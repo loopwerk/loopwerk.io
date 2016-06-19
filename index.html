@@ -2,13 +2,11 @@
 <html>
   <head>
     <title>loopwerk.io: web and mobile app development with 15 years experience</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <meta name="description" content="A good app is like a mechanical watch: lots of moving parts all working together in perfect harmony to create a beautiful and simple interface.">
+    <meta name="description" content="A good app is like a mechanical watch: lots of moving parts all working together to create a beautiful and simple interface.">
     <meta name="keywords" content="freelance,frontend,web,javascript,developer,mobile,ios,objective-c,swift,react,angular,angularjs,redux,native,python,api,json,css,html">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
     <style>
       * {
@@ -16,85 +14,129 @@
         box-sizing: border-box;
       }
 
-      html {
-        background: #F2A949;
-        color: white;
-        text-align: center;
-        padding: 20px;
+      body {
+        padding: 50px;
+        margin: 0;
+        font-family: helvetica;
       }
 
       img {
-        margin-bottom: 10px;
-        width: 100%;
+        height: 200px;
+        margin-bottom: 50px;
+      }
+
+      h1 {
+        font-size: 35px;
+        font-weight: lighter;
+        text-transform: uppercase;
+        color: #252525;
       }
 
       p {
-        font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
-        font-weight: 200;
-        font-size: 25px;
-        padding: 30px 0 0 0;
-        margin: 0;
+        font-size: 22px;
+        font-weight: lighter;
+        color: #464646;
       }
 
-      small {
-        font-size: 20px;
-        color: #636462;
-      }
-
-      a, a:visited, a:active {
-        color: #636462;
+      a, a:active, a:visited {
+        color: black;
       }
 
       a:hover {
-        text-decoration: underline;
+        background: black;
+        color: white;
+        text-decoration: none;
       }
 
-      @media screen and (min-width: 400px) {
-        html {
-          background: grey url(pic.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-          height: 100%;
-          padding: 0;
-        }
+      .content {
+        max-width: 400px;
+      }
 
+      @media screen and (min-width: 800px) {
         body {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
+          background: white url(bkgnd.jpg) no-repeat center center;
           padding: 0;
           margin: 0;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          min-height: 100vh;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
         }
 
-        img {
-          margin-bottom: 30px;
+        .header {
+          text-align: center;
+          width: 800px;
         }
 
-        .outer {
-          background: #F2A949;
-          max-width: 700px;
+        .content {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          width: 800px;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          max-width: inherit;;
         }
 
-        .inner {
-          padding: 60px 80px;
-          background: #F2A949;
-          border: 1px solid #636462;
-          margin: 5px;
+        h1 {
+          width: 50%;
+          text-align: right;
+          padding: 35px 38px 35px 0;
+          border-right: 3px solid #E1E1E1;
+        }
+
+        p {
+          width: 50%;
+          padding: 35px 0 35px 35px;
+        }
+      }
+
+      @media screen and (min-height: 800px) {
+        body {
+          background-size: cover;
         }
       }
     </style>
   </head>
 
   <body>
-    <div class="outer">
-      <div class="inner">
-        <img src="loopwerk.svg" alt="Loopwerk logo" />
-        <p>A <b>good app</b> is like a mechanical watch: lots of moving parts all working together in perfect harmony to create a <b>beautiful</b> and <b>simple interface</b>.</p>
-        <p><small>Contact <a href="mailto:projects@loopwerk.io">projects@loopwerk.io</a> to pitch your project.</small></p>
-      </div>
+    <div class="header">
+      <img src="loopwerk.svg" />
+    </div>
+
+    <div class="content">
+      <h1>
+        A <b>good app</b> is like<br>
+        a <b>mechanicale</b><br>
+        <b>watch</b>: lots of<br>
+        moving parts all<br>
+        working<br>
+        <b>together</b> to<br>
+        <b>create</b> a<br>
+        <b>beautiful</b> and<br>
+        simple <b>interface</b>.
+      </h1>
+
+      <p>
+        We make interactive apps for the web and mobile, using JavaScript, Elm, Objective-C and Swift. And the backends that drive them, using Node and Python.
+        <br><br>
+        Contact <a href="mailto:projects@loopwerk.io">projects@loopwerk.io</a> to pitch your project.
+      </p>
     </div>
 
     <script>
