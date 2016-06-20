@@ -52,8 +52,13 @@
       }
 
       @media screen and (min-width: 800px) {
+        html {
+          background: white url(gears.jpg) no-repeat center center;
+          background-size: cover;
+        }
+
         body {
-          background: white url(bkgnd.jpg) no-repeat center center;
+          background: transparent url(overlay.png) no-repeat 50% 10%;
           margin: 0;
           width: inherit;
           display: -webkit-box;
@@ -75,6 +80,10 @@
         .header {
           width: 800px;
           text-align: center;
+        }
+
+        img {
+          margin-bottom: 40px;
         }
 
         .content {
@@ -106,7 +115,13 @@
         }
       }
 
-      @media screen and (min-height: 800px) {
+      @media screen and (min-width: 1545px) {
+        body {
+          background-size: cover;
+        }
+      }
+
+      @media screen and (min-height: 1000px) {
         body {
           background-size: cover;
         }
