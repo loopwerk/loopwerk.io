@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>loopwerk.io: web and mobile app development with 15 years experience</title>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A good app is like a mechanical watch: lots of moving parts all working together to create a beautiful and simple interface.">
     <meta name="keywords" content="freelance,frontend,web,javascript,developer,mobile,ios,objective-c,swift,react,angular,angularjs,redux,native,python,api,json,css,html">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -53,12 +53,15 @@
 
       @media screen and (min-width: 800px) {
         html {
-          background: white url(gears.svg) no-repeat center center;
+          background: white url(gears.svg) no-repeat left bottom;
           background-size: cover;
         }
 
         body {
-          background: transparent url(overlay.png) no-repeat 50% 10%;
+          background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(255,255,255,0) 75%, rgba(255,255,255,0) 100%);
+          background-size: 1700px 1200px;
+          background-repeat: no-repeat;
+          background-position: center;
           margin: 0;
           width: inherit;
           display: -webkit-box;
@@ -98,7 +101,7 @@
           -webkit-box-align: center;
               -ms-flex-align: center;
                   align-items: center;
-          max-width: inherit;;
+          max-width: inherit;
         }
 
         h1 {
@@ -112,18 +115,6 @@
         p {
           width: 50%;
           padding: 35px 0 35px 35px;
-        }
-      }
-
-      @media screen and (min-width: 1545px) {
-        body {
-          background-size: cover;
-        }
-      }
-
-      @media screen and (min-height: 1000px) {
-        body {
-          background-size: cover;
         }
       }
     </style>
