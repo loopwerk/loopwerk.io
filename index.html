@@ -22,15 +22,23 @@
         font-family: helvetica;
       }
 
-      img {
+      .header img {
         width: 315px;
         height: 200px;
         margin-bottom: 20px;
       }
 
+      .footer {
+        margin-top: 40px;
+      }
+
+      .footer img {
+        height: 20px;
+        margin: 0 10px;
+      }
+
       h1 {
         font-size: 31px;
-        font-weight: lighter;
         text-transform: uppercase;
         color: #252525;
       }
@@ -41,12 +49,15 @@
 
       p {
         font-size: 22px;
-        font-weight: lighter;
         color: #464646;
       }
 
+      h1, p {
+        font-weight: lighter;
+      }
+
       a, a:active, a:visited {
-        color: #F5B240;
+        color: #F5B031;
         text-decoration: none;
       }
 
@@ -58,15 +69,16 @@
         html {
           background: white url(gears.svg) no-repeat left bottom;
           background-size: cover;
+          height: 100%;
         }
 
         body {
-          padding-top: 20px;
+          padding: 20px 0;
+          margin: 0;
           background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(255,255,255,0) 75%, rgba(255,255,255,0) 100%);
           background-size: 1700px 1400px;
           background-repeat: no-repeat;
           background-position: center;
-          margin: 0;
           width: inherit;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -75,21 +87,24 @@
           -webkit-box-direction: normal;
           -ms-flex-direction: column;
           flex-direction: column;
-          min-height: 100vh;
           -webkit-box-align: center;
           -ms-flex-align: center;
           align-items: center;
           -webkit-box-pack: center;
           -ms-flex-pack: center;
           justify-content: center;
+          height: 100%;
+          min-height: 620px;;
         }
 
-        .header {
+        .header, .footer {
           text-align: center;
         }
 
-        img {
-          margin-bottom: 60px;
+        .header img {
+          width: 251px;
+          height: 160px;
+          margin-bottom: 40px;
         }
 
         .content {
@@ -108,7 +123,7 @@
         }
 
         h1 {
-          font-size: 40px;
+          font-size: 30px;
           text-align: right;
           padding: 0 38px 0 0;
           border-right: 3px solid #E1E1E1;
@@ -116,11 +131,7 @@
 
         p {
           padding: 0 0 0 35px;
-          font-size: 20px;
-        }
-
-        i {
-          font-size: 18px;
+          font-size: 17px;
         }
 
         h1, p {
@@ -129,15 +140,53 @@
         }
 
         abbr {
-          border-bottom: 1px dashed #F5B240;
+          border-bottom: 1px dashed #F5B031;
         }
       }
 
-      @media screen and (min-height: 950px) and (min-width: 800px) {
-        img {
+      @media screen and (min-height: 800px) and (min-width: 800px) {
+        body {
+          padding-top: 0;
+        }
+
+        h1 {
+          font-size: 40px;
+        }
+
+        p {
+          font-size: 20px;
+        }
+
+        i {
+          font-size: 18px;
+        }
+
+        .footer {
+          margin-top: 50px;
+        }
+      }
+
+      @media screen and (min-height: 900px) and (min-width: 800px) {
+        .header img {
+          width: 315px;
+          height: 200px;
+          margin-bottom: 60px;
+        }
+
+        .footer {
+          margin-top: 60px;
+        }
+      }
+
+      @media screen and (min-height: 1000px) and (min-width: 800px) {
+        .header img {
           width: 393px;
           height: 250px;
           margin-bottom: 70px;
+        }
+
+        .footer {
+          margin-top: 70px;
         }
       }
     </style>
@@ -170,6 +219,13 @@
           "Kevin has a good knowledge of user experience and design, which was invaluable, and even his earliest builds were solid and usable. Amazingly, the app was fully fleshed out and crash free so early that we could focus on performance, and even add a few features. Quite honestly, he's one of the best developers I've ever worked with and I'd be reluctant to work on another app without him on the project."
         </i>
       </p>
+    </div>
+
+    <div class="footer">
+      <a href="http://www.mixedcase.nl" title="Portfolio and blog"><img src="web.svg"></a>
+      <a href="https://nl.linkedin.com/in/kevinrenskers" title="LinkedIn"><img src="linkedin.svg"></a>
+      <a href="https://www.facebook.com/loopwerk/" title="Facebook"><img src="facebook.svg"></a>
+      <a href="https://twitter.com/mixedcase" title="Twitter"><img src="twitter.svg"></a>
     </div>
 
     <script>
