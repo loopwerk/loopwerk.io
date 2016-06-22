@@ -65,7 +65,7 @@
         text-decoration: underline;
       }
 
-      @media screen and (min-width: 800px) {
+      @media screen and (min-width: 900px) {
         html {
           background: white url(gears.svg) no-repeat left bottom;
           background-size: cover;
@@ -94,7 +94,7 @@
           -ms-flex-pack: center;
           justify-content: center;
           height: 100%;
-          min-height: 620px;;
+          min-height: 620px;
         }
 
         .header, .footer {
@@ -130,21 +130,31 @@
         }
 
         p {
-          padding: 0 0 0 35px;
+          padding-left: 35px;
           font-size: 17px;
         }
 
-        h1, p {
+        .mobileonly {
+          display: none;
+        }
+
+        h1, .right {
           width: 50%;
           margin: 0;
         }
 
-        abbr {
+        abbr[title] {
+          text-decoration: none;
           border-bottom: 1px dashed #F5B031;
+          cursor: help;
+        }
+
+        abbr[title]:after {
+          content: "";
         }
       }
 
-      @media screen and (min-height: 800px) and (min-width: 800px) {
+      @media screen and (min-height: 800px) and (min-width: 900px) {
         body {
           padding-top: 0;
         }
@@ -166,7 +176,7 @@
         }
       }
 
-      @media screen and (min-height: 900px) and (min-width: 800px) {
+      @media screen and (min-height: 900px) and (min-width: 900px) {
         .header img {
           width: 315px;
           height: 200px;
@@ -178,7 +188,7 @@
         }
       }
 
-      @media screen and (min-height: 1000px) and (min-width: 800px) {
+      @media screen and (min-height: 1000px) and (min-width: 900px) {
         .header img {
           width: 393px;
           height: 250px;
@@ -210,15 +220,22 @@
         simple <b>interface</b>.
       </h1>
 
-      <p>
-        I'm Kevin Renskers, a freelance developer with 15 years of experience making interactive apps for the <abbr title="JavaScript, Elm, React">web</abbr> and <abbr title="Objective-C, Swift, React Native">mobile</abbr> plus the <abbr title="Node, Python">backends</abbr> that drive them.
-        <br><br>
-        I am available for new projects! Email me at <a href="mailto:projects@loopwerk.io">kevin@loopwerk.io</a> to pitch yours.
-        <br><br>
-        <i>
-          "Kevin has a good knowledge of user experience and design, which was invaluable, and even his earliest builds were solid and usable. Amazingly, the app was fully fleshed out and crash free so early that we could focus on performance, and even add a few features. Quite honestly, he's one of the best developers I've ever worked with and I'd be reluctant to work on another app without him on the project."
-        </i>
-      </p>
+      <div class="right">
+        <p>
+          I'm Kevin Renskers, a freelance developer with 15 years of experience making interactive apps for the <abbr title="JavaScript, Elm, React">web</abbr> and <abbr title="Objective-C, Swift, React Native">mobile</abbr> plus the <abbr title="Node, Python">backends</abbr> that drive them.
+        </p>
+        <p class="mobileonly">
+          My specialties include JavaScript, React, React Native, Elm, Objective-C, Swift and Python.
+        </p>
+        <p>
+          I am available for new projects! Email me at <a href="mailto:projects@loopwerk.io">kevin@loopwerk.io</a> to pitch yours.
+        </p>
+        <p>
+          <i>
+            "Kevin has a good knowledge of user experience and design, which was invaluable, and even his earliest builds were solid and usable. Amazingly, the app was fully fleshed out and crash free so early that we could focus on performance, and even add a few features. Quite honestly, he's one of the best developers I've ever worked with and I'd be reluctant to work on another app without him on the project."
+          </i>
+        </p>
+      </div>
     </div>
 
     <div class="footer">
