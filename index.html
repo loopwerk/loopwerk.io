@@ -16,6 +16,7 @@
       }
 
       html {
+        background: white;
         min-height: 800px;
       }
 
@@ -66,6 +67,21 @@
         text-decoration: underline;
       }
 
+      @media screen and (prefers-color-scheme: dark) {
+        html {
+          background: #0e1112;
+        }
+
+        h1 {
+          color: #877f7d;
+          border-color: #F5B031;
+        }
+
+        p {
+          color: #877f7d;
+        }
+      }
+
       @media screen and (min-width: 900px) {
         html {
           background: white url(gears.svg) no-repeat left bottom;
@@ -76,10 +92,6 @@
         body {
           padding: 20px 0;
           margin: 0;
-          background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(255,255,255,0) 75%, rgba(255,255,255,0) 100%);
-          background-size: 1700px 1400px;
-          background-repeat: no-repeat;
-          background-position: center;
           width: inherit;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -148,15 +160,12 @@
           width: 50%;
           margin: 0;
         }
+      }
 
-        abbr[title] {
-          text-decoration: none;
-          border-bottom: 1px dashed #F5B031;
-          cursor: help;
-        }
-
-        abbr[title]:after {
-          content: "";
+      @media screen and (min-width: 900px) and (prefers-color-scheme: dark) {
+        html {
+          background: #0e1112 url(gears-dark.svg) no-repeat left bottom;
+          background-size: cover;
         }
       }
 
