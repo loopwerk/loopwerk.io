@@ -10,7 +10,7 @@ The source of loopwerk.io, a static website generated with [Felix Felicis](https
 
 ### virtualenv
 
-1. `virtualenv -p python2.7 env`
+1. `python3 -m venv env`
 2. `. env/bin/activate`
 3. `pip install -r requirements.txt`
 

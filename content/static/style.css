@@ -140,7 +140,7 @@ input, select {
 :root {
   --accent: #F5B031;
   --page-background: white;
-  --nav-background: white;
+  --nav-background: #566b78;
   --code-background: #f5f7f9;
   --text-color: #566b78;
   --code-color: #566b78;
