@@ -1,0 +1,3 @@
+Sitemap: https://loopwerk.io/sitemap.xml
+User-agent: *
+Disallow: /static/

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block extraheader %}
+  <link rel="stylesheet" href="/static/not-home.css" />
+{% endblock %}
+
+{% block main %}
+  <div id="content">
+    {{ post.content }}
+
+    <ul>
+      {% for item in resource.posts[:10] %}
+        <li><a href="{{item|permalink}}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <div>
+      <p><a href="/articles/" class="more">archive</a></p>
+    </div>
+  </div>
+{% endblock %}

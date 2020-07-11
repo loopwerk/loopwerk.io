@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}: {{ post.title }}{% endblock %}
+
+{% block extraheader %}
+  <link rel="canonical" href="{{ post|permalink }}" />
+  <meta name="description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
+  <link rel="stylesheet" href="/static/not-home.css" />
+{% endblock %}
+
+{% block main %}
+  <div id="content">
+    {% set wordcount = post.content|striptags|wordcount %}
+    
+    <article itemscope itemtype="{% if post.review %}http://schema.org/Review{% else %}http://schema.org/BlogPosting{% endif %}">
+      <meta itemprop="author" content="{{ post.author.name }}" />
+      
+      {% if post.review %}
+      <meta itemprop="itemReviewed" content="{{ post.review }}" />
+      <meta itemprop="reviewRating" content="{{ post.rating }}" />
+      {% else %}
+      <meta itemprop="wordCount" content="{{ wordcount }}" />
+      {% endif %}
+      
+      <h1 itemprop="headline">{{ post.title }}</h1>
+      
+      <div class="article_info"><span class="time">{{ post.date.strftime('%B') }} {{ post.date.strftime('%d') }},
+        <a href="{{ content_url(site.prefix, post.date.strftime('%Y'), 'index.html') }}">{{ post.date.strftime('%Y') }}</a></span>{{ post.content|striptags|wordcount }} words{%- if post.tags -%}
+        , posted in {% for tag in post.tags -%}
+        {%- if loop.index > 1 %}, {% endif -%}
+        <a href="{{ tag|tag_url }}">{{ tag }}</a>
+        {%- endfor -%}
+        {%- endif -%}
+      </div>
+      
+      <div class="article_content" itemprop="{% if post.review %}reviewBody{% else %}articleBody{% endif %}">
+        {{ post.content }}
+      </div>
+    </article>
+    
+    <div id="article_footer">
+      <p>Have feedback? Let me know on <a href="https://twitter.com/kevinrenskers">Twitter</a>.</p>
+    </div>
+  </div>
+{% endblock %}

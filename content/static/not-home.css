@@ -1,0 +1,93 @@
+@media screen {
+  a[href^="https://github.com"] {
+    background: transparent url('images/github.png') no-repeat;
+    padding-left: 20px;
+  }
+  a[href^="https://itunes.apple.com"], a[href^="https://apps.apple.com"] {
+    background: transparent url('images/appstore.png') no-repeat;
+    padding-left: 20px;
+  }
+  p.more {
+    margin-top: 1em;
+  }
+  a.more:before {
+    content: '› ';
+  }
+  #content h1, #content h2 {
+    color: var(--header-color);
+  }
+  h1 a, h2 a {
+    color: var(--header-color);
+    border: 0;
+  }
+  #content h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  #content h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 1.5em;
+  }
+  #content h3 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+  #content h4 {
+    font-size: 1em;
+    font-weight: normal;
+    color: #CCC;
+  }
+  section ul, article ul, ul.errorlist {
+    padding-left: 1em;
+    margin-bottom: 1.5em;
+    list-style: square;
+  }
+  section ol, article ol {
+    padding-left: 1em;
+    margin-bottom: 1.5em;
+    list-style: decimal;
+  }
+  .article_info {
+    color: var(--secondary-text-color);
+    font-size: 0.875em;
+    margin-bottom: 1em;
+  }
+  .article_info .time {
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+    border-right: 1px solid var(--secondary-text-color);
+  }
+  section p {
+    margin: 0;
+  }
+  section, article {
+    position: relative;
+    margin: 0 0 1.5em;
+  }
+  article img {
+    max-width: 100%;
+  }
+  #article_footer {
+    color: var(--secondary-text-color);
+    font-style: italic;
+    font-size: 0.875em;
+  }
+}
+
+/* Normal width screen */
+@media screen and (min-width: 800px) {
+  nav ul, #content {
+    width: 800px;
+  }
+
+  nav .logo {
+    display: inline-block;
+    height: 30px;
+  }
+
+  nav .logo img {
+    height: 30px;
+    margin-right: 12px;
+  }
+}

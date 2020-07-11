@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}: Articles{% endblock %}
+
+{% block extraheader %}
+  <link rel="stylesheet" href="/static/not-home.css" />
+{% endblock %}
+
+{% block main %}
+  <div id="content">
+    {% for post in pagination.items %}
+    <section itemscope itemtype="{% if post.review %}http://schema.org/Review{% else %}http://schema.org/BlogPosting{% endif %}">
+      <h1><a href="{{ post|permalink }}" itemprop="url">{{ post.title }}</a></h1>
+      <div class="article_info"><span class="time">{{ post.date.strftime('%B') }} {{ post.date.strftime('%d') }},
+        <a href="{{ content_url(site.prefix, post.date.strftime('%Y'), 'index.html') }}">{{ post.date.strftime('%Y') }}</a></span>{{ post.content|striptags|wordcount }} words{%- if post.tags -%}
+        , posted in {% for tag in post.tags -%}
+        {%- if loop.index > 1 %}, {% endif -%}
+        <a href=" {{ tag|tag_url }}">{{ tag }}</a>
+        {%- endfor -%}
+        {%- endif -%}
+      </div>
+      {% if post.description %} {{ post.description }} {% else %} <p>{{ post.content|striptags|truncate }}</p> {% endif %}
+      <p class="more"><a href="{{ post|permalink }}" class="more">read more</a></p>
+    </section>
+    {% endfor %}
+    
+    {% if pagination.has_prev or pagination.has_next %}
+    <ul>
+      {% if pagination.has_prev %}
+      <li><a href="{{ content_url(pagination.root, 'page', pagination.prev_num) }}">Newer</a></li>
+      {% endif %}
+      {% if pagination.has_next %}
+      <li><a href="{{ content_url(pagination.root, 'page', pagination.next_num) }}">Older</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% set active_page = post.menu %}
+
+{% block title %}: {{ post.title }}{% endblock %}
+
+{% block extraheader %}
+  <link rel="stylesheet" href="/static/not-home.css" />
+{% endblock %}
+
+{% block main %}
+  <div id="content">
+    <article>
+      {{ post.content }}
+    </article>
+  </div>
+{% endblock %}
