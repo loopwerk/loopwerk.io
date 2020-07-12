@@ -1,2 +1,3 @@
 https://mixedcase.nl/* https://www.loopwerk.io/:splat 301!
 https://www.mixedcase.nl/* https://www.loopwerk.io/:splat 301!
+/articles/:year/:month/:date/:slug/* /articles/:year/:slug/:splat 301!
