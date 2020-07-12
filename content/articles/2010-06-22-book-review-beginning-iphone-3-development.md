@@ -11,7 +11,7 @@ My sixth book review, and the second one about iPhone development. The previous 
 _Dave Mark and Jeff LaMarche_  
 _Apress_
 
-My sixth book review, and the second one about iPhone development. The previous book, [Head First iPhone Development](/articles/2010/05/16/book-review-head-first-iphone-development/) was a great read, but since it only talked about the basics it left me wanting for (much) more. I needed more information about searchbars, core data, multitouch and the accelerometer. This time I actually read some reviews before buying a new book, and "Beginning iPhone 3 Development" seemed like a winner.
+My sixth book review, and the second one about iPhone development. The previous book, [Head First iPhone Development](/articles/2010/book-review-head-first-iphone-development/) was a great read, but since it only talked about the basics it left me wanting for (much) more. I needed more information about searchbars, core data, multitouch and the accelerometer. This time I actually read some reviews before buying a new book, and "Beginning iPhone 3 Development" seemed like a winner.
 
 Even though "Beginning iPhone 3 Development" is a book for beginners just as "Head First iPhone Development" is, and it is about the same length (500 pages), it packed much more information. It may not be as easy or fun to read, but it goes over all the basics and doesn't stop there. A lot of the more advanced topics that are absent in "Head First iPhone Development" are included here in all their glory.
 

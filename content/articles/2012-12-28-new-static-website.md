@@ -3,7 +3,7 @@
 
 ---
 
-More than a year ago I was [playing around with static site generators](/articles/2011/11/06/playing-around-static-site-generators/) because I wanted to simplify my code and ultimately get rid of my server.
+More than a year ago I was [playing around with static site generators](/articles/2011/playing-around-static-site-generators/) because I wanted to simplify my code and ultimately get rid of my server.
 
 My reasons back then were performance, version control and integration with GitHub. I tried a few generators, but never found one that felt right. Most generators expect me to add metadata to my posts, and I simply don't want to do that. I want my posts to be 100% valid Markdown with no added markup. The title of the article is already in the post (it's the first line, prefixed with a `#`), and the date of publication is in the filename. I don't need categories or tags, so why all this forced metadata crap?
 

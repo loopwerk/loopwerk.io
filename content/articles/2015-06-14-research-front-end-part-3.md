@@ -3,7 +3,7 @@
 
 ---
 
-Since early 2014 I've been working on a pretty big and complex Angular app called [Sling](http://getsling.com) and sadly it's not using any module system and it's still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files, add Angular injection annotations to our code, start a webserver with live reloading functionality, watches the source for changes and so on. It actually works really well but after doing the [previous](/articles/2015/05/17/research-front-end-part-1/) [two](/articles/2015/05/31/research-front-end-part-2/) experiments that use modules, ES6 and webpack I got a little bit tired of looking at this old fashioned project 😀.
+Since early 2014 I've been working on a pretty big and complex Angular app called [Sling](http://getsling.com) and sadly it's not using any module system and it's still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files, add Angular injection annotations to our code, start a webserver with live reloading functionality, watches the source for changes and so on. It actually works really well but after doing the [previous](/articles/2015/research-front-end-part-1/) [two](/articles/2015/research-front-end-part-2/) experiments that use modules, ES6 and webpack I got a little bit tired of looking at this old fashioned project 😀.
 
 So, for my third experiment I wanted to combine Angular with Webpack, mainly to see if this is something we can use for our project at work.
 
@@ -15,7 +15,7 @@ On the other hand, it's pretty damn big and if you're not careful you can run in
 The biggest problem with Angular for me is that version 2 is coming soon(ish) and won't offer an easy migration. These front end experiments are all about "what would I use if I had to start a brand new project", and I simply wouldn't use Angular 1.x because it's basically end-of-life. But like I said, this experiment wasn't about finding that out.
 
 ### Webpack
-Just as I concluded in my [first experiment](/articles/2015/05/17/research-front-end-part-1/), Webpack is a bit of a blessing and a curse. Very cool features but that config.. it's good that there are some good examples to copy from because I would never be able to come to this config just by using their documentation. It still feels like a magic black box to me, although at least I understand the loaders, how they work and what they allow me to do (like importing CSS and HTML templates).
+Just as I concluded in my [first experiment](/articles/2015/research-front-end-part-1/), Webpack is a bit of a blessing and a curse. Very cool features but that config.. it's good that there are some good examples to copy from because I would never be able to come to this config just by using their documentation. It still feels like a magic black box to me, although at least I understand the loaders, how they work and what they allow me to do (like importing CSS and HTML templates).
 
 The big question is if I would switch Sling to use Webpack. The config is done, it works, so why not? On the other hand it would be great to have a build system that the entire team would understand. With that in mind I immediately dived into my fourth experiment: replacing Webpack with Browserify.
 

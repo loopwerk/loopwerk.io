@@ -101,5 +101,5 @@ Maybe that's why I built my own site with Django-CMS, but for my latest project 
   [3]: http://www.django-cms.org/
   [4]: http://www.feinheit.ch/labs/feincms-django-cms/
   [5]: http://code.google.com/p/django-grappelli/
-  [6]: /articles/2011/01/17/looking-for-django-cms/
-  [7]: /articles/2011/01/29/django-cms-backend-usability/
+  [6]: /articles/2011/looking-for-django-cms/
+  [7]: /articles/2011/django-cms-backend-usability/

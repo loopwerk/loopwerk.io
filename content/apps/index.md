@@ -87,7 +87,7 @@ My first major app, built early 2012 in Iceland for CBS IMG. Listen to over 400 
 ## Noorderlink
 ![screenshots](/apps/noorderlink.jpg)
 
-After I created two iOS app using native development tools and Objective-c, I decided to give Appcelerator Titanium another try, mainly because the client wanted an Android app as well. At first [everything was going well](/articles/2010/11/09/once-again-i-turn-appcelerator/), but in the end we got two mediocre apps and decided to start from scratch, using native SDK's for both iOS and Android. I'm glad that we did.
+After I created two iOS app using native development tools and Objective-c, I decided to give Appcelerator Titanium another try, mainly because the client wanted an Android app as well. At first [everything was going well](/articles/2010/once-again-i-turn-appcelerator/), but in the end we got two mediocre apps and decided to start from scratch, using native SDK's for both iOS and Android. I'm glad that we did.
 
 
 ## Agenda Groninger Forum
@@ -99,6 +99,6 @@ View the program and Twitter feed for a local institute. Available as an univers
 ## Agenda Oosterpoort Stadsschouwburg Groningen
 ![screenshots](/apps/oosterpoort.jpg)
 
-My first iOS app, created in 2010. At first I wanted to use Appcelerator Titanium because I didn't know any Objective-c, but quickly [changed my mind](/articles/2010/04/21/getting-started-iphone-app-development/) and learned the proper skills instead. I actually rewrote the entire app after I submitted the "Agenda Groninger Forum" app, because I learned so much in such a short time and wasn't happy with my first effort anymore - the curse of every good developer.
+My first iOS app, created in 2010. At first I wanted to use Appcelerator Titanium because I didn't know any Objective-c, but quickly [changed my mind](/articles/2010/getting-started-iphone-app-development/) and learned the proper skills instead. I actually rewrote the entire app after I submitted the "Agenda Groninger Forum" app, because I learned so much in such a short time and wasn't happy with my first effort anymore - the curse of every good developer.
 
 This app shows the program for a local theater and its Twitter feed.

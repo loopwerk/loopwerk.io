@@ -3,7 +3,7 @@
 
 ---
 
-Yesterday I wrote [an article](/articles/2011/01/28/django-cms-vs-feincms-vs-mezzanine/) comparing Django-CMS, FeinCMS and Mezzanine. One of the conclusions was that while Django-CMS is the best CMS on paper, I don't like its backend interface that much. I thought it would be a good idea to properly explain what I don't like about it, and try to come up with a better interface.
+Yesterday I wrote [an article](/articles/2011/django-cms-vs-feincms-vs-mezzanine/) comparing Django-CMS, FeinCMS and Mezzanine. One of the conclusions was that while Django-CMS is the best CMS on paper, I don't like its backend interface that much. I thought it would be a good idea to properly explain what I don't like about it, and try to come up with a better interface.
 
 ## The problem
 When you edit a page in the CMS, there is no way to immediately see the content that's on the page. Have a look at the first screenshot: I can see that there is a "content" placeholder that contains a text plugin and a picture, and an "aside" placeholder that contains a text plugin. But what text? Which picture? This is not "what you see is what you get" levels of easy.

@@ -5,7 +5,7 @@
 
 Two weeks ago I started my journey into researching front end tools, with the idea to find my ultimate stack of build tools, JavaScript frameworks and/or libraries, CSS processors, a code style to follow and code linter to enforce it, and finally testing tools.
 
-In [my first experiment](/articles/2015/05/17/research-front-end-part-1/) I looked into Ampersand.js, React, PostCSS, the AirBnB code style and ESLint. I liked React but wanted something smaller, and didn't really see the need for Ampersand.js if I could find a better router. So for my second experiment the plan was to look into Deku and page.js.
+In [my first experiment](/articles/2015/research-front-end-part-1/) I looked into Ampersand.js, React, PostCSS, the AirBnB code style and ESLint. I liked React but wanted something smaller, and didn't really see the need for Ampersand.js if I could find a better router. So for my second experiment the plan was to look into Deku and page.js.
 
 You can find the code for this experiment on my [deku-cssnext-webpack](https://github.com/kevinrenskers/js-skeleton/tree/deku-cssnext-webpack) branch.
 

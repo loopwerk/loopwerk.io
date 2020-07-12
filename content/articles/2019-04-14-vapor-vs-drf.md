@@ -3,7 +3,7 @@
 
 ---
 
-A little while ago [I wrote about starting a new side project](/articles/2019/03/20/vapor/), where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit of a struggle. The conclusion of that article was that I didn't know how to continue: stick with Vapor 3 despite the problems I was having, or switch to Python.
+A little while ago [I wrote about starting a new side project](/articles/2019/vapor/), where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit of a struggle. The conclusion of that article was that I didn't know how to continue: stick with Vapor 3 despite the problems I was having, or switch to Python.
 
 Well, as an exercise I rebuilt the entire backend in Python using Django and Django REST Framework (DRF), while also adding new features and unit tests to both versions of my backend. Here are my findings now that I have two more-or-less identical backends.
 
@@ -161,7 +161,7 @@ With DRF, it was a bit harder to get started, to get to the first endpoint. Then
 
 I still have to decide which of the backends to continue with, because it's just silly to keep both of them. I now realize that a lot of the initial disappointments I had with Vapor actually ended up helping me a lot.
 
-What was more enjoyable in the end? The Vapor version or the DRF version? Probably the first one, even though I was [complaining about it at first](/articles/2019/03/20/vapor/). Yes, I end up writing more manual code in the Vapor version of my backend, but it immediately does exactly what I want. No matter if it's nested routes or doing very few queries or easy permission checking with middleware.
+What was more enjoyable in the end? The Vapor version or the DRF version? Probably the first one, even though I was [complaining about it at first](/articles/2019/vapor/). Yes, I end up writing more manual code in the Vapor version of my backend, but it immediately does exactly what I want. No matter if it's nested routes or doing very few queries or easy permission checking with middleware.
 
 For me the biggest wins for each framework are:
 

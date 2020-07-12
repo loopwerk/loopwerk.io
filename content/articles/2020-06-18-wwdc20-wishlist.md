@@ -8,7 +8,7 @@ WWDC is just around the corner, and we're all waiting like little kids at Christ
 WWDC is just around the corner, and we're all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes.
 
 ## SwiftUI 2.0
-I love SwiftUI! Well, mostly. While it's super quick and easy to build complex and good looking interfaces, it's also quite buggy, needs a ton of workarounds, and is missing a lot of features. I'll have more to say on all of this in [an upcoming article](/articles/2020/06/21/swiftui-review/).
+I love SwiftUI! Well, mostly. While it's super quick and easy to build complex and good looking interfaces, it's also quite buggy, needs a ton of workarounds, and is missing a lot of features. I'll have more to say on all of this in [an upcoming article](/articles/2020/swiftui-review/).
 
 Of all my wishes for this year's WWDC, a new version of SwiftUI is by far the biggest one.
 

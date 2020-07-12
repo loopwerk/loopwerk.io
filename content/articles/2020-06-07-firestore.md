@@ -5,9 +5,9 @@ Over a year ago I wrote that I started working on a brand new side project, and 
 
 ---
 
-Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I [started with Vapor 3](/articles/2019/03/20/vapor/), then [made the same backend in Django REST Framework](/articles/2019/04/14/vapor-vs-drf/), and couldn't really choose between the two. What did I end up choosing? Neither!
+Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I [started with Vapor 3](/articles/2019/vapor/), then [made the same backend in Django REST Framework](/articles/2019/vapor-vs-drf/), and couldn't really choose between the two. What did I end up choosing? Neither!
 
-I ended up scrapping my backend completely, and went with Firebase's Firestore instead. I actually [wrote about Firebase](/articles/2016/11/24/next-gen-backend/) back in 2016 when I was searching for my ideal "next gen backend", when Firestore didn't exist yet (only the older Firebase Realtime Database), and Cloud Functions weren't offered yet either as far as I can remember. But in the summer of 2019 Firebase was mature enough for me to make the switch, and I am super happy that I did.
+I ended up scrapping my backend completely, and went with Firebase's Firestore instead. I actually [wrote about Firebase](/articles/2016/next-gen-backend/) back in 2016 when I was searching for my ideal "next gen backend", when Firestore didn't exist yet (only the older Firebase Realtime Database), and Cloud Functions weren't offered yet either as far as I can remember. But in the summer of 2019 Firebase was mature enough for me to make the switch, and I am super happy that I did.
 
 For those of you who don't know Firestore, let me give you the elevator pitch. Think hosted database, with live queries. So you query the database for all objects in the `Books` collection for example, and when any of these objects change, or one is added or removed, your local collection is immediately updated as well, and you can update the UI. So you don't have to build a REST client with an additional websockets server to supply the client with real-time updates - it's all handled by Firestore. This is saving me an immense amount of time and effort.
 
@@ -75,4 +75,4 @@ The biggest problem of all though is their JavaScript SDK: it's really really bi
 
 Overall, I am really super happy with Firestore and would highly recommend anyone to check it out, especially for mobile apps (a bit less for web apps due to the SDK size).
 
-As for my side project: I've recently announced it to the world: https://www.critical-notes.com. It's a note-taking tool for roleplaying games like D&D. It has a web client (written in Svelte), an iOS app (SwiftUI) and a native macOS app (using Catalyst), and I hope to release the web client in a public beta this summer. I'll write about the iOS app and [my experience with SwiftUI](/articles/2020/06/21/swiftui-review/) ~~soon~~!
+As for my side project: I've recently announced it to the world: https://www.critical-notes.com. It's a note-taking tool for roleplaying games like D&D. It has a web client (written in Svelte), an iOS app (SwiftUI) and a native macOS app (using Catalyst), and I hope to release the web client in a public beta this summer. I'll write about the iOS app and [my experience with SwiftUI](/articles/2020/swiftui-review/) ~~soon~~!

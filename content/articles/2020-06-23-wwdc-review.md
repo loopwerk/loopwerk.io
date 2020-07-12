@@ -5,7 +5,7 @@ A quick review of the keynote and State of the Union talks. Let's see which of m
 
 ---
 
-A quick review of the keynote and State of the Union talks. Let's see which of [my wishes](/articles/2020/06/18/wwdc20-wishlist/) have been fulfilled, and which [SwiftUI problems](/articles/2020/06/21/swiftui-review/) have been solved.
+A quick review of the keynote and State of the Union talks. Let's see which of [my wishes](/articles/2020/wwdc20-wishlist/) have been fulfilled, and which [SwiftUI problems](/articles/2020/swiftui-review/) have been solved.
 
 ![WWDC logo](/articles/images/wwdcheader.jpg)
 
