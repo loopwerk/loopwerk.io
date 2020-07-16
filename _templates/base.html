@@ -3,7 +3,7 @@
 <head>
   <title>{{ site.name }}{% block title %}{% endblock %}</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
   <link rel="stylesheet" href="/static/style.css" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="HandheldFriendly" content="True" />
@@ -11,9 +11,9 @@
   <meta name="author" content="Kevin Renskers" />
   <meta name="keywords" content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen">
   <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.feed }}" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
   <script async defer data-domain="loopwerk.io" src="https://plausible.io/js/plausible.js"></script>
   {% block extraheader %}{% endblock %}
 </head>
