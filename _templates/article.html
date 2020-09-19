@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@kevinrenskers" />
   <meta property="og:url" content="{{ site.url }}{{ post|permalink }}" />
-  <meta property="og:title" content="{{ site.name }}: {{ post.title }}" />
+  <meta property="og:title" content="{{ post.title }} | {{ site.name }}" />
   <meta property="og:description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
 {% endblock %}
 
