@@ -3,9 +3,15 @@
 {% block title %}: {{ post.title }}{% endblock %}
 
 {% block extraheader %}
-  <link rel="canonical" href="{{ post|permalink }}" />
+  <link rel="canonical" href="{{ site.url }}{{ post|permalink }}" />
   <meta name="description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
   <link rel="stylesheet" href="/static/not-home.css" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@kevinrenskers" />
+  <meta property="og:url" content="{{ site.url }}{{ post|permalink }}" />
+  <meta property="og:title" content="{{ site.name }}: {{ post.title }}" />
+  <meta property="og:description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
 {% endblock %}
 
 {% block main %}

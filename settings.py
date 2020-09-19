@@ -6,7 +6,7 @@ from datetime import date
 
 site = {
     "name": "Loopwerk",
-    "url": "https://loopwerk.io",
+    "url": "https://www.loopwerk.io",
     "prefix": "articles",
     "feed": "/articles/feed.xml",
     "date": date.today(),
@@ -56,6 +56,7 @@ writer = {
         "archive_feed_output": "articles/feed.xml",
         "year_template": "year.html",
         "tag_template": "tag.html",
+        "post_template": "article.html",
     }
 }
 
