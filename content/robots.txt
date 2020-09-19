@@ -1,7 +1,7 @@
 Sitemap: https://loopwerk.io/sitemap.xml
 
-User-agent: Twitterbot
-Disallow:
-
 User-agent: *
 Disallow: /static/
+
+User-agent: Twitterbot
+Disallow:
