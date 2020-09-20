@@ -2,9 +2,11 @@
 
 {% block title %}: {{ post.title }}{% endblock %}
 
+{% set wordcount = post.content|striptags|wordcount %}
+
 {% block extraheader %}
   <link rel="canonical" href="{{ site.url }}{{ post|permalink }}" />
-  <meta name="description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
+  <meta name="description" content="{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}" />
   <link rel="stylesheet" href="/static/not-home.css" />
 
   <meta name="twitter:card" content="summary" />
@@ -12,33 +14,50 @@
   <meta name="twitter:image" content="{{ site.url }}/static/images/loopwerk.svg" />
   <meta property="og:url" content="{{ site.url }}{{ post|permalink }}" />
   <meta property="og:title" content="{{ post.title }} | {{ site.name }}" />
-  <meta property="og:description" content="{% if post.description_source %} {{ post.description_source|striptags }} {% else %} {{ post.content|striptags|truncate }} {% endif %}" />
+  <meta property="og:description" content="{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "{% if post.review %}Review{% else %}BlogPosting{% endif %}",
+      {% if post.review %}
+      "itemReviewed": {
+        "@type": "Book",
+        "name": "{{ post.review }}"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "{{ post.rating }}"
+      },
+      "description": "A review of {{ post.review }}",
+      "reviewBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}",
+      {% else %}
+      "headline": "{{ post.title }}",
+      "articleBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}",
+      "wordCount": "{{ wordcount }}",
+      {% endif %}
+      "name": "{{ post.title }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ post.author.name }}"
+      },
+      "url": "{{ site.url }}{{ post|permalink }}",
+      "publisher": {
+        "@type": "Person",
+        "name": "{{ post.author.name }}"
+      },
+      "datePublished": "{{ post.date.isoformat() }}"
+    }
+  </script>
 {% endblock %}
 
 {% block main %}
   <div id="content">
-    {% set wordcount = post.content|striptags|wordcount %}
-
-    <article itemscope itemtype="{% if post.review %}http://schema.org/Review{% else %}http://schema.org/BlogPosting{% endif %}">
-      <meta itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <meta itemprop="name" content="{{ post.author.name }}" />
-      </meta>
-
-      {% if post.review %}
-        <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Book">
-          <meta itemprop="name" content="{{ post.review }}" />
-        </meta>
-        <meta itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-          <meta itemprop="ratingValue" content="{{ post.rating }}" />
-        </meta>
-      {% else %}
-        <meta itemprop="wordCount" content="{{ wordcount }}" />
-      {% endif %}
-
-      <h1 itemprop="headline">{{ post.title }}</h1>
+    <article>
+      <h1>{{ post.title }}</h1>
 
       <div class="article_info"><span class="time">{{ post.date.strftime('%B') }} {{ post.date.strftime('%d') }},
-        <a href="{{ content_url(site.prefix, post.date.strftime('%Y'), 'index.html') }}">{{ post.date.strftime('%Y') }}</a></span>{{ post.content|striptags|wordcount }} words{%- if post.tags -%}
+        <a href="{{ content_url(site.prefix, post.date.strftime('%Y'), 'index.html') }}">{{ post.date.strftime('%Y') }}</a></span>{{ wordcount }} words{%- if post.tags -%}
         , posted in {% for tag in post.tags -%}
         {%- if loop.index > 1 %}, {% endif -%}
         <a href="{{ tag|tag_url }}">{{ tag }}</a>
@@ -46,7 +65,7 @@
         {%- endif -%}
       </div>
 
-      <div class="article_content" itemprop="{% if post.review %}reviewBody{% else %}articleBody{% endif %}">
+      <div class="article_content">
         {{ post.content }}
       </div>
     </article>
