@@ -224,4 +224,39 @@ class MyViewController {
 
 It works, but at the cost of even more boilerplate. Definitely not an improvement!
 
+And using `@Published` gets us back to needing to both initialize and then observe a value:
+
+``` swift
+class TextFieldCell {
+  let textField = UITextField()
+  @Published var value = ""
+
+  init() {
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    value = textField.text ?? ""
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+  private var cancellable: AnyCancellable?
+
+  init() {
+    nameTextField = TextFieldCell()
+
+    nameTextField.value = user.firstName
+
+    cancellable = nameTextField.$value.sink { [weak self] value in
+      self?.user.firstName = value
+    }
+  }
+}
+```
+
+So honestly at that point you might as well just use the closure method.
+
 At the moment my solution of choice is the `ReferenceWritableKeyPath` when I have a class as the model (or a class ViewModel for example that holds a value type model). If that is not possible and it's an iOS 13+ app, then the `Binding` approach would work pretty well too. But it feels like there is no really nice ideal solution with the same ease of use as SwiftUI.
