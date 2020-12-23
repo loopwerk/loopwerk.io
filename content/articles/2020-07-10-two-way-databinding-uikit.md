@@ -118,7 +118,7 @@ However, it can be slightly disorienting to work with this, due to the usage of 
 Can we use SwiftUI's `Binding` inside UIKit? Yes we can, provided that we are building an iOS 13+ app of course.
 
 ``` swift
-class TextFieldCell<Model> {
+class TextFieldCell {
   let textField = UITextField()
   private let value: Binding<String>
 
@@ -135,7 +135,7 @@ class TextFieldCell<Model> {
 
 class MyViewController {
   var user = User(firstName: "Kevin", lastName: "Renskers")
-  var nameTextField: TextFieldCell<MyViewController>!
+  var nameTextField: TextFieldCell!
 
   init() {
     nameTextField = TextFieldCell(value: 
@@ -161,7 +161,7 @@ class User {
   }
 }
 
-class TextFieldCell<Model> {
+class TextFieldCell {
   let textField = UITextField()
   private let value: Binding<String>
 
@@ -178,7 +178,7 @@ class TextFieldCell<Model> {
 
 class MyViewController {
   @State var user = User(firstName: "Kevin", lastName: "Renskers")
-  var nameTextField: TextFieldCell<MyViewController>!
+  var nameTextField: TextFieldCell!
 
   init() {
     nameTextField = TextFieldCell(value: $user.firstName)
@@ -189,7 +189,7 @@ class MyViewController {
 How about we use Combine, with a `PassthroughSubject`, instead?
 
 ``` swift
-class TextFieldCell<Model> {
+class TextFieldCell {
   let textField = UITextField()
   private let subject: PassthroughSubject<String, Never>
   private var cancellable: AnyCancellable?
@@ -210,7 +210,7 @@ class TextFieldCell<Model> {
 
 class MyViewController {
   var user = User(firstName: "Kevin", lastName: "Renskers")
-  var nameTextField: TextFieldCell<MyViewController>!
+  var nameTextField: TextFieldCell!
   private var cancellable: AnyCancellable?
 
   init() {
