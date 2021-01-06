@@ -41,39 +41,39 @@ A loyalty program app where consumers can upload their grocery shopping receipts
 
 
 ## Sjónvarp Símans
-![screenshots](/apps/sjonvarp.jpg)
+![screenshots](/apps/sjonvarp.png)
 
 Live streaming TV and video on demand for Síminn, an Icelandic media company. The catalogue browser is entirely remote-controlled: each page consists of structure- and layout JSON files personalized for the logged in user, comparable with HTML and CSS, respectively. Síminn can change the look and feel and even the navigation structure without ever having to upload a new app to the App Store. The TV player shows the full program guide in an innovative interface that doesn't get in your way.  
 [App Store (universal, free)](https://itunes.apple.com/app/sjonvarp-simans/id724740942?mt=8)
 
 
 ## Radíus
-![screenshots](/apps/radius.jpg)
+![screenshots](/apps/radius.png)
 
 Icelandic news reader. Choose from over a hundred Icelandic news sources and entertainment websites to create your own personalised news stream. Beautiful detail pages with support for videos and photo galleries.
 
 
 ## Radio.com v3
-![screenshots](/apps/radio3.jpg)
+![screenshots](/apps/radio3.png)
 
 A complete rebuild of the Radio.com streaming radio app, using a new reusable audio library for radio playback (which will be used in other CBS Local apps as well), a new interface and available as an universal app for both iPhone and iPad.
 
 
 ## Scrobbler for iOS
-![screenshots](/apps/scrobbler.jpg)
+![screenshots](/apps/scrobbler.png)
 
 "A new iOS music player that helps you rediscover the music you own. The Scrobbler is a fully-featured music player that helps you discover connections between the tracks in your iTunes library through playlists, deep artist information, and more. Plus, it scrobbles!". Created for Last.fm as an universal build. I am very proud of this app and use it myself as a replacement for the native music app on my iPhone and iPad.
 
 
 ## MetroLyrics
-![screenshots](/apps/metrolyrics.jpg)
+![screenshots](/apps/metrolyrics.png)
 
 A lyrics app for one of the largest lyrics websites on the planet. View the lyrics of your currently playing song (optionally auto-scrolling, karaoke-style), artist bio and pictures, song meanings and more.  
 [App Store (iPhone, free)](https://itunes.apple.com/app/metrolyrics/id547825550)
 
 
 ## Tailgate Fan
-![screenshots](/apps/tailgate.jpg)
+![screenshots](/apps/tailgate.png)
 
 "Football season is here and that can only mean one thing...time to tailgate! And with the new Tailgate Fan app, everything you need to make your tailgate great is right at your foam-fingertips."
 
@@ -85,19 +85,19 @@ My first major app, built early 2012 in Iceland for CBS IMG. Listen to over 400 
 
 
 ## Noorderlink
-![screenshots](/apps/noorderlink.jpg)
+![screenshots](/apps/noorderlink.png)
 
 After I created two iOS app using native development tools and Objective-c, I decided to give Appcelerator Titanium another try, mainly because the client wanted an Android app as well. At first [everything was going well](/articles/2010/once-again-i-turn-appcelerator/), but in the end we got two mediocre apps and decided to start from scratch, using native SDK's for both iOS and Android. I'm glad that we did.
 
 
 ## Agenda Groninger Forum
-![screenshots](/apps/forum.jpg)
+![screenshots](/apps/forum.png)
 
 View the program and Twitter feed for a local institute. Available as an universal build. Looking back, the iPad version was a poor effort, simply a bigger version of the iPhone app. It was my first universal app though, and I do like the dark design. After I submitted this app, I rewrote the "Agenda Oosterpoort" app to be universal as well.
 
 
 ## Agenda Oosterpoort Stadsschouwburg Groningen
-![screenshots](/apps/oosterpoort.jpg)
+![screenshots](/apps/oosterpoort.png)
 
 My first iOS app, created in 2010. At first I wanted to use Appcelerator Titanium because I didn't know any Objective-c, but quickly [changed my mind](/articles/2010/getting-started-iphone-app-development/) and learned the proper skills instead. I actually rewrote the entire app after I submitted the "Agenda Groninger Forum" app, because I learned so much in such a short time and wasn't happy with my first effort anymore - the curse of every good developer.
 
