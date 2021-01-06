@@ -6,14 +6,24 @@ iOS apps I've worked on. I was either the only developer on the project, or the 
 
 
 ## Diffry
-![screenshots](/apps/diffry.png)
+<div class="screenshots">
+<span><img src="/apps/diffry_1.jpg" /></span>
+<span><img src="/apps/diffry_2.jpg" /></span>
+<span><img src="/apps/diffry_3.jpg" /></span>
+<span><img src="/apps/diffry_4.jpg" /></span>
+</div>
 
 "Learn more about your natural hair by connecting with other users with similar hair textures."  
 [App Store (iPhone, free)](https://apps.apple.com/nl/app/diffry/id1459623608?l=en)
 
 
 ## Skippit
-![screenshots](/apps/skippit.jpg)
+<div class="screenshots">
+<span><img src="/apps/skippit_1.jpg" /></span>
+<span><img src="/apps/skippit_2.jpg" /></span>
+<span><img src="/apps/skippit_3.jpg" /></span>
+<span><img src="/apps/skippit_4.jpg" /></span>
+</div>
 
 "Skippit is a new type of first date that uses video calling to replace the expensive Ubers, awkward first drinks, and cat-fishing that’s common in most dating apps."  
 [App Store (iPhone, free)](https://apps.apple.com/us/app/skippit/id1475092571?ls=1)
@@ -23,18 +33,27 @@ iOS apps I've worked on. I was either the only developer on the project, or the 
 ![screenshots](/apps/tessa.png)
 
 A loyalty program app where consumers can upload their grocery shopping receipts to get points and access to special deals (like cash-back or lotteries to win prices). With the points they can buy items in the in-app store.  
-[App Store (universal, free)](https://itunes.apple.com/nl/app/tessa-sparen-voor-korting/id1159009842?l=en&mt=8)
 
 
 ## Last.fm Scrobbler
-![screenshots](/apps/lastfm.jpg)
+<div class="screenshots">
+<span><img src="/apps/lastfm_1.jpg" /></span>
+<span><img src="/apps/lastfm_2.jpg" /></span>
+<span><img src="/apps/lastfm_3.jpg" /></span>
+<span><img src="/apps/lastfm_4.jpg" /></span>
+</div>
 
 "Get the official Last.fm Scrobbler App to keep track of what you're listening to on Apple Music. Check out your top artist, album and song charts from all-time to last week, and watch videos of your favourite tracks."  
 [App Store (iPhone, free)](https://itunes.apple.com/us/app/last-fm-scrobbler/id1188681944?ls=1&mt=8)
 
 
 ## Sling
-![screenshots](/apps/sling.png)
+<div class="screenshots">
+<span><img src="/apps/sling_1.jpg" /></span>
+<span><img src="/apps/sling_2.jpg" /></span>
+<span><img src="/apps/sling_3.jpg" /></span>
+<span><img src="/apps/sling_4.jpg" /></span>
+</div>
 
 "Your business in your pocket." Sling is a complete tool for managing your business, with a newsfeed, chat function, shift scheduling and to-do tasks. It’s specifically built for hourly workers (think bars, restaurants, hotels, hospitals) and their managers. Managers can create complete shift schedules in advance, and employees can request time off, swap shifts amongst each other and apply for available shifts.  
 [App Store (universal, free)](https://itunes.apple.com/us/app/sling-stay-in-sync-your-team/id922995624?mt=8)
@@ -66,7 +85,12 @@ A complete rebuild of the Radio.com streaming radio app, using a new reusable au
 
 
 ## MetroLyrics
-![screenshots](/apps/metrolyrics.png)
+<div class="screenshots">
+<span><img src="/apps/metrolyrics_1.jpg" /></span>
+<span><img src="/apps/metrolyrics_2.jpg" /></span>
+<span><img src="/apps/metrolyrics_3.jpg" /></span>
+<span><img src="/apps/metrolyrics_4.jpg" /></span>
+</div>
 
 A lyrics app for one of the largest lyrics websites on the planet. View the lyrics of your currently playing song (optionally auto-scrolling, karaoke-style), artist bio and pictures, song meanings and more.  
 [App Store (iPhone, free)](https://itunes.apple.com/app/metrolyrics/id547825550)
