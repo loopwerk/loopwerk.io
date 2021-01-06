@@ -67,6 +67,7 @@ theme = {
             {'title': 'Articles', 'link': '/articles/'},
             {'title': 'Projects', 'link': '/projects/'},
             {'title': 'Apps', 'link': '/apps/'},
+            {'title': 'Mentorship Program', 'link': '/mentor/'},
             {'title': 'About', 'link': '/about/'},
         ]
     }

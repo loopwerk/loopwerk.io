@@ -311,12 +311,20 @@ input, select {
     margin: 0 auto;
     width: 315px;
   }
+
+  nav ul a.link_5 {
+    display: none;
+  }
 }
 
 /* Normal width screen */
 @media screen and (min-width: 800px) {
   nav ul a {
     margin: 0 10px;
+  }
+
+  nav ul a.link_5 {
+    display: block;
   }
 }
 

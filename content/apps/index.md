@@ -6,7 +6,7 @@ iOS apps I've worked on. I was either the only developer on the project, or the 
 
 
 ## Diffry
-![screenshots](/apps/diffry.jpg)
+![screenshots](/apps/diffry.png)
 
 "Learn more about your natural hair by connecting with other users with similar hair textures."  
 [App Store (iPhone, free)](https://apps.apple.com/nl/app/diffry/id1459623608?l=en)

@@ -25,7 +25,7 @@
       {% set active_page = active_page|default('Articles') -%}
       {% for item in theme.navigation %}
       <li>
-        <a href="{{ item.link }}"{% if active_page == item.title %} class="active"{% endif %}>{{ item.title }}</a>
+        <a href="{{ item.link }}" class="link_{{loop.index}}{% if active_page == item.title %} active{% endif %}">{{ item.title }}</a>
       </li>
       {% endfor %}
     </ul>
