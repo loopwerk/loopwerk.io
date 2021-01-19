@@ -65,8 +65,8 @@ theme = {
         "navigation": [
             {'title': 'Home', 'link': '/'},
             {'title': 'Articles', 'link': '/articles/'},
-            {'title': 'Projects', 'link': '/projects/'},
             {'title': 'Apps', 'link': '/apps/'},
+            {'title': 'Projects', 'link': '/projects/'},
             {'title': 'Mentorship Program', 'link': '/mentor/'},
             {'title': 'About', 'link': '/about/'},
         ]
