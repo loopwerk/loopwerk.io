@@ -145,7 +145,6 @@ input, select {
   --text-color: #566b78;
   --code-color: #566b78;
   --secondary-text-color: #CCC;
-  --blockquote-color: #666;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -157,7 +156,6 @@ input, select {
     --text-color: #eeeeee;
     --code-color: #eeeeee;
     --secondary-text-color: #CCC;
-    --blockquote-color: #CCC;
   }
 
   .highlight .hll { background-color: #272822; }

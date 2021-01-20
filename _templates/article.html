@@ -9,12 +9,16 @@
   <meta name="description" content="{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}" />
   <link rel="stylesheet" href="/static/not-home.css" />
 
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@kevinrenskers" />
-  <meta name="twitter:image" content="{{ site.url }}/static/images/loopwerk.svg" />
+  <meta name="twitter:image" content="{{ site.url }}/static/images/{{ post.filename }}.png" />
+  <meta name="twitter:image:alt content="{{ post.title }}" />
   <meta property="og:url" content="{{ site.url }}{{ post|permalink }}" />
   <meta property="og:title" content="{{ post.title }} | {{ site.name }}" />
   <meta property="og:description" content="{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}" />
+  <meta property="og:image" content="{{ site.url }}/static/images/{{ post.filename }}.png" />
+  <meta property="og:image:width" content="1600"/>
+  <meta property="og:image:height" content="840"/>
 
   <script type="application/ld+json">
     {

@@ -49,7 +49,8 @@ writer = {
         "liquidluck.writers.core.FileWriter",
         "liquidluck.writers.core.YearWriter",
         "liquidluck.writers.core.TagWriter",
-        "sitemap.SitemapWriter",
+        "SitemapWriter.SitemapWriter",
+        "ImageWriter.ImageWriter",
     ],
     "vars": {
         "archive_output": "articles/index.html",

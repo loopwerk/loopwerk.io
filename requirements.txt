@@ -1,3 +1,4 @@
 misaka==1.0.2
 liquidluck==3.8.1
 tornado
+pillow
