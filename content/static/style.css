@@ -224,11 +224,6 @@ input, select {
   .highlight .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
 }
 
-@font-face {
-  font-family: 'OdibeeSans';
-  src: url('/static/OdibeeSans-Regular.ttf');
-}
-
 /* Common styles, all screen widths */
 @media screen {
   * {
@@ -256,12 +251,13 @@ input, select {
   p {
     margin: 0 0 1.5em;
   }
-  blockquote {
+  blockquote p {
     font-style: italic;
-    color: var(--blockquote-color);
-    border-left: 2px solid var(--accent);
     padding-left: 0.5em;
     text-align: justify;
+  }
+  blockquote h1 {
+    margin: 0 0 1em;
   }
   pre {
     font-size: 0.875em;
