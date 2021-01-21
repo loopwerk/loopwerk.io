@@ -5,7 +5,7 @@ Resources for learning Swift and UIKit, what to build first, opinions on Unit Te
 
 ---
 
-In this article I'll go over a few questions I've received from my mentees and a few other people via Twitter, all centered around the idea of "how to get started."
+In this article I'll go over a few questions I've received from my mentees and a few other people via Twitter, all centered on the idea of "how to get started."
 
 # "How do I get started with iOS development?"
 Great news, there a ton of free resources on the internet for learning iOS development! From articles to free courses and books to videos, tutorials and references. No matter how you prefer to learn, there's free content out there for you. Here are some resources which I recommend:
@@ -17,7 +17,7 @@ An amazing free course using articles and videos. It first teaches you all the b
 Rather learn SwiftUI than UIKit? I would actually recommend learning UIKit first (see [this article](/articles/2021/faq-uikit-vs-swiftui/) for my reasons), but this course is *the* best resource for learning SwiftUI if you want to.
 
 ### [CS193p](https://cs193p.sites.stanford.edu)
-Stanford University has been teaching iOS development for a long time now, and since Spring 2020 the course focuses on SwiftUI. The videos are available on YouTube which is really handy! Its older course, focusing on UIKit and iOS 11, is still available on [iTunes U](https://itunes.apple.com/us/course/developing-ios-11-apps-with-swift/id1309275316).
+Stanford University has been teaching iOS development for a long time now, and since spring 2020 the course focuses on SwiftUI. The videos are available on YouTube which is really handy! Its older course, focusing on UIKit and iOS 11, is still available on [iTunes U](https://itunes.apple.com/us/course/developing-ios-11-apps-with-swift/id1309275316).
 
 ### [Swift By Sundell](https://swiftbysundell.com/basics/#filter)
 John Sundell writes very high quality articles about all things Swift, and his series of Basics articles is highly recommended when you're getting started and want to read more about things like properties, protocols, optionals, enums, and much much more.
@@ -32,7 +32,7 @@ The official SwiftUI tutorial from Apple, 4.5 hours of videos teaching you the b
 So you've learned the basics and are ready to build your first app. What should you build first? Easy: whatever you *want* to build! Preferably an app that you would actually use yourself, so if you have an itch to scratch, build that. If you have no ideas on what to build, I would recommend to build a todo app. They're not too complex as to be overwhelming, but complex enough to really teach you a bunch of things on the way. You'll need to build a list of todos, a way to add, edit and delete them, a way to store them between app starts, maybe a detail view to look at individual todo items. It's just big enough that you can play around with multiple architectures as well.
 
 # "What architecture should I use?"
-At first, I would just keep it simple and stick to MVC. Focus on building the UI, moving from one screen to the next, dealing with state - it'll be enough to keep you busy for some time. After that, look into MVVM and, if you're using UIKit, Coordinators which will decouple your view controllers from one another and improve the way you can test your code. But if you worry about "getting everything perfect" from the very beginning (something I heard from multiple mentees), you'll never get started and instead keep reading more and more articles about all kinds of architectures and their pros and cons. So, just get started, keep it simple, keep it small, and on the way you'll learn what works well for you and what you want to improve on.
+At first, I would just keep it simple and stick to MVC. Focus on building the UI, moving from one screen to the next, dealing with state — it'll be enough to keep you busy for some time. After that, look into MVVM and, if you're using UIKit, Coordinators which will decouple your view controllers from one another and improve the way you can test your code. But if you worry about "getting everything perfect" from the very beginning (something I heard from multiple mentees), you'll never get started and instead keep reading more and more articles about all kinds of architectures and their pros and cons. So, just get started, keep it simple, keep it small, and on the way you'll learn what works well for you and what you want to improve on.
 
 # "What and how should I test?"
 Here's my (possibly controversial) opinion: I wouldn't worry about it at first. While you're still learning to write iOS apps, just focus on that, and test them manually in the simulator. You won't be writing mission-critical apps just yet, most likely. Later on when Swift comes more natural and you feel like you can build basic apps without looking up everything all the time, that's a great time to start to look into testing. Or when you want to start applying for jobs, that's the time to get started with tests.
