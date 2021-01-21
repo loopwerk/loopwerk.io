@@ -36,7 +36,7 @@ author = {
 
 reader = {
     "active": [
-        "markdown.MarkdownReader",
+        "MarkdownReader.MarkdownReader",
     ],
 }
 

@@ -30,4 +30,4 @@ class ImageWriter(BaseWriter):
                 draw.text((30, offset), line, font=font_big, fill="#FFFFFF")
                 offset += 70
 
-            image.save(dest, format="PNG", optimize=True)
+            image.save(dest, format="PNG")
