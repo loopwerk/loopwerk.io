@@ -2,6 +2,7 @@
 #: settings for liquidluck
 
 from datetime import date
+import sys
 
 
 site = {
@@ -50,7 +51,6 @@ writer = {
         "liquidluck.writers.core.YearWriter",
         "liquidluck.writers.core.TagWriter",
         "SitemapWriter.SitemapWriter",
-        "ImageWriter.ImageWriter",
     ],
     "vars": {
         "archive_output": "articles/index.html",
@@ -60,6 +60,9 @@ writer = {
         "post_template": "article.html",
     }
 }
+
+if sys.argv[1] == "build":
+    writer["active"].append("ImageWriter.ImageWriter")
 
 theme = {
     "vars": {

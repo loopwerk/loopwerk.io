@@ -1,9 +1,9 @@
 @media screen {
-  a[href^="https://github.com"] {
+  .page_content a[href^="https://github.com"] {
     background: transparent url('images/github.png') no-repeat;
     padding-left: 20px;
   }
-  a[href^="https://itunes.apple.com"], a[href^="https://apps.apple.com"] {
+  .page_content a[href^="https://itunes.apple.com"], .page_content a[href^="https://apps.apple.com"] {
     background: transparent url('images/appstore.png') no-repeat;
     padding-left: 20px;
   }
