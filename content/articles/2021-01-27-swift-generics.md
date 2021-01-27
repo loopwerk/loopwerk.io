@@ -133,6 +133,55 @@ print(allPages.filter { page in
 })
 ```
 
-I don't think I can use an enum for the metadata, since enums can't be extended with new cases, and the library doesn't know what cases should be available.
+I don't think I can use an enum for the metadata, since enums can't be extended with new cases, and the library doesn't know what cases should be available. As you can see in the example below, the library would now have to ship with this `PageMetadata` enum, which is not possible since the library doesn't know about `ArticleMetadata` and `AppMetadata`. 
+
+``` swift
+import Foundation
+
+// ---- LIBRARY
+
+protocol Metadata: Decodable {}
+
+enum PageMetadata {
+  case article(ArticleMetadata)
+  case app(AppMetadata)
+}
+
+struct Page {
+  public var title: String
+  public var body: String
+  public var metadata: PageMetadata
+}
+
+// ---- USER APP
+
+struct ArticleMetadata: Metadata {
+  let isPublic: Bool
+}
+
+struct AppMetadata: Metadata {
+  let appStoreUrl: URL?
+}
+
+let articles: [Page] = [
+  .init(title: "Article 1", body: "", metadata: .article(ArticleMetadata(isPublic: true))),
+  .init(title: "Article 2", body: "", metadata: .article(ArticleMetadata(isPublic: false))),
+]
+
+let apps: [Page] = [
+  .init(title: "App", body: "", metadata: .app(AppMetadata(appStoreUrl: URL(string: "https://www.example.com"))))
+]
+
+let allPages = articles + apps
+
+print(allPages.filter { page in
+  switch page.metadata {
+    case .article(let article):
+      return article.isPublic
+    case .app:
+      return false
+  }
+})
+```
 
 Am I just stuck with type casting, or is there another brilliant solution to have an array of Pages using generics?
