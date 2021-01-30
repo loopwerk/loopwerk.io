@@ -1,4 +1,4 @@
-# Building my own static site generator. Part 1: inspiration.
+# Building my own static site generator, part 1: inspiration & goals
 - tags: swift
 
 In part 1 of a series of articles I'm looking at the inspiration behind my static site generator Saga, now available on Github.
@@ -7,7 +7,7 @@ In part 1 of a series of articles I'm looking at the inspiration behind my stati
 
 *I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*
 
-## Part 1: Inspiration
+## Part 1: Inspiration and goals
 
 ### liquidluck
 By far the biggest inspiration has come from [liquidluck](https://github.com/avelino/liquidluck), a static site generator written in Python that I've used since December 2012. There are many things that I really love about that generator: 
