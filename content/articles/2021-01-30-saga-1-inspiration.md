@@ -89,7 +89,7 @@ The second part of the inspiration for my own generator came from [Publish](http
 
 I was also not too fond of the way Publish has the concept of sections, items and pages; it seemed a bit too complex to me, I just wanted to have the concept of pages and that's it.
 
-Something that I did very much like was the way you can extend Publish with your own publishing steps, where you're free to modify sections, items and pages - although there were [some limitations](/articles/2021/static-site-publish/).
+Something that I did very much like is the way you can extend Publish with your own publishing steps, where you're free to modify sections, items and pages — although there were sadly [some limitations](/articles/2021/static-site-publish/) that stopped me from using Publish for my website.
 
 ### My take-aways
 After thinking about how I would want my own generator to work I knew I wanted at least the following things:
@@ -97,5 +97,6 @@ After thinking about how I would want my own generator to work I knew I wanted a
 1. If possible, have just the concept of Pages. No Pages and Posts, no Items, no Sections.
 2. It should be possible to have multiple kinds of strongly typed metadata, so that you have different sets of Pages. One set of articles, one set of questions, one for apps, and a generic default one for all other pages.
 3. Use liquidluck's concept of multiple readers and writers, but they have to operate on sets of pages, so that you can write a list of articles *and* a a list of questions or apps.
+4. It should be super easy to add your own readers and writers, or other steps where you can modify pages. By default it should "just work" using the built-in functionality, but it should be possible to extract dates from filenames for example, or do whatever else you want.
 
 Join me soon in part 2, where I dive into the API of Saga and how I got there.
