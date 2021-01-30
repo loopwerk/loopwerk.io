@@ -6,6 +6,12 @@ These are some of the more interesting open source projects I've created.
 Check my [GitHub profile](https://github.com/kevinrenskers) for a complete list of repositories and contributions.
 
 
+## Swift
+
+### Saga
+A static site generator.  
+[loopwerk/Saga](https://github.com/loopwerk/Saga)
+
 ## Objective-C
 
 ### GVUserDefaults
@@ -61,11 +67,6 @@ More developer friendly way of working with AdMarvel banners and interstitials.
 ### raml2html
 A simple RAML to HTML documentation generator, written for Node.js.  
 [raml2html/raml2html](https://github.com/raml2html/raml2html)
-
-### raml2md
-A simple RAML to Markdown documentation generator, written for Node.js.   
-[raml2html/raml2md](https://github.com/raml2html/raml2md)
-
 
 ## Python
 
