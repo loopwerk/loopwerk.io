@@ -237,6 +237,7 @@ try Saga(input: "content", output: "deploy")
         .yearWriter(template: "year.html"),
       ]),
       
+      // Apps
       .listWriter(
         template: "apps.html", 
         output: "apps/index.html", 
