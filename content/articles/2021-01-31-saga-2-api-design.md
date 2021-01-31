@@ -307,6 +307,6 @@ try Saga(input: "content", output: "deploy")
 
 The `pageProcessor` way is a bit simpler, but the custom step is more powerful since it has access to *all* files, even the ones not transformed to a `Page` using one of the read steps.
 
-Check out the [example that ships with Saga](https://github.com/loopwerk/Saga/blob/main/Example/Sources/Example/main.swift) for more use cases, such as transforming files with filenames like `2021-01-31-saga-2-api-design.md` into articles with that date as the published date and creating Twitter preview images for all articles.
+Check out the [example that ships with Saga](https://github.com/loopwerk/Saga/blob/main/Example/Sources/Example/main.swift) for more use cases, such as transforming files with filenames like `2021-01-31-saga-2-api-design.md` into articles with that date as the published date, and creating Twitter preview images for all articles.
 
 Part 3 will come soon, where I will discuss the pros and cons of the current setup, what I do and don't like about the API, and where I might see this going forward.
