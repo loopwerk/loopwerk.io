@@ -34,10 +34,10 @@
         "ratingValue": "{{ post.rating }}"
       },
       "description": "A review of {{ post.review }}",
-      "reviewBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}",
+      "reviewBody": "{% if post.description_source %}{{ post.description_source|striptags|escape }}{% else %}{{ post.content|striptags|truncate|escape }}{% endif %}",
       {% else %}
       "headline": "{{ post.title }}",
-      "articleBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate|escape }}{% endif %}",
+      "articleBody": "{% if post.description_source %}{{ post.description_source|striptags|escape }}{% else %}{{ post.content|striptags|truncate|escape }}{% endif %}",
       "wordCount": "{{ wordcount }}",
       {% endif %}
       "name": "{{ post.title }}",
