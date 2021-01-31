@@ -37,7 +37,7 @@
       "reviewBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}",
       {% else %}
       "headline": "{{ post.title }}",
-      "articleBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate }}{% endif %}",
+      "articleBody": "{% if post.description_source %}{{ post.description_source|striptags }}{% else %}{{ post.content|striptags|truncate|escape }}{% endif %}",
       "wordCount": "{{ wordcount }}",
       {% endif %}
       "name": "{{ post.title }}",
