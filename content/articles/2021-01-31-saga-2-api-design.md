@@ -90,7 +90,6 @@ try Saga(input: "content", output: "deploy")
       ),
     ]
   )
-  .staticFiles()
 ```
 
 As you can see, a lot more is going on now. First of all we declare our own metadata type, `ArticleMetadata`. In our case we declare this type to have an array of tags, an optional summary and an optional `public` flag, that we default to `true` via the `isPublic` computed property. This means that we can write articles like this and the metadata contained within the Markdown file with be parsed as expected:
@@ -183,7 +182,78 @@ You may notice that the four writers that deal with articles have a lot of repea
 
 That looks a lot better!
 
-I'm not super happy that the last `pageWriter` needs that `{ $0.metadata is EmptyMetadata }` filter but sadly I haven't found a better solution yet. The problem is that you could have articles that are ignored by that first `pageWriter` (because the `public` flag was set to `false` for example), so when the second `pageWriter` comes along, it sees an unwritten page and wants to write it to disk - which is not what we want in this case.
+And of course we're able to have different kinds of metadata for different kinds of pages, which was a huge goal I had for Saga. In the example below we have the articles like before using `ArticleMetadata`, but we now also have "apps" using `AppMetadata`, which are only written using the `listWriter`:
+
+``` swift
+struct ArticleMetadata: Metadata {
+  let tags: [String]
+  let summary: String?
+  let `public`: Bool?
+
+  var isPublic: Bool {
+    return `public` ?? true
+  }
+}
+
+struct AppMetadata: Metadata {
+  let url: URL?
+  let images: [String]?
+}
+
+extension Page {
+  var isPublicArticle: Bool {
+    return (metadata as? ArticleMetadata)?.isPublic ?? false
+  }
+  var tags: [String] {
+    return (metadata as? ArticleMetadata)?.tags ?? []
+  }
+  var isApp: Bool {
+    return metadata is AppMetadata
+  }
+}
+
+try Saga(input: "content", output: "deploy")
+  .read(
+    folder: "articles",
+    metadata: ArticleMetadata.self,
+    readers: [.markdownReader()]
+  )
+  .read(
+    folder: "apps",
+    metadata: AppMetadata.self,
+    readers: [.markdownReader()]
+  )
+  .read(
+    readers: [.markdownReader()]
+  )
+  .write(
+    templates: "templates",
+    writers: [
+      // Articles
+      .section(prefix: "articles", filter: \.isPublicArticle, writers: [
+        .pageWriter(template: "article.html"),
+        .listWriter(template: "articles.html"),
+        .tagWriter(template: "tag.html", tags: \.tags),
+        .yearWriter(template: "year.html"),
+      ]),
+      
+      .listWriter(
+        template: "apps.html", 
+        output: "apps/index.html", 
+        filter: \.isApp
+      ),
+
+      // Other pages
+      .pageWriter(
+        template: "page.html", 
+        filter: { $0.metadata is EmptyMetadata }
+      ),
+    ]
+  )
+  .staticFiles()
+```
+
+I'm not super happy that the last `pageWriter` needs that `{ $0.metadata is EmptyMetadata }` filter but sadly I haven't found a better solution yet. The problem is that you can have pages which were not written to disk using a previous `pageWriter`: for example articles with the `public` flag set to `false`, and all the apps (which are only written using a `listWriter`. So when the final `pageWriter` comes along, it sees unwritten pages and wants to write it to disk - which is not what we want, and as such we make sure to only deal with `EmptyMetadata` pages here.
 
 Finally we end with a call to `.staticFiles()`, which takes all the files in the input folder that were not read using one of the readers, and copies them to the output folder as-is. In practice, this means that all static files like images, css, raw html pages and so on are copied to your output folder as expected.
 
