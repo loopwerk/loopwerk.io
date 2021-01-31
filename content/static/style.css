@@ -76,7 +76,6 @@ input, select {
 /* Pygments syntax highlighter */
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
-.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .highlight .k { color: #000000; font-weight: bold } /* Keyword */
 .highlight .o { color: #000000; font-weight: bold } /* Operator */
 .highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
@@ -160,7 +159,6 @@ input, select {
 
   .highlight .hll { background-color: #272822; }
   .highlight .c { color: #75715e } /* Comment */
-  .highlight .err { color: #960050; background-color: #1e0010 } /* Error */
   .highlight .k { color: #66d9ef } /* Keyword */
   .highlight .l { color: #ae81ff } /* Literal */
   .highlight .n { color: #f8f8f2 } /* Name */

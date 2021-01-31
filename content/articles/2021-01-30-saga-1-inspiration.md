@@ -99,4 +99,4 @@ After thinking about how I would want my own generator to work I knew I wanted a
 3. Use liquidluck's concept of multiple readers and writers, but they have to operate on sets of pages, so that you can write a list of articles *and* a a list of questions or apps.
 4. It should be super easy to add your own readers and writers, or other steps where you can modify pages. By default it should "just work" using the built-in functionality, but it should be possible to extract dates from filenames for example, or do whatever else you want.
 
-Join me soon in part 2, where I dive into the API of Saga and how I got there.
+Join me in [part 2](/articles/2021/saga-2-api-design/) next, where I dive into the API of Saga and how I got there.
