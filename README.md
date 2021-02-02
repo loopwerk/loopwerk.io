@@ -4,15 +4,11 @@ The source of loopwerk.io, a static website generated with [Felix Felicis](https
 
 ## Getting started
 
-1. `npm -g install surge`
-2. `git clone git@github.com:loopwerk/loopwerk.io.git`
-3. `cd loopwerk.io`
-
-### virtualenv
-
-1. `python3 -m venv env`
-2. `. env/bin/activate`
-3. `pip install -r requirements.txt`
+1. `git clone git@github.com:loopwerk/loopwerk.io.git`
+2. `cd loopwerk.io`
+3. `python3 -m venv env`
+4. `. env/bin/activate`
+5. `pip install -r requirements.txt`
 
 ## Viewing locally
 

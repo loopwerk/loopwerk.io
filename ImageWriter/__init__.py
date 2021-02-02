@@ -1,6 +1,6 @@
 import os
 import textwrap
-import HTMLParser
+import html
 from PIL import Image, ImageDraw, ImageFont
 from liquidluck.options import g
 from liquidluck.writers.base import BaseWriter
@@ -18,7 +18,7 @@ class ImageWriter(BaseWriter):
 
         for post in g.public_posts:
             dest = os.path.join(g.output_directory, 'static', 'images', post.filename + '.png')
-            title = HTMLParser.HTMLParser().unescape(post.title)
+            title = html.unescape(post.title)
             
             image = self._image.copy()
 
