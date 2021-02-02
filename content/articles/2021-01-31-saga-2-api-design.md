@@ -9,7 +9,7 @@ Part 2, where I'm looking back at the current API of Saga.
 
 *If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/).*
 
-## Part 2: API design
+# Part 2: API design
 To explain the basic API design, let's start with a simple usage example, that we will then improve upon and extend later.
 
 ``` swift
@@ -309,4 +309,4 @@ The `pageProcessor` way is a bit simpler, but the custom step is more powerful s
 
 Check out the [example that ships with Saga](https://github.com/loopwerk/Saga/blob/main/Example/Sources/Example/main.swift) for more use cases, such as transforming files with filenames like `2021-01-31-saga-2-api-design.md` into articles with that date as the published date, and creating Twitter preview images for all articles.
 
-Part 3 will come soon, where I will discuss the pros and cons of the current setup, what I do and don't like about the API, and where I might see this going forward.
+[Part 3 is up](/articles/2021/saga-3-thoughts-so-far/), where I discuss the pros and cons of the current setup, what I do and don't like about the API, and where I might see this going forward.

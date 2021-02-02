@@ -30,8 +30,11 @@
     margin-top: 1.5em;
   }
   #content h3 {
-    font-size: 1em;
+    font-size: 1.15em;
     font-weight: bold;
+  }
+  #content h1 + h2 {
+    margin-top: 1em;
   }
   #content h2 + h3 {
     margin-top: 1em;

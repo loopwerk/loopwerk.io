@@ -7,9 +7,9 @@ In part 1 of a series of articles I'm looking at the inspiration behind my stati
 
 *I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*
 
-## Part 1: Inspiration and goals
+# Part 1: Inspiration and goals
 
-### liquidluck
+## liquidluck
 By far the biggest inspiration has come from [liquidluck](https://github.com/avelino/liquidluck), a static site generator written in Python that I've used since December 2012. There are many things that I really love about that generator: 
 
 1. The way it uses multiple readers and writers and the ease of adding your own
@@ -84,14 +84,14 @@ Some things I knew I wanted to change though: one thing that is not ideal about 
 
 I'm also not sure why liquidluck has the concept of both posts and pages, there honestly is no real difference in how both are handled other than how one uses `liquidluck.writers.core.PostWriter` and the other `liquidluck.writers.core.PageWriter`, which in turn use different templates. If you could pass parameters to the writers, surely you would only need one writer and only one type instead of two.
 
-### Publish
+## Publish
 The second part of the inspiration for my own generator came from [Publish](https://github.com/johnsundell/publish). I really like the way it allows to you extend an `Item` with custom metadata. However, it only allows for one metadata type for all your items which didn't seem ideal. I started to think about how I could have multiple types of items each with their own set of metadata: articles would have `tags`, and I could have a different set for apps, using an optional App Store URL plus URLs to screenshots. That way I could split my quite long `apps/index.md` file into separate Markdown files; one for each app, each with strongly typed metadata, and from those files I could then generate the actual Apps webpage. I could have both an Articles *and* a Questions section each with their own metadata. The possibilities are endless!
 
 I was also not too fond of the way Publish has the concept of sections, items and pages; it seemed a bit too complex to me, I just wanted to have the concept of pages and that's it.
 
 Something that I did very much like is the way you can extend Publish with your own publishing steps, where you're free to modify sections, items and pages — although there were sadly [some limitations](/articles/2021/static-site-publish/) that stopped me from using Publish for my website.
 
-### My take-aways
+## My take-aways
 After thinking about how I would want my own generator to work I knew I wanted at least the following things:
 
 1. If possible, have just the concept of Pages. No Pages and Posts, no Items, no Sections.
