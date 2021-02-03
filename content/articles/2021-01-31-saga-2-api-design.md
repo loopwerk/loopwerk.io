@@ -1,5 +1,5 @@
 # Building my own static site generator, part 2: API design
-- tags: swift
+- tags: swift, saga, open source
 
 Part 2, where I'm looking back at the current API of Saga.
 

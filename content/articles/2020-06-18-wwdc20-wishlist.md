@@ -1,5 +1,5 @@
 # WWDC20 wishlist
-- tags: iOS, other
+- tags: iOS
 
 WWDC is just around the corner, and we're all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes.
 

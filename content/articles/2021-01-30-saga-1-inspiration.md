@@ -1,5 +1,5 @@
 # Building my own static site generator, part 1: inspiration & goals
-- tags: swift
+- tags: swift, saga, open source
 
 In part 1 of a series of articles I'm looking at the inspiration behind my static site generator Saga, now available on Github.
 

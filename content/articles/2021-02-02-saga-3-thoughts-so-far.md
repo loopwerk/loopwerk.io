@@ -1,5 +1,5 @@
 # Building my own static site generator, part 3: thoughts so far
-- tags: swift
+- tags: swift, saga, open source
 
 In the third and final part of this series about Saga I'm looking at the pros and cons of the current system and what I might want to change.
 
