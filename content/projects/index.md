@@ -12,6 +12,10 @@ Check my [GitHub profile](https://github.com/kevinrenskers) for a complete list 
 A static site generator.  
 [loopwerk/Saga](https://github.com/loopwerk/Saga)
 
+### SwiftMarkdown2
+A Swift wrapper for python-markdown2.  
+[loopwerk/SwiftMarkdown2](https://github.com/loopwerk/SwiftMarkdown2)
+
 ## Objective-C
 
 ### GVUserDefaults
