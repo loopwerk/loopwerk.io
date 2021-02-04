@@ -1,5 +1,5 @@
 # Swift generics and arrays
-- tags: swift
+- tags: swift, saga
 
 I'm in the very early stages of building my own static site generator in Swift. I want the library to provide a basic `Page` type, that the user can then extend with custom metadata, and I need to be able to put Pages with different kinds of metadata into one array, which currently does work:
 
