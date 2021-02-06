@@ -1,8 +1,6 @@
+tags: iOS
+
 # My wishes for iOS 5
-- tags: iOS
-
----
-
 In June 2010 Apple finally added multitasking to the iPhone (the iPad had to wait 'til November to get iOS version 4) and with this resolved one of my biggest complaints about the operating system. And while I really enjoy iOS on the iPhone and the iPad, I still have wishes, especially after seeing the new HP WebOS.
 
 My wishes for the next version of iOS are listed below in no particular order. Hardware wishes are not included (but in short: LED notification lights on both devices, SD card support and front-facing camera on iPad).

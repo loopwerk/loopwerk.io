@@ -1,8 +1,6 @@
+tags: python
+
 # Serving 5000 pages per second with Django
-- tags: python
-
----
-
 Okay, this website wasn't slow and will never need to serve 5000 pages per second, but hey, it's possible now! Oh right, and it was fun to play around with a nice caching system.
 
 Almost everything on mixedCase.nl needs to come from the database: the list of categories, the menu on top of the site, the articles, the count of the number of comments, how many entries there are per month and category, and so on. So, caching makes a big difference in making the site very quick. When I wanted to play around with caching, I already knew about these options Django provides out of the box:

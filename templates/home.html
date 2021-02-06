@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% set active_page = "Home" %}
 
 {% block extraheader %}
   <meta name="description" content="A good app is like a mechanical watch: lots of moving parts all working together to create a beautiful and simple interface.">
@@ -26,7 +25,7 @@
       </h1>
 
       <div class="right">
-        {{ post.content }}
+        {{ page.body }}
       </div>
     </div>
 

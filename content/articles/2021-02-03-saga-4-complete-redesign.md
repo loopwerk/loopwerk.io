@@ -1,10 +1,7 @@
+tags: swift, saga, open source
+summary: An unexpectedly quick fourth article about Saga, after a complete redesign of the API.
+
 # Building my own static site generator, part 4: a complete redesign
-- tags: swift, saga, open source
-
-An unexpectedly quick fourth article about Saga, after a complete redesign of the API.
-
----
-
 *I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*
 
 # Part 4: A complete redesign
@@ -115,7 +112,7 @@ try Saga(input: "content", output: "deploy")
     ]
   )
 ```
-  
+
 The new version is more concise, more powerful, and needs a lot fewer hacks inside of the Saga codebase to deal with less-constrained writers running after more constrained writers and overwriting their pages. And a pet-peeve is solved: check that `output` parameter of the articles `listWriter`: `apps/index.html`. It really annoyed me that I had to prefix it with `app`, since in the read step, I was also telling the system to work in the `app` folder. This is so much better now.
   
 I'm very happy, and can't wait to see where the API goes from here. Check out the [pull request](https://github.com/loopwerk/Saga/pull/1) I created with these changes, in case you're interested.

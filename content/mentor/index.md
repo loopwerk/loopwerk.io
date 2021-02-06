@@ -1,6 +1,6 @@
+menu: mentor
+
 # Mentorship Program
-- menu: Mentorship Program
----------------------
 
 ## Mentorship Program
 Starting January 2021 I am offering a new Mentorship Program, where using one-on-one video calls, screen sharing and pair programming I will help you level up as an iOS developer. This Mentorship Program is completely free; I donate a few hours every week to help underprivileged people from the iOS community. 

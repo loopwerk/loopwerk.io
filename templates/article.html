@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}: {{ page.title }}{% endblock %}
+
+{% block extraheader %}
+  <link rel="canonical" href="{{ site.url }}{{ page|url }}" />
+  <meta name="description" content="{% if page.metadata.summary %}{{ page.metadata.summary|striptags|escape }}{% else %}{{ page.body|striptags|truncate|escape }}{% endif %}" />
+  <link rel="stylesheet" href="/static/not-home.css" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@kevinrenskers" />
+  <meta name="twitter:image" content="{{ site.url }}/static/images/{{ page.filenameWithoutExtension }}.png" />
+  <meta name="twitter:image:alt content="{{ page.title|escape }}" />
+  <meta property="og:url" content="{{ site.url }}{{ page|url }}" />
+  <meta property="og:title" content="{{ page.title|escape }} | {{ site.name }}" />
+  <meta property="og:description" content="{% if page.metadata.summary %}{{ page.metadata.summary|striptags|escape }}{% else %}{{ page.body|striptags|truncate|escape }}{% endif %}" />
+  <meta property="og:image" content="{{ site.url }}/static/images/{{ page.filenameWithoutExtension }}.png" />
+  <meta property="og:image:width" content="1014"/>
+  <meta property="og:image:height" content="530"/>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "{% if page.metadata.review %}Review{% else %}BlogPosting{% endif %}",
+      {% if page.metadata.review %}
+      "itemReviewed": {
+        "@type": "Book",
+        "name": "{{ page.metadata.review }}"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "{{ page.metadata.rating }}"
+      },
+      "description": "A review of {{ page.metadata.review }}",
+      "reviewBody": "{% if page.metadata.summary %}{{ page.metadata.summary|striptags|escape }}{% else %}{{ page.body|striptags|truncate|escape }}{% endif %}",
+      {% else %}
+      "headline": "{{ page.title }}",
+      "articleBody": "{% if page.metadata.summary %}{{ page.metadata.summary|striptags|escape }}{% else %}{{ page.body|striptags|truncate|escape }}{% endif %}",
+      "wordCount": "{{ page.body|striptags|wordcount }}",
+      {% endif %}
+      "name": "{{ page.title }}",
+      "author": {
+        "@type": "Person",
+        "name": "Kevin Renskers"
+      },
+      "url": "{{ site.url }}{{ page|url }}",
+      "publisher": {
+        "@type": "Person",
+        "name": "Kevin Renskers"
+      },
+      "datePublished": "{{ page.date|date:"yyyy-MM-dd'T'00:00:00" }}"
+    }
+  </script>
+{% endblock %}
+
+{% block main %}
+  <div id="content">
+    <article>
+      <h1>{{ page.title }}</h1>
+
+      <div class="article_info"><span class="time">{{ page.date|date:"MMMM" }} {{ page.date|date:"dd" }},
+        <a href="/articles/{{ page.date|date:"yyyy" }}/">{{ page.date|date:"yyyy" }}</a></span>{{ page.body|striptags|wordcount }} words{% if page.metadata.tags %}, posted in {% for tag in page.metadata.tags %}{% if forloop.counter > 1 %}, {% endif %}<a href="/articles/tag/{{ tag|slugify }}/">{{ tag }}</a>{% endfor %}{% endif %}
+      </div>
+
+      <div class="article_content">
+        {{ page.body }}
+      </div>
+    </article>
+
+    <div id="article_footer">
+      <p>Have feedback? Let me know on <a href="https://twitter.com/kevinrenskers">Twitter</a>.</p>
+    </div>
+  </div>
+{% endblock %}

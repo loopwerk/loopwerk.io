@@ -1,6 +1,6 @@
+menu: about
+
 # About me
-- menu: About
----------------------
 
 ## Hello! 
 My name is **Kevin Renskers**.

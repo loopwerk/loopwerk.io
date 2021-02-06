@@ -1,12 +1,9 @@
+tags: review
+review: Don't Make Me Think
+rating: 5
+summary: Buy this book.
+
 # Book review: Don't Make Me Think
-- tags: review
-- review: Don't Make Me Think
-- rating: 5
-
-Buy this book.
-
----
-
 **Don't make me think! A common sense approach to web usability (2nd edition)**  
 _Steve Krug_  
 _New Riders_

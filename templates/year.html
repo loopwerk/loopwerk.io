@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Articles posted in {{ year }}{% endblock %}
+
+{% block extraheader %}
+<link rel="stylesheet" href="/static/not-home.css" />
+{% endblock %}
+
+{% block main %}
+<div id="content">
+  {% for page in pages %}
+  <section itemscope itemtype="{% if page.metadata.review %}http://schema.org/Review{% else %}http://schema.org/BlogPosting{% endif %}">
+    <h1><a href="{{ page|url }}" itemprop="url">{{ page.title }}</a></h1>
+    <div class="article_info"><span class="time">{{ page.date|date:"MMMM" }} {{ page.date|date:"dd" }},
+      <a href="/articles/{{ page.date|date:"yyyy" }}/">{{ page.date|date:"yyyy" }}</a></span>{{ page.body|striptags|wordcount }} words{% if page.metadata.tags %}, posted in {% for tag in page.metadata.tags %}{% if forloop.counter > 1 %}, {% endif %}<a href="/articles/tag/{{ tag|slugify }}/">{{ tag }}</a>{% endfor %}{% endif %}
+    </div>
+    {% if page.metadata.summary %} {{ page.metadata.summary }} {% else %} <p>{{ page.body|striptags|truncate }}</p> {% endif %}
+    <p class="more"><a href="{{ page|url }}" class="more">read more</a></p>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

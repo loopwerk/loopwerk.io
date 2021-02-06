@@ -1,8 +1,6 @@
+tags: review, python
+
 # Django 1.2, a great release
-- tags: review, python
-
----
-
 I've been playing with the Beta release of Django 1.2 ([get it here](http://www.djangoproject.com/download/)) and I love many of the new improvements. I'd like to list the best and biggest new features, and also some problems I encountered while using it.
 
 ## Smarter if tag

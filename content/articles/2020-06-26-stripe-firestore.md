@@ -1,8 +1,6 @@
+tags: firebase, javascript
+
 # Connecting Stripe to Firestore via Cloud Functions and webhooks
-- tags: firebase, javascript
-
----
-
 After adding [subscriptions in iOS via Apple's Storekit](/articles/2020/storekit-webhooks-firestore/), I have now also added subscriptions to the web client of Critical Notes, using Stripe (even though they have [some serious drawbacks](/articles/2020/user-subscriptions/) at the moment).
 
 Since it was a bit of a puzzle to get it working, I am sharing my backend and frontend code.

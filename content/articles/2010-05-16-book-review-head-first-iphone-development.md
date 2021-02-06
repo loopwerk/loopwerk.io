@@ -1,12 +1,9 @@
+tags: review, iOS
+review: Head First iPhone Development
+rating: 3.5
+summary: In a previous blogentry I wrote about some great online resources I found to get started with iPhone development. I read the C and Objective-C introductions, watched the first 12 or so episodes of the Stanford courses and did the assignments that went along with it. Well, at least I tried to do all the assignments, but they were not easy with just the information from the taped lectures. There is a ton of information in them, but are kind of boring to watch, and you don't learn that well from slides.
+
 # Book review: Head First iPhone Development
-- tags: review, iOS
-- review: Head First iPhone Development
-- rating: 3.5
-
-In a previous blogentry I wrote about some great online resources I found to get started with iPhone development. I read the C and Objective-C introductions, watched the first 12 or so episodes of the Stanford courses and did the assignments that went along with it. Well, at least I tried to do all the assignments, but they were not easy with just the information from the taped lectures. There is a ton of information in them, but are kind of boring to watch, and you don't learn that well from slides.
-
----
-
 **Head First iPhone Development**  
 _Dan Pilone & Tracey Pilone_  
 _O'Reilly_

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% set active_page = post.menu %}
 
-{% block title %}: {{ post.title }}{% endblock %}
+{% block title %}: {{ page.title }}{% endblock %}
 
 {% block extraheader %}
   <link rel="stylesheet" href="/static/not-home.css" />
@@ -11,7 +10,7 @@
   <div id="content">
     <article>
       <div class="page_content">
-        {{ post.content }}
+        {{ page.body }}
       </div>
     </article>
   </div>

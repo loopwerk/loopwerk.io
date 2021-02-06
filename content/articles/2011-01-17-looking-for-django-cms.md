@@ -1,8 +1,6 @@
+tags: review, python
+
 # Looking for a Django CMS which suits my needs
-- tags: review, python
-
----
-
 I need to build a content-based website for a client, in Django. Well, that's easy right? Pick one of the content management systems available, build some templates and css, and ta-da, done. Since I have used [Django-CMS][1] in previous projects, that would make my choice pretty easy too. It's easy to work with, flexible and pretty user-friendly.
 
 Sadly though, after a day of wrestling with Django-CMS, I am not so sure about this choice. Let me explain why.

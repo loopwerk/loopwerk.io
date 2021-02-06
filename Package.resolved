@@ -1,0 +1,70 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Codextended",
+        "repositoryURL": "https://github.com/johnsundell/codextended.git",
+        "state": {
+          "branch": null,
+          "revision": "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "PathKit",
+        "repositoryURL": "https://github.com/kylef/PathKit.git",
+        "state": {
+          "branch": null,
+          "revision": "73f8e9dca9b7a3078cb79128217dc8f2e585a511",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "PythonKit",
+        "repositoryURL": "https://github.com/pvieito/PythonKit.git",
+        "state": {
+          "branch": null,
+          "revision": "074622c6893188bbb7926eee2f7eece8a5124c47",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "Slugify",
+        "repositoryURL": "https://github.com/nodes-vapor/slugify",
+        "state": {
+          "branch": null,
+          "revision": "2231b5cff8e08693e4036a03b7220e93340fcae0",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "Spectre",
+        "repositoryURL": "https://github.com/kylef/Spectre.git",
+        "state": {
+          "branch": null,
+          "revision": "f79d4ecbf8bc4e1579fbd86c3e1d652fb6876c53",
+          "version": "0.9.2"
+        }
+      },
+      {
+        "package": "Stencil",
+        "repositoryURL": "https://github.com/stencilproject/Stencil.git",
+        "state": {
+          "branch": null,
+          "revision": "94197b3adbbf926348ad8765476a158aa4e54f8a",
+          "version": "0.14.0"
+        }
+      },
+      {
+        "package": "SwiftMarkdown",
+        "repositoryURL": "https://github.com/loopwerk/SwiftMarkdown",
+        "state": {
+          "branch": null,
+          "revision": "360a3c9965b184ca488bcc983a1daaddac93f335",
+          "version": "0.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

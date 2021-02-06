@@ -272,6 +272,9 @@ input, select {
     background: var(--code-background);
     color: var(--code-color);
   }
+  pre code {
+    padding: 0;
+  }
 
   /* Navigation */
   nav {

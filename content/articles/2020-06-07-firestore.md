@@ -1,10 +1,7 @@
+tags: firebase, backend
+summary: Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I started with Vapor 3, then made the same backend in Django REST Framework, and couldn't really choose between the two...
+
 # After Vapor and Django comes.. Firestore
-- tags: firebase, backend
-
-Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I started with Vapor 3, then made the same backend in Django REST Framework, and couldn't really choose between the two...
-
----
-
 Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I [started with Vapor 3](/articles/2019/vapor/), then [made the same backend in Django REST Framework](/articles/2019/vapor-vs-drf/), and couldn't really choose between the two. What did I end up choosing? Neither!
 
 I ended up scrapping my backend completely, and went with Firebase's Firestore instead. I actually [wrote about Firebase](/articles/2016/next-gen-backend/) back in 2016 when I was searching for my ideal "next gen backend", when Firestore didn't exist yet (only the older Firebase Realtime Database), and Cloud Functions weren't offered yet either as far as I can remember. But in the summer of 2019 Firebase was mature enough for me to make the switch, and I am super happy that I did.

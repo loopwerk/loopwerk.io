@@ -11,7 +11,7 @@
   <meta name="author" content="Kevin Renskers" />
   <meta property="og:site_name" content="Loopwerk" />
   <meta name="keywords" content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.feed }}" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="/articles/feed.xml" />
   <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/static/images/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
@@ -23,12 +23,24 @@
   <nav>
     <ul>
       <li class="logo"><img src="/static/images/Loopwerk_mark.svg" alt="Loopwerk logo" /></li>
-      {% set active_page = active_page|default('Articles') -%}
-      {% for item in theme.navigation %}
       <li>
-        <a href="{{ item.link }}" class="link_{{loop.index}}{% if active_page == item.title %} active{% endif %}">{{ item.title }}</a>
+        <a href="/" class="link_1{% if page.metadata.menu == 'home' %} active{% endif %}">Home</a>
       </li>
-      {% endfor %}
+      <li>
+        <a href="/articles/" class="link_2{% if page.metadata.menu == nil %} active{% endif %}">Articles</a>
+      </li>
+      <li>
+        <a href="/apps/" class="link_3{% if page.metadata.menu == 'apps' %} active{% endif %}">Apps</a>
+      </li>
+      <li>
+        <a href="/projects/" class="link_4{% if page.metadata.menu == 'projects' %} active{% endif %}">Projects</a>
+      </li>
+      <li>
+        <a href="/mentor/" class="link_5{% if page.metadata.menu == 'mentor' %} active{% endif %}">Mentorship Program</a>
+      </li>
+      <li>
+        <a href="/about/" class="link_6{% if page.metadata.menu == 'about' %} active{% endif %}">About</a>
+      </li>
     </ul>
   </nav>
   

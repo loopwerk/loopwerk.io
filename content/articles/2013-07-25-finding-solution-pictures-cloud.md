@@ -1,8 +1,6 @@
+tags: review
+
 # Searching for a solution to back up all my pictures to the cloud
-- tags: review
-
----
-
 I have well over 35 GB of pictures, and after almost losing my hard drive (it started to behave very strangely but I was able to salvage all the pictures) I realised that I need to back them up in the cloud. I do usually share my best ones on Facebook, but I need a solution that backs up every picture (full-resolution with all its metadata intact) without ever thinking about it.
 
 ![Screenshot from Finder](/articles/images/pictures-folder.png "Currently all my photos are simply stored in subfolders like this")

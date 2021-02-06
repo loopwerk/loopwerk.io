@@ -1,8 +1,6 @@
+tags: iOS
+
 # MPVolumeView (Airplay button) on an UIBarButtonItem
-- tags: iOS
-
----
-
 In an app I'm currently building, the client wants an Airplay button in the navigation bar, with a nice background like so:
 
 ![toolbar screenshot][1]

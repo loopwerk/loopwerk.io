@@ -1,10 +1,7 @@
+menu: projects
+
 # Projects
-- menu: Projects
----------------------
-
-These are some of the more interesting open source projects I've created. 
-Check my [GitHub profile](https://github.com/kevinrenskers) for a complete list of repositories and contributions.
-
+These are some of the more interesting open source projects I've created. Check my [GitHub profile](https://github.com/kevinrenskers) for a complete list of repositories and contributions.
 
 ## Swift
 
@@ -19,7 +16,6 @@ A Swift wrapper for Python-Markdown, including custom extensions.
 ### SwiftMarkdown2
 A Swift wrapper for python-markdown2.  
 [loopwerk/SwiftMarkdown2](https://github.com/loopwerk/SwiftMarkdown2)
-
 
 ## Objective-C
 
@@ -71,13 +67,11 @@ Google-Mobile-Ads-SDK banners in interface builder with handy delegate callbacks
 More developer friendly way of working with AdMarvel banners and interstitials.  
 [gangverk/AdMarvelContainer](https://github.com/gangverk/AdMarvelContainer)
 
-
 ## JavaScript
 
 ### raml2html
 A simple RAML to HTML documentation generator, written for Node.js.  
 [raml2html/raml2html](https://github.com/raml2html/raml2html)
-
 
 ## Python
 

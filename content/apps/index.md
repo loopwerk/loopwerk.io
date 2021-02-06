@@ -1,7 +1,6 @@
-# Apps
-- menu: Apps
----------------------
+menu: apps
 
+# Apps
 iOS apps I've worked on. I was either the only developer on the project, or the lead developer with more people on the team. Newest apps are shown first.
 
 
