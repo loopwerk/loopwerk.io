@@ -1,11 +1,11 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.2
 
 import PackageDescription
 
 let package = Package(
   name: "Loopwerk",
   dependencies: [
-    .package(path: "../Saga/"),
+    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", .branch("SwiftMarkdown")),
   ],
   targets: [
     .target(
