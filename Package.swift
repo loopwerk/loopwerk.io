@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "Loopwerk",
   dependencies: [
-    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.8.0"),
+    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.8.1"),
   ],
   targets: [
     .target(
