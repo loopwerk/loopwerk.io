@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>{{ site.name }}</title>
+    <updated>{{ site.now|date:"yyyy-MM-dd'T'hh:mm:ss'Z'" }}</updated>
     <link href="{{ site.url }}/articles/feed.xml" rel="self" />
     <link href="{{ site.url }}/articles/" />
     <id>{{ site.url }}/articles/</id>
@@ -9,8 +10,8 @@
         <title type="html"><![CDATA[{{ page.title }}]]></title>
         <author><name>Kevin Renskers</name></author>
         <link href="{{ site.url }}{{ page|url }}"/>
-        <published>{{ page.date|date:"yyyy-MM-dd'T'00:00:00" }}</published>
-        <updated>{{ page.lastModified|date:"yyyy-MM-dd'T'00:00:00" }}</updated>
+        <published>{{ page.date|date:"yyyy-MM-dd'T'00:00:00'Z'" }}</published>
+        <updated>{{ page.lastModified|date:"yyyy-MM-dd'T'hh:mm:ss'Z'" }}</updated>
         <id>{{ site.url }}{{ page|url }}</id>
         {% for tag in page.metadata.tags %}
         <category scheme="{{ site.url }}/articles/tag/{{ tag|slugify }}/" term="{{ tag }}" label="{{ tag }}" />

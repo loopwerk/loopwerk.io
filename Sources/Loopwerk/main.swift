@@ -17,11 +17,13 @@ struct PageMetadata: Metadata {
 struct SiteMetadata: Metadata {
   let url: URL
   let name: String
+  let now: Date
 }
 
 let siteMetadata = SiteMetadata(
   url: URL(string: "https://www.loopwerk.io")!,
-  name: "Loopwerk"
+  name: "Loopwerk",
+  now: Date()
 )
 
 let pageProcessorDateFormatter = DateFormatter()
@@ -43,7 +45,7 @@ func pageProcessor(page: Page<ArticleMetadata>) {
   // Turn the destination into /articles/[year]/[filename-without-date-prefix]/index.html
   let first11 = String(page.relativeSource.lastComponentWithoutExtension.prefix(11))
   let newPath = Path("articles") + year + page.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
-  page.relativeDestination = newPath.makeOutputPath(keepExactPath: true)
+  page.relativeDestination = newPath.makeOutputPath(pageWriteMode: .moveToSubfolder)
 }
 
 try Saga(input: "content", output: "deploy", templates: "templates", siteMetadata: siteMetadata)
@@ -62,7 +64,8 @@ try Saga(input: "content", output: "deploy", templates: "templates", siteMetadat
   .register(
     metadata: PageMetadata.self,
     readers: [.markdownReader()],
-    writers: [.pageWriter(template: "page.html", keepExactPath: true)]
+    pageWriteMode: .keepAsFile,
+    writers: [.pageWriter(template: "page.html")]
   )
   .run()
   .staticFiles()
