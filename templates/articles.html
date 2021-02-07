@@ -15,7 +15,7 @@
         <a href="/articles/{{ page.date|date:"yyyy" }}/">{{ page.date|date:"yyyy" }}</a></span>{{ page.body|striptags|wordcount }} words{% if page.metadata.tags %}, posted in {% for tag in page.metadata.tags %}{% if forloop.counter > 1 %}, {% endif %}<a href="/articles/tag/{{ tag|slugify }}/">{{ tag }}</a>{% endfor %}{% endif %}
       </div>
       {% if page.metadata.summary %} {{ page.metadata.summary }} {% else %} <p>{{ page.body|striptags|truncate }}</p> {% endif %}
-      <p class="more"><a href="/{{ page.relativeDestination }}" class="more">read more</a></p>
+      <p class="more"><a href="{{ page|url }}" class="more">read more</a></p>
     </section>
     {% endfor %}
   </div>

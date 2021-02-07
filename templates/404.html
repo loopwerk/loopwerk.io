@@ -10,7 +10,7 @@
 
     <ul>
       {% for page in allPages where page.metadataType == "ArticleMetadata" %}
-        <li><a href="/{{ page.relativeDestination }}">{{ page.title }}</a></li>
+        <li><a href="{{page|url}}">{{ page.title }}</a></li>
       {% endfor %}
     </ul>
 
