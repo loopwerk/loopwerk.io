@@ -1,6 +1,7 @@
 import Saga
 import Foundation
 import PathKit
+import PythonKit
 
 struct ArticleMetadata: Metadata {
   let tags: [String]
@@ -65,23 +66,25 @@ try Saga(input: "content", output: "deploy", templates: "templates", siteMetadat
   )
   .run()
   .staticFiles()
-  //.createArticleImages()
+  .createArticleImages()
 
 
 extension Saga {
-  private func run(_ cmd: String) -> String? {
-    let pipe = Pipe()
-    let process = Process()
-    process.launchPath = "/bin/sh"
-    process.arguments = ["-c", String(format:"%@", cmd)]
-    process.standardOutput = pipe
-    let fileHandle = pipe.fileHandleForReading
-    process.launch()
-    return String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
-  }
-
   @discardableResult
   func createArticleImages() -> Self {
+    let rootPath = String(URL(fileURLWithPath: #file)
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .pathComponents
+      .joined(separator: "/")
+      .dropFirst())
+
+    let sys = Python.import("sys")
+    sys.path.append(rootPath)
+
+    let module = Python.import("ImageGenerator")
+    let generator = module.ImageGenerator(rootPath)
+
     let createArticleImagesDateFormatter = DateFormatter()
     createArticleImagesDateFormatter.dateFormat = "MMMM dd, yyyy"
     createArticleImagesDateFormatter.timeZone = .current
@@ -91,10 +94,8 @@ extension Saga {
     for article in articles {
       let date = createArticleImagesDateFormatter.string(from: article.date)
       let destination = (self.outputPath + "static" + "images" + article.relativeSource.lastComponentWithoutExtension).string + ".png"
-      _ = run("cd \((self.rootPath + "ImageGenerator").string) && python image.py \"\(article.title)\" \"\(date)\" \(destination)")
+      generator.generate(article.title, date, destination)
     }
-
-    print("\(Date()) Finished writing article images")
 
     return self
   }
