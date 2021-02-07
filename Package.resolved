@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "294c1151f5ab36db857ee6301e61563097c04390",
-          "version": "0.11.0"
+          "revision": "73c6ad8d9da779f8bfd34c3960a5ec7394e199ff",
+          "version": "0.12.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/loopwerk/SwiftMarkdown",
         "state": {
           "branch": null,
-          "revision": "3e9b02ff5ba995c4469ab12395be97c0953e2fdf",
-          "version": "0.3.0"
+          "revision": "6c3f4cd38c24d88016367f8775112b2c7af287d3",
+          "version": "0.4.0"
         }
       }
     ]
