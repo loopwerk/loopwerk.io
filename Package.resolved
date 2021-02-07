@@ -32,9 +32,9 @@
         "package": "Saga",
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
-          "branch": null,
-          "revision": "293917f9781665f90f461b35bd1451bf9c186481",
-          "version": "0.10.0"
+          "branch": "test",
+          "revision": "2598a639e70acd3be77e27e517d7eeee6eebebf3",
+          "version": null
         }
       },
       {

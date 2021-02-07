@@ -45,7 +45,7 @@ func pageProcessor(page: Page<ArticleMetadata>) {
   // Turn the destination into /articles/[year]/[filename-without-date-prefix]/index.html
   let first11 = String(page.relativeSource.lastComponentWithoutExtension.prefix(11))
   let newPath = Path("articles") + year + page.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
-  page.relativeDestination = newPath.makeOutputPath(pageWriteMode: .moveToSubfolder)
+  page.relativeDestination = newPath
 }
 
 try Saga(input: "content", output: "deploy", templates: "templates", siteMetadata: siteMetadata)
