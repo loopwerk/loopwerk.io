@@ -32,9 +32,9 @@
         "package": "Saga",
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
-          "branch": "SwiftMarkdown",
-          "revision": "99ae70723ac84ed96291f36e659e554ba5a0ed40",
-          "version": null
+          "branch": null,
+          "revision": "992393c83a56aec43b5241eceef72977ad956e02",
+          "version": "0.8.0"
         }
       },
       {
