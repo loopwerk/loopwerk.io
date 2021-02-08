@@ -1,4 +1,6 @@
+---
 tags: python
+---
 
 # Making Django suck less
 Or, "How to make Django even better then it already is". Because it really isn't as bad as the title implies :)

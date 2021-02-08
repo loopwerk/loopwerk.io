@@ -1,5 +1,7 @@
+---
 tags: javascript, firebase, backend
 summary: When you delete a document in Firestore, its subcollections and their documents are not automatically recursively deleted. Here is a simple Cloud Function that takes care of it.
+---
 
 # Clean up Firestore and Storage when deleting a document
 When you delete a document in Firestore, its subcollections and their documents are not automatically recursively deleted. Here is a simple Cloud Function that takes care of it. As a bonus, it also deletes all stored files in Firebase Storage in a folder with the same name as the document id.

@@ -1,4 +1,6 @@
+---
 tags: random
+---
 
 # Switching from MobileMe & my short adventure with Google App Engine
 I can't remember how long ago it's been that I've used a free email address like hotmail, yahoo or gmail. For more than 8 years I've used my own domain names to host my email. In the very beginning on my own little server at home, later on a "real" colocated server when I still had my own company, on the servers of my employer and the last year on Apple's [MobileMe](http://www.apple.com/mobileme/) service.

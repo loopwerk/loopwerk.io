@@ -1,4 +1,6 @@
+---
 tags: iOS
+---
 
 # My thoughts after having completed my first Appcelerator project
 A while ago I set out to build my third mobile application. Only this time the client wanted not only an iPhone app, but one for Android too. So that's why I [turned to Appcelerator](/articles/2010/once-again-i-turn-appcelerator/) once again, after my [failed first attempt](/articles/2010/getting-started-iphone-app-development/).

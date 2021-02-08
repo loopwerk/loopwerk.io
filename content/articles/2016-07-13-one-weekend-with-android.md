@@ -1,4 +1,6 @@
+---
 tags: review
+---
 
 # My one weekend with Android
 A while ago I decided to get an Android smartphone. Sounds like a very simple decision right, but as somewhat of an Apple fanboy for many years, I kind of shocked myself with this decision.

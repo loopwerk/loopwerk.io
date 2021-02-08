@@ -1,4 +1,6 @@
+---
 tags: news
+---
 
 # A new (static) website
 More than a year ago I was [playing around with static site generators](/articles/2011/playing-around-static-site-generators/) because I wanted to simplify my code and ultimately get rid of my server.

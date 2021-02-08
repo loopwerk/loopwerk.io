@@ -1,4 +1,6 @@
+---
 tags: review
+---
 
 # Playing around with static site generators
 Even though I'm quite happy with this website and its code, I want to rebuild it using a static site generator: you write your posts and pages with Markdown, write a couple of page html templates, and simply by pushing a new file to Git, your new article is published. 

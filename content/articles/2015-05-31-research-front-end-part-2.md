@@ -1,4 +1,6 @@
+---
 tags: javascript
+---
 
 # Researching front end tools, part 2: Deku, page.js and cssnext
 Two weeks ago I started my journey into researching front end tools, with the idea to find my ultimate stack of build tools, JavaScript frameworks and/or libraries, CSS processors, a code style to follow and code linter to enforce it, and finally testing tools.

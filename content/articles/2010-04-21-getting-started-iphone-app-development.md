@@ -1,4 +1,6 @@
+---
 tags: iOS
+---
 
 # Getting started with iPhone app development
 For a pretty long time I wanted to make an iPhone app, ever since the App Store opened really. But, I've never programmed for Mac OS, never done any C or C++ (let alone Objective-C). In fact, I've never created a desktop application, only working on web applications and websites in PHP and Python.

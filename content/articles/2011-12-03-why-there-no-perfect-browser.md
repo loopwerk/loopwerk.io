@@ -1,4 +1,6 @@
+---
 tags: review
+---
 
 # Why is there no perfect browser?
 I've used Firefox for a long, long time, back when I still used Windows pc's, until the summer 2007. Chrome didn't exist yet, Internet Explorer sucked and Safari was still Mac-only. Since then, I've switched browsers many times: from Firefox to Safari, back to Firefox, to Safari, to Chrome, to Safari and back to Chrome again.

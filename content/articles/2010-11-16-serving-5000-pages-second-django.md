@@ -1,4 +1,6 @@
+---
 tags: python
+---
 
 # Serving 5000 pages per second with Django
 Okay, this website wasn't slow and will never need to serve 5000 pages per second, but hey, it's possible now! Oh right, and it was fun to play around with a nice caching system.

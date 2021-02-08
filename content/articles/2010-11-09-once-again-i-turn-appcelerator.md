@@ -1,4 +1,6 @@
+---
 tags: iOS
+---
 
 # Once again I turn to Appcelerator
 After I [decided](/articles/2010/getting-started-iphone-app-development/) to create iPhone apps using just the iPhone SDK and the Objective-C language, I've created [two iPhone apps](http://itunes.apple.com/nl/artist/goldmund-wyldebeast-wunderliebe/id380925906) that are available in the Dutch App Store. Development for app number three has started today, but no longer will I be using Xcode.

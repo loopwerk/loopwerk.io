@@ -1,7 +1,9 @@
+---
 tags: review, iOS
 review: Beginning iPhone 3 Development
 rating: 4
 summary: My sixth book review, and the second one about iPhone development. The previous book was a great read, but since it only talked about the basics it left me wanting for (much) more. I needed more information about searchbars, core data, multitouch and the accelerometer. This time I actually read some reviews before buying a new book, and "Beginning iPhone 3 Development" seemed like a winner.
+---
 
 # Book review: Beginning iPhone 3 Development
 **Beginning iPhone 3 Development - Exploring the iPhone SDK**  

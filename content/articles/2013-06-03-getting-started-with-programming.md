@@ -1,4 +1,6 @@
+---
 tags: FAQ
+---
 
 # Getting started with programming
 At least twice per year someone will ask me how he or she can get started with programming. With the economy down jobs are hard to find, but there's always a need for developers, at least here in Iceland - so it's no wonder that more people are wondering how to get started.

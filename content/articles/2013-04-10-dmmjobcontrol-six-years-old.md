@@ -1,4 +1,6 @@
+---
 tags: open source
+---
 
 # JobControl is six years old
 I absolutely love open source software. I use all kinds of third party libraries for iOS for example (installed via the open source [CocoaPods](http://www.cocoapods.org) project of course), which makes my life as a developer a whole lot easier. And in return I open source [some of my work](/projects/) and share it with the community. I'm currently maintaining and/or contributing to more than ten open source projects.

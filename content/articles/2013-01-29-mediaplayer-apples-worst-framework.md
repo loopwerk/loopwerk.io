@@ -1,4 +1,6 @@
+---
 tags: iOS
+---
 
 # Apple's worst iOS framework: MediaPlayer
 When I started to work on Last.fm's [Scrobbler for iOS](http://www.last.fm/hardware/ios), I though it would be quite an easy app to create. After all, it's basically a couple of lists of artists, albums and tracks, and all actual music playback will be done using the MediaPlayer framework. Boy, was I wrong.

@@ -1,4 +1,6 @@
+---
 tags: review, macOS
+---
 
 # Review roundup: email clients for OS X
 Email is a huge part of my my life and I need a client that accommodates my ways and habits. It needs to be fast and user friendly. It needs to support multiple email accounts. And it needs to offer proper Google Mail support: archiving email by default and using the correct labels for Sent mail and Trash for example.

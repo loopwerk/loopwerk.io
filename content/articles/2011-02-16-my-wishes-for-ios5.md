@@ -1,4 +1,6 @@
+---
 tags: iOS
+---
 
 # My wishes for iOS 5
 In June 2010 Apple finally added multitasking to the iPhone (the iPad had to wait 'til November to get iOS version 4) and with this resolved one of my biggest complaints about the operating system. And while I really enjoy iOS on the iPhone and the iPad, I still have wishes, especially after seeing the new HP WebOS.

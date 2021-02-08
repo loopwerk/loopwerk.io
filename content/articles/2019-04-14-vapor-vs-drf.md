@@ -1,4 +1,6 @@
+---
 tags: review, backend
+---
 
 # Vapor 3 vs. Django REST Framework
 A little while ago [I wrote about starting a new side project](/articles/2019/vapor/), where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit of a struggle. The conclusion of that article was that I didn't know how to continue: stick with Vapor 3 despite the problems I was having, or switch to Python.

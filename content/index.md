@@ -1,5 +1,7 @@
+---
 template: home.html
 menu: home
+---
 
 # Home
 I'm Kevin Renskers, a freelance developer with 21 years of experience making interactive apps for the web and mobile plus the backends that drive them.

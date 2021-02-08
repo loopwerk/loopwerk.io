@@ -1,5 +1,7 @@
+---
 tags: swift, saga, open source
 summary: Part 2, where I'm looking back at the current API of Saga.
+---
 
 # Building my own static site generator, part 2: API design
 *I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*

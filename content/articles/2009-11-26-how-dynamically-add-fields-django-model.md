@@ -1,4 +1,6 @@
+---
 tags: python
+---
 
 # How to dynamically add fields to a Django model
 For a project I needed to create a Django model from a list of fields that were defined somewhere else. It took me hours to get this to work, so to save you the time, here is the solution:

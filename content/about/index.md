@@ -1,4 +1,6 @@
+---
 menu: about
+---
 
 # About me
 

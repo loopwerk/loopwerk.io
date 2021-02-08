@@ -1,4 +1,6 @@
+---
 tags: javascript
+---
 
 # Researching front end tools, part 1: Ampersand.js, React, Webpack, PostCSS and ESLint
 Since early 2014 I've been building a fairly large and complex JavaScript app in [AngularJS](https://angularjs.org), using [Less](http://lesscss.org) as the CSS pre-processor and [Gulp](http://gulpjs.com) as the build system. I haven't used ES6 or modules so far, via Browserify or otherwise. While it works and overall I'm pretty happy with Angular and the architecture of the app, I am very interested in what else is out there. Not in the least because Angular 1 is going the way of the dodo and the JavaScript world is moving very fast. It seems like a new framework pops up every month, and I want to do some proper research into the available options and best practices.
