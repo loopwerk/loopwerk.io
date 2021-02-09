@@ -4,9 +4,6 @@ summary: An unexpectedly quick fourth article about Saga, after a complete redes
 ---
 
 # Building my own static site generator, part 4: a complete redesign
-*I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*
-
-# Part 4: A complete redesign
 I've been busy! Yesterday evening I was playing around with what it would take to use a generic `Page` type. I ended up with a branch that did exactly that: instead of the `Page` object having a non-generic `Metadata` type (a simple typealias for `Decodable`, I ended up with a `Page<M: Metadata>` type, and it worked. I didn't really see big benefit though, as I was forced to use type erasure to be able to put all pages with mixed metadata types into one array, so in the end instead of doing things like `page.metadata as? ArticleMetadata`, you were now doing `page as? Page<ArticleMetadata>`. No big win, right.
 
 Today, I kept going. What if my idea from yesterday, to combine the read and write steps into one, could actually work? That way the whole workflow from reading to processing to writing a `Page` would indeed use a proper strongly typed generic `Page`, and typecasting would not be necessary. So I came up with the following new API:

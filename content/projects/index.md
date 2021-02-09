@@ -12,7 +12,7 @@ These are some of the more interesting open source projects I've created. Check 
 A static site generator.
 [loopwerk/Saga](https://github.com/loopwerk/Saga)
 
-## Parsley
+### Parsley
 A Markdown parser for Swift Package Manager, using Github Flavored Markdown, plus Metadata support.
 [loopwerk/Parsley](https://github.com/loopwerk/Parsley)
 
@@ -23,6 +23,15 @@ A Swift wrapper for Python-Markdown, including custom extensions.
 ### SwiftMarkdown2
 A Swift wrapper for python-markdown2.
 [loopwerk/SwiftMarkdown2](https://github.com/loopwerk/SwiftMarkdown2)
+
+### SagaInkMarkdownReader
+A Markdown reader for Saga, which uses SwiftMarkdown.
+[loopwerk/SagaInkMarkdownReader](https://github.com/loopwerk/SagaInkMarkdownReader)
+
+### SagaPythonMarkdownReader
+A Markdown reader for Saga, which uses Ink and Splash.
+[loopwerk/SagaPythonMarkdownReader](https://github.com/loopwerk/SagaPythonMarkdownReader)
+
 
 ## Objective-C
 
