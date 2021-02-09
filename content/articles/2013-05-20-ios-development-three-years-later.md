@@ -21,14 +21,14 @@ It might not be the most amazing "new" thing from the past three years, but I lo
 ## Modern Objective-C
 I have always hated this:
 
-```objective-c
+```objc
 [NSDictionary dictionaryWithObjectsAndKeys:object1, @"key1", object2, @"key2"];
 [NSArray arrayWithObjects:object1, object2];
 ```
 
 Instead, now we have these shortcuts:
 
-```objective-c
+```objc
 @{ @"key1": object1, @"key2": object2 };
 @[ object1, object2 ]
 ```

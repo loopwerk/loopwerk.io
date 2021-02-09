@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "cmark",
+        "repositoryURL": "https://github.com/brokenhandsio/cmark-gfm.git",
+        "state": {
+          "branch": null,
+          "revision": "c25ea288d0eb50c5c1150e7fdda675d5e9b1b6bb",
+          "version": "2.0.0"
+        }
+      },
+      {
         "package": "Codextended",
         "repositoryURL": "https://github.com/johnsundell/codextended.git",
         "state": {
           "branch": null,
           "revision": "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
           "version": "0.3.0"
+        }
+      },
+      {
+        "package": "Parsley",
+        "repositoryURL": "https://github.com/loopwerk/Parsley",
+        "state": {
+          "branch": null,
+          "revision": "af271fe39bad4d99139bae232cfd5f685f30733e",
+          "version": "0.1.0"
         }
       },
       {
@@ -32,9 +50,9 @@
         "package": "Saga",
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
-          "branch": null,
-          "revision": "73c6ad8d9da779f8bfd34c3960a5ec7394e199ff",
-          "version": "0.12.0"
+          "branch": "Parsley",
+          "revision": "4094d2ab3a2ec56aada05980a421290d3de6203f",
+          "version": null
         }
       },
       {
@@ -62,15 +80,6 @@
           "branch": null,
           "revision": "94197b3adbbf926348ad8765476a158aa4e54f8a",
           "version": "0.14.0"
-        }
-      },
-      {
-        "package": "SwiftMarkdown",
-        "repositoryURL": "https://github.com/loopwerk/SwiftMarkdown",
-        "state": {
-          "branch": null,
-          "revision": "6c3f4cd38c24d88016367f8775112b2c7af287d3",
-          "version": "0.4.0"
         }
       }
     ]

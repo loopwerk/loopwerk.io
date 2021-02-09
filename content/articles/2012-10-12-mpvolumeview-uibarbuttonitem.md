@@ -10,7 +10,7 @@ In an app I'm currently building, the client wants an Airplay button in the navi
 
 After trying some things, the solution seems to be to loop over the subviews. It feels a bit hacky, but works perfectly:
 
-```objective-c
+```objc
 MPVolumeView *airPlayButton = [[MPVolumeView alloc] initWithFrame:CGRectZero];
 airPlayButton.showsVolumeSlider = NO;
 airPlayButton.showsRouteButton = YES;
