@@ -6,11 +6,11 @@
 
 {% block main %}
   <div id="content">
-    {{ post.content }}
+    {{ page.body }}
 
     <ul>
-      {% for item in resource.posts[:10] %}
-        <li><a href="{{item|permalink}}">{{ item.title }}</a></li>
+      {% for page in allPages where page.metadataType == "ArticleMetadata" %}
+        <li><a href="{{page|url}}">{{ page.title }}</a></li>
       {% endfor %}
     </ul>
 

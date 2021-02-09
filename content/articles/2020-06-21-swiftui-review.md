@@ -1,10 +1,9 @@
-# A review of SwiftUI problems
-- tags: review, iOS, swift
-
-I've been working with SwiftUI for almost half a year now, and in that time I've learned a lot. I love a lot about it, but there are also so many bugs and issues that need workarounds that it's kind of maddening.
-
+---
+tags: review, iOS, swift
+summary: I've been working with SwiftUI for almost half a year now, and in that time I've learned a lot. I love a lot about it, but there are also so many bugs and issues that need workarounds that it's kind of maddening.
 ---
 
+# A review of SwiftUI problems
 I've been working with SwiftUI for almost half a year now, and in that time I've learned a lot. I love a lot about it, but there are also so many bugs and issues that need workarounds that it's kind of maddening. The first 80% of the app is super easy to build - but the last 20% takes another 200% of time.
 
 This article will make it seem like I hate SwiftUI but that's definitely not the case. I love the declarative style of writing views, I love the live previews even more. The Combine integration is awesome, as are `@State`, `@Binding`, `@Published` and friends. I love how easy it is to add animations to your app, and how quickly it is to build UIs using the `HStack` and `VStack` building blocks. There is no need for autolayout anymore. And combined with the live previews I don't even miss storyboards! In fact, it's so quick and easy to build prototypes in SwiftUI that I use it instead of something like Sketch or Figma to try out new ideas.

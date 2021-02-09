@@ -1,8 +1,8 @@
-# Django-CMS backend usability
-- tags: review, python
-
+---
+tags: review, python
 ---
 
+# Django-CMS backend usability
 Yesterday I wrote [an article](/articles/2011/django-cms-vs-feincms-vs-mezzanine/) comparing Django-CMS, FeinCMS and Mezzanine. One of the conclusions was that while Django-CMS is the best CMS on paper, I don't like its backend interface that much. I thought it would be a good idea to properly explain what I don't like about it, and try to come up with a better interface.
 
 ## The problem

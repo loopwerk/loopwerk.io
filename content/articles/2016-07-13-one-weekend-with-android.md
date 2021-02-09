@@ -1,8 +1,8 @@
-# My one weekend with Android
-- tags: review
-
+---
+tags: review
 ---
 
+# My one weekend with Android
 A while ago I decided to get an Android smartphone. Sounds like a very simple decision right, but as somewhat of an Apple fanboy for many years, I kind of shocked myself with this decision.
 
 It all started with my desire to buy a smartwatch, and the choice between an Apple Watch or one of the many Android Wear watches. Not really a contest - the Apple Watch is too expensive, too square, doesn’t have an always-on screen, is slow, you can’t install custom watch faces, etc etc. So I decided to buy the [Huawei Watch](http://www.gethuawei.com/huawei-watch) in silver with a black leather band, got it on sale for 250 euros. Come on Apple, you really have to do a lot better to get me to buy yours.

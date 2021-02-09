@@ -1,12 +1,11 @@
-# Book review: Effective UI
-- tags: review
-- review: Effective UI
-- rating: 3.5
-
-I bought this book, hoping it would give tips and hints on making effective user interfaces, what works best, what tools to use, how to make effective wireframes, give example screenshots, etc. Let me tell you this first: it's not that kind of book. Instead, this book is about educating you on the advantages of a good user experience (UX), how to generate support (buy-in) from your stakeholders and even a bit about agile methods.
-
+---
+tags: review
+review: Effective UI
+rating: 3.5
+summary: I bought this book, hoping it would give tips and hints on making effective user interfaces, what works best, what tools to use, how to make effective wireframes, give example screenshots, etc. Let me tell you this first: it's not that kind of book. Instead, this book is about educating you on the advantages of a good user experience (UX), how to generate support (buy-in) from your stakeholders and even a bit about agile methods.
 ---
 
+# Book review: Effective UI
 **Effective UI: The art of building a great user experience in software**  
 _Jonathan Anderson, John McRee, Robb Wilson & the EffectiveUI team_  
 _O'Reilly_

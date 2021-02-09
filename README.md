@@ -1,6 +1,6 @@
 # loopwerk.io
 
-The source of loopwerk.io, a static website generated with [Felix Felicis](https://github.com/avelino/liquidluck).
+The source of loopwerk.io, a static website generated with [Saga](https://github.com/loopwerk/Saga).
 
 ## Getting started
 
@@ -9,13 +9,8 @@ The source of loopwerk.io, a static website generated with [Felix Felicis](https
 3. `python3 -m venv env`
 4. `. env/bin/activate`
 5. `pip install -r requirements.txt`
+6. `open Package.swift`
 
-## Viewing locally
-
-With tornado installed (included in requirements.txt) the preview server auto-reloads on content changes, saving you from running `make html` and restarting the server.
-
-1. `make serve`
-2. `open 127.0.0.1:8000`
 
 ## Publish
 

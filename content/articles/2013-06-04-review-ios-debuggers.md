@@ -1,8 +1,8 @@
-# Review roundup: iOS debug tools and inspectors
-- tags: review, iOS
-
+---
+tags: review, iOS
 ---
 
+# Review roundup: iOS debug tools and inspectors
 All of a sudden it seems there's a big effort to create debugging tools for iOS developers. Some are free, they all have different features... Time for a comparison.
 
 ## PonyDebugger
@@ -21,7 +21,7 @@ The iOS framework and its dependencies can be installed via Cocoapods, just add 
 
 Now that the gateway server is listening, it's time to connect. You first need to add a bunch of code to your app delegate:
 
-```objective-c
+```objc
 PDDebugger *debugger = [PDDebugger defaultInstance];
 [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
 [debugger enableNetworkTrafficDebugging];

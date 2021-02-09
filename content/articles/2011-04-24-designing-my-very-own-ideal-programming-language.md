@@ -1,8 +1,8 @@
-# Designing my very own ideal programming language
-- tags: random
-
+---
+tags: random
 ---
 
+# Designing my very own ideal programming language
 In 2009 I made the switch to Python, after having worked exclusively with PHP and Javascript for almost a decade. I really like the language, much more than I ever liked PHP. Of course it's not perfect (see one of my first posts called [Things I hate about Python and Django](/articles/2009/things-i-hate-about-python-and-django/)), but I never really thought much about the lesser parts of the language.
 
 Until I started to learn other languages as well, that is.

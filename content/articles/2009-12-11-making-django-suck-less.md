@@ -1,8 +1,8 @@
-# Making Django suck less
-- tags: python
-
+---
+tags: python
 ---
 
+# Making Django suck less
 Or, "How to make Django even better then it already is". Because it really isn't as bad as the title implies :)
 
 In my previous post [Things I hate about Python and Django](/articles/2009/things-i-hate-about-python-and-django/), I said that one of the things I  "hate" about Django is its template language. While very easy to use and pretty extensible, it's missing some important (and basic, to be honest) features like in-template creation of variables, a good `if` syntax and the ability to use variable variables (variable interpolating).

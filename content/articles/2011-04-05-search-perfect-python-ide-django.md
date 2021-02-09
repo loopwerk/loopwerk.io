@@ -1,8 +1,8 @@
-# Review roundup: the search for the perfect Python IDE (for Django)
-- tags: review, python
-
+---
+tags: review, python
 ---
 
+# Review roundup: the search for the perfect Python IDE (for Django)
 When I first started working with Python in September 2009, I needed a good IDE. I quickly settled for Netbeans and I've been using it ever since, even though there are some things that really irritate me. But at least it works, and fits well in my workflow.
 
 Last weekend I did a clean install of Snow Leopard, and while I was busy setting it up again I started to wonder if maybe I needed to look for a better replacement.

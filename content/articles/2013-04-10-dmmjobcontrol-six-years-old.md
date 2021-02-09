@@ -1,8 +1,8 @@
-# JobControl is six years old
-- tags: open source
-
+---
+tags: open source
 ---
 
+# JobControl is six years old
 I absolutely love open source software. I use all kinds of third party libraries for iOS for example (installed via the open source [CocoaPods](http://www.cocoapods.org) project of course), which makes my life as a developer a whole lot easier. And in return I open source [some of my work](/projects/) and share it with the community. I'm currently maintaining and/or contributing to more than ten open source projects.
 
 My very first open source project is having a birthday this month: in April 2007 I started [JobControl](http://typo3.org/extensions/repository/view/dmmjobcontrol) while working for a web development company in The Netherlands. It's an extension, written in PHP, for the TYPO3 content management system, and it's used for showing job openings on a website. We used it a lot in our own projects for our clients and I asked the CEO of the company if I could open source the code so the community could use it and make it better in the process. He said yes, and JobControl became the company's (and mine) first ever open source project after I wrote extensive documentation for the project.

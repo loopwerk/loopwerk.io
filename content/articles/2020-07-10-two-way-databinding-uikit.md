@@ -1,10 +1,9 @@
-# Exploring two-way databinding solutions in UIKit
-- tags: swift, iOS
-
-With SwiftUI we have the `@Binding` property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions.
-
+---
+tags: swift, iOS
+summary: With SwiftUI we have the `@Binding` property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions.
 ---
 
+# Exploring two-way databinding solutions in UIKit
 It's quite common to have to build some kind of (reusable) component to edit some piece of state. For example, let's say we have a `User` model, and we want to build a form to edit a user. With SwiftUI we have the `@Binding` property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy.
 
 You can image that we'd build a `UITableView` with a `UITableViewCell` for every field of the user that we want to edit. Every cell has a `UITextField`, which is instantiated with the current value of the field we want to edit. And when the value is changed, we of course want to update the field on the user model.

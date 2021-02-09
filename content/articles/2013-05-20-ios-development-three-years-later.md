@@ -1,8 +1,8 @@
-# iOS development: three years later
-- tags: iOS
-
+---
+tags: iOS
 ---
 
+# iOS development: three years later
 In April 2010 I [started to work](/articles/2010/getting-started-iphone-app-development/) on my very first iPhone app. A new language, a new IDE, a completely new way of thinking about development (threads! memory! crashes!), it was very exciting. In these three years quite a lot has happened to us iOS developers. Yes, we still complain about Xcode from time to time, but everything is better and easier to do, with less code to write.
 
 The biggest advances for me as an iOS developer in the past three years, in order of impact it makes every day, were:
@@ -21,14 +21,14 @@ It might not be the most amazing "new" thing from the past three years, but I lo
 ## Modern Objective-C
 I have always hated this:
 
-```objective-c
+```objc
 [NSDictionary dictionaryWithObjectsAndKeys:object1, @"key1", object2, @"key2"];
 [NSArray arrayWithObjects:object1, object2];
 ```
 
 Instead, now we have these shortcuts:
 
-```objective-c
+```objc
 @{ @"key1": object1, @"key2": object2 };
 @[ object1, object2 ]
 ```

@@ -1,8 +1,8 @@
-# Researching front end tools, part 3: Angular & Webpack vs Browserify
-- tags: javascript
-
+---
+tags: javascript
 ---
 
+# Researching front end tools, part 3: Angular & Webpack vs Browserify
 Since early 2014 I've been working on a pretty big and complex Angular app called [Sling](http://getsling.com) and sadly it's not using any module system and it's still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files, add Angular injection annotations to our code, start a webserver with live reloading functionality, watches the source for changes and so on. It actually works really well but after doing the [previous](/articles/2015/research-front-end-part-1/) [two](/articles/2015/research-front-end-part-2/) experiments that use modules, ES6 and webpack I got a little bit tired of looking at this old fashioned project 😀.
 
 So, for my third experiment I wanted to combine Angular with Webpack, mainly to see if this is something we can use for our project at work.

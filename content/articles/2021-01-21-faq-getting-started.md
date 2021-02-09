@@ -1,10 +1,9 @@
-# Mentee Question 2: How to get started
-- tags: FAQ, iOS
-
-Resources for learning Swift and UIKit, what to build first, opinions on Unit Testing, and more.
-
+---
+tags: FAQ, iOS
+summary: Resources for learning Swift and UIKit, what to build first, opinions on Unit Testing, and more.
 ---
 
+# Mentee Question 2: How to get started
 In this article I'll go over a few questions I've received from my mentees and a few other people via Twitter, all centered on the idea of "how to get started."
 
 # "How do I get started with iOS development?"

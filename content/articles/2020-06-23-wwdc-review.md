@@ -1,10 +1,9 @@
-# WWDC20 review
-- tags: review, iOS, swift
-
-A quick review of the keynote and State of the Union talks. Let's see which of my wishes have been fulfilled, and which SwiftUI problems have been solved.
-
+---
+tags: review, iOS, swift
+summary: A quick review of the keynote and State of the Union talks. Let's see which of my wishes have been fulfilled, and which SwiftUI problems have been solved.
 ---
 
+# WWDC20 review
 A quick review of the keynote and State of the Union talks. Let's see which of [my wishes](/articles/2020/wwdc20-wishlist/) have been fulfilled, and which [SwiftUI problems](/articles/2020/swiftui-review/) have been solved.
 
 ![WWDC logo](/articles/images/wwdcheader.jpg)

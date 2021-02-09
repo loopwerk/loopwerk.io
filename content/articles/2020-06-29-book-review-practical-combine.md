@@ -1,12 +1,11 @@
-# Book review: Practical Combine
-- tags: review, iOS
-- review: Practical Combine
-- rating: 4.5
-
-It's almost exactly 10 years since I wrote my last book review. Time flies! Also, it makes me realize that the way I've been learning has changed dramatically. I am much more guided by autocomplete and documentation within Xcode, and in-depth articles and videos about one particular topic, instead of reading books.
-
+---
+tags: review, iOS
+review: Practical Combine
+rating: 4.5
+summary: It's almost exactly 10 years since I wrote my last book review. Time flies! Also, it makes me realize that the way I've been learning has changed dramatically. I am much more guided by autocomplete and documentation within Xcode, and in-depth articles and videos about one particular topic, instead of reading books.
 ---
 
+# Book review: Practical Combine
 **Practical Combine: an introduction to Combine with real examples**  
 *Donny Wals*
 

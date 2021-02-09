@@ -1,8 +1,8 @@
-# Our front end stack one year later
-- tags: javascript
-
+---
+tags: javascript
 ---
 
+# Our front end stack one year later
 One year ago I wrote my third article in a series where I researched front end tools, and with all that I learned I began to improve our front end stack at [Sling](http://www.getsling.com). It’s the big Angular app that I [wrote about](/articles/2015/research-front-end-part-3/), on which I’ve worked for 2.5 years now. Back then we used Gulp, Bower and Less. No modules, no ES6, barely any unit tests. We still use **Angular** 1.x, but a lot has changed in the last 12 months!
 
 First of all, we’re now using **CommonJS modules** and **ES6 syntax** throughout the app: fat arrows, destructuring, object literal shorthand, template strings, default function parameters, etc. We’re using **Babel 6** and **webpack** to compile all this to ES5. More specifically, we use `ng-annotate-loader` to automatically add injection annotation to our Angular code, and `html-loader` so that we can `require` our HTML templates right into the UI Router states.

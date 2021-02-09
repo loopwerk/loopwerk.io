@@ -1,0 +1,206 @@
+/**
+ * atom-dark theme for `prism.js`
+ * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
+ * @author Joe Gibson (@gibsjose)
+ */
+
+/* Colors */
+:root {
+  --code-background: #393e46;
+  --code-color: #eeeeee;
+  --token-comment: #7C7C7C;
+  --token-punctuation: #c5c8c6;
+  --token-property: #96CBFE;
+  --token-keyword: #96CBFE;
+  --token-tag: #96CBFE;
+  --token-class-name: #FFFFB6;
+  --token-boolean: #99CC99;
+  --token-constant: #99CC99;
+  --token-symbol: #f92672;
+  --token-number: #FF73FD;
+  --token-selector: #A8FF60;
+  --token-attr-name: #A8FF60;
+  --token-inserted: #A8FF60;
+  --token-string: #A8FF60;
+  --token-builtin: #A8FF60;
+  --token-variable: #C6C5FE;
+  --token-operator: #EDEDED;
+  --token-entity: #FFFFB6;
+  --token-url: #96CBFE;
+  --token-atrule: #F9EE98;
+  --token-attr-value: #F9EE98;
+  --token-function: #DAD085;
+  --token-regex: #E9C062;
+  --token-important: #fd971f;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  :root {
+    --code-background: #f5f7f9;
+    --code-color: #566b78;
+    --token-comment: #39adb5;
+    --token-punctuation: #39adb5;
+    --token-property: #39adb5;
+    --token-keyword: #7c4dff;
+    --token-tag: #e53935;
+    --token-class-name: #6182b8;
+    --token-boolean: #99CC99;
+    --token-constant: #7c4dff;
+    --token-symbol: #7c4dff;
+    --token-number: #f76d47;
+    --token-selector: #e53935;
+    --token-attr-name: #39adb5;
+    --token-inserted: #A8FF60;
+    --token-string: #39adb5;
+    --token-builtin: #39adb5;
+    --token-variable: #e53935;
+    --token-operator: #39adb5;
+    --token-entity: #e53935;
+    --token-url: #e53935;
+    --token-atrule: #7c4dff;
+    --token-attr-value: #f6a434;
+    --token-function: #7c4dff;
+    --token-regex: #6182b8;
+    --token-important: #7c4dff;
+  }
+}
+
+pre {
+  font-size: 0.875em;
+  margin-bottom: 1.715em;
+  border-left: 2px solid var(--accent);
+  width: 100%;
+  padding: 1em;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+code {
+  padding: 2px 4px;
+}
+
+pre, code {
+  font-family: monospace, sans-serif;
+  background: var(--code-background);
+  color: var(--code-color);
+}
+
+pre code {
+  padding: 0;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--token-comment);
+}
+
+.token.punctuation {
+  color: var(--token-punctuation);
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property {
+  color: var(--token-property);
+}
+
+.token.keyword {
+  color: var(--token-keyword);
+}
+
+.token.tag {
+  color: var(--token-tag);
+}
+
+.token.class-name {
+  color: var(--token-class-name);
+  text-decoration: underline;
+}
+
+.token.boolean {
+  color: var(--token-boolean);
+}
+
+.token.constant {
+  color: var(--token-constant);
+}
+
+.token.symbol,
+.token.deleted {
+  color: var(--token-symbol);
+}
+
+.token.number {
+  color: var(--token-number);
+}
+
+.token.selector {
+  color: var(--token-selector);
+}
+
+.token.attr-name {
+  color: var(--token-attr-name);
+}
+
+.token.inserted {
+  color: var(--token-inserted);
+}
+
+.token.string,
+.token.char {
+  color: var(--token-string);
+}
+
+.token.builtin {
+  color: var(--token-builtin);
+}
+
+.token.variable {
+  color: var(--token-variable);
+}
+
+.token.operator {
+  color: var(--token-operator);
+}
+
+.token.entity {
+  color: var(--token-entity);
+  cursor: help;
+}
+
+.token.url {
+  color: var(--token-url);
+}
+
+.token.atrule {
+  color: var(--token-atrule);
+}
+
+.token.attr-value {
+  color: var(--token-attr-value);
+}
+
+.token.function {
+  color: var(--token-function);
+}
+
+.token.regex {
+  color: var(--token-regex);
+}
+
+.token.important {
+  color: var(--token-important);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}

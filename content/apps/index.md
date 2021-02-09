@@ -1,7 +1,8 @@
-# Apps
-- menu: Apps
----------------------
+---
+menu: apps
+---
 
+# Apps
 iOS apps I've worked on. I was either the only developer on the project, or the lead developer with more people on the team. Newest apps are shown first.
 
 
@@ -13,7 +14,7 @@ iOS apps I've worked on. I was either the only developer on the project, or the 
 <span><img src="/apps/diffry_4.jpg" /></span>
 </div>
 
-"Learn more about your natural hair by connecting with other users with similar hair textures."  
+"Learn more about your natural hair by connecting with other users with similar hair textures."
 [App Store (iPhone, free)](https://apps.apple.com/nl/app/diffry/id1459623608?l=en)
 
 
@@ -25,7 +26,7 @@ iOS apps I've worked on. I was either the only developer on the project, or the 
 <span><img src="/apps/skippit_4.jpg" /></span>
 </div>
 
-"Skippit is a new type of first date that uses video calling to replace the expensive Ubers, awkward first drinks, and cat-fishing that’s common in most dating apps."  
+"Skippit is a new type of first date that uses video calling to replace the expensive Ubers, awkward first drinks, and cat-fishing that’s common in most dating apps."
 [App Store (iPhone, free)](https://apps.apple.com/us/app/skippit/id1475092571?ls=1)
 
 
@@ -43,7 +44,7 @@ A loyalty program app where consumers can upload their grocery shopping receipts
 <span><img src="/apps/lastfm_4.jpg" /></span>
 </div>
 
-"Get the official Last.fm Scrobbler App to keep track of what you're listening to on Apple Music. Check out your top artist, album and song charts from all-time to last week, and watch videos of your favourite tracks."  
+"Get the official Last.fm Scrobbler App to keep track of what you're listening to on Apple Music. Check out your top artist, album and song charts from all-time to last week, and watch videos of your favourite tracks."
 [App Store (iPhone, free)](https://itunes.apple.com/us/app/last-fm-scrobbler/id1188681944?ls=1&mt=8)
 
 
@@ -55,14 +56,14 @@ A loyalty program app where consumers can upload their grocery shopping receipts
 <span><img src="/apps/sling_4.jpg" /></span>
 </div>
 
-"Your business in your pocket." Sling is a complete tool for managing your business, with a newsfeed, chat function, shift scheduling and to-do tasks. It’s specifically built for hourly workers (think bars, restaurants, hotels, hospitals) and their managers. Managers can create complete shift schedules in advance, and employees can request time off, swap shifts amongst each other and apply for available shifts.  
+"Your business in your pocket." Sling is a complete tool for managing your business, with a newsfeed, chat function, shift scheduling and to-do tasks. It’s specifically built for hourly workers (think bars, restaurants, hotels, hospitals) and their managers. Managers can create complete shift schedules in advance, and employees can request time off, swap shifts amongst each other and apply for available shifts.
 [App Store (universal, free)](https://itunes.apple.com/us/app/sling-stay-in-sync-your-team/id922995624?mt=8)
 
 
 ## Sjónvarp Símans
 ![screenshots](/apps/sjonvarp.png)
 
-Live streaming TV and video on demand for Síminn, an Icelandic media company. The catalogue browser is entirely remote-controlled: each page consists of structure- and layout JSON files personalized for the logged in user, comparable with HTML and CSS, respectively. Síminn can change the look and feel and even the navigation structure without ever having to upload a new app to the App Store. The TV player shows the full program guide in an innovative interface that doesn't get in your way.  
+Live streaming TV and video on demand for Síminn, an Icelandic media company. The catalogue browser is entirely remote-controlled: each page consists of structure- and layout JSON files personalized for the logged in user, comparable with HTML and CSS, respectively. Síminn can change the look and feel and even the navigation structure without ever having to upload a new app to the App Store. The TV player shows the full program guide in an innovative interface that doesn't get in your way.
 [App Store (universal, free)](https://itunes.apple.com/app/sjonvarp-simans/id724740942?mt=8)
 
 
@@ -92,7 +93,7 @@ A complete rebuild of the Radio.com streaming radio app, using a new reusable au
 <span><img src="/apps/metrolyrics_4.jpg" /></span>
 </div>
 
-A lyrics app for one of the largest lyrics websites on the planet. View the lyrics of your currently playing song (optionally auto-scrolling, karaoke-style), artist bio and pictures, song meanings and more.  
+A lyrics app for one of the largest lyrics websites on the planet. View the lyrics of your currently playing song (optionally auto-scrolling, karaoke-style), artist bio and pictures, song meanings and more.
 [App Store (iPhone, free)](https://itunes.apple.com/app/metrolyrics/id547825550)
 
 

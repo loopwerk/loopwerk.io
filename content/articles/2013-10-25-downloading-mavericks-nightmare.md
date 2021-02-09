@@ -1,8 +1,8 @@
-# The nightmare of downloading OS X Mavericks
-- tags: macOS
-
+---
+tags: macOS
 ---
 
+# The nightmare of downloading OS X Mavericks
 I've been running OS X Mavericks on both my home and work laptops since beta 3 or so. And when Apple released it to the public of course I wanted to upgrade both my computers as soon as possible. Sadly you can't simply upgrade from GM, you have to download the entire 5.3 GB installer file and go through the entire 45 minute install process. Not a huge problem, so I went ahead and did all this at home without running into any problems.
 
 Since I didn't really want to download the entire 5.3 gigabytes again at work, I wanted to create an USB installer at home. Problem number one: the Mavericks installer removed itself from my drive after the upgrade was complete. Without ever asking me anything.

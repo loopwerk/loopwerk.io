@@ -1,10 +1,9 @@
-# User subscriptions on the web
-- tags: review
-
-As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can already subscribe in the iOS app, but of course not everyone uses iOS, so I need to build something for the web client too.
-
+---
+tags: review
+summary: As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can already subscribe in the iOS app, but of course not everyone uses iOS, so I need to build something for the web client too.
 ---
 
+# User subscriptions on the web
 As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can [already subscribe in the iOS app](/articles/2020/storekit-webhooks-firestore/), but of course not everyone uses iOS, so I need to build something for the web client too.
 
 What I need and want from a payment platform is rather simple: 

@@ -1,10 +1,9 @@
-# Mentee Question 1: UIKit or SwiftUI
-- tags: FAQ, iOS
-
-My take on the very common question "What should I learn or focus on? UIKit or SwiftUI?"
-
+---
+tags: FAQ, iOS
+summary: My take on the very common question "What should I learn or focus on? UIKit or SwiftUI?"
 ---
 
+# Mentee Question 1: UIKit or SwiftUI
 *Earlier this month I started a free [mentorship program](/mentor/) for underprivileged people who want to become iOS developers and simply need someone to ask questions, get guidance, someone to pair program their way through a problem with. I'm happy to say that I accepted four mentees from Egypt, Ghana, India and Russia, and have had three meetings so far. They average about 90 minutes or so, and a bunch of questions have already come my way. It felt useful to repeat the questions and answers here as well.*
 
 Today's question:

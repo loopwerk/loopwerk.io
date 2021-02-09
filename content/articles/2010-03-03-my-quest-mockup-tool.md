@@ -1,8 +1,8 @@
-# My quest for a mockup tool
-- tags: review
-
+---
+tags: review
 ---
 
+# My quest for a mockup tool
 A while ago I wrote that [Goldmund, Wyldebeast & Wunderliebe](http://www.gw20e.com) is going start a new usability department. At the moment I am busy writing marketing texts and thinking about a new website for ourself. Last week I also looked for a nice tool for making mockups and wireframe models, for Mac OS X. After testing 15 tools, I could make a well informed choice, and would like to share my findings with you.
 
 Definitions:
