@@ -8,7 +8,7 @@ let package = Package(
     .macOS(.v10_15)
   ],
   dependencies: [
-    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", .branch("Parsley")),
+    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.13.0"),
     .package(url: "https://github.com/pvieito/PythonKit.git", from: "0.1.0"),
   ],
   targets: [

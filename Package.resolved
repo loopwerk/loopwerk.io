@@ -50,9 +50,9 @@
         "package": "Saga",
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
-          "branch": "Parsley",
-          "revision": "4094d2ab3a2ec56aada05980a421290d3de6203f",
-          "version": null
+          "branch": null,
+          "revision": "12b52f3205d080f5ccc96519a14e0c2e4eb1be95",
+          "version": "0.13.0"
         }
       },
       {
