@@ -1,5 +1,5 @@
 ---
-menu: projects
+section: projects
 ---
 
 # Projects

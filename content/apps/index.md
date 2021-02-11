@@ -1,5 +1,5 @@
 ---
-menu: apps
+section: apps
 ---
 
 # Apps

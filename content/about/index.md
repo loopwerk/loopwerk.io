@@ -1,5 +1,5 @@
 ---
-menu: about
+section: about
 ---
 
 # About me

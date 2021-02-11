@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Parsley",
         "state": {
           "branch": null,
-          "revision": "af271fe39bad4d99139bae232cfd5f685f30733e",
-          "version": "0.1.0"
+          "revision": "8141e0b985632e33300262ca0b7793c19f1cff70",
+          "version": "0.3.0"
         }
       },
       {
@@ -51,8 +51,26 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "12b52f3205d080f5ccc96519a14e0c2e4eb1be95",
-          "version": "0.13.0"
+          "revision": "bfec86a98a6534fd5e5207cd08daf65cb6036b95",
+          "version": "0.14.0"
+        }
+      },
+      {
+        "package": "SagaParsleyMarkdownReader",
+        "repositoryURL": "https://github.com/loopwerk/SagaParsleyMarkdownReader",
+        "state": {
+          "branch": null,
+          "revision": "db26dadc9b85590df355e45af132be52e8e0cb71",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "SagaSwimRenderer",
+        "repositoryURL": "https://github.com/loopwerk/SagaSwimRenderer",
+        "state": {
+          "branch": null,
+          "revision": "24bf4985ff5628ceb6ee1eb9672de8bcbfa9b257",
+          "version": "0.3.2"
         }
       },
       {
@@ -74,12 +92,12 @@
         }
       },
       {
-        "package": "Stencil",
-        "repositoryURL": "https://github.com/stencilproject/Stencil.git",
+        "package": "HTML",
+        "repositoryURL": "https://github.com/robb/Swim",
         "state": {
           "branch": null,
-          "revision": "94197b3adbbf926348ad8765476a158aa4e54f8a",
-          "version": "0.14.0"
+          "revision": "a17c57dbd3148889b667604cc084417b13f9788f",
+          "version": "0.1.1"
         }
       }
     ]

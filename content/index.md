@@ -1,6 +1,5 @@
 ---
-template: home.html
-menu: home
+section: home
 ---
 
 # Home
