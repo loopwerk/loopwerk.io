@@ -9,7 +9,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/loopwerk/Saga.git", from: "0.15.0"),
-    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "0.2.0"),
+    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "0.3.0"),
     .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "0.3.3"),
     .package(url: "https://github.com/pvieito/PythonKit.git", from: "0.1.0"),
   ],

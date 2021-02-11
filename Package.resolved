@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaParsleyMarkdownReader",
         "state": {
           "branch": null,
-          "revision": "db26dadc9b85590df355e45af132be52e8e0cb71",
-          "version": "0.2.0"
+          "revision": "22c8199c296d846dd0b9e2897c475faf504aa006",
+          "version": "0.3.0"
         }
       },
       {
