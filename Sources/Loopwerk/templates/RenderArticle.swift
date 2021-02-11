@@ -16,7 +16,7 @@ func renderArticleInfo(_ article: Page<ArticleMetadata>) -> Node {
     article.metadata.tags.enumerated().map { index, tag in
       Node.fragment([
         index > 0 ? %", " : %"",
-        %a(href: "/articles/tag/\(tag.slugify())/") { tag }
+        %a(href: "/articles/tag/\(tag.slugified)/") { tag }
       ])
     }
   }

@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "bfec86a98a6534fd5e5207cd08daf65cb6036b95",
-          "version": "0.14.0"
+          "revision": "081eb42fd2bed9eba8825d8f9104481eb6a29ec9",
+          "version": "0.15.0"
         }
       },
       {
@@ -71,15 +71,6 @@
           "branch": null,
           "revision": "1f7c178aeebd3ce9c2f715ccd5420d9f9819bf08",
           "version": "0.3.3"
-        }
-      },
-      {
-        "package": "Slugify",
-        "repositoryURL": "https://github.com/nodes-vapor/slugify",
-        "state": {
-          "branch": null,
-          "revision": "2231b5cff8e08693e4036a03b7220e93340fcae0",
-          "version": "2.0.0"
         }
       },
       {
