@@ -24,6 +24,10 @@ A Swift wrapper for Python-Markdown, including custom extensions.
 A Swift wrapper for python-markdown2.
 [loopwerk/SwiftMarkdown2](https://github.com/loopwerk/SwiftMarkdown2)
 
+### SagaParsleyMarkdownReader
+A Markdown reader for Saga, which uses Parsley.
+[loopwerk/SagaParsleyMarkdownReader](https://github.com/loopwerk/SagaParsleyMarkdownReader)
+
 ### SagaInkMarkdownReader
 A Markdown reader for Saga, which uses SwiftMarkdown.
 [loopwerk/SagaInkMarkdownReader](https://github.com/loopwerk/SagaInkMarkdownReader)
@@ -31,6 +35,10 @@ A Markdown reader for Saga, which uses SwiftMarkdown.
 ### SagaPythonMarkdownReader
 A Markdown reader for Saga, which uses Ink and Splash.
 [loopwerk/SagaPythonMarkdownReader](https://github.com/loopwerk/SagaPythonMarkdownReader)
+
+### SagaSwimRenderer
+A renderer for Saga that uses Swim to turn a RenderingContext into a String.
+[loopwerk/SagaSwimRenderer](https://github.com/loopwerk/SagaSwimRenderer)
 
 
 ## Objective-C
