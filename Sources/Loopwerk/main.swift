@@ -1,4 +1,6 @@
 import Saga
+import SagaParsleyMarkdownReader
+import SagaSwimRenderer
 import Foundation
 import PathKit
 import PythonKit
@@ -11,7 +13,7 @@ struct ArticleMetadata: Metadata {
 }
 
 struct PageMetadata: Metadata {
-  let menu: String?
+  let section: String?
 }
 
 struct SiteMetadata: Metadata {
@@ -48,24 +50,26 @@ func pageProcessor(page: Page<ArticleMetadata>) {
   page.relativeDestination = newPath
 }
 
-try Saga(input: "content", output: "deploy", templates: "templates", siteMetadata: siteMetadata)
+try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
   .register(
     folder: "articles",
     metadata: ArticleMetadata.self,
-    readers: [.markdownReader(pageProcessor: pageProcessor)],
+    readers: [.parsleyMarkdownReader(pageProcessor: pageProcessor)],
     writers: [
-      .pageWriter(template: "article.html"),
-      .listWriter(template: "articles.html"),
-      .listWriter(template: "feed.xml", output: "feed.xml"),
-      .tagWriter(template: "tag.html", tags: \.metadata.tags),
-      .yearWriter(template: "year.html"),
+      .pageWriter(swim(renderArticle)),
+      .listWriter(swim(renderArticles)),
+      .listWriter(swim(renderFeed), output: "feed.xml"),
+      .tagWriter(swim(renderTag), tags: \.metadata.tags),
+      .yearWriter(swim(renderYear)),
     ]
   )
   .register(
     metadata: PageMetadata.self,
-    readers: [.markdownReader()],
+    readers: [.parsleyMarkdownReader()],
     pageWriteMode: .keepAsFile,
-    writers: [.pageWriter(template: "page.html")]
+    writers: [
+      .pageWriter(swim(renderPage))
+    ]
   )
   .run()
   .staticFiles()
