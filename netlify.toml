@@ -2,3 +2,6 @@
   base = ""
   publish = "deploy"
   command = "swift run"
+
+[build.environment]
+  SWIFT_VERSION = 5.3
