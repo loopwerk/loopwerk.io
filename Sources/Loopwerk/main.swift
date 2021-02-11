@@ -12,6 +12,11 @@ struct ArticleMetadata: Metadata {
   let rating: Float?
 }
 
+struct AppMetadata: Metadata {
+  let images: [String]
+  let url: String?
+}
+
 struct PageMetadata: Metadata {
   let section: String?
 }
@@ -61,6 +66,14 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
       .listWriter(swim(renderFeed), output: "feed.xml"),
       .tagWriter(swim(renderTag), tags: \.metadata.tags),
       .yearWriter(swim(renderYear)),
+    ]
+  )
+  .register(
+    folder: "apps",
+    metadata: AppMetadata.self,
+    readers: [.parsleyMarkdownReader()],
+    writers: [
+      .listWriter(swim(renderApps)),
     ]
   )
   .register(

@@ -97,3 +97,26 @@
     margin-right: 12px;
   }
 }
+
+.screenshots {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 -3px;
+}
+.screenshots span {
+  flex: 1;
+  display: block;
+}
+@media screen and (max-width: 800px) {
+  .screenshots span {
+    flex: 50%;
+  }
+}
+.screenshots img {
+  border-radius: 10%/4.7%;
+  padding: 0 3px;
+}
+
+.app p {
+  margin: 1.5em 0 0 0;
+}
