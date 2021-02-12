@@ -12,7 +12,7 @@
       },
       {
         "package": "Codextended",
-        "repositoryURL": "https://github.com/johnsundell/codextended.git",
+        "repositoryURL": "https://github.com/JohnSundell/Codextended.git",
         "state": {
           "branch": null,
           "revision": "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "081eb42fd2bed9eba8825d8f9104481eb6a29ec9",
-          "version": "0.15.0"
+          "revision": "d4f845b791b07fe9020d38d98c9f10d06c79244c",
+          "version": "0.16.0"
         }
       },
       {
