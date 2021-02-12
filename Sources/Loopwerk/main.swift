@@ -64,8 +64,8 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
       .pageWriter(swim(renderArticle)),
       .listWriter(swim(renderArticles)),
       .listWriter(swim(renderFeed), output: "feed.xml"),
-      .tagWriter(swim(renderTag), tags: \.metadata.tags),
-      .yearWriter(swim(renderYear)),
+      .tagWriter(swim(renderPartition), tags: \.metadata.tags),
+      .yearWriter(swim(renderPartition)),
     ]
   )
   .register(
