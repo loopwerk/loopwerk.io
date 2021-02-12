@@ -92,6 +92,11 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
 extension Saga {
   @discardableResult
   func createArticleImages() -> Self {
+    guard shouldCreateImages() else {
+      print("Skipping createArticleImages")
+      return self
+    }
+
     let rootPath = String(URL(fileURLWithPath: #file)
       .deletingLastPathComponent()
       .deletingLastPathComponent()
@@ -119,4 +124,12 @@ extension Saga {
 
     return self
   }
+}
+
+func shouldCreateImages() -> Bool {
+  if CommandLine.arguments.count == 2 {
+    let command = CommandLine.arguments[1]
+    return command == "createArticleImages"
+  }
+  return false
 }

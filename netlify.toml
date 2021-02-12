@@ -1,7 +1,7 @@
 [build]
   base = ""
   publish = "deploy"
-  command = "swift run"
+  command = "swift run Loopwerk createArticleImages"
 
 [build.environment]
   SWIFT_VERSION = "5.3"
