@@ -26,7 +26,7 @@ extension String {
   }
 }
 
-extension Page where M == ArticleMetadata {
+extension Item where M == ArticleMetadata {
   var summary: String {
     if let summary = metadata.summary {
       return summary

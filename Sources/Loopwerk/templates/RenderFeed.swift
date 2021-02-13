@@ -2,16 +2,16 @@ import Saga
 import HTML
 import SagaSwimRenderer
 
-func renderFeed(context: PagesRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
+func renderFeed(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
   AtomFeed(
     title: context.siteMetadata.name,
     author: "Kevin Renskers",
     baseURL: context.siteMetadata.url,
-    pagesPath: "articles/",
+    pagePath: "articles/",
     feedPath: "articles/feed.xml",
-    pages: Array(context.pages.prefix(20)),
-    summary: { page in
-      if let article = page as? Page<ArticleMetadata> {
+    items: Array(context.items.prefix(20)),
+    summary: { item in
+      if let article = item as? Item<ArticleMetadata> {
         return article.summary
       }
       return nil

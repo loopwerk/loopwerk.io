@@ -33,35 +33,35 @@ let siteMetadata = SiteMetadata(
   now: Date()
 )
 
-let pageProcessorDateFormatter = DateFormatter()
-pageProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
-pageProcessorDateFormatter.timeZone = .current
+let itemProcessorDateFormatter = DateFormatter()
+itemProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
+itemProcessorDateFormatter.timeZone = .current
 
-func pageProcessor(page: Page<ArticleMetadata>) {
+func itemProcessor(item: Item<ArticleMetadata>) {
   // If the filename starts with a valid date, use that as the Page's date and strip it from the destination path
-  let first10 = String(page.relativeSource.lastComponentWithoutExtension.prefix(10))
-  guard first10.count == 10, let date = pageProcessorDateFormatter.date(from: first10) else {
+  let first10 = String(item.relativeSource.lastComponentWithoutExtension.prefix(10))
+  guard first10.count == 10, let date = itemProcessorDateFormatter.date(from: first10) else {
     return
   }
 
   // Set the date
-  page.date = date
+  item.date = date
 
-  let year = String(page.relativeSource.lastComponentWithoutExtension.prefix(4))
+  let year = String(item.relativeSource.lastComponentWithoutExtension.prefix(4))
 
   // Turn the destination into /articles/[year]/[filename-without-date-prefix]/index.html
-  let first11 = String(page.relativeSource.lastComponentWithoutExtension.prefix(11))
-  let newPath = Path("articles") + year + page.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
-  page.relativeDestination = newPath
+  let first11 = String(item.relativeSource.lastComponentWithoutExtension.prefix(11))
+  let newPath = Path("articles") + year + item.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
+  item.relativeDestination = newPath
 }
 
 try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
   .register(
     folder: "articles",
     metadata: ArticleMetadata.self,
-    readers: [.parsleyMarkdownReader(pageProcessor: pageProcessor)],
+    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
     writers: [
-      .pageWriter(swim(renderArticle)),
+      .itemWriter(swim(renderArticle)),
       .listWriter(swim(renderArticles)),
       .listWriter(swim(renderFeed), output: "feed.xml"),
       .tagWriter(swim(renderPartition), tags: \.metadata.tags),
@@ -79,9 +79,9 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownReader()],
-    pageWriteMode: .keepAsFile,
+    itemWriteMode: .keepAsFile,
     writers: [
-      .pageWriter(swim(renderPage))
+      .itemWriter(swim(renderPage))
     ]
   )
   .run()
@@ -114,7 +114,7 @@ extension Saga {
     createArticleImagesDateFormatter.dateFormat = "MMMM dd, yyyy"
     createArticleImagesDateFormatter.timeZone = .current
 
-    let articles = fileStorage.compactMap { $0.page as? Page<ArticleMetadata> }
+    let articles = fileStorage.compactMap { $0.item as? Item<ArticleMetadata> }
 
     for article in articles {
       let date = createArticleImagesDateFormatter.string(from: article.date)

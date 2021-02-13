@@ -1,20 +1,20 @@
 import Saga
 import HTML
 
-func renderPage(context: PageRenderingContext<PageMetadata, SiteMetadata>) -> Node {
-  let section = Section(rawValue: context.page.metadata.section ?? "")
+func renderPage(context: ItemRenderingContext<PageMetadata, SiteMetadata>) -> Node {
+  let section = Section(rawValue: context.item.metadata.section ?? "")
 
-  return baseLayout(section: section, title: context.page.title, siteMetadata: context.siteMetadata) {
+  return baseLayout(section: section, title: context.item.title, siteMetadata: context.siteMetadata) {
     switch section {
       case .home:
-        return renderHome(body: context.page.body)
+        return renderHome(body: context.item.body)
       case .notFound:
-        let articles = context.allPages
-          .compactMap { $0 as? Page<ArticleMetadata> }
+        let articles = context.allItems
+          .compactMap { $0 as? Item<ArticleMetadata> }
           .prefix(10)
-        return render404(body: context.page.body, articles: Array(articles))
+        return render404(body: context.item.body, articles: Array(articles))
       default:
-        return renderNonHome(body: context.page.body)
+        return renderNonHome(body: context.item.body)
     }
   }
 }
@@ -66,7 +66,7 @@ func renderNonHome(body: String) -> Node {
   }
 }
 
-func render404(body: String, articles: [Page<ArticleMetadata>]) -> Node {
+func render404(body: String, articles: [Item<ArticleMetadata>]) -> Node {
   article {
     body
 

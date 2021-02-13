@@ -1,7 +1,7 @@
 import Saga
 import HTML
 
-func _renderArticles(_ articles: [Page<ArticleMetadata>], title pageTitle: String, siteMetadata: SiteMetadata) -> Node {
+func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: String, siteMetadata: SiteMetadata) -> Node {
   baseLayout(section: .articles, title: pageTitle, siteMetadata: siteMetadata) {
     articles.map { article in
       section {
@@ -20,10 +20,10 @@ func _renderArticles(_ articles: [Page<ArticleMetadata>], title pageTitle: Strin
   }
 }
 
-func renderArticles(context: PagesRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.pages, title: "Articles", siteMetadata: context.siteMetadata)
+func renderArticles(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
+  _renderArticles(context.items, title: "Articles", siteMetadata: context.siteMetadata)
 }
 
 func renderPartition<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.pages, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata)
+  _renderArticles(context.items, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata)
 }

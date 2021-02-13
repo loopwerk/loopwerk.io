@@ -1,7 +1,7 @@
 import Saga
 import HTML
 
-func renderApps(context: PagesRenderingContext<AppMetadata, SiteMetadata>) -> Node {
+func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> Node {
   baseLayout(section: .apps, title: "Apps", siteMetadata: context.siteMetadata) {
     article {
       div(class: "page_content") {
@@ -9,7 +9,7 @@ func renderApps(context: PagesRenderingContext<AppMetadata, SiteMetadata>) -> No
           "iOS apps I've worked on. I was either the only developer on the project, or the lead developer with more people on the team. Newest apps are shown first."
         }
 
-        context.pages.map { app in
+        context.items.map { app in
           div(class: "app") {
             h2 { app.title }
 

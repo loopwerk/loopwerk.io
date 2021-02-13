@@ -2,7 +2,7 @@ import Saga
 import HTML
 import Foundation
 
-func renderArticleInfo(_ article: Page<ArticleMetadata>) -> Node {
+func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "article_info") {
     span(class: "time") {
       article.date.formatted("MMMM dd") + ","
@@ -23,7 +23,7 @@ func renderArticleInfo(_ article: Page<ArticleMetadata>) -> Node {
 }
 
 @NodeBuilder
-func getArticleHeader(_ article: Page<ArticleMetadata>, siteUrl: URL) -> NodeConvertible {
+func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeConvertible {
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: "@kevinrenskers", name: "twitter:site")
   meta(content: siteUrl.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
@@ -36,17 +36,17 @@ func getArticleHeader(_ article: Page<ArticleMetadata>, siteUrl: URL) -> NodeCon
   meta(content: "530", name: "og:image:height")
 }
 
-func renderArticle(context: PageRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
-  let extraHeader = getArticleHeader(context.page, siteUrl: context.siteMetadata.url)
+func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
+  let extraHeader = getArticleHeader(context.item, siteUrl: context.siteMetadata.url)
 
-  return baseLayout(section: .articles, title: context.page.title, siteMetadata: context.siteMetadata, extraHeader: extraHeader) {
+  return baseLayout(section: .articles, title: context.item.title, siteMetadata: context.siteMetadata, extraHeader: extraHeader) {
     article {
-      h1 { context.page.title }
+      h1 { context.item.title }
 
-      renderArticleInfo(context.page)
+      renderArticleInfo(context.item)
 
       div(class: "article_content") {
-        context.page.body
+        context.item.body
       }
 
       div(id: "article_footer") {
