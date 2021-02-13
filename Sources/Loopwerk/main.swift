@@ -63,9 +63,12 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
     writers: [
       .itemWriter(swim(renderArticle)),
       .listWriter(swim(renderArticles)),
+      .tagWriter(swim(renderTag), tags: \.metadata.tags),
+      .yearWriter(swim(renderYear)),
+
+      // Atom feed for all articles, and a feed per tag
       .listWriter(swim(renderFeed), output: "feed.xml"),
-      .tagWriter(swim(renderPartition), tags: \.metadata.tags),
-      .yearWriter(swim(renderPartition)),
+      .tagWriter(swim(renderTagFeed), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
     ]
   )
   .register(
