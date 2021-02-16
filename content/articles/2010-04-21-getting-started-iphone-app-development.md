@@ -13,7 +13,7 @@ After looking at some tutorials, I decided that I didn't like Interface Builder 
 
 [PhoneGap](http://www.phonegap.com/), allowing you to use html, css and javascript to create native applications. Basically PhoneGap is just a mobile website inside a native iPhone container, with access to native functions like maps, contacts, multi touch, etc. Very easy to use, but it still kinda looks like a mobile sites (which in fact, it is).
 
-[Appcelerator Titanium Mobile](http://www.appcelerator.com/), which gives you a javascript API for creating real native elements on screen. You won't use html or css, everything is done with their API's. Of course, applications created with Titanium have full access to all native functions too.
+[Appcelerator Titanium Mobile](http://www.appcelerator.com/), which gives you a javascript API for creating real native elements on screen. You won't use html or css, everything is done with their APIs. Of course, applications created with Titanium have full access to all native functions too.
 
 After looking at PhoneGap for about a day, I decided that it wasn't good enough for creating "native feeling" applications and downloaded Titanium instead. Getting started was easy enough, and you really do create native applications that even compile for the Android platform too. However, poor documentation and paid support costing $200 per month made progress slow as I wanted to do more complicated things.
 

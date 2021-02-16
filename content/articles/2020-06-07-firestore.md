@@ -66,7 +66,7 @@ Firebase also offers authentication via email and password, sms tokens, one-time
 
 Lastly they add support for offline access to the database, automatic caching, crash reporting, analytics if you want, and it's available cross-platform - even on the web.
 
-It's not all perfect. Their Swift SDK doesn't natively support Codable models, you simply get dictionaries back. But I wrote a small library for my own use to make it super easy to use Codable models everywhere. The SDK also doesn't offer any kind of reactive framework support, instead all their API's are block-based, so my library also adds Combine support wherever they use blocks.
+It's not all perfect. Their Swift SDK doesn't natively support Codable models, you simply get dictionaries back. But I wrote a small library for my own use to make it super easy to use Codable models everywhere. The SDK also doesn't offer any kind of reactive framework support, instead all their APIs are block-based, so my library also adds Combine support wherever they use blocks.
 
 There are more problems due the way Firestore stores its data. For example you can't just get a count of documents in a collection without reading all those documents - and you pay per read, so that is not smart. You can also only write to each document just once per second, so Firestore is completely unusable for a bunch of real-time apps. I would also really love it if their permission system with the rules would act like a filter, so that you automatically only get the data that you have permissions for. But instead you still have to basically duplicate the server side rules in the client and query for specific data, or you'll end up getting access errors.
 

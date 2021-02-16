@@ -10,7 +10,7 @@ In case you don't know what Appcelerator is and don't want to read the previous 
 Well yes. A bit too good actually. While you get a working skeleton app very quickly that does indeed compile to both iPhone and Android, there are quite some disadvantages.
 
 * You can only use the Appcelerator API to build the interface of your app. If they don't support feature X, you're pretty much out of luck. In theory you can build native extensions that can then be used from within your Appcelerator app, but in practice this kind of defeats the purpose and requires you to still know Java and/or Objective-C.
-* Even though Appcelerator tries very hard to keep up to date, it is always a bit behind in terms of features offered by the native SDK's.
+* Even though Appcelerator tries very hard to keep up to date, it is always a bit behind in terms of features offered by the native SDKs.
 * Debugging is a lot harder if you are used to Xcode's excellent tools.
 * Performance on Android is less then stellar. Real native apps perform better, especially when you try to use a tableviews containing images.
 * I miss Interface Builder! Of course this is only valid for native iPhone development, but I guess Eclipse for Android development is better for laying out interfaces too. With Appcelerator you have to lay everything out by hand, using absolute pixel-positions.
