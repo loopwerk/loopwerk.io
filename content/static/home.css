@@ -31,22 +31,26 @@ h1 b {
   font-weight: bold;
 }
 
-@media screen and (min-width: 900px) {
-  nav ul, #content {
+@media screen and (min-width: 800px) {
+  nav, #content {
     width: 900px;
   }
 
   .header img {
     margin-bottom: 60px;
   }
+
+  nav {
+    justify-content: center;
+  }
+
+  nav img {
+    display: none;
+  }
   
   .footer {
     margin-top: 40px;
     display: block;
-  }
-
-  nav ul {
-    justify-content: center;
   }
 
   .header, .footer {

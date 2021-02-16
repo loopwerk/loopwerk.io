@@ -42,34 +42,34 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
       script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
     }
     body {
-      nav {
-        ul {
-          li(class: "logo") {
-            img(alt: "Loopwerk logo", src: "/static/images/Loopwerk_mark.svg")
-          }
+      header {
+        nav {
+          img(alt: "Loopwerk logo", src: "/static/images/Loopwerk_mark.svg")
 
-          li {
-            a(class: "link_1\(section == .home ? " active" : "")", href: "/") { "Home" }
-          }
+          ul {
+            li {
+              a(class: "link_1\(section == .home ? " active" : "")", href: "/") { "Home" }
+            }
 
-          li {
-            a(class: "link_2\(section == .articles ? " active" : "")", href: "/articles/") { "Articles" }
-          }
+            li {
+              a(class: "link_2\(section == .articles ? " active" : "")", href: "/articles/") { "Articles" }
+            }
 
-          li {
-            a(class: "link_3\(section == .apps ? " active" : "")", href: "/apps/") { "Apps" }
-          }
+            li {
+              a(class: "link_3\(section == .apps ? " active" : "")", href: "/apps/") { "Apps" }
+            }
 
-          li {
-            a(class: "link_4\(section == .projects ? " active" : "")", href: "/projects/") { "Projects" }
-          }
+            li {
+              a(class: "link_4\(section == .projects ? " active" : "")", href: "/projects/") { "Open Source" }
+            }
 
-          li {
-            a(class: "link_5\(section == .mentorshipProgram ? " active" : "")", href: "/mentor/") { "Mentorship Program" }
-          }
+            li {
+              a(class: "link_5\(section == .mentorshipProgram ? " active" : "")", href: "/mentor/") { "Mentorship Program" }
+            }
 
-          li {
-            a(class: "link_6\(section == .about ? " active" : "")", href: "/about/") { "About" }
+            li {
+              a(class: "link_6\(section == .about ? " active" : "")", href: "/about/") { "About" }
+            }
           }
         }
       }

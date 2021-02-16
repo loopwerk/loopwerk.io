@@ -1,0 +1,8 @@
+---
+images: cn_1.png, cn_2.png
+url: https://www.critical-notes.com
+date: 2020-06-23
+---
+
+#  Critical Notes
+Notes for roleplaying games. Keep track of your roleplaying games' campaigns and adventures! A web application built with Svelte and Firebase, and paid subscriptions via Stripe.

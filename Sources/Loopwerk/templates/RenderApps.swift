@@ -6,7 +6,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> No
     article {
       div(class: "page_content") {
         p {
-          "iOS apps I've worked on. I was either the only developer on the project, or the lead developer with more people on the team. Newest apps are shown first."
+          "Web and iOS apps I've worked on. I was either the only developer on the project, or the lead developer with more people on the team. Newest apps are shown first."
         }
 
         context.items.map { app in
@@ -22,7 +22,13 @@ func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> No
             app.body
 
             if let url = app.metadata.url {
-              a(class: "appstorelink", href: url) { "App Store" }
+              a(href: url) {
+                if url.contains(".apple.com") {
+                  "App Store"
+                } else {
+                  "Website"
+                }
+              }
             }
           }
         }

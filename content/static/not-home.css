@@ -81,23 +81,6 @@
   }
 }
 
-/* Normal width screen */
-@media screen and (min-width: 800px) {
-  nav ul, #content {
-    width: 800px;
-  }
-
-  nav .logo {
-    display: inline-block;
-    height: 30px;
-  }
-
-  nav .logo img {
-    height: 30px;
-    margin-right: 12px;
-  }
-}
-
 .screenshots {
   display: flex;
   flex-flow: row wrap;
