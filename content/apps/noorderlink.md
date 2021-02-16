@@ -1,5 +1,6 @@
 ---
 images: noorderlink.png
+roundOffImages: false
 date: 2011-06-01
 ---
 

@@ -1,5 +1,6 @@
 ---
 images: forum.png
+roundOffImages: false
 date: 2010-12-01
 ---
 

@@ -14,6 +14,8 @@ struct ArticleMetadata: Metadata {
 
 struct AppMetadata: Metadata {
   let images: [String]
+  let roundOffImages: Bool?
+  let breakImages: Int?
   let url: String?
 }
 

@@ -1,5 +1,6 @@
 ---
 images: radius.png
+roundOffImages: false
 date: 2014-12-01
 ---
 

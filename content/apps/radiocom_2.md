@@ -1,5 +1,6 @@
 ---
 images: radio2.jpg
+roundOffImages: false
 date: 2012-06-01
 ---
 

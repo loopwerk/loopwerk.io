@@ -1,5 +1,5 @@
 ---
-images: tessa.png
+images: tessa_1.png, tessa_2.png, tessa_3.png, tessa_4.png
 date: 2019-06-01
 ---
 

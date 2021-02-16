@@ -1,5 +1,6 @@
 ---
 images: oosterpoort.png
+roundOffImages: false
 date: 2010-06-01
 ---
 

@@ -1,5 +1,6 @@
 ---
 images: radio3.png
+roundOffImages: false
 date: 2014-08-01
 ---
 

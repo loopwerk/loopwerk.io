@@ -91,13 +91,24 @@
   display: block;
 }
 @media screen and (max-width: 800px) {
-  .screenshots span {
+  .screenshots.break_1 span {
+    flex: 100%;
+  }
+  
+  .screenshots.break_2 span {
     flex: 50%;
+  }
+
+  .screenshots.break_3 span {
+    flex: 33.3%;
   }
 }
 .screenshots img {
+  padding: 3px 3px 0 0;
+}
+
+.screenshots.rounded img {
   border-radius: 10%/4.7%;
-  padding: 0 3px;
 }
 
 .app p {

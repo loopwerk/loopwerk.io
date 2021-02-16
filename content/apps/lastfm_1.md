@@ -1,5 +1,6 @@
 ---
 images: scrobbler.png
+roundOffImages: false
 date: 2014-06-01
 ---
 

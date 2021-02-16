@@ -1,5 +1,6 @@
 ---
 images: metrolyrics_1.jpg, metrolyrics_2.jpg, metrolyrics_3.jpg, metrolyrics_4.jpg
+roundOffImages: false
 url: https://itunes.apple.com/app/metrolyrics/id547825550
 date: 2013-06-01
 ---

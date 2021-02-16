@@ -1,5 +1,6 @@
 ---
 images: tailgate.png
+roundOffImages: false
 date: 2013-01-01
 ---
 

@@ -1,5 +1,7 @@
 ---
-images: sjonvarp.png
+images: sjonvarp_1.png, sjonvarp_2.png
+roundOffImages: false
+breakImages: 1
 url: https://itunes.apple.com/app/sjonvarp-simans/id724740942?mt=8
 date: 2015-06-01
 ---
