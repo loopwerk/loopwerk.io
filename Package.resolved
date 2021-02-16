@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Parsley",
         "state": {
           "branch": null,
-          "revision": "8141e0b985632e33300262ca0b7793c19f1cff70",
-          "version": "0.3.0"
+          "revision": "802ea134d61039f33717c36d5164d30aaa9e70e6",
+          "version": "0.5.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "8aac9eebad14266873c28a5b6aec80b59efe6171",
-          "version": "0.18.1"
+          "revision": "1ff283153fc2a118f76768c9e7139baf1c4dabe7",
+          "version": "0.18.3"
         }
       },
       {
