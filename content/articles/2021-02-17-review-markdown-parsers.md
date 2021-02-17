@@ -1,5 +1,6 @@
 ---
 tags: swift, review, saga
+summary: A hugely important part of any static site generator is of course the parsing of Markdown content. The default parser for Saga is Parsley, a custom wrapper around a cmark fork. While I am generally quite happy with it, there are some problems.
 ---
 
 #  A review of Markdown parsers for Swift
