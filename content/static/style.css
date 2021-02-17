@@ -216,3 +216,22 @@ input, select {
     display: block;
   }
 }
+
+#site-footer {
+  color: #424448;
+  margin: 2em 0 1.5em 0;
+  line-height: 1.5em;
+  text-align: center;
+  font-size: 80%;
+  font-family: monospace, sans-serif;
+}
+
+#site-footer p {
+  margin: 0;
+}
+
+#site-footer a {
+  color: #424448;
+  border: 0;
+  text-decoration: underline;
+}

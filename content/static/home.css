@@ -86,3 +86,7 @@ h1 b {
     margin: 0;
   }
 }
+
+#site-footer {
+  display: none;
+}

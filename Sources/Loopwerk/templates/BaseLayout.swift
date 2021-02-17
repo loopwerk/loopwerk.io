@@ -1,4 +1,5 @@
 import HTML
+import Foundation
 
 enum Section: String {
   case home
@@ -76,6 +77,22 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
 
       div(id: "content") {
         children()
+
+        div(id: "site-footer") {
+          p {
+            "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
+          }
+          p {
+            "Built in Swift using"
+            a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
+            %"."
+          }
+          p {
+            a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
+            " | "
+            a(href: "\(siteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+          }
+        }
       }
 
       script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js")
