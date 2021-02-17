@@ -24,6 +24,19 @@ extension String {
       .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
       .trimmingCharacters(in: .whitespacesAndNewlines)
   }
+
+  /// See https://jinja2docs.readthedocs.io/en/stable/templates.html#truncate
+  func truncate(length: Int = 255, killWords: Bool = false, end: String = "...", leeway: Int = 5) -> String {
+    if self.count <= length + leeway {
+      return self
+    }
+
+    if killWords {
+      return self.prefix(length - end.count) + end
+    }
+
+    return self.prefix(length - end.count).split(separator: " ").dropLast().joined(separator: " ") + end
+  }
 }
 
 extension Item where M == ArticleMetadata {
@@ -31,6 +44,6 @@ extension Item where M == ArticleMetadata {
     if let summary = metadata.summary {
       return summary
     }
-    return String(body.withoutHtmlTags.prefix(255))
+    return String(body.withoutHtmlTags.truncate())
   }
 }
