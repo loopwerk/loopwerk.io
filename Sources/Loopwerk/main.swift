@@ -39,7 +39,10 @@ let itemProcessorDateFormatter = DateFormatter()
 itemProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
 itemProcessorDateFormatter.timeZone = .current
 
-func itemProcessor(item: Item<ArticleMetadata>) {
+func itemProcessor<M>(item: Item<M>) {
+  // Improve the HTML by adding target="_blank" to external links
+  item.body = item.body.improveHTML()
+
   // If the filename starts with a valid date, use that as the Page's date and strip it from the destination path
   let first10 = String(item.relativeSource.lastComponentWithoutExtension.prefix(10))
   guard first10.count == 10, let date = itemProcessorDateFormatter.date(from: first10) else {
@@ -76,14 +79,14 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
   .register(
     folder: "apps",
     metadata: AppMetadata.self,
-    readers: [.parsleyMarkdownReader()],
+    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
     writers: [
       .listWriter(swim(renderApps)),
     ]
   )
   .register(
     metadata: PageMetadata.self,
-    readers: [.parsleyMarkdownReader()],
+    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
     itemWriteMode: .keepAsFile,
     writers: [
       .itemWriter(swim(renderPage))

@@ -22,7 +22,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> No
             app.body
 
             if let url = app.metadata.url {
-              a(href: url, target: "_blank") {
+              a(href: url, rel: "nofollow", target: "_blank") {
                 if url.contains(".apple.com") {
                   "App Store"
                 } else {

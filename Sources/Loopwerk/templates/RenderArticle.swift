@@ -52,7 +52,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
       div(id: "article_footer") {
         p {
           "Have feedback? Let me know on"
-          a(href: "https://twitter.com/kevinrenskers") { "Twitter" }
+          a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
           %"."
         }
       }
