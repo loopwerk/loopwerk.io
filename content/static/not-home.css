@@ -19,6 +19,9 @@
   h1 a, h2 a {
     color: var(--header-color);
   }
+  section h1 a, section h2 a {
+    border: 0;
+  }
   #content h1 {
     font-size: 1.5em;
     font-weight: bold;

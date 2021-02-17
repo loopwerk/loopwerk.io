@@ -29,11 +29,11 @@ A Markdown reader for Saga, which uses Parsley.
 [loopwerk/SagaParsleyMarkdownReader](https://github.com/loopwerk/SagaParsleyMarkdownReader)
 
 ### SagaInkMarkdownReader
-A Markdown reader for Saga, which uses SwiftMarkdown.
+A Markdown reader for Saga, which uses Ink and Splash.
 [loopwerk/SagaInkMarkdownReader](https://github.com/loopwerk/SagaInkMarkdownReader)
 
 ### SagaPythonMarkdownReader
-A Markdown reader for Saga, which uses Ink and Splash.
+A Markdown reader for Saga, which uses SwiftMarkdown.
 [loopwerk/SagaPythonMarkdownReader](https://github.com/loopwerk/SagaPythonMarkdownReader)
 
 ### SagaSwimRenderer
@@ -73,11 +73,11 @@ Objective-c client for Sentry.
 
 ### DebugBar
 Handy UI for firing off (debug) methods.
-[kevinrenskers/NSString-URLEncode](https://github.com/kevinrenskers/NSString-URLEncode)
+[kevinrenskers/ios-debugbar](https://github.com/kevinrenskers/ios-debugbar)
 
 ### NSString-URLEncode
 Category that adds URLEncode and URLDecode to NSString.
-[kevinrenskers/ios-debugbar](https://github.com/kevinrenskers/ios-debugbar)
+[kevinrenskers/NSString-URLEncode](https://github.com/kevinrenskers/NSString-URLEncode)
 
 ### NLCoreData-ObjectiveRecord
 Adding ObjectiveRecord syntax on top of NLCoreData.
@@ -91,11 +91,13 @@ Google-Mobile-Ads-SDK banners in interface builder with handy delegate callbacks
 More developer friendly way of working with AdMarvel banners and interstitials.
 [gangverk/AdMarvelContainer](https://github.com/gangverk/AdMarvelContainer)
 
+
 ## JavaScript
 
 ### raml2html
 A simple RAML to HTML documentation generator, written for Node.js.
 [raml2html/raml2html](https://github.com/raml2html/raml2html)
+
 
 ## Python
 
