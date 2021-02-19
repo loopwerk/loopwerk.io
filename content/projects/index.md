@@ -41,6 +41,17 @@ A renderer for Saga that uses Swim to turn a RenderingContext into a String.
 [loopwerk/SagaSwimRenderer](https://github.com/loopwerk/SagaSwimRenderer)
 
 
+## JavaScript
+
+### raml2html
+A simple RAML to HTML documentation generator, written for Node.js.
+[raml2html/raml2html](https://github.com/raml2html/raml2html)
+
+### tag-changelog
+A GitHub Action triggered by a new tag getting pushed. It then fetches all the commits since the previous tag and creates a changelog text using the Conventional Commits format. It will also turn PR numbers into clickable links.
+[loopwerk/tag-changelog](https://github.com/loopwerk/tag-changelog)
+
+
 ## Objective-C
 
 ### GVUserDefaults
@@ -90,17 +101,6 @@ Google-Mobile-Ads-SDK banners in interface builder with handy delegate callbacks
 ### AdMarvelContainer
 More developer friendly way of working with AdMarvel banners and interstitials.
 [gangverk/AdMarvelContainer](https://github.com/gangverk/AdMarvelContainer)
-
-
-## JavaScript
-
-### raml2html
-A simple RAML to HTML documentation generator, written for Node.js.
-[raml2html/raml2html](https://github.com/raml2html/raml2html)
-
-### tag-changelog
-A GitHub Action triggered by a new tag getting pushed. It then fetches all the commits since the previous tag and creates a changelog text using the Conventional Commits format. It will also turn PR numbers into clickable links.
-[loopwerk/tag-changelog](https://github.com/loopwerk/tag-changelog)
 
 
 ## Python
