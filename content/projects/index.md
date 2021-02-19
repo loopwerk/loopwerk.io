@@ -98,6 +98,10 @@ More developer friendly way of working with AdMarvel banners and interstitials.
 A simple RAML to HTML documentation generator, written for Node.js.
 [raml2html/raml2html](https://github.com/raml2html/raml2html)
 
+### tag-changelog
+A GitHub Action triggered by a new tag getting pushed. It then fetches all the commits since the previous tag and creates a changelog text using the Conventional Commits format. It will also turn PR numbers into clickable links.
+[loopwerk/tag-changelog](https://github.com/loopwerk/tag-changelog)
+
 
 ## Python
 

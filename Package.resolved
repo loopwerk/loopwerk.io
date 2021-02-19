@@ -39,7 +39,7 @@
       },
       {
         "package": "PythonKit",
-        "repositoryURL": "https://github.com/pvieito/PythonKit.git",
+        "repositoryURL": "https://github.com/pvieito/PythonKit",
         "state": {
           "branch": null,
           "revision": "074622c6893188bbb7926eee2f7eece8a5124c47",
@@ -48,7 +48,7 @@
       },
       {
         "package": "Saga",
-        "repositoryURL": "https://github.com/loopwerk/Saga.git",
+        "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
           "branch": null,
           "revision": "01179870bfbfd9ad5a6a8f1f63755db6da526619",
@@ -84,7 +84,7 @@
       },
       {
         "package": "SwiftSoup",
-        "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
           "branch": null,
           "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
