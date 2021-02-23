@@ -123,7 +123,7 @@ The second gotcha is that `uses: ./` parameter for the Action you're working on.
 GITHUB_TOKEN=ABC123ABC123ABC123ABC123ABC123
 ```
 
-Just make really sure to add this file to `.gitignore`! If you don't do this step, your Action will not be given a `GITHUB_TOKEN`, since act can't create one for the runner like GitHub does.
+If you don't do this step, your Action will not be given a `GITHUB_TOKEN`, since act can't create one for the runner like GitHub does. Just make really sure to add this file to `.gitignore`!
 
 5. If you're using `getOctokit` from `@actions/github`, your Action does need to be in a git repo that's actually pushed to GitHub. This was a puzzle that I couldn't solve for a long time: I was trying to get a first version of my Action to work locally before even committing anything, let alone pushing it to GitHub, but that simply doesn't work. At least push a basic `README` file for example, and then work on your JavaScript code locally, and it'll work just fine.
 
