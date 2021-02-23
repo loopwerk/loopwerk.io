@@ -51,7 +51,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
 
       div(id: "article_footer") {
         p {
-          "Have feedback? Let me know on"
+          "Did you like this article, spot an error, or have other feedback? Please let me know on"
           a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
           %"."
         }
