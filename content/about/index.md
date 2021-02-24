@@ -11,6 +11,6 @@ I'm a creative freelance developer with a passion for good design and intuitive,
 
 Usability and design are always on my mind, even when writing code: this should be usable, readable and beautiful too.
 
-I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [/projects](/projects/) and a portfolio of mobile apps I've created on [/apps](/apps/).
+I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [/projects](/projects/) and a portfolio of apps I've created on [/apps](/apps/).
 
 Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Twitter](https://twitter.com/kevinrenskers). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
