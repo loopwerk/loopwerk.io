@@ -6,11 +6,11 @@ The source of loopwerk.io, a static website generated with [Saga](https://github
 2. `cd loopwerk.io`
 3. `open Package.swift`
 
-A standard build from Xcode or the command line (`swift run`) skips the `createArticleImages` step, since it's rather slow. To include this step as well, run `swift run Loopwerk createArticleImages` from the command line. You will need to have the Python package Pillow installed for that.
+A standard build from Xcode or the command line (`swift run`) skips the `createArticleImages` step, since it's rather slow. To include this step as well, run `swift run Loopwerk createArticleImages` from the command line. You will need to have the Python package Pillow installed for that (`pip install -r requirements.txt`).
 
 ## Development server with auto reload
 ```
-npm install --global lite-server
+npm install --global browser-sync
 swift run watch content Sources deploy
 ```
 
