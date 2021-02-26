@@ -13,18 +13,18 @@ Maybe there's an existing Action that would be the perfect fit for me, but I als
 
 My Action simply takes the commits between the last two tags, and turns that into a changelog string which is then made available for other Actions. 
 
-```
+```yml
 - name: Create changelog text
   id: changelog
-  uses: loopwerk/conventional-changelog-action@main
+  uses: loopwerk/conventional-changelog-action@v1
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
-    exclude: other,perf
+    exclude_types: other,perf
 ```
 
 So if you want to write the generated changelog to a file, or if you want to automatically create GitHub Releases using that same changelog text, that's all very easy. You combine small steps into a larger workflow:
 
-```
+```yml
 name: Create Release
 
 on:
@@ -42,10 +42,10 @@ jobs:
 
       - name: Create changelog text
         id: changelog
-        uses: loopwerk/conventional-changelog-action@main
+        uses: loopwerk/conventional-changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          exclude: other,perf
+          exclude_types: other,perf
 
       - name: Create release
         uses: actions/create-release@latest
@@ -87,7 +87,7 @@ Which brings me to the actual development process that I'm using. Normally you'd
 
 2. You'll need to create a `.github/workflow/[workflow].yml` file within your Action repo, that will be executed by act. There are subtle differences in how act behaves different from the real GitHub workflow runner though, and this was the first big hurdle.
 
-```
+```yml
 name: My Workflow
 
 on:

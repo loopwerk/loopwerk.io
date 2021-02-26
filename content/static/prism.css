@@ -118,7 +118,6 @@ pre code {
 
 .token.class-name {
   color: var(--token-class-name);
-  text-decoration: underline;
 }
 
 .token.boolean {
