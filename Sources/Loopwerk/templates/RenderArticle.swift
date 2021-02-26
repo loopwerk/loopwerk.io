@@ -24,6 +24,8 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeConvertible {
+  link(href: "\(siteUrl)\(article.url)", rel: "canonical")
+  meta(content: article.summary.escapedXMLCharacters, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: "@kevinrenskers", name: "twitter:site")
   meta(content: siteUrl.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
