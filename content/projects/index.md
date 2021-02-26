@@ -8,12 +8,12 @@ These are some of the more interesting open source projects I've created over th
 
 ## Swift
 &nbsp;
-![](saga-social-image.png)
+[![](saga-social-image.png)](https://github.com/loopwerk/Saga)
 ### Saga
 A static site generator.
 [loopwerk/Saga](https://github.com/loopwerk/Saga)
 
-![](parsley-social-image.png)
+[![](parsley-social-image.png)](https://github.com/loopwerk/Parsley)
 ### Parsley
 A Markdown parser for Swift Package Manager, using Github Flavored Markdown, plus Metadata support.
 [loopwerk/Parsley](https://github.com/loopwerk/Parsley)
@@ -45,12 +45,12 @@ A renderer for Saga that uses Swim to turn a RenderingContext into a String.
 
 ## JavaScript
 &nbsp;
-![](raml2html-social-image.png)
+[![](raml2html-social-image.png)](https://github.com/raml2html/raml2html)
 ### raml2html
 A simple RAML to HTML documentation generator, written for Node.js.
 [raml2html/raml2html](https://github.com/raml2html/raml2html)
 
-![](tag-changelog-social-image.png)
+[![](tag-changelog-social-image.png)](https://github.com/loopwerk/tag-changelog)
 ### tag-changelog
 A GitHub Action triggered by a new tag getting pushed. It then fetches all the commits since the previous tag and creates a changelog text using the Conventional Commits format. It will also turn PR numbers into clickable links.
 [loopwerk/tag-changelog](https://github.com/loopwerk/tag-changelog)

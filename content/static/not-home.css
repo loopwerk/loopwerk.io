@@ -1,11 +1,17 @@
 @media screen {
   .page_content a[href^="https://github.com"] {
-    background: transparent url('images/github.png') no-repeat;
+    background: transparent url('images/github.svg') no-repeat;
+    background-size: 1em 1em;
     padding-left: 20px;
   }
   .page_content a[href^="https://itunes.apple.com"], .page_content a[href^="https://apps.apple.com"] {
-    background: transparent url('images/appstore.png') no-repeat;
+    background: transparent url('images/apple.svg') no-repeat;
+    background-size: 1em 1em;
     padding-left: 20px;
+  }
+  .page_content a.contains_image {
+    padding-left: 0;
+    background: none;
   }
   p.more {
     margin-top: 0;

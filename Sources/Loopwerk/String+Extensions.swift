@@ -20,6 +20,11 @@ extension String {
         }
       }
 
+      let linksWithImages = try doc.select("a[href] img")
+      for link in linksWithImages {
+        try link.parent()?.addClass("contains_image")
+      }
+
       // Add named anchors to headings
       let headings = try doc.select("h1, h2, h3")
       for heading in headings {
@@ -32,7 +37,7 @@ extension String {
       for codeBlock in codeBlocks {
         let content = try codeBlock.html()
 
-        let regex = try NSRegularExpression(pattern: #"/\*HLS\W?(.*)\*/(.*)/\*HLE\*/"#)
+        let regex = try NSRegularExpression(pattern: #"\/\*HLS\W?(.*?)\*\/(.*?)\/\*HLE\*\/"#)
         let range = NSRange(content.startIndex..<content.endIndex, in: content)
         let newContent = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
 
