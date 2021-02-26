@@ -66,7 +66,7 @@
 }
 
 pre {
-  font-size: 0.875em;
+  font-size: 100%;
   margin-bottom: 1.715em;
   border-left: 2px solid var(--accent);
   width: 100%;
@@ -79,8 +79,13 @@ code {
   padding: 2px 4px;
 }
 
+@font-face {
+  font-family: "Anonymous Pro";
+  src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
+}
+
 pre, code {
-  font-family: monospace, sans-serif;
+  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   background: var(--code-background);
   color: var(--code-color);
 }
