@@ -69,7 +69,7 @@ Now you can simply subscribe to the `books` publisher without worrying about del
 
 ```swift
 struct ViewModel {
-  let books = CurrentValueSubject<[Book], Never>([])
+  let books = /*HLS*/CurrentValueSubject<[Book], Never>([])/*HLE*/
   // You need to give CurrentValueSubject an initial value,
   // here I'm simply using an empty array. 
 
@@ -96,11 +96,11 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.books.value.count
+    return /*HLS*/viewModel.books.value.count/*HLE*/
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let book = viewModel.books.value[indexPath.row]
+    let book = /*HLS*/viewModel.books.value[indexPath.row]/*HLE*/
     let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookCell
     cell.configure(with: book)
     return cell

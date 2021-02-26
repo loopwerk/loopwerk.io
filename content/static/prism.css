@@ -204,3 +204,8 @@ pre code {
 .token.italic {
   font-style: italic;
 }
+
+pre code .highlight {
+  border: 1px solid var(--accent);
+  padding: 2px;
+}
