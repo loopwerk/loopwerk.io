@@ -1,4 +1,5 @@
 import SwiftSoup
+import Foundation
 
 extension String {
   func improveHTML() -> String {
@@ -24,6 +25,18 @@ extension String {
       for heading in headings {
         let slug = try heading.text().slugified
         try heading.prepend("<a name=\"\(slug)\"></a>")
+      }
+
+      // Search all code blocks and replace /*HLS [optional title]*/[content]/*HLE*/ with a highlight span
+      let codeBlocks = try doc.select("pre code")
+      for codeBlock in codeBlocks {
+        let content = try codeBlock.html()
+
+        let regex = try NSRegularExpression(pattern: #"/\*HLS\W?(.*)\*/(.*)/\*HLE\*/"#)
+        let range = NSRange(content.startIndex..<content.endIndex, in: content)
+        let newContent = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
+
+        try codeBlock.html(newContent)
       }
 
       return try doc.body()?.html() ?? self
