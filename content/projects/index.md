@@ -42,6 +42,10 @@ A Markdown reader for Saga, which uses SwiftMarkdown.
 A renderer for Saga that uses Swim to turn a RenderingContext into a String.
 [loopwerk/SagaSwimRenderer](https://github.com/loopwerk/SagaSwimRenderer)
 
+### SagaStencilRenderer
+A renderer for Saga that uses Stencil to turn a RenderingContext into a String.
+[loopwerk/SagaStencilRenderer](https://github.com/loopwerk/SagaStencilRenderer)
+
 
 ## JavaScript
 &nbsp;
