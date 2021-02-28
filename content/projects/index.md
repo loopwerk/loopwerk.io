@@ -13,6 +13,44 @@ These are some of the more interesting open source projects I've created over th
 A static site generator.
 [loopwerk/Saga](https://github.com/loopwerk/Saga)
 
+### Saga plugins
+<table class="two_equal_width_columns" style="margin-top: 1em;">
+<tr>
+<td>
+<h3>SagaParsleyMarkdownReader</h3>
+<p>
+A Markdown reader for Saga, which uses Parsley.<br>
+<a href="https://github.com/loopwerk/SagaParsleyMarkdownReader">loopwerk/SagaParsleyMarkdownReader</a>
+</p>
+
+<h3>SagaInkMarkdownReader</h3>
+<p>
+A Markdown reader for Saga, which uses Ink and Splash.<br>
+<a href="https://github.com/loopwerk/SagaInkMarkdownReader">loopwerk/SagaInkMarkdownReader</a>
+</p>
+
+<h3>SagaPythonMarkdownReader</h3>
+<p>
+A Markdown reader for Saga, which uses SwiftMarkdown.<br>
+<a href="https://github.com/loopwerk/SagaPythonMarkdownReader">loopwerk/SagaPythonMarkdownReader</a>
+</p>
+</td>
+<td>
+<h3>SagaSwimRenderer</h3>
+<p>
+A renderer for Saga that uses Swim to turn a RenderingContext into a String.<br>
+<a href="https://github.com/loopwerk/SagaSwimRenderer">loopwerk/SagaSwimRenderer</a>
+</p>
+
+<h3>SagaStencilRenderer</h3>
+<p>
+A renderer for Saga that uses Stencil to turn a RenderingContext into a String.<br>
+<a href="https://github.com/loopwerk/SagaStencilRenderer">loopwerk/SagaStencilRenderer</a>
+</p>
+</td>
+</tr>
+</table>
+
 [![](parsley-social-image.png)](https://github.com/loopwerk/Parsley)
 ### Parsley
 A Markdown parser for Swift Package Manager, using Github Flavored Markdown, plus Metadata support.
@@ -25,26 +63,6 @@ A Swift wrapper for Python-Markdown, including custom extensions.
 ### SwiftMarkdown2
 A Swift wrapper for python-markdown2.
 [loopwerk/SwiftMarkdown2](https://github.com/loopwerk/SwiftMarkdown2)
-
-### SagaParsleyMarkdownReader
-A Markdown reader for Saga, which uses Parsley.
-[loopwerk/SagaParsleyMarkdownReader](https://github.com/loopwerk/SagaParsleyMarkdownReader)
-
-### SagaInkMarkdownReader
-A Markdown reader for Saga, which uses Ink and Splash.
-[loopwerk/SagaInkMarkdownReader](https://github.com/loopwerk/SagaInkMarkdownReader)
-
-### SagaPythonMarkdownReader
-A Markdown reader for Saga, which uses SwiftMarkdown.
-[loopwerk/SagaPythonMarkdownReader](https://github.com/loopwerk/SagaPythonMarkdownReader)
-
-### SagaSwimRenderer
-A renderer for Saga that uses Swim to turn a RenderingContext into a String.
-[loopwerk/SagaSwimRenderer](https://github.com/loopwerk/SagaSwimRenderer)
-
-### SagaStencilRenderer
-A renderer for Saga that uses Stencil to turn a RenderingContext into a String.
-[loopwerk/SagaStencilRenderer](https://github.com/loopwerk/SagaStencilRenderer)
 
 
 ## JavaScript

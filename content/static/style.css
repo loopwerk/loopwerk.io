@@ -235,3 +235,7 @@ input, select {
   border: 0;
   text-decoration: underline;
 }
+
+.two_equal_width_columns td {
+  width: 50%;
+}
