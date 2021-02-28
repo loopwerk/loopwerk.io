@@ -142,6 +142,7 @@ div.subprojects {
   margin-bottom: 1.5em;
   overflow-x: hidden;
   font-size: 90%;
+  margin-top: -1em;
 }
 
 #content div.subprojects h2 {
