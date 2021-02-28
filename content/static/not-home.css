@@ -11,6 +11,7 @@
   }
   .page_content a.contains_image {
     padding-left: 0;
+    border: 0;
     background: none;
   }
   p.more {
@@ -94,10 +95,12 @@
   flex-flow: row wrap;
   margin: 0 -3px;
 }
+
 .screenshots span {
   flex: 1;
   display: block;
 }
+
 @media screen and (max-width: 800px) {
   .screenshots.break_1 span {
     flex: 100%;
@@ -111,6 +114,7 @@
     flex: 33.3%;
   }
 }
+
 .screenshots img {
   padding: 3px 3px 0 0;
 }
@@ -121,4 +125,52 @@
 
 .app p {
   margin: 1.5em 0 0 0;
+}
+
+div.projects {
+  margin-top: 0.5em;
+}
+
+div.project img {
+  margin-bottom: 0.5em;
+  height: auto;
+}
+
+div.subprojects {
+  background: var(--darker-page-background);
+  padding: 1em 0 0 1em;
+  margin-bottom: 1.5em;
+  overflow-x: hidden;
+  font-size: 90%;
+}
+
+div.subprojects .project {
+  padding-right: 1em;
+}
+
+@media screen and (min-width: 800px) {
+  div.subprojects {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #content div.subprojects h2 {
+    flex: 100%;
+    margin: 0 0 1em 0;
+  }
+
+  div.subprojects .project {
+    flex: 0 50%;
+  }
+}
+
+.lineheader {
+  display: flex;
+  justify-content: center;
+  background: url(1x1.png) repeat-x 50% 60%;
+}
+
+.lineheader h1 {
+  background: var(--page-background);
+  padding: 0 0.5em;
 }

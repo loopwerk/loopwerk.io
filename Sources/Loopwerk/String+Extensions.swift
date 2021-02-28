@@ -20,11 +20,6 @@ extension String {
         }
       }
 
-      let linksWithImages = try doc.select("a[href] img")
-      for link in linksWithImages {
-        try link.parent()?.addClass("contains_image")
-      }
-
       // Add named anchors to headings
       let headings = try doc.select("h1, h2, h3")
       for heading in headings {

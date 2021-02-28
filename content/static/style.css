@@ -77,6 +77,7 @@ input, select {
 :root {
   --accent: #F5B031;
   --page-background: #222831;
+  --darker-page-background: #191e24;
   --nav-background: #0e1112;
   --text-color: #eeeeee;
   --secondary-text-color: #CCC;
@@ -86,6 +87,7 @@ input, select {
   :root {
     --accent: #F5B031;
     --page-background: white;
+    --darker-page-background: #F5F7F9;
     --nav-background: #566b78;
     --text-color: #566b78;
     --secondary-text-color: #CCC;

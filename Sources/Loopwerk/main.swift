@@ -23,6 +23,21 @@ struct PageMetadata: Metadata {
   let section: String?
 }
 
+struct ProjectMetadata: Metadata {
+  let category: String
+  let parent: String?
+  let repo: String
+  let image: String?
+  let text: String
+  let order: Int?
+}
+
+extension Item where M == ProjectMetadata {
+  var order: Int {
+    return metadata.order ?? 999
+  }
+}
+
 struct SiteMetadata: Metadata {
   let url: URL
   let name: String
@@ -82,6 +97,14 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
     readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
     writers: [
       .listWriter(swim(renderApps)),
+    ]
+  )
+  .register(
+    folder: "projects",
+    metadata: ProjectMetadata.self,
+    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+    writers: [
+      .listWriter(swim(renderProjects)),
     ]
   )
   .register(
