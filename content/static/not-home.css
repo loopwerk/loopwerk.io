@@ -144,6 +144,10 @@ div.subprojects {
   font-size: 90%;
 }
 
+#content div.subprojects h2 {
+  margin: 0 0 1em 0;
+}
+
 div.subprojects .project {
   padding-right: 1em;
 }
@@ -156,7 +160,6 @@ div.subprojects .project {
 
   #content div.subprojects h2 {
     flex: 100%;
-    margin: 0 0 1em 0;
   }
 
   div.subprojects .project {
