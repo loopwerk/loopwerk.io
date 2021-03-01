@@ -82,7 +82,7 @@ try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
     readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
     writers: [
       .itemWriter(swim(renderArticle)),
-      .listWriter(swim(renderArticles)),
+      .listWriter(swim(renderArticles), paginate: 20),
       .tagWriter(swim(renderTag), tags: \.metadata.tags),
       .yearWriter(swim(renderYear)),
 

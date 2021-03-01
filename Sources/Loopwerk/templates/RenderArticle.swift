@@ -61,22 +61,20 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
           "Did you like this article, spot an error, or have other feedback? Please let me know on"
           a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
           %". If you liked this article, please consider"
-          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "☕️ buying me a coffee" }
+          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "buying me a coffee" }
           %"."
         }
+      }
 
-        p {
-          if let previousArticle = previousArticle {
-            span {
-              "Previous article:"
-              a(href: previousArticle.url) { previousArticle.title }
-            }
-          }
+      ul(class: "pagination") {
+        li(class: "newer") {
           if let nextArticle = nextArticle {
-            span {
-              "Next article:"
-              a(href: nextArticle.url) { nextArticle.title }
-            }
+            a(href: nextArticle.url, title: "newer article") { nextArticle.title }
+          }
+        }
+        li(class: "older") {
+          if let previousArticle = previousArticle {
+            a(href: previousArticle.url, title: "older article") { previousArticle.title }
           }
         }
       }

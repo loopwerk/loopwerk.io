@@ -226,11 +226,55 @@ nav ul a:hover, nav ul a.active {
     background-color: white;
   }
 
-  header, #site-footer {
+  header, #site-footer, .pagination {
     display: none;
   }
 
   a {
     color: black;
+  }
+}
+
+.pagination {
+  background-color: var(--nav-background);
+  padding: 15px 15px 0 15px;
+  display: flex;
+  list-style: none;
+  flex-flow: column;
+}
+
+.pagination li {
+  padding-bottom: 15px;
+}
+
+.pagination a {
+  color: #CCC;
+  border-bottom: 2px solid var(--nav-background);
+}
+
+.pagination a:hover {
+  border-bottom: 2px solid var(--accent);
+  color: white;
+}
+
+.pagination .newer a:before {
+  content: '‹ ';
+}
+
+.pagination .older a:after {
+  content: ' ›';
+}
+
+@media screen and (min-width: 800px) {
+  .pagination {
+    flex-flow: row;
+  }
+
+  .pagination li {
+    flex: 0 50%;
+  }
+
+  .pagination .older {
+    text-align: right;
   }
 }

@@ -7,7 +7,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata, SiteMetadata
       div(class: "page_content opensource") {
         p {
           "These are some of the more interesting open source projects I’ve created over the years. If you use one or more of these projects, please consider"
-          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "☕️ buying me a coffee" }
+          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "buying me a coffee" }
           %"."
         }
 

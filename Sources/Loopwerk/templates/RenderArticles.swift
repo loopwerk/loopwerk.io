@@ -1,7 +1,7 @@
 import Saga
 import HTML
 
-func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: String, siteMetadata: SiteMetadata, extraHeader: NodeConvertible = Node.fragment([])) -> Node {
+func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?, title pageTitle: String, siteMetadata: SiteMetadata, extraHeader: NodeConvertible = Node.fragment([])) -> Node {
   baseLayout(section: .articles, title: pageTitle, siteMetadata: siteMetadata, extraHeader: extraHeader) {
     articles.map { article in
       section {
@@ -17,18 +17,33 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: Strin
         }
       }
     }
+
+    if let paginator = paginator {
+      ul(class: "pagination") {
+        li(class: "newer") {
+          if let previous = paginator.previous {
+            a(href: "/" + previous.string) { "newer articles" }
+          }
+        }
+        li(class: "older") {
+          if let next = paginator.next {
+            a(href: "/" + next.string) { "older articles" }
+          }
+        }
+      }
+    }
   }
 }
 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.items, title: "Articles", siteMetadata: context.siteMetadata)
+  _renderArticles(context.items, paginator: context.paginator, title: "Articles", siteMetadata: context.siteMetadata)
 }
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key)/feed.xml", rel: "alternate", title: "\(siteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  return _renderArticles(context.items, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata, extraHeader: extraHeader)
+  return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata, extraHeader: extraHeader)
 }
 
 func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.items, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata)
+  _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata)
 }
