@@ -74,9 +74,14 @@ input, select {
   vertical-align: middle;
 }
 
+@font-face {
+  font-family: "Anonymous Pro";
+  src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
+}
+
 /* Colors */
 :root {
-  --accent: #F5B031;
+  --accent: #F5B030;
   --page-background: #222831;
   --darker-page-background: #191e24;
   --nav-background: #0e1112;
@@ -86,7 +91,7 @@ input, select {
 
 @media screen and (prefers-color-scheme: light) {
   :root {
-    --accent: #F5B031;
+    --accent: #F5B030;
     --page-background: white;
     --darker-page-background: #F5F7F9;
     --nav-background: #566b78;
@@ -221,12 +226,12 @@ input, select {
 }
 
 #site-footer {
-  color: #424448;
+  color: var(--text-color);
   margin: 2em 0 1.5em 0;
   line-height: 1.5em;
   text-align: center;
   font-size: 80%;
-  font-family: monospace, sans-serif;
+  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 }
 
 #site-footer p {
@@ -234,7 +239,7 @@ input, select {
 }
 
 #site-footer a {
-  color: #424448;
+  color: var(--text-color);
   border: 0;
   text-decoration: underline;
 }

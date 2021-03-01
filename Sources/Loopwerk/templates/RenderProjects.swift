@@ -6,7 +6,9 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata, SiteMetadata
     article {
       div(class: "page_content opensource") {
         p {
-          "These are some of the more interesting open source projects I’ve created over the years."
+          "These are some of the more interesting open source projects I’ve created over the years. If you use one or more of these projects, please consider"
+          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "☕️ buying me a coffee" }
+          %"."
         }
 
         ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
