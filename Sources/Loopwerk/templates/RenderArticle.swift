@@ -41,6 +41,11 @@ func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeCon
 func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item, siteUrl: context.siteMetadata.url)
 
+  let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
+  let currentIndex = allArticles.firstIndex(where: { $0.relativeDestination == context.item.relativeDestination })!
+  let nextArticle = allArticles[safeIndex: currentIndex - 1]
+  let previousArticle = allArticles[safeIndex: currentIndex + 1]
+
   return baseLayout(section: .articles, title: context.item.title, siteMetadata: context.siteMetadata, extraHeader: extraHeader) {
     article {
       h1 { context.item.title }
@@ -58,6 +63,21 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
           %". If you liked this article, please consider"
           a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "☕️ buying me a coffee" }
           %"."
+        }
+
+        p {
+          if let previousArticle = previousArticle {
+            span {
+              "Previous article:"
+              a(href: previousArticle.url) { previousArticle.title }
+            }
+          }
+          if let nextArticle = nextArticle {
+            span {
+              "Next article:"
+              a(href: nextArticle.url) { nextArticle.title }
+            }
+          }
         }
       }
     }

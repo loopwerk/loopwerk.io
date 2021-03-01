@@ -180,13 +180,13 @@ div.subprojects .project {
   padding: 0 0.5em;
 }
 
-.article_navigation span {
+#article_footer span {
   display: block;
   color: var(--secondary-text-color);
 }
 
 @media print {
-  .article_navigation, #article_footer {
+  #article_footer {
     display: none;
   }
 }
