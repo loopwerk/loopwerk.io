@@ -118,6 +118,7 @@ article img {
 
 .screenshots img {
   padding: 3px 3px 0 0;
+  border-radius: 5px;
 }
 
 .screenshots.rounded img {
@@ -144,6 +145,7 @@ div.subprojects {
   overflow-x: hidden;
   font-size: 90%;
   margin-top: -1em;
+  border-radius: 5px;
 }
 
 #content div.subprojects h2 {
@@ -172,7 +174,7 @@ div.subprojects .project {
 .lineheader {
   display: flex;
   justify-content: center;
-  background: url(1x1.png) repeat-x 50% 60%;
+  background: url(/static/images/1x1.png) repeat-x 50% 60%;
 }
 
 .lineheader h1 {

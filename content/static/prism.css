@@ -68,11 +68,11 @@
 
   pre {
     font-size: 100%;
-    border-left: 2px solid var(--accent);
     width: 100%;
     padding: 1em;
     overflow: auto;
     overflow-y: hidden;
+    border-radius: 5px;
   }
 
   code {
@@ -205,7 +205,7 @@
 
   pre code .highlight {
     border: 1px solid var(--accent);
-    padding: 2px;
+    padding: 2px 4px;
   }
 }
 
