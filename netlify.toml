@@ -1,7 +1,7 @@
 [build]
   base = ""
   publish = "deploy"
-  command = "swift run Loopwerk createArticleImages && npm install -g html-minifier clean-css && html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy"
+  command = "swift run Loopwerk createArticleImages && npm install -g html-minifier && html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy"
 
 [build.environment]
   SWIFT_VERSION = "5.3"
