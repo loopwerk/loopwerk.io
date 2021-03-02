@@ -12,11 +12,11 @@ Consider this simple example, where we have a `SomeBookSDK` that has a `fetchBoo
 
 ```swift
 struct ViewModel {
-  let books = PassthroughSubject<[Book], Never>()
+  let books = /*HLS*/PassthroughSubject<[Book], Never>()/*HLE*/
 
   func fetchBooks() {
-    SomeBookSDK.fetchBooks { books in
-      books.send(books)
+    SomeBookSDK.fetchBooks { fetchedBooks in
+      /*HLS You can send values to PassthroughSubject*/self.books.send(fetchedBooks)/*HLE*/
     }
   }
 }
