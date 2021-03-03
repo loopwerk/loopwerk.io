@@ -129,16 +129,21 @@ article img {
   margin: 1.5em 0 0 0;
 }
 
-div.projects {
+.projects {
   margin-top: 0.5em;
 }
 
-div.project img {
+.projects h1 {
+  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 0.5em;
+}
+
+.project img {
   margin-bottom: 0.5em;
   height: auto;
 }
 
-div.subprojects {
+.subprojects {
   background: var(--darker-page-background);
   padding: 1em 0 0 1em;
   margin-bottom: 1.5em;
@@ -152,34 +157,23 @@ div.subprojects {
   margin: 0 0 1em 0;
 }
 
-div.subprojects .project {
+.subprojects .project {
   padding-right: 1em;
 }
 
 @media screen and (min-width: 800px) {
-  div.subprojects {
+  .subprojects {
     display: flex;
     flex-wrap: wrap;
   }
 
-  #content div.subprojects h2 {
+  #content .subprojects h2 {
     flex: 100%;
   }
 
-  div.subprojects .project {
+  .subprojects .project {
     flex: 0 50%;
   }
-}
-
-.lineheader {
-  display: flex;
-  justify-content: center;
-  background: url(/static/images/1x1.png) repeat-x 50% 60%;
-}
-
-.lineheader h1 {
-  background: var(--page-background);
-  padding: 0 0.5em;
 }
 
 @media print {

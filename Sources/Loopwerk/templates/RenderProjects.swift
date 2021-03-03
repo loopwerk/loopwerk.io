@@ -22,12 +22,9 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata, SiteMetadata
 
 @NodeBuilder
 private func renderCategory(category: String, projects: [Item<ProjectMetadata>]) -> Node {
-  div(class: "lineheader") {
-    div(class: "line") {}
-    h1 { category }
-  }
-
   div(class: "projects") {
+    h1 { category }
+
     projects
       .filter { $0.metadata.parent == nil }
       .sorted { ($0.order, $0.title) < ($1.order, $1.title) }
@@ -41,13 +38,8 @@ private func renderCategory(category: String, projects: [Item<ProjectMetadata>])
 @NodeBuilder
 private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<ProjectMetadata>]) -> Node {
   div(class: "project") {
-//    if let image = project.metadata.image {
-//      a(class: "contains_image", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
-//        img(height: "640", src: image, width: "1280")
-//      }
-//    }
-
     h3 { project.title }
+
     p {
       project.metadata.text
       br()
