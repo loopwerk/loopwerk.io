@@ -22,12 +22,12 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?,
       ul(class: "pagination") {
         li(class: "newer") {
           if let previous = paginator.previous {
-            a(href: "/" + previous.string) { "newer articles" }
+            a(href: previous.url) { "newer articles" }
           }
         }
         li(class: "older") {
           if let next = paginator.next {
-            a(href: "/" + next.string) { "older articles" }
+            a(href: next.url) { "older articles" }
           }
         }
       }
