@@ -7,7 +7,7 @@ summary: Resources for learning Swift and UIKit, what to build first, opinions o
 In this article I'll go over a few questions I've received from my mentees and a few other people via Twitter, all centered on the idea of "how to get started."
 
 # "How do I get started with iOS development?"
-Great news, there a ton of free resources on the internet for learning iOS development! From articles to free courses and books to videos, tutorials and references. No matter how you prefer to learn, there's free content out there for you. Here are some resources which I recommend:
+Great news, there are a ton of free resources on the internet for learning iOS development! From articles to free courses and books to videos, tutorials and references. No matter how you prefer to learn, there's free content out there for you. Here are some resources which I recommend:
 
 ### [100 Days of Swift](https://www.hackingwithswift.com/100)
 An amazing free course using articles and videos. It first teaches you all the basics of Swift itself and after 12 days you'll be building multiple iOS apps with UIKit. You'll touch on everything you need to know as an iOS developer. Can't recommend it highly enough.
