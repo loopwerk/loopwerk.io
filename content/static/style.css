@@ -81,7 +81,7 @@ input, select {
 
 /* Colors */
 :root {
-  --accent: #F5B030;
+  --accent: #F1A948;
   --page-background: #222831;
   --darker-page-background: #191e24;
   --nav-background: #0e1112;
@@ -91,7 +91,7 @@ input, select {
 
 @media screen and (prefers-color-scheme: light) {
   :root {
-    --accent: #F5B030;
+    --accent: #F1A948;
     --page-background: white;
     --darker-page-background: #F5F7F9;
     --nav-background: #566b78;
