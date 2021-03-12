@@ -1,5 +1,5 @@
 ---
-tags: FAQ, iOS
+tags: faq, iOS, swift
 ---
 
 # Mentee Question 5: What's the deal with coordinators?

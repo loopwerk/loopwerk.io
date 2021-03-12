@@ -1,5 +1,5 @@
 ---
-tags: review, python
+tags: review, python, django
 ---
 
 # Review roundup: the search for the perfect Python IDE (for Django)

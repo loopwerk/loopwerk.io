@@ -2,6 +2,18 @@ import Saga
 import HTML
 import Foundation
 
+func tagPrefix(index: Int, totalTags: Int) -> Node {
+  if index > 0 {
+    if index == totalTags - 1 {
+      return " and "
+    } else {
+      return ", "
+    }
+  }
+
+  return ""
+}
+
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "article_info") {
     span(class: "time") {
@@ -13,9 +25,9 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 
     %.text("\(article.body.withoutHtmlTags.numberOfWords) words, posted in ")
 
-    article.metadata.tags.enumerated().map { index, tag in
+    article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
-        index > 0 ? %", " : %"",
+        %tagPrefix(index: index, totalTags: article.metadata.tags.count),
         %a(href: "/articles/tag/\(tag.slugified)/") { tag }
       ])
     }

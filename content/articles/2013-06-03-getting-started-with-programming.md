@@ -1,5 +1,5 @@
 ---
-tags: FAQ
+tags: faq
 ---
 
 # Getting started with programming

@@ -1,5 +1,5 @@
 ---
-tags: FAQ, iOS
+tags: faq, iOS, swift
 summary: My take on the very common question "What should I learn or focus on? UIKit or SwiftUI?"
 ---
 

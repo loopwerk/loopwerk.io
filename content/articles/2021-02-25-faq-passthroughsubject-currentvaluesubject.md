@@ -1,5 +1,5 @@
 ---
-tags: FAQ, iOS
+tags: combine, faq, iOS, swift
 ---
 
 # Mentee Question 4: When to use PassthroughSubject and CurrentValueSubject?

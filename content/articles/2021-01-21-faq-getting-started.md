@@ -1,5 +1,5 @@
 ---
-tags: FAQ, iOS
+tags: faq, iOS, swift
 summary: Resources for learning Swift and UIKit, what to build first, opinions on Unit Testing, and more.
 ---
 

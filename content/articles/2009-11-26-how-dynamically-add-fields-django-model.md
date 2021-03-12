@@ -1,5 +1,5 @@
 ---
-tags: python
+tags: python, django
 ---
 
 # How to dynamically add fields to a Django model

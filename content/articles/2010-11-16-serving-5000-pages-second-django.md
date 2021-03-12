@@ -1,5 +1,5 @@
 ---
-tags: python
+tags: python, django
 ---
 
 # Serving 5000 pages per second with Django

@@ -1,5 +1,5 @@
 ---
-tags: python
+tags: python, django
 ---
 
 # Using the Google Visualization API in Django

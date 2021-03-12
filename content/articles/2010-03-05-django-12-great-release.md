@@ -1,5 +1,5 @@
 ---
-tags: review, python
+tags: review, python, django
 ---
 
 # Django 1.2, a great release

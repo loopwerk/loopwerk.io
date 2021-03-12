@@ -1,5 +1,5 @@
 ---
-tags: review, python
+tags: review, python, django
 ---
 
 # Django-CMS backend usability

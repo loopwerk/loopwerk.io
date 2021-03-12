@@ -1,5 +1,5 @@
 ---
-tags: open source, javascript
+tags: javascript, open source
 ---
 
 # Automating your changelog and GitHub releases

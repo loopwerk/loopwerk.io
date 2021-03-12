@@ -1,5 +1,5 @@
 ---
-tags: python
+tags: python, django
 ---
 
 # Making Django suck less

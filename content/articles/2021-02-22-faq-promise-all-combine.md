@@ -1,5 +1,5 @@
 ---
-tags: FAQ, iOS
+tags: combine, faq, iOS, swift
 summary: In JavaScript-world, it's really easy to know when multiple promises completed: just use Promise.all. How do you do the same thing in Combine?
 ---
 

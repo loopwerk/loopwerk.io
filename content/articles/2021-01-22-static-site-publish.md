@@ -1,5 +1,5 @@
 ---
-tags: review
+tags: review, swift
 summary: I'm taking a look at the static site generator Publish, written in Swift.
 ---
 
