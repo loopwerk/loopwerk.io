@@ -16,7 +16,7 @@ My Action simply takes the commits between the last two tags, and turns that int
 ```yml
 - name: Create changelog text
   id: changelog
-  uses: loopwerk/conventional-changelog-action@v1
+  uses: loopwerk/tag-changelog@v1
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     exclude_types: other,perf
@@ -42,7 +42,7 @@ jobs:
 
       - name: Create changelog text
         id: changelog
-        uses: loopwerk/conventional-changelog-action@v1
+        uses: loopwerk/tag-changelog@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           exclude_types: other,perf
