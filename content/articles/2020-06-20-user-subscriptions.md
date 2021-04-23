@@ -22,7 +22,7 @@ These are the payment platforms/providers I've looked into.
 My initial impression wasn't very positive, as their docs are an absolute maze. They have about a million pages on their documentation portal, and they all assume a fair bit of knowledge of Stripe and payment providers in general. It's all rather low-level. But, I dug in, got some help from their support staff (via email and Twitter), and built a working implementation.
 
 ### Positives
-* Reasonable prices. They charge 1.4% to 2.9%, plus a flat fee €0.25 per transaction.
+* Reasonable prices. They charge 1.4% to 2.9%, plus a flat fee of €0.25 per transaction.
 * A hosted checkout page. You redirect to their checkout page and when the payment is completed, it redirects back to a success page on your own website.
 * A hosted "customer portal" where the user can manage their subscription.
 * Emails are sent with the invoice, reminders about upcoming invoices, reminders about their payment method expiring, and more.
@@ -56,9 +56,9 @@ Gumroad is mostly targeted towards "digital creators" selling ebooks, webinars, 
 * The payload you receive in the webhook is rather basic, and even using the API you don't get an end date for a subscription for example.
 * No redirect url support after a payment is complete.
 
-	The lack of support for redirecting to a thank you page is actually a pretty big problem. Imagine this scenario: you have a "Subscribe now" button somewhere on your website, and when the user clicks on it, the Gumroad checkout page is shown as an overlay. The user completes their payment, and they are still left on the same page on your website with that overlay still open. So the user closes the overlay... and sees the same "Subscribe now" button. This happens because the webhook wasn't called yet (that takes about 10 seconds), so our server doesn't know yet that the user is now a subscriber. This is extremely confusing to the user - it takes a good 10 seconds or so for the UI to update, finally replacing the "Subscribe now" button with a "Thank you for subscribing" text.
+The lack of support for redirecting to a thank you page is actually a pretty big problem. Imagine this scenario: you have a "Subscribe now" button somewhere on your website, and when the user clicks on it, the Gumroad checkout page is shown as an overlay. The user completes their payment, and they are still left on the same page on your website with that overlay still open. So the user closes the overlay... and sees the same "Subscribe now" button. This happens because the webhook wasn't called yet (that takes about 10 seconds), so our server doesn't know yet that the user is now a subscriber. This is extremely confusing to the user - it takes a good 10 seconds or so for the UI to update, finally replacing the "Subscribe now" button with a "Thank you for subscribing" text.
 	
-	Gumroad actually offers `redirect_url` support for selling digital goods, but not for memberships. They told me it's on their roadmap but they don't have an ETA yet.
+> Gumroad actually offers `redirect_url` support for selling digital goods, but not for memberships. They told me it's on their roadmap but they don't have an ETA yet.
 
 ## Patreon
 It didn't occur to me for a long time, but Patreon can actually be used for handling user subscriptions pretty easily via a "Authenticate with Patreon" button on your website. That will allow you to link your own user model to the Patreon user, call the Patreon API and get server-to-server updates via a webhook.
