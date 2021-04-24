@@ -15,4 +15,4 @@ So what will we discuss in these meetings? Maybe you're stuck on a problem and n
 ### What do I expect from you?
 You're going to need an Apple computer and a good enough internet connection to talk and share your screen. You need to be able to speak English or Dutch. You're going to need at least a basic understanding of the Swift language - I can't teach you that from scratch. I would really recommend you check out the amazing "100 Days of Swift" course over at https://www.hackingwithswift.com/100 if you're only just getting started.
 
-Finally, as my preferred "office hours" are from 16:00 to 17:00 [Central European Time](https://time.is/CET), our schedules have to match as well. This means that it's probably quite hard to schedule meetings if you're in the United States for example.
+Finally, as my preferred "office hours" are from 16:00 to 17:00 [Central European Time](https://time.is/CET) (Amsterdam), our schedules have to match as well. This means that it's probably quite hard to schedule meetings if you're in the United States for example.

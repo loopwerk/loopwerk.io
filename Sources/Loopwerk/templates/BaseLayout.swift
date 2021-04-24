@@ -45,7 +45,7 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
     body {
       header {
         nav {
-          img(alt: "Loopwerk logo", src: "/static/images/Loopwerk_mark.svg")
+          img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
 
           ul {
             li {
