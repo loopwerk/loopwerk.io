@@ -19,7 +19,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> No
               }
             }
 
-            app.body
+            Node.raw(app.body)
 
             if let url = app.metadata.url {
               a(href: url, rel: "nofollow", target: "_blank") {

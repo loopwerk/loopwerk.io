@@ -27,7 +27,7 @@ func renderHome(body: String) -> Node {
 
     div(class: "content") {
       h1 {
-        Node.text("""
+        Node.raw("""
 A <b>good app</b> is like<br>
 a <b>mechanical</b><br>
 <b>watch</b>: lots of<br>
@@ -41,7 +41,7 @@ create a<br>
       }
 
       div(class: "right") {
-        body
+        Node.raw(body)
       }
     }
 
@@ -61,7 +61,7 @@ create a<br>
 func renderNonHome(body: String) -> Node {
   article {
     div(class: "page_content") {
-      body
+      Node.raw(body)
     }
   }
 }

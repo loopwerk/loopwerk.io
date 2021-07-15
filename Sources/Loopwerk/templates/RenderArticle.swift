@@ -65,7 +65,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
       renderArticleInfo(context.item)
 
       div(class: "article_content") {
-        context.item.body
+        Node.raw(context.item.body)
       }
 
       div(id: "article_footer") {
