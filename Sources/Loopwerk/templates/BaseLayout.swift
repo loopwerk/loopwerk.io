@@ -17,7 +17,8 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
   return html(lang: "en-US") {
     head {
       meta(charset: "utf-8")
-      meta(content: "#0e1112", name: "theme-color")
+      meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
+      meta(content: "#566B78", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: light)"])
       meta(content: "Kevin Renskers", name: "author")
       meta(content: "initial-scale=1.0, width=device-width", name: "viewport")
       meta(content: "telephone=no", name: "format-detection")
