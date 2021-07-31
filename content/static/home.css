@@ -1,7 +1,6 @@
 .footer img {
   height: 28px;
   margin: 10px 8px;
-  opacity: 0.6;
 }
 
 .footer a {
@@ -32,7 +31,8 @@ h1 b {
 }
 
 @media screen and (min-width: 800px) {
-  nav, #content {
+  nav,
+  #content {
     width: 900px;
   }
 
@@ -47,14 +47,20 @@ h1 b {
   nav img {
     display: none;
   }
-  
+
   .footer {
-    margin-top: 40px;
     display: block;
+    width: 600px;
+    margin: 40px auto 0 auto;
   }
 
-  .header, .footer {
+  .header,
+  .footer {
     text-align: center;
+  }
+
+  .footer img {
+    margin: 10px 16px;
   }
 
   .content {
@@ -81,7 +87,8 @@ h1 b {
     padding-left: 35px;
   }
 
-  h1, .right {
+  h1,
+  .right {
     width: 50%;
     margin: 0;
   }
