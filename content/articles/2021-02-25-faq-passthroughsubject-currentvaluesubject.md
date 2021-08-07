@@ -86,14 +86,17 @@ struct ViewModel {
 class ViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   let viewModel = ViewModel()
+  let subscriptions = Set<AnyCancellebles>()
 
   override func viewDidLoad() {
     tableView.dataSource = self
     
     // Whenever books changes, we reload the table
-    viewModel.books.sink { [tableView] books in
-      tableView?.reloadData()
-    }
+    viewModel.books
+      .sink { [tableView] books in
+        tableView?.reloadData()
+      }
+      .store(in: &subscriptions)
   }
 }
 
