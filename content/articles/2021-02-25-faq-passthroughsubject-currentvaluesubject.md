@@ -23,13 +23,16 @@ struct ViewModel {
 
 class ViewController: UIViewController {
   let viewModel = ViewModel()
+  let subscriptions = Set<AnyCancellebles>()
 
   override func viewDidLoad() {
     viewModel.fetchBooks()
   
-    viewModel.books.sink { books in
-      print("Books got updated!")
-    }
+    viewModel.books
+      .sink { books in
+        print("Books got updated!")
+      }
+      .store(in: &subscriptions)
   }
   
   @IBAction func reloadBooks() {
