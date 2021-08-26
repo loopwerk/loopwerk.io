@@ -574,32 +574,6 @@ Then, in `CreateCampaign` you can see that had I to add my own validation logic 
 Let's move on to the view code.
 
 ``` swift
-extension Campaign {
-static func fetchCampaign(id: UUID, req: Request) async throws -> Campaign? {
-    let token = req.auth.get(Token.self)
-
-    let campaign = try await Campaign
-      .query(on: req.db)
-      .join(User.self, on: \Campaign.$owner.$id == \User.$id)
-      .join(children: \.$members)
-      .with(\.$members) {
-        $0.with(\.$user)
-      }
-      .find(id)
-      .get()
-
-    guard let campaign = campaign else {
-      return nil
-    }
-
-    if !campaign.userIsMember(userId: token?.userID) && campaign.isPrivate {
-      return nil
-    }
-
-    return campaign
-  }
-}
-
 struct CampaignController: RouteCollection {
   func boot(routes: RoutesBuilder) throws {
     routes.group("campaigns") { unprotectedRoutes in
