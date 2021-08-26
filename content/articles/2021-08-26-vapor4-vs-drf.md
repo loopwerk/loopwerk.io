@@ -365,13 +365,22 @@ class CreateCampaignPayload(serializers.ModelSerializer):
         exclude = ['owner', 'members', 'months', 'invite_code', 'calendar']
 
 class CampaignsController(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (_CampaignPermission,)
 
     def get_queryset(self):
+        if self.kwargs.get('pk'):
+            return Campaign.objects.all()\
+                .select_related('owner') \
+                .prefetch_related(
+                    Prefetch('membership_set', queryset=Membership.objects.all().select_related('user'))
+                )
+
         return self.request.user\
             .campaigns\
-            .select_related('owner')\
-            .prefetch_related('membership_set__user')
+            .select_related('owner') \
+            .prefetch_related(
+                Prefetch('membership_set', queryset=Membership.objects.all().select_related('user'))
+            )
 
     def list(self, request, *args, **kwargs):
         self.serializer_class = CampaignSerializer
@@ -406,8 +415,24 @@ class CampaignsController(viewsets.ModelViewSet):
             months=calendar.months,
             owner=self.request.user,
             calendar=calendar.name,
+            starting_year=calendar.default_starting_year,
             invite_code=uuid.uuid4().hex
         )
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = CreateCampaignPayload(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+        response_serializer = CampaignSerializer(instance, context={'request': request})
+        return Response(response_serializer.data)
 ```
 
 Okay, that's a lot of code, so let's go through it. At the top are four serializer subclasses: first we have `UserSerializer`, `MembershipSerializer` and `CampaignSerializer` which are used for returning the public representation of users, memberships and campaigns. Plus `CreateCampaignPayload` which represents the payload that is posted to the server when we want to create a new campaign.
@@ -494,6 +519,55 @@ struct CreateCampaign: Content {
     if backgroundImage.isEmpty {
       throw Abort(.badRequest, reason: "backgroundImage must not be empty.")
     }
+  }
+}
+
+extension Campaign {
+  convenience init(from: CreateCampaign, calendar: Calendar, owner: User) throws {
+    self.init()
+    self.name = from.name
+    self.description = from.description
+    self.backgroundImage = from.backgroundImage
+    self.isPrivate = from.isPrivate
+    self.calendar = calendar.name
+    self.startingYear = calendar.defaultStartingYear
+    self.months = calendar.months
+    try self.$owner.id = owner.requireID()
+    self.inviteCode = UUID().uuidString
+  }
+
+  func userIsMember(userId: UUID?) -> Bool {
+    guard let userId = userId else {
+      return false
+    }
+
+    return self.members.contains { member in
+      member.user.id == userId
+    }
+  }
+
+  static func fetchCampaign(id: UUID, req: Request) async throws -> Campaign? {
+    let token = req.auth.get(Token.self)
+
+    let campaign = try await Campaign
+      .query(on: req.db)
+      .join(User.self, on: \Campaign.$owner.$id == \User.$id)
+      .join(children: \.$members)
+      .with(\.$members) {
+        $0.with(\.$user)
+      }
+      .find(id)
+      .get()
+
+    guard let campaign = campaign else {
+      return nil
+    }
+
+    if !campaign.userIsMember(userId: token?.userID) && campaign.isPrivate {
+      return nil
+    }
+
+    return campaign
   }
 }
 ```
