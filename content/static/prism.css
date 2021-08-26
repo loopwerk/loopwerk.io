@@ -9,35 +9,35 @@
   :root {
     --code-background: #393e46;
     --code-color: #eeeeee;
-    --token-comment: #7C7C7C;
+    --token-comment: #7c7c7c;
     --token-punctuation: #c5c8c6;
-    --token-property: #96CBFE;
-    --token-keyword: #96CBFE;
-    --token-tag: #96CBFE;
-    --token-class-name: #FFFFB6;
-    --token-boolean: #99CC99;
-    --token-constant: #99CC99;
+    --token-property: #96cbfe;
+    --token-keyword: #96cbfe;
+    --token-tag: #96cbfe;
+    --token-class-name: #ffffb6;
+    --token-boolean: #99cc99;
+    --token-constant: #99cc99;
     --token-symbol: #f92672;
-    --token-number: #FF73FD;
-    --token-selector: #A8FF60;
-    --token-attr-name: #A8FF60;
-    --token-inserted: #A8FF60;
-    --token-string: #A8FF60;
-    --token-builtin: #A8FF60;
-    --token-variable: #C6C5FE;
-    --token-operator: #EDEDED;
-    --token-entity: #FFFFB6;
-    --token-url: #96CBFE;
-    --token-atrule: #F9EE98;
-    --token-attr-value: #F9EE98;
-    --token-function: #DAD085;
-    --token-regex: #E9C062;
+    --token-number: #ff73fd;
+    --token-selector: #a8ff60;
+    --token-attr-name: #a8ff60;
+    --token-inserted: #a8ff60;
+    --token-string: #a8ff60;
+    --token-builtin: #a8ff60;
+    --token-variable: #c6c5fe;
+    --token-operator: #ededed;
+    --token-entity: #ffffb6;
+    --token-url: #96cbfe;
+    --token-atrule: #f9ee98;
+    --token-attr-value: #f9ee98;
+    --token-function: #dad085;
+    --token-regex: #e9c062;
     --token-important: #fd971f;
   }
 
   @media screen and (prefers-color-scheme: light) {
     :root {
-      --code-background: #f5f7f9;
+      --code-background: #dfe1e2;
       --code-color: #566b78;
       --token-comment: #39adb5;
       --token-punctuation: #39adb5;
@@ -45,13 +45,13 @@
       --token-keyword: #7c4dff;
       --token-tag: #e53935;
       --token-class-name: #6182b8;
-      --token-boolean: #99CC99;
+      --token-boolean: #99cc99;
       --token-constant: #7c4dff;
       --token-symbol: #7c4dff;
       --token-number: #f76d47;
       --token-selector: #e53935;
       --token-attr-name: #39adb5;
-      --token-inserted: #A8FF60;
+      --token-inserted: #a8ff60;
       --token-string: #39adb5;
       --token-builtin: #39adb5;
       --token-variable: #e53935;
@@ -79,7 +79,8 @@
     padding: 2px 4px;
   }
 
-  pre, code {
+  pre,
+  code {
     background: var(--code-background);
     color: var(--code-color);
   }
@@ -100,7 +101,7 @@
   }
 
   .namespace {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   .token.property {
@@ -213,6 +214,9 @@ pre {
   margin-bottom: 1.715em;
 }
 
-pre, code {
-  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+pre,
+code {
+  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono",
+    "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+    "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 }

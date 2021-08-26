@@ -6,7 +6,7 @@ tags: faq, iOS, swift
 
 A few weeks while ago in my [how to get started](/articles/2021/faq-getting-started/) article I mentioned coordinators in the “What architecture should I use?” section, and how they allow you to decouple your view controllers from one another, and improve the way you can test your code. Yesterday one of my mentees asked about the coordinator pattern: how to implement it, how to deal with various scenarios, and what the big deal is about decoupling view controllers.
 
-# What does "decoupling" mean?
+## What does "decoupling" mean?
 View controllers are "coupled" to each other when they know of each other's existence. Let's demonstrate with a very simple view controller which shows a table with four book titles.
 
 ```swift
@@ -66,7 +66,7 @@ extension ListViewController {
 
 Either way, the `ListViewController` now knows about, configures, and shows the `DetailViewController`. Decoupling is the process of eliminating these kinds of hard dependencies between view controllers.
 
-# Why does this matter?
+## Why does this matter?
 View controllers are a lot easier to reuse in different kinds of flows when they are unaware of how they are being used. It's also a lot easier to make changes to big flows when the various view controllers that make up a flow don't know where in that flow they are positioned. Consider this real-world example:
 
 In an app I used to work on we had a long sign-up flow, where the user had to go through multiple steps before they were registered. Every step had a button to go to the next step, which would instantiate the next view controller and push it onto a `UINavigationViewController`. This made it quite annoying to change the order of the steps, because now every view controller had to be changed to instantiate a different "next" view controller, even though their own UI had not be changed at all.
@@ -91,7 +91,7 @@ How would you write a unit test that makes sure that when a row is selected, tha
 
 All of these things make our view controllers harder to reuse, refactor and test.
 
-# So how do we solve this?
+## So how do we solve this?
 The Coordinator Pattern moves all navigation related logic to a different layer above the view controllers. The view controllers are no longer aware of each other or how they're being shown; all of this code is moved to a different object, the coordinator.
 
 We'll start with the most basic form of a coordinator for our tiny example app.
@@ -133,7 +133,7 @@ Of course the coordinator as shown above is extremely simplistic, but it should 
 
 Think of a coordinator as a delegate that handles all flow related code.
 
-# Doesn't this just couple view controllers to coordinators?
+## Doesn't this just couple view controllers to coordinators?
 It depends on how you set up your coordinators. In my example above, the `ListViewController` would be tightly coupled to the `CoordinatorProtocol`, but not the actual `Coordinator` struct, so it's possible to pass in different versions of the coordinator for different flows, that do different things. A different way is to make the view controller completely unaware of the coordinator by using delegates or closures.
 
 Let's look at an example that uses closures:
@@ -208,10 +208,10 @@ extension Coordinator: /*HLS*/ListViewControllerDelegate/*HLE*/ {
 }
 ```
 
-# Side-note about segues in storyboards
+## Side-note about segues in storyboards
 The existence of segues between two view controllers in a storyboard by definition means that one view controller is tightly coupled to another, which is exactly the thing we want to avoid. It's fine to use storyboards (I use them, I really like them!), it's fine to have multiple view controllers in one storyboard, but don't use segues between them. If you want a button or a tableview cell to open another view controller, don't use a segue but instead go via the coordinator. So in the case of a button create an `@IBAction` function that calls the coordinator.
 
-# Where to go from here?
+## Where to go from here?
 I've only touched on the basic principles behind the coordinator pattern without giving a working implementation of a coordinator that you can just plug into your app. I've also not explained how to instantiate the main coordinator from the `AppDelegate` or `SceneDelegate`, the benefits of child coordinators and when to use those, and so much more.
 
 If you want to read more about the why of coordinators, I would suggest Paul Hudson's [article on them](https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps) where he has you implement a coordinator from scratch. I wouldn't use his version of the coordinator object though, instead I would recommend [this open source coordinator](https://github.com/daveneff/Coordinator) which I've used in the past. It's a very basic "vanilla" implementation of the coordinator pattern that is very close to what you will find in most tutorials about coordinators, but with most edge-cases already taken care of.

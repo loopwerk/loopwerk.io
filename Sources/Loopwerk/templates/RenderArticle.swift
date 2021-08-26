@@ -68,16 +68,6 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata, SiteMetadata>)
         Node.raw(context.item.body)
       }
 
-      div(id: "article_footer") {
-        p {
-          "Did you like this article, spot an error, or have other feedback? Please let me know on"
-          a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
-          %". If you liked this article, please consider"
-          a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "buying me a coffee" }
-          %"."
-        }
-      }
-
       ul(class: "pagination") {
         li(class: "newer") {
           if let nextArticle = nextArticle {

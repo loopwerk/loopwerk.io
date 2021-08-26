@@ -20,17 +20,28 @@ p.more {
   margin-top: 0;
 }
 a.more:before {
-  content: '› ';
+  content: "› ";
 }
-#content h1, #content h2 {
-  color: var(--header-color);
+#content h1,
+#content h2 {
+  color: var(--text-color);
 }
-section h1 a, section h2 a {
-  color: var(--header-color);
+section h1 a,
+section h2 a,
+section h3 a {
+  color: var(--text-color);
 }
 #content h1 {
   font-size: 1.5em;
   font-weight: bold;
+}
+#content .article_content h1,
+.projects h1 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 1.5em;
+  border-bottom: 1px solid var(--code-background);
+  margin-bottom: 1em;
 }
 #content h2 {
   font-size: 1.3em;
@@ -38,7 +49,7 @@ section h1 a, section h2 a {
   margin-top: 1.5em;
 }
 #content h3 {
-  font-size: 1.15em;
+  font-size: 1.1em;
   font-weight: bold;
 }
 #content h1 + h2 {
@@ -50,14 +61,17 @@ section h1 a, section h2 a {
 #content h4 {
   font-size: 1em;
   font-weight: normal;
-  color: #CCC;
+  color: #ccc;
 }
-section ul, article ul, ul.errorlist {
+section ul,
+article ul,
+ul.errorlist {
   padding-left: 1em;
   margin-bottom: 1.5em;
   list-style: square;
 }
-section ol, article ol {
+section ol,
+article ol {
   padding-left: 1.5em;
   margin-bottom: 1.5em;
   list-style: decimal;
@@ -67,6 +81,14 @@ section ol, article ol {
   font-size: 0.875em;
   margin-bottom: 1em;
 }
+.article_info a {
+  color: var(--secondary-text-color);
+  border: 0;
+  text-decoration: underline;
+}
+.article_info a:hover {
+  color: var(--text-color);
+}
 .article_info .time {
   padding-right: 0.5em;
   margin-right: 0.5em;
@@ -75,17 +97,13 @@ section ol, article ol {
 section p {
   margin: 0;
 }
-section, article {
+section,
+article {
   position: relative;
   margin: 0 0 1.5em;
 }
 article img {
   max-width: 100%;
-}
-#article_footer {
-  color: var(--secondary-text-color);
-  font-style: italic;
-  font-size: 0.875em;
 }
 
 .screenshots {
@@ -103,7 +121,7 @@ article img {
   .screenshots.break_1 span {
     flex: 100%;
   }
-  
+
   .screenshots.break_2 span {
     flex: 50%;
   }
@@ -130,18 +148,13 @@ article img {
   margin-top: 0.5em;
 }
 
-.projects h1 {
-  border-bottom: 1px solid var(--text-color);
-  margin-bottom: 0.5em;
-}
-
 .project img {
   margin-bottom: 0.5em;
   height: auto;
 }
 
 .subprojects {
-  background: var(--darker-page-background);
+  background: var(--code-background);
   padding: 1em 0 0 1em;
   margin-bottom: 1.5em;
   overflow-x: hidden;

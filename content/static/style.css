@@ -1,5 +1,73 @@
 /* Reset */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -9,7 +77,8 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
   background: transparent;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -18,16 +87,30 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after, q:before, q:after {
-  content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
   content: none;
 }
 
@@ -56,7 +139,8 @@ del {
   text-decoration: line-through;
 }
 
-abbr[title], dfn[title] {
+abbr[title],
+dfn[title] {
   border-bottom: 1px dotted;
   cursor: help;
 }
@@ -70,7 +154,8 @@ hr {
   display: none;
 }
 
-input, select {
+input,
+select {
   vertical-align: middle;
 }
 
@@ -81,22 +166,20 @@ input, select {
 
 /* Colors */
 :root {
-  --accent: #F1A948;
+  --accent: #f1a948;
   --page-background: #222831;
-  --darker-page-background: #191e24;
   --nav-background: #0e1112;
   --text-color: #eeeeee;
-  --secondary-text-color: #CCC;
+  --secondary-text-color: #999999;
 }
 
 @media screen and (prefers-color-scheme: light) {
   :root {
-    --accent: #F1A948;
-    --page-background: white;
-    --darker-page-background: #F5F7F9;
+    --accent: #f1a948;
+    --page-background: #f5f5f5;
     --nav-background: #566b78;
     --text-color: #566b78;
-    --secondary-text-color: #CCC;
+    --secondary-text-color: #999999;
   }
 }
 
@@ -108,7 +191,9 @@ input, select {
   box-sizing: border-box;
 }
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 100%;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
@@ -167,19 +252,21 @@ nav ul {
 nav ul a {
   display: block;
   text-decoration: none;
-  color: #CCC;
+  color: #ccc;
   border-bottom: 2px solid var(--nav-background);
   margin: 0 4px;
 }
 
-nav ul a:hover, nav ul a.active {
+nav ul a:hover,
+nav ul a.active {
   border-bottom: 2px solid var(--accent);
   color: white;
 }
 
 /* Layout */
 @media screen {
-  nav, #content {
+  nav,
+  #content {
     margin: 0 auto;
     width: 315px;
   }
@@ -187,7 +274,8 @@ nav ul a:hover, nav ul a.active {
 
 /* Normal width screen */
 @media screen and (min-width: 800px) {
-  nav, #content {
+  nav,
+  #content {
     width: 800px;
   }
 
@@ -202,7 +290,9 @@ nav ul a:hover, nav ul a.active {
   line-height: 1.5em;
   text-align: center;
   font-size: 90%;
-  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono",
+    "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+    "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 }
 
 #site-footer p {
@@ -213,6 +303,9 @@ nav ul a:hover, nav ul a.active {
   color: var(--secondary-text-color);
   border: 0;
   text-decoration: underline;
+}
+#site-footer a:hover {
+  color: var(--text-color);
 }
 
 .two_equal_width_columns td {
@@ -225,7 +318,9 @@ nav ul a:hover, nav ul a.active {
     background-color: white;
   }
 
-  header, #site-footer, .pagination {
+  header,
+  #site-footer,
+  .pagination {
     display: none;
   }
 
@@ -235,7 +330,7 @@ nav ul a:hover, nav ul a.active {
 }
 
 .pagination {
-  background-color: var(--nav-background);
+  background-color: var(--code-background);
   padding: 15px 15px 0 15px;
   display: flex;
   list-style: none;
@@ -248,21 +343,21 @@ nav ul a:hover, nav ul a.active {
 }
 
 .pagination a {
-  color: #CCC;
-  border-bottom: 2px solid var(--nav-background);
+  color: var(--secondary-text-color);
+  border: 0;
+  text-decoration: underline;
 }
 
 .pagination a:hover {
-  border-bottom: 2px solid var(--accent);
-  color: white;
+  color: var(--text-color);
 }
 
 .pagination .newer a:before {
-  content: '‹ ';
+  content: "‹ ";
 }
 
 .pagination .older a:after {
-  content: ' ›';
+  content: " ›";
 }
 
 @media screen and (min-width: 800px) {
