@@ -328,7 +328,7 @@ struct CreateMemberMigration: Migration {
 }
 ```
 
-That is an example of only three database tables: `users`, `campaigns` and `members`, where I added the `isFeatured` and `isPrivate` fields to the `campaigns` table as a migration. All that code is written by hand, and it's a drag. The repetition of writing models and their migrations is demotivating.
+That is an example of only three database tables: `users`, `campaigns` and `members`, plus I added the `isFeatured` and `isPrivate` fields to the `campaigns` table as a new migration. All that code is written by hand, and it's a drag. The repetition of writing models and their migrations is demotivating.
 
 Winner: Django, with a HUGE margin.
 
