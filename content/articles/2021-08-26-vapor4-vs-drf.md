@@ -418,16 +418,6 @@ class CampaignsController(viewsets.ModelViewSet):
             starting_year=calendar.default_starting_year,
             invite_code=uuid.uuid4().hex
         )
-
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        serializer = CreateCampaignPayload(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-
-        response_serializer = CampaignSerializer(instance, context={'request': request})
-        return Response(response_serializer.data)
 ```
 
 Okay, that's a lot of code, so let's go through it. At the top are four serializer subclasses: first we have `UserSerializer`, `MembershipSerializer` and `CampaignSerializer` which are used for returning the public representation of users, memberships and campaigns. Plus `CreateCampaignPayload` which represents the payload that is posted to the server when we want to create a new campaign.
@@ -583,7 +573,7 @@ struct CampaignController: RouteCollection {
         protectedRoutes.post(use: create)
 
         protectedRoutes.group(":campaignID") { campaignRoutes in
-		      campaignRoutes.get(use: get)
+          campaignRoutes.get(use: get)
           campaignRoutes.put(use: update)
           campaignRoutes.delete(use: delete)
         }
