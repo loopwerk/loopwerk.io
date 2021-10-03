@@ -15,7 +15,7 @@ let package = Package(
     .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.3.2"),
   ],
   targets: [
-    .target(
+    .executableTarget(
       name: "Loopwerk",
       dependencies: [
         "Saga",

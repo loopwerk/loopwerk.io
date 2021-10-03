@@ -2,7 +2,7 @@
   "object": {
     "pins": [
       {
-        "package": "cmark-gfm",
+        "package": "cmark",
         "repositoryURL": "https://github.com/brokenhandsio/cmark-gfm.git",
         "state": {
           "branch": null,
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/loopwerk/PathKit",
         "state": {
           "branch": null,
-          "revision": "1b98c31130de6c070b21fc1e84b62d77ebfe7d69",
-          "version": "1.1.0"
+          "revision": "a77fe683402ecfe2dfa9fa18e7aaca1a9f806f40",
+          "version": "1.2.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
           "branch": null,
-          "revision": "17f65dfe4fa0cf3d67b2fc655201ebe7a7aa8a9f",
-          "version": "0.21.1"
+          "revision": "1114647c5f53ad7121f58c70c135c8539e64befe",
+          "version": "0.22.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaSwimRenderer",
         "state": {
           "branch": null,
-          "revision": "83a39c0532b05469c38219e357a5810e204dd743",
-          "version": "0.4.0"
+          "revision": "fc2f0f27225daccfbd028b496fb4f84ab381f5d2",
+          "version": "0.5.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/kylef/Spectre.git",
         "state": {
           "branch": null,
-          "revision": "f79d4ecbf8bc4e1579fbd86c3e1d652fb6876c53",
-          "version": "0.9.2"
+          "revision": "26cc5e9ae0947092c7139ef7ba612e34646086c7",
+          "version": "0.10.1"
         }
       },
       {
@@ -87,12 +87,12 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
           "branch": null,
-          "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
-          "version": "2.3.2"
+          "revision": "02c63b7be50bda384f22c56c64d347231754a07e",
+          "version": "2.3.3"
         }
       },
       {
-        "package": "Swim",
+        "package": "HTML",
         "repositoryURL": "https://github.com/robb/Swim",
         "state": {
           "branch": null,
