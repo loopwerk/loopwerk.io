@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Parsley",
         "state": {
           "branch": null,
-          "revision": "802ea134d61039f33717c36d5164d30aaa9e70e6",
-          "version": "0.5.0"
+          "revision": "2fcb269465fb598a82eef26d65ca37f670ac2619",
+          "version": "0.6.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
           "branch": null,
-          "revision": "1114647c5f53ad7121f58c70c135c8539e64befe",
-          "version": "0.22.0"
+          "revision": "05557bf7385195fc04bc1ec8d6a5a556b972a660",
+          "version": "1.0.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaParsleyMarkdownReader",
         "state": {
           "branch": null,
-          "revision": "7cdc37d30292588a21d1ff9fe4466aae26dd854d",
-          "version": "0.4.0"
+          "revision": "dff2d3fa3f4eb83b74ec026cdf9b2f62df0383af",
+          "version": "0.5.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaSwimRenderer",
         "state": {
           "branch": null,
-          "revision": "fc2f0f27225daccfbd028b496fb4f84ab381f5d2",
-          "version": "0.5.0"
+          "revision": "b4b833d20846c19581f4a0328cfdefa8d4e564ed",
+          "version": "0.6.1"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/robb/Swim",
         "state": {
           "branch": null,
-          "revision": "58bf32d8dcac4649d7a4f68a13beb136d6a86dd6",
-          "version": "0.2.0"
+          "revision": "e9f4c9975cc834e712e6b39f7bf57ef8e9cd80cd",
+          "version": "0.3.0"
         }
       }
     ]

@@ -50,17 +50,13 @@ let siteMetadata = SiteMetadata(
   now: Date()
 )
 
-let itemProcessorDateFormatter = DateFormatter()
-itemProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
-itemProcessorDateFormatter.timeZone = .current
-
 func itemProcessor<M>(item: Item<M>) {
   // Improve the HTML by adding target="_blank" to external links
   item.body = item.body.improveHTML()
 
   // If the filename starts with a valid date, use that as the Page's date and strip it from the destination path
   let first10 = String(item.relativeSource.lastComponentWithoutExtension.prefix(10))
-  guard first10.count == 10, let date = itemProcessorDateFormatter.date(from: first10) else {
+  guard first10.count == 10, let date = Run.itemProcessorDateFormatter.date(from: first10) else {
     return
   }
 
@@ -75,50 +71,61 @@ func itemProcessor<M>(item: Item<M>) {
   item.relativeDestination = newPath
 }
 
-try Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
-  .register(
-    folder: "articles",
-    metadata: ArticleMetadata.self,
-    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-    writers: [
-      .itemWriter(swim(renderArticle)),
-      .listWriter(swim(renderArticles), paginate: 20),
-      .tagWriter(swim(renderTag), tags: \.metadata.tags),
-      .yearWriter(swim(renderYear)),
+@main
+struct Run {
+  static var itemProcessorDateFormatter: DateFormatter = {
+    let itemProcessorDateFormatter = DateFormatter()
+    itemProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
+    itemProcessorDateFormatter.timeZone = .current
+    return itemProcessorDateFormatter
+  }()
 
-      // Atom feed for all articles, and a feed per tag
-      .listWriter(swim(renderFeed), output: "feed.xml"),
-      .tagWriter(swim(renderTagFeed), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
-    ]
-  )
-  .register(
-    folder: "apps",
-    metadata: AppMetadata.self,
-    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-    writers: [
-      .listWriter(swim(renderApps)),
-    ]
-  )
-  .register(
-    folder: "projects",
-    metadata: ProjectMetadata.self,
-    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-    writers: [
-      .listWriter(swim(renderProjects)),
-    ]
-  )
-  .register(
-    metadata: PageMetadata.self,
-    readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-    itemWriteMode: .keepAsFile,
-    writers: [
-      .itemWriter(swim(renderPage))
-    ]
-  )
-  .run()
-  .staticFiles()
-  .createArticleImages()
+  static func main() async throws {
+    try await Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
+      .register(
+        folder: "articles",
+        metadata: ArticleMetadata.self,
+        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        writers: [
+          .itemWriter(swim(renderArticle)),
+          .listWriter(swim(renderArticles), paginate: 20),
+          .tagWriter(swim(renderTag), tags: \.metadata.tags),
+          .yearWriter(swim(renderYear)),
 
+          // Atom feed for all articles, and a feed per tag
+          .listWriter(swim(renderFeed), output: "feed.xml"),
+          .tagWriter(swim(renderTagFeed), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+        ]
+      )
+      .register(
+        folder: "apps",
+        metadata: AppMetadata.self,
+        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        writers: [
+          .listWriter(swim(renderApps)),
+        ]
+      )
+      .register(
+        folder: "projects",
+        metadata: ProjectMetadata.self,
+        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        writers: [
+          .listWriter(swim(renderProjects)),
+        ]
+      )
+      .register(
+        metadata: PageMetadata.self,
+        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        itemWriteMode: .keepAsFile,
+        writers: [
+          .itemWriter(swim(renderPage))
+        ]
+      )
+      .run()
+      .staticFiles()
+      .createArticleImages()
+  }
+}
 
 extension Saga {
   @discardableResult
