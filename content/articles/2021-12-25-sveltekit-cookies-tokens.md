@@ -46,7 +46,7 @@ export async function post(request) {
 }
 ```
 
-Then to get access to the token in the web client I use the following hook:
+Then to get access to the token in the web client I use the following hooks:
 
 ``` javascript
 // /hooks.js
@@ -93,7 +93,7 @@ We're reading the HttpOnly cookie and storing it in memory (in the `$session` st
 ## What about proxying all requests?
 One way to increase the security is to proxy *all* requests via a local SvelteKit endpoint: that way the SvelteKit code can read the HttpOnly cookie and set the `Authorization` header with the token. The token would never have to be passed to the client, it should never have a need for it. In my case I am also using the existence of the token in `$session` to know if the user is logged in or not, but of course you could simply check for the existence of the token cookie and store a simple `isLoggedIn` boolean in the `$session`.
 
-While this would-be better for security, it also doubles the requests made, every single request has to go to two servers, and this will cause some latency. I decided not to go this route for my project.
+While this would be better for security, it also doubles the requests made, every single request has to go to two servers, and this will cause some latency. I decided not to go this route for my project.
 
 ## Why do you even need the HttpOnly cookie?
 When the user logs in and the external API returns a token, you need to store this token somewhere. Just keeping it in memory means that the user is logged out when they refresh the browser or close the website. You could store it in a normal (non-HttpOnly) cookie or in `localStorage`; you wouldn't need to proxy the login request via a SvelteKit endpoint anymore, but both are easily readable by JavaScript code and are not considered secure.
