@@ -7,15 +7,15 @@ summary: When HttpOnly cookies didn't work as expected in my SvelteKit project I
 
 When I completely rewrote my [Critical Notes](https://www.critical-notes.com) side-project from Svelte + Firestore to SvelteKit + Django, I wanted to use HttpOnly cookies for authentication. So the web client would call a Django API endpoint to login, the server would return a response with a `set-cookie` header which would set a HttpOnly cookie containing a token, and from then on every request that the web client makes to the API would automatically send that cookie back. It sounded pretty simple to implement and great for security (HttpOnly cookies can't be read by JavaScript). Locally everything was working perfectly fine, so when the time came to deploy everything to my staging server, I was really surprised that nothing was working: cookies were not getting send back to the API so none of the requests were authenticated. I wrote up my problems in a [GitHub ticket](https://github.com/sveltejs/kit/issues/1198#issuecomment-932447869) and hoped for a fix.
 
-Sadly the problem wasn't getting fixed in SvelteKit in time for me to release the new version of Critical Notes, so I had to come up with a workaround, and it's this workaround that I want to talk about in this post, since I've been getting multiple questions via email, Twitter and that GitHub ticket.
+Sadly the problem wasn't getting fixed in SvelteKit in time for me to release the new version of Critical Notes, so I had to come up with a workaround, and it's this workaround that I want to talk about in this post, since I've been getting multiple questions about it via email, Twitter and that GitHub ticket.
 
 My workaround in a few bullet-points:
 
 - The client calls the external login endpoint via a SvelteKit endpoint
 - The external endpoint no longer returns a `set-cookie` header but simply returns the token in the body of the response
 - The SvelteKit endpoint reads the response and sets its own HttpOnly cookie
-- A SvelteKit hook reads the cookie and makes the token available in the session
-- Every other API endpoint request gets an `Authorization` token with that token
+- SvelteKit hooks reads the cookie and makes the token available in the session
+- Every other API endpoint request gets an `Authorization` header with that token
 
 So in other words, the Django API doesn't do anything with cookies anymore; it doesn't send them, and it doesn't expect to receive them. It has become a mobile-style API that just deals with headers.
 
