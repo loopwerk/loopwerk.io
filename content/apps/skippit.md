@@ -5,4 +5,4 @@ date: 2019-12-01
 ---
 
 # Skippit
-"Skippit is a new type of first date that uses video calling to replace the expensive Ubers, awkward first drinks, and cat-fishing that’s common in most dating apps."
+"Skippit is a new type of first date that uses video calling to replace the expensive Ubers, awkward first drinks, and cat-fishing that’s common in most dating apps." Skippit later rebranded and became the [Lolly dating app](https://www.thelollyapp.com).
