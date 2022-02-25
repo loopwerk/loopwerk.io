@@ -7,4 +7,4 @@ date: 2020-06-23
 ---
 
 # Critical Notes
-Notes for roleplaying games. Keep track of your roleplaying games' campaigns and adventures! A web application built with Svelte and Firebase, and paid subscriptions via Stripe.
+Notes for roleplaying games. Keep track of your roleplaying games' campaigns and adventures! A web application built with SvelteKit, Django REST Framework, websockets, and paid subscriptions via Stripe.
