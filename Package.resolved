@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Parsley",
         "state": {
           "branch": null,
-          "revision": "2fcb269465fb598a82eef26d65ca37f670ac2619",
-          "version": "0.6.0"
+          "revision": "177d5630b2977133707ffe097e9a835252e4c814",
+          "version": "0.7.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/pvieito/PythonKit",
         "state": {
           "branch": null,
-          "revision": "074622c6893188bbb7926eee2f7eece8a5124c47",
-          "version": "0.1.0"
+          "revision": "d383a1b1e35fff450fe5ca2443c6d1ec9e040ec4",
+          "version": "0.2.2"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
           "branch": null,
-          "revision": "02c63b7be50bda384f22c56c64d347231754a07e",
-          "version": "2.3.3"
+          "revision": "13ba661fd1146967270fca92ce8195b223631436",
+          "version": "2.3.8"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/robb/Swim",
         "state": {
           "branch": null,
-          "revision": "e9f4c9975cc834e712e6b39f7bf57ef8e9cd80cd",
-          "version": "0.3.0"
+          "revision": "a0943e6f3cb5751ee7b69ed43a33613ea67d0c6a",
+          "version": "0.4.0"
         }
       }
     ]
