@@ -42,9 +42,16 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
 
     p {
       project.metadata.text
-      br()
-      a(href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
-        project.metadata.repo
+    }
+
+    div(class: "footer") {
+      div {
+        a(href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
+          project.metadata.repo
+        }
+      }
+      div {
+        img(src: "https://img.shields.io/github/stars/\(project.metadata.repo)")
       }
     }
 

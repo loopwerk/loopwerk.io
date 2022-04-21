@@ -148,9 +148,19 @@ article img {
   margin-top: 0.5em;
 }
 
+.projects p {
+  margin: 0;
+}
+
+.project .footer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5em;
+  line-height: 1;
+}
+
 .project img {
-  margin-bottom: 0.5em;
-  height: auto;
+  margin-left: 10px;
 }
 
 .subprojects {
