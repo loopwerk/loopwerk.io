@@ -9,11 +9,11 @@ In August last year [I wrote](/articles/2021/architecting-sveltekit/) about tryi
 
 I'm happy to say that I have found a solution for all my problems and the new version of Critical Notes -fully rewritten in SvelteKit- launched in October of 2021, although it took some steps to get there.
 
-The first version of my solution used either `context` (since renamed to `stuff`) or a store, depending on if we're running in SSR or in the browser. I first came up with this solution just a day after writing my previous SvelteKit article, and created a [Pull Request](https://github.com/kevinrenskers/sveltekit-reproduce/pull/2) to my example/repro repository on GitHub. Many people have found this PR and found it useful, but that code is rather boilerplate-y. In the months since, I've greatly simplified the code. Instead of either using `context` or a store, we're now always using a store, but in a safe way. 
+The first version of my solution used either `context` (since renamed to `stuff`) or a store, depending on if we're running in SSR or in the browser. I first came up with this solution just a day after writing my previous SvelteKit article, and created a [Pull Request](https://github.com/kevinrenskers/sveltekit-reproduce/pull/2) to my example/repro repository on GitHub. Many people have found this PR and found it useful, but that code is rather boilerplate-y. In the months since, I've greatly simplified the code. Instead of either using `context` or a store, we're now always using a store from `context`, in a safe way.
 
 Let's dig in!
 
-### __layout.svelte
+### routes/__layout.svelte
 ```javascript
 <script context="module">
   import { fetchBooksStore } from "$lib/utils";
@@ -35,7 +35,7 @@ Let's dig in!
 <slot />
 ```
 
-### index.svelte
+### routes/index.svelte
 ```javascript
 <script context="module">
   // Pass the `stuff` from __layout into the props of this page
@@ -57,7 +57,7 @@ Let's dig in!
 </ul>
 ```
 
-### [id].svelte
+### routes/[id].svelte
 ```javascript
 <script context="module">
   import { get } from "svelte/store";
