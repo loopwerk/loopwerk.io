@@ -127,7 +127,7 @@ export async function fetchBooksStore(fetch) {
 }
 ```
 
-The meat of the solution is contained within this `fetchBooksStore` function: it always returns a Svelte store, no matter if we're running in the browser or in SSR. It's just that in SSR we create a readable store on the fly, we're not using any global store that would be shared by all clients (which is the problem [I initially wrote about](/articles/2021/architecting-sveltekit/)). That makes our layout code a lot easier, as we now always have a consistent interface to work with - compared to my first solution where you'd sometimes have a store and sometimes a normal object.
+The meat of the solution is contained within this `fetchBooksStore` function: it always returns a Svelte store, no matter if we're running in the browser or in SSR. It's just that in SSR we create a readable store on the fly, we're not using any global store that would be shared by all clients (which is the problem [I initially wrote about](/articles/2021/architecting-sveltekit/)). That makes our layout code a lot easier, as we now always have a consistent interface to work with - compared to my first solution where you'd sometimes have a store and sometimes a normal object, and there were a bunch of `if browser` checks all over the layout code. This is now all hidden away.
 
 Of course `fetchBooksStore` can be made much more generic to fetch and store any kind of content. For example the version I use in Critical Notes looks like this:
 
