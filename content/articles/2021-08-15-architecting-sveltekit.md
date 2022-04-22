@@ -149,3 +149,5 @@ I thought that the fix would be rather simple. Just check if we're running in th
 Sadly this doesn't work because the SSR version of the page now has no content, and then when the browser hydrates the page the content suddenly pops in. Instead of briefly flashing old content, it now briefly flashes "undefined". One small positive: at least content is not shared between different browsers anymore, but it's a long way from a full solution.
 
 I've created a GitHub repo with a minimal, reproducible example of a bunch of problems I've come across with this architecture: [https://github.com/kevinrenskers/sveltekit-reproduce](https://github.com/kevinrenskers/sveltekit-reproduce). I would love it if people could play around with it and send a PR with a better architecture that does manage to tick my boxes: don't fetch content from the server more than absolutely necessary, make it possible to update content from a single place (for WebSocket updates), and don't leak data from one client to another.
+
+**Update**: I've written a [follow up article with a proper solution](/articles/2022/sveltekit-architecture/). 
