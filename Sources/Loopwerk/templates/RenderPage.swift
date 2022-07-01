@@ -53,6 +53,7 @@ create a<br>
       a(href: "https://www.cbs.com", title: "CBS") { img(alt: "CBS logo", src: "/static/images/cbs.svg") }
       a(href: "https://www.metrolyrics.com", title: "Metrolyrics") { img(alt: "Metrolyrics logo", src: "/static/images/metrolyrics.svg") }
       a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
+      a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
     }
   }
 }
