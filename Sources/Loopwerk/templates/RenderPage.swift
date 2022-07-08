@@ -68,7 +68,7 @@ func renderNonHome(body: String) -> Node {
 
 func render404(body: String, articles: [Item<ArticleMetadata>]) -> Node {
   article {
-    body
+    Node.raw(body)
 
     ul {
       articles.map { article in
