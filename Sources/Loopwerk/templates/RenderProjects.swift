@@ -6,7 +6,8 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata, SiteMetadata
     article {
       div(class: "page_content opensource") {
         p {
-          "These are some of the more interesting open source projects I’ve created over the years. If you use one or more of these projects, please consider"
+          "These are some of the more interesting open source projects I’ve created (or contributed to) over the years."
+          "If you use one or more of these projects, please consider"
           a(href: "https://www.buymeacoffee.com/loopwerk", rel: "nofollow", target: "_blank") { "buying me a coffee" }
           %"."
         }
@@ -38,7 +39,14 @@ private func renderCategory(category: String, projects: [Item<ProjectMetadata>])
 @NodeBuilder
 private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<ProjectMetadata>]) -> Node {
   div(class: "project") {
-    h3 { project.title }
+    h3 {
+      project.title
+      if project.involvement != .author {
+        span(class: "involvement") {
+          project.involvement.rawValue
+        }
+      }
+    }
 
     p {
       project.metadata.text

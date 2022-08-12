@@ -23,6 +23,11 @@ struct PageMetadata: Metadata {
   let section: String?
 }
 
+enum ProjectInvolvement: String, Decodable {
+  case author
+  case contributor
+}
+
 struct ProjectMetadata: Metadata {
   let category: String
   let parent: String?
@@ -30,11 +35,16 @@ struct ProjectMetadata: Metadata {
   let image: String?
   let text: String
   let order: Int?
+  let involvement: ProjectInvolvement?
 }
 
 extension Item where M == ProjectMetadata {
   var order: Int {
     return metadata.order ?? 999
+  }
+
+  var involvement: ProjectInvolvement {
+    return metadata.involvement ?? .author
   }
 }
 

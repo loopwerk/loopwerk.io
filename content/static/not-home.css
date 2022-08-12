@@ -163,6 +163,14 @@ article img {
   margin-left: 10px;
 }
 
+.project span.involvement {
+  border: 1px solid var(--code-background);
+  padding: 2px 5px;
+  color: var(--code-background);
+  font-weight: 200;
+  margin-left: 5px;
+}
+
 .subprojects {
   background: var(--code-background);
   padding: 1em 0 0 1em;
