@@ -112,27 +112,16 @@ And in the same way we can also access the token in every single `+page.svelte` 
 </script>
 ```
 
-The only thing that remains is all the different components that also need access to the token. Before the breaking change it would be a simple `import { session } from "$app/stores"`, but that no longer exists. One possible solution is to pass the token in as a prop from every page to every component that needs it, but that didn't feel good to me so instead I used the `setContext` API.
-
-```javascript
-// /routes/+layout.svelte
-<script>
-  import { setContext } from "svelte";
-  export let data;
-  setContext("token", data.token);
-</script>
-```
-
-And with that change in place, I can now access the token from every single component:
+Accessing the token inside of components is also a small change:
 
 ``` javascript
 // /lib/components/MyComponent.svelte
 <script>
-  import { getContext } from "svelte";
-  const token = getContext("token");
+  import { page } from "$app/stores";
+  // you now have access to `$page.data.token`
 </script>
 ```
 
-And with that all functionality is restored. In the end this SvelteKit change required me to make changes to `hooks.js`, `+layout.svelte`, `+layout.js`, a new `+layout.server.js` file, and changes to every page and component to read the token in a different way. For me I had to change about 200 lines across 60 files.
+And with that all functionality is restored. In the end this SvelteKit change required me to make changes to `hooks.js`, `+layout.js`, a new `+layout.server.js` file, and changes to every layout, page and component to read the token in a different way. For me I had to change about 200 lines across 60 files.
 
 Good luck!
