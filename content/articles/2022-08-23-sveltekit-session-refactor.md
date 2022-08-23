@@ -41,6 +41,8 @@ export async function load({ fetch, session }) {
 }
 ```
 
+> (Please note that code like this will fetch the user on each and every page change which is most probably not what you want. I kept the code in this post small to focus on the token logic. See [this](https://github.com/sveltejs/kit/discussions/5883#discussioncomment-3460345) for an example that caches the user and only fetches it once.)
+
 And every page and component has easy access to it as well:
 
 ### /routes/some-route/+page.svelte
