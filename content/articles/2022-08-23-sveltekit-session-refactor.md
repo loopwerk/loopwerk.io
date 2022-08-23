@@ -1,5 +1,5 @@
 ---
-tags: javascript
+tags: javascript, sveltekit
 summary: SvelteKit version 1.0.0-next.415 removed the session object and store. Refactoring my project wasn't very straightforward, let's go over the changes.
 ---
 

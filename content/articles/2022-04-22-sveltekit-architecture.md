@@ -1,5 +1,5 @@
 ---
-tags: javascript
+tags: javascript, sveltekit
 summary: Last August I wrote about trying to come up with the architecture for a SvelteKit app I was working on, and failing.  I'm happy to say that I have found a solution for all my problems!
 ---
 
