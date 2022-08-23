@@ -47,7 +47,7 @@ And every page and component has easy access to it as well:
 // /routes/some-route/+page.svelte
 <script>
   import { session } from "$app/stores";
-  // access token as $session.token 
+  // access token as `$session.token` 
 </script>
 ```
 
