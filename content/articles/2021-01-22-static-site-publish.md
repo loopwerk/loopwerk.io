@@ -36,7 +36,7 @@ Here goes the summary for the list of articles.
 I've had a long history with static site generators for this website.
 ```
 
-The point is, it was very easy to make liquidluck [work this way](https://github.com/loopwerk/loopwerk.io/blob/master/MarkdownReader.py) as it's very easily customizable. I made it work with the way I write my articles, not the other way around. Another example: it was extremely easy to add a [static image generator](https://github.com/loopwerk/loopwerk.io/blob/master/ImageWriter/__init__.py) which creates a Twitter preview image for each and every article.
+The point is, it was very easy to make liquidluck [work this way](https://github.com/loopwerk/loopwerk.io/blob/3ba81efe1f1ff10305b54dbed3e5963b048491b8/MarkdownReader.py) as it's very easily customizable. I made it work with the way I write my articles, not the other way around. Another example: it was extremely easy to add a [static image generator](https://github.com/loopwerk/loopwerk.io/blob/3ba81efe1f1ff10305b54dbed3e5963b048491b8/ImageWriter/__init__.py) which creates a Twitter preview image for each and every article.
 
 But as much as I enjoy this setup (and I am not looking forward to redo the whole site), the fact that liquidluck is unmaintained is becoming a liability and so I decided to take a look at a static site generator written in Swift, by famous developer John Sundell: [Publish](https://github.com/johnsundell/publish).
 
