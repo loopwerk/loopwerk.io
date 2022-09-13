@@ -15,7 +15,7 @@ class ImageGenerator:
 
         offset = 80
         for line in textwrap.wrap(title, width=32):
-            draw.text((30, offset), line, font=self.font_big, fill="#000000")
+            draw.text((36, offset), line, font=self.font_big, fill="#FFFFFF")
             offset += 70
 
         image.save(output_path, format="PNG")
