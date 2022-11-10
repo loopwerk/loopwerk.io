@@ -8,7 +8,7 @@ summary: I've been running my side project Critical Notes, built with SvelteKit,
 I've been running my side project [Critical Notes](https://www.critical-notes.com), built with [SvelteKit](https://kit.svelte.dev), on my own server for about a year now and it's been pretty much rock solid. Since I saw some questions about how to host a SvelteKit app on your own server, I figured I'd document my setup.
 
 ## Nginx
-The first part of the equation is the Nginx configuration for the website. Basically all it does is forward the request to the Node server coming with SvelteKit. It also redirects requests `critical-notes.com` to `www.critical-notes.com`.
+The first part of the equation is the Nginx configuration for the website. Basically all it does is forward the request to the Node server coming with SvelteKit. It also redirects requests for `critical-notes.com` to `www.critical-notes.com`.
 
 ### /etc/nginx/sites-available/www.critical-notes.com
 
@@ -48,7 +48,7 @@ Right now the website is only accessible using HTTP requests on port 80, which i
 $ certbot --nginx
 ```
 
-Afterwards your config will looks more like this:
+Afterwards your config will look more like this:
 
 ```
 server {
@@ -106,10 +106,10 @@ server {
 }
 ```
 
-Restart Nginx to active the changes: `service nginx reload`.
+Restart Nginx to activate the changes: `service nginx reload`.
 
 ## SvelteKit server
-Within my real site root `/opt/www` I can checkout my Git repo, and run `npm run build`, this creates the compiled build and the Node server. I am using `adapter-node` for this.
+Within my real site root `/opt/www` I can checkout my Git repo and run `npm run build`; this creates the compiled build and the Node server. I am using `adapter-node` for this.
 
 To run the Node server, I am using systemd. I created a config file `/etc/systemd/system/www.critical-notes.com.service` with the following content:
 
