@@ -1,3 +1,6 @@
+# Company Opening
+
+# Company Opening
 Instead of a company posting a job ad, why not a person posting a company ad?
 
 I'm Kevin, a creative full stack developer with over twenty years of experience building software. I've been building websites since 2000 and iOS apps since 2010. I've been the team lead on multiple projects, where I had 2 or 3 junior developers under my wing - until 2015 when I became a freelance developer. Since 2021 I've been running my own mentorship program, mentoring underprivileged junior iOS developers from all over the world, to scratch that itch to want to mentor people.
