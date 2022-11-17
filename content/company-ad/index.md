@@ -23,11 +23,12 @@ Dealbreakers:
 
 What I offer:
 
-- 20+ years of experience with HTML, CSS, JavaScript
+- 22 years of experience with HTML, CSS, JavaScript
 - 13 years with Python and Django
 - 12 years with Objective-C
 - 7 years with Swift
 - 3 years with Svelte (1 with SvelteKit)
+- 1 year with TypeScript
 - More than 10 years as a senior/lead developer
 - Led multiple teams and mentored multiple junior developers
 - A big interest in functional languages, reactive programming, declarative programming
