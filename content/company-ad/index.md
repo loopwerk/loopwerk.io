@@ -3,7 +3,7 @@
 # Company Opening
 Instead of a company posting a job ad, why not a person posting a company ad?
 
-I'm Kevin, a creative full stack developer with over twenty years of experience building software. I've been building websites since 2000 and iOS apps since 2010. I've been the team lead on multiple projects, where I had 2 or 3 junior developers under my wing - until 2015 when I became a freelance developer. Since 2021 I've been running my own mentorship program, mentoring underprivileged junior iOS developers from all over the world, to scratch that itch to want to mentor people.
+I'm Kevin, a creative full stack developer with over twenty years of experience building software. I've been building websites since 2000 and iOS apps since 2010. I've been the team lead on multiple projects, where I had 2 or 3 junior developers under my wing - until 2016 when I became a freelance developer. Since 2021 I've been running my own mentorship program, mentoring underprivileged junior iOS developers from all over the world, to scratch that itch to want to mentor people.
 
 I've had a lot of fun working for big international clients like WeTransfer, Last.fm, Unilever and Sentry, but I want to start to move away from full-time programming. I want to move my day job towards leading and mentoring people, managing projects. And for this I am looking for a company that wants to hire me, one worthy to leave freelancing behind.
 
