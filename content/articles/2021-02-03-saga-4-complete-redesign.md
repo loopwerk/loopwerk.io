@@ -112,6 +112,6 @@ try Saga(input: "content", output: "deploy")
   )
 ```
 
-The new version is more concise, more powerful, and needs a lot fewer hacks inside of the Saga codebase to deal with less-constrained writers running after more constrained writers and overwriting their pages. And a pet-peeve is solved: check that `output` parameter of the articles `listWriter`: `apps/index.html`. It really annoyed me that I had to prefix it with `app`, since in the read step, I was also telling the system to work in the `app` folder. This is so much better now.
+The new version is more concise, more powerful, and needs a lot fewer hacks inside of the Saga codebase to deal with less-constrained writers running after more constrained writers and overwriting their pages. And a pet-peeve is solved: check that `output` parameter of the articles `listWriter`: `apps/index.html`. It really annoyed me that I had to prefix it with `apps`, since in the read step, I was also telling the system to work in the `apps` folder. This is so much better now.
   
 I'm very happy, and can't wait to see where the API goes from here. Check out the [pull request](https://github.com/loopwerk/Saga/pull/1) I created with these changes, in case you're interested.

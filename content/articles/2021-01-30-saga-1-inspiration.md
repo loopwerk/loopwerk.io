@@ -28,7 +28,7 @@ To give you some examples of its flexibility, let me tell you about the setup of
 Hello World!
 ```
 
-You'd call that file `hello-world.md`, and it would result in an article with the url `articles/hello-world/index.html`. Which is fine for most people, but that I wanted to name my file something like `2021-01-30-hello-world.md`, and the article's date would be taken from that filename, and still result in the url `articles/hello-world/index.html`, without that date in there. I also wanted to write the article like this:
+You'd call that file `hello-world.md`, and it would result in an article with the url `articles/hello-world/index.html`. Which is fine for most people, but I wanted to name my file something like `2021-01-30-hello-world.md`, and then the article's date would be taken from that filename, and still result in the same url `articles/hello-world/index.html`, without that date in there. I also wanted to write the article like this:
 
 ```
 # Hello World

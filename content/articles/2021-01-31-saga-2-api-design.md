@@ -253,7 +253,7 @@ try Saga(input: "content", output: "deploy")
   .staticFiles()
 ```
 
-I'm not super happy that the last `pageWriter` needs that `{ $0.metadata is EmptyMetadata }` filter but sadly I haven't found a better solution yet. The problem is that you can have pages which were not written to disk using a previous `pageWriter`: for example articles with the `public` flag set to `false`, and all the apps (which are only written using a `listWriter`. So when the final `pageWriter` comes along, it sees unwritten pages and wants to write it to disk - which is not what we want, and as such we make sure to only deal with `EmptyMetadata` pages here.
+I'm not super happy that the last `pageWriter` needs that `{ $0.metadata is EmptyMetadata }` filter but sadly I haven't found a better solution yet. The problem is that you can have pages which were not written to disk using a previous `pageWriter`: for example articles with the `public` flag set to `false`, and all the apps (which are only written using a `listWriter`). So when the final `pageWriter` comes along, it sees unwritten pages and wants to write it to disk - which is not what we want, and as such we make sure to only deal with `EmptyMetadata` pages here.
 
 Finally we end with a call to `.staticFiles()`, which takes all the files in the input folder that were not read using one of the readers, and copies them to the output folder as-is. In practice, this means that all static files like images, css, raw html pages and so on are copied to your output folder as expected.
 
