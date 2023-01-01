@@ -7,7 +7,7 @@ section: about
 # Hello! 
 My name is **Kevin Renskers**.
 
-I'm a creative freelance developer with a passion for good design and intuitive, user friendly interfaces. I love working on the front end, whether that's creating a beautiful and performant iOS app or using HTML, CSS and JavaScript to create interactive and responsive web apps. I also like working on the back end: I use Swift, Python, Node.js and Firestore to create developer-friendly APIs for those apps.
+I’m a creative developer with a passion for good design and intuitive, user friendly interfaces. I love working on the front end, whether that's creating a beautiful and performant iOS app or using HTML, CSS and TypeScript to create interactive and responsive web apps. I also like working on the back end: I use Python and the Django framework, or Swift with the Vapor framework, to create developer-friendly APIs for those apps.
 
 Usability and design are always on my mind, even when writing code: this should be usable, readable and beautiful too.
 
