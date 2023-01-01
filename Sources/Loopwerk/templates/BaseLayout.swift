@@ -92,7 +92,7 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
               %"."
             }
             p {
-              a(href: "https://twitter.com/kevinrenskers", rel: "nofollow", target: "_blank") { "Twitter" }
+              a(href: "https://fosstodon.org/@kevinrenskers", rel: "nofollow", target: "_blank") { "Mastodon" }
               " | "
               a(href: "\(siteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
             }
