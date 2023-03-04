@@ -258,6 +258,7 @@ find $backup_dir -type f -prune -mtime +$number_of_days -exec rm -f {} \;
 Now we need to make sure the script is automatically run, using the cron.
 
 ```
+chmod +x ~/backup.sh
 crontab -e
 ```
 
@@ -272,7 +273,7 @@ This will run the script every day at 6:00.
 
 ## 2.3 - Store the backups off-site
 
-The backups are now stored on the same server as the PostgreSQL database itself. It's much better than not having backups, but even better would be to store them off-site. I use [rsync.net](https://www.rsync.net) for this purpose. It's like a cloud server that you can run commands on via SSH, and you can send folders with files to it via rsync, sftp and scp. It's really great. After you signed up, just add this to the end of the backup script:
+The backups are now stored on the same server as the PostgreSQL database itself. It's much better than not having backups at all, but even better would be to store them off-site. I use [rsync.net](https://www.rsync.net) for this purpose. It's like a cloud server that you can run commands on via SSH, and you can send folders with files to it via rsync, sftp and scp. It's really great. After you signed up, just add this to the end of the backup script:
 
 ```
 # Immediately store off-site
@@ -287,13 +288,19 @@ On your server, logged in as `/*TMS*/$PROJECT_USER/*TME*/`, create a new SSH key
 ssh-keygen -t rsa -b 4096
 ```
 
-Accept the defaults and do **NOT** enter a passphrase.
-
-Then upload it to the rsync.net server:
+Accept the defaults and do **NOT** enter a passphrase. Then upload it to the rsync.net server:
 
 ```
 scp ~/.ssh/id_rsa.pub /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:.ssh/authorized_keys
 ```
+
+Test that your key works by ssh'ing to your rsync.net filesystem (from your local system, as the user who created/uploaded the key):
+
+```
+ssh /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net ls
+```
+
+You should not be asked for a password.
 
 
 # Chapter 3 - the Django backend
@@ -330,6 +337,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 First we're going to clone the git project, and open the directory:
 
 ```
+cd ~
 git clone your_backend_git_repo_address /*TMS*/$BACKEND_DOMAIN/*TME*/
 cd /*TMS*/$BACKEND_DOMAIN/*TME*/
 ```
@@ -368,7 +376,11 @@ User=/*TMS*/$PROJECT_USER/*TME*/
 Group=/*TMS*/$PROJECT_USER/*TME*/
 Restart=on-failure
 WorkingDirectory=/home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$BACKEND_DOMAIN/*TME*/
-ExecStart=/home//*TMS*/$PROJECT_USER/*TME*//.local/bin/poetry run uvicorn projectname.asgi:application --log-level warning --workers 4 --uds /tmp/uvicorn.sock
+ExecStart=/home//*TMS*/$PROJECT_USER/*TME*//.local/bin/poetry run gunicorn \
+          --access-logfile - \
+          --workers 2 \
+          --bind=127.0.0.1:8000 --bind=[::1]:8000 \
+          /*TMS*/your_project_name/*TME*/.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -427,7 +439,7 @@ server {
         proxy_set_header Connection $connection_upgrade;
         proxy_redirect off;
         proxy_buffering off;
-        proxy_pass http://uvicorn;
+        proxy_pass http://localhost:8000;
     }
 
     listen 80;
@@ -436,10 +448,6 @@ server {
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
-}
-
-upstream uvicorn {
-    server unix:/tmp/uvicorn.sock;
 }
 ```
 
@@ -458,7 +466,7 @@ Finally, we need to configure the firewall to open up the ports for the Nginx:
 sudo ufw allow "Nginx Full"
 ```
 
-Your backend should now be reachable on `http://$BACKEND_DOMAIN/` if you already changed the domain's DNS settings, otherwise it's reachable via `http://$SERVER_IP_ADDRESS/`.
+Your backend should now be reachable on `http:///*TMS*/$BACKEND_DOMAIN/*TME*//` if you already changed the domain's DNS settings, otherwise it's reachable via `http:///*TMS*/$SERVER_IP_ADDRESS//*TME*/`.
 
 Let's make it run on HTTPS though. For this the DNS settings of the domain should be in order, so an `A` record pointing your (sub)domain to the server's IP address should be in place.
 
@@ -477,7 +485,7 @@ With all that done, simply run Certbot:
 sudo certbot
 ```
 
-Answer the questions and select your domain for which you want to active HTTPS. Certbot then does the rest and you should be able to visit `https://$BACKEND_DOMAIN/`. Hooray!
+Answer the questions and select your domain for which you want to active HTTPS. Certbot then does the rest and you should be able to visit `https:///*TMS*/$BACKEND_DOMAIN/*TME*//`. Hooray!
 
 ## 3.6 - Deploying changes
 
@@ -626,13 +634,13 @@ sudo ln -s ../sites-available//*TMS*/$FRONTEND_DOMAIN/*TME*/
 
 Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`.
 
-Now we can run Certbot again:
+Now we can run Certbot again - after making sure the DNS has an entry for `/*TMS*/$FRONTEND_DOMAIN/*TME*/` and `/*TMS*/$NAKED_DOMAIN/*TME*/`:
 
 ```
 sudo certbot
 ```
 
-This time choosing the newly added domains. You should be able to visit `https://$FRONTEND_DOMAIN/`.
+This time choosing the newly added domains. You should be able to visit `https:///*TMS*/$FRONTEND_DOMAIN/*TME*//`.
 
 ## 4.5 - Deploying changes
 
