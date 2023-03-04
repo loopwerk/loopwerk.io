@@ -189,7 +189,7 @@ On the server, install Poetry with this oneliner:
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-## 2.3 - Checking out **the** backend project
+## 2.3 - Checking out the backend project
 
 First we're going to clone the git project, and open the directory:
 
@@ -314,7 +314,15 @@ cd /etc/nginx/sites-enabled/
 sudo ln -s ../sites-available//*TMS*/$BACKEND_DOMAIN/*TME*/
 ```
 
-Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`. Your backend should now be reachable on `http://$BACKEND_DOMAIN/` if you already changed the domain's DNS settings, otherwise it's reachable via `http://$SERVER_IP_ADDRESS/`.
+Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`. 
+
+Finally, we need to configure the firewall to open up the ports for the Nginx:
+
+```
+sudo ufw allow "Nginx Full"
+```
+
+Your backend should now be reachable on `http://$BACKEND_DOMAIN/` if you already changed the domain's DNS settings, otherwise it's reachable via `http://$SERVER_IP_ADDRESS/`.
 
 Let's make it run on HTTPS though. For this the DNS settings of the domain should be in order, so an `A` record pointing your (sub)domain to the server's IP address should be in place.
 
