@@ -208,6 +208,14 @@
     border: 1px solid var(--accent);
     padding: 2px 4px;
   }
+
+  code .template {
+    background: #1c6b86;
+  }
+
+  pre code .template {
+    padding: 2px 4px;
+  }
 }
 
 pre {

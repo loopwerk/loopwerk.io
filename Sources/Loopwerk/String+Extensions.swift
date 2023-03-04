@@ -28,15 +28,19 @@ extension String {
       }
 
       // Search all code blocks and replace /*HLS [optional title]*/[content]/*HLE*/ with a highlight span
-      let codeBlocks = try doc.select("pre code")
+      let codeBlocks = try doc.select("code")
       for codeBlock in codeBlocks {
-        let content = try codeBlock.html()
+        var content = try codeBlock.html()
 
-        let regex = try NSRegularExpression(pattern: #"\/\*HLS\W?(.*?)\*\/(.*?)\/\*HLE\*\/"#)
+        let regex = try NSRegularExpression(pattern: #"(?s)/\*HLS(?:(?!\*/)\W)?((?:(?!/\*HLS).)*?)\*/(.*?)/\*HLE\*/"#)
         let range = NSRange(content.startIndex..<content.endIndex, in: content)
-        let newContent = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
+        content = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
 
-        try codeBlock.html(newContent)
+        let regex2 = try NSRegularExpression(pattern: #"(?s)/\*TMS(?:(?!\*/)\W)?((?:(?!/\*TMS).)*?)\*/(.*?)/\*TME\*/"#)
+        let range2 = NSRange(content.startIndex..<content.endIndex, in: content)
+        content = regex2.stringByReplacingMatches(in: content, options: [], range: range2, withTemplate: #"<span class="template" title="$1">$2</span>"#)
+
+        try codeBlock.html(content)
       }
 
       return try doc.body()?.html() ?? self
