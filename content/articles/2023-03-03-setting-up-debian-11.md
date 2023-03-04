@@ -5,11 +5,9 @@ summary: I recently had to set up a brand new server for a website running on Sv
 
 # Setting up a Debian 11 server for SvelteKit and Django
 
-I recently had to set up a brand new server for a website running on SvelteKit and its API running on Django. I used a virtual server from [Hetzner](https://www.hetzner.com/cloud) running Debian 11. A CCX22 instance to be exact: 4 dedicated vCPUs, 16 GB of RAM and 160 GB of disk space, with 20 TB of traffic included, all for €45 per month. If you use my [referral link](https://hetzner.cloud/?ref=WZ6oJ9LrNtzM) when signing up for a cloud server, you'll get €20 in credits.
+I recently had to set up a brand new server for a website running on SvelteKit and its API running on Django. I used a virtual server from [Hetzner](https://www.hetzner.com/cloud) running Debian 11. A CCX22 instance to be exact: 4 dedicated vCPUs, 16 GB of RAM and 160 GB of disk space, with 20 TB of traffic included, all for €45 per month - although you can also get a server for as little as €3.79 per month! And if you use my [referral link](https://hetzner.cloud/?ref=WZ6oJ9LrNtzM) when signing up for a cloud server, you'll get €20 in credits.
 
-I am a software developer and setting up servers and hosting isn't something I normally do, so I followed a bunch of different tutorials. In this article I want to combine all these tutorials, mostly for future me, but hopefully you'll find it useful as well.
-
-Most of this information came from the following tutorials, so check them out if you want more in-depth explanation of the commands:
+I am a software developer and setting up servers and hosting isn't something I normally do, so I followed a bunch of different tutorials. In this article I want to combine all this information, mostly for future me, but hopefully you'll find it useful as well. Most of the info came from the following tutorials, so check them out if you want more in-depth explanations of the commands:
 
 - https://www.digitalocean.com/community/tutorials/initial-server-setup-with-debian-11
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-debian-11
@@ -18,7 +16,7 @@ Most of this information came from the following tutorials, so check them out if
 - https://www.howtogeek.com/675010/how-to-secure-your-linux-computer-with-fail2ban/
 - https://linuxiac.com/how-to-set-up-automatic-updates-on-debian/
 
-In this article many command have placeholders like `$SERVER_IP_ADDRESS` which you need to replace with the actual value.
+In this article many command have placeholders like `/*TMS*/$SERVER_IP_ADDRESS/*TME*/` which you need to replace with the actual value.
 
 - `/*TMS*/$SERVER_IP_ADDRESS/*TME*/`: the IP address of your server. You got this from Hetzner.
 - `/*TMS*/$PROJECT_USER/*TME*/`: the user that will be running your project. This can be your name, or for a server that is used for one project, the name of your project. Examples: `kevin` or `criticalnotes` or `loopwerk`.
@@ -80,7 +78,7 @@ When setting up the server with Hetzner you had the opportunity to select an SSH
 
 Instead of having to type in a password when we log into the server, it is much nicer and safer to instead login using private keys, so let's set that up now.
 
-If you don't have SSH keys on your own computer yet, create them with the following command:
+If you don't have SSH keys on your own computer yet, create them with the following command **on your own computer, not on the server**:
 
 ```
 ssh-keygen -t ed25519 -C "your_email@domain.com"
@@ -193,6 +191,8 @@ sudo service unattended-upgrades status
 
 # Chapter 2 - PostgreSQL
 
+## 2.1 - Setup
+
 Install PostgreSQL:
 
 ```
@@ -216,6 +216,85 @@ postgres=# CREATE DATABASE my_database_name OWNER /*TMS*/$PROJECT_USER/*TME*/;
 ```
 
 Press command+d to exit the PostgreSQL session.
+
+## 2.2 - Backups
+
+Let's make sure we make daily backups of our database.
+
+```
+mkdir ~/backups
+pico ~/backup.sh
+```
+
+Enter the following contents:
+
+```
+#!/usr/bin/bash
+
+set -x
+
+# Location to place backups
+backup_dir="/home//*TMS*/$PROJECT_USER/*TME*//backups/"
+
+# String to append to the name of the backup files
+backup_date=`date +%d-%m-%Y`
+
+# Number of days you want to keep copy of your databases
+number_of_days=30
+
+databases=`psql -X -l -t | cut -d'|' -f1 | sed -e 's/ //g' -e '/^$/d'`
+
+for i in $databases; do
+  if [ "$i" != "template0" ] && [ "$i" != "template1" ]; then
+    echo Dumping $i to $backup_dir$i\_$backup_date
+    pg_dump -Ox $i | gzip > $backup_dir$i\_$backup_date.sql.gz
+  fi
+done
+
+# Remove old backups
+find $backup_dir -type f -prune -mtime +$number_of_days -exec rm -f {} \;
+```
+
+Now we need to make sure the script is automatically run, using the cron.
+
+```
+crontab -e
+```
+
+Enter the following contents:
+
+```
+# m h dom mon dow command
+0 6 * * * /home//*TMS*/$PROJECT_USER/*TME*//backup.sh
+```
+
+This will run the script every day at 6:00.
+
+## 2.3 - Store the backups off-site
+
+The backups are now stored on the same server as the PostgreSQL database itself. It's much better than not having backups, but even better would be to store them off-site. I use [rsync.net](https://www.rsync.net) for this purpose. It's like a cloud server that you can run commands on via SSH, and you can send folders with files to it via rsync, sftp and scp. It's really great. After you signed up, just add this to the end of the backup script:
+
+```
+# Immediately store off-site
+rsync -avH ~/backups /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:backups
+```
+
+But to enable this to run without having to enter a password, let's enable SSH key authentication.
+
+On your server, logged in as `/*TMS*/$PROJECT_USER/*TME*/`, create a new SSH key:
+
+```
+ssh-keygen -t rsa -b 4096
+```
+
+Accept the defaults and do **NOT** enter a passphrase.
+
+Then upload it to the rsync.net server:
+
+```
+scp ~/.ssh/id_rsa.pub /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:.ssh/authorized_keys
+```
+
 
 # Chapter 3 - the Django backend
 
