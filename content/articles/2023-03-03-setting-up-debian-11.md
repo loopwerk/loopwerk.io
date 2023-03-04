@@ -9,7 +9,14 @@ I recently had to set up a brand new server for a website running on SvelteKit a
 
 I am a software developer and setting up servers and hosting isn't something I normally do, so I followed a bunch of different tutorials. In this article I want to combine all these tutorials, mostly for future me, but hopefully you'll find it useful as well.
 
-# Chapter 1 - Setting up the basics
+Most of this information came from the following tutorials, so check them out if you want more in-depth explanation of the commands:
+
+- https://www.digitalocean.com/community/tutorials/initial-server-setup-with-debian-11
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-debian-11
+- https://linuxize.com/post/how-to-set-up-ssh-keys-on-debian-10
+- https://computingforgeeks.com/how-to-install-node-js-on-ubuntu-debian/
+- https://www.howtogeek.com/675010/how-to-secure-your-linux-computer-with-fail2ban/
+- https://linuxiac.com/how-to-set-up-automatic-updates-on-debian/
 
 In this article many command have placeholders like `$SERVER_IP_ADDRESS` which you need to replace with the actual value.
 
@@ -19,9 +26,9 @@ In this article many command have placeholders like `$SERVER_IP_ADDRESS` which y
 - `/*TMS*/$FRONTEND_DOMAIN/*TME*/`: domain that's used for your frontend, like `www.example.com` (again without `http://` or `https://`)
 - `/*TMS*/$NAKED_DOMAIN/*TME*/`: the "naked" domain that's used for your frontend, without the `www` like `example.com` (you guessed it, without `http://` or `https://`)
 
-## 1.1 - Setting up the accounts
+# Chapter 1 - Setting up the basics
 
-Most of this information came from [this tutorial](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-debian-11), please refer to that if you want the full explanation for what the commands do.
+## 1.1 - Setting up the accounts
 
 First we're going to login as root, create a new user, and then allow the new user to run commands as root with `sudo`.
 
@@ -132,7 +139,57 @@ This should fail with the message `Permission denied (publickey)`. Now make sure
 ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
 ```
 
-You can now close the other SSH sessions, including the one where you are still logged in as root. From now all everything will be done as the normal user, using `sudo` where necessary.
+You can now close the other SSH sessions, including the one where you are still logged in as root. 
+
+**From now all everything will be done as the normal user, using `sudo` where necessary**.
+
+## 1.5 - Further securing your server with fail2ban
+
+Inevitably, hackers will try to log into your server, trying a bunch of common passwords. Let's automatically block anyone who fails to connect using fail2ban.
+
+```
+sudo apt install fail2ban
+sudo pico /etc/fail2ban/jail.local
+```
+
+Enter the following contents:
+
+```
+[DEFAULT]
+bantime = 2h
+
+[sshd]
+enabled = true
+maxretry = 1
+```
+
+Now enable end start fail2ban:
+
+```
+sudo systemctl enable fail2ban
+sudo service fail2ban start
+```
+
+You can see its status with the following command:
+
+```
+fail2ban-client status sshd
+```
+
+## 1.6 - Automatic security updates
+
+It would be great if important security updates automatically get installed on the server, and that's exactly what the `unattended-upgrades` package is for. Let's install it:
+
+```
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+```
+
+Check if the service is started:
+
+```
+sudo service unattended-upgrades status
+```
 
 # Chapter 2 - PostgreSQL
 
@@ -164,7 +221,7 @@ Press command+d to exit the PostgreSQL session.
 
 Debian doesn't come with the latest and greatest version of Python pre-installed, so we're going to install a new version using [pyenv](https://github.com/pyenv/pyenv). I'm also using [Poetry](https://python-poetry.org/) as my Python dependency- and virtual-environment manager of choice, rather than pip and virtualenv.
 
-## 2.1 - pyenv
+## 3.1 - pyenv
 
 Install pyenv:
 
@@ -179,7 +236,7 @@ pyenv install 3.10
 pyenv global 3.10
 ```
 
-## 2.2 - Poetry
+## 3.2 - Poetry
 
 For the actual usage of Poetry in your project I'll refer to the official docs on https://python-poetry.org/docs/basic-usage/. I use Poetry with two [optional groups](https://python-poetry.org/docs/managing-dependencies/#optional-groups): `dev` and `prod`.
 
@@ -189,7 +246,7 @@ On the server, install Poetry with this oneliner:
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-## 2.3 - Checking out the backend project
+## 3.3 - Checking out the backend project
 
 First we're going to clone the git project, and open the directory:
 
@@ -211,7 +268,7 @@ Make sure the Django project's settings are using your server's PostgreSQL datab
 poetry run ./manage.py migrate
 ```
 
-## 2.4 - systemd config
+## 3.4 - systemd config
 
 We now need to make sure that the Django server is automatically started when the server is started. For this we'll use systemd.
 
@@ -256,7 +313,7 @@ Check if it is indeed running:
 service /*TMS*/$BACKEND_DOMAIN/*TME*/ status
 ```
 
-## 2.5 - Nginx
+## 3.5 - Nginx
 
 While the Django server is now running, is isn't actually accessible yet. For that we'll install Nginx, and use it to proxy request to the uvicorn proces.
 
@@ -343,7 +400,7 @@ sudo certbot
 
 Answer the questions and select your domain for which you want to active HTTPS. Certbot then does the rest and you should be able to visit `https://$BACKEND_DOMAIN/`. Hooray!
 
-## 2.6 - Deploying changes
+## 3.6 - Deploying changes
 
 I use a really simple deploy script in my backend project:
 
@@ -379,7 +436,14 @@ This will allow the user to restart the backend and the future frontend services
 
 # Chapter 4 - The SvelteKit frontend
 
-## 4.1 - Checking out the code and creating a build
+## 4.1 - Installing Node.js
+
+```
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt install nodejs
+```
+
+## 4.2 - Checking out the code and creating a build
 
 ```
 cd ~
@@ -390,7 +454,7 @@ npm run build
 mv build deploy
 ```
 
-## 4.2 - systemd
+## 4.3 - systemd
 
 Create a new service config:
 
@@ -436,7 +500,7 @@ Check if it is indeed running:
 service /*TMS*/$FRONTEND_DOMAIN/*TME*/ status
 ```
 
-## 4.3 - Nginx
+## 4.4 - Nginx
 
 Create a site config file:
 
@@ -491,7 +555,7 @@ sudo certbot
 
 This time choosing the newly added domains. You should be able to visit `https://$FRONTEND_DOMAIN/`.
 
-## 4.4 - Deploying changes
+## 4.5 - Deploying changes
 
 I include the following deploy script in my SvelteKit project:
 
