@@ -443,6 +443,7 @@ server {
     }
 
     listen 80;
+    listen [::]:80
 }
 
 map $http_upgrade $connection_upgrade {
@@ -616,12 +617,14 @@ server {
     }
 
     listen 80;
+    listen [::]:80
 }
 
 server {
     server_name /*TMS*/$NAKED_DOMAIN/*TME*/;
     return 301 http:///*TMS*/$FRONTEND_DOMAIN/*TME*/$request_uri;
     listen 80;
+    listen [::]:80
 }
 ```
 
