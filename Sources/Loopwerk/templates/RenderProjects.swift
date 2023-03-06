@@ -59,7 +59,7 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
         }
       }
       div {
-        img(src: "https://img.shields.io/github/stars/\(project.metadata.repo)")
+        img(src: "https://img.shields.io/github/stars/\(project.metadata.repo)?color=f5b031&labelColor=566b78")
       }
     }
 
