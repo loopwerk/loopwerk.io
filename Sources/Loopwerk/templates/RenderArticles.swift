@@ -40,7 +40,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata
 }
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
-  let extraHeader = link(href: "/articles/tag/\(context.key)/feed.xml", rel: "alternate", title: "\(siteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
+  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(siteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
   return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata, extraHeader: extraHeader)
 }
 
