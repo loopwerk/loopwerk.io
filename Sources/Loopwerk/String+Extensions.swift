@@ -10,11 +10,9 @@ extension String {
       // Find all links with an href attribute
       let links = try doc.select("a[href]")
       for link in links {
-        // If the href doesn't start with a slash or mailto:, it's an external link.
-        // This is simplified but should work for most examples.
         // External links get target="_blank" and rel="nofollow"
         let href = try link.attr("href")
-        if !href.starts(with: "/") && !href.starts(with: "mailto:") {
+        if href.starts(with: "http://") || href.starts(with: "https://") {
           try link.attr("target", "_blank")
           try link.attr("rel", "nofollow")
         }
