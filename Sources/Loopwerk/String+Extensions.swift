@@ -1,5 +1,19 @@
 import SwiftSoup
 import Foundation
+import Parsley
+
+func tagnameToSpacing(_ tag: String) -> String {
+  switch tag {
+    case "h1":
+      return ""
+    case "h2":
+      return "  "
+    case "h3":
+      return "    "
+    default:
+      return ""
+  }
+}
 
 extension String {
   func improveHTML() -> String {
@@ -18,11 +32,29 @@ extension String {
         }
       }
 
+      var toc: [String] = []
+      var hasSeenTocTemplate = false
+
       // Add named anchors to headings
-      let headings = try doc.select("h1, h2, h3")
+      // Generate the Table of Contents
+      let headings = try doc.select("p, h1, h2, h3")
       for heading in headings {
-        let slug = try heading.text().slugified
+        let tagName = heading.tagName()
+        let text = try heading.text()
+
+        if (tagName == "p") {
+          if (text == "%TOC%") {
+            hasSeenTocTemplate = true
+          }
+          continue
+        }
+
+        let slug = text.slugified
         try heading.prepend("<a name=\"\(slug)\"></a>")
+
+        if hasSeenTocTemplate {
+          toc.append("\(tagnameToSpacing(tagName))- [\(text)](#\(slug))")
+        }
       }
 
       // Search all code blocks and replace /*HLS [optional title]*/[content]/*HLE*/ with a highlight span
@@ -41,7 +73,10 @@ extension String {
         try codeBlock.html(content)
       }
 
-      return try doc.body()?.html() ?? self
+      let result = try doc.body()?.html() ?? self
+      let tocString = toc.joined(separator: "\n")
+      let tocHtml = try Parsley.html(tocString)
+      return result.replacingOccurrences(of: "<p>%TOC%</p>", with: tocHtml)
     } catch {
       return self
     }

@@ -23,6 +23,11 @@ let package = Package(
         "SagaSwimRenderer",
         "PythonKit",
         "SwiftSoup",
-      ]),
+      ]
+    ),
+    .testTarget(
+      name: "LoopwerkTests",
+      dependencies: ["Loopwerk"]
+    ),
   ]
 )

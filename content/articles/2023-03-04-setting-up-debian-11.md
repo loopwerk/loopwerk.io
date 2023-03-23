@@ -26,30 +26,7 @@ In this article many command have placeholders like `/*TMS*/$SERVER_IP_ADDRESS/*
 
 # Table of contents
 
-- [Chapter 1 - Setting up the basics](#chapter-1-setting-up-the-basics)
-  - [1.1 - Setting up the accounts](#1-1-setting-up-the-accounts)
-  - [1.2 - Firewall](#1-2-firewall)
-  - [1.3 - Logging in with SSH keys](#1-3-logging-in-with-ssh-keys)
-  - [1.4 - Securing the SSH server](#1-4-securing-the-ssh-server)
-  - [1.5 - Further securing your server with fail2ban](#1-5-further-securing-your-server-with-fail2ban)
-  - [1.6 - Automatic security updates](#1-6-automatic-security-updates)
-- [Chapter 2 - PostgreSQL](#chapter-2-postgresql)
-  - [2.1 - Setup](#2-1-setup)
-  - [2.2 - Backups](#2-2-backups)
-  - [2.3 - Store the backups off-site](#2-3-store-the-backups-off-site)
-- [Chapter 3 - the Django backend](#chapter-3-the-django-backend)
-  - [3.1 - pyenv](#3-1-pyenv)
-  - [3.2 - Poetry](#3-2-poetry)
-  - [3.3 - Checking out the backend project](#3-3-checking-out-the-backend-project)
-  - [3.4 - systemd config](#3-4-systemd-config)
-  - [3.5 - Nginx](#3-5-nginx)
-  - [3.6 - Deploying changes](#3-6-deploying-changes)
-- [Chapter 4 - The SvelteKit frontend](#chapter-4-the-sveltekit-frontend)
-  - [4.1 - Installing Node.js](#4-1-installing-node-js)
-  - [4.2 - Checking out the code and creating a build](#4-2-checking-out-the-code-and-creating-a-build)
-  - [4.3 - systemd](#4-3-systemd)
-  - [4.4 - Nginx](#4-4-nginx)
-  - [4.5 - Deploying changes](#4-5-deploying-changes)
+%TOC%
 
 # Chapter 1 - Setting up the basics
 
