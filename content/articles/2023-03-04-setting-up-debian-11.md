@@ -294,7 +294,7 @@ Accept the defaults and do **NOT** enter a passphrase. Then upload it to the rsy
 scp ~/.ssh/id_rsa.pub /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:.ssh/authorized_keys
 ```
 
-Test that your key works by ssh'ing to your rsync.net filesystem (from your local system, as the user who created/uploaded the key):
+Test that your key works by ssh'ing to your rsync.net filesystem:
 
 ```
 ssh /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net ls
