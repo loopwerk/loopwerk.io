@@ -277,7 +277,7 @@ The backups are now stored on the same server as the PostgreSQL database itself.
 
 ```
 # Immediately store off-site
-rsync -avH ~/backups /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:backups
+rsync -avH ~/backups /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:
 ```
 
 But to enable this to run without having to enter a password, let's enable SSH key authentication.
