@@ -241,7 +241,7 @@ set -x
 backup_dir="/home//*TMS*/$PROJECT_USER/*TME*//backups/"
 
 # String to append to the name of the backup files
-backup_date=`date +%d-%m-%Y`
+backup_date=`date +%Y-%m-%d`
 
 # Number of days you want to keep copy of your databases
 number_of_days=30
