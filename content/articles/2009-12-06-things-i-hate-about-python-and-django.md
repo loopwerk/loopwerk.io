@@ -30,7 +30,7 @@ I'd like to end on a positive note though with the things I love about Python an
 * Significant whitespace. It makes other peoples Python code much easier to read, even though I still miss the closing brackets some times. They just make it easier to see where your block ends.
 * Keyword arguments. All languages should have them!
 * The community is great, both Python and Django (and Plone!)
-* Url config's, and how easy it is to create a beautiful url that links to a view.
+* Url configs, and how easy it is to create a beautiful url that links to a view.
 * Extending templates makes it easy to organize your html code
 * The Django documentation is very good. In fact, I think I have never seen an open source project with better documentation!
 * The thing I love most about Django has to be its buildin generic views like direct_to_template, object_list, object_detail, etc. It's so easy to create a view that shows a paginated list of items, or a view that uses a date in your url like /blog/2009/03.
