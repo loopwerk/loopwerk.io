@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, open source
+tags: swift, saga, open source, news
 summary: In the past few days I’ve made some pretty substantial improvements to Saga, to make it work for me and my website, which is now built using Saga.
 ---
 
