@@ -409,7 +409,7 @@ service /*TMS*/$BACKEND_DOMAIN/*TME*/ status
 
 ## 3.5 - Nginx
 
-While the Django server is now running, is isn't actually accessible yet. For that we'll install Nginx, and use it to proxy request to the uvicorn proces.
+While the Django server is now running, is isn't actually accessible yet. For that we'll install Nginx, and use it to proxy request to the gunicorn proces.
 
 Install Nginx and then create a site config file:
 
