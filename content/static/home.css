@@ -18,7 +18,11 @@
 .header img {
   width: 315px;
   height: 200px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+}
+
+.footer {
+  margin-top: 60px;
 }
 
 h1 {
@@ -41,7 +45,7 @@ h1 b {
   }
 
   .header img {
-    margin-bottom: 60px;
+    margin-bottom: 100px;
   }
 
   nav {
@@ -54,7 +58,8 @@ h1 b {
 
   .footer {
     display: block;
-    margin: 40px auto 0 auto;
+    margin: 200px auto 0 auto;
+    padding: 0 40px;
   }
 
   .header,
@@ -63,7 +68,7 @@ h1 b {
   }
 
   .footer img {
-    margin: 10px 16px;
+    margin: 20px;
   }
 
   .content {
@@ -82,12 +87,16 @@ h1 b {
   h1 {
     font-size: 40px;
     text-align: right;
-    padding: 0 38px 0 0;
+    padding: 0 48px 0 0;
     border-right: 3px solid var(--accent);
   }
 
   p {
-    padding-left: 35px;
+    padding-left: 45px;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
   }
 
   h1,
