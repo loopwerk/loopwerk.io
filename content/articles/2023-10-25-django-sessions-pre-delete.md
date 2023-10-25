@@ -7,7 +7,7 @@ summary: How do you delete baskets belonging to anonymous users when their sessi
 
 I'm in the process of migrating [a webshop](https://www.soundradix.com) from Django-Oscar to a custom shop, built from scratch. We want anonymous (not logged in) users to be able to add products to their basket, but we also want baskets to be cleaned up when that anonymous user's session expires. Plus, when an anonymous user logs in, their anonymous basket should then be assigned to that user, possibly by merging it with an existing open basket for the user.
 
-The biggest problem I had was the cleaning up of baskets when sessions expire. With Oscar we have literally over 31 million open baskets for anonymous users in our database, 99.9% of which are of course unable to ever be checked out because those sessions are long expired. This is something that I really wanted to do better with our new shop.
+The biggest problem I had was the cleaning up of baskets when sessions expire. With Oscar we have literally over 31 million open baskets for anonymous users in our database, 99.9% of which are of course unable to ever be checked out because those sessions are long expired - and deleted, by running the `clearsessions` management command. This is something that I really wanted to do better with our new shop.
 
 My first instinct was to model the basket like this:
 
