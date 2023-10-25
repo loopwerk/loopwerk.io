@@ -6,7 +6,7 @@ tags: python, django
 For a project I needed to create a Django model from a list of fields that were defined somewhere else. It took me hours to get this to work, so to save you the time, here is the solution:
 
 ```python
-bc.. fields = ['field_a', 'field_b', 'field_c']
+fields = ['field_a', 'field_b', 'field_c']
 
 # the base model with some basic fields
 class MyModel(models.Model):
