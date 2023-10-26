@@ -19,11 +19,13 @@ class Basket(Model):
 
 The basket would either belong to a user, or be assigned a session. When the session is removed from the database, the basket would automatically be deleted with it. And when the user logs in I'd simply assign the basket to the user and remove the session value. That was the idea at least.
 
-Sadly it wasn't quite this easy. The problem is that when a user logs in, that this user gets a new session (which is documented [right here](https://docs.djangoproject.com/en/4.2/topics/http/sessions/#django.contrib.sessions.backends.base.SessionBase.cycle_key)). And the old session is deleted, so the basket is also deleted, ever before you get a chance to assign the basket to the newly logged-in user, for example in a `user_logged_in` signal handler.
+Sadly it wasn't quite this easy. The problem is that when a user logs in, that this user gets a new session (which is documented [right here](https://docs.djangoproject.com/en/4.2/topics/http/sessions/#django.contrib.sessions.backends.base.SessionBase.cycle_key)). And the old session is deleted, so the basket is also deleted, before you ever get a chance to assign the basket to the newly logged-in user, for example in a `user_logged_in` signal handler.
 
-Okay, so a `ForeignKey` field to the `Session` table isn't going to work. What other options do we have? I could override the built-in `cycle_key` method to simply not do its thing. When a user logs in they keep their old session and in the `user_logged_in` signal handler I can update the basket. It's a simple solution, but one that leaves our users vulnerable to [session fixation attacks](https://en.wikipedia.org/wiki/Session_fixation), so really it's not a solution at all.
+I could override the built-in `cycle_key` method to simply not do its thing. When a user logs in they keep their old session and in the `user_logged_in` signal handler I can update the basket. It's a simple solution, but one that leaves our users vulnerable to [session fixation attacks](https://en.wikipedia.org/wiki/Session_fixation), so really it's not a solution at all. What other options do we have?
 
-In the end I removed the `session` field from my `Basket` model, and I am storing the basket ID inside of the session. Then I have a `pre_delete` signal handler reacting when sessions are deleted, and in this handler I then clean up the basket. The code looks like this:
+In the end I removed the `session` field from my `Basket` model, and I am storing the basket ID inside of the session. Then I have a `pre_delete` signal handler reacting when sessions are deleted, and in this handler I then clean up the basket.
+
+Let's look at the code. The code to get the basket for the current request is rather simple:
 
 ``` python
 def get_basket(request):
@@ -42,9 +44,9 @@ def get_basket(request):
         return basket
 ```
 
-The code to get the basket for the current request is rather simple. If the user is logged in we get (or create) a basket for the user. Otherwise we see if there's a `basket_id` value in the session and get that basket - or create a new basket for the anonymous user and store its ID in the session.
+If the user is logged in we get (or create) a basket for the user. Otherwise we see if there's a `basket_id` value in the session and get that basket - or create a new basket for the anonymous user and store its ID in the session.
 
-Of course I want baskets to be removed when session expires, which is what the following signal handler does:
+Of course I want baskets to be removed when sessions expires, which is what the following signal handler does:
 
 ``` python
 @receiver(pre_delete, sender=Session)
@@ -85,4 +87,4 @@ def assign_or_merge_basket(basket_id, user):
 
 And with all these pieces in place we have baskets for anonymous users that are getting cleaned up when sessions expire.
 
-One thing to note is that this only works with the database backend for sessions. If you use the cache backend then there's no `pre_delete` signal for when a sessions is removed. This is unfortunate and something I wish Django would improve, to make it possible to clean up database records tied to sessions.
+One thing to note is that this only works with the database backend for sessions. If you use the cache backend then there's no `pre_delete` signal for when a session is removed. This is unfortunate and something I wish Django would improve, to make it possible to clean up database records tied to sessions.
