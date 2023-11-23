@@ -1,8 +1,8 @@
 import Saga
 import HTML
 
-func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?, title pageTitle: String, siteMetadata: SiteMetadata, extraHeader: NodeConvertible = Node.fragment([])) -> Node {
-  baseLayout(section: .articles, title: pageTitle, siteMetadata: siteMetadata, extraHeader: extraHeader) {
+func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?, title pageTitle: String, extraHeader: NodeConvertible = Node.fragment([])) -> Node {
+  baseLayout(section: .articles, title: pageTitle, extraHeader: extraHeader) {
     articles.map { article in
       section {
         h1 {
@@ -35,15 +35,15 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?,
   }
 }
 
-func renderArticles(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.items, paginator: context.paginator, title: "Articles", siteMetadata: context.siteMetadata)
+func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
+  _renderArticles(context.items, paginator: context.paginator, title: "Articles")
 }
 
-func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
-  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(siteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata, extraHeader: extraHeader)
+func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
+  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
+  return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", extraHeader: extraHeader)
 }
 
-func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata, SiteMetadata>) -> Node {
-  _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", siteMetadata: context.siteMetadata)
+func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
+  _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)")
 }

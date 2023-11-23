@@ -11,7 +11,7 @@ enum Section: String {
   case notFound
 }
 
-func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteMetadata, extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
+func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   let titleSuffix = pageTitle.map { ": \($0)" } ?? ""
 
   return [
@@ -28,10 +28,10 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
         meta(content: "320", name: "MobileOptimized")
         meta(content: "Loopwerk", name: "og:site_name")
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen", name: "keywords")
-        title { siteMetadata.name + titleSuffix }
+        title { SiteMetadata.name + titleSuffix }
         link(href: "/static/style.css", rel: "stylesheet")
         link(href: "/static/prism.css", rel: "stylesheet")
-        link(href: "/articles/feed.xml", rel: "alternate", title: siteMetadata.name, type: "application/rss+xml")
+        link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
         link(href: "/static/images/favicon-32x32.png", rel: "icon", sizes: "32x32", type: "image/png")
         link(href: "/static/images/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
         link(href: "/static/images/favicon-16x16.png", rel: "icon", sizes: "16x16", type: "image/png")
@@ -94,7 +94,7 @@ func baseLayout(section: Section?, title pageTitle: String?, siteMetadata: SiteM
             p {
               a(href: "https://hachyderm.io/@kevinrenskers", rel: "nofollow", target: "_blank") { "Mastodon" }
               " | "
-              a(href: "\(siteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+              a(href: "\(SiteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
             }
           }
         }

@@ -1,8 +1,8 @@
 import Saga
 import HTML
 
-func renderProjects(context: ItemsRenderingContext<ProjectMetadata, SiteMetadata>) -> Node {
-  baseLayout(section: .projects, title: "Open Source", siteMetadata: context.siteMetadata) {
+func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
+  baseLayout(section: .projects, title: "Open Source") {
     article {
       div(class: "page_content opensource") {
         p {

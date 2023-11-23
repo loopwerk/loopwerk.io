@@ -1,8 +1,8 @@
 import Saga
 import HTML
 
-func renderApps(context: ItemsRenderingContext<AppMetadata, SiteMetadata>) -> Node {
-  baseLayout(section: .apps, title: "Apps", siteMetadata: context.siteMetadata) {
+func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
+  baseLayout(section: .apps, title: "Apps") {
     article {
       div(class: "page_content") {
         p {

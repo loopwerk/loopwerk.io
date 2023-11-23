@@ -1,10 +1,10 @@
 import Saga
 import HTML
 
-func renderPage(context: ItemRenderingContext<PageMetadata, SiteMetadata>) -> Node {
+func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")
 
-  return baseLayout(section: section, title: context.item.title, siteMetadata: context.siteMetadata) {
+  return baseLayout(section: section, title: context.item.title) {
     switch section {
       case .home:
         return renderHome(body: context.item.body)

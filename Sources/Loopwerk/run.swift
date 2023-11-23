@@ -48,17 +48,12 @@ extension Item where M == ProjectMetadata {
   }
 }
 
-struct SiteMetadata: Metadata {
-  let url: URL
-  let name: String
-  let now: Date
+enum SiteMetadata {
+  static let url = URL(string: "https://www.loopwerk.io")!
+  static let name = "Loopwerk"
+  static let author = "Kevin Renskers"
+  static let now = Date()
 }
-
-let siteMetadata = SiteMetadata(
-  url: URL(string: "https://www.loopwerk.io")!,
-  name: "Loopwerk",
-  now: Date()
-)
 
 func itemProcessor<M>(item: Item<M>) {
   // Improve the HTML by adding target="_blank" to external links
@@ -91,7 +86,7 @@ struct Run {
   }()
 
   static func main() async throws {
-    try await Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
+    try await Saga(input: "content", output: "deploy")
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
