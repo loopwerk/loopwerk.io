@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" width="200" alt="tag-changelog" />
+  <img src="logo.png" width="200" alt="tag-changelog" /> 
 </p>
 
 # loopwerk.io
