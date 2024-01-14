@@ -27,8 +27,10 @@ Even if the “auto” setting for the windscreen wiper would work perfectly, I 
 
 The model 3 doesn’t have a traditional gauge cluster behind the steering wheel, there’s only the big center tablet. This means you always have to look to the right to see your current speed, which doesn’t seem like such a good idea to me either. I got used to it, but I’m pretty sure it’s safer to have a speedometer in your direct line of sight.
 
-## No Apple CarPlay (or Android auto)
+## No Apple CarPlay (or Android Auto)
 No CarPlay also means no Google Maps or Waze for navigation. You’re stuck with Tesla’s navigation and it’s not good. At least not in Iceland it’s not. We’ve had wrong directions from the GPS on multiple occasions, the maps were not up to date, speed limits were very often not correct, search results didn’t always make sense. I started to mistrust the maps so much that I started to double check everything using Google Maps on my phone. Tesla, just add CarPlay. For me this would be a dealbreaker.
+
+Playing music from the phone via Bluetooth worked fine though, even things like playlists and seeing upcoming tracks worked as expected. Better than I expected in fact.
 
 ## Build quality, interior and comfort
 The biggest problem when it came to build quality was wind noise coming from the passenger window. Whenever it was windy (which it is all the time in Iceland) the passenger window would make a constant whistling sound, slowly driving us quite mad. Especially on higher speeds it got really bad. I wonder if those widespread stories about panel gaps have anything to do with this problem, or if there was something else going on.
