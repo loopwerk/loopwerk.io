@@ -3,7 +3,7 @@ tags: review
 summary: In December of 2023 my girlfriend and I went on an eight day vacation to Iceland, where we wanted to rent a car and travel the south coast. This seemed like the perfect chance to try out living with an electric car, since the charging infrastructure in Iceland is very good, and their electricity very cheap. So we rented a Tesla model 3 and let’s just say I have some opinions.
 ---
 
-# My one week with a Tesla 3
+# My one week with a Tesla
 
 Early 2023 I bought myself a hybrid car: a Volkswagen Golf GTE, which has a tiny battery that’s good for about 40 kilometers of range. Plenty for most of the trips I take, and on longer trips I don’t have any range anxiety because then it’s just a normal gasoline-powered car. But on those longer trips where the battery runs out after 40 kilometers and the car switches to the regular engine, I miss the silence and the instant power. After a few months I started to wonder if I made a mistake, if I shouldn’t have bought a fully electric car instead. And I was sure that my next car would definitely be fully electric.
 
