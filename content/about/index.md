@@ -13,4 +13,4 @@ Usability and design are always on my mind, even when writing code: this should 
 
 I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [/projects](/projects/) and a portfolio of apps I've created on [/apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
 
-Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://fosstodon.org/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
+Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
