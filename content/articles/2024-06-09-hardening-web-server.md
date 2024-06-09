@@ -32,7 +32,7 @@ My webserver is constantly getting hit by requests to random PHP files, even tho
 And when a new PHP vulnerability is discovered it gets even worse, sometimes the server is getting hit hundreds of thousands of times a day. Let’s do something about this!
 
 # Step 1: denying the requests
-When someone accesses a non-existing PHP file on my server, I don’t want my SvelteKit site to render a nice looking 404 page. That’s a huge waste of resources and bandwidth. So the first step is to flat out deny all requests to these kinds of files.
+When someone accesses a non-existing PHP file on my server, I don’t want my SvelteKit site to render a nice looking 404 page. That’s a huge waste of resources and bandwidth. So the first step is to deny requests to these kinds of files on the Nginx level.
 
 For this I created a file `/etc/nginx/deny_rules.conf` with the following contents:
 
