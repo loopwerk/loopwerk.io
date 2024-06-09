@@ -151,16 +151,22 @@ Inevitably, hackers will try to log into your server, trying a bunch of common p
 
 ```
 sudo apt install fail2ban
-sudo pico /etc/fail2ban/jail.local
+cd /etc/fail2ban
+sudo cp jail.conf jail.local
+sudo pico jail.local
 ```
 
-Enter the following contents:
+You’ll want to add or change the following variables in the `[DEFAULT]` section:
 
 ```
-[DEFAULT]
 bantime = 2h
+maxretry = 3
+banaction = ufw
+```
 
-[sshd]
+And in the `‌[sshd]` section you’ll want to add these variables:
+
+```
 enabled = true
 maxretry = 1
 ```
