@@ -1,5 +1,5 @@
 ---
-tags: django
+tags: django, python
 summary: Extending Django’s autocomplete widget with a new action which copies the linked user’s email address to the clipboard.
 ---
 
