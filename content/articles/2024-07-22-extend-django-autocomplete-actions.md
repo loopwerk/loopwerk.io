@@ -47,6 +47,8 @@ class CustomRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         return context
 ```
 
+This will fetch the model instance whenever the model class has an `email` field, and when there’s a value set (so when the autocomplete field has a value).
+
 The contents of the `admin/related_widget_wrapper.html` file:
 
 ```html
