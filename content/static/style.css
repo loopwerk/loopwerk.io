@@ -286,7 +286,7 @@ nav ul a.active {
 
 #site-footer {
   color: var(--secondary-text-color);
-  margin: 2em 0 1.5em 0;
+  margin: 5em 0;
   line-height: 1.5em;
   text-align: center;
   font-size: 90%;

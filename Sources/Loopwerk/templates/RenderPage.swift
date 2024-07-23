@@ -26,23 +26,7 @@ func renderHome(body: String) -> Node {
     }
 
     div(class: "content") {
-      h1 {
-        Node.raw("""
-A <b>good app</b> is like<br>
-a <b>mechanical</b><br>
-<b>watch</b>: lots of<br>
-moving parts all<br>
-working<br>
-<b>together</b> to<br>
-create a<br>
-<b>beautiful</b> and<br>
-<b>simple</b> interface.
-""")
-      }
-
-      div(class: "right") {
-        Node.raw(body)
-      }
+      Node.raw(body)
     }
 
     div(class: "footer") {
