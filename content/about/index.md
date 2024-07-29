@@ -7,11 +7,11 @@ section: about
 # Goedendag! 
 My name is **Kevin Renskers**.
 
-I’m a creative developer with a passion for good design and intuitive, user friendly interfaces. I love working on the front end, whether that's creating a beautiful and performant iOS app or using HTML, CSS and TypeScript to create interactive and responsive web apps. I also like working on the back end: I use Python and the Django framework, or Swift with the Vapor framework, to create developer-friendly APIs for those apps.
+I’m a creative developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces, especially on the "back-of-the-front-end" side of things; I love making stuff tick, architecting innovative solutions to complex problems. I also love working on the back-end: I use Python (with Django REST Framework or Django Ninja), or Swift (with Vapor), to create developer-friendly APIs for those apps.
 
 Usability and design are always on my mind, even when writing code: this should be usable, readable and beautiful too.
 
-I've been online since 1994, creating websites since 2000 and iOS apps since 2010, so you could say I am experienced. You can find my open source projects on [Open Source](/projects/) and a portfolio of apps I've created on [Apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
+I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [Open Source](/projects/) and a portfolio of apps I've created on [Apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
 
 Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
 
