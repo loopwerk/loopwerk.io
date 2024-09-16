@@ -108,7 +108,7 @@ $ service fail2ban restart
 Now when someone gets the 503 for accessing a `.php` file twice within one minute, they immediately get added to the firewall by fail2ban.
 
 # If you use CloudFlare
-If you proxy your site through CloudFlare than a bit more work is needed, because the IP address hitting your server is CloudFlare’s IP address, not the user’s IP address. You don’t want to add CloudFlare’s IP address to the firewall - it would break the site for everyone!
+If you proxy your site through CloudFlare then a bit more work is needed, because the IP address hitting your server is CloudFlare’s IP address, not the user’s IP address. You don’t want to add CloudFlare’s IP address to the firewall - it would break the site for everyone!
 
 First we need to make sure that Nginx has access to the user’s real IP address, by using the `real_ip` module. Edit `/etc/nginx/ngin.conf`:
 
