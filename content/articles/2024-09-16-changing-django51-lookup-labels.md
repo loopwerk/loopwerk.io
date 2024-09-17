@@ -25,7 +25,7 @@ This works fine: the header in the table is “PACE ACCOUNT ID”, and it’s so
 
 ![screenshot](/articles/images/lookup_after.png)
 
-But it’s also quite a lof of annoying boilerplate code to have to write with lots of repetition. Why can `list_filter` and `search_fields` work with related fields using the double underscore lookup method (`account_settings__pace_account_id`), yet `list_display` can not?
+But it’s also quite a lot of annoying boilerplate code to have to write with lots of repetition. Why can `list_filter` and `search_fields` work with related fields using the double underscore lookup method (`account_settings__pace_account_id`), yet `list_display` can not?
 
 Good news: this has been fixed in Django 5.1! I was super excited about this feature, since it would allow me to remove a bunch of boilerplate code. Now I can just add `account_settings__pace_account_id` to `list_display` and it just works, sortable and all. However, I immediately noticed something quite annoying: the header in the table isn’t just “PACE ACCOUNT ID” as I would expect, but rather the full “ACCOUNT SETTINGS PACE ACCOUNT ID”. This is way too long and takes up way too much space:
 
