@@ -7,7 +7,7 @@ summary: Django 5.1 adds related field lookup to the model admin’s list_displa
 
 I love Django’s admin feature. It’s so easy to quickly build out a complete CRUD admin for all your models, it’s truly one of Django’s strongest points. One thing that was always a bit annoying though was adding related fields to a `ModelAdmin`’s `list_display`.
 
-For example let’s say your `User` model has a one to one relationship with an `AccountSettings` model, and in the admin’s list of users you want to show the user’s names as well as the value of `AccountSettings.pace_account_id`. Until Django 5.1 you’d have to create a getter function like this:
+For example let’s say your `User` model has a one to one relationship with an `AccountSettings` model, and in the admin’s list of users you want to show the users' names as well as the value of `AccountSettings.pace_account_id`. Until Django 5.1 you’d have to create a getter function like this:
 
 ```python
 class UserAdmin(BaseUserAdmin):
