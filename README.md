@@ -14,7 +14,7 @@ A standard build from Xcode or the command line (`swift run`) skips the `createA
 
 ## Development server with auto reload
 ```
-npm install --global browser-sync
+pnpm add --global browser-sync
 swift run watch content Sources deploy
 ```
 
