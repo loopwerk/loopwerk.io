@@ -52,7 +52,7 @@ Dig a little bit deeper though and there are some notable differences.
 ## Dependency groups
 Poetry supports multiple groups of dependencies within a project. For example you can add a dependency group `dev`, and `prod` and `test`, and each group can have dependencies added that won’t be installed by default. The `prod` group can contain `gunicorn`, `dev` can have `ruff` and `test` can contain `pytest` for example. You can specify which group to install with `poetry install --with dev`, and you can also install multiple groups.
 
-This is not possible with uv, as far as I can see. There are dev dependencies, but they are always getting installed. It seems this is only useful for when you publish your code to PyPI, not for when you’re writing an app, like a Django site. This is too bad, since now all dependencies for development, production and testing are always getting installed in every environment. Yes, that installation is a very fast but it would still be good to be able to have separate dependencies for production which you might not want to (or can not) install on your MacBook.
+This is not possible with uv, as far as I can see. There are dev dependencies, but they are always getting installed. It seems this is only useful for when you publish your code to PyPI, not for when you’re writing an app, like a Django site. This is too bad, since now all dependencies for development, production and testing are always getting installed in every environment. Yes, that installation is very fast but it would still be good to be able to have separate dependencies for production which you might not want to (or can not) install on your MacBook.
 
 ## Updating dependencies
 Updating dependencies is quite easy in Poetry:
@@ -90,7 +90,7 @@ cowsay mooo
 
 With both pipx and uv you don’t even have to explicitly install the application, you can also run `pipx run cowsay mooo` or `uvx  cowsay mooo` to run it immediately.
 
-It’s nice that uv can replace pipx, especially since it’s way faster in installing the applications, but it doesn’t really solve any complexity, it doesn’t make my live easier.
+It’s nice that uv can replace pipx, especially since it’s way faster in installing the applications, but it doesn’t really solve any complexity, it doesn’t make my life easier.
 
 ## uv replaces pyenv
 And here we get to the very best feature of uv: it completely replaces [pyenv](https://github.com/pyenv/pyenv), mimicking the way [pnpm](https://pnpm.io) (a package manager for JavaScript projects that I absolutely love) works. You just configure your project to require a certain Python version (by setting the version number in the `.python-version` file), and then whenever you use `uv run` within the project the right Python version is installed, the virtual environment gets created, and the dependencies get installed. And it does that super fast too; installing Python 3.12.6 took about a second or two. When you want to upgrade the Python version you just edit `.python-version`, and that’s it: when you run any command using `uv run` the new Python version is automatically dowloaded and used.
