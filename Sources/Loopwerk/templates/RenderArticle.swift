@@ -71,7 +71,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 <script src="https://giscus.app/client.js"
         data-repo="loopwerk/loopwerk.io"
         data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
-        data-category="Announcements"
+        data-category="Article discussions"
         data-category-id="DIC_kwDOAtoOzs4Ciykw"
         data-mapping="pathname"
         data-strict="1"
