@@ -23,7 +23,7 @@ pdm add gunicorn --group prod
 pdm install --group dev
 ```
 
-One weird thing that I noticed: when you add a dependency it’s automatically and immediately getting installed. I prefer Poetry’s way where adding a new dependency doesn’t immediately install it - you have to run `poetry install` as a separate command. Why this is better will become more obvious in the next section.
+One weird thing that I noticed: when you add a dependency it’s automatically and immediately getting installed. I prefer Poetry’s way where adding a new dependency to a group doesn’t immediately install it - you have to run `poetry install --with [group]` as a separate command. Why this is better will become more obvious in the next section.
 
 ## Dependency groups
 While PDM supports multiple optional dependency groups, in practice every single dependency from every group gets installed, because running `pdm add` immediately installs the dependency, even when it’s for an optional group. After initializing an empty PDM project I ran the following commands:
@@ -44,7 +44,7 @@ Removed packaging v24.1
 Audited 4 packages in 0.04ms
 ```
 
-Probably a bug where it says it’s removing a package, but in reality it’s not. The effect is that I have to delete the entire `.venv` folder and then run `pdm install --group dev` for it to only install the base and development dependencies, without the production dependencies. But if I then add one more production package, for example `pdm add cowsay --group prod` it not only immediately installs cowsay but also gunicorn again. Sheesh! Poetry does this a hundred times better by its `add` command not immediately installing packages.
+Probably a bug where it says it’s removing a package, but in reality it’s not. The effect is that I have to delete the entire `.venv` folder and then run `pdm install --group dev` for it to only install the base and development dependencies, without the production dependencies. But if I then add one more production package, for example `pdm add cowsay --group prod` it not only immediately installs cowsay but also gunicorn again. Sheesh! Poetry does this a hundred times better by its `add` command not immediately installing packages (when specifying a group).
 
 This strange behavior happens whether or not you use uv. Adding a new package always installs it, running `pdm install --group dev` doesn’t get rid of production packages, and you need to recreate the virtual environment for that to happen. In practice this will only happen on your local machine where you add packages to your project; on your production server you’ll never run `pdm add`, only `pdm install --group prod`. But it *is* an issue because I have run into problems where a production dependency, not needed on my local machine, simply can not be installed on my local machine. Using PDM would not be possible which a project that has such dependencies.
 
