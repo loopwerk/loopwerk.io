@@ -31,7 +31,7 @@ I think both tools are about as easy to get started. Creating a new project with
 ```
 poetry init
 poetry add django
-poetry add ruff --with dev
+poetry add ruff --group dev
 poetry install --with dev
 poetry run ./manage.py
 ```
