@@ -4,12 +4,11 @@ section: about
 
 # About me
 
-# Goedendag! 
-My name is **Kevin Renskers**.
+Hi there! My name is **Kevin Renskers**.
 
-I’m a creative developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces, especially on the "back-of-the-front-end" side of things; I love making stuff tick, architecting innovative solutions to complex problems. I also love working on the back-end: I use Python (with Django REST Framework or Django Ninja), or Swift (with Vapor), to create developer-friendly APIs for those apps.
+I’m a creative software developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces, especially on the "back-of-the-front-end" side of things: making stuff tick. I also love working on the back-end to create developer-friendly APIs for those apps.
 
-Usability and design are always on my mind, even when writing code: this should be usable, readable and beautiful too.
+Usability and design are always on my mind, both when creating new features and when solving big architectural problems.
 
 I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [Open Source](/projects/) and a portfolio of apps I've created on [Apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
 
