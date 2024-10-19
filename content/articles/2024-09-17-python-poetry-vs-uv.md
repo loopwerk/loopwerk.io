@@ -9,7 +9,7 @@ In January of 2023 I switched all my Python projects to [Poetry](https://python-
 
 Poetry made installing, removing, and updating third party packages a lot simpler and a lot faster, there’s now a proper lock file, and publishing packages to PyPI no longer means having to own a doctorate’s degree. All of that is to say: I’m a fan.
 
-Recently Astral (known for their very fast Python formatter  [ruff](https://astral.sh/ruff)) announced [uv](https://docs.astral.sh/uv/), an extremely fast Python package and project manager. There’s been a lot of talk about it being written in Rust and thus locking out Python developers from maintaining this tool, it being owned and development by a VC-backed company with no business plan and seemingly no way to monetize any of their work, but I want to focus on actually using uv. How does it compare to Poetry?
+Recently Astral (known for their very fast Python formatter  [ruff](https://astral.sh/ruff)) announced [uv](https://docs.astral.sh/uv/), an extremely fast Python package and project manager. There’s been a lot of talk about it being written in Rust and thus locking out Python developers from maintaining this tool, it being owned and developed by a VC-backed company with no business plan and seemingly no way to monetize any of their work, but I want to focus on actually using uv. How does it compare to Poetry?
 
 ## Installation
 
