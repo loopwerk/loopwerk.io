@@ -110,16 +110,11 @@ Once again though, no real time support. Also they only do a strict one-to-one m
 ## Apollo
 [Apollo](http://www.apollodata.com) is a set of tools and products that help you to create a GraphQL server with subscription (real time updates) support. You still have to deal with the resolve functions yourself, but at least the subscription support is there. Finally! I actually went ahead and created a small trial project with this stack.
 
-Currently on the server I am using express, graphql-server-express and graphql-tools just for the GraphQL part,
-and then graphql-subscriptions plus subscriptions-transport-ws for the real time updates support. On the client I am
-using React, apollo-client, react-apollo and graphql-tag, plus subscriptions-transport-ws.
+Currently on the server I am using express, graphql-server-express and graphql-tools just for the GraphQL part, and then graphql-subscriptions plus subscriptions-transport-ws for the real time updates support. On the client I am using React, apollo-client, react-apollo and graphql-tag, plus subscriptions-transport-ws.
 
 This whole stack feels.. big. A lot of moving parts and packages, a lot of manual setting up of stuff as well. I do like to write my own GraphQL schema but I really don't want to deal with the resolve function, the ordering, the filtering, mutation data, etc etc. And while Apollo does support GraphQL subscriptions, it's far from my ideal solution because you still need to manually deal with created, updated, and deleted objects, mutate your local state when these real time messages come in.
 
-What I really want is "live" queries so that if anything changes in the data set, it's automatically updated, without
-setting up subscriptions on the server and on the client. And I also want that my GraphQL schema can automatically be
-persisted to a database, without me having to write database models and then having to manually deal with shifting data
-from and to GraphQL and the database.
+What I really want is "live" queries so that if anything changes in the data set, it's automatically updated, without setting up subscriptions on the server and on the client. And I also want that my GraphQL schema can automatically be persisted to a database, without me having to write database models and then having to manually deal with shifting data from and to GraphQL and the database.
 
 Sadly it just doesn't seem like this is possible at the moment. None of the servers offer the connection between GraphQL and database that I want plus real time updates, especially not in a way that I want.
 
