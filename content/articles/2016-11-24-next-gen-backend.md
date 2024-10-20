@@ -18,8 +18,7 @@ And some other wishes:
 2. It should be easy to add caching.
 3. Optimistic UI updates on mutations.
 4. I'd like it if all queries for the entire component tree end up sending one request to the server.
-5. On the client side the data should preferably end up in Redux so it can be persisted, debugged with dev tools, sent to
-[LogRocket](https://logrocket.com), etc.
+5. On the client side the data should preferably end up in Redux so it can be persisted, debugged with dev tools, sent to [LogRocket](https://logrocket.com), etc.
 6. It should be possible to have custom server-side logic.
 
 What follows is bunch of frameworks and technologies that I looked into, roughly in chronological order.
