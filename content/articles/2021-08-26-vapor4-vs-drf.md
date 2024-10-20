@@ -1,9 +1,9 @@
 ---
-tags: review, backend, swift, django
+tags: review, backend, swift, django, python
 summary: Over two years ago I wrote an article where I compared Vapor 3 to Django REST Framework. It's time for a rematch with Vapor 4.
 ---
 
-# Vapor 4 vs. Django REST Framework
+# Vapor 4 versus Django REST Framework
 
 Over two years ago I wrote [an article](/articles/2019/vapor-vs-drf/) where I compared Vapor 3 to Django REST Framework. Back then I was building a REST API for a [side project](https://www.critical-notes.com) using Vapor 3, got stuck with some problems and decided to try to build the same system using DRF, and to compare the two. At the end of the article I came to the conclusion that there wasn't a clear winner; both had their pros and cons. So which one did I end up choosing?
 

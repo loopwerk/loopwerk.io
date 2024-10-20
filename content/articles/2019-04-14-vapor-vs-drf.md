@@ -1,8 +1,8 @@
 ---
-tags: review, backend, swift, django
+tags: review, backend, swift, django, python
 ---
 
-# Vapor 3 vs. Django REST Framework
+# Vapor 3 versus Django REST Framework
 A little while ago [I wrote about starting a new side project](/articles/2019/vapor/), where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit of a struggle. The conclusion of that article was that I didn't know how to continue: stick with Vapor 3 despite the problems I was having, or switch to Python.
 
 Well, as an exercise I rebuilt the entire backend in Python using Django and Django REST Framework (DRF), while also adding new features and unit tests to both versions of my backend. Here are my findings now that I have two more-or-less identical backends.
