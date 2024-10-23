@@ -15,13 +15,13 @@ Recently Astral (known for their very fast Python formatter  [ruff](https://astr
 
 The easiest way to install Poetry is with [pipx](https://pipx.pypa.io), which is a great tool to use for globally installing Python applications:
 
-`pipx install poetry`
+`$ pipx install poetry`
 
 You can also use their install script (`curl -sSL https://install.python-poetry.org | python3 -`) but I wouldn’t recommend it. Poetry then tends to break whenever you upgrade Python, requiring you to reinstall Poetry again. That’s what so great about pipx: every application gets its own isolated environment.
 
 Installing uv is even easier. You don’t even need pipx installed - which makes sense since uv replaces pipx among other tools:
 
-`brew install uv`
+`$ brew install uv`
 
 I think this is a small win for uv since you don’t need to first install pipx. uv really is meant to replace a whole bunch of Python tools.
 
@@ -29,18 +29,18 @@ I think this is a small win for uv since you don’t need to first install pipx.
 I think both tools are about as easy to get started. Creating a new project with their `init` commands, adding dependencies, it’s all very similar:
 
 ```
-poetry init
-poetry add django
-poetry add ruff --group dev
-poetry install --with dev
-poetry run ./manage.py
+$ poetry init
+$ poetry add django
+$ poetry add ruff --group dev
+$ poetry install --with dev
+$ poetry run ./manage.py
 ```
 
 ```
-uv init
-uv add django
-uv add ruff --dev
-uv run ./manage.py
+$ uv init
+$ uv add django
+$ uv add ruff --dev
+$ uv run ./manage.py
 ```
 
 Uv does have a `uv sync` command to install the dependencies, but in practice you won’t need to run that, as `uv run` already makes sure that the dependencies are in sync, which is pretty nice.
@@ -58,11 +58,11 @@ This is not possible with uv, as far as I can see. There are dev dependencies, b
 Updating dependencies is quite easy in Poetry:
 
 ```
-poetry show --outdated --top-level --with dev --with prod
-poetry update
-poetry update --with dev
-poetry update django
-poetry update ruff --with dev
+$ poetry show --outdated --top-level --with dev --with prod
+$ poetry update
+$ poetry update --with dev
+$ poetry update django
+$ poetry update ruff --with dev
 ```
 
 The only downside here is that you always have to deal with those dependency groups (if you have them), but other than that, it works very well.
@@ -75,8 +75,8 @@ I think this doesn’t make much sense. The way that the uv CLI is structured is
 One of the goals of uv is to replace a bunch of different Python tools, amongst which is pipx. pipx is used to “install and run Python applications in isolated environments”. For example:
 
 ```
-pipx install cowsay
-cowsay mooo
+$ pipx install cowsay
+$ cowsay mooo
 ```
 
 This installs the Python application cowsay into its own isolated environment, and makes the binary available on the PATH.
@@ -84,8 +84,8 @@ This installs the Python application cowsay into its own isolated environment, a
 uv replaces pipx with familiar commands:
 
 ```
-uv tool install cowsay
-cowsay mooo
+$ uv tool install cowsay
+$ cowsay mooo
 ```
 
 With both pipx and uv you don’t even have to explicitly install the application, you can also run `pipx run cowsay mooo` or `uvx  cowsay mooo` to run it immediately.
@@ -98,10 +98,10 @@ And here we get to the very best feature of uv: it completely replaces [pyenv](h
 The best part is that the Python version is stored in the git repo, so when you deploy the changes to production uv will automatically install and use the same Python version there as well. This is an amazing feature and something I really wish Poetry did as well. But instead you’ll need to combine Poetry with pyenv like so:
 
 ```
-poetry config virtualenvs.prefer-active-python true
-pyenv install 3.12.6
-pyenv local 3.12.6
-poetry install
+$ poetry config virtualenvs.prefer-active-python true
+$ pyenv install 3.12.6
+$ pyenv local 3.12.6
+$ poetry install
 ```
 
 The magic bit here is the `pyenv local 3.12.6` command, which you run in your Python project. This also stores the Python version in `.python-version`, which pyenv uses to make that the active Python version within this folder. And because of the `virtualenvs.prefer-active-python` Poetry config change, Poetry now uses that Python version as well.
