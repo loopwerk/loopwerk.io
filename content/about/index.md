@@ -4,13 +4,15 @@ section: about
 
 # About me
 
-Hi there! My name is **Kevin Renskers**.
+Hi there! 
 
-I’m a creative software developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces, especially on the "back-of-the-front-end" side of things: making stuff tick. I also love working on the back-end to create developer-friendly APIs for those apps.
+My name is **Kevin Renskers**, and I’m a creative software developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces and their APIs. 
 
-Usability and design are always on my mind, both when creating new features and when solving big architectural problems.
+I created my first website in 2000 and my first iOS app in 2010. I’ve been working as a fully remote freelance developer since 2016, fixing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer and Unilever. I’ve mentored multiple junior developers, both at other companies and in my own [mentorship program](/mentor/).
 
-I've been online since 1994, creating websites since 2000 and iOS apps since 2010. You can find my open source projects on [Open Source](/projects/) and a portfolio of apps I've created on [Apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
+You can expect a healthy dose of Dutch honesty from me. I’ll just tell you how it is, what needs to be fixed, without the bullshit. I think our industry could use some more honesty and better ethics.
+
+ You can find my open source projects on [Open Source](/projects/) and a portfolio of apps I've created on [Apps](/apps/). My CV, if you need it, can be downloaded [here](/about/KevinRenskers.pdf).
 
 Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
 

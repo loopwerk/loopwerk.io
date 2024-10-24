@@ -69,6 +69,10 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
               }
 
               li {
+                a(class: "link_4\(section == .mentorshipProgram ? " active" : "")", href: "/mentor/") { "Mentorship Program" }
+              }
+              
+              li {
                 a(class: "link_6\(section == .about ? " active" : "")", href: "/about/") { "About" }
               }
             }
