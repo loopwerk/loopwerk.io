@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "PythonKit",
-        "repositoryURL": "https://github.com/pvieito/PythonKit",
-        "state": {
-          "branch": null,
-          "revision": "d383a1b1e35fff450fe5ca2443c6d1ec9e040ec4",
-          "version": "0.2.2"
-        }
-      },
-      {
         "package": "Saga",
         "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
@@ -80,6 +71,15 @@
           "branch": null,
           "revision": "7ec44e7384793e507cf046336aef68586719a24e",
           "version": "1.0.2"
+        }
+      },
+      {
+        "package": "SwiftGD",
+        "repositoryURL": "https://github.com/twostraws/SwiftGD",
+        "state": {
+          "branch": "main",
+          "revision": "07650dcb343d5b045598459fd3aad0936e0259bf",
+          "version": null
         }
       },
       {

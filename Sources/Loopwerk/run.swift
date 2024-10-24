@@ -3,7 +3,6 @@ import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 import Foundation
 import PathKit
-import PythonKit
 
 struct ArticleMetadata: Metadata {
   let tags: [String]
@@ -147,22 +146,16 @@ extension Saga {
       .joined(separator: "/")
       .dropFirst())
 
-    let sys = Python.import("sys")
-    sys.path.append(rootPath)
-
-    let module = Python.import("ImageGenerator")
-    let generator = module.ImageGenerator(rootPath)
-
     let createArticleImagesDateFormatter = DateFormatter()
     createArticleImagesDateFormatter.dateFormat = "MMMM dd, yyyy"
     createArticleImagesDateFormatter.timeZone = .current
 
     let articles = fileStorage.compactMap { $0.item as? Item<ArticleMetadata> }
-
+    
     for article in articles {
-      let date = createArticleImagesDateFormatter.string(from: article.date)
       let destination = (self.outputPath + "static" + "images" + article.relativeSource.lastComponentWithoutExtension).string + ".png"
-      generator.generate(article.title, date, destination)
+      let generator = ImageGenerator(rootPath: rootPath)
+      generator?.generate(title: article.title, outputPath: destination)
     }
 
     return self
