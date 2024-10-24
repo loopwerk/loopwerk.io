@@ -40,7 +40,7 @@ from django.forms import utils
 
 def custom_pretty_name(name):
     if LOOKUP_SEP in name and inspect.stack()[1][3] == "label_for_field":
-        name = name.split(LOOKUP_SEP)[1]
+        name = name.split(LOOKUP_SEP)[-1]
     return pretty_name(name)
 
 
