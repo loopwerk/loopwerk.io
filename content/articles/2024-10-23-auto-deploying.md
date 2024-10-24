@@ -121,7 +121,7 @@ Description=node daemon for deploy.example.com
 User=example
 Group=www-data
 WorkingDirectory=/home/example/deploy.example.com
-ExecStart=node dist/index.js
+ExecStart=node index.js
 Restart=always
 RestartSec=3
 
@@ -131,7 +131,7 @@ WantedBy=multi-user.target
 
 And an Nginx site to host it:
 
-#### <i class="fa-regular fa-file-code"></i> **/etc/nginx/sites-available/deploy.example.com**
+#### <i class="fa-regular fa-file-code"></i> **/etc/nginx/sites-enabled/deploy.example.com**
 ```
 server {
     server_name deploy.example.com;
