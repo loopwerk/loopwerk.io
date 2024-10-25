@@ -38,9 +38,9 @@ class Character(models.Model):
         return self.name
 ```
 
-As you can see, a D&D campaign has multiple members, and each member has a role: player or dungeon master (this is stored in the `is_dm` boolean field). Campaigns be public or private (`is_private`). Then there’s a `Character` model, because of course we want to store which character we play in our D&D campaign.
+As you can see, a D&D campaign has multiple members, and each member has a role: player or dungeon master (this is stored in the `is_dm` boolean field). Campaigns be public or private (`is_private`). Then there’s a `Character` model, because of course we want to store the characters we play in our D&D campaigns.
 
-## Characters
+## Django REST Framework
 I’m going to start by building the characters endpoints in DRF. I’m going to assume that people reading this article already have at least a basic knowledge of DRF so I am not going to explain every line of code in detail, but most things should be pretty clear.
 
 There are two important rules for the character API: 
