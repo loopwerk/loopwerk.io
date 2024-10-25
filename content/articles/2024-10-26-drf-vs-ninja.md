@@ -318,7 +318,7 @@ Instead the code has to be changed like so:
 from ninja import Router
 from ninja_crud import views, viewsets
 from .models import Character
-from .perms import campaignMemberOrPublicReadOnlyPermission
+from .permissions import campaignMemberOrPublicReadOnlyPermission
 from .schemas import CharacterIn, CharacterOut
 
 router = Router()
