@@ -162,7 +162,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
         return qs
 ```
 
-With this change users can only fetch characters for campaigns they’re a member of, or of public campaigns. Furthermore, only members can make non-GET requests, meaning that only members can create new characters, edit characters, or delete characters. And only DMs can fetch hidden characters.
+With this change users can only fetch characters for campaigns they’re a member of, and of public campaigns. Furthermore, only members can make non-GET requests, meaning that only members can create new characters, edit characters, or delete characters. And only DMs can fetch hidden characters.
 
 All that’s left to do is to make sure the `campaign_id` can’t be changed when creating or updating a character. That’s very easy with a small addition to our `CharacterViewSet` as well:
 
@@ -266,9 +266,7 @@ urlpatterns = [
 
 Our basic `CharacterViewSet` for DRF was literally four lines of code, and it did the same as what Ninja needs thirty lines for (excluding newlines, so in reality it’s even more). The problem is that Ninja doesn’t have something like a `ViewSet` which bundles the CRUD operations; you need to write an endpoint for every operation. I also don’t really like how we need to use `get_object_or_404` all over the place, because Ninja doesn’t handle exceptions itself, unlike DRF.
 
-And we haven’t even started on permissions, making sure people only view characters of campaigns they have access to, making sure only the DM has access to the hidden characters, all the stuff we did before with DRF with very few lines of code.
-
-Then I came across a third party package called `django-ninja-crud`, which aims to solve this boilerplate code. Let’s refactor our views.
+And we haven’t even started on permissions, making sure people only view characters of campaigns they have access to, making sure only the DM has access to the hidden characters, all the stuff we did before with DRF with very few lines of code. Then I came across a third party package called `django-ninja-crud`, which aims to solve this boilerplate code. Let’s refactor our views.
 
 ## Django Ninja CRUD
 After reading Django Ninja CRUD’s documentation I changed my views and URL config as such:
