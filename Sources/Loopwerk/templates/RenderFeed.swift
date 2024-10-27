@@ -8,7 +8,7 @@ func renderFeed(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
     author: SiteMetadata.author,
     baseURL: SiteMetadata.url,
     feedPath: context.outputPath.string,
-    items: Array(context.items.prefix(20)),
+    items: context.items,
     summary: { item in
       return item.summary
     }
