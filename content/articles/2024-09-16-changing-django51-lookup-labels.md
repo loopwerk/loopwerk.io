@@ -48,7 +48,7 @@ pretty_name = utils.pretty_name
 utils.pretty_name = custom_pretty_name
 ```
 
-This code needs to be placed inside of `manage.py`. Placing it anywhere else means that Django still uses the original version before it’s replaced with the custom one. Once you add this code to the top of `manage.py`, the table headers are now nicely succinct, and by using Python’s `inspect` module we only change the behavior when the function is called by Django’s own `label_for_field` method. 
+This code needs to be placed inside of `settings.py`, all the way at the top. Placing it anywhere else means that Django still uses the original version before it’s replaced with the custom one. Once you add this code to the top of `settings.py`, the table headers are now nicely succinct, and by using Python’s `inspect` module we only change the behavior when the function is called by Django’s own `label_for_field` method. 
 
 We also defer to the original method to return the pretty name, rather than copying Django’s code into our custom function. So in the case that Django would modify their `pretty_name` implementation, we automatically make use of it as well.
 
