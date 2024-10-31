@@ -1,8 +1,8 @@
 import Saga
 import HTML
 
-func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?, title pageTitle: String, extraHeader: NodeConvertible = Node.fragment([])) -> Node {
-  baseLayout(section: .articles, title: pageTitle, extraHeader: extraHeader) {
+func _renderArticles(_ articles: [Item<ArticleMetadata>], paginator: Paginator?, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
+  baseLayout(section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
     articles.map { article in
       section {
         h1 {
@@ -41,7 +41,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", extraHeader: extraHeader)
+  return _renderArticles(context.items, paginator: context.paginator, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
 }
 
 func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {

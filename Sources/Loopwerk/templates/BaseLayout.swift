@@ -11,7 +11,7 @@ enum Section: String {
   case notFound
 }
 
-func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
+func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   let titleSuffix = pageTitle.map { ": \($0)" } ?? ""
 
   return [
@@ -94,7 +94,7 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
             p {
               a(href: "https://hachyderm.io/@kevinrenskers", rel: "nofollow", target: "_blank") { "Mastodon" }
               " | "
-              a(href: "\(SiteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+              a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
             }
           }
         }
