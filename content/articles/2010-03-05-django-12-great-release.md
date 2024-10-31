@@ -15,7 +15,7 @@ Personally I don't expect I will use this a lot, but it's great to see that it's
 
 ## Cached template loaders
 
-Before Django 1.2, all templates needed to be parsed from disc for every request. This can be a (small) problem if you have lots of nested templates. I am very happy with this change, but have yet to see its impact. As a side-effect of the new template loaders, it is now much much easier to use different template languages like Jinja2, which I blogged about in a [previous post](/articles/2009/making-django-suck-less/).
+Before Django 1.2, all templates needed to be parsed from disc for every request. This can be a (small) problem if you have lots of nested templates. I am very happy with this change, but have yet to see its impact. As a side-effect of the new template loaders, it is now much much easier to use different template languages like Jinja2, which I blogged about in a [previous post](/articles/2009/using-jinja/).
 
 ## Custom email backends
 
