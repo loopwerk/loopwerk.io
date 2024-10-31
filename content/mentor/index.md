@@ -5,9 +5,9 @@ section: mentorshipProgram
 # Mentorship Program
 
 # Mentorship Program
-Since January 2021 I am offering a Mentorship Program, where using one-on-one video calls, screen sharing and pair programming I will help you level up as a **web developer**. This Mentorship Program is completely free; I donate a few hours every week to help underprivileged people from the developer community.
+Since January 2021 I am offering a Mentorship Program, where using one-on-one video calls, screen sharing and pair programming I will help you level up as a **web developer**. This Mentorship Program is **completely free**; I donate a few hours every week to help underprivileged people from the developer community.
 
-From 2021 to 2023 this Mentorship Program was focused on iOS development, but since 2024 I refocused back on the open web and as such the Mentorship Program will also focus on web development -- specifically HTML, CSS, JavaScript, TypeScript, Svelte and SvelteKit, Python, Django and Django REST Framework.
+From 2021 to 2023 this Mentorship Program was focused on iOS development, but in 2023 I refocused back on the open web and as such the Mentorship Program is now also focused on web development -- specifically HTML, CSS, JavaScript, TypeScript, Svelte and SvelteKit, Python, Django and Django REST Framework.
 
 Please note that I do not use React, I am not a fan of React, and I cannot give support on React code and projects.
 
@@ -19,7 +19,7 @@ So what will we discuss in these meetings? Maybe you're stuck on a problem and n
 ## What do I expect from you?
 You're going to need a good enough internet connection to talk and share your screen. You need to be able to speak English or Dutch. You're going to need at least a basic understanding of HTML, JavaScript and/or Python - I can't teach you that from scratch.
 
-Finally, as my preferred "office hours" are from 16:00 to 17:00 [Central European Time](https://time.is/CET) (Amsterdam), our schedules have to match as well. This means that it's probably quite hard to schedule meetings if you're in the United States for example.
+Finally, as my preferred "office hours" are between 16:00 and 18:00 [Central European Time](https://time.is/CET) (Amsterdam), our schedules have to match as well. This means that it's probably not so easy to schedule meetings if you're in the United States for example.
 
 ## Interested?
 Contact me on [Mastodon](https://hachyderm.io/@kevinrenskers) or email me at <kevin@loopwerk.io>.
