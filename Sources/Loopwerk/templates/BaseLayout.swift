@@ -8,6 +8,7 @@ enum Section: String {
   case projects
   case mentorshipProgram
   case about
+  case hireMe
   case notFound
 }
 
@@ -53,27 +54,31 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
 
             ul {
               li {
-                a(class: "link_1\(section == .home ? " active" : "")", href: "/") { "Home" }
+                a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
 
               li {
-                a(class: "link_2\(section == .articles ? " active" : "")", href: "/articles/") { "Articles" }
+                a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
               }
 
               li {
-                a(class: "link_3\(section == .apps ? " active" : "")", href: "/apps/") { "Apps" }
+                a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
               }
 
               li {
-                a(class: "link_4\(section == .projects ? " active" : "")", href: "/projects/") { "Open Source" }
+                a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
               }
 
               li {
-                a(class: "link_4\(section == .mentorshipProgram ? " active" : "")", href: "/mentor/") { "Mentorship Program" }
+                a(class: section == .mentorshipProgram ? "active" : "", href: "/mentor/") { "Mentorship" }
               }
               
               li {
-                a(class: "link_6\(section == .about ? " active" : "")", href: "/about/") { "About" }
+                a(class: section == .about ? "active" : "", href: "/about/") { "About" }
+              }
+              
+              li {
+                a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
               }
             }
           }

@@ -230,23 +230,19 @@ header {
 
 nav img {
   display: inline-block;
-  height: 30px;
-}
-
-nav img {
-  height: 30px;
-  margin-right: 12px;
 }
 
 nav {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 nav ul {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
+  column-gap: 24px;
 }
 
 nav ul a {
@@ -254,7 +250,7 @@ nav ul a {
   text-decoration: none;
   color: #ccc;
   border-bottom: 2px solid var(--nav-background);
-  margin: 0 4px;
+  font-size: 1.3rem;
 }
 
 nav ul a:hover,
@@ -279,8 +275,16 @@ nav ul a.active {
     width: 800px;
   }
 
+  nav {
+    gap: 30px;
+  }
+  
+  nav ul {
+    column-gap: 20px;
+  }
+  
   nav ul a {
-    margin: 0 10px;
+    font-size: 1rem;
   }
 }
 
