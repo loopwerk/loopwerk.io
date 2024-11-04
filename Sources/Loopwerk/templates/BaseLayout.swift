@@ -39,6 +39,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         link(href: "/favicon.ico", rel: "shortcut icon")
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
         link(href: "/site.webmanifest", rel: "manifest")
+        link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
 
         switch section {
           case .home:
