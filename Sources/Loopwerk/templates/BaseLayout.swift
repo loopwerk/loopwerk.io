@@ -23,6 +23,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
         meta(content: "#566B78", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: light)"])
         meta(content: "Kevin Renskers", name: "author")
+        meta(content: "Loopwerk", name: "apple-mobile-web-app-title")
         meta(content: "initial-scale=1.0, width=device-width", name: "viewport")
         meta(content: "telephone=no", name: "format-detection")
         meta(content: "True", name: "HandheldFriendly")
@@ -33,9 +34,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         link(href: "/static/style.css", rel: "stylesheet")
         link(href: "/static/prism.css", rel: "stylesheet")
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
-        link(href: "/static/images/favicon-32x32.png", rel: "icon", sizes: "32x32", type: "image/png")
-        link(href: "/static/images/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
-        link(href: "/static/images/favicon-16x16.png", rel: "icon", sizes: "16x16", type: "image/png")
+        link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
+        link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
+        link(href: "/favicon.ico", rel: "shortcut icon")
+        link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
+        link(href: "/site.webmanifest", rel: "manifest")
 
         switch section {
           case .home:

@@ -242,7 +242,7 @@ nav ul {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
-  column-gap: 10px;
+  column-gap: 11px;
 }
 
 nav ul a {
@@ -277,7 +277,7 @@ nav ul a.active {
   nav {
     gap: 30px;
   }
-  
+
   nav ul {
     column-gap: 20px;
   }
