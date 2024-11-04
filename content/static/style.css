@@ -242,7 +242,7 @@ nav ul {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
-  column-gap: 24px;
+  column-gap: 10px;
 }
 
 nav ul a {
@@ -250,7 +250,6 @@ nav ul a {
   text-decoration: none;
   color: #ccc;
   border-bottom: 2px solid var(--nav-background);
-  font-size: 1.3rem;
 }
 
 nav ul a:hover,
@@ -282,21 +281,20 @@ nav ul a.active {
   nav ul {
     column-gap: 20px;
   }
-  
-  nav ul a {
-    font-size: 1rem;
-  }
 }
 
 #site-footer {
+  border-top: 1px solid var(--secondary-text-color);
   color: var(--secondary-text-color);
-  margin: 5em 0;
+  padding-top: 1em;
   line-height: 1.5em;
   text-align: center;
   font-size: 90%;
   font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono",
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  max-width: 500px;
+  margin: 2em auto;
 }
 
 #site-footer p {
