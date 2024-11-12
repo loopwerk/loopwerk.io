@@ -1,6 +1,6 @@
 ---
 tags: javascript, sveltekit
-summary: Solving problems by putting writable reactivate stores in Svelte’s context.
+summary: Solving problems by putting writable reactive stores in Svelte’s context.
 ---
 
 # Putting Svelte stores inside context for fun and profit
