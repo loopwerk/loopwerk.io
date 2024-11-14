@@ -26,7 +26,7 @@ Installing uv is even easier. You don’t even need pipx installed - which makes
 I think this is a small win for uv since you don’t need to first install pipx. uv really is meant to replace a whole bunch of Python tools.
 
 ## Getting started
-I think both tools are about as easy to get started. Creating a new project with their `init` commands, adding dependencies, it’s all very similar:
+I think both tools are about equally easy to get started with. Creating a new project with their `init` commands, adding dependencies, it’s all very similar:
 
 ```
 $ poetry init
