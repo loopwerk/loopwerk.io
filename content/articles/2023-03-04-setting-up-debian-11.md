@@ -314,31 +314,21 @@ You should not be asked for a password.
 
 # Chapter 3 - the Django backend
 
-Debian doesn't come with the latest and greatest version of Python pre-installed, so we're going to install a new version using [pyenv](https://github.com/pyenv/pyenv). I'm also using [Poetry](https://python-poetry.org/) as my Python dependency- and virtual-environment manager of choice, rather than pip and virtualenv.
+Debian doesn't come with the latest and greatest version of Python pre-installed, but that doesn’t matter since we should be using [uv](https://docs.astral.sh/uv/) as our dependency- and virtual-environment manager of choice. You can then specify the specific Python version to use inside of each Python project, and uv will install it automatically.
 
-## 3.1 - pyenv
+## 3.1 - uv
 
-Install pyenv:
-
-```
-curl https://pyenv.run | bash
-```
-
-After that you can install a new version of Python, and set it as the globally used version:
+Install uv:
 
 ```
-pyenv install 3.10
-pyenv global 3.10
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## 3.2 - Poetry
-
-For the actual usage of Poetry in your project I'll refer to the official docs on https://python-poetry.org/docs/basic-usage/. I use Poetry with two [optional groups](https://python-poetry.org/docs/managing-dependencies/#optional-groups): `dev` and `prod`.
-
-On the server, install Poetry with this oneliner:
+For the actual usage of uv in your project I'll refer to the official docs on https://docs.astral.sh/uv/. I use uv with two [dependency groups](https://docs.astral.sh/uv/concepts/dependencies/#dependency-groups): `dev` and `prod`, which I make optional with the following two lines added to `pyproject.toml`:
 
 ```
-curl -sSL https://install.python-poetry.org | python3 -
+[tool.uv]
+default-groups = []
 ```
 
 ## 3.3 - Checking out the backend project
@@ -351,17 +341,18 @@ git clone your_backend_git_repo_address /*TMS*/$BACKEND_DOMAIN/*TME*/
 cd /*TMS*/$BACKEND_DOMAIN/*TME*/
 ```
 
-Then we'll instruct Poetry to use Python 3.10, and we install the dependencies, including the ones from the `prod` group:
+Then we'll instruct uv install the dependencies, including the ones from the `prod` group:
 
 ```
-poetry env use 3.10
-poetry install --with prod
+uv sync --group prod
 ```
+
+This will also install the Python version as specific in your project’s `.python-version` file.
 
 Make sure the Django project's settings are using your server's PostgreSQL database (for example using an `.env` file - I use [django-environ](https://django-environ.readthedocs.io/en/latest/) for that) and let's run the Django migrations:
 
 ```
-poetry run ./manage.py migrate
+uv run ./manage.py migrate
 ```
 
 ## 3.4 - systemd config
@@ -385,7 +376,7 @@ User=/*TMS*/$PROJECT_USER/*TME*/
 Group=/*TMS*/$PROJECT_USER/*TME*/
 Restart=on-failure
 WorkingDirectory=/home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$BACKEND_DOMAIN/*TME*/
-ExecStart=/home//*TMS*/$PROJECT_USER/*TME*//.local/bin/poetry run gunicorn \
+ExecStart=/home//*TMS*/$PROJECT_USER/*TME*//.local/bin/uv run gunicorn \
           --access-logfile - \
           --workers 2 \
           --bind=127.0.0.1:8000 --bind=[::1]:8000 \
@@ -503,8 +494,8 @@ I use a really simple deploy script in my backend project:
 
 ```
 git pull
-poetry install --with prod --sync
-poetry run ./manage.py migrate
+uv sync --group prod
+uv run ./manage.py migrate
 sudo /usr/sbin/service /*TMS*/$BACKEND_DOMAIN/*TME*/ restart
 ```
 
