@@ -38,6 +38,8 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 ```
 
+Don’t worry if you don’t use dependency groups in your project; the process is still exactly the same, you just get to ignore some steps.
+
 ## Step 1: use PDM’s import tool
 We start by running `uvx pdm import pyproject.toml`. This will modify the `pyproject.toml` to be almost uv compatible. Our file now looks like this:
 
@@ -121,7 +123,7 @@ readme = "README.md"
 ```
 
 ## Step 3: clean up `pyproject.toml`
-Now rename `[tool.pdm.dev-dependencies]` to `[dependency-groups]` and move it below `[project]`. 
+Now rename `[tool.pdm.dev-dependencies]` to `[dependency-groups]` and move it below `[project]`. If you don’t have a `[tool.pdm.dev-dependencies]` section because you didn’t use dependency groups, then don’t worry. You don’t have to do anything.
 
 In my projects I’ve also added a new section `[tool.uv]` where I clear out the default dependency groups, so that production dependencies don’t get installed on my local machine, and development dependencies don’t get installed on my production server (see [this article](/articles/2024/python-uv-revisited/) for more info).
 
