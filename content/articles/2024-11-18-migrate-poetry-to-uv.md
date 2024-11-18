@@ -161,3 +161,5 @@ default-groups = []
 It’s a good idea to remove your old `.venv` folder and then you can run `uv lock` or `uv sync` and your packages will get installed. Congrats, you’ve migrated your project from Poetry to uv!
 
 So while it wasn’t quite as easy as executing a single command, it’s not very hard either. Mostly you just need to take care of removing and renaming the right sections from `pyproject.toml`, and it works.
+
+> Credit for the idea to use PDM to migrate from Poetry to uv goes to [this tweet](https://x.com/tiangolo/status/1839686030007361803).
