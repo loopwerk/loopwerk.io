@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django, python, uv
 summary: Almost two months ago I compared Poetry with uv, and for me uv had some pretty significant drawbacks that kept me from switching over. The situation has changed quite a bit since then!
 ---
 

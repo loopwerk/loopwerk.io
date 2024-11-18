@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django, python, uv
 summary: Comparing two Python package managers: Poetry and new kid on the block uv.
 ---
 
