@@ -17,9 +17,9 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "article_info") {
     span(class: "time") {
-      article.date.formatted("MMMM dd") + ","
-      a(href: "/articles/\(article.date.formatted("yyyy"))/") {
-        article.date.formatted("yyyy")
+      article.published.formatted("MMMM dd") + ","
+      a(href: "/articles/\(article.published.formatted("yyyy"))/") {
+        article.published.formatted("yyyy")
       }
     }
 

@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
           "branch": null,
-          "revision": "71a3bd17ae1fcff20d285f72d17742c131e2ae31",
-          "version": "1.2.0"
+          "revision": "94f39ed22d58a3ab8153f1eebb86a15ed5b7b65c",
+          "version": "1.3.1"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaParsleyMarkdownReader",
         "state": {
           "branch": null,
-          "revision": "d4fe9fca9829c1fb294af0160c23d5fc4bcf5fe4",
-          "version": "0.6.0"
+          "revision": "f2d0038703f72b8a15943c0ddd591feba20d2ed3",
+          "version": "0.7.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/loopwerk/SagaSwimRenderer",
         "state": {
           "branch": null,
-          "revision": "f53481e5c9972b83ca2d16ca2b962c63d460e23f",
-          "version": "0.7.0"
+          "revision": "79032c8a51b84f2be739a93fa2faad5dabd8ff56",
+          "version": "0.9.0"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
           "branch": null,
-          "revision": "41e7c263fb8c277e980ebcb9b0b5f6031d3d4886",
-          "version": "2.4.2"
+          "revision": "0837db354faf9c9deb710dc597046edaadf5360f",
+          "version": "2.7.6"
         }
       },
       {

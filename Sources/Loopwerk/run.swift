@@ -65,7 +65,7 @@ func itemProcessor<M>(item: Item<M>) {
   }
 
   // Set the date
-  item.date = date
+  item.published = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date) ?? date
 
   let year = String(item.relativeSource.lastComponentWithoutExtension.prefix(4))
 
