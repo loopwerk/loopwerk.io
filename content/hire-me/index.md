@@ -23,6 +23,6 @@ I do not use PHP, Wordpress, Windows, or React, and have no interest in doing so
 I work fully remote from my own office in Winterswijk, the Netherlands. I work four days a week for clients, with one day a week reserved for open source work and side projects.
 
 ### Let’s work together!
-You can expect a healthy dose of Dutch honesty from me. I’ll just tell you how it is, what needs to be fixed, without the bullshit. I think our industry could use some more honesty and better ethics. If all of that sounds good, then reach our to me and let’s work together!
+You can expect a healthy dose of Dutch honesty from me. I’ll just tell you how it is, what needs to be fixed, without the bullshit. I think our industry could use some more honesty and better ethics. If all of that sounds good, then reach out to me and let’s work together!
 
 Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
