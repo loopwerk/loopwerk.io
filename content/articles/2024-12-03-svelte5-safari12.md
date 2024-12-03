@@ -3,9 +3,9 @@ tags: javascript, sveltekit
 summary: Quite recently I upgraded a Svelte 4 project to Svelte 5, and soon afterwards I found some problems inside of Safari 12 that needed a tricky workaround.
 ---
 
-# Svelte 5 sites don’t work as expected in Safari 12
+# Svelte 5 sites don’t work as expected in Safari 12 and 13
 
-Quite recently I upgraded a Svelte 4 project to Svelte 5, and at first everything seemed to work perfectly fine. I tested the site in multiple browsers in multiple versions, found no bugs, and deployed to production. Pretty soon after that I started to get complaints that the site’s dropdown menus no longer worked in Safari 12, so I got an account at [BrowserStack.com](https://www.browserstack.com) - a pretty great way to test your site in almost any browser and OS you can think of - and was able to reproduce the issue. Sure enough: when you hovered your mouse over the main menu items, the submenu items no longer became visible.
+Quite recently I upgraded a Svelte 4 project to Svelte 5, and at first everything seemed to work perfectly fine. I tested the site in multiple browsers in multiple versions, found no bugs, and deployed to production. Pretty soon after that I started to get complaints that the site’s dropdown menus no longer worked in Safari 12 or Safari 13, so I got an account at [BrowserStack.com](https://www.browserstack.com) - a pretty great way to test your site in almost any browser and OS you can think of - and was able to reproduce the issue. Sure enough: when you hovered your mouse over the main menu items, the submenu items no longer became visible.
 
 To figure out what was actually causing the problem I decided to copy my `Menu.svelte` component to the [Svelte Playground](https://svelte.dev/playground/hello-world), so that I could easily play around with the CSS and the JavaScript in Safari 12 (using BrowserStack), to see what was causing it, and how to fix it. Sadly Svelte’s Playground only works in Safari 17.6 and up [due to missing polyfills](https://github.com/sveltejs/svelte.dev/issues/911), but even with the polyfills in place only Safari 14 and up would be supported. So then I tried [JSFiddle](https://jsfiddle.net): I copied my component’s HTML and CSS into a new fiddle (leaving out all the Svelte specific logic), opened it up in Safari 12... and JSFiddle also didn’t work. Sigh. Then I found [CodePen.io](https://codepen.io) and luckily this did work in Safari 12. But so did my menu. Hovering the mouse over the main menu items revealed the submenu items just fine, no bugs at all. Weird!
 
@@ -83,4 +83,4 @@ Anyway, after a lot of trial and error and reading through docs of multiple proj
 },
 ```
 
-This transforms the CSS both in the dev server and in created builds, and gets rid of the `:where` selector. And now the site works perfectly fine again in “ancient” Safari 12. Which yes, we still support!
+This transforms the CSS both in the dev server and in created builds, and gets rid of the `:where` selector. And now the site works perfectly fine again in “ancient” Safari 12 and 13. Which yes, we still support!
