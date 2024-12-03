@@ -1,6 +1,6 @@
 ---
 tags: javascript, sveltekit
-summary: Quite recently I upgraded a Svelte 4 project to Svelte 5, and soon afterwards I found some problems inside of Safari 12 that needed a tricky workaround.
+summary: Quite recently I upgraded a Svelte 4 project to Svelte 5, and soon afterwards I found some problems inside of Safari 12 and 13 that needed a tricky workaround.
 ---
 
 # Svelte 5 sites don’t work as expected in Safari 12 and 13
