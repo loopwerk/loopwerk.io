@@ -1,5 +1,5 @@
 ---
-tags: python, Django
+tags: python, django
 summary: I started using Django in 2009, and fifteen years later I am still a happy user. Why do I prefer it over Flask or FastAPI?
 ---
 
