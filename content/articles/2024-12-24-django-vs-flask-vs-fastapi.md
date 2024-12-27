@@ -5,12 +5,14 @@ summary: I started using Django in 2009, and fifteen years later I am still a ha
 
 # Why I still choose Django over Flask or FastAPI
 
+I started using Django in 2009, and fifteen years later I am still a happy user. When I compare this to the number of JavaScript frameworks I’ve gone through during the same fifteen years, it’s clear that Django is rather special. Here are a few of my reason.
+
 ## Batteries included
 Django comes with a database ORM, authentication, a way to email users, a template language, static files handling, forms and validation, a testing framework, support for localization, RSS feeds, the built-in admin interface for your database models, and a bunch of other things.
 
 Sure, not all the batteries are equally good, but I really appreciate that I don’t have to think about having to find an ORM, how to do database migrations when changing my models, how to build a simple admin interface, how to send emails.
 
-Would I be able to setup Flask with SQLAlchemy as the ORM and Alembic for migrations? Why, yes. But do I want to have to do that? Absolutely not. While some people see Django’s way as limiting, I see it as freeing myself from having to piece together a working system by myself from scatch.
+Would I be able to setup Flask with SQLAlchemy as the ORM and Alembic for migrations? Why, yes. But do I want to have to do that? Absolutely not. While some people see Django’s way as limiting, I see it as freeing myself from having to piece together a working system by myself from scratch.
 
 ## The ORM
 While I’d prefer a simpler syntax for the models based on types ala Pydantic, the ORM is still really simple to use. I honestly prefer it above SQLAlchemy when it comes to filtering, fetching, updating and creating database models. You have to be careful to not run into the dreadful N+1 queries problem when using related tables, but overall the ORM is a joy to use.
@@ -30,6 +32,6 @@ It doesn’t matter if I need to build a website using HTML templates, or a JSON
 I also don’t really want to use two different systems; FastAPI for APIs and Django (or Flask) for websites. I'd rather be very good at using one hammer for two different jobs where maybe technically speaking that hammer isn't the optimal choice, compared to using two separate tools and not having the time to master either of them, if that makes sense.
 
 ## Community
-There are countless open source packages available for Django, and when you run into a problem it’s extremely easy to get help. Good chance someone else has run into the problem and the answer is already on StackOverflow, and otherwise there’s a huge pool of Django exports on StackOverflow and the Django forum and Discord server. The community is also very beginner-friendly, which didn’t always seem the case with Flask (to be honest my experience is from a long time ago).
+There are countless open source packages available for Django, and when you run into a problem it’s extremely easy to get help. Good chance someone else has run into the same problem and the answer is already on StackOverflow, and otherwise there’s a huge pool of Django experts on StackOverflow and the Django forum and Discord server. The community is also very beginner-friendly, which didn’t always seem the case with Flask (to be honest my experience is from a long time ago).
 
 Come for the framework, stay for the community ❤️
