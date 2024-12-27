@@ -38,7 +38,6 @@ func renderHome(body: String) -> Node {
       a(href: "https://www.siminn.is", title: "Siminn") { img(alt: "Siminn logo", src: "/static/images/siminn.svg") }
       a(href: "https://www.cbs.com", title: "CBS") { img(alt: "CBS logo", src: "/static/images/cbs.svg") }
       a(href: "https://www.metrolyrics.com", title: "Metrolyrics") { img(alt: "Metrolyrics logo", src: "/static/images/metrolyrics.svg") }
-      a(class: "hidden", href: "https://hachyderm.io/@kevinrenskers", rel: "me") { "@kevinrenskers@hachyderm.io" }
     }
   }
 }

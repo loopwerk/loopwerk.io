@@ -101,7 +101,9 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
               %"."
             }
             p {
-              a(href: "https://hachyderm.io/@kevinrenskers", rel: "nofollow", target: "_blank") { "Mastodon" }
+              a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
+              " | "
+              a(href: "https://bsky.app/profile/loopwerk.io", rel: "nofollow", target: "_blank") { "Bluesky" }
               " | "
               a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
             }
