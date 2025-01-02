@@ -31,7 +31,7 @@ let { user }: { user?: User } = $props();
 
 But that doesn't scale when you have multiple props. And either way it’s still way more code than what it used to be, with the property name repeated.
 
-It's like non of the people who write Svelte 5 actually use it in combination with TypeScript, because strongly typed props have become such a hassle to write now. None of the examples on https://svelte.dev/docs/svelte/$props are strongly typed either except for the very last bit where it explains how to do it. But by not doing it in any of the examples it hides the boilerplate!
+It's like none of the people who write Svelte 5 actually use it in combination with TypeScript, because strongly typed props have become such a hassle to write now. None of the examples on https://svelte.dev/docs/svelte/$props are strongly typed either except for the very last bit where it explains how to do it. But by not doing it in any of the examples it hides the boilerplate!
 
 Also, the Svelte 4 docs had that global JavaScript / TypeScript toggle in the sidebar, which is completely gone in the Svelte 5 docs. TypeScript has become an afterthought for Svelte?
 
