@@ -10,7 +10,7 @@ I'm very busy migrating a big SvelteKit project to Svelte 5's new runes syntax a
 For example, what used to be a single line:
 
 ```
-export let user: User | undefined = undefined;
+export let user: User | undefined;
 ```
 
 Now takes 5 lines because of the added effort to properly type everything:
