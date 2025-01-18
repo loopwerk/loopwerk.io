@@ -16,6 +16,7 @@ export const load: LayoutLoad = async ({ fetch, data }) => {
     ...data,
     user: user,
   };
+};
 ```
 
 This works fine, the user is now available in every layout and page, via the page data:
