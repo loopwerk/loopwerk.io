@@ -1,5 +1,5 @@
 ---
-tags: backend, review, swift
+tags: review, swift
 summary: I'm trying out Vapor 4 for a side project, and one thing that I am constantly running into is the amount of boilerplate and copy-pasted code. Are there no better solutions for this?
 ---
 

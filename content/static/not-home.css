@@ -213,3 +213,22 @@ article img {
     display: none;
   }
 }
+
+.flex {
+  display: flex;
+}
+.sidebar {
+  flex: 0 0 200px;
+  color: var(--secondary-text-color);
+  padding-left: 2em;
+}
+.sidebar ul {
+  background: var(--code-background);
+  padding: 1em;
+}
+
+.sidebar a {
+  color: var(--secondary-text-color);
+  border: 0;
+  text-decoration: underline;
+}

@@ -1,5 +1,5 @@
 ---
-tags: review, backend, swift, django, python
+tags: review, swift, django, python
 summary: Over two years ago I wrote an article where I compared Vapor 3 to Django REST Framework. It's time for a rematch with Vapor 4.
 ---
 

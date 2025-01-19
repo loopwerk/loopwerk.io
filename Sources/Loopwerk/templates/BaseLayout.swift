@@ -90,26 +90,26 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
 
         div(id: "content") {
           children()
-
-          div(id: "site-footer") {
-            p {
-              "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
-            }
-            p {
-              "Built in Swift using"
-              a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
-              %"."
-            }
-            p {
-              a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
-              " | "
-              a(href: "https://bsky.app/profile/loopwerk.io", rel: "nofollow", target: "_blank") { "Bluesky" }
-              " | "
-              a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
-            }
-          }
         }
 
+        div(id: "site-footer") {
+          p {
+            "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
+          }
+          p {
+            "Built in Swift using"
+            a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
+            %"."
+          }
+          p {
+            a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
+            " | "
+            a(href: "https://bsky.app/profile/loopwerk.io", rel: "nofollow", target: "_blank") { "Bluesky" }
+            " | "
+            a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+          }
+        }
+        
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js")

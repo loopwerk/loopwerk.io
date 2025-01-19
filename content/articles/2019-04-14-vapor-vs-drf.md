@@ -1,5 +1,5 @@
 ---
-tags: review, backend, swift, django, python
+tags: review, swift, django, python
 ---
 
 # Vapor 3 versus Django REST Framework

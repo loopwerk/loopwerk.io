@@ -1,5 +1,5 @@
 ---
-tags: review, backend
+tags: review
 ---
 
 # Searching for a next gen back end

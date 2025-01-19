@@ -1,5 +1,5 @@
 ---
-tags: iOS, swift, random
+tags: iOS, news
 summary: Recently I was interviewed for the Russian IT website proglib.io. Since it might be interesting for non-Russian speakers, here it is in the original English version.
 ---
 
@@ -39,23 +39,19 @@ I do have hopes that SwiftUI has gotten better with iOS 15, but unless you build
 What I'd want to change is for Swift and SwiftUI changes to be usable with older iOS versions. For example Swift's new async/await support is really really awesome. But.. iOS 15+ only. I'd love for Apple to find a way to remove these kind of dependencies from the core OS itself, so that individual frameworks can get updated without a whole major OS upgrade. Same goes for apps like Mail, Weather, Notes, etc. Why are they part of iOS itself? If they were in the App Store like any other app, they could be updated more often with less trouble.
 
 ### What resources do you use for work and training?
-
 https://www.pointfree.co
 https://www.donnywals.com
 https://www.hackingwithswift.com
 
 ### Did you have any mistakes, and what would you suggest for the guys from Russia who are just starting to understand iOS development?
-
 Not really a mistake, but I kinda wish I would've jumped on the FRP bandwagon a bit earlier than I did. I never really liked RxSwift (or ReactiveCocoa back in the Obj-C days), it never really clicked until I started using ReactiveKit and Bond back in 2019. I am now using Combine in all my apps since 2020 and I can't imagine going back to the old way of building apps. 
 
 If you're just starting out with iOS development, the number one piece of advice I would give is to not get overwhelmed with all the different architecture options, or wanting to do it "perfect" from the beginning. Just go with MVC, don't care if you end up with massive view controllers or not. Use storyboard with segues if you like those, don't even think about Coordinators yet. Forget about Combine and reactive functional programming. Just start with the basics and have fun! You'll figure out what doesn't scale when you start building bigger and better apps, and you'll search for solutions for those problems as you come across them. But if you want to do everything perfect from the beginning, you're just going to end with analysis paralysis and not doing anything at all.
 
 ### What is the future of iOS development?
-
 SwiftUI and async/await. Too bad that future is still a few years off for real world apps where you have to support older iOS versions.
 
 ### What are you doing now and what are your plans?
-
 I am working on a project for a client, where I work on the iOS app and the server code as well. I plan to keep having fun as a freelance developer, taking projects that interest me.
 
 I am almost 40 though, I don't know how long I want to keep being a developer, freelance or not. So eventually I might want to focus more on being a mentor, something I really enjoy doing now a few hours a week. We'll see!
