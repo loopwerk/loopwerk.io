@@ -99,7 +99,9 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           p {
             "Built in Swift using"
             a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
-            %"."
+            "("
+            %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
+            %")."
           }
           p {
             a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
