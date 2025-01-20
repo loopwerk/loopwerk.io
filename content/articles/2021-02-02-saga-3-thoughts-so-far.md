@@ -17,7 +17,7 @@ I chose to use [Ink](https://github.com/johnsundell/ink) and [Splash](https://gi
 
 The third big dependency is [Stencil](https://github.com/stencilproject/Stencil), a template language with a syntax similar to Django / Mustache / Jinja2. I chose it because I'm very used to the syntax myself, but Stencil has some bugs that might not be dealbreakers but are definitely annoying to work around. And also this project doesn't look like it has a team of maintainers with a lot of free time behind it. But *by far* the biggest problem is that a template language is just not as powerful as an actual programming language. Everything you might want to do in your template needs to be explicitly supported via "filters". For example, if you want to show the five most recent articles on your homepage, that is simply not possible at the moment, since there is no way to filter, sort or limit arrays in Stencil templates. Of course I can add special filters to the Stencil renderer for that, but where does it end? It seems a lot smarter to use a HTML DSL like [Plot](https://github.com/JohnSundell/Plot) or [swift-html](https://github.com/pointfreeco/swift-html), although that's quite a big learning curve for people used to writing HTML templates. Another thing to keep in mind is that these DSLs are limited in what kind of output they can produce — can they make a sitemap XML document? RSS feeds?
 
-My final worry has to due with the `Page` metadata. Currently this metadata is very basic:
+My final worry has to do with the `Page` metadata. Currently this metadata is very basic:
 
 ``` swift
 public protocol Metadata: Decodable {}

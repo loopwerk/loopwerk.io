@@ -1,11 +1,11 @@
 ---
-tags: python, django
+tags: python, django, review
 summary: I started using Django in 2009, and fifteen years later I am still a happy user. When I compare this to the number of JavaScript frameworks I’ve gone through during the same fifteen years, it’s clear that Django is rather special.
 ---
 
 # Why I still choose Django over Flask or FastAPI
 
-I started using Django in 2009, and fifteen years later I am still a happy user. When I compare this to the number of JavaScript frameworks I’ve gone through during the same fifteen years, it’s clear that Django is rather special. Here are a few of my reasons.
+I started using Django in 2009, and fifteen years later I am still a happy user. When I compare this to the number of JavaScript frameworks I’ve gone through during the same fifteen years, it’s clear that Django is rather special. Here are a few of my reasons why.
 
 ## Batteries included
 Django comes with a database ORM, authentication, a way to email users, a template language, static files handling, forms and validation, a testing framework, support for localization, RSS feeds, the built-in admin interface for your database models, and a bunch of other things.

@@ -91,7 +91,7 @@ try Saga(input: "content", output: "deploy")
   )
 ```
 
-As you can see, a lot more is going on now. First of all we declare our own metadata type, `ArticleMetadata`. In our case we declare this type to have an array of tags, an optional summary and an optional `public` flag, that we default to `true` via the `isPublic` computed property. This means that we can write articles like this and the metadata contained within the Markdown file with be parsed as expected:
+As you can see, a lot more is going on now. First of all we declare our own metadata type, `ArticleMetadata`. In our case we declare this type to have an array of tags, an optional summary and an optional `public` flag, that we default to `true` via the `isPublic` computed property. This means that we can write articles like this and the metadata contained within the Markdown file will be parsed as expected:
 
 ```
 ---

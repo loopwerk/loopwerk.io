@@ -4,7 +4,7 @@ summary: I'm taking a look at the static site generator Publish, written in Swif
 ---
 
 # Looking at the static site generator Publish
-I've had a long history with static site generators for this website. I first [reviewed a bunch of them](/articles/2011/playing-around-static-site-generators/) in November 2011, and finally [settled on liquidluck](/articles/2012/new-static-website/) back in December 2012. And while there have been plenty of changes to this website in those eight years, I am still using liquidluck to this day. And that's beginning to be a bit of a problem; it's been over four years since it had its last commit, and over *seven years* since its last release. The biggest problem is that it doesn't work well with Python 3, and of course Python 2 is (finally) EOL'd.
+I've had a long history with static site generators for this website. I first [reviewed a bunch of them](/articles/2011/playing-around-static-site-generators/) in November 2011, and finally settled on [liquidluck](https://github.com/avelino/liquidluck) back in December 2012. And while there have been plenty of changes to this website in those eight years, I am still using liquidluck to this day. And that's beginning to be a bit of a problem; it's been over four years since it had its last commit, and over *seven years* since its last release. The biggest problem is that it doesn't work well with Python 3, and of course Python 2 is (finally) EOL'd.
 
 I do still really appreciate liquidluck, I've made it work exactly how I want it to. For example, I can simply create a new file called `2021-01-22-static-site-publish.md`, and have its contents be like this:
 
