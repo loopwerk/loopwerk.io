@@ -108,6 +108,14 @@ article img {
   max-width: 100%;
 }
 
+article hr {
+  display: block;
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--secondary-text-color);
+  margin: 0 0 1em;
+}
+
 .screenshots {
   display: flex;
   flex-flow: row wrap;
@@ -232,7 +240,7 @@ article img {
     background: var(--code-background);
     padding: 1em;
   }
-  
+
   .sidebar a {
     color: var(--secondary-text-color);
     border: 0;
