@@ -38,7 +38,7 @@ struct Run {
       // All files will be parsed to html.
       .register(
         readers: [.parsleyMarkdownReader()],
-        writers: [ .itemWriter(swim(renderPage))]
+        writers: [.itemWriter(swim(renderPage))]
       )
 
       // Run the step we registered above
