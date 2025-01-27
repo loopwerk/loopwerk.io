@@ -23,7 +23,7 @@ func renderHome(body: String) -> Node {
   div {
     img(alt: "Loopwerk logo", class: "my-25 w-[315px] h-200px mx-auto", src: "/static/images/Loopwerk.svg")
 
-    div(class: "my-25 uppercase text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
+    div(class: "my-25 uppercase font-helvetica text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
       Node.raw(body)
     }
 

@@ -49,6 +49,16 @@
   }
 }
 
-body.home .site-footer {
-  display: none;
+body.home {
+  header img {
+    display: none;
+  }
+  
+  nav {
+    @apply justify-center;
+  }
+  
+  .site-footer {
+    display: none;
+  }
 }

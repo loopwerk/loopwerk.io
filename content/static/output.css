@@ -287,9 +287,6 @@
       max-width: 800px;
     }
   }
-  .m-0 {
-    margin: calc(var(--spacing) * 0);
-  }
   .m-0\! {
     margin: calc(var(--spacing) * 0) !important;
   }
@@ -717,17 +714,8 @@
       margin-bottom: 0;
     }
   }
-  .-mt-4 {
-    margin-top: calc(var(--spacing) * -4);
-  }
-  .-mt-6 {
-    margin-top: calc(var(--spacing) * -6);
-  }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
-  }
-  .mt-6 {
-    margin-top: calc(var(--spacing) * 6);
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
@@ -735,17 +723,11 @@
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
-  .mb-1 {
-    margin-bottom: calc(var(--spacing) * 1);
-  }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
-  }
-  .mb-6 {
-    margin-bottom: calc(var(--spacing) * 6);
   }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
@@ -817,9 +799,6 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
-  .gap-12 {
-    gap: calc(var(--spacing) * 12);
-  }
   .gap-x-5 {
     column-gap: calc(var(--spacing) * 5);
   }
@@ -849,14 +828,8 @@
   .bg-page {
     background-color: var(--color-page);
   }
-  .p-0 {
-    padding: calc(var(--spacing) * 0);
-  }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
-  }
-  .pt-4 {
-    padding-top: calc(var(--spacing) * 4);
   }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
@@ -876,13 +849,12 @@
   .font-anonymous {
     font-family: var(--font-anonymous);
   }
+  .font-helvetica {
+    font-family: var(--font-helvetica);
+  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
-  }
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
   .text-4xl {
     font-size: var(--text-4xl);
@@ -920,9 +892,6 @@
   }
   .text-gray-2 {
     color: var(--color-gray-2);
-  }
-  .text-orange {
-    color: var(--color-orange);
   }
   .text-white {
     color: var(--color-white);
@@ -1027,8 +996,16 @@
   font-family: "Anonymous Pro";
   src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
 }
-body.home .site-footer {
-  display: none;
+body.home {
+  header img {
+    display: none;
+  }
+  nav {
+    justify-content: center;
+  }
+  .site-footer {
+    display: none;
+  }
 }
 @keyframes spin {
   to {
