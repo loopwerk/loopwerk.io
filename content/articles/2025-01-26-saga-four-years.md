@@ -17,7 +17,7 @@ Saga does offer all this flexibility, and then some. It’s so easy to write you
 
 As far as I know [Hugo](https://gohugo.io) is the only other static site generator flexible enough to render this website using multiple sets of metadata. Out of interest I did have a look at Hugo but I did not like its template language, or the use of configuration over explicit code. With Saga your site is built exactly as you instruct it to do; with Hugo you’re dealing with default config values that you have to override or disable and a lot of hidden behavior. Some things are quite nice though, such as automatic RSS feeds (RSS feeds are certainly possible in Saga but take work to configure), server-side code block syntax highlighting, and the wealth of available themes. Then again a theme is just HTML and CSS and there is no reason this can’t be adapted to Saga quite easily. I like Hugo’s documentation as well, but on the other hand... there is so much documentation! Saga is much simpler in comparison. Not because it’s less flexible, but because the developer is expected to write their own Swift code to setup and configure things. Saga doesn’t need to offer a million config options for every possible feature a site developer might need, now or in the future.
 
-And it’s not like it’s hard to get started with Saga, the bare minimum to get markdown pages rendered to HTML, using a strongly-typed template language is something like this:
+And it’s not like it’s hard to get started with Saga. The bare minimum to get markdown pages rendered to HTML, using a strongly-typed template language, is something like this:
 
 ```swift
 func renderPage(context: ItemRenderingContext<EmptyMetadata>) -> Node {
