@@ -10,11 +10,11 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
-    h2 {
+    h2(class: "text-2xl font-bold mb-2") {
       a(href: article.url) { article.title }
     }
-    div(class: "article_info") {
-      span(class: "time") {
+    div(class: "text-gray-2 text-sm [&>a]:text-gray-2 [&>a]:underline [&>a]:hover:text-white mb-4") {
+      span(class: "border-r border-gray-2 pr-2 mr-2") {
         article.published.formatted("MMMM dd, YYYY")
       }
       
@@ -39,16 +39,12 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
   
   return baseLayout(section: .articles, title: "Articles", rssLink: "", extraHeader: "") {
-    div(class: "flex") {
-      div(class: "list") {
-        sortedByYearDescending.map { year, articles in
-          div(class: "archive") {
-            h1 { year }
-            
-            div(class: "grid") {
-              articles.map { renderArticleForGrid(article: $0) }
-            }
-          }
+    sortedByYearDescending.map { year, articles in
+      div {
+        h1(class: "text-4xl font-extrabold mb-12") { year }
+        
+        div(class: "grid grid-cols-2 gap-10 mb-16") {
+          articles.map { renderArticleForGrid(article: $0) }
         }
       }
     }
@@ -59,19 +55,14 @@ func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> N
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
   
   return baseLayout(section: .articles, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
-    div(class: "list") {
-      context.items.map { article in
-        section {
-          h1 {
-            a(href: article.url) { article.title }
-          }
-          renderArticleInfo(article)
-          p {
-            article.summary
-          }
-          p(class: "more") {
-            a(class: "more", href: article.url) { "read more" }
-          }
+    context.items.map { article in
+      section(class: "mb-10") {
+        h1(class: "text-2xl font-bold mb-2") {
+          a(href: article.url) { article.title }
+        }
+        renderArticleInfo(article)
+        p(class: "mt-4") {
+          article.summary
         }
       }
     }

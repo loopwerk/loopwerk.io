@@ -1,0 +1,54 @@
+@import "tailwindcss"  source("../../Sources/Loopwerk/templates");
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Anonymous Pro";
+  src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
+}
+
+@theme {
+  --font-helvetica: "Helvetica", ui-sans-serif, system-ui, sans-serif;
+  --font-anonymous: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  
+  --color-*: initial;
+  --color-white: #eee;
+  --color-orange: #f1a948;
+  --color-page: #222831;
+  --color-nav: #0e1112;
+  --color-gray-1: #ccc;
+  --color-gray-2: #9e9d9d;
+  
+  --breakpoint-*: initial;
+  --breakpoint-desktop: 800px;
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+@utility prose {
+  --tw-prose-body: var(--color-white);
+  --tw-prose-headings: var(--color-white);
+  --tw-prose-links: var(--color-orange);
+  --tw-prose-bold: var(--color-white);
+  --tw-prose-quote-borders: var(--color-white);
+  --tw-prose-quotes: var(--color-white);
+  --tw-prose-code: var(--color-white);
+  @apply max-w-none prose-code:before:hidden prose-code:after:hidden;
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  code {
+    @apply font-normal text-base;
+  }
+}
+
+body.home .site-footer {
+  display: none;
+}

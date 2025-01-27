@@ -31,8 +31,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         meta(content: "Loopwerk", name: "og:site_name")
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen", name: "keywords")
         title { SiteMetadata.name + titleSuffix }
-        link(href: "/static/style.css", rel: "stylesheet")
-        link(href: "/static/prism.css", rel: "stylesheet")
+        link(href: "/static/output.css", rel: "stylesheet")
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
         link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
         link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
@@ -41,38 +40,31 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
 
-        switch section {
-          case .home:
-            link(href: "/static/home.css", rel: "stylesheet")
-          default:
-            link(href: "/static/not-home.css", rel: "stylesheet")
-        }
-
         extraHeader
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
-      body {
-        header {
-          nav {
+      body(class: "bg-page text-white pb-5 \(section?.rawValue ?? "")") {
+        header(class: "bg-nav text-gray-1 py-4 mb-10 text-base/6") {
+          nav(class: "container flex gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
-
-            ul {
+            
+            ul(class: "flex gap-x-5 [&>li>a]:block [&>li>a]:border-b-2 [&>li>a]:border-transparent [&>li>a]:hover:border-orange [&>li>a.active]:border-orange [&>li>a.active]:text-white") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
-
+              
               li {
                 a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
               }
-
+              
               li {
                 a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
               }
-
+              
               li {
                 a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
               }
-
+              
               li {
                 a(class: section == .mentorshipProgram ? "active" : "", href: "/mentor/") { "Mentorship" }
               }
@@ -88,11 +80,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           }
         }
 
-        div(id: "content") {
+        div(class: "container") {
           children()
         }
 
-        div(id: "site-footer") {
+        div(class: "site-footer container text-gray-2 border-t border-gray-2 text-center pt-6 mt-8 text-sm [&>p>a]:underline [&>p>a]:hover:text-white font-anonymous") {
           p {
             "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
           }

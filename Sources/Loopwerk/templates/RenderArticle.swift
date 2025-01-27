@@ -15,8 +15,8 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "article_info") {
-    span(class: "time") {
+  div(class: "text-gray-2 text-sm [&>a]:text-gray-2 [&>a]:underline [&>a]:hover:text-white") {
+    span(class: "border-r border-gray-2 pr-2 mr-2") {
       article.published.formatted("MMMM dd, yyyy")
     }
 
@@ -34,6 +34,7 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeConvertible {
   link(href: "\(siteUrl)\(article.url)", rel: "canonical")
+  link(href: "/static/prism.css", rel: "stylesheet")
   meta(content: article.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: "@kevinrenskers", name: "twitter:site")
@@ -55,14 +56,43 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let otherArticles = allArticles.filter { $0.url != context.item.url }.prefix(2)
 
   return baseLayout(section: .articles, title: context.item.title, extraHeader: extraHeader) {
-    article {
+    article(class: "prose") {
       h1 { context.item.title }
-
       renderArticleInfo(context.item)
+      Node.raw(context.item.body)
+    }
 
-      div(class: "article_content") {
-        Node.raw(context.item.body)
+    div(class: "border-t border-gray-2 mt-8 pt-8") {
+      h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
+      div(class: "flex gap-8") {
+        img(class: "h-[120px] rounded-full", src: "/articles/images/kevin.png")
         
+        div(class: "prose") {
+          h3(class: "m-0!") { "Kevin Renskers" }
+          p(class: "text-gray-1") {
+            "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
+            a(href: "https://www.critical-notes.com") { "Critical Notes" }
+            %", and maintains a bunch of"
+            a(href: "/projects/") { "open source projects" }
+            %"."
+          }
+        }
+      }
+    }
+    
+    div(class: "border-t border-gray-2 mt-8 pt-8") {
+      h2(class: "text-4xl font-extrabold mb-8") { "More articles" }
+      
+      div(class: "grid grid-cols-2 gap-10") {
+        otherArticles.map { renderArticleForGrid(article: $0) }
+      }
+      
+      p(class: "prose mt-8") {
+        a(href: "/articles/") { "› See all articles" }
+      }
+    }
+    
+//      div {
 //        Node.raw("""
 //<script src="https://giscus.app/client.js"
 //        data-repo="loopwerk/loopwerk.io"
@@ -81,37 +111,6 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 //        async>
 //</script>
 //""")
-      }
-      
-      div(class: "article-footer") {
-        h2 { "Written by" }
-        div(class: "flex") {
-          img(src: "/articles/images/kevin.png")
-          
-          div {
-            h3 { "Kevin Renskers" }
-            p {
-              "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
-              a(href: "https://www.critical-notes.com") { "Critical Notes" }
-              %", and maintains a bunch of"
-              a(href: "/projects/") { "open source projects" }
-              %"."
-            }
-          }
-        }
-      }
-      
-      div(class: "article-footer") {
-        h2 { "More articles" }
-        
-        div(class: "grid") {
-          otherArticles.map { renderArticleForGrid(article: $0) }
-        }
-        
-        p {
-          a(class: "more", href: "/articles/") { "See all articles" }
-        }
-      }
-    }
+//      }
   }
 }

@@ -6,4 +6,4 @@ xcuserdata/
 *.py[cod]
 env
 deploy
-
+node_modules
