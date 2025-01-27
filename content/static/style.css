@@ -293,7 +293,7 @@ nav ul a.active {
   font-family: "Anonymous Pro", ui-monospace, Menlo, Monaco, "Cascadia Mono",
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  max-width: 500px;
+  max-width: 800px;
   margin: 2em auto;
 }
 
@@ -321,57 +321,11 @@ nav ul a.active {
   }
 
   header,
-  #site-footer,
-  .pagination {
+  #site-footer {
     display: none;
   }
 
   a {
     color: black;
-  }
-}
-
-.pagination {
-  background-color: var(--code-background);
-  padding: 15px 15px 0 15px;
-  display: flex;
-  list-style: none;
-  flex-flow: column;
-  border-radius: 5px;
-}
-
-.pagination li {
-  padding-bottom: 15px;
-}
-
-.pagination a {
-  color: var(--secondary-text-color);
-  border: 0;
-  text-decoration: underline;
-}
-
-.pagination a:hover {
-  color: var(--text-color);
-}
-
-.pagination .newer a:before {
-  content: "‹ ";
-}
-
-.pagination .older a:after {
-  content: " ›";
-}
-
-@media screen and (min-width: 800px) {
-  .pagination {
-    flex-flow: row;
-  }
-
-  .pagination li {
-    flex: 0 50%;
-  }
-
-  .pagination .older {
-    text-align: right;
   }
 }

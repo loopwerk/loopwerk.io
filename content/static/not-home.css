@@ -116,6 +116,33 @@ article hr {
   margin: 0 0 1em;
 }
 
+#content .archive h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+#content .archive + .archive h1 {
+  margin-top: 3rem;
+}
+
+#content .archive .grid p a {
+  color: var(--text-color);
+}
+
+#content .archive .grid p a:hover {
+  border: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+}
+
+#content .grid h2 {
+  margin: 0;
+}
+
 .screenshots {
   display: flex;
   flex-flow: row wrap;
@@ -222,28 +249,31 @@ article hr {
   }
 }
 
-.sidebar {
-  display: none;
+.article-footer {
+  margin-top: 50px;
+  padding-top: 50px;
+  border-top: 1px solid var(--secondary-text-color);
 }
 
-@media screen and (min-width: 800px) {
-  .flex {
-    display: flex;
-  }
-  .sidebar {
-    display: block;
-    flex: 0 0 200px;
-    color: var(--secondary-text-color);
-    padding-left: 2em;
-  }
-  .sidebar ul {
-    background: var(--code-background);
-    padding: 1em;
-  }
+#content .article-footer h2 {
+  font-size: 3em;
+  margin: 0 0 0.4em 0;
+}
 
-  .sidebar a {
-    color: var(--secondary-text-color);
-    border: 0;
-    text-decoration: underline;
-  }
+#content .article-footer .grid h2 {
+  font-size: 1.3em;
+}
+
+.article-footer img {
+  height: 120px;
+  border-radius: 100%;
+  margin-right: 2rem;
+}
+
+.article-footer h2 {
+  margin-bottom: 1rem;
+}
+
+.article-footer .flex {
+  display: flex;
 }

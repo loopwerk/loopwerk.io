@@ -17,10 +17,7 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "article_info") {
     span(class: "time") {
-      article.published.formatted("MMMM dd") + ","
-      a(href: "/articles/\(article.published.formatted("yyyy"))/") {
-        article.published.formatted("yyyy")
-      }
+      article.published.formatted("MMMM dd, yyyy")
     }
 
     %.text("\(article.body.withoutHtmlTags.numberOfWords) words, posted in ")
@@ -53,11 +50,9 @@ func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeCon
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item, siteUrl: SiteMetadata.url)
-
+  
   let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
-  let currentIndex = allArticles.firstIndex(where: { $0.relativeDestination == context.item.relativeDestination })!
-  let nextArticle = allArticles[safeIndex: currentIndex - 1]
-  let previousArticle = allArticles[safeIndex: currentIndex + 1]
+  let otherArticles = allArticles.filter { $0.url != context.item.url }.prefix(2)
 
   return baseLayout(section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article {
@@ -68,36 +63,53 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       div(class: "article_content") {
         Node.raw(context.item.body)
         
-        Node.raw("""
-<script src="https://giscus.app/client.js"
-        data-repo="loopwerk/loopwerk.io"
-        data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
-        data-category="Article discussions"
-        data-category-id="DIC_kwDOAtoOzs4Ciykw"
-        data-mapping="pathname"
-        data-strict="1"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-""")
+//        Node.raw("""
+//<script src="https://giscus.app/client.js"
+//        data-repo="loopwerk/loopwerk.io"
+//        data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
+//        data-category="Article discussions"
+//        data-category-id="DIC_kwDOAtoOzs4Ciykw"
+//        data-mapping="pathname"
+//        data-strict="1"
+//        data-reactions-enabled="1"
+//        data-emit-metadata="0"
+//        data-input-position="bottom"
+//        data-theme="preferred_color_scheme"
+//        data-lang="en"
+//        data-loading="lazy"
+//        crossorigin="anonymous"
+//        async>
+//</script>
+//""")
       }
-
-      ul(class: "pagination") {
-        li(class: "newer") {
-          if let nextArticle = nextArticle {
-            a(href: nextArticle.url, title: "newer article") { nextArticle.title }
+      
+      div(class: "article-footer") {
+        h2 { "Written by" }
+        div(class: "flex") {
+          img(src: "/articles/images/kevin.png")
+          
+          div {
+            h3 { "Kevin Renskers" }
+            p {
+              "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
+              a(href: "https://www.critical-notes.com") { "Critical Notes" }
+              %", and maintains a bunch of"
+              a(href: "/projects/") { "open source projects" }
+              %"."
+            }
           }
         }
-        li(class: "older") {
-          if let previousArticle = previousArticle {
-            a(href: previousArticle.url, title: "older article") { previousArticle.title }
-          }
+      }
+      
+      div(class: "article-footer") {
+        h2 { "More articles" }
+        
+        div(class: "grid") {
+          otherArticles.map { renderArticleForGrid(article: $0) }
+        }
+        
+        p {
+          a(class: "more", href: "/articles/") { "See all articles" }
         }
       }
     }

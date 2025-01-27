@@ -92,9 +92,8 @@ struct Run {
         readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
         writers: [
           .itemWriter(swim(renderArticle)),
-          .listWriter(swim(renderArticles), paginate: 20),
+          .listWriter(swim(renderArticles)),
           .tagWriter(swim(renderTag), tags: \.metadata.tags),
-          .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
           .listWriter(swim(renderFeed), output: "feed.xml"),
