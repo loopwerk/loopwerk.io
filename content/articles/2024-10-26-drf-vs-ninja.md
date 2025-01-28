@@ -9,7 +9,7 @@ I’m a big fan of Django REST Framework (DRF), which I’ve been using since 20
 
 Recently I became aware of [Django Ninja](https://django-ninja.dev), another API framework for Django, and decided to try it out. For this I am going to compare it with DRF using the following models, inspired by my real Dungeons & Dragons note-taking tool [critical-notes.com](https://www.critical-notes.com):
 
-#### <i class="fa-regular fa-file-code"></i> **models.py**
+#### <i class="fa-regular fa-file-code"></i> models.py
 ``` python
 from django.conf import settings
 from django.db import models
@@ -50,7 +50,7 @@ There are two important rules for the character API:
 
 But let’s start simple and not worry about these rules just yet.
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ``` python
 from rest_framework import viewsets
 from .models import Character
@@ -63,7 +63,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
         return Character.objects.filter(campaign_id=self.kwargs["campaign_id"])
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **serializers.py**
+#### <i class="fa-regular fa-file-code"></i> serializers.py
 ``` python
 from .models import Character
 
@@ -73,7 +73,7 @@ class CharacterSerializer(serializers.ModelSerializer):
         fields = "__all__"
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **urls.py**
+#### <i class="fa-regular fa-file-code"></i> urls.py
 ``` python
 from django.contrib import admin
 from django.urls import include, path
@@ -104,7 +104,7 @@ However, there are some problems to fix:
 
 Let’s tackle the first three points all at the same time, by creating a custom permissions class:
 
-#### <i class="fa-regular fa-file-code"></i> **permissions.py**
+#### <i class="fa-regular fa-file-code"></i> permissions.py
 ``` python
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 from .models import Campaign, Membership
@@ -143,7 +143,7 @@ class CampaignMemberOrPublicReadOnlyPermission(BasePermission):
 
 And we change our view to make use of it:
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ``` python
 from rest_framework import viewsets
 from .models import Character
@@ -166,7 +166,7 @@ With this change users can only fetch characters for campaigns they’re a membe
 
 All that’s left to do is to make sure the `campaign_id` can’t be changed when creating or updating a character. That’s very easy with a small addition to our `CharacterViewSet` as well:
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ``` python
 class CharacterViewSet(viewsets.ModelViewSet):
     # ...
@@ -183,7 +183,7 @@ That’s our characters API done, in DRF. Now let’s recreate this with Ninja.
 ## Django Ninja
 To create the basic CRUD functionality for characters, a lot more code is needed.
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ``` python
 from typing import List
 from django.shortcuts import get_object_or_404
@@ -236,7 +236,7 @@ def character_delete(request, campaign_id: int, id: int):
     return {"success": True}
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **schemas.py**
+#### <i class="fa-regular fa-file-code"></i> schemas.py
 ``` python
 from ninja import ModelSchema
 from .models import Character
@@ -252,7 +252,7 @@ class CharacterIn(ModelSchema):
         exclude = ["id", "campaign"]
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **urls.py**
+#### <i class="fa-regular fa-file-code"></i> urls.py
 ``` python
 from django.contrib import admin
 from django.urls import include, path
@@ -271,7 +271,7 @@ And we haven’t even started on permissions, making sure people only view chara
 ## Django Ninja CRUD
 After reading Django Ninja CRUD’s documentation I changed my views and URL config as such:
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ``` python
 from ninja import Router
 from ninja_crud import views, viewsets
@@ -293,7 +293,7 @@ class CharacterViewSet(viewsets.APIViewSet):
     delete_character = views.DeleteView()
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **urls.py**
+#### <i class="fa-regular fa-file-code"></i> urls.py
 ``` python
 from django.contrib import admin
 from django.urls import path
@@ -313,7 +313,7 @@ It’s definitely shorter than the code we had before, but it’s still a far cr
 
 Instead the code has to be changed like so:
 
-#### <i class="fa-regular fa-file-code"></i> **views.py**
+#### <i class="fa-regular fa-file-code"></i> views.py
 ```python
 from ninja import Router
 from ninja_crud import views, viewsets
@@ -359,7 +359,7 @@ class CharactersViewSet(viewsets.APIViewSet):
     )
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **permissions.py**
+#### <i class="fa-regular fa-file-code"></i> permissions.py
 ```python
 from functools import wraps
 from django.core.exceptions import PermissionDenied
@@ -405,7 +405,7 @@ def campaignMemberOrPublicReadOnlyPermission(func):
     return wrapper
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **urls.py**
+#### <i class="fa-regular fa-file-code"></i> urls.py
 ```python
 from django.contrib import admin
 from django.urls import path

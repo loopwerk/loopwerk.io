@@ -25,7 +25,7 @@ Modals can be nested infinitely. Inside of this character form are multiple butt
 
 Every modal has code that detects when the escape key is pressed, and then it will close the top-most modal. The core of the code looks like this:
 
-#### <i class="fa-regular fa-file-code"></i> **Modal.svelte**
+#### <i class="fa-regular fa-file-code"></i> Modal.svelte
 ``` typescript
 <script lang="ts">
   export let title: string;
@@ -71,7 +71,7 @@ function handleKeydown(e: KeyboardEvent) {
 
 But how can the modal know that its form has changes? It doesn’t even know which form is shown, it just has a `<slot />` tag and that’s it. My first instinct was to use an event dispatcher to communicate from the child to the parent:
 
-#### <i class="fa-regular fa-file-code"></i> **Form.svelte**
+#### <i class="fa-regular fa-file-code"></i> Form.svelte
 ``` typescript
 <script>
     import { createEventDispatcher } from 'svelte';
@@ -84,7 +84,7 @@ But how can the modal know that its form has changes? It doesn’t even know whi
 </script>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **Modal.svelte**
+#### <i class="fa-regular fa-file-code"></i> Modal.svelte
 ``` typescript
 <script>
     let hasChanges = false;
@@ -105,7 +105,7 @@ One possible solution was to move the event listener to the character page, wher
 
 My first thought was to just use a global store to store the `hasChanges` value. Write to it from the forms, listen to it from the modals, done. But the nested modals make that problematic: changes made to a child modal would now also affect the parent modal, since they use the same store. And then I remembered that you can [set context variables](https://v4.svelte.dev/docs/svelte#setcontext), which are stored per component. And you can store a writable store inside the context just fine.
 
-#### <i class="fa-regular fa-file-code"></i> **Modal.svelte**
+#### <i class="fa-regular fa-file-code"></i> Modal.svelte
 ``` typescript
 <script lang="ts">
   import { setContext } from "svelte";
@@ -117,7 +117,7 @@ My first thought was to just use a global store to store the `hasChanges` value.
 </script>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **Form.svelte**
+#### <i class="fa-regular fa-file-code"></i> Form.svelte
 ``` typescript
 <script lang="ts">
   import { getContext } from "svelte";

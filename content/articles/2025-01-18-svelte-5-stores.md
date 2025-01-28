@@ -11,7 +11,7 @@ One pattern that I love to use in my SvelteKit projects is returning writable st
 
 The basic code to make this lovely pattern work looks like this:
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.ts**
+#### <i class="fa-regular fa-file-code"></i> +layout.ts
 ```typescript
 import type { LayoutLoad } from "./$types";
 import { writable } from "svelte/store";
@@ -25,7 +25,7 @@ export const load: LayoutLoad = async () => {
 
 Obviously the user object would normally be something you’d `fetch` from a server, but this example serves our purpose. Now we have a writable store that we can access from any page, and we can thus change the user object:
 
-#### <i class="fa-regular fa-file-code"></i> **+page.svelte**
+#### <i class="fa-regular fa-file-code"></i> +page.svelte
 ```typescript
 <script lang="ts">
   let { data } = $props();
@@ -41,7 +41,7 @@ Obviously the user object would normally be something you’d `fetch` from a ser
 
 When we press the button the user name as shown on a completely different page or layout automatically changes. For example maybe we’re showing the user’s name in the navigation bar when the user is logged in:
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.svelte**
+#### <i class="fa-regular fa-file-code"></i> +layout.svelte
 ```typescript
 <script lang="ts">
   let { children, data } = $props();
@@ -62,7 +62,7 @@ This pattern still works beautifully, but I wanted to see if I could replace the
 
 Sadly, you can’t just return a `$state` rune from `+layout.ts` like so:
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.ts**
+#### <i class="fa-regular fa-file-code"></i> +layout.ts
 ```typescript
 import type { LayoutLoad } from "./$types";
 
@@ -77,7 +77,7 @@ This results in the Svelte error `rune_outside_svelte`: “The `$state` rune is 
 
 One thing we try to do is store the state in an external file:
 
-#### <i class="fa-regular fa-file-code"></i> **/lib/state.svelte.ts**
+#### <i class="fa-regular fa-file-code"></i> /lib/state.svelte.ts
 ```typescript
 type State = {
   user: undefined | { name: string };
@@ -88,7 +88,7 @@ export const state: State = $state({ user: undefined });
 
 We write to `state` from our `load` function:
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.ts**
+#### <i class="fa-regular fa-file-code"></i> +layout.ts
 ```typescript
 import type { LayoutLoad } from "./$types";
 import { state } from "$lib/state.svelte";
@@ -100,7 +100,7 @@ export const load: LayoutLoad = async () => {
 
 We can access it from our layout:
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.svelte**
+#### <i class="fa-regular fa-file-code"></i> +layout.svelte
 ```typescript
 <script lang="ts">
   let { children } = $props();
@@ -119,7 +119,7 @@ We can access it from our layout:
 
 And we can still write to it from our page:
 
-#### <i class="fa-regular fa-file-code"></i> **+page.svelte**
+#### <i class="fa-regular fa-file-code"></i> +page.svelte
 ```typescript
 <script lang="ts">
   import { state } from "$lib/state.svelte";
@@ -134,13 +134,13 @@ And we can still write to it from our page:
 
 But sadly this introduces shared state on the server (when we use SSR), and this is a big problem since we’re now leaking data between different users. See [SvelteKit’s own documentation on this](https://svelte.dev/docs/kit/state-management#No-side-effects-in-load) for more info. You can quite easily see this data leakage in action with the following code:
 
-#### <i class="fa-regular fa-file-code"></i> **/lib/state.svelte.ts**
+#### <i class="fa-regular fa-file-code"></i> /lib/state.svelte.ts
 ```typescript
 export const state = $state({ count: 0 });
 
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.ts**
+#### <i class="fa-regular fa-file-code"></i> +layout.ts
 ```typescript
 import type { LayoutLoad } from "./$types";
 import { state } from "$lib/state.svelte";
@@ -150,7 +150,7 @@ export const load: LayoutLoad = async () => {
 };
 ```
 
-#### <i class="fa-regular fa-file-code"></i> **+layout.svelte**
+#### <i class="fa-regular fa-file-code"></i> +layout.svelte
 ```typescript
 <script lang="ts">
   let { children } = $props();

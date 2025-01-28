@@ -7,7 +7,7 @@ summary: The best feature of Heroku is the ability to just push a branch, and it
 
 When I [setup my own Debian server back in 2023](/articles/2023/setting-up-debian-11/) I didn’t really have a good way to automatically deploy my site. Instead I’d have to SSH into the server, go into the right folder, and execute a script that would pull the changes, run the migrations and restart the service. Something like this, for my Django backend:
 
-#### <i class="fa-regular fa-file-code"></i> **/home/example/api.example.com/deploy.sh**
+#### <i class="fa-regular fa-file-code"></i> /home/example/api.example.com/deploy.sh
 ```
 git pull
 poetry install --with prod --sync
@@ -21,7 +21,7 @@ Turns out that this is pretty simple using GitHub’s webhooks. If you have an e
 
 Here’s my version, using the `express` framework:
 
-#### <i class="fa-regular fa-file-code"></i> **/home/example/deploy.example.com/index.js**
+#### <i class="fa-regular fa-file-code"></i> /home/example/deploy.example.com/index.js
 ``` javascript
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
@@ -104,7 +104,7 @@ This script actually works for two sites running on the same server, and sharing
 
 Also create a `.env` file containing a webhook secret. It can be anything you want, just create something long and random:
 
-#### <i class="fa-regular fa-file-code"></i> **/home/example/deploy.example.com/.env**
+#### <i class="fa-regular fa-file-code"></i> /home/example/deploy.example.com/.env
 
 ```
 GITHUB_WEBHOOK_SECRET="my_secret_value_here"
@@ -112,7 +112,7 @@ GITHUB_WEBHOOK_SECRET="my_secret_value_here"
 
 To get this `express` site up and running I created a `systemd` service file:
 
-#### <i class="fa-regular fa-file-code"></i> **/etc/systemd/system/deploy.example.com.service**
+#### <i class="fa-regular fa-file-code"></i> /etc/systemd/system/deploy.example.com.service
 ```
 [Unit]
 Description=node daemon for deploy.example.com
@@ -131,7 +131,7 @@ WantedBy=multi-user.target
 
 And an Nginx site to host it:
 
-#### <i class="fa-regular fa-file-code"></i> **/etc/nginx/sites-enabled/deploy.example.com**
+#### <i class="fa-regular fa-file-code"></i> /etc/nginx/sites-enabled/deploy.example.com
 ```
 server {
     server_name deploy.example.com;

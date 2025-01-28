@@ -11,7 +11,7 @@ For this we rely on two packages: [`django-mailer`](https://github.com/pinax/dja
 
 Our `django-apscheduler` script looks something like this:
 
-#### <i class="fa-regular fa-file-code"></i> **/soundradix/management/commands/runapscheduler.py**
+#### <i class="fa-regular fa-file-code"></i> /soundradix/management/commands/runapscheduler.py
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
 We run this `manage.py runapscheduler` script via systemd with the following config file:
 
-#### <i class="fa-regular fa-file-code"></i> **/etc/systemd/system/scheduler.soundradix.com.service**
+#### <i class="fa-regular fa-file-code"></i> /etc/systemd/system/scheduler.soundradix.com.service
 ```
 [Unit]
 Description=scheduler process for api.soundradix.com
