@@ -1,13 +1,6 @@
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
   --tw-pan-x:  ;
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
@@ -46,13 +39,6 @@
 ::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
   --tw-pan-x:  ;
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;

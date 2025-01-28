@@ -54,6 +54,7 @@ module.exports = {
     },
   },
   corePlugins: {
+    transform: false,
     filter: false,
     backgroundOpacity: false,
     textOpacity: false,
