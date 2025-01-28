@@ -66,8 +66,10 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
     div(class: "border-t border-gray-2 mt-8 pt-8") {
       h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
-      div(class: "flex gap-8") {
-        img(class: "h-[120px] rounded-full", src: "/articles/images/kevin.png")
+      div(class: "flex flex-col lg:flex-row gap-8") {
+        div {
+          img(class: "h-[120px] rounded-full", src: "/articles/images/kevin.png")
+        }
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
@@ -85,7 +87,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     div(class: "border-t border-gray-2 mt-8 pt-8") {
       h2(class: "text-4xl font-extrabold mb-8") { "More articles" }
 
-      div(class: "grid grid-cols-2 gap-10") {
+      div(class: "grid lg:grid-cols-2 gap-10") {
         otherArticles.map { renderArticleForGrid(article: $0) }
       }
 
