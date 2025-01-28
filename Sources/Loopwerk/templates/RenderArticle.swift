@@ -1,6 +1,6 @@
-import Saga
-import HTML
 import Foundation
+import HTML
+import Saga
 
 func tagPrefix(index: Int, totalTags: Int) -> Node {
   if index > 0 {
@@ -25,7 +25,7 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
         %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-        %a(href: "/articles/tag/\(tag.slugified)/") { tag }
+        %a(href: "/articles/tag/\(tag.slugified)/") { tag },
       ])
     }
   }
@@ -51,7 +51,7 @@ func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeCon
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item, siteUrl: SiteMetadata.url)
-  
+
   let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
   let otherArticles = allArticles.filter { $0.url != context.item.url }.prefix(2)
 
@@ -68,7 +68,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
       div(class: "flex gap-8") {
         img(class: "h-[120px] rounded-full", src: "/articles/images/kevin.png")
-        
+
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
           p(class: "text-gray-1") {
@@ -81,38 +81,38 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         }
       }
     }
-    
+
     div(class: "border-t border-gray-2 mt-8 pt-8") {
       h2(class: "text-4xl font-extrabold mb-8") { "More articles" }
-      
+
       div(class: "grid grid-cols-2 gap-10") {
         otherArticles.map { renderArticleForGrid(article: $0) }
       }
-      
+
       p(class: "prose mt-8") {
         a(href: "/articles/") { "› See all articles" }
       }
     }
-    
+
     div(class: "border-t border-gray-2 mt-8 pt-8") {
       Node.raw("""
-<script src="https://giscus.app/client.js"
-      data-repo="loopwerk/loopwerk.io"
-      data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
-      data-category="Article discussions"
-      data-category-id="DIC_kwDOAtoOzs4Ciykw"
-      data-mapping="pathname"
-      data-strict="1"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="bottom"
-      data-theme="preferred_color_scheme"
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async>
-</script>
-""")
+      <script src="https://giscus.app/client.js"
+            data-repo="loopwerk/loopwerk.io"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
+            data-category="Article discussions"
+            data-category-id="DIC_kwDOAtoOzs4Ciykw"
+            data-mapping="pathname"
+            data-strict="1"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+      </script>
+      """)
     }
   }
 }

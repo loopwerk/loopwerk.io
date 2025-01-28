@@ -1,5 +1,5 @@
-import HTML
 import Foundation
+import HTML
 
 enum Section: String {
   case home
@@ -47,7 +47,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         header(class: "bg-nav text-gray-1 py-4 mb-10 text-base/6") {
           nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
-            
+
             ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
@@ -103,11 +103,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
             a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
           }
         }
-        
+
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js")
       }
-    }
+    },
   ]
 }

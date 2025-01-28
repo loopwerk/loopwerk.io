@@ -1,5 +1,5 @@
-import Saga
 import HTML
+import Saga
 import SagaSwimRenderer
 
 func renderFeed(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
@@ -10,7 +10,7 @@ func renderFeed(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
     feedPath: context.outputPath.string,
     items: context.items,
     summary: { item in
-      return item.summary
+      item.summary
     }
   ).node()
 }
@@ -23,7 +23,7 @@ func renderTagFeed(context: PartitionedRenderingContext<String, ArticleMetadata>
     feedPath: context.outputPath.string,
     items: context.items,
     summary: { item in
-      return item.summary
+      item.summary
     }
   ).node()
 }

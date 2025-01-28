@@ -1,8 +1,8 @@
+import Foundation
+import PathKit
 import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
-import Foundation
-import PathKit
 
 struct ArticleMetadata: Metadata {
   let tags: [String]
@@ -122,7 +122,7 @@ struct Run {
         readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
         itemWriteMode: .keepAsFile,
         writers: [
-          .itemWriter(swim(renderPage))
+          .itemWriter(swim(renderPage)),
         ]
       )
       .run()
@@ -151,9 +151,9 @@ extension Saga {
     createArticleImagesDateFormatter.timeZone = .current
 
     let articles = fileStorage.compactMap { $0.item as? Item<ArticleMetadata> }
-    
+
     for article in articles {
-      let destination = (self.outputPath + "static" + "images" + article.relativeSource.lastComponentWithoutExtension).string + ".png"
+      let destination = (outputPath + "static" + "images" + article.relativeSource.lastComponentWithoutExtension).string + ".png"
       let generator = ImageGenerator(rootPath: rootPath)
       generator?.generate(title: article.title, outputPath: destination)
     }

@@ -1,5 +1,5 @@
-import Saga
 import HTML
+import Saga
 
 func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
   baseLayout(section: .projects, title: "Open Source") {

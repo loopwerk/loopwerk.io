@@ -1,5 +1,5 @@
-import Saga
 import HTML
+import Saga
 
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")

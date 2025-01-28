@@ -1,6 +1,6 @@
-import SwiftSoup
 import Foundation
 import Parsley
+import SwiftSoup
 
 func tagnameToSpacing(_ tag: String) -> String {
   switch tag {
@@ -42,8 +42,8 @@ extension String {
         let tagName = heading.tagName()
         let text = try heading.text()
 
-        if (tagName == "p") {
-          if (text == "%TOC%") {
+        if tagName == "p" {
+          if text == "%TOC%" {
             hasSeenTocTemplate = true
           }
           continue
@@ -63,11 +63,11 @@ extension String {
         var content = try codeBlock.html()
 
         let regex = try NSRegularExpression(pattern: #"(?s)/\*HLS(?:(?!\*/)\W)?((?:(?!/\*HLS).)*?)\*/(.*?)/\*HLE\*/"#)
-        let range = NSRange(content.startIndex..<content.endIndex, in: content)
+        let range = NSRange(content.startIndex ..< content.endIndex, in: content)
         content = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
 
         let regex2 = try NSRegularExpression(pattern: #"(?s)/\*TMS(?:(?!\*/)\W)?((?:(?!/\*TMS).)*?)\*/(.*?)/\*TME\*/"#)
-        let range2 = NSRange(content.startIndex..<content.endIndex, in: content)
+        let range2 = NSRange(content.startIndex ..< content.endIndex, in: content)
         content = regex2.stringByReplacingMatches(in: content, options: [], range: range2, withTemplate: #"<span class="template" title="$1">$2</span>"#)
 
         try codeBlock.html(content)

@@ -1,6 +1,6 @@
-import Saga
-import HTML
 import Foundation
+import HTML
+import Saga
 
 func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)] {
   let tags = articles.flatMap { $0.metadata.tags }
@@ -17,11 +17,11 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
       span(class: "border-r border-gray-2 pr-2 mr-2") {
         article.published.formatted("MMMM dd, YYYY")
       }
-      
+
       article.metadata.tags.sorted().enumerated().map { index, tag in
         Node.fragment([
           %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-           %a(href: "/articles/tag/\(tag.slugified)/") { tag }
+          %a(href: "/articles/tag/\(tag.slugified)/") { tag },
         ])
       }
     }
@@ -34,15 +34,15 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   let dateFormatter = DateFormatter()
   dateFormatter.dateFormat = "yyyy"
-  
+
   let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.published) })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
-  
+
   return baseLayout(section: .articles, title: "Articles", rssLink: "", extraHeader: "") {
     sortedByYearDescending.map { year, articles in
       div {
         h1(class: "text-4xl font-extrabold mb-12") { year }
-        
+
         div(class: "grid grid-cols-2 gap-10 mb-16") {
           articles.map { renderArticleForGrid(article: $0) }
         }
@@ -69,7 +69,7 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: Strin
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  
+
   return _renderArticles(context.items, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
 }
 
