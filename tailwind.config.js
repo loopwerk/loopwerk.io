@@ -39,6 +39,7 @@ module.exports = {
             '--tw-prose-headings': theme('colors.white'),
             '--tw-prose-code': theme('colors.white'),
             '--tw-prose-pre-bg': '#393e46',
+            '--tw-prose-hr': theme('colors.white'),
             a: {
               color: theme('colors.orange'),
               textDecoration: 'none',
@@ -50,6 +51,10 @@ module.exports = {
               color: theme('colors.white'),
               fontWeight: '800',
             },
+            pre: {
+              fontSize: "1rem",
+              lineHeight: "1.5rem",
+            }
           },
         },
       }),

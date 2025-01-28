@@ -77,6 +77,10 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply font-normal text-base;
 }
 
+.fa-regular {
+  font-weight: normal;
+}
+
 /* SCREENSHOTS */
 
 .screenshots.break_1 span {
