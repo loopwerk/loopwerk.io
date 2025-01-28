@@ -1,5 +1,5 @@
-import Saga
 import HTML
+import Saga
 
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")
@@ -21,15 +21,13 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func renderHome(body: String) -> Node {
   div {
-    div(class: "header") {
-      img(alt: "Loopwerk logo", src: "/static/images/Loopwerk.svg")
-    }
+    img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/Loopwerk.svg")
 
-    div(class: "content") {
+    div(class: "my-24 uppercase font-helvetica text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
       Node.raw(body)
     }
 
-    div(class: "footer") {
+    div(class: "text-center images") {
       a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
       a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
       a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
@@ -44,7 +42,7 @@ func renderHome(body: String) -> Node {
 
 func renderNonHome(body: String) -> Node {
   article {
-    div(class: "page_content") {
+    div(class: "prose") {
       Node.raw(body)
     }
   }

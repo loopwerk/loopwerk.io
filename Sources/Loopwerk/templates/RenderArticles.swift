@@ -1,5 +1,6 @@
-import Saga
+import Foundation
 import HTML
+import Saga
 
 func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)] {
   let tags = articles.flatMap { $0.metadata.tags }
@@ -7,70 +8,71 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
   return tagsWithCounts.sorted { $0.1 > $1.1 }
 }
 
-func _renderArticles(_ articles: [Item<ArticleMetadata>], tags: [(String, Int)], paginator: Paginator?, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
-  baseLayout(section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
-    
-    div(class: "flex") {
-      div(class: "list") {
-        articles.map { article in
-          section {
-            h1 {
-              a(href: article.url) { article.title }
-            }
-            renderArticleInfo(article)
-            p {
-              article.summary
-            }
-            p(class: "more") {
-              a(class: "more", href: article.url) { "read more" }
-            }
-          }
-        }
+func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
+  section {
+    h2(class: "text-2xl font-bold mb-2") {
+      a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
+    }
+    div(class: "text-gray-2 text-sm mb-4") {
+      span(class: "border-r border-gray-2 pr-2 mr-2") {
+        article.published.formatted("MMMM dd, YYYY")
       }
-      
-      if !tags.isEmpty {
-        div(class: "sidebar") {
-          ul {
-            tags.map { (tag: String, count: Int) in
-              li {
-                a(href: "/articles/tag/\(tag.slugified)/") { tag }
-                %":"
-                "\(count)"
-              }
-            }
-          }
-        }
+
+      article.metadata.tags.sorted().enumerated().map { index, tag in
+        Node.fragment([
+          %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+          %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+        ])
       }
     }
+    p {
+      a(href: article.url) { article.summary }
+    }
+  }
+}
 
-    if let paginator = paginator {
-      ul(class: "pagination") {
-        li(class: "newer") {
-          if let previous = paginator.previous {
-            a(href: previous.url) { "newer articles" }
-          }
-        }
-        li(class: "older") {
-          if let next = paginator.next {
-            a(href: next.url) { "older articles" }
-          }
+func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
+  let dateFormatter = DateFormatter()
+  dateFormatter.dateFormat = "yyyy"
+
+  let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.published) })
+  let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
+
+  return baseLayout(section: .articles, title: "Articles", rssLink: "", extraHeader: "") {
+    sortedByYearDescending.map { year, articles in
+      div {
+        h1(class: "text-4xl font-extrabold mb-12") { year }
+
+        div(class: "grid grid-cols-2 gap-10 mb-16") {
+          articles.map { renderArticleForGrid(article: $0) }
         }
       }
     }
   }
 }
 
-func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
-  let tags = uniqueTagsWithCount(allArticles as [Item<ArticleMetadata>])
-  return _renderArticles(context.items, tags: tags, paginator: context.paginator, title: "Articles")
+func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
+  return baseLayout(section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
+    articles.map { article in
+      section(class: "mb-10") {
+        h1(class: "text-2xl font-bold mb-2") {
+          a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
+        }
+        renderArticleInfo(article)
+        p(class: "mt-4") {
+          a(href: article.url) { article.summary }
+        }
+      }
+    }
+  }
 }
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  return _renderArticles(context.items, tags: [], paginator: context.paginator, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
+
+  return _renderArticles(context.items, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
 }
 
 func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
-  _renderArticles(context.items, tags: [], paginator: context.paginator, title: "Articles in \(context.key)")
+  _renderArticles(context.items, title: "Articles in \(context.key)")
 }

@@ -1,5 +1,5 @@
-import Saga
 import HTML
+import Saga
 
 func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
   baseLayout(section: .projects, title: "Open Source") {
@@ -20,8 +20,8 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
 
 @NodeBuilder
 private func renderCategory(category: String, projects: [Item<ProjectMetadata>]) -> Node {
-  div(class: "projects") {
-    h1 { category }
+  div(class: "mt-12") {
+    h1(class: "text-2xl font-bold mb-2 border-b border-sub") { category }
 
     projects
       .filter { $0.metadata.parent == nil }
@@ -35,11 +35,11 @@ private func renderCategory(category: String, projects: [Item<ProjectMetadata>])
 
 @NodeBuilder
 private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<ProjectMetadata>]) -> Node {
-  div(class: "project") {
-    h3 {
+  div(class: "mt-8") {
+    h3(class: "text-xl font-bold") {
       project.title
       if project.involvement != .author {
-        span(class: "involvement") {
+        span(class: "text-sm text-gray-2 border border-gray-2 p-1 rounded ml-2") {
           project.involvement.rawValue
         }
       }
@@ -49,20 +49,20 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
       project.metadata.text
     }
 
-    div(class: "footer") {
+    div(class: "flex gap-4 items-center") {
       div {
-        a(href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
+        a(class: "orange app text-sm lg:text-base", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
           project.metadata.repo
         }
       }
-      div {
+      div(class: "hidden lg:block") {
         img(src: "https://img.shields.io/github/stars/\(project.metadata.repo)?color=f5b031&labelColor=566b78")
       }
     }
 
     if !subProjects.isEmpty {
-      div(class: "subprojects") {
-        h2 {
+      div(class: "bg-sub p-4 rounded mt-2") {
+        h2(class: "text-2xl font-bold -mb-2") {
           "\(project.title) projects"
         }
         subProjects

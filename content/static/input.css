@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Anonymous Pro";
+  src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
+}
+
+/* BODY */
+
+body.home nav {
+  @apply lg:justify-center;
+}
+
+body.home header img {
+  @apply block lg:hidden;
+}
+
+body.home .site-footer {
+  @apply hidden;
+}
+
+body.home .images img {
+  @apply inline m-5 h-[28px];
+}
+
+/* LINKS */
+
+nav a {
+  @apply block border-b-2 border-transparent;
+}
+
+nav a:hover {
+  @apply border-orange;
+}
+
+nav a.active {
+  @apply border-orange text-white;
+}
+
+.text-gray-2 a {
+  @apply underline text-inherit;
+}
+
+.text-gray-2 a:hover {
+  @apply text-white;
+}
+
+a.orange {
+  @apply text-orange;
+}
+
+a.orange:hover {
+  @apply underline;
+}
+
+a[href^="https://github.com"].app {
+  background: transparent url("images/github.svg") no-repeat;
+  background-size: 1em 1em;
+  padding-left: 20px;
+}
+
+a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
+  background: transparent url("images/apple.svg") no-repeat;
+  background-size: 1em 1em;
+  padding-left: 20px;
+}
+
+/* PROSE */
+
+.prose {
+  @apply prose-code:before:hidden prose-code:after:hidden;
+}
+
+.prose code {
+  @apply font-normal text-base;
+}
+
+/* SCREENSHOTS */
+
+.screenshots.break_1 span {
+  @apply flex-1;
+}
+
+.screenshots.break_2 span {
+  @apply flex-[0_0_50%] lg:flex-1;
+}
+
+.screenshots.break_3 span {
+  @apply flex-[0_0_33%] lg:flex-1;
+}
+
+.screenshots img {
+  padding: 3px 3px 0 0;
+  border-radius: 0px;
+  margin: 0;
+}
+
+.screenshots.rounded img {
+  border-radius: 10%/4.7%;
+}

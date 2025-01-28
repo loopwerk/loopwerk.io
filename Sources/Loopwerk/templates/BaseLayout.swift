@@ -1,5 +1,5 @@
-import HTML
 import Foundation
+import HTML
 
 enum Section: String {
   case home
@@ -31,8 +31,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         meta(content: "Loopwerk", name: "og:site_name")
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen", name: "keywords")
         title { SiteMetadata.name + titleSuffix }
-        link(href: "/static/style.css", rel: "stylesheet")
-        link(href: "/static/prism.css", rel: "stylesheet")
+        link(href: "/static/output.css", rel: "stylesheet")
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
         link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
         link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
@@ -41,22 +40,15 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
 
-        switch section {
-          case .home:
-            link(href: "/static/home.css", rel: "stylesheet")
-          default:
-            link(href: "/static/not-home.css", rel: "stylesheet")
-        }
-
         extraHeader
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
-      body {
-        header {
-          nav {
+      body(class: "bg-page text-white pb-5 \(section?.rawValue ?? "")") {
+        header(class: "bg-nav text-gray-1 py-4 mb-10 text-base/6") {
+          nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
 
-            ul {
+            ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
@@ -76,11 +68,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
               li {
                 a(class: section == .mentorshipProgram ? "active" : "", href: "/mentor/") { "Mentorship" }
               }
-              
+
               li {
                 a(class: section == .about ? "active" : "", href: "/about/") { "About" }
               }
-              
+
               li {
                 a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
               }
@@ -88,11 +80,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           }
         }
 
-        div(id: "content") {
+        div(class: "container") {
           children()
         }
 
-        div(id: "site-footer") {
+        div(class: "site-footer container text-gray-2 border-t border-gray-2 text-center pt-6 mt-8 text-sm font-anonymous") {
           p {
             "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
           }
@@ -111,11 +103,11 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
             a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
           }
         }
-        
+
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js")
         script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js")
       }
-    }
+    },
   ]
 }

@@ -1,5 +1,5 @@
-import XCTest
 @testable import Loopwerk
+import XCTest
 
 final class LoopwerkTests: XCTestCase {
   func testImproveHtml_ExternalLink_HTTP() {
@@ -35,27 +35,27 @@ final class LoopwerkTests: XCTestCase {
   func testImproveHtml_Heading() {
     let input = "<h1>Heading 1</h1><h2>2 - Heading 2</h2>"
     let expectedOutput = """
-<h1><a name="heading-1"></a>Heading 1</h1>
-<h2><a name="2-heading-2"></a>2 - Heading 2</h2>
-"""
+    <h1><a name="heading-1"></a>Heading 1</h1>
+    <h2><a name="2-heading-2"></a>2 - Heading 2</h2>
+    """
     XCTAssertEqual(input.improveHTML(), expectedOutput)
   }
 
   func testImproveHtml_Toc() {
     let input = "<h1>Table Of Contents</h1><p>%TOC%</p><h1>Heading 1</h1><h2>2 - Heading 2</h2>"
     let expectedOutput = """
-<h1><a name="table-of-contents"></a>Table Of Contents</h1>
-<ul>
-<li><a href="#heading-1">Heading 1</a>
-<ul>
-<li><a href="#2-heading-2">2 - Heading 2</a></li>
-</ul>
-</li>
-</ul>
+    <h1><a name="table-of-contents"></a>Table Of Contents</h1>
+    <ul>
+    <li><a href="#heading-1">Heading 1</a>
+    <ul>
+    <li><a href="#2-heading-2">2 - Heading 2</a></li>
+    </ul>
+    </li>
+    </ul>
 
-<h1><a name="heading-1"></a>Heading 1</h1>
-<h2><a name="2-heading-2"></a>2 - Heading 2</h2>
-"""
+    <h1><a name="heading-1"></a>Heading 1</h1>
+    <h2><a name="2-heading-2"></a>2 - Heading 2</h2>
+    """
     XCTAssertEqual(input.improveHTML(), expectedOutput)
   }
 }
