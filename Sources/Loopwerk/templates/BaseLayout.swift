@@ -48,7 +48,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           nav(class: "container flex gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
             
-            ul(class: "flex gap-x-5 [&>li>a]:block [&>li>a]:border-b-2 [&>li>a]:border-transparent [&>li>a]:hover:border-orange [&>li>a.active]:border-orange [&>li>a.active]:text-white") {
+            ul(class: "flex gap-x-5") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
@@ -84,7 +84,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           children()
         }
 
-        div(class: "site-footer container text-gray-2 border-t border-gray-2 text-center pt-6 mt-8 text-sm [&>p>a]:underline [&>p>a]:hover:text-white font-anonymous") {
+        div(class: "site-footer container text-gray-2 border-t border-gray-2 text-center pt-6 mt-8 text-sm font-anonymous") {
           p {
             "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
           }

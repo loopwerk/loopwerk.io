@@ -58,7 +58,9 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   return baseLayout(section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article(class: "prose") {
       h1 { context.item.title }
-      renderArticleInfo(context.item)
+      div(class: "-mt-6") {
+        renderArticleInfo(context.item)
+      }
       Node.raw(context.item.body)
     }
 

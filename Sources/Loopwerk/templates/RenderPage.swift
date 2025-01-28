@@ -21,13 +21,13 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func renderHome(body: String) -> Node {
   div {
-    img(alt: "Loopwerk logo", class: "my-25 w-[315px] h-200px mx-auto", src: "/static/images/Loopwerk.svg")
+    img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/Loopwerk.svg")
 
-    div(class: "my-25 uppercase font-helvetica text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
+    div(class: "my-24 uppercase font-helvetica text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
       Node.raw(body)
     }
 
-    div(class: "text-center [&>a>img]:inline [&>a>img]:m-5 [&>a>img]:h-[28px]") {
+    div(class: "text-center images") {
       a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
       a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
       a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
