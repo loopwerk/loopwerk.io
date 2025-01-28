@@ -62,5 +62,5 @@ module.exports = {
     backgroundOpacity: false,
     textOpacity: false,
   },
-  plugins: [typography],
+  plugins: [typography({ target: 'legacy' })],
 }
