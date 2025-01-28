@@ -54,6 +54,8 @@ module.exports = {
     },
   },
   corePlugins: {
+    contain: false,
+    ringWidth: false,
     backdropFilter: false,
     transform: false,
     filter: false,
