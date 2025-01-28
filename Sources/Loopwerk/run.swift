@@ -7,8 +7,6 @@ import SagaSwimRenderer
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
-  let review: String?
-  let rating: Float?
 }
 
 struct AppMetadata: Metadata {

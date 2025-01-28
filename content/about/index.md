@@ -11,7 +11,7 @@ I created my first website in 2000, and got my first job as a PHP developer in 2
 
 My hobbies and interests include playing PC games, playing Dungeons & Dragons, watching tv shows (a list of my all-time favs can be [found on IMDB](https://www.imdb.com/list/ls047084150/)), photography and architecture. 
 
-I maintain a bunch of [open source projects](/projects/), and I’m a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
+I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/projects/), and I’m a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
 I choose cats over dogs, tea over coffee, and winter over summer. I’ve lived in Iceland for almost four years, and I still speak Icelandic to my cat Mia. My favorite foods are ramen, hamburgers and tacos.
 

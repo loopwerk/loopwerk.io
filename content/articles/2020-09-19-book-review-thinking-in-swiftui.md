@@ -1,7 +1,5 @@
 ---
 tags: review, iOS, swift
-review: Thinking in SwiftUI
-rating: 4.5
 summary: A while ago I asked on Twitter which Swift-related book I should review next, and overwhelmingly Thinking in SwiftUI by the objc.io guys was chosen. An excellent choice!
 ---
 
