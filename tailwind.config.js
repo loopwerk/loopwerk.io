@@ -8,19 +8,21 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '2rem',
-        lg: '0',
+        DEFAULT: '0',
       },
     },
     screens: {
+      sm: "315px",
       lg: "800px",
     },
     colors: {
+      inherit: "inherit",
       transparent: "transparent",
       white: "#eee",
       orange: "#f1a948",
       page: "#222831",
       nav: "#0e1112",
+      sub: "#393e46",
       "gray-1": "#ccc",
       "gray-2": "#9e9d9d",
     },

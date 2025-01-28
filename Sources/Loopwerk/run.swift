@@ -94,6 +94,7 @@ struct Run {
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),
           .tagWriter(swim(renderTag), tags: \.metadata.tags),
+          .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
           .listWriter(swim(renderFeed), output: "feed.xml"),

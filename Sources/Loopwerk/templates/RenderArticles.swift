@@ -11,7 +11,7 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
     h2(class: "text-2xl font-bold mb-2") {
-      a(href: article.url) { article.title }
+      a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
     }
     div(class: "text-gray-2 text-sm mb-4") {
       span(class: "border-r border-gray-2 pr-2 mr-2") {
@@ -51,35 +51,28 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   }
 }
 
-func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
-  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-  
-  return baseLayout(section: .articles, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
-    context.items.map { article in
+func _renderArticles(_ articles: [Item<ArticleMetadata>], title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
+  return baseLayout(section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
+    articles.map { article in
       section(class: "mb-10") {
         h1(class: "text-2xl font-bold mb-2") {
-          a(href: article.url) { article.title }
+          a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
         }
         renderArticleInfo(article)
         p(class: "mt-4") {
-          article.summary
-        }
-      }
-    }
-    
-    if let paginator = context.paginator {
-      ul(class: "pagination") {
-        li(class: "newer") {
-          if let previous = paginator.previous {
-            a(href: previous.url) { "newer articles" }
-          }
-        }
-        li(class: "older") {
-          if let next = paginator.next {
-            a(href: next.url) { "older articles" }
-          }
+          a(href: article.url) { article.summary }
         }
       }
     }
   }
+}
+
+func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
+  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
+  
+  return _renderArticles(context.items, title: "Articles in \(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
+}
+
+func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
+  _renderArticles(context.items, title: "Articles in \(context.key)")
 }

@@ -15,7 +15,7 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "text-gray-2 text-sm [&>a]:text-gray-2 [&>a]:underline [&>a]:hover:text-white") {
+  div(class: "text-gray-2 text-sm") {
     span(class: "border-r border-gray-2 pr-2 mr-2") {
       article.published.formatted("MMMM dd, yyyy")
     }
@@ -70,7 +70,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         img(class: "h-[120px] rounded-full", src: "/articles/images/kevin.png")
         
         div(class: "prose") {
-          h3(class: "m-0!") { "Kevin Renskers" }
+          h3(class: "!m-0") { "Kevin Renskers" }
           p(class: "text-gray-1") {
             "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
             a(href: "https://www.critical-notes.com") { "Critical Notes" }
@@ -94,25 +94,25 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
     }
     
-//      div {
-//        Node.raw("""
-//<script src="https://giscus.app/client.js"
-//        data-repo="loopwerk/loopwerk.io"
-//        data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
-//        data-category="Article discussions"
-//        data-category-id="DIC_kwDOAtoOzs4Ciykw"
-//        data-mapping="pathname"
-//        data-strict="1"
-//        data-reactions-enabled="1"
-//        data-emit-metadata="0"
-//        data-input-position="bottom"
-//        data-theme="preferred_color_scheme"
-//        data-lang="en"
-//        data-loading="lazy"
-//        crossorigin="anonymous"
-//        async>
-//</script>
-//""")
-//      }
+    div(class: "border-t border-gray-2 mt-8 pt-8") {
+      Node.raw("""
+<script src="https://giscus.app/client.js"
+      data-repo="loopwerk/loopwerk.io"
+      data-repo-id="MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA=="
+      data-category="Article discussions"
+      data-category-id="DIC_kwDOAtoOzs4Ciykw"
+      data-mapping="pathname"
+      data-strict="1"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+</script>
+""")
+    }
   }
 }

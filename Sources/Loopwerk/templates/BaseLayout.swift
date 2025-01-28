@@ -45,10 +45,10 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
       }
       body(class: "bg-page text-white pb-5 \(section?.rawValue ?? "")") {
         header(class: "bg-nav text-gray-1 py-4 mb-10 text-base/6") {
-          nav(class: "container flex gap-x-7 items-center") {
+          nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
             
-            ul(class: "flex gap-x-5") {
+            ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
