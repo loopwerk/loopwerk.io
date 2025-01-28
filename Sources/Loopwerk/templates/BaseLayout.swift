@@ -52,27 +52,27 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
-              
+
               li {
                 a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
               }
-              
+
               li {
                 a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
               }
-              
+
               li {
                 a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
               }
-              
+
               li {
                 a(class: section == .mentorshipProgram ? "active" : "", href: "/mentor/") { "Mentorship" }
               }
-              
+
               li {
                 a(class: section == .about ? "active" : "", href: "/about/") { "About" }
               }
-              
+
               li {
                 a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
               }
