@@ -15,9 +15,9 @@ So, I'm back to that old question: do I use Vapor (which has now reached version
 
 This time I've written the code for only one the features of my project, first in Vapor and then in DRF. Let's look at this feature: the models, model migrations and the view code (router logic and the controller) for managing D&D campaigns. Campaigns have members, and each member can have a role (player or DM), so we're dealing with a many-to-many relationship that needs to store an extra field.
 
-# Models
+## Models
 
-## Django
+### Django
 
 ``` python
 class User(models.Model):
@@ -52,7 +52,7 @@ class Membership(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 ```
 
-## Vapor
+### Vapor
 
 ``` swift
 final class User: Model, Content {
@@ -199,12 +199,12 @@ final class Member: Model {
 
 Winner: a big win for Django. Not only because there is a lot less repeating of strings and field names, but also because we get to specify things like `db_index`, `unique`, and `auto_now_add` directly in the fields. With Vapor that is done in the migrations, which brings us to..
 
-# Migrations
+## Migrations
 
-## Django
+### Django
 It's all done automatically. When you create or change your models, you run `manage.py makemigrations` to create the migration definitions, and then run `manage.py migrate` to apply them to the database. It couldn't be more simple. It's one of the best features of Django.
 
-## Vapor
+### Vapor
 Sadly, a *lot* of work is involved.
 
 ``` swift
@@ -332,10 +332,10 @@ That is an example of only three database tables: `users`, `campaigns` and `memb
 
 Winner: Django, with a HUGE margin.
 
-# Views
+## Views
 Let's take a look at 3 endpoints: `GET /campaigns`, `POST /campaigns` and `GET /campaigns/[id]`. One thing to note is that the public representation of a campaign (the response of these endpoints) is not the same as the actual Campaign database model. There are some fields that we don't want to include, for example the `is_featured` field, or for the owner and the members we definitely don't want to include all user model fields: the email address for example is private. So how do both frameworks make this possible?
 
-## Django
+### Django
 ``` python
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -432,7 +432,7 @@ router.register('/?', CampaignsController, basename='campaign')
 urlpatterns = router.urls
 ```
 
-## Vapor
+### Vapor
 ``` swift
 struct PublicUser: Content {
   let id: UUID
@@ -643,7 +643,7 @@ Another nice thing is that everything is very explicit, it's easy to read the co
 
 But boy, working with the data transfer objects and having to write all those really is a huge bummer.
 
-# Conclusion
+## Conclusion
 I hate writing models, model migrations and the data transfer objects in Vapor - it's so much *boring* repeated code to write! Validation needs to be witten by hand as well. But on the other hand, the view code is pretty nice to write. Yes, it's a bit longer than the DRF version, but it's understandable, fully customizable to exactly how I want it to work, and I know that if it compiles, that I won't have weird crashes because some property wasn't found on an object.
 
 DRF on the other hand really excels in the models, automatic migrations and the serializers which are based on the models but really easily modified without having to redefine the entire model minus one field or something like that. The one controller that I showed above was also very readable and understandable. In reality most controllers for most of my apps's features would be a lot simpler, making the difference with Vapor even bigger.

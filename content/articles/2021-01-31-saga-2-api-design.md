@@ -8,7 +8,7 @@ summary: Part 2, where I'm looking back at the current API of Saga.
 
 *If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/).*
 
-# Part 2: API design
+## Part 2: API design
 To explain the basic API design, let's start with a simple usage example, that we will then improve upon and extend later.
 
 ``` swift

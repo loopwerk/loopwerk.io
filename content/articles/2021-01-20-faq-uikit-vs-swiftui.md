@@ -8,7 +8,7 @@ summary: My take on the very common question "What should I learn or focus on? U
 
 Today's question:
 
-> # "What should I learn or focus on? UIKit or SwiftUI?"
+## "What should I learn or focus on? UIKit or SwiftUI?"
 
 SwiftUI is the new kid on the block and grabbing all the attention. Most new tutorials and articles seem to be all about SwiftUI, it's what people new to iOS development are guided towards and what experienced people want to pick up and at least play around with. But UIKit has a huge history so it's natural to wonder: what should I learn first?
 

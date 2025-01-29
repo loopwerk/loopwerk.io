@@ -11,7 +11,7 @@ If you've been following SvelteKit's [changelog](https://github.com/sveltejs/kit
 
 My web app [Critical Notes](https://www.critical-notes.com) uses an external API, built in Django. Users can login to the API which returns an auth token, which we need to store and from then on all requests to the API need to send along this auth token. Pretty standard stuff. The code to make all of this work looked like this:
 
-### /hooks.js
+#### <i class="fa-regular fa-file-code"></i> /hooks.js
 ``` javascript
 import cookie from "cookie";
 
@@ -30,7 +30,7 @@ export function getSession({ locals }) {
 
 In `hooks.js` I read the cookie, copy the token to `event.locals`, and then the `getSession` function copies the `locals` to the actual session object. From then on every load function can access it:
 
-### /routes/+layout.js
+#### <i class="fa-regular fa-file-code"></i> /routes/+layout.js
 ``` javascript
 export async function load({ fetch, session }) {
   const fetchedUser = await getApi(fetch, "/auth/me", session.token);
@@ -45,7 +45,7 @@ export async function load({ fetch, session }) {
 
 And every page and component has easy access to it as well:
 
-### /routes/some-route/+page.svelte
+#### <i class="fa-regular fa-file-code"></i> /routes/some-route/+page.svelte
 ``` javascript
 <script>
   import { session } from "$app/stores";
@@ -57,7 +57,7 @@ And every page and component has easy access to it as well:
 
 With the removal of the session object and store, the existing code no longer worked. In fact SvelteKit generates fatal errors whenever you access the session object in a load function, or the session store anywhere else. Here's how the code looks now:
 
-### /hooks.js
+#### <i class="fa-regular fa-file-code"></i> /hooks.js
 ``` javascript
 import cookie from "cookie";
 
@@ -70,7 +70,7 @@ export async function handle({ event, resolve }) {
 
 The `hooks.js` mostly still works the same, except that the `getSession` function has been removed. So how do we access the event locals? Well, we need to create a root level `+layout.server.js` file like this:
 
-### /routes/+layout.server.js
+#### <i class="fa-regular fa-file-code"></i> /routes/+layout.server.js
 ``` javascript
 export async function load({ locals }) {
   return {
@@ -81,7 +81,7 @@ export async function load({ locals }) {
 
 All this does is make the data available to the root `+layout.js` file, which we need to change like so:
 
-### /routes/+layout.js
+#### <i class="fa-regular fa-file-code"></i> /routes/+layout.js
 ``` javascript
 export async function load({ fetch, /*HLS*/data/*HLE*/ }) {
   // you now have access to `data.token`
@@ -96,7 +96,7 @@ export async function load({ fetch, /*HLS*/data/*HLE*/ }) {
 
 By returning the destructured data object we will be able to access the token in every single load function of every single route:
 
-### /routes/some-route/+page.js
+#### <i class="fa-regular fa-file-code"></i> /routes/some-route/+page.js
 ``` javascript
 export async function load({ fetch, parent }) {
   const data = await parent();
@@ -106,7 +106,7 @@ export async function load({ fetch, parent }) {
 
 And in the same way we can also access the token in every single `+page.svelte` file:
 
-### /routes/some-route/+page.svelte
+#### <i class="fa-regular fa-file-code"></i> /routes/some-route/+page.svelte
 ```javascript
 <script>
   export let data;
@@ -116,7 +116,7 @@ And in the same way we can also access the token in every single `+page.svelte` 
 
 Accessing the token inside of components is also a small change:
 
-### /lib/components/MyComponent.svelte
+#### <i class="fa-regular fa-file-code"></i> /lib/components/MyComponent.svelte
 ``` javascript
 <script>
   import { page } from "$app/stores";

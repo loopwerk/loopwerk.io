@@ -8,8 +8,6 @@ summary: In the third and final part of this series about Saga I'm looking at th
 
 *If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/). And part 2, where I talk about the API design can be found [here](/articles/2021/saga-2-api-design/).*
 
-# Part 3: Thoughts so far
-
 ## Pros and cons of the current setup
 I'm quite happy with the [current API](/articles/2021/saga-2-api-design/) - I think it's quite easy to work with, flexible, easy to extend, yet very easy for the simple use-cases. What I am not so happy with, are the third party dependencies that Saga relies on at the moment.
 

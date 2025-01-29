@@ -40,9 +40,14 @@ module.exports = {
             '--tw-prose-code': theme('colors.white'),
             '--tw-prose-pre-bg': '#393e46',
             '--tw-prose-hr': theme('colors.white'),
+            '--tw-prose-bullets': theme('colors.gray-2'),
+            '--tw-prose-counters': theme('colors.gray-2'),
+            '--tw-prose-quotes': theme('colors.gray-2'),
+            '--tw-prose-quote-borders': theme('colors.gray-2'),
             a: {
               color: theme('colors.orange'),
               textDecoration: 'none',
+              fontWeight: '400',
               '&:hover': {
                 textDecoration: 'underline',
               },

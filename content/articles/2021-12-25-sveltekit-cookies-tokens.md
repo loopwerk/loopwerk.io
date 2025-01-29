@@ -21,8 +21,8 @@ So in other words, the Django API doesn't do anything with cookies anymore; it d
 
 The biggest cog in this wheel is the login "proxy", the SvelteKit endpoint that is called by the web client:
 
+#### <i class="fa-regular fa-file-code"></i> /routes/auth/login.js
 ``` javascript
-// /routes/auth/login.js
 import { postApi } from "$lib/api";
 
 export async function post({ request }) {
@@ -48,8 +48,8 @@ export async function post({ request }) {
 
 Then to get access to the token in the web client I use the following hooks:
 
+#### <i class="fa-regular fa-file-code"></i> /hooks.js
 ``` javascript
-// /hooks.js
 import cookie from "cookie";
 
 export async function handle({ event, resolve }) {
@@ -69,8 +69,8 @@ This token can then be accessed from any Svelte component from the `load` method
 
 Logging out is done using a SvelteKit endpoint that clears the cookie:
 
+#### <i class="fa-regular fa-file-code"></i> /routes/auth/logout.js
 ``` javascript
-// /routes/auth/logout.js
 export function post() {
   return {
     headers: {

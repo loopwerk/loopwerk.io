@@ -13,7 +13,7 @@ The first version of my solution used either `context` (since renamed to `stuff`
 
 Let's dig in!
 
-### /routes/__layout.svelte
+#### <i class="fa-regular fa-file-code"></i> /routes/__layout.svelte
 ```javascript
 <script context="module">
   import { fetchBooksStore } from "$lib/utils";
@@ -35,7 +35,7 @@ Let's dig in!
 <slot />
 ```
 
-### /routes/index.svelte
+#### <i class="fa-regular fa-file-code"></i> /routes/index.svelte
 ```javascript
 <script context="module">
   // Pass the `stuff` from __layout into the props of this page
@@ -57,7 +57,7 @@ Let's dig in!
 </ul>
 ```
 
-### /routes/[id].svelte
+#### <i class="fa-regular fa-file-code"></i> /routes/[id].svelte
 ```javascript
 <script context="module">
   import { get } from "svelte/store";
@@ -89,13 +89,13 @@ Let's dig in!
 
 That was all the layout code, and now for the utility code:
 
-### /lib/store.js
+#### <i class="fa-regular fa-file-code"></i> /lib/store.js
 ```javascript
 import { writable } from "svelte/store";
 export const books = writable({});
 ```
 
-### /lib/utils.js
+#### <i class="fa-regular fa-file-code"></i> /lib/utils.js
 ```javascript
 import { get, readable } from "svelte/store";
 import { browser } from "$app/env";

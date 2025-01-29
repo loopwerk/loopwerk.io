@@ -35,37 +35,6 @@
     --token-important: #fd971f;
   }
 
-  @media screen and (prefers-color-scheme: light) {
-    :root {
-      --code-background: #dfe1e2;
-      --code-color: #566b78;
-      --token-comment: #39adb5;
-      --token-punctuation: #39adb5;
-      --token-property: #39adb5;
-      --token-keyword: #7c4dff;
-      --token-tag: #e53935;
-      --token-class-name: #6182b8;
-      --token-boolean: #99cc99;
-      --token-constant: #7c4dff;
-      --token-symbol: #7c4dff;
-      --token-number: #f76d47;
-      --token-selector: #e53935;
-      --token-attr-name: #39adb5;
-      --token-inserted: #a8ff60;
-      --token-string: #39adb5;
-      --token-builtin: #39adb5;
-      --token-variable: #e53935;
-      --token-operator: #39adb5;
-      --token-entity: #e53935;
-      --token-url: #e53935;
-      --token-atrule: #7c4dff;
-      --token-attr-value: #f6a434;
-      --token-function: #7c4dff;
-      --token-regex: #6182b8;
-      --token-important: #7c4dff;
-    }
-  }
-
   pre {
     font-size: 100%;
     width: 100%;
