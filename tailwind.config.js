@@ -18,7 +18,7 @@ module.exports = {
     colors: {
       inherit: "inherit",
       transparent: "transparent",
-      white: "#eee",
+      white: "#f1f5f9",
       orange: "#f1a948",
       page: "#1a202b",
       nav: "#0e1112",
