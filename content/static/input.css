@@ -104,3 +104,11 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 .screenshots.rounded img {
   border-radius: 10%/4.7%;
 }
+
+@media (min-width: 860px) {
+  .prose pre {
+    margin-left: -20px;
+    width: 840px;
+    padding-left: 20px;
+  }
+}
