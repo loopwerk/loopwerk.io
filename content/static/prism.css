@@ -7,7 +7,7 @@
 @media screen {
   /* Colors */
   :root {
-    --code-background: #393e46;
+    --code-background: #252f3f;
     --code-color: #eeeeee;
     --token-comment: #7c7c7c;
     --token-punctuation: #c5c8c6;
@@ -41,7 +41,7 @@
     padding: 1em;
     overflow: auto;
     overflow-y: hidden;
-    border-radius: 5px;
+    border-radius: 6px;
   }
 
   code {

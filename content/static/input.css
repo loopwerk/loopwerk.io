@@ -39,11 +39,11 @@ nav a.active {
   @apply border-orange text-white;
 }
 
-.text-gray-2 a {
+.gray-links a {
   @apply underline text-inherit;
 }
 
-.text-gray-2 a:hover {
+.gray-links a:hover {
   @apply text-white;
 }
 
@@ -75,6 +75,11 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 
 .prose code {
   @apply font-normal text-base;
+}
+
+.prose hr {
+  margin-left: 140px;
+  margin-right: 140px;
 }
 
 .fa-regular {

@@ -15,8 +15,8 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "text-gray-2 text-sm") {
-    span(class: "border-r border-gray-2 pr-2 mr-2") {
+  div(class: "text-gray gray-links text-sm") {
+    span(class: "border-r border-gray pr-2 mr-2") {
       article.published.formatted("MMMM dd, yyyy")
     }
 
@@ -64,7 +64,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       Node.raw(context.item.body)
     }
 
-    div(class: "border-t border-gray-2 mt-8 pt-8") {
+    div(class: "border-t border-light mt-8 pt-8") {
       h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
       div(class: "flex flex-col lg:flex-row gap-8") {
         div(class: "flex-[0_0_120px]") {
@@ -73,7 +73,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
-          p(class: "text-gray-1") {
+          p(class: "text-gray") {
             "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
             a(href: "https://www.critical-notes.com") { "Critical Notes" }
             %", and maintains a bunch of"
@@ -84,7 +84,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
     }
 
-    div(class: "border-t border-gray-2 mt-8 pt-8") {
+    div(class: "mt-16") {
       h2(class: "text-4xl font-extrabold mb-8") { "More articles" }
 
       div(class: "grid lg:grid-cols-2 gap-10") {
@@ -96,7 +96,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
     }
 
-    div(class: "border-t border-gray-2 mt-8 pt-8") {
+    div(class: "border-t border-light mt-8 pt-8") {
       Node.raw("""
       <script src="https://giscus.app/client.js"
             data-repo="loopwerk/loopwerk.io"

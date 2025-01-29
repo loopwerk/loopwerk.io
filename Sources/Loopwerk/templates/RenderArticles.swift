@@ -13,8 +13,8 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
     h2(class: "text-2xl font-bold mb-2") {
       a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
     }
-    div(class: "text-gray-2 text-sm mb-4") {
-      span(class: "border-r border-gray-2 pr-2 mr-2") {
+    div(class: "text-gray gray-links text-sm mb-4") {
+      span(class: "border-r border-gray pr-2 mr-2") {
         article.published.formatted("MMMM dd, YYYY")
       }
 

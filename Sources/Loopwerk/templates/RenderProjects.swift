@@ -21,7 +21,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
 @NodeBuilder
 private func renderCategory(category: String, projects: [Item<ProjectMetadata>]) -> Node {
   div(class: "mt-12") {
-    h1(class: "text-2xl font-bold mb-2 border-b border-sub") { category }
+    h1(class: "text-2xl font-bold mb-2 border-b border-light") { category }
 
     projects
       .filter { $0.metadata.parent == nil }
@@ -39,7 +39,7 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
     h3(class: "text-xl font-bold") {
       project.title
       if project.involvement != .author {
-        span(class: "text-sm text-gray-2 border border-gray-2 p-1 rounded ml-2") {
+        span(class: "text-sm text-gray border border-gray p-1 rounded ml-2") {
           project.involvement.rawValue
         }
       }
@@ -61,7 +61,7 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
     }
 
     if !subProjects.isEmpty {
-      div(class: "bg-sub p-4 rounded mt-2") {
+      div(class: "bg-sub p-4 rounded-md mt-2") {
         h2(class: "text-2xl font-bold -mb-2") {
           "\(project.title) projects"
         }

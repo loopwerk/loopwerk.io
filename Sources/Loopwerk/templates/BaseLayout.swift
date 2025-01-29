@@ -44,7 +44,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
       body(class: "bg-page text-white pb-5 \(section?.rawValue ?? "")") {
-        header(class: "bg-nav text-gray-1 py-4 text-base/6 lg:fixed w-full lg:h-[62px]") {
+        header(class: "bg-nav text-gray py-4 text-base/6 lg:fixed w-full lg:h-[62px]") {
           nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
 
@@ -84,7 +84,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
           children()
         }
 
-        div(class: "site-footer container text-gray-2 border-t border-gray-2 text-center pt-6 mt-8 text-sm font-anonymous") {
+        div(class: "site-footer container text-gray gray-links border-t border-light text-center pt-6 mt-8 text-sm font-anonymous") {
           p {
             "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
           }
