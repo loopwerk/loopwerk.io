@@ -61,7 +61,7 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
     }
 
     if !subProjects.isEmpty {
-      div(class: "bg-sub p-4 rounded-md mt-2") {
+      div(class: "bg-sub p-4 rounded-md mt-2 shadow-lg shadow-nav") {
         h2(class: "text-2xl font-bold -mb-2") {
           "\(project.title) projects"
         }
