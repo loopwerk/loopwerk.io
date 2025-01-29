@@ -31,7 +31,7 @@ My webserver is constantly getting hit by requests to random PHP files, even tho
 
 And when a new PHP vulnerability is discovered it gets even worse, sometimes the server is getting hit hundreds of thousands of times a day. Let’s do something about this!
 
-# Step 1: denying the requests
+## Step 1: denying the requests
 When someone accesses a non-existing PHP file on my server, I don’t want my SvelteKit site to render a nice looking 404 page. That’s a huge waste of resources and bandwidth. So the first step is to deny requests to these kinds of files on the Nginx level.
 
 For this I created a file `/etc/nginx/deny_rules.conf` with the following contents:
@@ -54,7 +54,7 @@ server {
 
 Make sure the Nginx config is correct (`nginx -t`), and then reload Nginx (`service nginx reload`). Now any request to a URL ending with `.php` simply gets blocked by Nginx itself with a barebones 403 page.
 
-# Step 2: blocking these requests in the firewall
+## Step 2: blocking these requests in the firewall
 We’re now blocking theses requests from reaching our website, but they still hit Nginx, and they generate a bunch of entries in our `error.log`. It would be better to simply block the IP addresses of repeat offenders directly in the firewall.
 
 I am using UFW and fail2ban on my server, which I wrote about in my [Setting up a Debian 11 server for SvelteKit and Django](/articles/2023/setting-up-debian-11/) article last year. So check that article if you don’t have a firewall and/or fail2ban running.
@@ -107,7 +107,7 @@ $ service fail2ban restart
 
 Now when someone gets the 503 for accessing a `.php` file twice within one minute, they immediately get added to the firewall by fail2ban.
 
-# If you use CloudFlare
+## If you use CloudFlare
 If you proxy your site through CloudFlare then a bit more work is needed, because the IP address hitting your server is CloudFlare’s IP address, not the user’s IP address. You don’t want to add CloudFlare’s IP address to the firewall - it would break the site for everyone!
 
 First we need to make sure that Nginx has access to the user’s real IP address, by using the `real_ip` module. Edit `/etc/nginx/ngin.conf`:
