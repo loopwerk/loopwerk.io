@@ -32,30 +32,29 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 }
 
 @NodeBuilder
-func getArticleHeader(_ article: Item<ArticleMetadata>, siteUrl: URL) -> NodeConvertible {
-  link(href: "\(siteUrl)\(article.url)", rel: "canonical")
+func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   link(href: "/static/prism.css", rel: "stylesheet")
   meta(content: article.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: "@kevinrenskers", name: "twitter:site")
-  meta(content: siteUrl.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
+  meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
   meta(content: article.title, name: "twitter:image:alt")
-  meta(content: siteUrl.appendingPathComponent(article.url).absoluteString, name: "og:url")
+  meta(content: SiteMetadata.url.appendingPathComponent(article.url).absoluteString, name: "og:url")
   meta(content: article.title, name: "og:title")
   meta(content: article.summary, name: "og:description")
-  meta(content: siteUrl.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "og:image")
+  meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "og:image")
   meta(content: "1014", name: "og:image:width")
   meta(content: "530", name: "og:image:height")
   script(crossorigin: "anonymous", src: "https://kit.fontawesome.com/f209982030.js")
 }
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
-  let extraHeader = getArticleHeader(context.item, siteUrl: SiteMetadata.url)
+  let extraHeader = getArticleHeader(context.item)
 
   let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
   let otherArticles = allArticles.filter { $0.url != context.item.url }.prefix(2)
 
-  return baseLayout(section: .articles, title: context.item.title, extraHeader: extraHeader) {
+  return baseLayout(canocicalURL: context.item.url, section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article(class: "prose") {
       h1 { context.item.title }
       div(class: "-mt-6") {

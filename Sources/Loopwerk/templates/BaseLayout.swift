@@ -12,9 +12,7 @@ enum Section: String {
   case notFound
 }
 
-func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
-  let titleSuffix = pageTitle.map { ": \($0)" } ?? ""
-
+func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
     html(lang: "en-US") {
@@ -30,7 +28,7 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         meta(content: "320", name: "MobileOptimized")
         meta(content: "Loopwerk", name: "og:site_name")
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen", name: "keywords")
-        title { SiteMetadata.name + titleSuffix }
+        title { SiteMetadata.name + ": \(pageTitle)" }
         link(href: "/static/output.css", rel: "stylesheet")
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
         link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
@@ -39,11 +37,12 @@ func baseLayout(section: Section?, title pageTitle: String?, rssLink: String = "
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
+        link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
 
         extraHeader
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
-      body(class: "bg-page text-white pb-5 \(section?.rawValue ?? "")") {
+      body(class: "bg-page text-white pb-5 \(section.rawValue)") {
         header(class: "bg-nav text-gray py-4 text-base/6 lg:fixed w-full lg:h-[62px]") {
           nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")

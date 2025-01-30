@@ -3,8 +3,9 @@ import Saga
 
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")
+  assert(section != nil)
 
-  return baseLayout(section: section, title: context.item.title) {
+  return baseLayout(canocicalURL: context.item.url, section: section!, title: context.item.title) {
     switch section {
       case .home:
         return renderHome(body: context.item.body)
@@ -49,7 +50,7 @@ func renderNonHome(body: String) -> Node {
 }
 
 func render404(body: String, articles: [Item<ArticleMetadata>]) -> Node {
-  article {
+  article(class: "prose") {
     Node.raw(body)
 
     ul {
@@ -61,7 +62,7 @@ func render404(body: String, articles: [Item<ArticleMetadata>]) -> Node {
     }
 
     div {
-      a(class: "more", href: "/articles/") { "archive" }
+      a(href: "/articles/") { "› See all articles" }
     }
   }
 }

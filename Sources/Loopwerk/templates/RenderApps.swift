@@ -2,7 +2,7 @@ import HTML
 import Saga
 
 func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
-  baseLayout(section: .apps, title: "Apps") {
+  baseLayout(canocicalURL: "/apps/", section: .apps, title: "Apps") {
     p {
       "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
     }
