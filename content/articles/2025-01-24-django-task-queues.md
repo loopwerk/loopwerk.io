@@ -129,7 +129,7 @@ All our scheduled tasks are run as management.py commands, so why not add all of
 2 0 * * * ~/.local/bin/uv run ~/api.soundradix.com/manage.py import_xchange_daily
 ```
 
-And the deploy script can then install the new cron by running `crontab < /path/to/file`. So we still have the config in our repo, we can’t forget to add a new task to the crontab on the server. The only problem is that cron can’t run more than once a minute, so we’re in the same situation with the `send_mail` command. So we could have that run in with the `runmailer` command as a systemd service.
+And the deploy script can then install the new cron by running `crontab < /path/to/file`. So we still have the config in our repo, we can’t forget to add a new task to the crontab on the server. The only problem is that cron can’t run more than once a minute, so we’re in the same situation with the `send_mail` command. To solve this we could have that run in a separate process, outside of cron -- with the `runmailer` command as a systemd service.
 
 Then we still have to add `django-tasks` to the mix for the one-off background tasks, and its systemd service of course. The upside is that once this is part of Django itself that we can get rid of the `runmailer` service since it’ll be part of Django’s built-in version of `django-tasks`.
 
