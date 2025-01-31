@@ -67,7 +67,7 @@ func itemProcessor<M>(item: Item<M>) {
 
   let year = String(item.relativeSource.lastComponentWithoutExtension.prefix(4))
 
-  // Turn the destination into /articles/[year]/[filename-without-date-prefix]/index.html
+  // Turn the destination into articles/[year]/[filename-without-date-prefix]/index.html
   let first11 = String(item.relativeSource.lastComponentWithoutExtension.prefix(11))
   let newPath = Path("articles") + year + item.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
   item.relativeDestination = newPath
