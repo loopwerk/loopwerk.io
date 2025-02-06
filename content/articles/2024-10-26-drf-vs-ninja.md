@@ -93,7 +93,7 @@ urlpatterns = [
 ]
 ```
 
-With that little bit of code in place we can access the URL `/api/campaigns/1/characters/` to fetch all characters that belong to campaign 1. We can POST to `/api/campaigns/1/characters/` to create a new character, we can PUT to `/api/campaigns/1/characters/1/` to edit a character and DELETE to `/api/campaigns/1/characters/1/` to, you guessed it, delete a character. All this functionality which such a super simple `ModelViewSet` subclass: this is absolutely one of the best features of DRF.
+With that little bit of code in place we can access the URL `/api/campaigns/1/characters/` to fetch all characters that belong to campaign 1. We can POST to `/api/campaigns/1/characters/` to create a new character, we can PUT to `/api/campaigns/1/characters/1/` to edit a character and DELETE to `/api/campaigns/1/characters/1/` to, you guessed it, delete a character. All this functionality with such a super simple `ModelViewSet` subclass: this is absolutely one of the best features of DRF.
 
 However, there are some problems to fix:
 
