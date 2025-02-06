@@ -87,7 +87,7 @@ struct Run {
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
-        readers: [.parsleyMarkdownReader()],
+        readers: [.parsleyMarkdownReader],
         itemProcessor: itemProcessor,
         writers: [
           .itemWriter(swim(renderArticle)),
@@ -103,20 +103,20 @@ struct Run {
       .register(
         folder: "apps",
         metadata: AppMetadata.self,
-        readers: [.parsleyMarkdownReader()],
+        readers: [.parsleyMarkdownReader],
         itemProcessor: itemProcessor,
         writers: [.listWriter(swim(renderApps))]
       )
       .register(
         folder: "projects",
         metadata: ProjectMetadata.self,
-        readers: [.parsleyMarkdownReader()],
+        readers: [.parsleyMarkdownReader],
         itemProcessor: itemProcessor,
         writers: [.listWriter(swim(renderProjects))]
       )
       .register(
         metadata: PageMetadata.self,
-        readers: [.parsleyMarkdownReader()],
+        readers: [.parsleyMarkdownReader],
         itemProcessor: itemProcessor,
         itemWriteMode: .keepAsFile,
         writers: [.itemWriter(swim(renderPage))]
