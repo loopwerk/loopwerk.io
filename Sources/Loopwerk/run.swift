@@ -87,7 +87,8 @@ struct Run {
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
-        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        readers: [.parsleyMarkdownReader()],
+        itemProcessor: itemProcessor,
         writers: [
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),
@@ -102,26 +103,23 @@ struct Run {
       .register(
         folder: "apps",
         metadata: AppMetadata.self,
-        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-        writers: [
-          .listWriter(swim(renderApps)),
-        ]
+        readers: [.parsleyMarkdownReader()],
+        itemProcessor: itemProcessor,
+        writers: [.listWriter(swim(renderApps))]
       )
       .register(
         folder: "projects",
         metadata: ProjectMetadata.self,
-        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
-        writers: [
-          .listWriter(swim(renderProjects)),
-        ]
+        readers: [.parsleyMarkdownReader()],
+        itemProcessor: itemProcessor,
+        writers: [.listWriter(swim(renderProjects))]
       )
       .register(
         metadata: PageMetadata.self,
-        readers: [.parsleyMarkdownReader(itemProcessor: itemProcessor)],
+        readers: [.parsleyMarkdownReader()],
+        itemProcessor: itemProcessor,
         itemWriteMode: .keepAsFile,
-        writers: [
-          .itemWriter(swim(renderPage)),
-        ]
+        writers: [.itemWriter(swim(renderPage))]
       )
       .run()
       .staticFiles()

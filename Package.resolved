@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga",
         "state": {
           "branch": null,
-          "revision": "94f39ed22d58a3ab8153f1eebb86a15ed5b7b65c",
-          "version": "1.3.1"
+          "revision": "c3cbbd37dce15ef8fa1906df82030d7e64d32e02",
+          "version": "1.5.0"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
           "branch": null,
-          "revision": "0837db354faf9c9deb710dc597046edaadf5360f",
-          "version": "2.7.6"
+          "revision": "6b4930da67b462d3f200472c902dd016d37a554d",
+          "version": "2.7.7"
         }
       },
       {
