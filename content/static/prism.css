@@ -7,7 +7,7 @@
 @media screen {
   /* Colors */
   :root {
-    --code-background: #252f3f;
+    --code-background: var(--color-sub);
     --code-color: #eeeeee;
     --token-comment: #7c7c7c;
     --token-punctuation: #c5c8c6;
@@ -174,7 +174,7 @@
   }
 
   pre code .highlight {
-    border: 1px solid var(--accent);
+    border: 1px solid var(--color-orange);
     padding: 2px 4px;
   }
 

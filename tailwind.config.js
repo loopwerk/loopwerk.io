@@ -8,7 +8,7 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '0',
+        DEFAULT: "0",
       },
     },
     screens: {
@@ -31,35 +31,35 @@ module.exports = {
         helvetica: ["Helvetica", ...defaultTheme.fontFamily.sans],
         anonymous: ["Anonymous Pro", ...defaultTheme.fontFamily.mono],
       },
-      typography: (theme) => ({
+      typography: theme => ({
         DEFAULT: {
           css: {
-            maxWidth: '100%',
-            '--tw-prose-body': theme('colors.white'),
-            '--tw-prose-headings': theme('colors.white'),
-            '--tw-prose-code': theme('colors.white'),
-            '--tw-prose-pre-bg': theme('colors.sub'),
-            '--tw-prose-hr': theme('colors.light'),
-            '--tw-prose-bullets': theme('colors.gray'),
-            '--tw-prose-counters': theme('colors.gray'),
-            '--tw-prose-quotes': theme('colors.gray'),
-            '--tw-prose-quote-borders': theme('colors.gray'),
+            maxWidth: "100%",
+            "--tw-prose-body": theme("colors.white"),
+            "--tw-prose-headings": theme("colors.white"),
+            "--tw-prose-code": theme("colors.white"),
+            "--tw-prose-pre-bg": theme("colors.sub"),
+            "--tw-prose-hr": theme("colors.light"),
+            "--tw-prose-bullets": theme("colors.gray"),
+            "--tw-prose-counters": theme("colors.gray"),
+            "--tw-prose-quotes": theme("colors.gray"),
+            "--tw-prose-quote-borders": theme("colors.gray"),
             a: {
-              color: theme('colors.orange'),
-              textDecoration: 'none',
-              fontWeight: '400',
-              '&:hover': {
-                textDecoration: 'underline',
+              color: theme("colors.orange"),
+              textDecoration: "none",
+              fontWeight: "400",
+              "&:hover": {
+                textDecoration: "underline",
               },
             },
             strong: {
-              color: theme('colors.white'),
-              fontWeight: '800',
+              color: theme("colors.white"),
+              fontWeight: "800",
             },
             pre: {
               fontSize: "1rem",
               lineHeight: "1.5rem",
-            }
+            },
           },
         },
       }),
@@ -74,5 +74,26 @@ module.exports = {
     backgroundOpacity: false,
     textOpacity: false,
   },
-  plugins: [typography({ target: 'legacy' })],
-}
+  plugins: [
+    typography({ target: "legacy" }),
+
+    function ({ addBase, theme }) {
+      function extractColorVars(colorObj, colorGroup = "") {
+        return Object.keys(colorObj).reduce((vars, colorKey) => {
+          const value = colorObj[colorKey];
+
+          const newVars =
+            typeof value === "string"
+              ? { [`--color${colorGroup}-${colorKey}`]: value }
+              : extractColorVars(value, `-${colorKey}`);
+
+          return { ...vars, ...newVars };
+        }, {});
+      }
+
+      addBase({
+        ":root": extractColorVars(theme("colors")),
+      });
+    },
+  ],
+};
