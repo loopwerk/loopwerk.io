@@ -111,7 +111,7 @@ As you can see, the API looks remarkably similar to the Swift version. We have t
 
 By using [Pydantic](https://docs.pydantic.dev/latest/) the Python version of Saga also validates and transforms metadata. So also in this case a missing `tag` in an article would result in an error, and a comma-separated string of tags results in an array of strings.
 
-There are very good markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren’t any strongly typed template languages or DLSs as far as I know of. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside markdown files, it’s a shame that the HTML templates are unaware of exactly what kind of metadata they’re dealing with. It’s not strongly typed “top to bottom”, as in the Swift version.
+There are very good markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren’t any strongly typed template languages or DLSs as far as I know. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside markdown files, it’s a shame that the HTML templates are unaware of exactly what kind of metadata they’re dealing with. It’s not strongly typed “top to bottom”, as in the Swift version.
 
 ## TypeScript
 
@@ -152,7 +152,7 @@ Just as with the Swift and Python versions we have strongly typed metadata, and 
 
 The render functions get a fully typed `Item<T>` instance, where `T` is the metadata type. And unlike Python it’s more useful here, as you could use TSX as your template language, in which case the strong types absolutely help a lot and we’re strongly typed from top to bottom once again.
 
-However, this version of Saga does not validate the markdown, and it can’t transform it as needed, because the TypeScript types can’t be used like that in runtime. Saga can’t check if a JSON object confirms to `T`, since it doesn’t know what `T` is. So it also can’t transform the data to the expected type. This means that while the `ArticleMetadata` says that `tags` is an array or strings, in reality it’ll be a comma-separated string. The type and the actual metadata instance are not aligned, which will definitely cause problems when you try to use the metadata in your templates.
+However, this version of Saga does not validate the metadata, and it can’t transform it as needed, because the TypeScript types can’t be used like that in runtime. Saga can’t check if a JSON object confirms to `T`, since it doesn’t know what `T` is. So it also can’t transform the data to the expected type. This means that while the `ArticleMetadata` says that `tags` is an array or strings, in reality it’ll be a comma-separated string. The type and the actual metadata instance are not aligned, which will definitely cause problems when you try to use the metadata in your templates.
 
 The only way to solve this is to force users of Saga to describe their metadata using something else than pure TypeScript type notation, for example using [zod](https://zod.dev):
 
