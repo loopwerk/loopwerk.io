@@ -210,7 +210,7 @@ Alright, so the Python type system kind of sucks, had me scratching my head quit
 
 And while I found the TypeScript version much more enjoyable to work on, there is the matter of TypeScript itself. People really would need to install [bun](https://bun.sh) to run this version of Saga as intended, in pure TypeScript, since Node doesn’t run TypeScript code (at least not yet). And while I could distribute a JavaScript version to NPM that people could import into their Node script, the whole point of Saga is to have strongly typed metadata.
 
-I think realistically speaking, the TypeScript version would never be used as TypeScript but rather the compiled-to-JavaScript version. And when you add something like zod to the mix to describe the metadata, there really isn’t anything strongly typed left. Which is probably fine, since almost all template languages are not strongly typed either.
+I think realistically speaking, the TypeScript version would never be used as TypeScript but rather the compiled-to-JavaScript version. And when you add something like zod to the mix to describe the metadata, there really isn’t anything strongly typed left. Which is probably fine, since almost no template languages are strongly typed either.
 
 So those are some of my conflicting thoughts at the moment. In conclusion:
 
@@ -221,7 +221,7 @@ So those are some of my conflicting thoughts at the moment. In conclusion:
 
 Once you add zod to facilitate the metadata validation and transformation, the need for TypeScript’s types basically goes away and thus it makes total sense to distribute Saga as JavaScript code. I have quite a strong negative feeling about requiring users to describe the metadata using zod though. I mean... `z.string().transform(str => str.split(",").map(tag => tag.trim()))` - really?
 
-Until I find a better solution to deal with metadata validation and parsing in TypeScript / JavaScript, I don’t think TypeScript is a good fit for Saga. I say that with some disappointment, as I really do enjoy TypeScript as a language.
+Until I find a better solution to deal with metadata validation and parsing in TypeScript / JavaScript, I don’t think TypeScript is a good fit for Saga. I say that with some disappointment, as I really do enjoy TypeScript as a language. Also, the TypeScript version is slightly faster to run than the Python version, especially when writing files to disk. Writing a bunch of files took 0.3 ms in TypeScript, and the same amount of files took 22 ms with Python. Not a huge difference, but interesting to note.
 
 That leaves me with the Python version, which arguably makes way more sense for a lot of people than the Swift version. I don’t enjoy the type system so much while *working on* Saga, but as a user *using* Saga it’s pretty great! And in the end that’s the goal of course.
 
