@@ -52,43 +52,28 @@ enum SiteMetadata {
   static let now = Date()
 }
 
-func itemProcessor<M>(item: Item<M>) {
+func improveHTML<M>(item: Item<M>) {
   // Improve the HTML by adding target="_blank" to external links
   item.body = item.body.improveHTML()
+}
 
-  // If the filename starts with a valid date, use that as the Page's date and strip it from the destination path
-  let first10 = String(item.relativeSource.lastComponentWithoutExtension.prefix(10))
-  guard first10.count == 10, let date = Run.itemProcessorDateFormatter.date(from: first10) else {
-    return
-  }
-
-  // Set the date
-  item.published = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date) ?? date
-
-  let year = String(item.relativeSource.lastComponentWithoutExtension.prefix(4))
-
-  // Turn the destination into articles/[year]/[filename-without-date-prefix]/index.html
-  let first11 = String(item.relativeSource.lastComponentWithoutExtension.prefix(11))
-  let newPath = Path("articles") + year + item.relativeSource.lastComponentWithoutExtension.replacingOccurrences(of: first11, with: "") + "index.html"
-  item.relativeDestination = newPath
+func permalink(item: Item<ArticleMetadata>) {
+  // Insert the publication year into the permalink.
+  // If the `relativeDestination` was "articles/looking-for-django-cms/index.html", then it becomes "articles/2009/looking-for-django-cms/index.html"
+  var components = item.relativeDestination.components
+  components.insert("\(Calendar.current.component(.year, from: item.published))", at: 1)
+  item.relativeDestination = Path(components: components)
 }
 
 @main
 struct Run {
-  static var itemProcessorDateFormatter: DateFormatter = {
-    let itemProcessorDateFormatter = DateFormatter()
-    itemProcessorDateFormatter.dateFormat = "yyyy-MM-dd"
-    itemProcessorDateFormatter.timeZone = .current
-    return itemProcessorDateFormatter
-  }()
-
   static func main() async throws {
     try await Saga(input: "content", output: "deploy")
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: itemProcessor,
+        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink),
         writers: [
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),
@@ -104,21 +89,21 @@ struct Run {
         folder: "apps",
         metadata: AppMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: itemProcessor,
+        itemProcessor: improveHTML,
         writers: [.listWriter(swim(renderApps))]
       )
       .register(
         folder: "projects",
         metadata: ProjectMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: itemProcessor,
+        itemProcessor: improveHTML,
         writers: [.listWriter(swim(renderProjects))]
       )
       .register(
         metadata: PageMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: itemProcessor,
-        itemWriteMode: .keepAsFile,
+        itemProcessor: improveHTML,
+        itemWriteMode: .keepAsFile, // need to keep 404.md as 404.html, not 404/index.html
         writers: [.itemWriter(swim(renderPage))]
       )
       .run()
