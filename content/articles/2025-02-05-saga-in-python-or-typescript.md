@@ -83,9 +83,9 @@ class ArticleMetadata(Metadata):
 
 class AppMetadata(Metadata):
     images: List[str]
-    roundOffImages: Optional[bool]
-    breakImages: Optional[int]
-    url: Optional[str]
+    roundoffimages: bool = True
+    breakimages: Optional[int] = None
+    url: Optional[str] = None
 
 Saga(input="content", output="deploy")
   .register(
