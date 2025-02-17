@@ -111,7 +111,7 @@ As you can see, the API looks remarkably similar to the Swift version. We have t
 
 By using [Pydantic](https://docs.pydantic.dev/latest/) the Python version of Saga also validates and transforms metadata. So also in this case a missing `tag` in an article would result in an error, and a comma-separated string of tags results in an array of strings.
 
-There are very good markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren’t any strongly typed template languages or DLSs as far as I know. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside markdown files, it’s a shame that the HTML templates are unaware of exactly what kind of metadata they’re dealing with. It’s not strongly typed “top to bottom”, as in the Swift version.
+There are very good markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren’t any strongly typed template languages or DSLs as far as I know. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside markdown files, it’s a shame that the HTML templates are unaware of exactly what kind of metadata they’re dealing with. It’s not strongly typed “top to bottom”, as in the Swift version.
 
 ## TypeScript
 
