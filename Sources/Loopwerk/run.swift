@@ -61,7 +61,7 @@ func permalink(item: Item<ArticleMetadata>) {
   // Insert the publication year into the permalink.
   // If the `relativeDestination` was "articles/looking-for-django-cms/index.html", then it becomes "articles/2009/looking-for-django-cms/index.html"
   var components = item.relativeDestination.components
-  components.insert("\(Calendar.current.component(.year, from: item.published))", at: 1)
+  components.insert("\(Calendar.current.component(.year, from: item.date))", at: 1)
   item.relativeDestination = Path(components: components)
 }
 
@@ -81,8 +81,8 @@ struct Run {
           .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
-          .listWriter(swim(renderFeed), output: "feed.xml"),
-          .tagWriter(swim(renderTagFeed), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary), output: "feed.xml"),
+          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
         ]
       )
       .register(

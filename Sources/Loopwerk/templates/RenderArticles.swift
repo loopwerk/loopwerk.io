@@ -15,7 +15,7 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
     }
     div(class: "text-gray gray-links text-sm mb-4") {
       span(class: "border-r border-gray pr-2 mr-2") {
-        article.published.formatted("MMMM dd, YYYY")
+        article.date.formatted("MMMM dd, YYYY")
       }
 
       article.metadata.tags.sorted().enumerated().map { index, tag in
@@ -35,7 +35,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   let dateFormatter = DateFormatter()
   dateFormatter.dateFormat = "yyyy"
 
-  let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.published) })
+  let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.date) })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
 
   return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles", rssLink: "", extraHeader: "") {

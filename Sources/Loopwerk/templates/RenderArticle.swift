@@ -17,7 +17,7 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "text-gray gray-links text-sm") {
     span(class: "border-r border-gray pr-2 mr-2") {
-      article.published.formatted("MMMM dd, yyyy")
+      article.date.formatted("MMMM dd, yyyy")
     }
 
     %.text("\(article.body.withoutHtmlTags.numberOfWords) words, posted in ")

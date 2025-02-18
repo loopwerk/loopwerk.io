@@ -8,9 +8,9 @@ let package = Package(
     .macOS(.v12),
   ],
   dependencies: [
-    .package(url: "https://github.com/loopwerk/Saga", from: "1.2.0"),
-    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "0.5.0"),
-    .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "0.7.0"),
+    .package(url: "https://github.com/loopwerk/Saga", from: "2.0.0"),
+    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "1.0.0"),
+    .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "1.0.0"),
     .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.3.2"),
     .package(url: "https://github.com/twostraws/SwiftGD", branch: "main"),
   ],
