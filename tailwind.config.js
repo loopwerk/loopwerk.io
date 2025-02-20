@@ -44,6 +44,11 @@ module.exports = {
             "--tw-prose-counters": theme("colors.gray"),
             "--tw-prose-quotes": theme("colors.gray"),
             "--tw-prose-quote-borders": theme("colors.gray"),
+            "blockquote p:first-of-type::before": false,
+            "blockquote p:last-of-type::after": false,
+            blockquote: {
+              fontWeight: "normal",
+            },
             a: {
               color: theme("colors.orange"),
               textDecoration: "none",
