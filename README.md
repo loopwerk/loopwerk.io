@@ -24,4 +24,4 @@ This builds the website and creates a static server showing the contents of the 
 ## License
 This code is made publicly available to get ideas on how to create a site using [Saga](https://github.com/loopwerk/Saga), but the design and content are NOT available to copy to your site. Or in more technical terms:
 
-The source code of this website is licensed under the MIT License. However, this license explicitly excludes the design, visual elements, and written content of the website. The design, layout, and content, including text, images, and graphics, are copyright notice may not be copied, reproduced, or distributed without prior permission.
+The source code of this website is licensed under the MIT License. However, this license explicitly excludes the design, visual elements, and written content of the website. The design, layout, css, and content, including text, images, and other graphics, may not be copied, reproduced, or distributed without prior permission.
