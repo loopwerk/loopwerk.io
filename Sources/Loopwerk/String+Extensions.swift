@@ -27,8 +27,8 @@ extension String {
         // External links get target="_blank" and rel="nofollow"
         let href = try link.attr("href")
         if href.starts(with: "http://") || href.starts(with: "https://") {
-          try link.attr("target", "_blank")
-          try link.attr("rel", "nofollow")
+          try _ = link.attr("target", "_blank")
+          try _ = link.attr("rel", "nofollow")
         }
       }
 

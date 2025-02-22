@@ -79,6 +79,9 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             a(href: "/projects/") { "open source projects" }
             %"."
           }
+          p(class: "text-gray") {
+            "No AI was used in writing any of the content on this website."
+          }
         }
       }
     }

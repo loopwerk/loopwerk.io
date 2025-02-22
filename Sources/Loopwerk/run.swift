@@ -134,7 +134,7 @@ extension Saga {
     let articles = fileStorage.compactMap { $0.item as? Item<ArticleMetadata> }
 
     for article in articles {
-      let destination = (outputPath + "static" + "images" + article.relativeSource.lastComponentWithoutExtension).string + ".png"
+      let destination = (outputPath + "static" + "images" + article.filenameWithoutExtension).string + ".png"
       let generator = ImageGenerator(rootPath: rootPath)
       generator?.generate(title: article.title, outputPath: destination)
     }
