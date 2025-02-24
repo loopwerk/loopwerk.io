@@ -10,7 +10,7 @@ Almost two months ago [I compared Poetry with uv](/articles/2024/python-poetry-v
 I’m very happy to say that both these issues have been solved in recent updates of uv, and I am definitely going to switch my Python projects from Poetry to uv. Yes, the smaller drawbacks are unchanged: uv is not written in Python, locking out most of the Python community from contributing; Astral, the company behind uv doesn’t seem to have a way to monetize their work; and I think the command interface for uv still doesn’t make much sense. But I can forget about all of that when uv has such clear benefits -- especially its ability to manage the installed Python version.
 
 ## Dependency groups
-Since version 0.4.7 dependency groups are properly supported in uv, and now you can add dependencies to any custom group you want:
+Since version 0.4.27 dependency groups are properly supported in uv, and now you can add dependencies to any custom group you want:
 
 ```
 $ uv add django
