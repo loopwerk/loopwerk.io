@@ -23,7 +23,7 @@ Installing uv is even easier. You don’t even need pipx installed - which makes
 
 `$ brew install uv`
 
-I think this is a small win for uv since you don’t need to first install pipx. uv really is meant to replace a whole bunch of Python tools.
+This is a small win for uv since you don’t need to first install pipx. uv really is meant to replace a whole bunch of Python tools.
 
 ## Getting started
 I think both tools are about equally easy to get started with. Creating a new project with their `init` commands, adding dependencies, it’s all very similar:
@@ -54,6 +54,8 @@ Poetry supports multiple groups of dependencies within a project. For example yo
 
 This is not possible with uv, as far as I can see. There are dev dependencies, but they are always getting installed. It seems this is only useful for when you publish your code to PyPI, not for when you’re writing an app, like a Django site. This is too bad, since now all dependencies for development, production and testing are always getting installed in every environment. Yes, that installation is very fast but it would still be good to be able to have separate dependencies for production which you might not want to (or can not) install on your MacBook.
 
+> **Update Nov 11, 2024**: this is no longer correct, after uv released version 0.4.7 which support dependency groups. Check out my [revisiting uv](/articles/2024/python-uv-revisited/) article for more information.
+
 ## Updating dependencies
 Updating dependencies is quite easy in Poetry:
 
@@ -70,6 +72,8 @@ The only downside here is that you always have to deal with those dependency gro
 This is not quite as easy with uv. For starters, there is no command to see outdated packages, which is already pretty much a dealbreaker. And then to update dependencies you don’t run something like `uv update django` but instead you need to run `uv lock --upgrade-package django`. Upgrading all packages can be done with `uv lock --upgrade`.
 
 I think this doesn’t make much sense. The way that the uv CLI is structured is complex with a lot of commands and subcommands. I really do prefer Poetry’s CLI. For example why is there a `uv pip` interface with a bunch of different subcommands to manage package dependencies on a low level?
+
+> **Update Nov 11, 2024**: uv version 0.5.0 added support for seeing outdated packages. Check out my [revisiting uv](/articles/2024/python-uv-revisited/) article for more information.
 
 ## uv replaces pipx
 One of the goals of uv is to replace a bunch of different Python tools, amongst which is pipx. pipx is used to “install and run Python applications in isolated environments”. For example:
@@ -117,6 +121,8 @@ Adding and removing dependencies works just fine, until you want to support mult
 
 So for now I am sticking with pipx, pyenv, and Poetry. All tools written in Python, and maintained by Pythonistas. I am looking forward to seeing what uv might become and I’ll surely be tempted to try it again in the future. But I do think their corporate backing and lack of business plan is a huge downside, but [other](https://mastodon.social/@glyph/113093806840686501) [people](https://cloudisland.nz/@freakboy3742/113093889194737339) [said](https://mastodon.social/@glyph/113094489990995018) it better.
 
-**Update Oct 4, 2024**: I wrote [another article where I looked at PDM](/articles/2024/trying-pdm/), comparing that with Poetry and uv. Check it out!
+> **Update Oct 4, 2024**: I wrote [another article where I looked at PDM](/articles/2024/trying-pdm/), comparing that with Poetry and uv. Check it out!
 
-**Update Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!
+> **Update Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!
+
+> **Update Nov 18, 2024**: I’ve written an article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/).

@@ -20,22 +20,7 @@ $ uv add --group prod --no-sync gunicorn
 
 Only Django gets installed, the other two packages get added to the dependency list but won’t be installed (the `--no-sync` parameter skips the installing). 
 
-However, as soon as you run any command that in turn runs `uv sync` (like `uv run`) you will notice that all of the optional dependencies get installed, which is not what I personally want to happen. Luckily this is easily solved by adding these two lines to your `pyproject.toml` file:
-
-```
-[tool.uv]
-default-groups = []
-```
-
-And now only Django will be installed, even when you run `uv sync`. The way to get the other groups also installed is similar to Poetry:
-
-```
-$ uv sync --group dev
-$ uv sync --group prod
-$ uv sync --group dev --group prod
-```
-
-I’d use `uv sync --group dev` on my local machine, and I’d use `uv sync --group prod` on the production server, and the right packages get installed as expected.
+When you run `uv sync` or `uv run`, then by default the dev dependencies get installed (see [docs](https://docs.astral.sh/uv/concepts/projects/dependencies/#default-groups)), which is perfect when you run these commands on your development machine. On your production server however you’ll want to run `uv sync --no-group dev --group prod` instead, to include the production dependencies and skip the dev dependencies.
 
 And just like that, the biggest problem I had with uv is now completely gone.
 
@@ -71,4 +56,4 @@ You can see that the latest update for Django is listed in that tree. My only wi
 
 In case you don’t use dependency groups then you might want to use `uv pip list --outdated` rather than `uv tree --outdated`, since it only shows actually outdated packages. But sadly `uv pip list` doesn’t take the `--group` parameter so you can’t view updates for non-installed dependencies, like you can with `uv tree`. It also doesn’t support `--depth=1` which is a bummer.
 
-**Update Nov 18, 2024**: I wrote a quick article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/). 
+> **Update Nov 18, 2024**: I wrote a quick article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/). 
