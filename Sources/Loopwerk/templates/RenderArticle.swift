@@ -50,9 +50,28 @@ func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item)
-
   let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
-  let otherArticles = allArticles.filter { $0.url != context.item.url }.prefix(2)
+  let otherArticles = allArticles.filter { $0.url != context.item.url }
+  let latestArticles = otherArticles.prefix(2)
+  let tags = Set(context.item.metadata.tags)
+
+  let relatedArticles = otherArticles
+    .map { article in
+      let numberOfSharedTags = tags.intersection(Set(article.metadata.tags)).count
+      return (article, numberOfSharedTags)
+    }
+    .filter { $0.1 > 0 } // filter out articles with zero matched tags
+    .sorted { // sort by number of shared tags, and then by date
+      if $0.1 == $1.1 {
+        return $0.0.date > $1.0.date
+      }
+      return $0.1 > $1.1
+    }
+    .map { $0.0 } // extract the sorted articles
+    .prefix(2)
+
+  let seeMoreArticles = relatedArticles.count >= 2 ? relatedArticles : latestArticles
+  let seeMoreArticlesTitle = relatedArticles.count >= 2 ? "Related articles" : "Recent articles"
 
   return baseLayout(canocicalURL: context.item.url, section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article(class: "prose") {
@@ -87,10 +106,10 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     }
 
     div(class: "mt-16") {
-      h2(class: "text-4xl font-extrabold mb-8") { "More articles" }
+      h2(class: "text-4xl font-extrabold mb-8") { seeMoreArticlesTitle }
 
       div(class: "grid lg:grid-cols-2 gap-10") {
-        otherArticles.map { renderArticleForGrid(article: $0) }
+        seeMoreArticles.map { renderArticleForGrid(article: $0) }
       }
 
       p(class: "prose mt-8") {
