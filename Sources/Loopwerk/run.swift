@@ -109,6 +109,7 @@ struct Run {
       .run()
       .staticFiles()
       .createArticleImages()
+      .createPageFindIndex()
   }
 }
 
@@ -141,6 +142,21 @@ extension Saga {
 
     return self
   }
+  
+  @discardableResult
+  func createPageFindIndex(originFilePath: StaticString = #file) -> Self {
+    let folder = Path("\(originFilePath)").resolveSwiftPackageFolder()
+
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    process.arguments = ["pnpm", "index"]
+    process.currentDirectoryURL = URL(fileURLWithPath: folder.string)
+    process.environment = ["PATH": "/Users/kevin/Library/pnpm:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]
+    process.launch()
+    process.waitUntilExit()
+
+    return self
+  }
 }
 
 func shouldCreateImages() -> Bool {
@@ -149,4 +165,28 @@ func shouldCreateImages() -> Bool {
     return command == "createArticleImages"
   }
   return false
+}
+
+extension Path {
+  func resolveSwiftPackageFolder() -> Path {
+    var nextFolder = parent()
+    
+    while nextFolder.isDirectory {
+      if nextFolder.containsFile(named: "Package.swift") {
+        return nextFolder
+      }
+      
+      nextFolder = nextFolder.parent()
+    }
+    
+    return Path()
+  }
+  
+  func containsFile(named file: Path) -> Bool {
+    return (self + file).isFile
+  }
+  
+  var attributes: [FileAttributeKey: Any] {
+    return (try? FileManager.default.attributesOfItem(atPath: string)) ?? [:]
+  }
 }

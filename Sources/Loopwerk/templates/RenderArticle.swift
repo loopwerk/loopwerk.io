@@ -74,7 +74,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let seeMoreArticlesTitle = relatedArticles.count >= 2 ? "Related articles" : "Recent articles"
 
   return baseLayout(canocicalURL: context.item.url, section: .articles, title: context.item.title, extraHeader: extraHeader) {
-    article(class: "prose") {
+    article(class: "prose", customAttributes: ["data-pagefind-body": "data-pagefind-body"]) {
       h1 { context.item.title }
       div(class: "-mt-6") {
         renderArticleInfo(context.item)

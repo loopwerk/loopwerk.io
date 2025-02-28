@@ -9,6 +9,7 @@ enum Section: String {
   case mentorshipProgram
   case about
   case hireMe
+  case search
   case notFound
 }
 
@@ -43,11 +44,11 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
       body(class: "bg-page text-white pb-5 \(section.rawValue)") {
-        header(class: "bg-nav text-gray py-4 text-base/6 lg:fixed w-full lg:h-[62px]") {
-          nav(class: "container flex gap-x-5 lg:gap-x-7 items-center") {
+        header(class: "bg-nav text-gray py-3 text-base/6 lg:fixed w-full z-10") {
+          nav(class: "container flex gap-x-5 lg:gap-x-7 items-center lg:h-[44px]") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
 
-            ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5") {
+            ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5 flex-1") {
               li {
                 a(class: section == .home ? "active" : "", href: "/") { "Home" }
               }
@@ -65,15 +66,17 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
               }
 
               li {
-                a(class: section == .mentorshipProgram ? "active" : "", href: "/mentor/") { "Mentorship" }
-              }
-
-              li {
                 a(class: section == .about ? "active" : "", href: "/about/") { "About" }
               }
 
               li {
                 a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
+              }
+            }
+            
+            if (section != .search) {
+              form(action: "/search/", class: "hidden lg:block pagefind-ui__form") {
+                input(class: "pagefind-ui__search-input", name: "q", placeholder: "Search articles", type: "text")
               }
             }
           }

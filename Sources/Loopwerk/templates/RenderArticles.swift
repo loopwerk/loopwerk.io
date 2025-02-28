@@ -38,7 +38,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.date) })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
 
-  return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles", rssLink: "", extraHeader: "") {
+  return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles", rssLink: "") {
     sortedByYearDescending.map { year, articles in
       div {
         h1(class: "text-4xl font-extrabold mb-12") { year }
