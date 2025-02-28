@@ -3,8 +3,11 @@ import Saga
 
 func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
   baseLayout(canocicalURL: "/apps/", section: .apps, title: "Apps") {
-    p {
-      "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
+    div(class: "prose") {
+      h1 { "Apps" }
+      p {
+        "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
+      }
     }
 
     context.items.map { app in

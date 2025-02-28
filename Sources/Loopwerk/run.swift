@@ -109,7 +109,6 @@ struct Run {
       .run()
       .staticFiles()
       .createArticleImages()
-      .createPageFindIndex()
   }
 }
 
@@ -139,26 +138,6 @@ extension Saga {
       let generator = ImageGenerator(rootPath: rootPath)
       generator?.generate(title: article.title, outputPath: destination)
     }
-
-    return self
-  }
-  
-  @discardableResult
-  func createPageFindIndex(originFilePath: StaticString = #file) throws -> Self {
-    guard shouldCreateImages() == false else {
-      print("Skipping createPageFindIndex")
-      return self
-    }
-
-    let folder = try Path("\(originFilePath)").resolveSwiftPackageFolder()
-
-    let process = Process()
-    process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-    process.arguments = ["pnpm", "index"]
-    process.currentDirectoryURL = URL(fileURLWithPath: folder.string)
-    process.environment = ["PATH": "/Users/kevin/Library/pnpm:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]
-    try process.run()
-    process.waitUntilExit()
 
     return self
   }

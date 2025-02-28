@@ -4,7 +4,6 @@ section: hireMe
 
 # Hire me
 
-# Hire me
 I created my first website in 2000 and my first iOS app in 2010. I’ve been working as a fully remote freelance developer since 2016, fixing and finishing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer and Unilever, so you’re in good hands. You can find my portfolio on the  [Apps](/apps/) page.
 
 I’ve also mentored multiple junior developers, both at other companies and in my own [mentorship program](/mentor/).

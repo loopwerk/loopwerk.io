@@ -72,6 +72,7 @@ func renderNonHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     article {
       div(class: "prose") {
+        h1 { context.item.title }
         Node.raw(context.item.body)
       }
     }

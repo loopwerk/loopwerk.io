@@ -3,17 +3,16 @@ import Saga
 
 func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
   baseLayout(canocicalURL: "/projects/", section: .projects, title: "Open Source") {
-    article {
-      div(class: "page_content opensource") {
-        p {
-          "These are some of the more interesting open source projects I’ve created (or contributed to) over the years."
-        }
-
-        ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
-          let projects = context.items.filter { $0.metadata.category == category }
-          return renderCategory(category: category, projects: projects)
-        }
+    div(class: "prose") {
+      h1 { "Open Source" }
+      p {
+        "These are some of the more interesting open source projects I’ve created (or contributed to) over the years."
       }
+    }
+
+    ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
+      let projects = context.items.filter { $0.metadata.category == category }
+      return renderCategory(category: category, projects: projects)
     }
   }
 }
