@@ -152,7 +152,7 @@ extension Saga {
     process.arguments = ["pnpm", "index"]
     process.currentDirectoryURL = URL(fileURLWithPath: folder.string)
     process.environment = ["PATH": "/Users/kevin/Library/pnpm:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]
-    process.launch()
+    try! process.run()
     process.waitUntilExit()
 
     return self
