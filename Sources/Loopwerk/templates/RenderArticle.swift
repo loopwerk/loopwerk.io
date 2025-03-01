@@ -50,8 +50,7 @@ func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item)
-  let allArticles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }
-  let otherArticles = allArticles.filter { $0.url != context.item.url }
+  let otherArticles = context.items.filter { $0.url != context.item.url }
   let latestArticles = otherArticles.prefix(2)
   let tags = Set(context.item.metadata.tags)
 
