@@ -74,10 +74,8 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
               }
             }
             
-            if (section != .search) {
-              form(action: "/search/", class: "hidden lg:block pagefind-ui__form") {
-                input(class: "pagefind-ui__search-input", name: "q", placeholder: "Search articles", type: "text")
-              }
+            form(action: "/search/", class: "hidden lg:block relative", id:"search-form") {
+              input(class: "w-[260px]", id: "search", name: "q", placeholder: "Search articles", type: "text")
             }
           }
         }

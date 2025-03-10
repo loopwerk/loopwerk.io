@@ -44,14 +44,24 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 @NodeBuilder
 func getSearchHeader() -> NodeConvertible {
-  script(src: "/pagefind/pagefind-ui.js")
+  script(src: "/pagefind/pagefind-modular-ui.js")
   script {
     Node.raw(
     """
     window.addEventListener('DOMContentLoaded', (event) => {
-        let pageFind = new PagefindUI({ element: "#search", showImages: false, pageSize: 20 });
         let q = new URLSearchParams(window.location.search).get("q");
-        pageFind.triggerSearch(q);
+    
+        const instance = new PagefindModularUI.Instance();
+        instance.add(new PagefindModularUI.Input({
+            inputElement: "#search"
+        }));
+        instance.add(new PagefindModularUI.ResultList({
+            containerElement: "#results"
+        }));
+        instance.add(new PagefindModularUI.Summary({
+          containerElement: "#summary"
+        }));
+        instance.triggerSearch(q);
     });
     """
     )
@@ -62,7 +72,8 @@ func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
   
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title, extraHeader: getSearchHeader()) {
-    div(id: "search")
+    div(id: "summary")
+    div(id: "results")
   }
 }
 

@@ -122,11 +122,11 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 
 /* PAGEFIND */
 
-.pagefind-ui__form {
-  position: relative;
+.pagefind-modular-list-image {
+  display: none;
 }
 
-.pagefind-ui__form::before {
+#search-form::before {
   background-color: var(--color-gray);
   width: 18px;
   height: 18px;
@@ -144,34 +144,17 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   pointer-events: none;
 }
 
-.pagefind-ui__search-input {
+#search {
   background: var(--color-sub);
   height: 44px;
   padding: 0 70px 0 54px;
   border-radius: 6px;
-  position: relative;
-  appearance: none;
-  -webkit-appearance: none;
-  display: flex;
-  width: 100%;
   color: var(--color-white);
 }
 
-.pagefind-ui__search-input::placeholder {
+#search::placeholder {
   color: var(--color-gray);
   font-weight: 200;
-}
-
-.pagefind-ui__search-clear {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  height: 40px;
-  padding: 0 15px 0 2px;
-  cursor: pointer;
-  border: none;
-  appearance: none;
-  color: var(--color-gray);
 }
 
 .pagefind-ui__message {
@@ -179,30 +162,19 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   margin-bottom: 40px;
 }
 
-.pagefind-ui__result {
-  margin-bottom: 40px;
+.pagefind-modular-list-result {
+  margin-top: 40px;
+  list-style: none;
 }
 
-.pagefind-ui__result-link {
+.pagefind-modular-list-link {
   @apply font-bold text-2xl;
 }
 
-.pagefind-ui__result-link:hover {
+.pagefind-modular-list-link:hover {
   border-bottom: 1px solid var(--color-orange)
 }
 
-.pagefind-ui__result-excerpt mark {
+.pagefind-modular-list-excerpt mark {
   background: var(--color-orange)
-}
-
-.pagefind-ui__button {
-  color: var(--color-orange);
-}
-
-.pagefind-ui__button:hover {
-  border-bottom: 1px solid var(--color-orange);
-}
-
-header .pagefind-ui__search-input {
-  width: 260px;
 }
