@@ -3,7 +3,7 @@ tags: django, python, open source
 summary: I love RSS feeds, but it’s not ideal that you’re stuck with all the articles that are in the feed. So I built RSSfilter.com, offering a way to filter the feed based on keywords and categories.
 ---
 
-# Announcing RSSfilter.com
+# Announcing RSSfilter.com: a Trump filter for RSS feeds, built with Django
 
 I love RSS feeds. It’s how I keep up with all of my (tech) news, for example from [The Verge](https://www.theverge.com) and [Ars Technica](https://arstechnica.com). If a news site or blog doesn’t have a RSS feed, I won’t keep up with it, sorry.
 
