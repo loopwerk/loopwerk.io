@@ -26,39 +26,42 @@ from django.views.generic import View
 
 from .models import KeyValueCache
 
+def get_certificate(self, url):
+    try:
+        cache = KeyValueCache.objects.get(key=url)
+        return cache.value
+    except KeyValueCache.DoesNotExist:
+        r = requests.get(url)
+        KeyValueCache.objects.create(key=url, value=r.text)
+        return r.text
+
+def validate_webhook_event(request, webhook_id):
+    # Create the validation message
+    transmission_id = request.headers.get("paypal-transmission-id")
+    timestamp = request.headers.get("paypal-transmission-time")
+    crc = zlib.crc32(request.body)
+    message = f"{transmission_id}|{timestamp}|{webhook_id}|{crc}"
+
+    # Decode the base64-encoded signature from the header
+    signature = base64.b64decode(request.headers.get("paypal-transmission-sig"))
+
+    # Load the certificate and extract the public key
+    certificate = get_certificate(request.headers.get("paypal-cert-url"))
+    cert = x509.load_pem_x509_certificate(certificate.encode("utf-8"), default_backend())
+    public_key = cert.public_key()
+
+    # Validate the message using the signature
+    try:
+        public_key.verify(signature, message.encode("utf-8"), padding.PKCS1v15(), hashes.SHA256())
+        return True
+    except Exception:
+        # Validation failed
+        return False
+
 
 class PayPalWebhookView(View):
-    def get_certificate(self, url):
-        try:
-            cache = KeyValueCache.objects.get(key=url)
-            return cache.value
-        except KeyValueCache.DoesNotExist:
-            r = requests.get(url)
-            KeyValueCache.objects.create(key=url, value=r.text)
-            return r.text
-
     def post(self, request):
-        body = request.body
-
-        # Create the validation message
-        transmission_id = request.headers.get("paypal-transmission-id")
-        timestamp = request.headers.get("paypal-transmission-time")
-        crc = zlib.crc32(body)
-        webhook_id = settings.PAYPAL_WEBHOOK_ID
-        message = f"{transmission_id}|{timestamp}|{webhook_id}|{crc}"
-
-        # Decode the base64-encoded signature from the header
-        signature = base64.b64decode(request.headers.get("paypal-transmission-sig"))
-
-        # Load the certificate and extract the public key
-        certificate = self.get_certificate(request.headers.get("paypal-cert-url"))
-        cert = x509.load_pem_x509_certificate(certificate.encode("utf-8"), default_backend())
-        public_key = cert.public_key()
-
-        # Validate the message using the signature
-        try:
-            public_key.verify(signature, message.encode("utf-8"), padding.PKCS1v15(), hashes.SHA256())
-        except Exception:
+        if not validate_webhook_event(request, settings.PAYPAL_WEBHOOK_ID):
             # Validation failed, exit
             return HttpResponseBadRequest()
 
