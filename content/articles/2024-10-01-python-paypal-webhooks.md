@@ -21,14 +21,13 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from django.conf import settings
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import View
 
 from .models import KeyValueCache
 
 
-class PayPalWebhookView(APIView):
+class PayPalWebhookView(View):
     def get_certificate(self, url):
         try:
             cache = KeyValueCache.objects.get(key=url)
@@ -38,7 +37,7 @@ class PayPalWebhookView(APIView):
             KeyValueCache.objects.create(key=url, value=r.text)
             return r.text
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         body = request.body
 
         # Create the validation message
@@ -61,16 +60,16 @@ class PayPalWebhookView(APIView):
             public_key.verify(signature, message.encode("utf-8"), padding.PKCS1v15(), hashes.SHA256())
         except Exception:
             # Validation failed, exit
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponseBadRequest()
 
         # Validation succeeded! 
         # Now you can inspect the webhook payload (request.data)
         # and handle each event (request.data.get("event_type"))
 
-        return Response(status=status.HTTP_200_OK)
+        return HttpResponse(status=200)
 ```
 
-The webhook ID (`settings.PAYPAL_WEBHOOK_ID`) you get when you edit your PayPal app and add the webhook URL. It’s not part of the webhook payload. I store mine in an `.env` file which I read in my `settings.py` file.
+The webhook ID (`settings.PAYPAL_WEBHOOK_ID`) you get when you edit your PayPal app and add the webhook URL. It’s not part of the webhook payload. I store mine in an `.env` file which [I read in my `settings.py` file](/articles/2024/django-settings/).
 
 I also use an extremely simple cache model to store the certificate:
 
