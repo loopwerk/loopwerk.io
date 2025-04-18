@@ -110,7 +110,7 @@ By default this editor doesn’t work so well when the Django Admin is in dark m
 
 So instead of a complete CMS we now have a Django model with a `CKEditor5Field` instance. Our model becomes the CMS, and our admins manage everything within the normal Django Admin interface that they’re already familiar with. They don’t have to use multiple URLs, like `/admin/` and `/cms/` to manage different kinds of things on the site.
 
-We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn’t support everything we need. Instead of building complicated plugins, we decided to completely remove remove this responsibly from the text editor, and instead we parse the body text for special tags like this:
+We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn’t support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibly from the text editor, and instead we parse the body text for special tags like this:
 
 ```
 Lorem ipsum dolor sit amet, consectetur adipiscing elit
