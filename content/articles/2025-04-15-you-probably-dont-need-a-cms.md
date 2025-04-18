@@ -5,7 +5,7 @@ summary: Many people quickly reach for a big CMS package for Django, when often 
 
 # You probably don’t need a CMS
 
-When I took over development and maintenance of the Sound Radix site and backend in January of 2023, it had a full blown CMS system ([puput](https://github.com/APSL/puput)) for the artist interviews. The administrators used the regular ol’ Django Admin site to manage everything except for the interviews which were handled in a completely separate CMS environment, reached on its own URL. Similarly I see plenty of people recommending Wagtail or Django CMS or Mezzanine when somebody asks how to get started building a simple blog.
+When I took over development and maintenance of the [Sound Radix](https://www.soundradix.com) site and backend in January of 2023, it had a full blown CMS system ([puput](https://github.com/APSL/puput)) for the artist interviews. The administrators used the regular ol’ Django Admin site to manage everything except for the interviews which were handled in a completely separate CMS environment, reached on its own URL. Similarly I see plenty of people recommending Wagtail or Django CMS or Mezzanine when somebody asks how to get started building a simple blog.
 
 I’m always very surprised by this. These are big dependencies that do a lot of stuff, and usually you only need a very small portion of their functionality - especially when getting started. I think it makes a lot more sense to build something yourself, which is also a great learning exercise when getting started.
 
