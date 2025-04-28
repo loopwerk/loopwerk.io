@@ -9,7 +9,7 @@ Two weeks ago I wrote [an article pitting uv against Poetry](/articles/2024/pyth
 
 It really seems that this combines all the best things of Poetry and uv, without their downsides. Let’s take a look!
 
-**Update October 12, 2024:** a previous version of this article made some comments about PDM not being able to add dependencies to an optional dependency group, without them also immediately getting installed. This turns out to not be correct, when using the `--no-sync` option. The article and its conclusion have been updated.
+> **Update October 12, 2024:** a previous version of this article made some comments about PDM not being able to add dependencies to an optional dependency group, without them also immediately getting installed. This turns out to not be correct, when using the `--no-sync` option. The article and its conclusion have been updated.
 
 ## Getting started
 There are multiple installation methods: via a script, via pipx (or `uv tool`), or via Homebrew. I used pipx myself, and it was quick and painless. Compared to Poetry and uv, it’s just as easy.

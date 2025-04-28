@@ -160,3 +160,5 @@ action = cloudflare
 Now the offending user’s IP address is sent to CloudFlare’s firewall and to the server’s own firewall (to block access to SSH for example). After the ban time is over the IP address is automatically removed from CloudFlare’s firewall.
 
 If you want to see the list of blocked IP addresses you can run `fail2ban-client status nginx-limit-req`. You can also view CloudFlare’s firewall in Security -> WAF -> Tools.
+
+> **Update April 28, 2025**: I wrote [another article](/articles/2025/cloudflare-waf-block-php/) about blocking these sort of requests directly within CloudFlare using their custom WAF rules. This prevents the requests from making it to your server in the first place.
