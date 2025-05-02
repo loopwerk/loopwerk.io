@@ -29,6 +29,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         meta(content: "320", name: "MobileOptimized")
         meta(content: "Loopwerk", name: "og:site_name")
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen", name: "keywords")
+        meta(content: "@kevinrenskers@hachyderm.io", name: "fediverse:creator")
         title { SiteMetadata.name + ": \(pageTitle)" }
         link(href: "/static/output.css", rel: "stylesheet")
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
