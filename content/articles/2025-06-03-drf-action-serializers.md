@@ -1,6 +1,6 @@
 ---
 tags: django, python
-summary: Introducing ActionSerializerViewSet, a ViewSet that allows you to choose a serializer for each action and method combination.
+summary: Introducing ActionSerializerModelViewSet, a ViewSet that allows you to choose a serializer for each action and method combination.
 ---
 
 # An easy way to use different serializers for different actions and request methods in Django REST Framework
@@ -90,7 +90,7 @@ The second project, drf-rw-serializers, allows you to specify different serializ
 So I took these ideas, evolved it, and now your view can look like this:
 
 ```python
-class PostViewSet(ActionSerializerViewSet):
+class PostViewSet(ActionSerializerModelViewSet):
     serializer_class = PostDetailSerializer
     list_serializer_class = PostListSerializer
     write_serializer_class = PostWriteSerializer
@@ -99,7 +99,7 @@ class PostViewSet(ActionSerializerViewSet):
 Or you can get super specific, like this:
 
 ```python
-class PostViewSet(ActionSerializerViewSet):
+class PostViewSet(ActionSerializerModelViewSet):
     list_read_serializer_class = PostListSerializer
     retrieve_read_serializer_class = PostDetailSerializer
     create_write_serializer_class = PostWriteSerializer
@@ -110,23 +110,22 @@ class PostViewSet(ActionSerializerViewSet):
 
 And it also works for any extra actions you add onto the ViewSet. So you can have different serializers for each action, you can have different serializers for input and output, and a different serializer for every combination of action and method, with sensible fallback logic so you don’t have to specify a serializer for every possible combination (like you’re forced to do with rest-framework-actions).
 
-Here’s the full code of `ActionSerializerViewSet`. Just drop it into your project (mine lives in a `lib.py` file) and use this instead of `ModelViewSet`.
+Here’s the full code of `ActionSerializerModelViewSet`. Just drop it into your project (mine lives in a `lib.py` file) and use this instead of `ModelViewSet`.
 
 ```python
-from rest_framework import permissions, status, viewsets
+# mypy: ignore-errors
+
+from rest_framework import mixins, permissions, status, viewsets
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 
-class ActionSerializerViewSet(viewsets.ModelViewSet):
-    """
-    A ModelViewSet that enables the use of different serializers for responses and
-    requests for update/create, as well as different serializers for different actions.
+# Generic views
 
-    The create and update actions use a special write serializer, while the response of these
-    actions use the read serializer.
-    """
-
+class ActionSerializerGenericAPIView(GenericAPIView):
     def get_action_serializer(self, method):
+        assert hasattr(self, "action"), "View must have an `action` attribute"
+
         result = (
             getattr(self, f"{self.action}_{method}_serializer_class", None)
             or getattr(self, f"{self.action}_read_serializer_class", None)
@@ -146,6 +145,10 @@ class ActionSerializerViewSet(viewsets.ModelViewSet):
         method = "read" if self.request.method in permissions.SAFE_METHODS else "write"
         return self.get_action_serializer(method)
 
+
+# Mixins
+
+class ActionSerializerCreateModelMixin(mixins.CreateModelMixin):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -159,6 +162,8 @@ class ActionSerializerViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(response_serializer.data)
         return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+
+class ActionSerializerUpdateModelMixin(mixins.UpdateModelMixin):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
@@ -176,6 +181,27 @@ class ActionSerializerViewSet(viewsets.ModelViewSet):
             context=self.get_serializer_context(),
         )
         return Response(response_serializer.data)
-```
 
-Disclaimer: this code could (and probably should) be split up into multiple mixins, so you don’t always get the full set of actions that come with `ModelViewSet` when you use `ActionSerializerViewSet`. Once I have a need for that in my real-world project I’ll make the changes and update this post. For now I don’t want to post this code to GitHub, maybe later.
+
+# ViewSets
+
+class ActionSerializerGenericViewSet(viewsets.ViewSetMixin, ActionSerializerGenericAPIView):
+    pass
+
+
+class ActionSerializerReadOnlyModelViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, ActionSerializerGenericViewSet
+):
+    pass
+
+
+class ActionSerializerModelViewSet(
+    ActionSerializerCreateModelMixin,
+    mixins.RetrieveModelMixin,
+    ActionSerializerUpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    ActionSerializerGenericViewSet,
+):
+    pass
+```
