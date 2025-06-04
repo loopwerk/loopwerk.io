@@ -26,7 +26,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 The `PostSerializer` class is used for everything: the list of posts, retrieving a single post, the payload when creating or updating a post, and the response when creating or updating a post. 
 
-I find that this is often not what I want; for example I often want a simple version of the model to be returned in the list endpoint (`/posts/`), while the full model is returned in the retrieve endpoint (`/posts/{post_id}/`). And I also often want that the *input* serializer is different from the *output* serializer, when creating or updating something (especially when using DRF’s built-in Browsable API, because it includes all the read-only fields in the example input payload, causing confusion).
+I find that this is often not what I want; for example I often want a simple version of the model to be returned in the list endpoint (`/posts/`), while the full model is returned in the retrieve endpoint (`/posts/{post_id}/`). And I also often want that the *input* serializer is different from the *output* serializer, when creating or updating something.
 
 Using different serializers in the list and retrieve endpoints isn’t too hard:
 
