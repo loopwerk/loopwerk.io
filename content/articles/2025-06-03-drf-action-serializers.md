@@ -83,7 +83,7 @@ This is starting to get pretty unwieldy for something that comes up all time tim
 
 Today I want to present a better way, inspired by [rest-framework-actions](https://github.com/AlexisMunera98/rest-framework-actions) and [drf-rw-serializers](https://github.com/vintasoftware/drf-rw-serializers). 
 
-The first project, rest-framework-actions, allows you to specify different serializers for different actions (so you can have a `list_serializer_class` which is different from the `serializer_class`), which is super useful, as well as different serializers for input versus output. It’s almost perfect, but not quite. For example you can’t specify different serializers for added actions, and since there’s no serializer fallback logic you end up being forced to six properties to your ViewSets.
+The first project, rest-framework-actions, allows you to specify different serializers for different actions (so you can have a `list_serializer_class` which is different from the `serializer_class`), which is super useful, as well as different serializers for input versus output. It’s almost perfect, but not quite. For example you can’t specify different serializers for added actions, and since there’s no serializer fallback logic you end up being forced to add six properties to your ViewSets.
 
 The second project, drf-rw-serializers, allows you to specify different serializers for the write and read actions: `write_serializer_class` and `read_serializer_class`, and it handles serializer fallbacks a lot better. But it doesn’t allow you to specify different serializers for different actions, it’s a bit too simple.
 
