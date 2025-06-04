@@ -206,7 +206,7 @@ class ActionSerializerModelViewSet(
     pass
 ```
 
-If you’re using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you’re not - you should), then the following code will make sure that the correct serializers are used for the response and request.
+If you’re using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you’re not - you should), then the following code will make sure that the correct serializers are used for the request and response.
 
 ```python
 from drf_spectacular.openapi import AutoSchema
