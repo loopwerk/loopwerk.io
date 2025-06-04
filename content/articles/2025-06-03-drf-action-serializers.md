@@ -239,7 +239,7 @@ class ActionSerializerAutoSchema(AutoSchema):
 
 Simply add the following to settings.py and it’s automatically used:
 
-```
+```python
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "path.to.ActionSerializerAutoSchema",
 }
