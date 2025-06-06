@@ -128,9 +128,9 @@ class ActionSerializerGenericAPIView(GenericAPIView):
 
         result = (
             getattr(self, f"{self.action}_{method}_serializer_class", None)
+            or getattr(self, f"{method}_serializer_class", None)
             or getattr(self, f"{self.action}_read_serializer_class", None)
             or getattr(self, f"{self.action}_serializer_class", None)
-            or getattr(self, f"{method}_serializer_class", None)
             or getattr(self, "read_serializer_class", None)
             or getattr(self, "serializer_class", None)
         )
