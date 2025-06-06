@@ -126,20 +126,34 @@ class ActionSerializerGenericAPIView(GenericAPIView):
     def get_action_serializer(self, method):
         assert hasattr(self, "action"), "View must have an `action` attribute"
 
-        result = (
-            getattr(self, f"{self.action}_{method}_serializer_class", None)
-            or getattr(self, f"{method}_serializer_class", None)
-            or getattr(self, f"{self.action}_read_serializer_class", None)
-            or getattr(self, f"{self.action}_serializer_class", None)
-            or getattr(self, "read_serializer_class", None)
-            or getattr(self, "serializer_class", None)
-        )
+        candidates = [
+            f"{self.action}_{method}_serializer_class",
+            f"{method}_serializer_class",
+            f"{self.action}_read_serializer_class",
+            f"{self.action}_serializer_class",
+        ]
 
-        assert result is not None, (
-            f"{self.__class__.__name__} should either include one of `{self.action}_{method}_serializer_class`, `{self.action}_read_serializer_class`, `{self.action}_serializer_class`, `{method}_serializer_class`, `read_serializer_class`, and `serializer_class` attribute, or override the `get_serializer_class()` method"
-        )
+        # Fallback to update if action is partial_update and no exact match found
+        if self.action == "partial_update":
+            candidates += [
+                f"update_{method}_serializer_class",
+                "update_read_serializer_class",
+                "update_serializer_class",
+            ]
 
-        return result
+        candidates += [
+            "read_serializer_class",
+            "serializer_class",
+        ]
+
+        for attr in candidates:
+            result = getattr(self, attr, None)
+            if result is not None:
+                return result
+
+        raise AssertionError(
+            f"{self.__class__.__name__} must define a suitable serializer. Tried: {', '.join(candidates)}"
+        )
 
     def get_serializer_class(self):
         method = "read" if self.request.method in permissions.SAFE_METHODS else "write"
