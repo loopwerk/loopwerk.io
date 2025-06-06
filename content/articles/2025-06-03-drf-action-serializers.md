@@ -110,145 +110,18 @@ class PostViewSet(ActionSerializerModelViewSet):
 
 And it also works for any extra actions you add onto the ViewSet. So you can have different serializers for each action, you can have different serializers for input and output, and a different serializer for every combination of action and method, with sensible fallback logic so you don’t have to specify a serializer for every possible combination (like you’re forced to do with rest-framework-actions).
 
-Here’s the full code of `ActionSerializerModelViewSet`. Just drop it into your project (mine lives in a `lib.py` file) and use this instead of `ModelViewSet`.
+The code is published on PyPI and can be installed with one command:
 
-```python
-# mypy: ignore-errors
-
-from rest_framework import mixins, permissions, status, viewsets
-from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
-
-
-# Generic views
-
-class ActionSerializerGenericAPIView(GenericAPIView):
-    def get_action_serializer(self, method):
-        assert hasattr(self, "action"), "View must have an `action` attribute"
-
-        candidates = [
-            f"{self.action}_{method}_serializer_class",
-            f"{method}_serializer_class",
-            f"{self.action}_read_serializer_class",
-            f"{self.action}_serializer_class",
-        ]
-
-        # Fallback to update if action is partial_update and no exact match found
-        if self.action == "partial_update":
-            candidates += [
-                f"update_{method}_serializer_class",
-                "update_read_serializer_class",
-                "update_serializer_class",
-            ]
-
-        candidates += [
-            "read_serializer_class",
-            "serializer_class",
-        ]
-
-        for attr in candidates:
-            result = getattr(self, attr, None)
-            if result is not None:
-                return result
-
-        raise AssertionError(
-            f"{self.__class__.__name__} must define a suitable serializer. Tried: {', '.join(candidates)}"
-        )
-
-    def get_serializer_class(self):
-        method = "read" if self.request.method in permissions.SAFE_METHODS else "write"
-        return self.get_action_serializer(method)
-
-
-# Mixins
-
-class ActionSerializerCreateModelMixin(mixins.CreateModelMixin):
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-
-        response_serializer = self.get_action_serializer("read")(
-            instance=serializer.instance,
-            context=self.get_serializer_context(),
-        )
-
-        headers = self.get_success_headers(response_serializer.data)
-        return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
-class ActionSerializerUpdateModelMixin(mixins.UpdateModelMixin):
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop("partial", False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-
-        if getattr(instance, "_prefetched_objects_cache", None):
-            # If 'prefetch_related' has been applied to a queryset, we need to
-            # forcibly invalidate the prefetch cache on the instance.
-            instance._prefetched_objects_cache = {}
-
-        response_serializer = self.get_action_serializer("read")(
-            instance=serializer.instance,
-            context=self.get_serializer_context(),
-        )
-        return Response(response_serializer.data)
-
-
-# ViewSets
-
-class ActionSerializerGenericViewSet(viewsets.ViewSetMixin, ActionSerializerGenericAPIView):
-    pass
-
-
-class ActionSerializerReadOnlyModelViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, ActionSerializerGenericViewSet
-):
-    pass
-
-
-class ActionSerializerModelViewSet(
-    ActionSerializerCreateModelMixin,
-    mixins.RetrieveModelMixin,
-    ActionSerializerUpdateModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.ListModelMixin,
-    ActionSerializerGenericViewSet,
-):
-    pass
+```bash
+$ uv add drf-action-serializers
 ```
 
-If you’re using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you’re not - you should), then the following code will make sure that the correct serializers are used for the request and response.
+From then use the ViewSets from `drf_action_serializers.viewsets` instead of from `rest_framework.viewsets`.
 
-```python
-from drf_spectacular.openapi import AutoSchema
+If you’re using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you’re not - you should), then there’s a cool optional package to install:
 
-
-class ActionSerializerAutoSchema(AutoSchema):
-    def get_request_serializer(self):
-        if self.method.lower() in {"post", "put", "patch"}:
-            if hasattr(self.view, "get_action_serializer"):
-                return self.view.get_action_serializer("write")
-        return super().get_request_serializer()
-
-    def get_response_serializers(self):
-        if not hasattr(self.view, "get_action_serializer"):
-            return super().get_response_serializers()
-
-        method = self.method.lower()
-
-        if method == "post":
-            return {
-                "201": self.view.get_action_serializer("read"),
-            }
-        elif method in {"put", "patch"}:
-            return {
-                "200": self.view.get_action_serializer("read"),
-            }
-
-        return super().get_response_serializers()
+```bash
+$ uv add drf-action-serializers[spectacular]
 ```
 
 Simply add the following to settings.py and it’s automatically used:
@@ -258,3 +131,5 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "path.to.ActionSerializerAutoSchema",
 }
 ```
+
+Your API docs will now show the correct schemas for the request and the response.
