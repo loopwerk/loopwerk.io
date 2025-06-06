@@ -96,6 +96,8 @@ class PostViewSet(ActionSerializerModelViewSet):
     write_serializer_class = PostWriteSerializer
 ```
 
+And just like that you’re using a different serializer for the list action, and for the create and update actions.
+
 Or you can get super specific, like this:
 
 ```python
@@ -108,6 +110,8 @@ class PostViewSet(ActionSerializerModelViewSet):
     update_read_serializer_class = PostDetailSerializer
 ```
 
+Now you’re using different input and output serializers as well!
+
 And it also works for any extra actions you add onto the ViewSet. So you can have different serializers for each action, you can have different serializers for input and output, and a different serializer for every combination of action and method, with sensible fallback logic so you don’t have to specify a serializer for every possible combination (like you’re forced to do with rest-framework-actions).
 
 The code is published on PyPI and can be installed with one command:
@@ -116,7 +120,7 @@ The code is published on PyPI and can be installed with one command:
 $ uv add drf-action-serializers
 ```
 
-From then use the ViewSets from `drf_action_serializers.viewsets` instead of from `rest_framework.viewsets`.
+There’s nothing to configure, there is no step 2. Now you can use the ViewSets from `drf_action_serializers.viewsets` instead of from `rest_framework.viewsets`.
 
 If you’re using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you’re not - you should), then there’s a cool optional package to install:
 
