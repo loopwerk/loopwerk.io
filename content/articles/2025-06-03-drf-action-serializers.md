@@ -114,7 +114,7 @@ Now you’re using different input and output serializers as well!
 
 And it also works for any extra actions you add onto the ViewSet. So you can have different serializers for each action, you can have different serializers for input and output, and a different serializer for every combination of action and method, with sensible fallback logic so you don’t have to specify a serializer for every possible combination (like you’re forced to do with rest-framework-actions).
 
-The code is published on PyPI and can be installed with one command:
+The code is [published on PyPI](https://pypi.org/project/drf-action-serializers/) and can be installed with one command:
 
 ```bash
 $ uv add drf-action-serializers
