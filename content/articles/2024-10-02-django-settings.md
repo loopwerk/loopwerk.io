@@ -54,7 +54,7 @@ Your `.env` file has the config values:
 ```
 DEBUG=True
 SECRET_KEY=secret-key
-DATABASE_URL=postgres://mydatabase:password@localhost:5432/mydatabase
+DATABASE_URL=postgres://username:password@localhost:5432/mydatabase
 ```
 
 And the `settings.py` file uses these values:
