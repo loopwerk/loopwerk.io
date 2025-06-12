@@ -388,6 +388,6 @@ This approach also champions **Locality of Behavior**. When you look at a templa
 
 This isn't to say SPAs are dead. For highly interactive, application-like experiences (think Figma or a complex dashboard), a framework like SvelteKit or Vue is still the right tool.
 
-But for the vast majority of websites—the content sites, the e-commerce stores, the blogs—that are mostly pages of content with forms and a sprinkle of interactivity, this hypermedia approach feels like a return to sanity. It combines the stability and simplicity of Web 1.0 with the slick user experience of Web 2.0.
+But for the vast majority of websites —the content sites, the e-commerce stores, the blogs— that are mostly pages of content with forms and a sprinkle of interactivity, this hypermedia approach feels like a return to sanity. It combines the stability and simplicity of Web 1.0 with the slick user experience of Web 2.0.
 
 If you're a Django developer feeling the fatigue of the modern frontend, I highly recommend you give Alpine.js and Alpine AJAX a try. You might be surprised how productive and fun it is to build for the web again.
