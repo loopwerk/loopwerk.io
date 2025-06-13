@@ -95,6 +95,10 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             a(href: "https://www.critical-notes.com") { "Critical Notes" }
             %", and maintains a bunch of"
             a(href: "/projects/") { "open source projects" }
+            %". Connect on"
+            a(href: "https://hachyderm.io/@kevinrenskers") { "Mastodon" }
+            %" or"
+            a(href: "https://bsky.app/profile/loopwerk.io") { "Blusky" }
             %"."
           }
         }
