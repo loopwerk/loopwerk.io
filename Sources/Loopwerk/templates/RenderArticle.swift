@@ -98,7 +98,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             %". Connect on"
             a(href: "https://hachyderm.io/@kevinrenskers") { "Mastodon" }
             %" or"
-            a(href: "https://bsky.app/profile/loopwerk.io") { "Blusky" }
+            a(href: "https://bsky.app/profile/loopwerk.io") { "Bluesky" }
             %"."
           }
         }
