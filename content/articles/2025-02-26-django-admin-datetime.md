@@ -18,7 +18,7 @@ USE_TZ = True
 TIME_ZONE = "UTC"
 ```
 
-Why doesn’t the Django Admin just say “date and time must be entered as UTC”? That would make it super clear how people should enter the values, which the current note does not. At the moment I am adding `help_text=f"Date and time must be entered as {settings.TIME_ZONE}."` to all my `DateTimeField` instances, and I’m hiding Django’s default note with the following css:
+Why doesn’t the Django Admin just say “date and time must be entered as UTC”? That would make it super clear how people should enter the values, which the current note does not. At the moment I am adding `help_text=f"Date and time are in {settings.TIME_ZONE}"` to all my `DateTimeField` instances, and I’m hiding Django’s default note with the following css:
 
 ```css
 .timezonewarning { 
