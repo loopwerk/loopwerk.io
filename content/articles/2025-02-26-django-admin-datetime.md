@@ -26,7 +26,7 @@ Why doesn’t the Django Admin just say “date and time must be entered as UTC�
 }
 ```
 
-This is a substantial improvements for our admins, who now understand exactly what’s being asked of them. They know that dates and times have to be entered in a certain time zone, and that they should translate their “target” time zone to UTC.
+This is a substantial improvement for our admins, who now understand exactly what’s being asked of them. They know that dates and times have to be entered in a certain time zone, and that they should translate their “target” time zone to UTC.
 
 ![](/articles/images/django-admin-datetime-after.png)
 
