@@ -87,9 +87,11 @@ htmx really is a fantastic library, but there is one big downside: it encourages
 </button>
 ```
 
-If JavaScript is disabled or fails to load, this button does... nothing. It's not wrapped in a form, so it has no default action. The same is true for the "Cancel" button in the edit form. The application is broken. This violates the principle of **Progressive Enhancement**, where a site should be functional at a baseline level (plain HTML) and enhanced with JavaScript.
+If JavaScript is disabled<sup>1</sup> or fails to load, this button does... nothing. It's not wrapped in a form, so it has no default action. The same is true for the "Cancel" button in the edit form. The application is broken. This violates the principle of **Progressive Enhancement**, where a site should be functional at a baseline level (plain HTML) and enhanced with JavaScript.
 
 You *can* write progressively enhanced code with htmx, but it often requires attribute repetition and constant vigilance from you, the developer.
+
+> <sup>1</sup> JavaScript fails more often than people think. Not just because some users disable it (which is admittedly very rare), but because of things like flaky networks, aggressive content blockers, misconfigured scripts, browser extensions, corporate firewalls, or even just unhandled JS errors. When your site depends entirely on JavaScript to function, any one of those issues can leave users with a broken or unusable experience. Having a site work without JS is also good for SEO and for accessibility technology such as screenreaders.
 
 ## My preferred alternative: Alpine.js + Alpine AJAX
 
