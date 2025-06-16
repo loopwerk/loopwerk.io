@@ -183,3 +183,5 @@ So why use both the middleware *and* the JavaScript? Because together, they cove
 *   **On all subsequent visits:** The user has the cookie. The `TimezoneMiddleware` activates their timezone. The `local_time` template tag now renders the time correctly, right from the server. The JavaScript still runs, but it essentially replaces the already-correct time with the same correct time, resulting in no visible change.
 
 This two-part approach gives you the best of server-side rendering (no content-shifting for returning visitors) while using client-side JavaScript as a progressive enhancement to fix the one edge case where the server can't know better.
+
+If rendering dates and times and dealing with timezones interests you, also check out the article [“Django Admin’s handling of dates and times is very confusing”](/articles/2025/django-admin-datetime/) I wrote earlier this year.
