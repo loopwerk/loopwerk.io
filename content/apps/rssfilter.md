@@ -2,7 +2,7 @@
 images: rssfiltercom.png
 roundOffImages: false
 breakImages: 1
-url: rssfilter.com
+url: https://rssfilter.com
 date: 2025-04-06
 ---
 
