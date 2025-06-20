@@ -14,7 +14,7 @@ Technologies and tools I use include HTML, CSS, Tailwind, Python, Django, Django
 But the list keeps on growing and if your tech stack doesn’t completely match mine, let’s talk anyway.
 
 ### Ethics and turn-offs
-I will not work on anything related to the promotion of fossil fuels, gambling, tobacco, alcohol, firearms, bitcoin, blockchain, or artificial intelligence.
+I will not work on anything related to the promotion of fossil fuels, gambling, tobacco, alcohol, firearms, bitcoin, or blockchains.
 
 I do not use PHP, Wordpress, Windows, or React, and have no interest in doing so.
 
