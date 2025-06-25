@@ -8,7 +8,7 @@ summary: In a previous blogentry I wrote about some great online resources I fou
 _Dan Pilone & Tracey Pilone_  
 _O'Reilly_
 
-In a [previous blogentry](/articles/2010/getting-started-iphone-app-development/) I wrote about some great online resources I found to get started with iPhone development. I read the C and Objective-C introductions, watched the first 12 or so episodes of the Stanford courses and did the assignments that went along with it. Well, at least I tried to do all the assignments, but they were not easy with just the information from the taped lectures. There is a ton of information in them, but are kind of boring to watch, and you don't learn that well from slides.
+In a [previous article](/articles/2010/getting-started-iphone-app-development/) I wrote about some great online resources I found to get started with iPhone development. I read the C and Objective-C introductions, watched the first 12 or so episodes of the Stanford courses and did the assignments that went along with it. Well, at least I tried to do all the assignments, but they were not easy with just the information from the taped lectures. There is a ton of information in them, but are kind of boring to watch, and you don't learn that well from slides.
 
 So, I thought it would be better to buy a book for iPhone beginners, where they start from zero and take you through building actual applications with good background information. I just went to the bookstore without reading any reviews about iPhone development books, and bought the "Head First iPhone Development" one. Just a lucky guess that it would be a good read.
 
