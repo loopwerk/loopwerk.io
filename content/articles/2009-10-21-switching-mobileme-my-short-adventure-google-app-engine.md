@@ -5,7 +5,7 @@ tags: review
 # Switching from MobileMe & my short adventure with Google App Engine
 I can't remember how long ago it's been that I've used a free email address like hotmail, yahoo or gmail. For more than 8 years I've used my own domain names to host my email. In the very beginning on my own little server at home, later on a "real" colocated server when I still had my own company, on the servers of my employer and then last year on Apple's [MobileMe](http://www.apple.com/mobileme/) service.
 
-Last September, my MobileMe subscription needed to be renewed, and it got me thinking if that was something I really wanted to do. It's $99 a year for 20 GB of email/calendar/contacts hosting and iDisk for online storage. It also offers easy web galleries with a click of a button within iPhoto and great syncing between my home- and work Mac's and my iPhone. Not too pricy for what you get really, but still... it got me thinking.
+Last September, my MobileMe subscription needed to be renewed, and it got me thinking if that was something I really wanted to do. It's $99 a year for 20 GB of email/calendar/contacts hosting and iDisk for online storage. It also offers easy web galleries with a click of a button within iPhoto and great syncing between my home- and work Macs and my iPhone. Not too pricy for what you get really, but still... it got me thinking.
 
 Last September I also got a new job, where I no longer work on an Apple computer, but on a laptop running Ubuntu. The first problem with MobileMe quickly popped up: it doesn't sync your calendars or contacts to Linux. So on the "plus" side of MobileMe I could erase its ease of syncing everything.
 
