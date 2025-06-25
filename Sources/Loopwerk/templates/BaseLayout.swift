@@ -16,7 +16,7 @@ enum Section: String {
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
-    html(lang: "en-US") {
+    html(class: "bg-nav", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
