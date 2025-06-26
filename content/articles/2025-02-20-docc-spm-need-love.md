@@ -1,5 +1,5 @@
 ---
-tags: swift, review
+tags: apple, swift, review
 summary: Apple’s DocC project and the Swift Package Manager have been missing pretty crucial features for years now. It’s time that Apple gave them some love and attention.
 ---
 

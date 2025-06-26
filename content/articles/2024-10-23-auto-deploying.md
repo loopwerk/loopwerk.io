@@ -1,5 +1,5 @@
 ---
-tags: linux, django, python
+tags: deployment, linux, django, python
 summary: The best feature of Heroku is the ability to just push a branch, and it gets deployed. How do we replicate a workflow like that on our own server?
 ---
 

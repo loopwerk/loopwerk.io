@@ -1,5 +1,5 @@
 ---
-tags: linux
+tags: deployment
 summary: Webservers get hit by hundreds of thousands of requests to random (non-existing) PHP files. Previously I dealt with this on the server level, now I’m doing it directly within CloudFlare.
 ---
 

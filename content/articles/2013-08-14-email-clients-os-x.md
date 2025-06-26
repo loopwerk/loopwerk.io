@@ -1,5 +1,5 @@
 ---
-tags: review, macOS
+tags: review, apple
 ---
 
 # Review roundup: email clients for OS X
