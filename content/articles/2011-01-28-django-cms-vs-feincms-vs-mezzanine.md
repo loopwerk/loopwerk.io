@@ -24,7 +24,7 @@ Is has some very compelling arguments:
 
 But not all is golden:
 
-- The plugin system, while nicely extendible, makes the admin interface [pretty sucky][7]
+- The plugin system, while nicely extendible, makes the admin interface [pretty sucky][6]
 - Doesn't work with [Grappelli][5]
 - Doesn't use the TinyMCE editor by default
 
@@ -32,7 +32,7 @@ It's a very good CMS that's very easy to work with as a developer. However, I fe
 
 The thing I absolutely like the most about Django-CMS is the way you define one or more placeholders directly in your HTML templates. Then, when you create a new page, you select one of your templates and it scans the source to find the placeholders you've defined. No config, no code, very very easy.
 
-> **Update** - just to clarify: I'm not suggesting to drop the plugin system, just its current (backend) admin interface. Maybe when the frontend editing gets even better, it could completely replace it and thus solving the biggest problems I am having with Django-CMS. See also one of my other posts [here][7].
+> **Update** - just to clarify: I'm not suggesting to drop the plugin system, just its current (backend) admin interface. Maybe when the frontend editing gets even better, it could completely replace it and thus solving the biggest problems I am having with Django-CMS. See also one of my other posts [here][6].
 
 ## FeinCMS
 
@@ -58,7 +58,7 @@ It's the most flexible CMS by far, but that does come with a price: it's also th
 
 ## Mezzanine
 
-For my latest project I used the Mezzanine CMS, because Django-CMS [didn't quite fit right][6]. I've worked with Mezzanine for two weeks now.
+For my latest project I used the Mezzanine CMS, because Django-CMS didn't quite fit right. I've worked with Mezzanine for two weeks now.
 
 Pros:
 
@@ -101,5 +101,4 @@ Maybe that's why I built my own site with Django-CMS, but for my latest project 
   [3]: http://www.django-cms.org/
   [4]: http://www.feinheit.ch/labs/feincms-django-cms/
   [5]: http://code.google.com/p/django-grappelli/
-  [6]: /articles/2011/looking-for-django-cms/
-  [7]: /articles/2011/django-cms-backend-usability/
+  [6]: /articles/2011/django-cms-backend-usability/
