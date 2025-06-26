@@ -16,7 +16,7 @@ enum Section: String {
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
-    html(class: "bg-nav", lang: "en-US") {
+    html(class: "bg-nav h-full", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
@@ -44,7 +44,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         extraHeader
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
-      body(class: "bg-page text-white pb-5 \(section.rawValue)") {
+      body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
         header(class: "bg-nav text-gray py-3 text-base/6 lg:fixed w-full z-10") {
           nav(class: "container flex gap-x-5 lg:gap-x-7 items-center lg:h-[44px]") {
             img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
