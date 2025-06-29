@@ -35,13 +35,15 @@ RUN swift package resolve
 # Copy all source files
 COPY . .
 
-# Copy .git directory temporarily for git-restore-mtime
-COPY .git .git
+# Clone the repository to get .git directory for git-restore-mtime
+# This is necessary because Coolify doesn't include .git in build context
+RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
+    && cp -r /tmp/repo/.git . \
+    && ./git-restore-mtime \
+    && rm -rf .git /tmp/repo
 
 # Build the site
-RUN ./git-restore-mtime \
-    && rm -rf .git \
-    && swift run Loopwerk createArticleImages \
+RUN swift run Loopwerk createArticleImages \
     && pnpm index \
     && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
 
