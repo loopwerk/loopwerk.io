@@ -22,8 +22,8 @@ WORKDIR /app
 # Copy package files for Node dependencies
 COPY package.json pnpm-lock.yaml ./
 
-# Install Node dependencies
-RUN pnpm install
+# Install Node dependencies (including devDependencies needed for build)
+RUN pnpm install --frozen-lockfile
 
 # Copy Swift package files
 COPY Package.swift ./
@@ -42,10 +42,18 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
     && ./git-restore-mtime \
     && rm -rf .git /tmp/repo
 
-# Build the site
-RUN swift run Loopwerk createArticleImages \
+# Build the site with verbose output for debugging
+RUN echo "Starting Swift build..." \
+    && swift run Loopwerk createArticleImages \
+    && echo "Swift build completed. Checking deploy directory..." \
+    && ls -la deploy/ || echo "Deploy directory not found yet" \
+    && echo "Running pnpm index..." \
     && pnpm index \
-    && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
+    && echo "Index generation completed. Checking deploy directory again..." \
+    && ls -la deploy/ \
+    && echo "Running HTML minifier..." \
+    && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy \
+    && echo "Build completed successfully!"
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
