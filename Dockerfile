@@ -47,15 +47,8 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
 # Build the site with verbose output for debugging
 RUN echo "Starting Swift build..." \
     && swift run Loopwerk createArticleImages \
-    && echo "Swift build completed. Checking deploy directory..." \
-    && ls -la deploy/ || echo "Deploy directory not found yet" \
-    && echo "Running pnpm index..." \
     && pnpm index \
-    && echo "Index generation completed. Checking deploy directory again..." \
-    && ls -la deploy/ \
-    && echo "Running HTML minifier..." \
-    && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy \
-    && echo "Build completed successfully!"
+    && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
