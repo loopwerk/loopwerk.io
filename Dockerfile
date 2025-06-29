@@ -6,6 +6,7 @@ FROM swift:6.0.1-jammy AS builder
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libgd-dev \
+    libavif-dev \
     python3 \
     git \
     curl \
