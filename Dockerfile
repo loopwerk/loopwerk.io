@@ -35,8 +35,12 @@ RUN swift package resolve
 # Copy all source files
 COPY . .
 
+# Copy .git directory temporarily for git-restore-mtime
+COPY .git .git
+
 # Build the site
 RUN ./git-restore-mtime \
+    && rm -rf .git \
     && swift run Loopwerk createArticleImages \
     && pnpm index \
     && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
