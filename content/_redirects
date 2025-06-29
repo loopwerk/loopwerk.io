@@ -1,3 +1,2 @@
-https://mixedcase.nl/* https://www.loopwerk.io/:splat 301!
-https://www.mixedcase.nl/* https://www.loopwerk.io/:splat 301!
 /articles/:year/:month/:date/:slug/* /articles/:year/:slug/:splat 301!
+/articles/2025/announding-rssfilter-com/ /articles/2025/announcing-rssfilter-com/ 301

@@ -6,8 +6,3 @@
 [build.environment]
   SWIFT_VERSION = "6.0.1"
   NODE_VERSION = "20"
-
-[[redirects]]
-  from = "/articles/2025/announding-rssfilter-com/"
-  to = "/articles/2025/announcing-rssfilter-com/"
-  status = 301
