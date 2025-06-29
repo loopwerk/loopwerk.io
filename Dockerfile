@@ -1,7 +1,8 @@
 # Multi-stage build for loopwerk.io static site
 
 # Stage 1: Build environment
-FROM swift:6.0.1-jammy AS builder
+# Using Ubuntu 24.04 (Noble) for libgd 2.3.2+ with AVIF support
+FROM swift:6.0-noble AS builder
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
