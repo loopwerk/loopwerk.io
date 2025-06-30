@@ -136,7 +136,7 @@ extension Saga {
     for article in articles {
       let destination = (outputPath + "static" + "images" + article.filenameWithoutExtension).string + ".png"
       let generator = ImageGenerator(rootPath: rootPath)
-      generator?.generate(title: article.title, outputPath: destination)
+      generator?.generate(article: article, outputPath: destination)
     }
 
     return self

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftGD
+import Saga
 
 class ImageGenerator {
   private let background: Image
@@ -13,19 +14,29 @@ class ImageGenerator {
     }
     background = backgroundImage
     fontPath = "\(rootPath)/ImageGenerator/Roboto-Regular.ttf"
-    fontSize = 60
+    fontSize = 54
   }
 
-  func generate(title: String, outputPath: String) {
-    let wrappedText = title.splitByLineWidth(width: 24)
+  func generate(article: Item<ArticleMetadata>, outputPath: String) {
+    let wrappedText = article.title.splitByLineWidth(width: 25)
 
-    // Draw the text on the image
-    var offsetY = 100
+    // Draw the title on the image
+    var offsetY = 160
     for line in wrappedText {
-      background.renderText(line, from: Point(x: 36, y: offsetY), fontList: [fontPath], color: Color.white, size: fontSize)
-      offsetY += Int(fontSize) + 20
+      background.renderText(line, from: Point(x: 90, y: offsetY), fontList: [fontPath], color: Color.white, size: fontSize)
+      offsetY += Int(fontSize) + 24
     }
 
+    // Draw the date on the image
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd, yyyy"
+    let date = dateFormatter.string(from: article.date)
+    background.renderText(date, from: Point(x: 90, y: 540), fontList: [fontPath], color: Color.white, size: 20)
+
+    // Draw the tags on the image
+    let tags = article.metadata.tags.map { "#\($0)" }.joined(separator: ", ")
+    background.renderText(tags, from: Point(x: 90, y: 580), fontList: [fontPath], color: Color.white, size: 20)
+    
     // Save the image as a PNG
     background.write(to: URL(fileURLWithPath: outputPath))
   }
