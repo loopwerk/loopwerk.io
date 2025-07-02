@@ -165,7 +165,7 @@ Within the Coolify UI, I can now create a new application, point it to my GitHub
 
 I no longer have an `.env` file on the server with the environment variables (like `DATABASE_URL`), instead I use Coolify's Environment Variables within the project settings. The way [I configure my Django projects](/articles/2024/django-settings/) hasn't changed, only the `.env` file part has been replaced with Coolify's UI. However, there is one small gotcha: by default these Coolify environment variables are only available at runtime, but because I use code like `os.getenv("DATABASE_URL")` in my settings.py, these variables also need to be available at build-time when Django commands like `collectstatic` run. This is why we explicitly expose these three variables as build arguments in the Dockerfile with the `ARG` declarations, making them available during the Docker build process.
 
-As a final step when setting up the Django application you’ll want to add a health check. This can easily be done within your app configuration tab. This allows the rolling deployments where the new container is started while the old one is still running. Only when the health check is successful is the old container removed.
+As a final step when setting up the Django application you’ll want to add a health check. This can easily be done within your app configuration tab. This enables the rolling deployments where the new container is started while the old one is still running. Only when the health check is successful is the old container removed.
 
 (For a non-Python example: the `Dockerfile` for this very website, which is built with Swift, can be found [on GitHub](https://github.com/loopwerk/loopwerk.io/blob/main/Dockerfile).)
 
