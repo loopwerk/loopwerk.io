@@ -171,7 +171,7 @@ As a final step when setting up the Django application you’ll want to add a he
 
 ## Step 4: configure backups
 
-My old [custom backup script](/articles/2023/setting-up-debian-11/#2-2-backups) is no longer needed because Coolify has backups built-in. First, you need to configure a destination, which Coolify calls an "S3 Storage" target.
+My old [custom backup script](/articles/2023/setting-up-debian-11/#2-2-backups) is no longer needed because Coolify has backups built-in. To enable off-site storage you need to configure a destination, which Coolify calls an "S3 Storage" target.
 
 I'm using [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) for this, as it offers a generous 10 GB of S3-compatible object storage for free. Here’s how to set it up:
 
