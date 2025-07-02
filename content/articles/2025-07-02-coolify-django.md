@@ -31,7 +31,7 @@ Enter [Coolify](https://coolify.io/). It promises a Heroku-like experience you c
 
 This looked like exactly what I needed. Here’s how I moved my Django apps to it.
 
-## Step 1: Prepare a Fresh Server
+## Step 1: prepare a fresh server
 
 Before installing Coolify, it’s wise to perform some basic server hardening. I spun up a new VPS on Hetzner and logged in as root to get it ready.
 
@@ -98,7 +98,7 @@ $ dpkg-reconfigure --priority=low unattended-upgrades
 
 With the server secured, it was time for the main event.
 
-## Step 2: Install Coolify
+## Step 2: install Coolify
 
 This is the easiest part. Coolify provides a simple installation script that handles everything.
 
@@ -108,7 +108,7 @@ $ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | sudo bash
 
 After a few minutes, Coolify is up and running, accessible via the server's IP address. I created a CNAME DNS entry for my server so that I can easily access it with a memorable domain.
 
-## Step 3: Containerize the Django App
+## Step 3: containerize the Django app
 
 Coolify works by building and running your applications in Docker containers. This is a departure from my old setup of running Gunicorn directly on the host. The central piece of this is the `Dockerfile`, a recipe for creating your application's image.
 
@@ -167,7 +167,7 @@ I no longer have an `.env` file on the server with the environment variables (li
 
 (For a non-Python example: the `Dockerfile` for this very website, which is built with Swift, can be found [on GitHub](https://github.com/loopwerk/loopwerk.io/blob/main/Dockerfile).)
 
-## Step 4: Configure Backups
+## Step 4: configure backups
 
 My old custom backup script is no longer needed because Coolify has backups built-in. First, you need to configure a destination, which Coolify calls an "S3 Storage" target.
 
@@ -190,11 +190,11 @@ With the S3 storage now configured, we can set up our backups.
 - Go to Settings -> Backup, and make sure backups are turned on. Then enable the “S3 Enabled” checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
 - Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the “Save to S3” checkmark to also store it remotely.
 
-## Step 5: Remaining Coolify Config
+## Step 5: remaining Coolify config
 
 To make sure you get important alerts, you’ll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the “use system wide (transactional) email settings” checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
 
-## The Way Forward
+## The way forward
 
 Moving to Coolify is a significant simplification of my infrastructure. It replaces my collection of custom scripts with a unified, robust system that provides the modern, git-based workflow I love from Netlify. The shift to containerization was long overdue, and Coolify makes it approachable.
 
