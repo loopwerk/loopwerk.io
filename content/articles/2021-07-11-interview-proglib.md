@@ -1,5 +1,5 @@
 ---
-tags: iOS, news
+tags: iOS, personal
 summary: Recently I was interviewed for the Russian IT website proglib.io. Since it might be interesting for non-Russian speakers, here it is in the original English version.
 ---
 
