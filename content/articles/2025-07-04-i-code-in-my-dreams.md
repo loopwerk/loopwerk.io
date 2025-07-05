@@ -19,13 +19,13 @@ And then, somewhere between consciousness and sleep, something strange happens. 
 
 I don't mean I dream *about* coding – I mean I literally write lines of code, character by character, in my sleep. I'll be constructing functions, debugging logic, refactoring class structures. My sleeping brain becomes this weird IDE where I'm typing out actual code, complete with proper indentation and everything. It's like my subconscious has decided it's going to solve this puzzle whether I'm awake or not.
 
-The really bizarre part? The code usually makes sense. I'm not just dreaming random syntax; I'm writing coherent solutions to the actual problem I was stuck on. I'll work through imports, define variables, write conditional statements. Sometimes I'll even dream about writing tests for the code, because apparently my brain has internalized good development practices even in sleep mode.
+The really bizarre part? The code usually makes sense. I'm not just dreaming random syntax; I'm writing coherent solutions to the actual problem I was stuck on. I'll work through imports, define variables, write conditional statements. Sometimes I'll even dream about writing tests for the code!
 
 ## It's exhausting, but it works
 
-Here's the thing though: I don't wake up rested. At all. Instead of getting a good night's sleep, I feel like I've been working all night. Which, in a way, I have been. My brain has been churning through code for eight hours straight. I wake up feeling mentally drained, like I've just finished a long coding session, because essentially, I have.
+Here's the thing though: I don't wake up rested. At all. Instead of getting a good night's sleep, I feel like I've been working all night. Which, in a way, I have been. My brain has been churning through code for eight hours straight, and I wake up feeling mentally drained.
 
-The weird part is that I usually wake up with fresh insights. Not always a complete solution, but often a new angle to try, or a different approach that hadn't occurred to me before. That stubborn bug? I might wake up with a fresh perspective on where to look. That new feature I was designing? Suddenly I have a clearer idea of how to structure it elegantly.
+The upside is that I usually wake up with fresh insights. Not always a complete solution, but often a new angle to try, or a different approach that hadn't occurred to me before. That stubborn bug? I might wake up with a fresh perspective on where to look. That new feature I was designing? Suddenly I have a clearer idea of how to structure it elegantly.
 
 It's like my sleeping brain becomes this background processor that can work on problems without all the noise and distractions of being awake. No email and Slack notifications, no random thoughts about what to have for lunch and dinner, no checking Mastodon every fifteen minutes. Just pure, focused problem-solving.
 
@@ -41,11 +41,9 @@ Don't get me wrong – I'm not complaining about being passionate about programm
 
 ## When the solution hits
 
-There's something pretty magical about those moments when I wake up with clarity about a problem. It's like my brain has been working on it all night in the background, and suddenly I have this fresh perspective on what needs to be done. I'll stumble to my laptop, still half-asleep, and start implementing the approach that dream-me figured out.
+There's something pretty magical about those moments when I wake up with clarity about a problem. I'll stumble to my laptop, still half-asleep, and start implementing the approach that dream-me figured out. Sometimes it works perfectly on the first try, which is both satisfying and slightly unsettling. Other times I need to adapt the dream-solution to work in the harsh reality of production code, but it usually points me in the right direction.
 
-Sometimes it works perfectly on the first try, which is both satisfying and slightly unsettling. Other times I need to adapt the dream-solution to work in the harsh reality of production code, but it usually points me in the right direction.
-
-It's made me wonder if I should be deliberately sleeping on problems more often. Like, instead of staying up until 2 AM trying to brute-force a solution, maybe I should call it quits earlier and let my unconscious mind take a crack at it. Though knowing me, I'd probably just lie awake thinking about the fact that I'm supposed to be sleeping on the problem, which defeats the whole purpose.
+It's made me wonder if I should be deliberately sleeping on problems more often. Like, instead of staying up until 2 AM trying to brute-force a solution, maybe I should call it quits earlier and let my unconscious mind take a crack at it. Then again, solving the problem before going to bed means there's less chance of a restless night spent working overtime.
 
 So if you ever wonder why your developer friends always look slightly tired, now you know. We're not just coding during work hours – we're coding in our dreams too. Our brains don't have an off switch, just different power modes.
 
