@@ -1,5 +1,5 @@
 ---
-tags: deployment, linux, python, django, sveltekit
+tags: deployment, python, django, sveltekit
 summary: I recently had to set up a brand new server for a website running on SvelteKit and its API running on Django. I am a software developer and setting up servers and hosting isn't something I normally do, so I followed a bunch of different tutorials. In this article I want to combine all these tutorials, mostly for future me, but hopefully you'll find it useful as well.
 ---
 
