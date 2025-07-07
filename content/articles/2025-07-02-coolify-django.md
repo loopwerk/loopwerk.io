@@ -82,7 +82,7 @@ backend = systemd
 maxretry = 1
 ```
 
-After saving, I enabled and started the service:
+You’ll also need to change the value of `banaction` to `ufw`. After saving, I enabled and started the service:
 
 ```
 $ systemctl enable fail2ban
@@ -158,6 +158,8 @@ EXPOSE 8000
 CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "config.wsgi:application"]
 ```
 
+(For a non-Python example: the `Dockerfile` for this very website, which is built with Swift, can be found [on GitHub](https://github.com/loopwerk/loopwerk.io/blob/main/Dockerfile).)
+
 This file defines every step needed to run the application. It installs dependencies, builds static assets, and runs database migrations. The final image is a self-contained, runnable artifact. When Coolify deploys this, it's simply a matter of stopping the old container and starting the new one, which is how it achieves zero-downtime deploys.
 
 > Note: I run database migrations as part of the build process. Some some prefer to run migrations at container startup <sup>[citation needed]</sup>, but since we're rebuilding on every Git push anyway, it fits perfectly with this workflow. Feel free to tell me in the comments below if I am wrong.
@@ -168,24 +170,72 @@ I no longer have an `.env` file on the server with the environment variables (li
 
 As a final step when setting up the Django application you’ll want to add a health check. This can easily be done within your app configuration tab. This enables the rolling deployments where the new container is started while the old one is still running. Only when the health check is successful is the old container removed.
 
-(For a non-Python example: the `Dockerfile` for this very website, which is built with Swift, can be found [on GitHub](https://github.com/loopwerk/loopwerk.io/blob/main/Dockerfile).)
+Oh, and make sure you include the following two lines in your `settings.py` file, or CSRF verification will fail and you won’t be able to log into the Django Admin:
 
-## Step 4: configure backups
+```python
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+```
+
+For some reason this wasn’t necessary when I ran my Django app behind Nginx, but now it is.
+
+Don’t start the Django app just yet, as we still need to add a database.
+
+> Note: static files and user-uploaded media files need to be handled a bit differently than you might be used to, if you’re coming from a bare-bones deployment strategy, like I was. This will be addressed in a separate article, but the TL;DR is to use [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/) for the static files. Media files are more complex. Stay tuned!
+
+## Step 4: Set up the database
+
+With our application containerized, the next piece of the puzzle is the database. Coolify can manage databases like PostgreSQL as first-class services, running them in their own secure containers right alongside your application.
+
+Here’s how to get a PostgreSQL database up and running for your Django project:
+
+1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **“Postgres URL (internal)”** and copy it. You’ll need this in a moment.
+
+2.  **Create a dedicated database:** While you could use the default `postgres` database, it's good practice to create a separate one for each application.
+    *   Start the new PostgreSQL service.
+    *   Navigate to its "Terminal" tab in the Coolify UI and click "Connect."
+    *   This drops you into a shell inside the database container. Run `psql` to access the PostgreSQL prompt.
+    *   Create your application's database with a standard SQL command:
+        ```sql
+        CREATE DATABASE my_app_db;
+        ```
+    *   You can verify it was created by listing all databases with `\l`. Once confirmed, exit `psql` and the container shell with `exit` or `Ctrl+D`.
+
+3.  **Import existing data:** If you're moving an existing project, you'll need to import your data.
+    *   First, create a backup of your old database. The `pg_dump` command with the `-Fc` flag (custom format) is perfect for this. Using `--no-owner` and `--no-privileges` makes the dump more portable.
+        ```bash
+        $ pg_dump -Fc --no-owner --no-privileges my_app_db > my_app_db.dump
+        ```
+    *   In Coolify, go to your PostgreSQL service's "Import Backup" tab. Upload the `.dump` file.
+    *   **Important:** By default, Coolify's import command restores to the `postgres` database. You must modify the import command to target the database you just created. Use a command like this:
+        ```bash
+        pg_restore --clean -U $POSTGRES_USER -d my_app_db
+        ```
+
+4.  **Connect Django to the database:** Now, let's tell our Django application where to find its database.
+    *   Go back to your Django application's settings in Coolify and open the "Environment Variables" tab.
+    *   Create a new variable named `DATABASE_URL`.
+    *   Paste the internal connection URL you copied in the first step, but **change the database name at the end** from `/postgres` to `/my_app_db`. The final URL should look like this: `postgres://postgres:random_password@container_name:5432/my_app_db`.
+    *   Finally, and this is crucial, check the “Is Build Variable” box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
+
+With these steps complete, your Django application is now fully configured to communicate with its PostgreSQL database, all managed neatly within your Coolify project. You can now safely start the Django app.
+
+## Step 5: configure backups
 
 My old [custom backup script](/articles/2023/setting-up-debian-11/#2-2-backups) is no longer needed because Coolify has backups built-in. To enable off-site storage you need to configure a destination, which Coolify calls an "S3 Storage" target.
 
 I'm using [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) for this, as it offers a generous 10 GB of S3-compatible object storage for free. Here’s how to set it up:
 
-1.  **In Cloudflare:** Navigate to **R2** from your dashboard. Create a new bucket, giving it a unique name (e.g., `coolify-backups-your-name`).
-2.  Once the bucket is created, go to the R2 overview page and click **Manage R2 API Tokens**.
-3.  Click **Create API Token**. Give it a descriptive name, grant it "Object Read & Write" permissions, and specify the bucket you just created.
-4.  After you create the token, Cloudflare will display the **Access Key ID** and **Secret Access Key**. Copy these immediately, as the Secret Key won't be shown again. You will also need your **Account ID** and the S3 endpoint URL, which is shown on the R2 bucket page.
+1.  **In Cloudflare:** Navigate to **R2 Object Storage** from your dashboard. Create a new bucket, giving it a unique name (e.g., `coolify-backups-your-name`).
+2.  Once the bucket is created, go to the R2 overview page and click **API** dropdown button. Choose **Manage API tokens**.
+3.  Click **Create Account API token**. Give it a descriptive name, grant it "Object Read & Write" permissions, and specify the bucket you just created.
+4.  After you create the token, Cloudflare will display the **Access Key ID** and **Secret Access Key**. Copy these immediately, as the Secret Key won't be shown again. You will also need your **Account ID** and the S3 endpoint URL.
 
 With these credentials in hand, head back to Coolify:
 
 1.  **In Coolify:** Go to the **Storages** tab in the main navigation.
 2.  Click **Add a new S3 Storage**.
-3.  Fill in the form with the credentials from Cloudflare. The `region` can typically be ignored, just leave it as-is.
+3.  Fill in the form with the credentials from Cloudflare. The `region` can be ignored, just leave it as-is.
 4.  Save the new storage configuration.
 
 With the S3 storage now configured, we can set up our backups.
@@ -193,7 +243,7 @@ With the S3 storage now configured, we can set up our backups.
 - Go to Settings -> Backup, and make sure backups are turned on. Then enable the “S3 Enabled” checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
 - Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the “Save to S3” checkmark to also store it remotely.
 
-## Step 5: remaining Coolify config
+## Step 6: remaining Coolify config
 
 To make sure you get important alerts, you’ll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the “use system wide (transactional) email settings” checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
 
