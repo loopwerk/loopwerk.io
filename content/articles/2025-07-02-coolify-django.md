@@ -129,6 +129,7 @@ ARG DATABASE_URL
 # Install system dependencies needed by our app (e.g., for psycopg2)
 RUN apt-get update && apt-get install -y \
     postgresql-client \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
