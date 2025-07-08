@@ -66,11 +66,11 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 }
 
 .prose code {
-  @apply font-normal text-base bg-sub p-1;
+  @apply font-normal text-base text-white bg-sub p-1;
 }
 
 .prose pre {
-  @apply shadow-lg shadow-nav;
+  @apply shadow-lg shadow-nav py-4 rounded-md bg-sub;
   overflow: auto;
   overflow-y: hidden;
 }
@@ -79,28 +79,28 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply text-sm;
 }
 
+code .highlight {
+  border: 1px solid var(--color-orange);
+  padding: 2px 4px;
+}
+
+code .template {
+  background: #1c6b86;
+  color: #eeeeee;
+  padding: 2px;
+}
+
 .prose hr {
   margin-left: 140px;
   margin-right: 140px;
 }
 
 .prose h1 {
-  font-weight: 600;
+  @apply font-semibold mt-12;
 }
 
 .fa-regular {
   font-weight: normal;
-}
-
-pre code .highlight {
-  border: 1px solid var(--color-orange);
-  padding: 2px 4px;
-}
-
-pre code .template {
-  background: #1c6b86;
-  color: #eeeeee;
-  padding: 2px;
 }
 
 /* SCREENSHOTS */

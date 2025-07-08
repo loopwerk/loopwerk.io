@@ -37,8 +37,6 @@ module.exports = {
             maxWidth: "100%",
             "--tw-prose-body": theme("colors.white"),
             "--tw-prose-headings": theme("colors.white"),
-            "--tw-prose-code": theme("colors.white"),
-            "--tw-prose-pre-bg": theme("colors.sub"),
             "--tw-prose-hr": theme("colors.light"),
             "--tw-prose-bullets": theme("colors.gray"),
             "--tw-prose-counters": theme("colors.gray"),
@@ -46,9 +44,6 @@ module.exports = {
             "--tw-prose-quote-borders": theme("colors.gray"),
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
-            h1: {
-              marginTop: "1.4em",
-            },
             blockquote: {
               fontWeight: "normal",
             },
@@ -63,10 +58,6 @@ module.exports = {
             strong: {
               color: theme("colors.white"),
               fontWeight: "800",
-            },
-            pre: {
-              fontSize: "1rem",
-              lineHeight: "1.5rem",
             },
           },
         },
