@@ -180,7 +180,7 @@ For some reason this wasn’t necessary when I ran my Django app behind Nginx, b
 
 Don’t start the Django app just yet, as we still need to add a database.
 
-> Note: static files and user-uploaded media files need to be handled a bit differently than you might be used to, if you’re coming from a bare-bones deployment strategy, like I was. This will be addressed in a separate article, but the TL;DR is to use [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/) for the static files. Media files are more complex. Stay tuned!
+> Note: static files and user-uploaded media files need to be handled a bit differently than you might be used to, if you’re coming from a bare-bones deployment strategy, like I was. This is addressed in a [separate article](/articles/2025/coolify-django-static-media/).
 
 ## Step 4: Set up the database
 
