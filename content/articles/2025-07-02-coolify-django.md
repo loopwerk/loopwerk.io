@@ -144,8 +144,7 @@ RUN uv sync --no-group dev --group prod
 # Copy the rest of the application code into the container
 COPY . .
 
-# Run build steps. These are baked into the final image.
-RUN uv run --no-sync ./manage.py tailwind build
+# Collect the static files
 RUN uv run --no-sync ./manage.py collectstatic --noinput
 
 # Migrate the database
@@ -155,7 +154,7 @@ RUN uv run --no-sync ./manage.py migrate
 EXPOSE 8000
 
 # Run with gunicorn
-CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "config.wsgi:application"]
+CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--access-logfile", "-", "--error-logfile", "-", "--log-level", "info", "config.wsgi:application"]
 ```
 
 (For a non-Python example: the `Dockerfile` for this very website, which is built with Swift, can be found [on GitHub](https://github.com/loopwerk/loopwerk.io/blob/main/Dockerfile).)
