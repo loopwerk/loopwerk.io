@@ -24,7 +24,7 @@ A common and effective solution is to store these files on a dedicated cloud sto
 
 In my case, however, I preferred to keep all my project's files on my own server. I didn't want to introduce a dependency on an external storage provider like S3 or R2. This choice meant I had to find a way to solve two problems: storing the media files outside the container and serving them efficiently.
 
-### Step 1: solving storage with Coolify Persistent Volumes
+## Step 1: solving storage with Coolify Persistent Volumes
 
 Thankfully, the storage problem is simple to solve with a built-in Coolify feature: Persistent Storage. This allows you to map a directory on your host server to a directory inside your container.
 
@@ -38,7 +38,7 @@ In your Django application's resource view in Coolify, navigate to the **Persist
 
 With this volume mount in place, all uploaded media files will be saved to the `/root/my-app-media` directory on the host, safely outside the ephemeral container. They will now persist across deployments.
 
-### Step 2: serving files with Caddy and supervisor
+## Step 2: serving files with Caddy and supervisor
 
 While the files are now stored safely, they aren't being served yet. Django's development server doesn't run in production, and WhiteNoise is designed to handle only static files, not media files. The solution is to add a lightweight, production-ready web server to our container that will serve the media (and static) files and proxy all other requests to our Django application.
 
@@ -137,6 +137,6 @@ command=caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
 
 Supervisor is responsible for starting and managing our two processes: Gunicorn and Caddy. It ensures that both our application server and our file server are running concurrently.
 
-### Step 3: profit
+## Step 3: profit
 
 With these new configurations committed to your repository, your next Coolify deploy will build a container equipped to handle everything. Caddy will efficiently serve static and media assets from the persistent volume we configured, while Gunicorn continues to handle the dynamic application logic. This setup keeps all your data on your own server, solves the ephemeral storage problem, and provides a robust, production-ready solution for serving all your Django project's files.

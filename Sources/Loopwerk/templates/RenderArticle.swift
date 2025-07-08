@@ -90,7 +90,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
-          p(class: "text-gray") {
+          p(class: "text-gray gray-links") {
             "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
             a(href: "https://www.critical-notes.com") { "Critical Notes" }
             %", and maintains a bunch of"

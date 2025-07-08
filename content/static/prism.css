@@ -7,8 +7,6 @@
 @media screen {
   /* Colors */
   :root {
-    --code-background: var(--color-sub);
-    --code-color: #eeeeee;
     --token-comment: #7c7c7c;
     --token-punctuation: #c5c8c6;
     --token-property: #96cbfe;
@@ -33,29 +31,6 @@
     --token-function: #dad085;
     --token-regex: #e9c062;
     --token-important: #fd971f;
-  }
-
-  pre {
-    font-size: 100%;
-    width: 100%;
-    padding: 1em;
-    overflow: auto;
-    overflow-y: hidden;
-    border-radius: 6px;
-  }
-
-  code {
-    padding: 2px 4px;
-  }
-
-  pre,
-  code {
-    background: var(--code-background);
-    color: var(--code-color);
-  }
-
-  pre code {
-    padding: 0;
   }
 
   .token.comment,
@@ -172,19 +147,4 @@
   .token.italic {
     font-style: italic;
   }
-
-  pre code .highlight {
-    border: 1px solid var(--color-orange);
-    padding: 2px 4px;
-  }
-
-  code .template {
-    background: #1c6b86;
-    color: #eeeeee;
-    padding: 2px;
-  }
-}
-
-pre {
-  margin-bottom: 1.715em;
 }

@@ -46,6 +46,9 @@ module.exports = {
             "--tw-prose-quote-borders": theme("colors.gray"),
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
+            h1: {
+              marginTop: "1.4em",
+            },
             blockquote: {
               fontWeight: "normal",
             },

@@ -66,11 +66,13 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 }
 
 .prose code {
-  @apply font-normal text-base;
+  @apply font-normal text-base bg-sub p-1;
 }
 
 .prose pre {
   @apply shadow-lg shadow-nav;
+  overflow: auto;
+  overflow-y: hidden;
 }
 
 .prose pre code {
@@ -88,6 +90,17 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 
 .fa-regular {
   font-weight: normal;
+}
+
+pre code .highlight {
+  border: 1px solid var(--color-orange);
+  padding: 2px 4px;
+}
+
+pre code .template {
+  background: #1c6b86;
+  color: #eeeeee;
+  padding: 2px;
 }
 
 /* SCREENSHOTS */
