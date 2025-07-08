@@ -1,5 +1,5 @@
 ---
-tags: django, python, deployment
+tags: django, python, deployment, coolify
 summary: How I moved my Django projects from a manual server setup to Coolify for easier, zero-downtime deployments.
 ---
 
@@ -71,9 +71,8 @@ $ nano jail.local
 
 I then enabled the SSH jail in `jail.local` and configured it to be quite strict, banning an IP after a single failed attempt. After all, we’re using SSH keys, not passwords.
 
+#### <i class="fa-regular fa-file-code"></i> /etc/fail2ban/jail.local
 ```ini
-# /etc/fail2ban/jail.local
-
 [sshd]
 enabled = true
 port = ssh
@@ -114,6 +113,7 @@ Coolify works by building and running your applications in Docker containers. Th
 
 Here is a `Dockerfile` I've put together for a typical Django project. (It uses `uv`, because it’s awesome. I’ve written a [bunch of articles](/articles/tag/uv/) about it.)
 
+#### <i class="fa-regular fa-file-code"></i> Dockerfile
 ```dockerfile
 # Use a slim, modern Python base image
 FROM python:3.13-slim
@@ -126,10 +126,10 @@ ARG DEBUG
 ARG SECRET_KEY
 ARG DATABASE_URL
 
-# Install system dependencies needed by our app (e.g., for psycopg2)
+# Install system dependencies needed by our app
 RUN apt-get update && apt-get install -y \
     postgresql-client \
-    curl \
+    curl wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
