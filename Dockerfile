@@ -10,13 +10,12 @@ RUN apt-get update && apt-get install -y \
     libavif-dev \
     python3 \
     git \
-    curl \
+    curl wget \
+    nodejs npm \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 20 and pnpm
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g pnpm
+# Install pnpm
+RUN npm install -g pnpm
 
 # Set working directory
 WORKDIR /app
