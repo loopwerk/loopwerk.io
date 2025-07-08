@@ -11,7 +11,7 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
     h2(class: "text-2xl font-bold mb-2") {
-      a(class: "[&:hover]:border-b border-orange", href: article.url) { article.title }
+      a(class: "[&:hover]:text-orange", href: article.url) { article.title }
     }
     div(class: "text-gray gray-links text-sm mb-4") {
       span(class: "border-r border-gray pr-2 mr-2") {
@@ -43,7 +43,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles", rssLink: "") {
     // Tag cloud section
     div(class: "mb-12") {
-      h2(class: "text-lg font-bold") { "Browse by tag" }
+      h2(class: "text-lg font-light") { "Browse by tag" }
       
       div(class: "flex flex-wrap gap-x-2 text-gray gray-links text-sm") {
         tagsWithCounts.map { tag, count in

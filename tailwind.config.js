@@ -29,7 +29,7 @@ module.exports = {
     extend: {
       fontFamily: {
         helvetica: ["Helvetica", ...defaultTheme.fontFamily.sans],
-        anonymous: ["Anonymous Pro", ...defaultTheme.fontFamily.mono],
+        ibm: ["IBM Plex Sans", ...defaultTheme.fontFamily.sans],
       },
       typography: theme => ({
         DEFAULT: {

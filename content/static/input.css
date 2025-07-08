@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Anonymous Pro";
-  src: local("Anonymous Pro Regular"), url(/static/AnonymousPro-Regular.ttf);
+  font-family: "IBM Plex Sans";
+  src: local("IBM Plex Sans Regular"), url(/static/IBMPlexSans-Regular.ttf);
 }
 
 /* BODY */
@@ -36,7 +36,7 @@ nav a.active {
 }
 
 .gray-links a:hover {
-  @apply text-white;
+  @apply text-orange;
 }
 
 a.orange {
@@ -73,9 +73,17 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply shadow-lg shadow-nav;
 }
 
+.prose pre code {
+  @apply text-sm;
+}
+
 .prose hr {
   margin-left: 140px;
   margin-right: 140px;
+}
+
+.prose h1 {
+  font-weight: 600;
 }
 
 .fa-regular {
