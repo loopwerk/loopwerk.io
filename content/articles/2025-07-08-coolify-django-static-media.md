@@ -131,15 +131,45 @@ This configuration tells Caddy to serve any requests for `/static/*` and `/media
 ```
 [supervisord]
 nodaemon=true
+logfile=/dev/null
+logfile_maxbytes=0
+logfile_backups=0
+loglevel=info
 
 [program:gunicorn]
 command=uv run --no-sync gunicorn --bind 127.0.0.1:8000 --workers 3 --access-logfile - --error-logfile - --log-level info config.wsgi:application
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+autorestart=true
+startretries=3
 
 [program:caddy]
 command=caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+autorestart=true
+startretries=3
 ```
 
 Supervisor is responsible for starting and managing our two processes: Gunicorn and Caddy. It ensures that both our application server and our file server are running concurrently.
+
+An added benefit of this supervisor is that it’s super easy to add a long running process into the mix, for example for [django-tasks](https://github.com/RealOrangeOne/django-tasks):
+
+```
+[program:django-tasks]
+command=uv run --no-sync ./manage.py db_worker
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+autorestart=true
+startretries=3
+priority=30
+```
 
 ## Step 3: profit
 
