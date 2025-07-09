@@ -130,7 +130,7 @@ This configuration tells Caddy to serve any requests for `/static/*` and `/media
 nodaemon=true
 
 [program:gunicorn]
-command=uv run --no-sync gunicorn --bind 127.0.0.1:8000 --access-logfile - --error-logfile - --log-level info config.wsgi:application
+command=uv run --no-sync gunicorn --bind 127.0.0.1:8000 --workers 3 --access-logfile - --error-logfile - --log-level info config.wsgi:application
 
 [program:caddy]
 command=caddy run --config /etc/caddy/Caddyfile --adapter caddyfile

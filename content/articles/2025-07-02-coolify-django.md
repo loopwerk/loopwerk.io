@@ -210,7 +210,7 @@ Here’s how to get a PostgreSQL database up and running for your Django project
     *   In Coolify, go to your PostgreSQL service's "Import Backup" tab. Upload the `.dump` file.
     *   **Important:** By default, Coolify's import command restores to the `postgres` database. You must modify the import command to target the database you just created. Use a command like this:
         ```bash
-        pg_restore --clean -U $POSTGRES_USER -d my_app_db
+        pg_restore --clean --no-owner --no-privileges -U $POSTGRES_USER -d my_app_db
         ```
 
 4.  **Connect Django to the database:** Now, let's tell our Django application where to find its database.
