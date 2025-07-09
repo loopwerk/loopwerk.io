@@ -115,8 +115,9 @@ Here is a `Dockerfile` I've put together for a typical Django project. (It uses 
 
 #### <i class="fa-regular fa-file-code"></i> Dockerfile
 ```dockerfile
-# Use a slim, modern Python base image
-FROM python:3.13-slim
+# Use a slim Debian image as our base
+# (we don't use a Python image because Python will be installed with uv)
+FROM debian:bookworm-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -128,15 +129,16 @@ ARG DATABASE_URL
 
 # Install system dependencies needed by our app
 RUN apt-get update && apt-get install -y \
-    postgresql-client \
+    build-essential \
     curl wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
-RUN pip install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Copy only the dependency definitions first to leverage Docker's layer caching
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock .python-version ./
 
 # Install Python dependencies for production
 RUN uv sync --no-group dev --group prod

@@ -46,8 +46,8 @@ For this, we'll use Caddy as our web server and Supervisor to manage both the Ca
 
 #### <i class="fa-regular fa-file-code"></i> Dockerfile
 ```dockerfile
-# Use a slim, modern Python base image
-FROM python:3.13-slim
+# Use a slim Debian image as our base
+# (we don't use a Python image because Python will be installed with uv)
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -59,17 +59,18 @@ ARG DATABASE_URL
 
 # Install system dependencies needed by our app
 RUN apt-get update && apt-get install -y \
-    postgresql-client \
+    build-essential \
     curl wget \
     /*HLS*/supervisor \/*HLE*/
     /*HLS*/caddy \/*HLE*/
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
-RUN pip install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Copy only the dependency definitions first to leverage Docker's layer caching
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock .python-version ./
 
 # Install Python dependencies for production
 RUN uv sync --no-group dev --group prod
@@ -93,7 +94,7 @@ RUN uv run --no-sync ./manage.py migrate
 /*HLS*/CMD ["supervisord", "-c", "/etc/supervisord.conf"]/*HLE*/
 ```
 
-The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy.
+The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy. You’ll need to update the “Ports Exposes” setting in the General Configuration tab (under “Network”) from `8000` to `80`.
 
 #### <i class="fa-regular fa-file-code"></i> .config/Caddyfile
 ```
