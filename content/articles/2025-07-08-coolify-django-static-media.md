@@ -1,6 +1,6 @@
 ---
 tags: django, python, deployment, coolify
-summary: Let’s solve the challenge of managing persistent static and media files on your self-hosted Coolify server.
+summary: Let’s solve the challenge of serving media files for your Coolified Django site.
 ---
 
 # Handling static and media files in your Django app running on Coolify
