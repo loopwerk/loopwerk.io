@@ -26,12 +26,16 @@ COPY package.json pnpm-lock.yaml ./
 # Install Node dependencies (including devDependencies needed for build)
 RUN pnpm install --frozen-lockfile
 
-# Copy Swift package files
+# Copy Swift package files AND source code needed to build
 COPY Package.swift ./
 COPY Package.resolved ./
+COPY Sources ./Sources
 
-# Pre-fetch Swift dependencies
-RUN swift package resolve
+# Pre-fetch and pre-build Swift dependencies
+# This layer will be cached as long as Package files and Sources don't change
+RUN echo "Prefetching and prebuilding dependencies..." \
+    && swift package resolve \
+    && swift build --product Loopwerk -c release
 
 # Copy all source files
 COPY . .
@@ -44,7 +48,7 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
     && rm -rf .git /tmp/repo
 
 # Build the site with verbose output for debugging
-RUN echo "Starting Swift build..." \
+RUN echo "Starting website build..." \
     && swift run Loopwerk createArticleImages \
     && pnpm index \
     && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
