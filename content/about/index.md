@@ -14,6 +14,6 @@ I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of 
 
 I choose cats over dogs, tea over coffee, and winter over summer. I’ve lived in Iceland for almost four years, and I still speak Icelandic to my cat Mia. My favorite foods are ramen, hamburgers and tacos.
 
-You can reach me via email at <kevin@loopwerk.io>, on [Mastodon](https://hachyderm.io/@kevinrenskers), and I am also (reluctantly) on [LinkedIn](https://www.linkedin.com/in/kevinrenskers/). My CV, if you need it for some reason, can be downloaded [here](/about/KevinRenskers.pdf).
+You can reach me via email at <kevin@loopwerk.io>, on [Mastodon](https://hachyderm.io/@kevinrenskers), and I am also (reluctantly) on [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
 
-![A black and white photo of Kevin](kevin.jpg)
+![A photo of Kevin](kevin.jpg)
