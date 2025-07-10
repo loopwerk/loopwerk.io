@@ -171,6 +171,8 @@ startretries=3
 priority=30
 ```
 
+> Side note: you might wonder why we don’t use Docker Compose to run Django, Caddy, and the `db_worker` process all in their own containers. We’d get separate logs which would be very nice, containers can be restarted individually, and one crashing container won’t bring down the others. Those are all really great benefits, but we’d loose rolling updates, so your app would be down for a short time every time you deploy changes. I also found that dealing with build-time environment variables was a lot more complex with Docker Compose.
+
 ## Step 3: profit
 
 With these new configurations committed to your repository, your next Coolify deploy will build a container equipped to handle everything. Caddy will efficiently serve static and media assets from the persistent volume we configured, while Gunicorn continues to handle the dynamic application logic. This setup keeps all your data on your own server, solves the ephemeral storage problem, and provides a robust, production-ready solution for serving all your Django project's files.
