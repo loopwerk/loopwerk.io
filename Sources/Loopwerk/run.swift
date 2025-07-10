@@ -7,6 +7,7 @@ import SagaSwimRenderer
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
+  var heroImage: String?
 }
 
 struct AppMetadata: Metadata {
@@ -65,6 +66,18 @@ func permalink(item: Item<ArticleMetadata>) {
   item.relativeDestination = Path(components: components)
 }
 
+let imageExtensions: Set<String> = ["webp", "jpg", "png"]
+
+func heroImage(item: Item<ArticleMetadata>) {
+  for imageExtension in imageExtensions {
+    let imageFilename = item.filenameWithoutExtension + ".\(imageExtension)"
+    if (Path("content/articles/heroes") + imageFilename).exists {
+      item.metadata.heroImage = imageFilename
+      break
+    }
+  }
+}
+
 @main
 struct Run {
   static func main() async throws {
@@ -73,7 +86,7 @@ struct Run {
         folder: "articles",
         metadata: ArticleMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink),
+        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
         writers: [
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),

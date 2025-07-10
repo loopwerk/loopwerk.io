@@ -78,6 +78,11 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       div(class: "-mt-6") {
         renderArticleInfo(context.item)
       }
+      
+      if let heroImage = context.item.metadata.heroImage {
+        img(class:"hero-image", src: "/articles/heroes/\(heroImage)")
+      }
+      
       Node.raw(context.item.body)
     }
 

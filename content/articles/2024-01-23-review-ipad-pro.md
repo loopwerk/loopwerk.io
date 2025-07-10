@@ -5,8 +5,6 @@ summary: I bought the 12.9” iPad Pro with the Apple Pencil back in 2018 and sp
 
 # Quick review: 12.9” iPad Pro (2018)
 
-![](/articles/images/ipad.jpg)
-
 I owned the 2016 9.7” iPad Pro with the first generation Apple Pencil, which I mainly used for drawing cartoons and for watching Netflix in bed. When the 12.9” iPad Pro was announced by Apple I thought it just looked so damn cool, such a huge screen! Science-fiction made real. The new Apple Pencil was a huge improvement as well and as I was using my iPad for drawing cartoons it was an easy decision to spend an awful lot of money and upgrade.
 
 For no particular reason I lost my interest in drawing pretty soon after I got the 12.9” iPad Pro, and it started to seem like I made a bad purchase. I tried to use the iPad for note taking, but I hated that. It’s not just the feel of the pencil on the screen that’s not great, it’s also that you have to write way bigger than you’d ever do with a normal pen on paper. It feels clunky and weird and I’m not a fan.

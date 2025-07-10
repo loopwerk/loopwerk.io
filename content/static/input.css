@@ -75,6 +75,10 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   overflow-y: hidden;
 }
 
+.hero-image {
+  @apply shadow-lg shadow-nav rounded-md bg-sub;
+}
+
 .prose pre code {
   @apply text-sm;
 }
@@ -128,16 +132,17 @@ code .template {
 }
 
 @media (min-width: 860px) {
-  .prose pre {
+  .prose pre, body.projects .bg-sub {
     margin-left: -20px;
-    width: 840px;
+    margin-right: -20px;
     padding-left: 20px;
+    padding-right: 20px;
   }
   
-  body.projects .bg-sub {
+  .hero-image {
     margin-left: -20px;
     width: 840px;
-    padding-left: 20px;
+    max-width: 840px;
   }
 }
 

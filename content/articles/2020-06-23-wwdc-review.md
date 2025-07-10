@@ -6,8 +6,6 @@ summary: A quick review of the keynote and State of the Union talks. Let's see w
 # WWDC20 review
 A quick review of the keynote and State of the Union talks. Let's see which of [my wishes](/articles/2020/wwdc20-wishlist/) have been fulfilled, and which [SwiftUI problems](/articles/2020/swiftui-review/) have been solved.
 
-![WWDC logo](/articles/images/wwdcheader.jpg)
-
 ## SwiftUI
 They didn't call it SwiftUI 2.0 (in fact it didn't get a version number at all), but quite a lot has been added and improved. Grids are completely new, as is its `LazyGrid` counterpart. There are also new `LazyVStack` and `LazyHStack` views. I think this could solve a lot of performance problems, nice.
 

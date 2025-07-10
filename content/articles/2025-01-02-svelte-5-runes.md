@@ -5,7 +5,7 @@ summary: I'm very busy migrating a big SvelteKit project to Svelte 5's new runes
 
 # First thoughts on Svelte 5’s runes
 
-I'm very busy migrating a big SvelteKit project to Svelte 5's new runes syntax and I have to be honest... not a big fan of the increased number of lines, especially when it comes to the props.
+I'm very busy migrating a big SvelteKit project to Svelte 5's [new runes syntax](https://svelte.dev/blog/runes) and I have to be honest... not a big fan of the increased number of lines, especially when it comes to the props.
 
 For example, what used to be a single line:
 
