@@ -30,6 +30,7 @@ RUN pnpm install --frozen-lockfile
 COPY Package.swift ./
 COPY Package.resolved ./
 COPY Sources ./Sources
+COPY Tests ./Tests
 
 # Pre-fetch and pre-build Swift dependencies
 # This layer will be cached as long as Package files and Sources don't change
