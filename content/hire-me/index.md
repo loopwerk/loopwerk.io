@@ -9,7 +9,7 @@ I created my first website in 2000 and my first iOS app in 2010. I’ve been wor
 I’ve also mentored multiple junior developers, both at other companies and in my own [mentorship program](/mentor/).
 
 ### Tech
-Technologies and tools I use include HTML, CSS, Tailwind, Python, Django, Django REST Framework, htmx, Alpine, Alpine AJAX, uv, ruff, JavaScript, TypeScript, SvelteKit, Swift, UIKit, SwiftUI, git, GitHub, macOS, Debian, Coolify, VS Code, and Xcode.
+Technologies and tools I use include HTML, CSS, Tailwind, Python, Django, Django REST Framework, htmx, Alpine, Alpine AJAX, uv, ruff, JavaScript, TypeScript, SvelteKit, Swift, UIKit, SwiftUI, git, GitHub, macOS, Debian, Coolify, Claude Code, VS Code, and Xcode.
 
 But the list keeps on growing and if your tech stack doesn’t completely match mine, let’s talk anyway.
 
