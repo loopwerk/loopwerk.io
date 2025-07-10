@@ -50,7 +50,7 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
 
 # Build the site with verbose output for debugging
 RUN echo "Starting website build..." \
-    && swift run Loopwerk createArticleImages \
+    && .build/release/Loopwerk createArticleImages \
     && pnpm index \
     && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
 
