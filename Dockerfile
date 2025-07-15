@@ -57,6 +57,9 @@ RUN echo "Starting website build..." \
 # Stage 2: Nginx runtime
 FROM nginx:alpine
 
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy built static files from builder
 COPY --from=builder /app/deploy /usr/share/nginx/html
 
