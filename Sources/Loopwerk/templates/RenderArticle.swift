@@ -87,7 +87,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
       
       if context.item.archive {
-        p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and shouldn't be used as a source of information. It's here to preserve the history of this site, to stop link rot, and to allow readers to find out more about the author's work in other contexts." }
+        p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
       }
       
       if let heroImage = context.item.metadata.heroImage {

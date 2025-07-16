@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit
+tags: sveltekit, deployment
 summary: I've been running my side project Critical Notes, built with SvelteKit, on my own server for about a year now and it's been pretty much rock solid. Since I saw some questions about how to host a SvelteKit app on your own server, I figured I'd document my setup.
 archive: true
 ---
@@ -7,8 +7,6 @@ archive: true
 # Hosting SvelteKit
 
 I've been running my side project [Critical Notes](https://www.critical-notes.com), built with [SvelteKit](https://kit.svelte.dev), on my own server for about a year now and it's been pretty much rock solid. Since I saw some questions about how to host a SvelteKit app on your own server, I figured I'd document my setup.
-
-### **Attention: In 2023 I’ve written [a new article](/articles/2023/setting-up-debian-11/) detailing how to setup a Debian server from scratch for running SvelteKit and Django apps. It’s much more detailed and in-depth, and this article below should no longer be used as a reference.**<br><br>
 
 ## Nginx
 The first part of the equation is the Nginx configuration for the website. Basically all it does is forward the request to the Node server coming with SvelteKit. It also redirects requests `critical-notes.com` to `www.critical-notes.com`.
