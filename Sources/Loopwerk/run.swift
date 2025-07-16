@@ -8,6 +8,7 @@ struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
   var heroImage: String?
+  var archive: Bool?
 }
 
 struct AppMetadata: Metadata {
@@ -43,6 +44,12 @@ extension Item where M == ProjectMetadata {
 
   var involvement: ProjectInvolvement {
     return metadata.involvement ?? .author
+  }
+}
+
+extension Item where M == ArticleMetadata {
+  var archive: Bool {
+    return metadata.archive ?? false
   }
 }
 
@@ -87,6 +94,8 @@ struct Run {
         metadata: ArticleMetadata.self,
         readers: [.parsleyMarkdownReader],
         itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
+        filter: { $0.archive == false },
+        filteredOutItemsAreHandled: false,
         writers: [
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),
@@ -96,6 +105,16 @@ struct Run {
           // Atom feed for all articles, and a feed per tag
           .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary), output: "feed.xml"),
           .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+        ]
+      )
+      .register(
+        folder: "articles",
+        metadata: ArticleMetadata.self,
+        readers: [.parsleyMarkdownReader],
+        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
+        filter: { $0.archive == true },
+        writers: [
+          .itemWriter(swim(renderArticle)),
         ]
       )
       .register(

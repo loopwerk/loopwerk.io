@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "2b8ac3f509ed8fc358693088e3f01bd2a0f78750",
-        "version" : "2.3.0"
+        "revision" : "0ac96a8b50baf3addf15ca0b0a5040cfbb72f516",
+        "version" : "2.5.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "9605b14aa43e32eec454d2dff26bcaf95a1a1a93",
-        "version" : "1.0.0"
+        "revision" : "b5f26f35d8843b01bd9a884a6a9d9922c58b1cba",
+        "version" : "1.0.1"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "b6186c767689768c5d1efc21b169947ede16c1d0",
-        "version" : "1.0.0"
+        "revision" : "3ae2675d1a7feedb92b72796198c74956e5671f6",
+        "version" : "1.0.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "aa85ee96017a730031bafe411cde24a08a17a9c9",
-        "version" : "2.8.8"
+        "revision" : "d1d6add8f277bd76992a0f7e72961a896609b707",
+        "version" : "2.9.5"
       }
     },
     {

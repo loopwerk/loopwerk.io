@@ -5,7 +5,13 @@ import Saga
 func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)] {
   let tags = articles.flatMap { $0.metadata.tags }
   let tagsWithCounts = tags.reduce(into: [:]) { $0[$1, default: 0] += 1 }
-  return tagsWithCounts.sorted { $0.1 > $1.1 }
+  return tagsWithCounts.sorted {
+    // Sort by number of articles (descending). If that's the same, sort by title (ascending).
+    if $0.1 == $1.1 {
+      return $0.0 < $1.0
+    }
+    return $0.1 > $1.1
+  }
 }
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {

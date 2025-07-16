@@ -20,12 +20,18 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
       article.date.formatted("MMMM dd, yyyy")
     }
 
-    %.text("\(article.body.withoutHtmlTags.numberOfWords) words, posted in ")
+    %.text("\(article.body.withoutHtmlTags.numberOfWords) words")
+
+    if article.archive {
+      %.text(", previously posted in ")
+    } else {
+      %.text(", posted in ")
+    }
 
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
         %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-        %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+         %a(href: "/articles/tag/\(tag.slugified)/") { tag },
       ])
     }
   }
@@ -50,7 +56,8 @@ func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item)
-  let otherArticles = context.items.filter { $0.url != context.item.url }
+  let articles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }.filter { $0.archive == false }
+  let otherArticles = articles.filter { $0.archive == false && $0.url != context.item.url }
   let latestArticles = otherArticles.prefix(2)
   let tags = Set(context.item.metadata.tags)
 
@@ -77,6 +84,10 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       h1 { context.item.title }
       div(class: "-mt-6") {
         renderArticleInfo(context.item)
+      }
+      
+      if context.item.archive {
+        p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and shouldn't be used as a source of information. It's here to preserve the history of this site, to stop link rot, and to allow readers to find out more about the author's work in other contexts." }
       }
       
       if let heroImage = context.item.metadata.heroImage {
