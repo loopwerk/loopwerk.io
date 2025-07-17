@@ -132,7 +132,7 @@ Simply add the following to settings.py and it’s automatically used:
 
 ```python
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "path.to.ActionSerializerAutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_action_serializer.spectacular.ActionSerializerAutoSchema",
 }
 ```
 
