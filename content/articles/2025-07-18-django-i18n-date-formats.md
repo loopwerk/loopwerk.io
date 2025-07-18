@@ -114,9 +114,9 @@ myproject/
 
 ### 2. Create a custom `formats.py`
 
-Inside `myproject/formats/en/formats.py`, we can define our own formats for the `en` language code. We'll specify the 24-hour clock using `%H` for the hour.
+Inside `formats.py` we can define our own formats for the `en` language code. We'll specify the 24-hour clock using `H` for the hour.
 
-#### <i class="fa-regular fa-file-code"></i> formats.py
+#### <i class="fa-regular fa-file-code"></i> myproject/formats/en/formats.py
 ```python
 DATETIME_FORMAT = "N j, Y, H:i"
 TIME_FORMAT = "H:i"
@@ -131,12 +131,51 @@ Finally, in your `settings.py`, tell Django where to find this new module:
 
 #### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
-LANGUAGE_CODE = 'en-us'
-
-# This tells Django to look in `formats` for locale formats
 FORMAT_MODULE_PATH = 'formats'
 ```
 
 And voilà! The Django admin now displays all times in the glorious, unambiguous 24-hour format, even while `LANGUAGE_CODE` is still `en-us`.
 
 It’s definitely more work than you'd expect for such a simple change. I really do think they should change the precedence order, but now you know how to change formatting settings for an existing locale.
+
+## Override the time picker options
+
+There is one remaining place where “a.m.” and “p.m.” are still being used, and that’s in the time picker, which shows quick options for “now”, “midnight”, "6 a.m.”, “noon” and "6 p.m.”. I’d rather see 24-hour times here, which means we have to override Django’s default strings.
+
+We need to make three changes to our settings:
+
+#### <i class="fa-regular fa-file-code"></i> settings.py
+```python
+LANGUAGE_CODE = "en"
+LANGUAGES = [("en", "English")]
+LOCALE_PATHS = [BASE_DIR / "locale"]
+```
+
+This is because `en-us` is Django’s default language which doesn’t use translation files. As such we need to switch to a custom language where we can make changes. Any strings that don’t exist in our custom language translation file automatically fall back to the default, which is `en-us`.
+
+Now create the following file in the root (same level as `manage.py`):
+
+#### <i class="fa-regular fa-file-code"></i> locale/en/LC_MESSAGES/djangojs.po
+```
+msgid ""
+msgstr ""
+"Project-Id-Version: django\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Midnight"
+msgstr "00:00"
+
+msgid "6 a.m."
+msgstr "06:00"
+
+msgid "Noon"
+msgstr "12:00"
+
+msgid "6 p.m."
+msgstr "18:00"
+```
+
+Then run `./manage.py compilemessages` and restart the development server. And with that the Django Admin should show sensible times in the time picker dropdown as well.
