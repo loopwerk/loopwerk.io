@@ -3,7 +3,7 @@ tags: django, python
 summary: A dive into why Django's DATETIME_FORMAT setting seems to do nothing, and how to actually force the 24-hour clock in the admin, even when your locale says otherwise.
 ---
 
-# Why Django's DATETIME_FORMAT ignores you
+# Why Django's DATETIME_FORMAT ignores you (and how to fix it)
 
 When you start a new Django project, you get a handful of default settings for localization and timezones:
 
@@ -35,7 +35,7 @@ MIDDLEWARE = [
 ]
 ```
 
-Only after adding `LocaleMiddleware` will the admin honor your browser's language preference. This feels weird to me. Why enable `USE_I18N` by default, which has a small performance cost, if it doesn't do anything without manual intervention?
+Only after adding `LocaleMiddleware` will the Admin honor your browser's language preference. This feels weird to me. Why enable `USE_I18N` by default, which has a small performance cost, if it doesn't do anything without manual intervention?
 
 It’s also very strange to me that there isn’t a language drop-down in the Admin, where users can choose from the available languages (as defined by the `LANGUAGES` setting). That seems like such an obvious improvement to the Admin, in the same way that there really should be a timezone dropdown as well, to render dates and times in your local timezone.
 
