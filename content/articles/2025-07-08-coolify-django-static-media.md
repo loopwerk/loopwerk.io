@@ -11,6 +11,7 @@ If your application only serves static files - the CSS, JavaScript, and images t
 
 However, if you’re also dealing with user-uploaded media files then you have to deal with two challenges: where to store the files and how to serve them. Let’s assume you have a standard configuration in your `settings.py`:
 
+#### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
 STATIC_ROOT = BASE_DIR / "static_root"
 STATIC_URL = "/static/"
