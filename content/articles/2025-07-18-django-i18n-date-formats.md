@@ -127,11 +127,11 @@ You can add a few other locate-related formats you want to override here, see [t
 
 ### 3. Point Django to your custom formats
 
-Finally, in your `settings.py`, tell Django where to find this new module:
+Finally, in your `settings.py`, tell Django where to find this new module, by adding one line:
 
 #### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
-FORMAT_MODULE_PATH = 'formats'
+FORMAT_MODULE_PATH = "formats"
 ```
 
 And voilà! The Django admin now displays all times in the glorious, unambiguous 24-hour format, even while `LANGUAGE_CODE` is still `en-us`.
@@ -140,20 +140,32 @@ It’s definitely more work than you'd expect for such a simple change. I really
 
 ## Override the time picker options
 
-There is one remaining place where “a.m.” and “p.m.” are still being used, and that’s in the time picker, which shows quick options for “now”, “midnight”, "6 a.m.”, “noon” and "6 p.m.”. I’d rather see 24-hour times here, which means we have to override Django’s default strings.
+Our `FORMAT_MODULE_PATH` solution fixed the main display, but there's one last holdout for the 12-hour clock: the time picker widget in the admin. It still shows helpful-but-annoying shortcuts like "6 a.m." and "6 p.m.".
 
-We need to make three changes to our settings:
+To change these, we need to override the text itself, which means we have to dive into Django's translation system. The good news is that we can do this without re-enabling the full internationalization system (`USE_I18N`). The shortcuts are rendered on the server, and Django's core translation loader will pick up our overrides as long as we point it to them.
+
+### 1. Update your settings
+
+We need to make three changes, the rest can stay as-is:
 
 #### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
-LANGUAGE_CODE = "en"
-LANGUAGES = [("en", "English")]
-LOCALE_PATHS = [BASE_DIR / "locale"]
+USE_I18N = False
+/*HLS*/LANGUAGE_CODE = "en"/*HLE*/
+/*HLS*/LANGUAGES = [("en", "English")]/*HLE*/
+USE_TZ = True
+TIME_ZONE = "UTC"
+FORMAT_MODULE_PATH = "formats"
+/*HLS*/LOCALE_PATHS = [BASE_DIR / "locale"]/*HLE*/
 ```
 
-This is because `en-us` is Django’s default language which doesn’t use translation files. As such we need to switch to a custom language where we can make changes. Any strings that don’t exist in our custom language translation file automatically fall back to the default, which is `en-us`.
+You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file.”
 
-Now create the following file in the root (same level as `manage.py`):
+The beauty is that any strings we don't override in our `en` file will automatically fall back to the built-in `en-us` defaults, so we get the best of both worlds.
+
+### 2. Create the override file
+
+Next, create the following file in the root (same level as `manage.py`):
 
 #### <i class="fa-regular fa-file-code"></i> locale/en/LC_MESSAGES/djangojs.po
 ```
@@ -178,4 +190,12 @@ msgid "6 p.m."
 msgstr "18:00"
 ```
 
-Then run `./manage.py compilemessages` and restart the development server. And with that the Django Admin should show sensible times in the time picker dropdown as well.
+### 3. Compile the messages
+
+Finally, run a management command to compile this text file into a format Django can use efficiently:
+
+```
+./manage.py compilemessages
+```
+
+Restart your development server, and the time picker dropdown will now show your clean, 24-hour options. With that, the Django Admin is fully converted to a sensible clock, from the list display right down to the picker shortcuts.
