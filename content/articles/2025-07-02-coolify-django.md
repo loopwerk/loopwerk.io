@@ -163,7 +163,7 @@ CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--workers"
 
 This file defines every step needed to run the application. It installs dependencies, builds static assets, and runs database migrations. The final image is a self-contained, runnable artifact. When Coolify deploys this, it's simply a matter of stopping the old container and starting the new one, which is how it achieves zero-downtime deploys.
 
-> Note: I run database migrations as part of the build process. Some some prefer to run migrations at container startup <sup>[citation needed]</sup>, but since we're rebuilding on every Git push anyway, it fits perfectly with this workflow. Feel free to tell me in the comments below if I am wrong.
+> Note: I run database migrations as part of the build process. Some people prefer to run migrations at container startup <sup>[citation needed]</sup>, but since we're rebuilding on every Git push anyway, it fits perfectly with this workflow. Feel free to tell me in the comments below if I am wrong.
 
 Within the Coolify UI, I can now create a new application, point it to my GitHub repository, and tell it to use the "Dockerfile" build pack. Coolify automatically detects pushes to my main branch, pulls the code, builds the new image, and deploys it.
 
