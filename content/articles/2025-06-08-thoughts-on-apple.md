@@ -8,7 +8,7 @@ With hashtag WWDC right around the corner, I can’t help but notice a feeling t
 
 It’s hard to pinpoint when the magic died. It wasn’t a single event, but a slow, creeping realization. The company I once admired has changed, or maybe I have. In January of 2023 I left iOS development behind and returned to the open web. I left behind the walled garden for a world without an inconsistent review process and without a 30% tax on my work. Without an overlord telling you what kind of links and buttons are allowed in your app.
 
-## The eeveloper in the room
+## The developer in the room
 On the big stage, Apple will loudly praise developers as the heart of their ecosystem. But in practice, it feels like they’re squeezing those same developers at every turn. They need to be forced by courts to do the right thing, and when they are, their compliance is so petty and malicious it’s almost insulting.
 
 Look no further than their response to the EU’s Digital Markets Act. Instead of embracing a more open future, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the very freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring announced with great fanfare, only to find them perpetually unavailable. We are an afterthought.
