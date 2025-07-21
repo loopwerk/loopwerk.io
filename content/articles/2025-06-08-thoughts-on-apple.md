@@ -8,14 +8,14 @@ With hashtag WWDC right around the corner, I can’t help but notice a feeling t
 
 It’s hard to pinpoint when the magic died. It wasn’t a single event, but a slow, creeping realization. The company I once admired has changed, or maybe I have. In January of 2023 I left iOS development behind and returned to the open web. I left behind the walled garden for a world without an inconsistent review process and without a 30% tax on my work. Without an overlord telling you what kind of links and buttons are allowed in your app.
 
-## The developer in the room
+## Apple's petty and malicious behavior
 On the big stage, Apple will loudly praise developers as the heart of their ecosystem. But in practice, it feels like they’re squeezing those same developers at every turn. They need to be forced by courts to do the right thing, and when they are, their compliance is so petty and malicious it’s almost insulting.
 
-Look no further than their response to the EU’s Digital Markets Act. Instead of embracing a more open future, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the very freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring announced with great fanfare, only to find them perpetually unavailable. We are an afterthought.
+Look no further than their response to the EU’s Digital Markets Act. Specifically alternative app stores, alternative browser engines, and allowing developers to link to external paymen methods. Instead of embracing a more open future, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the very freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring announced with great fanfare, only to find them perpetually unavailable. We are an afterthought.
 
 For developers there's also a constant, lingering fear of being “Sherlocked”; the phenomenon where you build a beloved and successful app, only for Apple to copy its core functions into the next OS update, effectively killing your business. It turns the App Store from a marketplace into a minefield, where your success can be the very trigger for your extinction.
 
-## Swift's growing pains
+## Swift no longer sparks joy
 This developer-hostile attitude *might* have been tolerable if the tools remained a joy to use. And for a long time, they were. I used to absolutely love Swift. I jumped in around Swift 3, and it felt like a revelation. A clean, safe, and expressive leap forward from Objective-C. Gone were the verbose brackets and header files; in their place were optionals, powerful enums, and value types that made reasoning about code a breeze. The language was opinionated in a way that guided you toward better, safer patterns. It sparked joy.
 
 But over the years, that initial simplicity and focus have been buried under layers of ever-increasing complexity. It feels like the language sprinted from a practical tool for building apps to a highly academic exercise in language theory.
