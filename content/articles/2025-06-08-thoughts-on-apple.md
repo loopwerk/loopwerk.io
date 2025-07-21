@@ -8,14 +8,14 @@ With hashtag WWDC right around the corner, I can’t help but notice a feeling t
 
 It’s hard to pinpoint when the magic died. It wasn’t a single event, but a slow, creeping realization. The company I once admired has changed, or maybe I have. In January of 2023 I left iOS development behind and returned to the open web. I left behind the walled garden for a world without an inconsistent review process and without a 30% tax on my work. Without an overlord telling you what kind of links and buttons are allowed in your app.
 
-## The Developer in the Room
+## The eeveloper in the room
 On the big stage, Apple will loudly praise developers as the heart of their ecosystem. But in practice, it feels like they’re squeezing those same developers at every turn. They need to be forced by courts to do the right thing, and when they are, their compliance is so petty and malicious it’s almost insulting.
 
 Look no further than their response to the EU’s Digital Markets Act. Instead of embracing a more open future, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the very freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring announced with great fanfare, only to find them perpetually unavailable. We are an afterthought.
 
 For developers there's also a constant, lingering fear of being “Sherlocked”; the phenomenon where you build a beloved and successful app, only for Apple to copy its core functions into the next OS update, effectively killing your business. It turns the App Store from a marketplace into a minefield, where your success can be the very trigger for your extinction.
 
-## Swift's Growing Pains
+## Swift's growing pains
 This developer-hostile attitude *might* have been tolerable if the tools remained a joy to use. And for a long time, they were. I used to absolutely love Swift. I jumped in around Swift 3, and it felt like a revelation. A clean, safe, and expressive leap forward from Objective-C. Gone were the verbose brackets and header files; in their place were optionals, powerful enums, and value types that made reasoning about code a breeze. The language was opinionated in a way that guided you toward better, safer patterns. It sparked joy.
 
 But over the years, that initial simplicity and focus have been buried under layers of ever-increasing complexity. It feels like the language sprinted from a practical tool for building apps to a highly academic exercise in language theory.
@@ -30,12 +30,12 @@ Each new feature added power, yes, but at the cost of immense cognitive overhead
 
 I still haven’t updated [Saga](https://github.com/loopwerk/Saga), my static site generator written in Swift, to use Swift 6. I just can’t be bothered, to be honest.
 
-## It Just... Doesn't Work as Well
+## It just... doesn't work as well
 At the same time, the fundamental promise of the Apple ecosystem - that "it just works" - has been steadily eroding. The software quality isn't what it used to be. Filing bug reports into the black hole that is the Feedback Assistant still feels like a demoralizing and useless ritual. Tickets are left open without any form of reaction, or closed as duplicate, with absolutely no way of seeing the status of that other ticket. Or even worse: you’re asked to double check if the bug is still a bug with every new OS version. Like, do your own work!
 
 Their recent forays into new territory have been equally uninspiring. The AI efforts feel misguided and years behind the competition. And the only major new product category in a decade, the Vision Pro, is a marvel of engineering that is effectively dead on arrival for most people due to its insane price tag.
 
-## The Golden Cage
+## The golden cage
 Just last week I sold my Apple Watch, because I got so incredibly bored with being stuck with the same few watch faces. It’s truly insane to me how developers are still not able to create third party watch faces, and I don’t understand how it’s in Apple’s best interest. I bought an old-fashioned mechanical watch instead. I would’ve liked to buy another smart watch, but of course Apple makes it impossible for non-Apple watches to compete on features. They lock everything down, for example only with the Apple Watch can you reply to messages or act on other notifications.
 
 This gatekeeping extends even to the web itself. For over a decade, Apple mandated that every single web browser on iOS (Chrome, Firefox, Edge) wasn't a real browser. It was just a different user interface built on top of Apple's own Safari engine, WebKit. This gave users the illusion of choice while ensuring Apple maintained absolute control over web standards on its platform, stifling innovation and holding back what developers could build. Only now, under legal pressure from regulators like the EU, are they reluctantly allowing true browser competition. It's another clear example of Apple only loosening its grip when forced, never for the benefit of users or the open ecosystem.
