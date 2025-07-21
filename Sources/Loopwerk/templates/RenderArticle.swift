@@ -124,7 +124,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     div(class: "mt-16") {
       h2(class: "text-4xl font-extrabold mb-8") { seeMoreArticlesTitle }
 
-      div(class: "grid lg:grid-cols-2 gap-10") {
+      div(class: "grid lg:grid-cols-2 gap-8") {
         seeMoreArticles.map { renderArticleForGrid(article: $0) }
       }
 

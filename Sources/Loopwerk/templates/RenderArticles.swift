@@ -16,23 +16,25 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
-    h2(class: "text-2xl font-bold mb-2") {
-      a(class: "[&:hover]:text-orange", href: article.url) { article.title }
+    h2 {
+      a(class: "bg-light rounded-md overflow-hidden text-2xl font-bold p-4 relative min-h-[4em] flex items-end [&:hover]:bg-orange", href: article.url) { article.title }
     }
-    div(class: "text-gray gray-links text-sm mb-4") {
-      span(class: "border-r border-gray pr-2 mr-2") {
-        article.date.formatted("MMMM dd, YYYY")
+    div(class: "bg-sub rounded-b-md overflow-hidden -mt-3 pt-3") {
+      div(class: "text-gray gray-links text-sm p-4") {
+        span(class: "border-r border-gray pr-2 mr-2") {
+          article.date.formatted("MMMM dd, YYYY")
+        }
+        
+        article.metadata.tags.sorted().enumerated().map { index, tag in
+          Node.fragment([
+            %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+             %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+          ])
+        }
       }
-
-      article.metadata.tags.sorted().enumerated().map { index, tag in
-        Node.fragment([
-          %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-          %a(href: "/articles/tag/\(tag.slugified)/") { tag },
-        ])
+      p(class: "p-4 pt-1") {
+        a(href: article.url) { article.summary }
       }
-    }
-    p {
-      a(href: article.url) { article.summary }
     }
   }
 }
@@ -65,7 +67,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
       div {
         h1(class: "text-4xl font-extrabold mb-12") { year }
 
-        div(class: "grid lg:grid-cols-2 gap-10 mb-16") {
+        div(class: "grid lg:grid-cols-2 gap-8 mb-16") {
           articles.map { renderArticleForGrid(article: $0) }
         }
       }
@@ -78,7 +80,7 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], canocicalURL: String, 
     
     h1(class: "text-4xl font-extrabold mb-12") { pageTitle }
     
-    div(class: "grid lg:grid-cols-2 gap-10 mb-16") {
+    div(class: "grid lg:grid-cols-2 gap-8 mb-16") {
       articles.map { renderArticleForGrid(article: $0) }
     }
   }
