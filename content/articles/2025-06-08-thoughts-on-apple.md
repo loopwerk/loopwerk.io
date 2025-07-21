@@ -45,7 +45,7 @@ Or what about the iMessage lock-in? By refusing to adopt modern, open messaging 
 And the control doesn't stop at software. With their war on repair, using serialized parts that only they can authenticate, Apple has tried to redefine the very concept of ownership. The device you paid a premium for is never truly yours to fix or modify. It’s another wall in the garden, designed to lock you into their expensive services and push you towards the next upgrade cycle rather than a simple, sustainable repair.
 
 ## So, I left.
-The Apple I fell in love with was an innovator that put the user and developer experience first. It was the scrappy underdog championing the user and the user experience above all else. The Apple of today feels out of touch, greedy, and constantly on the defensive.
+The Apple I fell in love with was an innovator that put the user and developer experience first. It was the scrappy underdog championing the user and the user experience above all else. The Apple of today feels out of touch, greedy, petty, and honestly sometimes downright evil.
 
 So, I went back to Python and Django, back to the open web. I picked up TypeScript and SvelteKit. The contrast is stark. Here, the tools are open, the community is collaborative, and the platform doesn't demand a cut of my revenue for the privilege of existing. I can ship an update without asking the overlords for permission and waiting a week. And most important of all: I’m having fun again! Things are simpler to build, and they can be accessed by anyone in the world, on any device.
 
