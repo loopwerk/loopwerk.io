@@ -23,7 +23,7 @@ More recently, I've found a happy medium with Coolify, a self-hosted PaaS that g
 
 ## My favorite dependencies
 
-No framework is an island, and Django's rich ecosystem of third-party packages is a huge part of its power. Over the years, I've developed a set of favorite dependencies that I return to again and again.
+No framework is an island, and Django's rich ecosystem of third-party packages is a huge part of its power. Over the years, I've collected a set of favorite dependencies that I return to again and again.
 
 ### Core Django extensions
 
