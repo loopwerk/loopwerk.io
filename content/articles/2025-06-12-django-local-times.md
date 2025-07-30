@@ -128,7 +128,7 @@ def local_time(value):
     iso_format = date(localized, "c")
 
     # This format is specific to a US-style locale.
-    display_format = date(localized, "F j, Y \\a\\t h:i A")
+    display_format = date(localized, "F j, Y \\a\\t g:i A")
 
     return format_html('<time datetime="{}" class="local-time">{}</time>', iso_format, display_format)
 ```
