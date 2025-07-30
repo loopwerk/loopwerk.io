@@ -8,7 +8,7 @@ I maintain a handful of Python packages, such as [drf-action-serializers](https:
 
 Until today I did this by hand:
 
-1. Update the version on `pyproject.toml`
+1. Update the version in `pyproject.toml`
 2. Run `uv build`
 3. Run `uv publish`
 4. Login using a special token
@@ -17,7 +17,7 @@ Until today I did this by hand:
 
 It’s kind of time-consuming, especially the last step where I have to go to GitHub, create a new release based on a tag, and come up with a changelog. But now I’ve finally automated all this, and the steps are now much simpler:
 
-1. Update the version on `pyproject.toml`
+1. Update the version in `pyproject.toml`
 2. Push a tag with the version number to Git
 
 A Github Action then takes care of everything else: linting and type-checking the code, running unit tests on multiple Python versions, and if everything is okay: creating a new release, publishing it to PyPI, creating the changelog text based on commits (using my own [tag-changelog](https://github.com/loopwerk/tag-changelog) action), and then using that to create a new release on GitHub.
