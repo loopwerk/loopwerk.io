@@ -102,29 +102,29 @@ To create a seamless experience, we need to handle that first visit gracefully. 
 
 First, we create a custom template tag that wraps our timestamp in a semantically-correct `<time>` element. This element includes a machine-readable `datetime` attribute, which is perfect for our JavaScript to hook into.
 
-#### <i class="fa-regular fa-file-code"></i> myapp/templatetags/local_time.py
+#### <i class="fa-regular fa-file-code"></i> myapp/templatetags/localtime.py
 ```python
 from django import template
 from django.template.defaultfilters import date
 from django.utils.html import format_html
-from django.utils.timezone import localtime
+from django.utils.timezone import localtime as _localtime
 
 register = template.Library()
 
 
 @register.filter
-def local_time(value):
+def localtime(value):
     """
     Renders a <time> element with an ISO 8601 datetime and a fallback display value.
     Example:
-      {{ comment.added|local_time }}
+      {{ comment.added|localtime }}
     Outputs:
       <time datetime="2024-05-19T10:34:00+02:00" class="local-time">May 19, 2024 at 10:34 AM</time>
     """
     if not value:
         return ""
 
-    localized = localtime(value)
+    localized = _localtime(value)
     iso_format = date(localized, "c")
 
     # This format is specific to a US-style locale.
@@ -137,11 +137,11 @@ Now, update your template to use this new filter. Remember to load your custom t
 
 #### <i class="fa-regular fa-file-code"></i> post.html
 ```html
-/*HLS*/{% load local_time %}/*HLE*/
+/*HLS*/{% load localtime %}/*HLE*/
 
 {% for comment in post.comment_set.all %}
   <div>
-    <h3>From {{ comment.user.name }} on /*HLS*/{{ comment.added|local_time }}/*HLE*/</h3>
+    <h3>From {{ comment.user.name }} on /*HLS*/{{ comment.added|localtime }}/*HLE*/</h3>
     <p>{{ comment.comment }}</p>
   </div>
 {% endfor %}
@@ -178,10 +178,12 @@ Just make sure that the way Python formats the dates and times matches the way t
 
 So why use both the middleware *and* the JavaScript? Because together, they cover all bases and provide the best user experience.
 
-*   **On the first visit:** The user has no `timezone` cookie and the middleware does nothing. The `local_time` template tag renders the time in your server's default timezone (`setting.TIME_ZONE`). Immediately after the page loads, the JavaScript runs, finds the `.local-time` element, and instantly rewrites its content to the user's actual local time. There might be a barely-perceptible flicker, but only on this very first page view.
+*   **On the first visit:** The user has no `timezone` cookie and the middleware does nothing. The `localtime` template tag renders the time in your server's default timezone (`setting.TIME_ZONE`). Immediately after the page loads, the JavaScript runs, finds the `.local-time` element, and instantly rewrites its content to the user's actual local time. There might be a barely-perceptible flicker, but only on this very first page view.
 
-*   **On all subsequent visits:** The user has the cookie. The `TimezoneMiddleware` activates their timezone. The `local_time` template tag now renders the time correctly, right from the server. The JavaScript still runs, but it essentially replaces the already-correct time with the same correct time, resulting in no visible change.
+*   **On all subsequent visits:** The user has the cookie. The `TimezoneMiddleware` activates their timezone. The `localtime` template tag now renders the time correctly, right from the server. The JavaScript still runs, but it essentially replaces the already-correct time with the same correct time, resulting in no visible change.
 
 This two-part approach gives you the best of server-side rendering (no content-shifting for returning visitors) while using client-side JavaScript as a progressive enhancement to fix the one edge case where the server can't know better.
 
 If rendering dates and times and dealing with timezones interests you, also check out the article [“Django Admin’s handling of dates and times is very confusing”](/articles/2025/django-admin-datetime/) I wrote earlier this year.
+
+> **Update July 30, 2025**: all the code necessary to make this work on your website (so the templatetag, middleware and javascript code) is now available as part of [django-vrot](https://github.com/loopwerk/django-vrot).
