@@ -87,6 +87,6 @@ The experience of porting Saga crystallized everything for me.
 
 * **TypeScript** offered a world-class development experience that was genuinely enjoyable. But its compile-time/runtime divide was a dealbreaker. The beautiful types are an illusion that can't protect you from the messy reality of external data.
 
-* **Swift** gives you robust safety. It’s complex, for sure, and has its own issues that have led me to [leave native app development behind](articles/2025/thoughts-on-apple/). But for a project like Saga, that complexity is made manageable by a compiler that works *with* you. It’s harder, but you're building on solid ground.
+* **Swift** gives you robust safety. It’s complex, for sure, and has its own issues that have led me to [leave native app development behind](/articles/2025/thoughts-on-apple/). But for a project like Saga, that complexity is made manageable by a compiler that works *with* you. It’s harder, but you're building on solid ground.
 
 In the end, I came full circle. The experiment confirmed that, for this specific project, the original choice was the right one. The trade-offs that Swift makes - prioritizing runtime safety and compiler guarantees over simplicity - were the ones that mattered most.
