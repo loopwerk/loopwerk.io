@@ -11,7 +11,9 @@ However, when I first deployed a project using this setup, I ran into a classic 
 
 Luckily, Django has a built-in cache-busting mechanism in the form of `ManifestStaticFilesStorage`. But, there’s one important caveat: you need to make sure that `css/source.css` is not processed by `ManifestStaticFilesStorage` or things will break.
 
-Step 1: configure the storage in `settings.py`:
+## Step 1: configure the storage
+
+Update `settings.py`:
 
 #### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
@@ -29,13 +31,17 @@ STORAGES = {
 }
 ```
 
-Step 2: update your base template. Replace the `{% tailwind_css %}` tag with:
+## Step 2: update your base template
+
+Replace the `{% tailwind_css %}` tag with:
 
 #### <i class="fa-regular fa-file-code"></i> base.html
 ```html
 <link rel="preload" href="{% static 'css/tailwind.css' %}" as="style">
 <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" />
 ```
+
+## Step 3: update your deploy process
 
 With those two things configured, your deployment process for static files will now be a two-step command:
 
