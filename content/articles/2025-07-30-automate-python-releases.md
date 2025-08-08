@@ -4,7 +4,7 @@ summary: I maintain a handful of Python packages. Here’s how I automate creati
 ---
 
 # Automate Python package releases
-I maintain a handful of Python packages, such as [drf-action-serializers](https://github.com/loopwerk/drf-action-serializers), [django-rss-filter](https://github.com/loopwerk/django-rss-filter) and [django-vrot](https://github.com/loopwerk/django-vrot). Whenever I finish a new feature or fix a bug in one of these packages, I of course need to release a new version.
+I maintain a handful of Python packages, such as [django-generic-notifications](https://github.com/loopwerk/django-generic-notifications), [drf-action-serializers](https://github.com/loopwerk/drf-action-serializers), [django-rss-filter](https://github.com/loopwerk/django-rss-filter) and [django-vrot](https://github.com/loopwerk/django-vrot). Whenever I finish a new feature or fix a bug in one of these packages, I of course need to release a new version.
 
 Until today I did this by hand:
 
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
