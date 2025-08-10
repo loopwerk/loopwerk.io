@@ -73,6 +73,7 @@ Over the years, I've created several Django packages to scratch my own itches:
 - [**django-generic-notifications**](https://pypi.org/project/django-generic-notifications/): A flexible notification system for Django applications.
 - [**django-jinja-render-block**](https://pypi.org/project/django-jinja-render-block/): Render specific blocks from Jinja2 templates. Great for AJAX responses.
 - [**django-rss-filter**](https://pypi.org/project/django-rss-filter/): Filter and transform RSS feeds. Powers [RSSFilter.com](https://rssfilter.com).
+- [**django-vrot**](https://pypi.org/project/django-vrot/): A collection of Django templatetags and middleware for common web development tasks.
 - [**drf-action-serializers**](https://pypi.org/project/drf-action-serializers/): Use different serializers for different viewset actions in Django REST Framework.
 
 I’ve also written [quite a few](/articles/tag/django/) articles on Django, and have been made a [Django Software Foundation member](https://www.djangoproject.com/foundation/individual-members/).
