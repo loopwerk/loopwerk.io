@@ -29,7 +29,6 @@ No framework is an island, and Django's rich ecosystem of third-party packages i
 
 - [**python-dotenv**](https://pypi.org/project/python-dotenv/): Loads environment variables from `.env` files. Essential for local development.
 - [**dj-database-url**](https://pypi.org/project/dj-database-url/): Parses database configuration from a URL, perfect in combination with python-dotenv. See the article [How I configure my Django projects](/articles/2024/django-settings/) I wrote in 2024.
-- [**django-browser-reload**](https://pypi.org/project/django-browser-reload/): Automatically reloads your browser during development. A massive time-saver.
 - [**django-cors-headers**](https://pypi.org/project/django-cors-headers/): Handles CORS headers for when your frontend and backend are on different domains. Crucial for my SvelteKit-on-the-frontend projects.
 - [**sentry-sdk**](https://pypi.org/project/sentry-sdk/): Error tracking that has saved me countless hours of debugging in production.
 - [**parameterized**](https://pypi.org/project/parameterized/): I don't use pytest in my Django projects, instead I prefer to stick with Django's built-in test framework. Less is more, use the batteries that are included. But the parameterized package helps a lot when you need to run the same test with different inputs.
@@ -46,10 +45,12 @@ No framework is an island, and Django's rich ecosystem of third-party packages i
 
 - [**django-tailwind-cli**](https://pypi.org/project/django-tailwind-cli/): Integrates Tailwind CSS with Django using the standalone CLI. No Node.js required! Check out [this article](/articles/2025/django-tailwind-production/) to learn about cache-busting Tailwind’s generated CSS in production.
 - [**django-template-partials**](https://pypi.org/project/django-template-partials/): Reusable template fragments that work great with Alpine AJAX.
+- [**django-browser-reload**](https://pypi.org/project/django-browser-reload/): Automatically reloads your browser during development. A massive time-saver.
 
 ### Infrastructure
 
 - [**django-mailer**](https://pypi.org/project/django-mailer/): Queues emails for sending later. Prevents email sending from blocking requests.
+- [**django-apscheduler**](https://pypi.org/project/django-apscheduler/): A pretty simple way of adding scheduling features to Django, with minimal dependencies. i use it for django-mailer abd other tasks that need to run on a schedule.
 - [**django-storages**](https://pypi.org/project/django-storages/): Custom storage backends for Django. Essential for S3 or other cloud storage.
 
 ## Django's enduring strengths
