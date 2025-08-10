@@ -50,7 +50,7 @@ No framework is an island, and Django's rich ecosystem of third-party packages i
 ### Infrastructure
 
 - [**django-mailer**](https://pypi.org/project/django-mailer/): Queues emails for sending later. Prevents email sending from blocking requests.
-- [**django-apscheduler**](https://pypi.org/project/django-apscheduler/): A pretty simple way of adding scheduling features to Django, with minimal dependencies. I use it for django-mailer abd other tasks that need to run on a schedule.
+- [**django-apscheduler**](https://pypi.org/project/django-apscheduler/): A pretty simple way of adding scheduling features to Django, with minimal dependencies. I use it for django-mailer and other tasks that need to run on a schedule.
 - [**django-storages**](https://pypi.org/project/django-storages/): Custom storage backends for Django. Essential for S3 or other cloud storage.
 
 ## Django's enduring strengths
