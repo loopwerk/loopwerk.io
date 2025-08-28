@@ -1,6 +1,6 @@
 ---
 tags: python, django
-summary: Why I only use Django's base View class.
+summary: Why I only use Django's base View class instead of generic class-based views or function-based views.
 ---
 
 # How I write Django views
