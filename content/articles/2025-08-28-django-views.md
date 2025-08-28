@@ -5,7 +5,7 @@ summary: Why I only use Django's base View class instead of generic class-based 
 
 # How I write Django views
 
-When learning Django, one of the first major forks in the road is how to write your views. Django gives you two main options: simple functions or powerful classes. The official tutorial starts you off gently with function-based views (FBVs).
+When learning Django, one of the first major forks in the road is how to write your views. Django gives you two main options: simple functions or powerful classes. The official tutorial starts you off gently with function-based views.
 
 It begins with the basics:
 
@@ -23,7 +23,7 @@ def index(request):
     return render(request, "polls/index.html", context)
 ```
 
-But quickly after that, it dives into generic views:
+But quickly after that, it dives into generic class-based views (CBV):
 
 ```python
 class IndexView(generic.ListView):
@@ -71,7 +71,7 @@ This complexity is why I'm a big fan of the argument made in [Django Views — T
 
 It’s a great guide that shows how common CBV patterns can be implemented more explicitly and often more concisely with functions. I highly recommend reading it.
 
-However, I take a slightly different approach in my own projects: I only use the base `View` class. I avoid function-based views and the complex generic CBVs. This gives me what I consider the perfect middle ground. It provides a clean way to organize code by request method (get, post, put, etc.) and automatically handles `405 Method Not Allowed` responses for you.
+However, I take a slightly different approach in my own projects: I only use the base `View` class. I avoid both function-based views *and* the complex generic class-based views. This gives me what I consider the perfect middle ground. It provides a clean way to organize code by request method (get, post, put, etc.) and automatically handles `405 Method Not Allowed` responses for you.
 
 So, instead of a function-based view with a big `if` block:
 
