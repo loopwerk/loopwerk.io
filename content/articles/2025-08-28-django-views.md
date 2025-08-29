@@ -115,7 +115,7 @@ class CommentFormView(View):
 
 While this class-based version is a few lines longer, I find the separation of `get` and `post` logic far cleaner than nesting the core POST handling inside an `if request.method == "POST"` block.
 
-You might notice a small duplication here: `get_object_or_404` is called in both `get` and `post`. The `View` class gives us an elegant way to solve this, demonstrating the power of class-based organization without the complexity. We can use the `dispatch` method to run code for all requests:
+You might notice a small duplication here: `get_object_or_404` is called in both `get` and `post`. The "textbook" way to solve this using the base `View` class is to use the `dispatch` method. It runs before `get` or `post` are called, making it a natural place for setup logic:
 
 ```python
 class CommentFormView(View):
@@ -138,7 +138,37 @@ class CommentFormView(View):
         return TemplateResponse(request, "form.html", {"form": form, "post": self.post_obj})
 ```
 
-This, for me, is the sweet spot: the simplicity and explicitness of a function, but with better organization, automatic HTTP method handling, and the ability to share setup logic or create my own simple, reusable base views.
+However, I don't really use this pattern in my own code, as it feels a bit too magical. Instead of a method that we explicitly call ourselves, it’s one more thing to have to know about Django’s `View` implementation.
+
+For a simple case like this, I often find the small duplication is actually the clearest option. It's explicit and requires zero cognitive overhead to understand what's happening in `get` and `post`. If the setup logic becomes more complex, or when there is a bigger shared context with more variables in play, then instead of using `dispatch` I'll extract it into a simple helper method that I can call from both places. This keeps the control flow explicit:
+
+```python
+class CommentFormView(View):
+    def get_shared_context(self, request, post_id):
+        # Imagine that this would return more than just the one post variable 😅
+        post = get_object_or_404(Post, pk=post_id)
+        return {"post": post}
+
+    def get(self, request, post_id, *args, **kwargs):
+        form = CommentForm()
+        context = self.get_shared_context(request, post_id) | {"form": form}
+        return TemplateResponse(request, "form.html", context)
+
+    def post(self, request, post_id, *args, **kwargs):
+        form = CommentForm(data=request.POST)
+        context = self.get_shared_context(request, post_id) | {"form": form}
+        post = context["post"]
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect(post)
+        
+        return TemplateResponse(request, "form.html", context)
+```
+
+This, for me, is the sweet spot. We've eliminated the code duplication, but in a way that remains completely explicit. The `get` and `post` methods are in full control. There's no "magic" state being set behind the scenes. We get the simplicity and explicitness of a function, but with better organization, automatic HTTP method handling, and the ability to share logic on our own terms.
 
 And yes, Django’s `FormView` is smaller in its most basic form:
 
