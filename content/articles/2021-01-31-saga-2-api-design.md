@@ -120,7 +120,7 @@ Let's look at how running Saga has changed. You'll notice that we're now calling
 
 First we tell Saga that the files with the `articles` folder should use `ArticleMetadata`. Then, we run the `read` function a second time, which will then render the rest of the files, ignoring files that were already picked up by previous `read` step. Since we're not handing a custom metadata type to the second `read` step, it defaults to the built-in `EmptyMetadata` type, which is just an empty struct.
 
-Now comes the `write` step, which has a lot more lines then before:
+Now comes the `write` step, which has a lot more lines than before:
 
 ``` swift
 .write(

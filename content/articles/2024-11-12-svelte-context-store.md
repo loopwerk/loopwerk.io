@@ -19,7 +19,7 @@ A modal looks like this:
 
 ![Modal 1](/articles/images/cn-modal-1.jpg)
 
-Modals can be nested infinitely. Inside of this character form are multiple buttons that will open open another modal with another form, for example to create a new lore item:
+Modals can be nested infinitely. Inside of this character form are multiple buttons that will open another modal with another form, for example to create a new lore item:
 
 ![Modal 2](/articles/images/cn-modal-2.jpg)
 

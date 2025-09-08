@@ -7,11 +7,11 @@ One year ago I wrote my third article in a series where I researched front end t
 
 First of all, we’re now using **CommonJS modules** and **ES6 syntax** throughout the app: fat arrows, destructuring, object literal shorthand, template strings, default function parameters, etc. We’re using **Babel 6** and **webpack** to compile all this to ES5. More specifically, we use `ng-annotate-loader` to automatically add injection annotation to our Angular code, and `html-loader` so that we can `require` our HTML templates right into the UI Router states.
 
-We’re no longer using Bower, instead 100% of our dependancies come from **NPM**. And we also exclusively use **NPM scripts** for running our local dev server, compiling the builds and running the tests and linter. So no more Gulp either.
+We're no longer using Bower, instead 100% of our dependencies come from **NPM**. And we also exclusively use **NPM scripts** for running our local dev server, compiling the builds and running the tests and linter. So no more Gulp either.
 
 We still use **Less**, and have now combined that with PostCSS for the **autoprefixer** plugin.
 
-Our code is linted using **ESLint**, using a slightly modified AirBnb code style. Mainly we enabled more rules. And we’ve added a ton of unit tests! We now run our tests in pure Node 6.1.0 using **Mocha**, **Chai** and **JSDom**: no browser is needed, and the code doesn’t need to go through Babel or webpack. It’s super fast. In my [second font end tools article](/articles/2015/research-front-end-part-2/) I voiced some concerns about locking ourself in with webpack and making it harder to test our code when we’re using webpack-only features, but we solved that by simply using a `__TEST__` global and checking for that before requiring any non-JS files.
+Our code is linted using **ESLint**, using a slightly modified AirBnb code style. Mainly we enabled more rules. And we’ve added a ton of unit tests! We now run our tests in pure Node 6.1.0 using **Mocha**, **Chai** and **JSDom**: no browser is needed, and the code doesn’t need to go through Babel or webpack. It’s super fast. In my [second front end tools article](/articles/2015/research-front-end-part-2/) I voiced some concerns about locking ourselves in with webpack and making it harder to test our code when we’re using webpack-only features, but we solved that by simply using a `__TEST__` global and checking for that before requiring any non-JS files.
 
 We’ve added **Istanbul** to get code coverage as well. We’re currently almost at 50% so definitely still have a way to go, but considering that a year ago we had almost nothing, I am very proud of the team - myself included :)
 

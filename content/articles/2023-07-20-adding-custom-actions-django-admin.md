@@ -14,7 +14,7 @@ Here's the list of requirements going in:
 - Instead of the usual delete and save buttons, there should be two other buttons: deny and approve.
 - When pressing either of these buttons, another page will be shown with a textarea pre-filled with some text which will be sent to the user who filled in the apply form.
 
-When looking at the Django docs I came across something called [Admin actions](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/actions/) which sounded perfect, but sadly that's purely for adding actions to the list-view, to execute some kind of action on one or multiple objects at the same time. That's not what I need. I'm pretty sure I'm not the only one who ran into the same wish to add a new action (page) to the admin interface and looked at the Admin actions docs in disappointed, so here's how I managed to fulfill my requirements in three easy steps.
+When looking at the Django docs I came across something called [Admin actions](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/actions/) which sounded perfect, but sadly that's purely for adding actions to the list-view, to execute some kind of action on one or multiple objects at the same time. That's not what I need. I'm pretty sure I'm not the only one who ran into the same wish to add a new action (page) to the admin interface and looked at the Admin actions docs in disappointment, so here's how I managed to fulfill my requirements in three easy steps.
 
 ## 1. Making the form read-only
 

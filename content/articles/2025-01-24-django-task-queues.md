@@ -7,7 +7,7 @@ summary: I use django-apscheduler to run a queue of scheduled tasks. Now I also 
 
 At [Sound Radix](https://www.soundradix.com/) we don’t use any async code in Django, but we do use a task queue for things we don’t want to run synchronously in the views (such as sending email), and for things that we need to run on a schedule. For example: every day we import sales reports from an external reseller, every month we generate and send a sales report to the managers, and every five seconds we send queued email.
 
-For this we rely on two packages: [`django-mailer`](https://github.com/pinax/django-mailer/), and [`django-apscheduler`](https://github.com/jcass77/django-apscheduler). The former acts as an email backend in Django, and instead of directly sending emails it adds it to a queue in the database. The latter is for executing scheduled jobs - one of which is to send queued emails.
+For this we rely on two packages: [`django-mailer`](https://github.com/pinax/django-mailer/), and [`django-apscheduler`](https://github.com/jcass77/django-apscheduler). The former acts as an email backend in Django, and instead of directly sending emails it adds them to a queue in the database. The latter is for executing scheduled jobs - one of which is to send queued emails.
 
 Our `django-apscheduler` script looks something like this:
 
@@ -43,7 +43,7 @@ def import_xchange_daily():
 
 
 def send_sales_report():
-    # Send the montly sales report to the managers.
+    # Send the monthly sales report to the managers.
     management.call_command("send_sales_report")
 
 

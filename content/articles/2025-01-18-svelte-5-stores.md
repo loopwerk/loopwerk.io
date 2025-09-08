@@ -75,7 +75,7 @@ export const load: LayoutLoad = async () => {
 
 This results in the Svelte error `rune_outside_svelte`: “The `$state` rune is only available inside `.svelte` and `.svelte.js/ts` files”. I also can’t rename `+layout.ts` to `+layout.svelte.ts`, because then I get the error message “Files prefixed with + are reserved”. Bummer.
 
-One thing we try to do is store the state in an external file:
+One thing we can try is to store the state in an external file:
 
 #### <i class="fa-regular fa-file-code"></i> /lib/state.svelte.ts
 ```typescript

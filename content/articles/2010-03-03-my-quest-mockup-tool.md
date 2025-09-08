@@ -3,21 +3,21 @@ tags: review
 ---
 
 # My quest for a mockup tool
-A while ago I wrote that [Goldmund, Wyldebeast & Wunderliebe](http://www.gw20e.com) is going start a new usability department. At the moment I am busy writing marketing texts and thinking about a new website for ourself. Last week I also looked for a nice tool for making mockups and wireframe models, for Mac OS X. After testing 15 tools, I could make a well informed choice, and would like to share my findings with you.
+A while ago I wrote that [Goldmund, Wyldebeast & Wunderliebe](http://www.gw20e.com) is going to start a new usability department. At the moment I am busy writing marketing texts and thinking about a new website for ourselves. Last week I also looked for a nice tool for making mockups and wireframe models, for Mac OS X. After testing 15 tools, I could make a well informed choice, and would like to share my findings with you.
 
 Definitions:
 
-* Mockup: a static lo-fi representation of a screen, for quickly testing out UI's
+* Mockup: a static lo-fi representation of a screen, for quickly testing out UIs
 * Wireframe: a functional mockup for testing interaction design (navigation etc.)
 
 [Adobe Fireworks](http://www.adobe.com/products/fireworks/), $299, desktop app  
-Many features, very good for basic interaction design. Not so many build-in widgets ("symbols") for quickly creating mockups, but [this page](http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html) helps. Conclusion: very good product, but compare with OmniGraffle for yourself.
+Many features, very good for basic interaction design. Not so many built-in widgets ("symbols") for quickly creating mockups, but [this page](http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html) helps. Conclusion: very good product, but compare with OmniGraffle for yourself.
 
 [Axure RP Pro](http://www.axure.com), $589, desktop app  
-Mac version is in Beta. Very good documentation. Very few build-in widgets, making it hard to drag-and-drop a mockup into existence. It can create website specifications based on the wireframe. No snap-to-element, only snap-to-grid. Learning curve seems a bit high. Conclusion: I am not that impressed.
+Mac version is in Beta. Very good documentation. Very few built-in widgets, making it hard to drag-and-drop a mockup into existence. It can create website specifications based on the wireframe. No snap-to-element, only snap-to-grid. Learning curve seems a bit high. Conclusion: I am not that impressed.
 
 [Balsamiq Mockups](http://www.balsamiq.com/products/mockups), $79, Adobe AIR  
-Unique drawn style, not that professional. However, its build-in widgets are plenty and good. It's good for internal mockups, but I wouldn't show it to a client.
+Unique drawn style, not that professional. However, its built-in widgets are plenty and good. It's good for internal mockups, but I wouldn't show it to a client.
 
 [Cacoo](http://cacoo.com/), free, webbased  
 Nice for flow charts or office layouts, not so much for mockups or wireframes.
@@ -35,19 +35,19 @@ Only works in Firefox. Very Beta and buggy. Its biggest problem however is that 
 Mockups with basic widgets and some wireframe functionality - you can define actions on buttons etc. Pretty good snap-to-element with automatic padding between elements. Software looks a bit unpolished though.
 
 [JustInMind Prototyper](http://www.justinmind.com/wireframe/justinmind_prototyper), $690, desktop app  
-Mac version is in Beta. Many video tutorials. Not so many build-in widgets. Lots of functionality, seems simpler to use than Axure RP Pro. Conclusion: nice, but not great.
+Mac version is in Beta. Many video tutorials. Not so many built-in widgets. Lots of functionality, seems simpler to use than Axure RP Pro. Conclusion: nice, but not great.
 
 [MockFlow](http://www.mockflow.com/), free or $59 /y, Adobe AIR  
-The free version offers very few build-in widgets. The paid version gives you access to the "MockStore", where everyone can place widgets for others to use. However, these widgets are hard to find, and since it's not really integrated into the tool itself, it's a bit too hard to use. Conclusion: not that bad, but there are better tools.
+The free version offers very few built-in widgets. The paid version gives you access to the "MockStore", where everyone can place widgets for others to use. However, these widgets are hard to find, and since it's not really integrated into the tool itself, it's a bit too hard to use. Conclusion: not that bad, but there are better tools.
 
 [MockingBird](http://gomockingbird.com/), free, webbased  
-Reasonable selection of build-in widgets. It doesn't offer a lot of functionality, but it is very easy for quickly making a mockup screen. Good snap-to-element. Conclusion: if you need a free tool for making a mockup, look no further.
+Reasonable selection of built-in widgets. It doesn't offer a lot of functionality, but it is very easy for quickly making a mockup screen. Good snap-to-element. Conclusion: if you need a free tool for making a mockup, look no further.
 
 [OmniGraffle (professional edition)](http://www.omnigroup.com/applications/OmniGraffle/), $199, desktop app  
-The ultimate diagramming tool for the Mac, and very good for making mockups with basic clickthrough prototyping. Not that many build-in widgets, but there are hundreds available on the web,  most free to use. Extremely good for mockups with superb snap-to-element, snap-to-guides and snap-to-grid. Best tool on the Mac for making mockups.
+The ultimate diagramming tool for the Mac, and very good for making mockups with basic clickthrough prototyping. Not that many built-in widgets, but there are hundreds available on the web,  most free to use. Extremely good for mockups with superb snap-to-element, snap-to-guides and snap-to-grid. Best tool on the Mac for making mockups.
 
 [Pencil](http://www.evolus.vn/Pencil/), free, Firefox plugin  
-Very simpel, very low selection of widgets. Not really that usable, but try it out anyway.
+Very simple, very low selection of widgets. Not really that usable, but try it out anyway.
 
 [Pidoko Wireframe Creator](https://pidoco.com/en/benefits/products/prototype-creator), €30 /m, webbased  
 Slow, few widgets, few wireframe functions. Not really worth it.

@@ -31,7 +31,7 @@ My initial impression wasn't very positive, as their docs are an absolute maze. 
 * Very friendly and patient support staff.
 
 ### Negatives
-* You are required to give them your phone number, which is then displayed in all emails sent to your users. I don't want my personal cellphone number to be public like that! But apparently it's a legal requirement, or so that say at least.
+* You are required to give them your phone number, which is then displayed in all emails sent to your users. I don't want my personal cellphone number to be public like that! But apparently it's a legal requirement, or so they say at least.
 * They don't handle VAT at all. If you charge $4 a month for a subscription, the user will be charged $4 a month and that's it. 
 
 Of course I'm required to actually collect (and then pay to the tax office!) the value added taxes, so that last point is actually a major problem and a dealbreaker. Stripe is working on adding VAT support but the first version of it, coming in July 2020, will require you to input all countries / U.S. states and their tax levels by hand. That's just not going to work. Plus they won't do automatic user location detection, so the user has to pick their country to see the correct VAT percentage. 
@@ -81,4 +81,4 @@ So, what am I going to do now? That's hard to say. I think Gumroad right now has
 
 Stripe meanwhile has the lowest rates and because you're actually the seller on record, your own business name will be shown on credit card statements (rather than Gumroad or Patreon). Not important, but pretty cool. Too bad that comes with the requirement of adding your phone number to all emails. Getting a Google Voice number could work, but that's not free and I don't really want to take on costs until I have some subscribers. But that's besides the point really, the real issue is the total lack of VAT support on their hosted checkout page. They really do focus on the low level stuff where YOU build a checkout page and handle VAT. It's what Gumroad, Patreon and Memberstack are all built on.
 
-If you have suggestions for Saas as in "subscriptions as a service", please [let me know](mailto:kevin@loopwerk.io)!
+If you have suggestions for SaaS as in "subscriptions as a service", please [let me know](mailto:kevin@loopwerk.io)!

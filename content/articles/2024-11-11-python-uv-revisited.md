@@ -18,7 +18,7 @@ $ uv add --group dev ruff
 $ uv add --group prod --no-sync gunicorn
 ```
 
-Only Django and ruff get installed, while gunicorn  get added to the dependency list (in the `prod` group) but it doesn’t get installed locally (the `--no-sync` parameter skips the installing).
+Only Django and ruff get installed, while gunicorn gets added to the dependency list (in the `prod` group) but it doesn't get installed locally (the `--no-sync` parameter skips the installing).
 
 When you run `uv sync` or `uv run`, then by default the dev dependencies get installed (see [docs](https://docs.astral.sh/uv/concepts/projects/dependencies/#default-groups)), which is perfect when you run these commands on your development machine. On your production server however you’ll want to run `uv run --no-group dev --group prod` instead, to include the production dependencies and skip the dev dependencies.
 

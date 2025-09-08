@@ -219,7 +219,7 @@ I had really high hopes for PDM because on paper it looked like the perfect blen
 
 So let’s compare Poetry, uv and PDM. When it comes to installing Python versions:
 
-- Poetry doesn’t this at all
+- Poetry doesn't do this at all
 - PDM does, but not particularly user-friendly
 - uv does it brilliantly
 

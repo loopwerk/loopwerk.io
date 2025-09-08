@@ -559,7 +559,7 @@ extension Campaign {
 
 Let's start with the models before I add the view code. Unlike Django where the serializer for a model can simply exclude a few fields without having to redefine the whole model, in Vapor it's par for the course to create these so-called "data transfer objects"; different versions of your database model for the public representation, the payload for creating a model, one for updating a model, and so on.
 
-Then, in `CreateCampaign` you can see that had I to add my own validation logic to make sure that `name` and `backgroundImage` are not empty strings - logic that is not needed in Django since that information is already available in the model definition itself (`blank=False`, which is the default), and automatically validated.
+Then, in `CreateCampaign` you can see that I had to add my own validation logic to make sure that `name` and `backgroundImage` are not empty strings - logic that is not needed in Django since that information is already available in the model definition itself (`blank=False`, which is the default), and automatically validated.
 
 Let's move on to the view code.
 

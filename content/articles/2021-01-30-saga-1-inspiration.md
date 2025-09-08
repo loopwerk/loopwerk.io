@@ -37,7 +37,7 @@ You'd call that file `hello-world.md`, and it would result in an article with th
 Hello World!
 ```
 
-I didn't want be forced to add that `-------` separator after the metadata. The solution was pretty simple: I wrote my own `MarkdownReader` class, added that in `settings.py` to be used, and it works. It was *very* easy to adjust the way liquickluck converts articles and their metadata.
+I didn't want to be forced to add that `-------` separator after the metadata. The solution was pretty simple: I wrote my own `MarkdownReader` class, added that in `settings.py` to be used, and it works. It was *very* easy to adjust the way liquidluck converts articles and their metadata.
 
 I also love the way it has the concept of multiple "writers," like this:
 
@@ -95,7 +95,7 @@ After thinking about how I would want my own generator to work I knew I wanted a
 
 1. If possible, have just the concept of Pages. No Pages and Posts, no Items, no Sections.
 2. It should be possible to have multiple kinds of strongly typed metadata, so that you have different sets of Pages. One set of articles, one set of questions, one for apps, and a generic default one for all other pages.
-3. Use liquidluck's concept of multiple readers and writers, but they have to operate on sets of pages, so that you can write a list of articles *and* a a list of questions or apps.
+3. Use liquidluck's concept of multiple readers and writers, but they have to operate on sets of pages, so that you can write a list of articles *and* a list of questions or apps.
 4. It should be super easy to add your own readers and writers, or other steps where you can modify pages. By default it should "just work" using the built-in functionality, but it should be possible to extract dates from filenames for example, or do whatever else you want.
 
 Join me in [part 2](/articles/2021/saga-2-api-design/) next, where I dive into the API of Saga and how I got there.

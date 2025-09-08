@@ -110,7 +110,7 @@ By default this editor doesn’t work so well when the Django Admin is in dark m
 
 So instead of a complete CMS we now have a Django model with a `CKEditor5Field` instance. Our model becomes the CMS, and our admins manage everything within the normal Django Admin interface that they’re already familiar with. They don’t have to use multiple URLs, like `/admin/` and `/cms/` to manage different kinds of things on the site.
 
-We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn’t support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibly from the text editor, and instead we parse the body text for special tags like this:
+We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn’t support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibility from the text editor, and instead we parse the body text for special tags like this:
 
 ```
 Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -204,6 +204,6 @@ class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
 ```
 
-And with that we have a simple and user friendly text editor  without having to include a big dependency like Django CMS or Wagtail. Our admins can upload images into their articles, and we can easily embed anything we want. We have a single Django Admin interface where all content is managed, including the articles.
+And with that we have a simple and user friendly text editor without having to include a big dependency like Django CMS or Wagtail. Our admins can upload images into their articles, and we can easily embed anything we want. We have a single Django Admin interface where all content is managed, including the articles.
 
 So next time you’re reaching for a CMS when you’re building a blog, I would suggest to first start with a simple model and a WYSIWYG field.

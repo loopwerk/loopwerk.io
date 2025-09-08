@@ -17,7 +17,7 @@ After the introduction come 11 chapters, going over publishers, subscribers, sub
 
 The chapter that I keep going back to is the one about combining multiple user inputs into a single publisher, which explains the differences between `Publishers.Zip`, `Publishers.Merge`, and `Publishers.CombineLatest`. No matter how long I've been using Combine now, these are still not easy for me to understand. So maybe this chapter didn't help me that much since I keep having to check it - I do also think this part of the book uses the weakest examples of all the book.
 
-In my opinion one of the best chapters is the one on testing, which also goes over how to best write your code to make it easily testable in the first place, and how to mock side effects like doing network requests or using `NoticationCenter`. Very valuable skills to have, and Donny does a good job teaching them. 
+In my opinion one of the best chapters is the one on testing, which also goes over how to best write your code to make it easily testable in the first place, and how to mock side effects like doing network requests or using `NotificationCenter`. Very valuable skills to have, and Donny does a good job teaching them. 
 
 One problem I had with the EPUB version of the book (which I use with Apple Books) is that there is no syntax highlighting at all, which make the examples less than ideal to read. I guess this is a flaw in EPUB and not the book, but I would recommend to use the PDF version when you can.
 

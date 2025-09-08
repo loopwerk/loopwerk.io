@@ -9,11 +9,11 @@ I have been a PHP programmer for the last 9 years, and only in September of 2009
 * The lack of public, private and protected functions. Yes, there is a convention to use an underscore for private methods, but it seems very old-fashioned to me.
 * Static functions are overly complicated to use in my opinion.
 * Why do all methods need to be given a "self" as their first parameter. I mean really..? Why can't this be automagically done?
-* `', '.join(list)`. No matter how you this explain this to me, it's still backwards.
+* `', '.join(list)`. No matter how often you explain this to me, it's still backwards.
 * No `switch` statement. You can replicate its functionality using a dictionary, but it is harder to read, and a lot harder to write.
 * Dictionaries are unordered. Argh! Very, very annoying.
 * The official Python documentation. I guess I am spoiled having used the very impressive official PHP documentation for so long, but really Python could use more work on this.
-* Not everything is consistently done in a object oriented fashion: why is it `len(['list'])` and `len("string")`, and not `['list'].len()` and `"string".len()`?
+* Not everything is consistently done in an object oriented fashion: why is it `len(['list'])` and `len("string")`, and not `['list'].len()` and `"string".len()`?
 * All the underscores and `__init__.py` files.
 * Tuples must die. They are ugly, especially when you only have one item in it and it needs that dangling comma: `('item',)`
 
@@ -33,5 +33,5 @@ I'd like to end on a positive note though with the things I love about Python an
 * Url configs, and how easy it is to create a beautiful url that links to a view.
 * Extending templates makes it easy to organize your html code
 * The Django documentation is very good. In fact, I think I have never seen an open source project with better documentation!
-* The thing I love most about Django has to be its buildin generic views like direct_to_template, object_list, object_detail, etc. It's so easy to create a view that shows a paginated list of items, or a view that uses a date in your url like /blog/2009/03.
-* And last but certainly not least: the buildin admin site. It just saves you so much time!
+* The thing I love most about Django has to be its built-in generic views like direct_to_template, object_list, object_detail, etc. It's so easy to create a view that shows a paginated list of items, or a view that uses a date in your url like /blog/2009/03.
+* And last but certainly not least: the built-in admin site. It just saves you so much time!

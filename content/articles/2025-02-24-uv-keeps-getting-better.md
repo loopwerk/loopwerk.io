@@ -55,7 +55,7 @@ $ uv run script.py
 # ///
 
 import requests
-resp = requests.get("https://peps.python.org/api/peps.json")\
+resp = requests.get("https://peps.python.org/api/peps.json")
 print(resp)
 ```
 
@@ -81,7 +81,7 @@ If your project needs to read environment variables from a `.env` file, you’d 
 
 uv now makes this dependency obsolete by allowing you to load an `.env` file directly from the `uv run` command:
 
-```shelll
+```shell
 $ uv run --env-file .env ./manage.py runserver
 ```
 

@@ -19,8 +19,8 @@ final class AppState: NSObject, ObservableObject {
   @Published var paymentInProgress = false
 
   func loadProducts() {
-    let subcriptionIds = Set(["pro.monthly", "pro.yearly"])
-    let request = SKProductsRequest(productIdentifiers: subcriptionIds)
+    let subscriptionIds = Set(["pro.monthly", "pro.yearly"])
+    let request = SKProductsRequest(productIdentifiers: subscriptionIds)
     request.delegate = self
     request.start()
   }

@@ -3,7 +3,7 @@ tags: iOS
 ---
 
 # Apple's worst iOS framework: MediaPlayer
-When I started to work on Last.fm's [Scrobbler for iOS](http://www.last.fm/hardware/ios), I though it would be quite an easy app to create. After all, it's basically a couple of lists of artists, albums and tracks, and all actual music playback will be done using the MediaPlayer framework. Boy, was I wrong.
+When I started to work on Last.fm's [Scrobbler for iOS](http://www.last.fm/hardware/ios), I thought it would be quite an easy app to create. After all, it's basically a couple of lists of artists, albums and tracks, and all actual music playback will be done using the MediaPlayer framework. Boy, was I wrong.
 
 *Note: when talking about MediaPlayer, I am mostly talking about `[MPMusicPlayerController iPodMusicPlayer]`.*
 
@@ -31,9 +31,9 @@ The client had a simple request: the Scrobbler app should show the playback queu
 Right now we detect when a track is started that's not part of the current queue, while the app is in the background. This means the queue was changed from outside the Scrobbler app, so then we clear the local queue and message the user, telling him we can't show his play queue because it was changed from outside the app.
 
 ## Problem 6: you can't edit the queue
-In the Scrobbler app we have a nifty "smart playlists" feature, kind of like iTunes Genius, where we create a playlist based on similarities in tracks. Let's say you're listening to the "slow music" smart playlist, and one of the tracks isn't slow at all. We have this "doesn't belong" button, where you can remove this track from the playlist, training the system in the process. Of course, we need to remove this track from your playback queue as well, or it will still come up next. Yeah.. that's not possible. You can't edit the queue, you can't only set a new one. Normally you would then get the current queue, create a local mutable copy, remove the one track and set the queue to your modified copy. But like I said, the queue can't be read. Luckily, I was already saving a local copy of the queue to deal with problem five.
+In the Scrobbler app we have a nifty "smart playlists" feature, kind of like iTunes Genius, where we create a playlist based on similarities in tracks. Let's say you're listening to the "slow music" smart playlist, and one of the tracks isn't slow at all. We have this "doesn't belong" button, where you can remove this track from the playlist, training the system in the process. Of course, we need to remove this track from your playback queue as well, or it will still come up next. Yeah.. that's not possible. You can't edit the queue, you can only set a new one. Normally you would then get the current queue, create a local mutable copy, remove the one track and set the queue to your modified copy. But like I said, the queue can't be read. Luckily, I was already saving a local copy of the queue to deal with problem five.
 
-So, we set the new queue to our current-queue-minus-one version, but the removed track is still played as part of the queue. What gives? Turns out the new queue isn't actually set until you send the `play` message to MediaPlayer as well, which results in your currently playing track restarting. Not really what you'd call a smooth experience. So, you have to save the current position of the current track, set the new queue-minus-the-one-track, send the `play` message and fast forward to the saved position. The user will have a hick up of about a second, but it's the best we could do.
+So, we set the new queue to our current-queue-minus-one version, but the removed track is still played as part of the queue. What gives? Turns out the new queue isn't actually set until you send the `play` message to MediaPlayer as well, which results in your currently playing track restarting. Not really what you'd call a smooth experience. So, you have to save the current position of the current track, set the new queue-minus-the-one-track, send the `play` message and fast forward to the saved position. The user will have a hiccup of about a second, but it's the best we could do.
 
 It's a lot worse when the user has shuffle enabled though: in that case a completely different random track will start to play, and there's nothing we can do about that.
 
@@ -48,4 +48,4 @@ Not convinced yet that MediaPlayer is Apple's worst framework?
 
 All of these problems made sure that this "it's just a music player" app took way longer to create than anticipated, while giving a lot more headaches than ever thought possible.
 
-In the end we've solved almost all of the problems and Scrobbler for iOS came out really good. I'm immensely proud of it, I just wish that we didn't have this much problems on the way. Most of the iOS frameworks are very good and good to work with. I have no clue why Apple created such a horrible mess with MediaPlayer. It's buggy as hell, under powered and over simplified.
+In the end we've solved almost all of the problems and Scrobbler for iOS came out really good. I'm immensely proud of it, I just wish that we didn't have this many problems on the way. Most of the iOS frameworks are very good and easy to work with. I have no clue why Apple created such a horrible mess with MediaPlayer. It's buggy as hell, underpowered and oversimplified.
