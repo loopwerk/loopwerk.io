@@ -16,4 +16,4 @@ I choose cats over dogs, tea over coffee, and winter over summer. I’ve lived i
 
 You can reach me via email at <kevin@loopwerk.io>, on [Mastodon](https://hachyderm.io/@kevinrenskers), and I am also (reluctantly) on [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
 
-![A photo of Kevin](kevin.jpg)
+![A photo of Kevin](kevin.webp)
