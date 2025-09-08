@@ -11,13 +11,13 @@ Since it was a bit of a puzzle to get it working, I am sharing my backend and fr
 It all starts with a button that the user can click to subscribe.
 
 ```
-<button on:click={() => subscibe('price_A')}>$3.99/month</button>
+<button on:click={() => subscribe('price_A')}>$3.99/month</button>
 ```
 
-That calls the `subscibe` function below:
+That calls the `subscribe` function below:
 
 ``` javascript
-function subscibe(priceId) {
+function subscribe(priceId) {
   createStripeSession(priceId).then(result => {
     const sessionId = result.data;
 
@@ -40,7 +40,7 @@ function createStripeSession(priceId) {
 }
 ```
 
-As you can see, `subscibe` calls `createStripeSession`, which in turn executes a callable Cloud Function called `createStripeSession` to fetch a Stripe session id. Once it has that session id, it can redirect to Stripe's hosted Checkout page.
+As you can see, `subscribe` calls `createStripeSession`, which in turn executes a callable Cloud Function called `createStripeSession` to fetch a Stripe session id. Once it has that session id, it can redirect to Stripe's hosted Checkout page.
 
 The Cloud Function is a bit more complex.
 

@@ -5,7 +5,7 @@ summary: Ditch the complex SPA. Learn how to build modern, server-rendered Djang
 
 # Beyond htmx: building modern Django apps with Alpine AJAX
 
-I’ve recently been rethinking how I build web applications. For  the past few years my default has been a Django backend serving a JSON API to a frontend built with SvelteKit. And I am not alone; many (if not most) sites now use a complex JavaScript frontend and a JSON API. This pattern, the Single-Page Application (SPA), brought us amazing user experiences, but it also brought a mountain of complexity: state management, API versioning, client-side routing, duplicate form validation, build tools, and the endless churn of the JavaScript ecosystem.
+I've recently been rethinking how I build web applications. For the past few years my default has been a Django backend serving a JSON API to a frontend built with SvelteKit. And I am not alone; many (if not most) sites now use a complex JavaScript frontend and a JSON API. This pattern, the Single-Page Application (SPA), brought us amazing user experiences, but it also brought a mountain of complexity: state management, API versioning, client-side routing, duplicate form validation, build tools, and the endless churn of the JavaScript ecosystem.
 
 And then I came across htmx, which promises to enhance HTML to the point where your old-fashioned Multi-Page Application (MPA) feels modern, without having to write a single line of JavaScript. We can have the smooth, modern UX of a SPA but with the simplicity and robustness of traditional, server-rendered Django applications.
 

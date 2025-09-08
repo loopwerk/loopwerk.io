@@ -8,7 +8,7 @@ In June 2010 Apple finally added multitasking to the iPhone (the iPad had to wai
 My wishes for the next version of iOS are listed below in no particular order. Hardware wishes are not included (but in short: LED notification lights on both devices, SD card support and front-facing camera on iPad).
 
 ### Notifications
-Seriously Apple, what the fuck. In 2007 this was already an annoying system, and that was when it was only used for SMS. Now this retarded system is used for push notifications as well, where one is replacing the other and no way of seeming them again after unlocking the screen. This notification system needed to be replaced with something new a long long time ago. All other mobile OS'es have something better. Wake up Apple!
+Seriously Apple, what the fuck. In 2007 this was already an annoying system, and that was when it was only used for SMS. Now this retarded system is used for push notifications as well, where one is replacing the other and no way of seeing them again after unlocking the screen. This notification system needed to be replaced with something new a long long time ago. All other mobile OS'es have something better. Wake up Apple!
 
 ### iPhone and iPad working together
 Both the iPhone and the iPad have bluetooth. Please let me link the two together so I can send and receive SMS messages on my iPad to give just one small example. Let me send links from one device to the other, and I don't necessarily mean by tapping one device on the other like HP's new Pre 3 and TouchPad.

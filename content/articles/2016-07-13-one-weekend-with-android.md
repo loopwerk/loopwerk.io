@@ -16,7 +16,7 @@ Then I got security update after security update, and each time the phone had to
 I used the phone full time from that Friday afternoon to the next Monday afternoon and sadly there were a lot more problems. Some big, some small, but in the end I decided to send the phone back.
 
 ## App quality
-One of the things I noticed first is how the Android counterparts of my most used iOS apps were of substantial lower quality. They didn’t look as good, were slower, buggier, had less features, sometimes all of the above. Even first party apps like the Google Authenticator look so much better on iOS. There is also a lot more crap on the Google Play store. Maybe the quality will improve over time but right now the quality apps are on iOS, simple as that.
+One of the things I noticed first is how the Android counterparts of my most used iOS apps were of substantial lower quality. They didn’t look as good, were slower, buggier, had fewer features, sometimes all of the above. Even first party apps like the Google Authenticator look so much better on iOS. There is also a lot more crap on the Google Play store. Maybe the quality will improve over time but right now the quality apps are on iOS, simple as that.
 
 ## Browsers and bookmarks
 I use Safari as my main browser on macOS and its bookmarks are synced via iCloud to my iPhone and my iPad. Even if I would switch to the Android phone, I’d still keep my iPhone for app development, I still have my Macbook and iPad and so I need to make sure that my bookmarks get synced between all four devices.
@@ -31,7 +31,7 @@ On macOS and iOS I use Apple’s Notes app, which is plenty powerful for me, and
 ## Photos
 I do use Apple’s Photos app on macOS but I don’t use the iCloud Photo Library (way too many problems with that which deserves its own blog post) so I wasn’t concerned about Android compatibility. I’d just import pictures into the Photos app just like I do with my iPhone or my Fujifilm camera. 
 
-I was really turned off by the standard camera app on Android though. No sweep panorama? That is my most used photo feature on iOS! I love panorama’s! I guess on Android it’s easier to install 3rd party apps and set them as the default camera application, but the few options I looked at all looked crappy. Again the app quality issue.
+I was really turned off by the standard camera app on Android though. No sweep panorama? That is my most used photo feature on iOS! I love panoramas! I guess on Android it’s easier to install 3rd party apps and set them as the default camera application, but the few options I looked at all looked crappy. Again the app quality issue.
 
 ## Music
 All my music is stored in iTunes and I use iTunes Match so all my music is uploaded to the cloud and streamed to my iPad, iPhone and my Apple TV. It works very well (one of the few iCloud services that consistently works well for me). But you guessed it, of course this doesn’t work on Android. Do I need to upload all my music to Google Play Music? It doesn’t have a proper desktop app, I’d still want to keep my music in iCloud for the Apple TV, so do I use two different music libraries? How can I rate a song when there is no single source of truth? This is all just horrible and it was at this moment I realized I had to send back the Android phone. Having to switch browsers and notes apps was annoying enough, but this was a deal breaker.

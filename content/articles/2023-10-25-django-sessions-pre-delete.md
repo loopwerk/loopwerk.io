@@ -1,6 +1,6 @@
 ---
 tags: python, django
-summary: How do you delete baskets belonging to anonymous users when their sessions expires? It wasn't quite as simple as I thought.
+summary: How do you delete baskets belonging to anonymous users when their sessions expire? It wasn't quite as simple as I thought.
 ---
 
 # Deleting anonymous users' baskets when their sessions expire
@@ -46,7 +46,7 @@ def get_basket(request):
 
 If the user is logged in we get (or create) a basket for the user. Otherwise we see if there's a `basket_id` value in the session and get that basket - or create a new basket for the anonymous user and store its ID in the session.
 
-Of course I want baskets to be removed when sessions expires, which is what the following signal handler does:
+Of course I want baskets to be removed when sessions expire, which is what the following signal handler does:
 
 ``` python
 @receiver(pre_delete, sender=Session)

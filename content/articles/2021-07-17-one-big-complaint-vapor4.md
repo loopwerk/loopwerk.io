@@ -62,7 +62,7 @@ final class User: Model, Content {
 }
 ```
 
-Of course's we're also going to need a database migration to actually create the table.
+Of course we're also going to need a database migration to actually create the table.
 
 ```swift
 struct CreateUserMigration: Migration {

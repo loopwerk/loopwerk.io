@@ -23,7 +23,7 @@ struct ViewModel {
 
 class ViewController: UIViewController {
   let viewModel = ViewModel()
-  let subscriptions = Set<AnyCancellebles>()
+  let subscriptions = Set<AnyCancellable>()
 
   override func viewDidLoad() {
     viewModel.fetchBooks()
@@ -78,7 +78,7 @@ struct ViewModel {
 
   func fetchBooks() {
     SomeBookSDK.fetchBooks { books in
-      books.value = books
+      self.books.value = books
     }
   }
 }
@@ -86,7 +86,7 @@ struct ViewModel {
 class ViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   let viewModel = ViewModel()
-  let subscriptions = Set<AnyCancellebles>()
+  let subscriptions = Set<AnyCancellable>()
 
   override func viewDidLoad() {
     tableView.dataSource = self

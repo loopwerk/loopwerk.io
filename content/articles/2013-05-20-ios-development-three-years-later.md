@@ -41,7 +41,7 @@ The idea of having all your screens in one storyboard file with all their relati
 Still, we use storyboards, but split them up across multiple files: one storyboard per scene. This way we can all work simultaneously on different parts of the app. The big advantage over good old xib files? Prototype cells! When you're working with UITableView or UICollectionView, it's so much better to have your cells' design directly there in the storyboard. A major time saver, and I never want to go back, even if I don't use any other storyboard feature.
 
 ## UIAppearance
-It used to be so damn hard to customize standard UI controls, and of course some clients always demanded customization. Luckily we now how UIAppearance, solving most of the clients' needs.
+It used to be so damn hard to customize standard UI controls, and of course some clients always demanded customization. Luckily we now have UIAppearance, solving most of the clients' needs.
 
 ## UICollectionView
 Grids (mostly used on the iPad) used to be a pain in the ass to create. Yes, there were some third party libraries that helped, but none were super good and of course you didn't have Interface Builder integration. iOS 6 changed all this, finally adding collection views. A huge shout out should go to the incredible [PSTCollectionView library](https://github.com/steipete/PSTCollectionView) which backports all this goodness to iOS 5. Seriously, check it out.

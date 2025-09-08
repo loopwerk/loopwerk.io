@@ -38,7 +38,7 @@ VStack<
 >
 ```
 
-I think that will give you a bit of an idea what kind of content to expect. Like I said, this is not for beginners! It's super important to understand *how* a SwiftUI is made though, to know how the order of applied view modifiers impacts what you're seeing on screen. Throughout the book they refer to these kinds of diagrams, and it has helped me a *lot* with understanding why a certain order of things makes a view behave the way it does:
+I think that will give you an idea of what kind of content to expect. Like I said, this is not for beginners! It's super important to understand *how* a SwiftUI is made though, to know how the order of applied view modifiers impacts what you're seeing on screen. Throughout the book they refer to these kinds of diagrams, and it has helped me a *lot* with understanding why a certain order of things makes a view behave the way it does:
 
 ![SwiftUI view diagram](/articles/images/swiftui-diagram.png)
 

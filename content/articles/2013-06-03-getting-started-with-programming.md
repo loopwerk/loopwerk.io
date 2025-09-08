@@ -71,9 +71,9 @@ That's where the programming starts, and for me it started with learning PHP in 
 
 
 ## Python and Django
-After I worked as a PHP developer for nine year I decided enough was enough; I needed something new. And this something new was to be Python, a popular language for creating dynamic websites. It's also used to create apps, desktop software, games and much more. A perfect choice then with lots of room to grow and many available jobs (and usually better paying than PHP jobs too!).
+After I worked as a PHP developer for nine years I decided enough was enough; I needed something new. And this something new was to be Python, a popular language for creating dynamic websites. It's also used to create apps, desktop software, games and much more. A perfect choice then with lots of room to grow and many available jobs (and usually better paying than PHP jobs too!).
 
-When you want to build a website you normally choose a "framework": a set of tools and functions that will make your life a lot easier. A bunch of smart people have done most of the heavy lifting: all the standard repetitive stuff like talking to a database, letting users log in, saving comments to a news article and much more is all taken care off.
+When you want to build a website you normally choose a "framework": a set of tools and functions that will make your life a lot easier. A bunch of smart people have done most of the heavy lifting: all the standard repetitive stuff like talking to a database, letting users log in, saving comments to a news article and much more is all taken care of.
 
 Arguably one of the best frameworks for Python is Django. Definitely my recommendation to pick up, also because of the many jobs that are available for Django programmers.
 

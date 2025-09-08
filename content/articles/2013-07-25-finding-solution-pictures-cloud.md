@@ -3,7 +3,7 @@ tags: review
 ---
 
 # Searching for a solution to back up all my pictures to the cloud
-I have well over 35 GB of pictures, and after almost losing my hard drive (it started to behave very strangely but I was able to salvage all the pictures) I realised that I need to back them up in the cloud. I do usually share my best ones on Facebook, but I need a solution that backs up every picture (full-resolution with all its metadata intact) without ever thinking about it.
+I have well over 35 GB of pictures, and after almost losing my hard drive (it started to behave very strangely but I was able to salvage all the pictures) I realized that I need to back them up in the cloud. I do usually share my best ones on Facebook, but I need a solution that backs up every picture (full-resolution with all its metadata intact) without ever thinking about it.
 
 ![Screenshot from Finder](/articles/images/pictures-folder.png "Currently all my photos are simply stored in subfolders like this")
 
@@ -49,23 +49,23 @@ I gave it a spin and while it did upload all my pictures to Flickr, it doesn't d
 A very good idea but not good enough just yet.
 
 ## Photostream
-Apple's photostream only holds 1000 photos, but by using shared photostreams you supposedly can get around this limit. All pictures taken with my iPhone would be automatically uploaded, other pictures can be uploaded via iPhoto or Aperture.
+Apple's photostream only holds 1000 photos, but by using shared photostreams you supposedly can get around this limit. All pictures taken with my iPhone would be automatically uploaded; other pictures can be uploaded via iPhoto or Aperture.
 
 I've tried to use photostreams multiple times with iPhoto, but it never really works for me. When I try to import my photos from my iPhone they're always seen as duplicates for example, it just doesn't fit my mental workflow. Of course, with some practice and time I'm sure I could get used to it.
 
-But shared photostreams can't contains videos, so that kills this solution.
+But shared photostreams can't contain videos, so that kills this solution.
 
 ## Picturelife
 [Picturelife][] is a desktop app that automatically syncs your photos plus an iOS app to view them. At $70 per year for 100 GB it's cheaper than Dropbox. They support RAW and video files, so it all sounds pretty good.
 
-I signed up for a free 5 GB account to try them out and was very quickly very disappointed. All my pictures are organised in subsolders (one for each event) and while they were all picked up and uploaded to Picturelife, it didn't translate those folders into albums on their server. So I ended up with one huge stream of pictures, not what I'm looking for at all.
+I signed up for a free 5 GB account to try them out and was very quickly very disappointed. All my pictures are organized in subfolders (one for each event) and while they were all picked up and uploaded to Picturelife, it didn't translate those folders into albums on their server. So I ended up with one huge stream of pictures, not what I'm looking for at all.
 
 It also seems impossible to download your complete backup and the sync app is one way only. All in all, I need a more Dropbox-like approach that maintains my folder structure and allows me to download all my pictures if necessary.
 
 [Picturelife]: https://picturelife.com
 
 ## Everpix
-[Everpix][] is only $49 per year and offers unlimited hosting. Their image analysis seems cool as well, but they don't accept RAW photos. Too bad, because that is a must-have for me. They also seem to run all pictures through their "proprietary image optimisation process". It sounds like they're messing with your originals, not cool.
+[Everpix][] is only $49 per year and offers unlimited hosting. Their image analysis seems cool as well, but they don't accept RAW photos. Too bad, because that is a must-have for me. They also seem to run all pictures through their "proprietary image optimization process". It sounds like they're messing with your originals, not cool.
 
 [Everpix]: https://www.everpix.com
 
@@ -93,6 +93,6 @@ I've got myself a one year 50GB subscription and can't wait to see how this serv
 ### Update October 7, 2013
 Loom has updated its OS X app and completed removed the Dropbox-like syncing experience. Up until this update you had a "Loom" folder on your Mac, and anything you dropped in there got uploaded. If you installed Loom on another computer then you could download your pictures into this Loom folder. Like I said, very much like Dropbox.
 
-So now that they've removed this Loom folder, that automatic uploading is gone. You can select "source" folders which will get uploaded so it's not too bad. Except when you want to download your photo library from the cloud to your Mac: this is now impossible. There is no Loom folder to sync, stored albums can't be downloaded, your pictures are locked in the cloud.
+Now that they've removed this Loom folder, that automatic uploading is gone. You can select "source" folders which will get uploaded so it's not too bad. Except when you want to download your photo library from the cloud to your Mac: this is now impossible. There is no Loom folder to sync, stored albums can't be downloaded, your pictures are locked in the cloud.
 
 I'm hoping they will rethink their update and at least give me the option of downloading entire albums. If not, I'll have to think about maybe moving to Dropbox (or Flickr) after all.

@@ -57,7 +57,7 @@ We got to use Tesla’s supercharger a few times and it’s really really good. 
 
 Living with a fully electric car really was quite easy. I think in our eight days we only had two 20 minute charging sessions where we sat in the car and waited, all other charging was done while we were out and about, or overnight. It wasn’t more annoying than living with a normal gasoline powered car. And if you do have to wait for a charge then the Tesla has some nice features to make the time fly by, like games and YouTube on the giant screen. There was even a racing game you could play with the actual car’s steering wheel.
 
-We did find that the car was always overestimating its range, it really just lies about how far it can go. Still, driving 400 actual kilometers on one full charge is very good. And 20 minutes of charging adds quite a lot of range, we never had range anxiety.
+We did find that the car was always overestimating its range; it really just lies about how far it can go. Still, driving 400 actual kilometers on one full charge is very good. And 20 minutes of charging adds quite a lot of range, we never had range anxiety.
 
 ## So, would I buy a Tesla?
 No, I would not buy a Tesla because there are too many problems and even dealbreakers for me. I do think the screen is really cool and most of the software very good, but too much is controlled by the screen. The lack of a gauge cluster behind the steering wheel didn’t help. The build quality is a major concern, comfort wasn’t good enough, and we got a lot of errors due to obscured cameras. We had the car step on the brakes by itself while driving 100 km/h, or the one-pedal driving suddenly didn’t work anymore. I wouldn’t spend $45,000 on this.
