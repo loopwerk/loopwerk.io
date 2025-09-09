@@ -37,7 +37,7 @@ Eventually, the pendulum swung back.
 
 TypeScript brought sanity to JavaScript. Svelte and SvelteKit made complexity vanish into the background, giving me the power of modern frameworks without the headaches of endless configuration. Writing code felt fun again.
 
-Then came htmx and Alpine AJAX. Suddenly I was back to building multi-page apps, just like in the early days, but with smooth interactivity and zero build step. It felt almost old-school, but in the best way.
+Then came htmx and Alpine AJAX. Suddenly I was back to building multi-page apps, just like in the early days, but with smooth interactivity. It felt almost old-school, but in the best way.
 
 When it comes to deployment, I’ve seen it all over the years:
 
