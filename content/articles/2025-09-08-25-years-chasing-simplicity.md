@@ -14,12 +14,12 @@ My professional journey began in 2001 as a sysadmin at the University of Groning
 By this time my Flash website was now a collection of 15 static HTML pages. And every time I wanted to change the navigation menu, I had to meticulously edit all 15 files. It was a nightmare! Hearing about my struggle, a colleague showed me a single line of PHP that would change everything: 
 
 ```php
-<?php include 'header.php'; ?>
+<?php include 'header.html'; ?>
 ```
 
 It was like magic to me. With this one function, my tangled mess of duplication vanished. There was no turning back. I spent every free moment digging through the PHP docs, and by the time I left my sysadmin job in 2003, I had transformed into a junior developer, thanks to that initial small discovery and the patient mentorship of colleagues.
 
-Back then, building websites was pure joy. The stack: PHP + HTML, with a sprinkle of MooTools, Prototype.js, and later on: jQuery. The deployment: drag files into an FTP window, or later, a quick `cvs update` on the server. You could go from idea to online in minutes. The barrier between writing code and sharing it with the world was almost non-existent.
+Back then, building websites was pure joy. The stack: PHP + HTML, with a sprinkle of MooTools, Prototype.js, and later on: jQuery. The deployment: drag files into an SFTP window, or later, a quick `cvs update` on the server. You could go from idea to online in minutes. The barrier between writing code and sharing it with the world was almost non-existent.
 
 ## Welcome to the build step
 
