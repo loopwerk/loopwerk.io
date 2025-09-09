@@ -23,17 +23,15 @@ private func renderCategory(category: String, projects: [Item<ProjectMetadata>])
     h1(class: "text-2xl font-bold mb-2 border-b border-light") { category }
 
     projects
-      .filter { $0.metadata.parent == nil }
       .sorted { ($0.order, $0.title) < ($1.order, $1.title) }
       .map { project -> Node in
-        let subProjects = projects.filter { $0.metadata.parent == project.title }
-        return renderProject(project: project, subProjects: subProjects)
+        return renderProject(project: project)
       }
   }
 }
 
 @NodeBuilder
-private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<ProjectMetadata>]) -> Node {
+private func renderProject(project: Item<ProjectMetadata>) -> Node {
   div(class: "mt-8") {
     h3(class: "text-xl font-bold") {
       project.title
@@ -56,19 +54,6 @@ private func renderProject(project: Item<ProjectMetadata>, subProjects: [Item<Pr
       }
       div(class: "hidden lg:block") {
         img(src: "https://img.shields.io/github/stars/\(project.metadata.repo)?color=f5b031&labelColor=566b78")
-      }
-    }
-
-    if !subProjects.isEmpty {
-      div(class: "bg-sub p-4 rounded-md mt-2 shadow-lg shadow-nav") {
-        h2(class: "text-2xl font-bold -mb-2") {
-          "\(project.title) projects"
-        }
-        subProjects
-          .sorted { ($0.order, $0.title) < ($1.order, $1.title) }
-          .map {
-            renderProject(project: $0, subProjects: [])
-          }
       }
     }
   }

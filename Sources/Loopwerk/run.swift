@@ -29,7 +29,6 @@ enum ProjectInvolvement: String, Decodable {
 
 struct ProjectMetadata: Metadata {
   let category: String
-  let parent: String?
   let repo: String
   let image: String?
   let text: String
