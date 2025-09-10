@@ -1,5 +1,5 @@
 ---
-tags: iOS
+tags: iOS, insights
 ---
 
 # Apple's worst iOS framework: MediaPlayer

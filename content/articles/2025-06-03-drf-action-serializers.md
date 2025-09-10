@@ -1,9 +1,9 @@
 ---
-tags: django, python
-summary: Introducing ActionSerializerModelViewSet, a ViewSet that allows you to choose a serializer for each action and method combination.
+tags: django, python, news
+summary: An easy way to use different serializers for different actions and request methods in Django REST Framework.
 ---
 
-# An easy way to use different serializers for different actions and request methods in Django REST Framework
+# Announcing drf-action-serializers
 
 Imagine a simple Django REST Framework serializer and view like this:
 

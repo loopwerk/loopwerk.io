@@ -1,5 +1,5 @@
 ---
-tags: review
+tags: review, personal, apple
 ---
 
 # My one weekend with Android

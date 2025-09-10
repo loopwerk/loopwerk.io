@@ -1,10 +1,10 @@
 ---
-tags: combine, faq, iOS, swift
+tags: faq, iOS, swift
 ---
 
 # Mentee Question 4: When to use PassthroughSubject and CurrentValueSubject?
 
-That's a great question! And actually one I asked myself too, when I just got started with Combine. Let's first explain what `PassthroughSubject` and `CurrentValueSubject` *are* though.
+That's a great question! And actually one I asked myself too, when I just got started with Combine. Let's first explain what `PassthroughSubject` and `CurrentValueSubject` _are_ though.
 
 Subjects are a kind of publisher that you can subscribe to, but can also send values to. It's kind of like a serving hatch where you pass items through, from one side to the other. It's mostly used to turn imperative code that uses closures and delegates, into declarative and reactive code using publishers.
 
@@ -27,14 +27,14 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     viewModel.fetchBooks()
-  
+
     viewModel.books
       .sink { books in
         print("Books got updated!")
       }
       .store(in: &subscriptions)
   }
-  
+
   @IBAction func reloadBooks() {
     viewModel.fetchBooks()
   }
@@ -49,7 +49,7 @@ Let's look at another example. When you're dealing with a library or framework t
 struct ViewModel {
   let books = PassthroughSubject<[Book], Never>()
   let bookSDK = SomeBookSDK()
-  
+
   init() {
     bookSDK.delegate = self
   }
@@ -74,7 +74,7 @@ Now you can simply subscribe to the `books` publisher without worrying about del
 struct ViewModel {
   let books = /*HLS*/CurrentValueSubject<[Book], Never>([])/*HLE*/
   // You need to give CurrentValueSubject an initial value,
-  // here I'm simply using an empty array. 
+  // here I'm simply using an empty array.
 
   func fetchBooks() {
     SomeBookSDK.fetchBooks { books in
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     tableView.dataSource = self
-    
+
     // Whenever books changes, we reload the table
     viewModel.books
       .sink { [tableView] books in

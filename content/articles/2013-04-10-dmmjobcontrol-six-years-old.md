@@ -1,5 +1,6 @@
 ---
 tags: open source
+archive: true
 ---
 
 # JobControl is six years old

@@ -1,5 +1,5 @@
 ---
-tags: python, django
+tags: python, django, news
 summary: A modern, flexible rewrite of django-generic-notifications is here. Easily send website and email notifications, create digests, group similar messages, and much more.
 ---
 

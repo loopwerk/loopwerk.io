@@ -1,5 +1,5 @@
 ---
-tags: iOS
+tags: iOS, insights
 ---
 
 # iOS development: three years later

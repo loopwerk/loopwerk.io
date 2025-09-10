@@ -1,5 +1,6 @@
 ---
 tags: iOS
+archive: true
 ---
 
 # My wishes for iOS 5

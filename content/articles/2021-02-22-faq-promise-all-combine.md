@@ -1,9 +1,10 @@
 ---
-tags: combine, faq, iOS, swift
+tags: faq, iOS, swift
 summary: In JavaScript-world, it's really easy to know when multiple promises completed: just use Promise.all. How do you do the same thing in Combine?
 ---
 
 # Mentee Question 3: How to know when multiple publishers completed?
+
 In JavaScript-world, it's really easy to know when multiple promises completed: just use `Promise.all`. How do you do the same thing in Combine?
 
 One easy built-in way is a combination of `MergeMany` and `collect`:
@@ -77,9 +78,9 @@ three.send(3)
 three.send(completion: .finished)
 ```
 
-Now `$0` is the deeply nested tuple `(((1, 2), 3), 4)`. 
+Now `$0` is the deeply nested tuple `(((1, 2), 3), 4)`.
 
-A much bigger problem with `combineLatest` is that it doesn't work if you have an array of publishers, which is not uncommon. So, how would you know when an array of publishers are all complete, and also get the results in the same order? The answer is CombineExt's [combineLatest function](https://github.com/CombineCommunity/CombineExt#CombineLatestMany), which *does* work on an array of publishers.
+A much bigger problem with `combineLatest` is that it doesn't work if you have an array of publishers, which is not uncommon. So, how would you know when an array of publishers are all complete, and also get the results in the same order? The answer is CombineExt's [combineLatest function](https://github.com/CombineCommunity/CombineExt#CombineLatestMany), which _does_ work on an array of publishers.
 
 ```swift
 /*HLS*/import CombineExt/*HLE*/

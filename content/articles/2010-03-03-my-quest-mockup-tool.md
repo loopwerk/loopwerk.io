@@ -1,5 +1,6 @@
 ---
 tags: review
+archive: true
 ---
 
 # My quest for a mockup tool

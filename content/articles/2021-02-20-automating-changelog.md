@@ -1,8 +1,8 @@
 ---
-tags: javascript, open source
+tags: javascript, open source, workflow, news
 ---
 
-# Automating your changelog and GitHub releases
+# Announcing tag-changelog: automate your changelog and GitHub releases
 In a short time I've created 25 releases for my static site generator [Saga](https://github.com/loopwerk/Saga). For each release I've manually updated the `CHANGELOG.md` file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was already using to automatically run unit tests on every commit to the main branch, and for every pull request. I searched the [GitHub Marketplace](https://github.com/marketplace) for Actions that would suit my needs, but sadly couldn't find any.
 
 - I create releases by pushing tags, so my workflow needs to be triggered by, and be based on, tags.

@@ -1,5 +1,5 @@
 ---
-tags: apple
+tags: apple, insights
 summary: With WWDC around the corner, I'm reflecting on why I've fallen out of love with Apple. After more than a decade of iOS development, the company's anti-developer stance, Swift's growing complexity, and the eroding software quality led me back to the open web.
 ---
 

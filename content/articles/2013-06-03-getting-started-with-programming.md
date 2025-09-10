@@ -1,5 +1,6 @@
 ---
-tags: faq
+tags: faq, insights
+summary: At least twice per year someone will ask me how he or she can get started with programming. Here are links to useful resources.
 ---
 
 # Getting started with programming

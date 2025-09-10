@@ -1,5 +1,5 @@
 ---
-tags: python
+tags: python, workflow
 summary: I maintain a handful of Python packages. Here’s how I automate creating new releases, both on PyPI and GitHub.
 ---
 

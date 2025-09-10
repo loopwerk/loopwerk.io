@@ -1,5 +1,5 @@
 ---
-tags: ai
+tags: insights
 summary: Luckily for us, good developers are still necessary in the age of LLMs. You can't just say "make an app", you still need to know how to build a good app.
 ---
 

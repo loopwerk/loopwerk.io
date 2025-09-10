@@ -1,5 +1,5 @@
 ---
-tags: python, uv
+tags: python, uv, review
 summary: Comparing two Python package managers: Poetry and new kid on the block uv.
 ---
 

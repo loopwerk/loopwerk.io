@@ -1,5 +1,5 @@
 ---
-tags: personal
+tags: insights
 summary: A reflection on 25 years of web development, from simplicity to complexity and back.
 ---
 

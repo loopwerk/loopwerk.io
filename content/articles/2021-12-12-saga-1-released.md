@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, open source
+tags: swift, saga, open source, news
 summary: About ten months ago I wrote that I was confident that the API of Saga wasn't going to change a lot anymore, and that I'd release 1.0.0. Well, it's taken a little bit longer than I expected back then, but 1.0.0 has finally been released!
 ---
 

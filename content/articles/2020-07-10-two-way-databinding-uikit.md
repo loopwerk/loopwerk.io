@@ -1,16 +1,17 @@
 ---
-tags: swift, iOS, combine
+tags: swift, iOS, insights
 summary: With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions.
 ---
 
 # Exploring two-way databinding solutions in UIKit
+
 It's quite common to have to build some kind of (reusable) component to edit some piece of state. For example, let's say we have a `User` model, and we want to build a form to edit a user. With SwiftUI we have the `@Binding` property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy.
 
 You can imagine that we'd build a `UITableView` with a `UITableViewCell` for every field of the user that we want to edit. Every cell has a `UITextField`, which is instantiated with the current value of the field we want to edit. And when the value is changed, we of course want to update the field on the user model.
 
 Let's start off with a version without two-way databinding to set a baseline. Simplified, it can look something like this:
 
-``` swift
+```swift
 import UIKit
 
 struct User {
@@ -40,7 +41,7 @@ We create a `TextFieldCell` for the user's `firstName` field and instantiate it 
 
 We need to introduce a way to communicate changes back to the model. A simple way is to use a closure:
 
-``` swift
+```swift
 class TextFieldCell {
   let textField = UITextField()
   private let onUpdate: (String) -> Void
@@ -76,13 +77,13 @@ vc.nameTextField?.updated()
 print(vc.user.firstName) // prints "Bob" 🎉
 ```
 
-*I'm calling the `updated` function by hand in the second to last line since programmatically changing the text value of a `UITextField` doesn't trigger the `valueChanged` action.*
+_I'm calling the `updated` function by hand in the second to last line since programmatically changing the text value of a `UITextField` doesn't trigger the `valueChanged` action._
 
 We start off with a user called "Kevin", update the value to "Bob", and the user's `firstName` property now holds "Bob". It feels a bit iffy to have to pass in the `user.firstName` and also do the `user.firstName = newName` dance - it would be much nicer if this could be combined into one.
 
 One improvement that we can make is to use KeyPaths.
 
-``` swift
+```swift
 class TextFieldCell<Model> {
   let textField = UITextField()
   private let model: Model
@@ -110,13 +111,13 @@ class MyViewController {
 }
 ```
 
-Creating an instance of `TextFieldCell` is now a lot simpler, as you don't have to give an initial value and also an `onUpdate` closure. Instead we give a `ReferenceWritableKeyPath`. 
+Creating an instance of `TextFieldCell` is now a lot simpler, as you don't have to give an initial value and also an `onUpdate` closure. Instead we give a `ReferenceWritableKeyPath`.
 
 However, it can be slightly disorienting to work with this, due to the usage of `ReferenceWritableKeyPath`. For example since the `User` model is a struct (a value type), I need to pass in the view controller itself as the model, with the keyPath `\.user.firstName`.
 
 Can we use SwiftUI's `Binding` inside UIKit? Yes we can, provided that we are building an iOS 13+ app of course.
 
-``` swift
+```swift
 class TextFieldCell {
   let textField = UITextField()
   private let value: Binding<String>
@@ -137,9 +138,9 @@ class MyViewController {
   var nameTextField: TextFieldCell!
 
   init() {
-    nameTextField = TextFieldCell(value: 
+    nameTextField = TextFieldCell(value:
       Binding(
-        get: { self.user.firstName }, 
+        get: { self.user.firstName },
         set: { self.user.firstName = $0 }
       )
     )
@@ -149,7 +150,7 @@ class MyViewController {
 
 It solves the `ReferenceWritableKeyPath` weirdness, but now we're back to needing to give both a getter and a setter, so it's not an ideal solution either. It can be improved by also using `@State`, but at the cost of turning the `User` model into a class:
 
-``` swift
+```swift
 class User {
   var firstName: String
   var lastName: String
@@ -187,7 +188,7 @@ class MyViewController {
 
 How about we use Combine, with a `PassthroughSubject`, instead?
 
-``` swift
+```swift
 class TextFieldCell {
   let textField = UITextField()
   private let subject: PassthroughSubject<String, Never>
@@ -225,7 +226,7 @@ It works, but at the cost of even more boilerplate. Definitely not an improvemen
 
 And using `@Published` gets us back to needing to both initialize and then observe a value:
 
-``` swift
+```swift
 class TextFieldCell {
   let textField = UITextField()
   @Published var value = ""

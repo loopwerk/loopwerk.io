@@ -1,6 +1,7 @@
 ---
 tags: review, apple
 summary: A quick review of the keynote and State of the Union talks. Let's see which of my wishes have been fulfilled, and which SwiftUI problems have been solved.
+archive: true
 ---
 
 # WWDC20 review

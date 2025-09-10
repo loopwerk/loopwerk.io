@@ -1,5 +1,5 @@
 ---
-tags: django, python, javascript
+tags: django, python, javascript, insights
 summary: Ditch the complex SPA. Learn how to build modern, server-rendered Django apps using Alpine AJAX and the power of hypermedia.
 ---
 

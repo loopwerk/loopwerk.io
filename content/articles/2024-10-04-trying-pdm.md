@@ -1,5 +1,5 @@
 ---
-tags: python, uv
+tags: python, uv, review
 summary: After comparing uv to Poetry, I am trying out PDM. On paper it combines all the best things of Poetry and uv, without their downsides. How does it hold up?
 ---
 

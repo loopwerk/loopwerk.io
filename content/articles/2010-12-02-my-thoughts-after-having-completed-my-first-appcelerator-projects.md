@@ -1,5 +1,5 @@
 ---
-tags: iOS
+tags: iOS, review
 ---
 
 # My thoughts after having completed my first Appcelerator project

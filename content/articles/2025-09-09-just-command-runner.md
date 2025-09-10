@@ -1,5 +1,5 @@
 ---
-tags: review
+tags: review, workflow
 summary: How I use the just command runner to create a simple, unified interface for running, testing, linting, and formatting all my projects, regardless of the tech stack.
 ---
 

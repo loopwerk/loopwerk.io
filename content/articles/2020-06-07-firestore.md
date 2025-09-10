@@ -1,5 +1,5 @@
 ---
-tags: firebase
+tags: firebase, review
 summary: Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I started with Vapor 3, then made the same backend in Django REST Framework, and couldn't really choose between the two...
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: javascript
+tags: javascript, insights
 ---
 
 # Our front end stack one year later

@@ -1,5 +1,5 @@
 ---
-tags: python, django
+tags: python, django, insights
 summary: Why I only use Django's base View class instead of generic class-based views or function-based views.
 ---
 
