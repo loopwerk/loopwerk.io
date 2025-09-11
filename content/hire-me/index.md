@@ -18,11 +18,11 @@ Over my 25 years of experience, [I’ve learned that the best solution is often 
 >
 > <cite>&mdash; Michael Hodges, former CTO at Skippit</cite>
 
-> "From the moment he joined our development team **the quality of the code base increased quickly and our release cycles shortened significantly.** Kevin also has a healthy knowledge of UX and UI, which made me and the team always consider his fresh valuable input. Except for being a solid rock in your team, Kevin is also just a super nice and pleasant guy. I truly enjoyed having his peaceful personality around and I hope, maybe one day, we can embark on a new adventure together once again. "
+> "From the moment he joined our development team **the quality of the code base increased quickly and our release cycles shortened significantly.** Kevin also has a healthy knowledge of UX and UI, which made me and the team always consider his fresh valuable input. Besides being a solid rock in your team, Kevin is also just a super nice and pleasant guy. I truly enjoyed having his peaceful personality around."
 >
 > <cite>&mdash; Bert Verstappen, former Project Manager at Tessa (a Unilever project)</cite>
 
-> “I worked with Kevin on the Last.fm Scrobbler App for iOS. The app was a very complicated and challenging build that had to be completed to a tight deadline. From the first day of development Kevin proved to be personally invested in the project, suggesting ways to make it more powerful and useful, ideas that resulted in great user feedback. [...] **the app was fully fleshed out and crash free so early in the process that we could focus on performance, and even add a few features.**”
+> “I worked with Kevin on the Last.fm Scrobbler App for iOS. The app was a very complicated and challenging build that had to be completed to a tight deadline. From the first day of development Kevin proved to be personally invested in the project, suggesting ways to make it more powerful and useful, ideas that resulted in great user feedback. Amazingly, **the app was fully fleshed out and crash free so early in the process that we could focus on performance, and even add a few features.**”
 > >
 > <cite>&mdash; Graham Todman, former Director of Design at Last.fm</cite>
 
