@@ -5,7 +5,7 @@ summary: How I use the just command runner to create a simple, unified interface
 
 # One command to run them all
 
-As a developer who jumps between projects in Python, JavaScript, and Swift, I live with a constant, low-level friction: remembering the right command to get things done. For example to run the development server it might be `uv run ./manage.py runserver`, `pnpm dev`, or `swift run watch content Sources deploy`, depending on the project. 
+As a developer who jumps between projects in Python, JavaScript, and Swift, I live with a constant, low-level friction: remembering the right command to get things done. For example to run the development server it might be `uv run ./manage.py runserver`, `pnpm dev`, or `swift run watch`, depending on the project. 
 
 For a long time, I just dealt with it. I'd seen people praise the [just](https://github.com/casey/just) command runner, but I never really got the point. It seemed like a solution in search of a problem.
 
