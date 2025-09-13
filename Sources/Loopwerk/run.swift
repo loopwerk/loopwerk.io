@@ -50,6 +50,10 @@ extension Item where M == ArticleMetadata {
   var archive: Bool {
     return metadata.archive ?? false
   }
+  
+  var year: Int {
+    return Calendar.current.component(.year, from: self.date)
+  }
 }
 
 enum SiteMetadata {

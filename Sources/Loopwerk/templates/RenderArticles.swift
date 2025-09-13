@@ -16,10 +16,13 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
-    h2 {
-      a(class: "bg-light rounded-md overflow-hidden text-2xl font-bold p-4 relative min-h-[4em] flex items-end [&:hover]:bg-orange", href: article.url) { article.title }
-    }
-    div(class: "bg-sub rounded-b-md overflow-hidden -mt-3 pt-3") {
+    div(class: "bg-sub rounded-md") {
+      a(class: "group", href: article.url) {
+        h2(class: "bg-light rounded-md text-2xl font-bold p-4 min-h-[4em] flex items-end group-hover:bg-orange") {
+          article.title
+        }
+      }
+      
       div(class: "text-gray gray-links text-sm p-4") {
         span(class: "border-r border-gray pr-2 mr-2") {
           article.date.formatted("MMMM dd, YYYY")
@@ -32,7 +35,8 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
           ])
         }
       }
-      p(class: "p-4 pt-1") {
+
+      p(class: "p-4 pt-0") {
         a(href: article.url) { article.summary }
       }
     }
@@ -40,10 +44,7 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
 }
 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  let dateFormatter = DateFormatter()
-  dateFormatter.dateFormat = "yyyy"
-
-  let articlesPerYear = Dictionary(grouping: context.items, by: { dateFormatter.string(from: $0.date) })
+  let articlesPerYear = Dictionary(grouping: context.items, by: { $0.year })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
   
   let tagsWithCounts = uniqueTagsWithCount(context.items)
@@ -65,7 +66,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
     // Articles by year
     sortedByYearDescending.map { year, articles in
       div {
-        h1(class: "text-4xl font-extrabold mb-12") { year }
+        h1(class: "text-4xl font-extrabold mb-12") { "\(year)" }
 
         div(class: "grid lg:grid-cols-2 gap-8 mb-16") {
           articles.map { renderArticleForGrid(article: $0) }
