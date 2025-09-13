@@ -1,5 +1,5 @@
 ---
-tags: django, python, deployment
+tags: django, python, deployment, howto
 summary: I'm a big fan of the django-tailwind-cli package, but I ran into problems deploying it to production. Here’s how to make sure you cache-bust tailwind.css.
 ---
 
@@ -31,19 +31,9 @@ STORAGES = {
 }
 ```
 
-## Step 2: update your base template
+## Step 2: update your deploy process
 
-Replace the `{% tailwind_css %}` tag with:
-
-#### <i class="fa-regular fa-file-code"></i> base.html
-```html
-<link rel="preload" href="{% static 'css/tailwind.css' %}" as="style">
-<link href="{% static 'css/tailwind.css' %}" rel="stylesheet" />
-```
-
-## Step 3: update your deploy process
-
-With those two things configured, your deployment process for static files will now be a two-step command:
+With the settings configured, your deployment process for static files will now be a two-step command:
 
 ```sh
 ./manage.py tailwind build

@@ -1,5 +1,5 @@
 ---
-tags: python, django
+tags: python, django, howto
 summary: How do you delete baskets belonging to anonymous users when their sessions expire? It wasn't quite as simple as I thought.
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: saga, open source, swift, insights
+tags: saga, swift, insights
 summary: I started building Saga, my own static site generator written in Swift, four years ago. Let’s look at the state of the project.
 ---
 

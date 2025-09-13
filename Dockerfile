@@ -54,7 +54,7 @@ RUN echo "Starting website build..." \
     && pnpm index \
     && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
 
-# Build the CSS, give it a unique nameand replace the path in all the HTML files
+# Build the CSS, give it a unique name, and replace the path in all the HTML files
 RUN pnpm css-build && ./hash-css.sh
 
 # Stage 2: Nginx runtime

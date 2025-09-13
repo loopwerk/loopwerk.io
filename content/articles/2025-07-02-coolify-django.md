@@ -1,5 +1,5 @@
 ---
-tags: django, python, deployment, coolify
+tags: django, python, deployment, coolify, howto
 summary: How I moved my Django projects from a manual server setup to Coolify for easier, zero-downtime deployments.
 ---
 

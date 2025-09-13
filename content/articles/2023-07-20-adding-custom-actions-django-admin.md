@@ -1,5 +1,5 @@
 ---
-tags: python, django
+tags: python, django, howto
 summary: Let's add custom actions to Django's admin site - but to the change form, not the list view.
 ---
 

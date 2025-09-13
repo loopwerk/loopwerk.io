@@ -1,5 +1,5 @@
 ---
-tags: django, python, open source, news
+tags: django, python, news
 summary: I love RSS feeds, but it’s not ideal that you’re stuck with all the articles that are in the feed. So I built RSSfilter.com, offering a way to filter the feed based on keywords and categories.
 ---
 

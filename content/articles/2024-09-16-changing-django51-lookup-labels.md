@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django, python, howto
 summary: Django 5.1 adds related field lookup to the model admin’s list_display, but with an annoying quirk. Let’s fix that!
 ---
 

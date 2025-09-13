@@ -1,5 +1,5 @@
 ---
-tags: javascript, open source, workflow, news
+tags: javascript, workflow, news
 ---
 
 # Announcing tag-changelog: automate your changelog and GitHub releases

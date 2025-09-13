@@ -1,5 +1,5 @@
 ---
-tags: python, uv, faq
+tags: python, uv, howto
 summary: So, like me you’ve decided to switch from Poetry to uv, and now you’re wondering how to actually migrate your pyproject.toml file? You’ve come to the right place!
 ---
 

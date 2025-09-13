@@ -1,5 +1,5 @@
 ---
-tags: firebase, javascript
+tags: firebase, javascript, howto
 ---
 
 # Connecting Stripe to Firestore via Cloud Functions and webhooks

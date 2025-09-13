@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, open source
+tags: swift, saga
 summary: I've already replaced my own SwiftMarkdown package...
 ---
 

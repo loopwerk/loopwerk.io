@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, open source
+tags: swift, saga
 summary: Part 2, where I'm looking back at the current API of Saga.
 ---
 

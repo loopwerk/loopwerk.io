@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django, python, howto
 summary: A dive into why Django's DATETIME_FORMAT setting seems to do nothing, and how to actually force the 24-hour clock in the admin, even when your locale says otherwise.
 ---
 

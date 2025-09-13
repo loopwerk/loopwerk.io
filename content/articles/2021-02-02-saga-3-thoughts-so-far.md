@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, open source
+tags: swift, saga
 summary: In the third and final part of this series about Saga I'm looking at the pros and cons of the current system and what I might want to change.
 ---
 

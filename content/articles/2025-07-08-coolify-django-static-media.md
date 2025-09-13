@@ -1,5 +1,5 @@
 ---
-tags: django, python, deployment, coolify
+tags: django, python, deployment, coolify, howto
 summary: Let’s solve the challenge of serving media files for your Coolified Django site.
 ---
 

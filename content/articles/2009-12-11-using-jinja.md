@@ -1,5 +1,6 @@
 ---
-tags: python, django
+tags: python, django, howto
+archive: true
 ---
 
 # Using Jinja2 templates in Django
