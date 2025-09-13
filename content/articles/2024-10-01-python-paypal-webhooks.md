@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django, python, open source
 summary: Paypal’s documentation only shows a JavaScript example. How do you validate the webhooks in Python though?
 ---
 
