@@ -10,6 +10,8 @@ When learning Django, one of the first major forks in the road is how to write y
 It begins with the basics:
 
 ```python
+from django.http import HttpResponse
+
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 ```
@@ -17,6 +19,8 @@ def index(request):
 It then gets a bit more complicated, but still using function-based views:
 
 ```python
+from django.shortcuts import render
+
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {"latest_question_list": latest_question_list}
@@ -26,7 +30,9 @@ def index(request):
 But quickly after that, it dives into generic class-based views (CBV):
 
 ```python
-class IndexView(generic.ListView):
+from django.views.generic.list import ListView
+
+class IndexView(ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
 
@@ -74,6 +80,9 @@ However, I take a slightly different approach in my own projects: I only use the
 So, instead of a function-based view with a big `if` block:
 
 ```python
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+
 def comment_form_view(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
@@ -93,6 +102,10 @@ def comment_form_view(request, post_id):
 I write this:
 
 ```python
+from django.views import View
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+
 class CommentFormView(View):
     def get(self, request, post_id, *args, **kwargs):
         post = get_object_or_404(Post, pk=post_id)
@@ -116,6 +129,10 @@ While this class-based version is a few lines longer, I find the separation of `
 You might notice a small duplication here: `get_object_or_404` is called in both `get` and `post`. The "textbook" way to solve this using the base `View` class is to use the `dispatch` method. It runs before `get` or `post` are called, making it a natural place for setup logic:
 
 ```python
+from django.views import View
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+
 class CommentFormView(View):
     def dispatch(self, request, post_id, *args, **kwargs):
         self.post_obj = get_object_or_404(Post, pk=post_id)
@@ -141,6 +158,10 @@ However, I don't really use this pattern in my own code, as it feels a bit too m
 For a simple case like this, I often find the small duplication is actually the clearest option. It's explicit and requires zero cognitive overhead to understand what's happening in `get` and `post`. If the setup logic becomes more complex, or when there is a bigger shared context with more variables in play, then instead of using `dispatch` I'll extract it into a simple helper method that I can call from both places. This keeps the control flow explicit:
 
 ```python
+from django.views import View
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+
 class CommentFormView(View):
     def get_shared_context(self, request, post_id):
         # Imagine that this would return more than just the one post variable 😅
@@ -171,6 +192,9 @@ This, for me, is the sweet spot. We've eliminated the code duplication, but in a
 And yes, Django’s `FormView` is smaller in its most basic form:
 
 ```python
+from django.views.generic.edit import FormView
+from django.shortcuts import get_object_or_404, redirect
+
 class CommentFormView(FormView):
     template_name = "form.html"
     form_class = CommentForm
