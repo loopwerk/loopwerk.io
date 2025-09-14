@@ -99,7 +99,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
     div(class: "border-t border-light mt-8 pt-8") {
       h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
-      div(class: "flex flex-col lg:flex-row gap-8") {
+      div(class: "flex flex-col lg:flex-row gap-8 lg:items-center") {
         div(class: "flex-[0_0_120px]") {
           img(class: "w-[120px] h-[120px] rounded-full", src: "/articles/images/kevin.png")
         }
@@ -107,14 +107,18 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
           p(class: "text-gray gray-links") {
-            "Freelance software developer with over 25 years of experience. Writes articles about Swift, Python, and TypeScript. Builds"
-            a(href: "https://www.critical-notes.com") { "Critical Notes" }
-            %", and maintains a bunch of"
+            "I'm a freelance software developer with over 25 years of experience. I write articles about Swift, Python, and TypeScript. I've worked on "
+            a(href: "/apps/") { "many apps" }
+            %", and maintain a bunch of"
             a(href: "/projects/") { "open source projects" }
-            %". Connect on"
-            a(href: "https://hachyderm.io/@kevinrenskers") { "Mastodon" }
-            %" or"
-            a(href: "https://bsky.app/profile/loopwerk.io") { "Bluesky" }
+            %". I'm available "
+            a(href: "/hire-me/") { "for hire" }
+            %" and for podcast interviews about Django, Python, and modern web development. Connect with me on"
+            a(href: "https://hachyderm.io/@kevinrenskers", target: "_blank") { "Mastodon" }
+            %", "
+            a(href: "https://bsky.app/profile/loopwerk.io", target: "_blank") { "Bluesky" }
+            %", or "
+            a(href: "mailto:kevin@loopwerk.io") { "email" }
             %"."
           }
         }
