@@ -65,7 +65,7 @@ And then you need to know its method resolution order, or what it calls internal
 - `get()`
 - `render_to_response()`
 
-That’s 11 methods spread across 5 classes and mixins. Debugging a view or figuring out exactly which method to override to make the view behave in a certain way quickly becomes a case of opening way too many files and jumping back and worth between different method declarations. It’s just too much.
+That’s 11 methods spread across 5 classes and mixins. Debugging a view or figuring out exactly which method to override to make the view behave in a certain way quickly becomes a case of opening way too many files and jumping back and forth between different method declarations. It’s just too much.
 
 The supposed benefit is to make your views simpler with less code, but honestly for simple views it doesn’t really save any lines, and for complex views you’re often fighting against the default behavior of the generic views.
 
