@@ -113,7 +113,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             a(href: "/projects/") { "open source projects" }
             %". I'm available "
             a(href: "/hire-me/") { "for hire" }
-            %" and for podcast interviews about Django, Python, and modern web development. Connect with me on"
+            %" and for podcast interviews about modern web development. Connect with me on"
             a(href: "https://hachyderm.io/@kevinrenskers", target: "_blank") { "Mastodon" }
             %", "
             a(href: "https://bsky.app/profile/loopwerk.io", target: "_blank") { "Bluesky" }
