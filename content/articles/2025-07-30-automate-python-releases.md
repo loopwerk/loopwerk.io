@@ -26,7 +26,7 @@ And those two steps can be simplified even further by using tbump:
 
 1. Just run `tbump {new_version_number}`.
 
-It’ll update the version number in `pyproject.toml`, commit the changes, and create a push a new tag to Git. Check the [tbump website](https://github.com/your-tools/tbump) for instructions on how to set it up.
+It’ll update the version number in `pyproject.toml`, commit the changes, and create and push a new tag to Git. Check the [tbump website](https://github.com/your-tools/tbump) for instructions on how to set it up.
 
 The workflow that does all the automated work should be added to the `.github/workflows/` folder in your repo. Here’s mine:
 
