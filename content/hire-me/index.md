@@ -4,7 +4,7 @@ section: hireMe
 
 # Hire me
 
-I created my first website in 2000 and my first iOS app in 2010. I’ve been working as a fully remote freelance developer since 2016, finishing and fixing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix, so you’re in good hands. You can find my portfolio on the [Apps](/apps/) page.
+I created my first website in 2000 and my first iOS app in 2010. I’ve been working as a fully remote freelance developer since 2016, finishing and fixing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix, so you’re in good hands. You can find my portfolio on the [Apps](/apps/) page, and my CV can be downloaded [here](/about/KevinRenskers.pdf).
 
 I’ve also mentored multiple junior developers, both at other companies and in my own [mentorship program](/mentor/).
 
