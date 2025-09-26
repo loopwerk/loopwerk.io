@@ -101,7 +101,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
             " | "
             a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
             " | "
-            a(href: "https://bsky.app/profile/loopwerk.io", rel: "nofollow", target: "_blank") { "Bluesky" }
+            a(href: "mailto:kevin@loopwerk.io") { "Email" }
           }
         }
 

@@ -47,4 +47,4 @@ I work fully remote from my own office in Winterswijk, the Netherlands. I work f
 ### Let’s work together!
 You can expect a healthy dose of Dutch honesty from me. I’ll just tell you how it is, what needs to be fixed, without the sugar-coating. I think our industry could use some more honesty and better ethics. If all of that sounds good, then let’s work together!
 
-Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers) or [LinkedIn](https://www.linkedin.com/in/kevinrenskers/).
+Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers).

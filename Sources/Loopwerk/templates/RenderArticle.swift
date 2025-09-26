@@ -115,9 +115,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             a(href: "/hire-me/") { "for hire" }
             %" and for podcast interviews about modern web development. Connect with me on"
             a(href: "https://hachyderm.io/@kevinrenskers", target: "_blank") { "Mastodon" }
-            %", "
-            a(href: "https://bsky.app/profile/loopwerk.io", target: "_blank") { "Bluesky" }
-            %", or "
+            %" or "
             a(href: "mailto:kevin@loopwerk.io") { "email" }
             %"."
           }
