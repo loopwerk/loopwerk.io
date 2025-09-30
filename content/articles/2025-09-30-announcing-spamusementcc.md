@@ -13,4 +13,6 @@ Like this one, titled “Your Dog Will Love It!”
 
 Spamusement.com was created by Steven Frank (yes, [that one](https://stevenf.com)) in 2004, and was updated until 2007. Sadly the website went offline in 2020 and the only way to access those comics now is with the Internet Archive, which is very slow, and it blocks you after you quickly access multiple pages in a row.
 
-I missed it so much that I put online an archive: [spamusement.cc](https://www.spamusement.cc).
+**I missed it so much that I put online an archive: [spamusement.cc](https://www.spamusement.cc).**
+
+The site is built using [Saga](https://github.com/loopwerk/Saga) (of course), and the source can be found on [GitHub](https://github.com/kevinrenskers/spamusement.cc). No matter if you’re already aquatinted with Spamusement or it’s completely new to you, I hope the comics make your day a smiley day.
