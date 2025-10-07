@@ -6,7 +6,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
     div(class: "prose") {
       h1 { "Open Source" }
       p {
-        "These are some of the more interesting open source projects I’ve created (or contributed to) over the years."
+        "These are some of the more interesting open source projects I’ve created over the years."
       }
     }
 
@@ -35,15 +35,10 @@ private func renderProject(project: Item<ProjectMetadata>) -> Node {
   div(class: "pb-10 lg:pb-8") {
     h3(class: "text-xl font-bold") {
       project.title
-      if project.involvement != .author {
-        span(class: "text-sm text-gray border border-gray p-1 rounded ml-2") {
-          project.involvement.rawValue
-        }
-      }
     }
 
-    p {
-      project.metadata.text
+    div(class: "[&_a]:underline") {
+      Node.raw(project.body)
     }
 
     div(class: "mt-2 lg:mt-0 flex gap-1 lg:gap-4 items-start lg:items-center flex-col lg:flex-row") {
