@@ -1,6 +1,6 @@
 ---
 tags: django, python, insights
-summary: Async Django represents a massive engineering effort that adds considerable complexity to the framework for benefits so niche that it often proves to be a counterproductive trap for the average developer.
+summary: While a technical marvel, async Django has been quietly rejected by the community it was built for, with the vast majority of developers finding its complexity outweighs its niche benefits and sticking to simpler, proven solutions.
 ---
 
 # Async Django: a solution in search of a problem?
