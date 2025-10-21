@@ -9,7 +9,7 @@ A client recently asked me a seemingly simple question: "If we switch our Django
 
 The short answer is no. The slightly longer answer is that switching the server from WSGI to ASGI does nothing on its own. To see any change, you have to start rewriting your views to be `async`, and even then, the benefits are marginal at best for 99% of web applications. For their specific workload, offloading heavy tasks to a background worker is a far simpler and more effective solution.
 
-This conversation got me thinking. My experience with async in the Django ecosystem limited to Django Channels for WebSocket support. It works, but the setup is complex. If I were starting today, I’d probably use Server-Sent Events, or maybe build a tiny, separate WebSocket server in TypeScript and have my Django app post updates to it. Simple, decoupled, and far less cognitive overhead. But I have never used async views, and nobody that I know has used Async Django apart from Channels. No async views or async database calls.
+This conversation got me thinking. My experience with async in the Django ecosystem is limited to Django Channels for WebSocket support. It works, but the setup is complex. If I were starting today, I’d probably use Server-Sent Events, or maybe build a tiny, separate WebSocket server in TypeScript and have my Django app post updates to it. Simple, decoupled, and far less cognitive overhead. But I have never used async views, and nobody that I know has used Async Django apart from Channels. No async views or async database calls.
 
 So if the performance gains are elusive and the complexity is high, why did the Django team pour countless hours into a multi-year effort to bolt async onto a fundamentally synchronous framework? I decided to dig in. The more I looked, the more it felt like a feature with a profound mismatch between its complexity and its practical application for the average Django developer.
 
@@ -19,7 +19,7 @@ The official justification for async Django is to better handle I/O-bound worklo
 
 In a traditional synchronous (WSGI) world, when a request is waiting, it holds a worker process hostage. If you have four workers and four requests are all waiting on slow API calls, your entire server is blocked. A fifth user has to wait in line.
 
-Async (ASGI) flips this model. An `async` view can say, "I'm waiting for this API call," and hand control back to the event loop, which can then start work on another request. When the API call finishes, the event loop picks the original task back up. This allows a single process to juggle hundreds or even thousands of concurrent connections, making it a good fit for:
+Async (ASGI) flips this model. An `async` view can say, "I'm waiting for this API call”, and hand control back to the event loop, which can then start work on another request. When the API call finishes, the event loop picks the original task back up. This allows a single process to juggle hundreds or even thousands of concurrent connections, making it a good fit for:
 
 *   **High-concurrency APIs:** Handling a massive number of simultaneous, slow requests.
 *   **Real-time features:** WebSockets, live notifications, and chat applications.
@@ -35,7 +35,7 @@ The practical reality is that after years and countless hours of effort to add a
 
 Furthermore, the heart of Django - the ORM - is still a work in progress. To call a synchronous piece of code from an `async` view, you must wrap it in `sync_to_async`. While functional, this bridge highlights the inherent friction between the two paradigms and serves as a constant reminder that the async path is still evolving. For new developers, this duality can make the documentation harder to navigate.
 
-If you truly need raw, async-first performance, frameworks like FastAPI are [objectively better](https://github.com/AakarSharma/fastapi-vs-django-benchmark). Built on Starlette, FastAPI is async from the ground up and consistently outperforms Django in high-concurrency benchmarks. This isn't just because of async, but also because it's a lighter framework with less built-in machinery.
+If you truly need raw, async-first performance, frameworks like FastAPI are [objectively better](https://github.com/AakarSharma/fastapi-vs-django-benchmark). Built on Starlette, FastAPI is async from the ground up and consistently outperforms Django in high-concurrency benchmarks. This isn't just because of async, but also because it's a lighter framework with less built-in machinery. No batteries included.
 
 ## A monumental and unending effort
 
