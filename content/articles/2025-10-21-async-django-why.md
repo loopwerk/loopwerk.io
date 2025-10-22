@@ -1,6 +1,6 @@
 ---
 tags: django, python, insights
-summary: While a technical marvel, async Django has been quietly rejected by the community it was built for, with the vast majority of developers finding its complexity outweighs its niche benefits and sticking to simpler, proven solutions.
+summary: While a technical marvel, async Django has been quietly rejected by the community it was built for, with the vast majority of developers sticking to simpler, proven solutions.
 ---
 
 # Async Django: a solution in search of a problem?
@@ -39,7 +39,7 @@ If you truly need raw, async-first performance, frameworks like FastAPI are [obj
 
 ## A monumental and unending effort
 
-The journey to bring async to Django has been a marathon, not a sprint. It officially began in 2018 with Godwin's proposal ([DEP 0009 ](https://github.com/django/deps/blob/main/accepted/0009-async.rst)) and has been a part of every major release since.
+The journey to bring async to Django has been a marathon, not a sprint. It officially began in 2018 with Godwin's proposal ([DEP 0009](https://github.com/django/deps/blob/main/accepted/0009-async.rst)) and has been a part of every major release since.
 
 *   **Django 3.0 (2019):** Introduced basic ASGI support.
 *   **Django 3.1 (2020):** Delivered the first `async` views, middleware, and tests.
@@ -53,6 +53,7 @@ This timeline represents a colossal investment of time from numerous core contri
 > I do think we’ll never be able to make it fully async only in the ORM core, as the slowdown in sync mode will just be too much. Given that, I’m very realistic about the fact that we may just not be able to write and maintain what are two parallel ORM cores
 
 ## My verdict: an impressive feat for a problem that rarely exists
+
 The journey to add async support to Django is a marvel of open-source engineering. The core team managed to graft a fundamentally new paradigm onto a mature, synchronous framework without breaking it for the millions of users who rely on it. It is, by all measures, an incredible technical achievement.
 
 But a feature's success isn't measured by its technical brilliance; it's measured by its utility. For a feature to justify the permanent complexity it adds, it must solve a common problem more effectively than existing solutions. On this front, Async Django falters.
@@ -66,3 +67,5 @@ So, was it worth it? For the developer in the trenches, my answer is a clear no.
 The proof is in the silence of its adoption. The fact is, I personally know nobody who reaches for `async def` in their Django projects, apart from the necessity of using Channels. The data backs this up: according to the official [Django Developer Survey from 2024](https://blog.jetbrains.com/pycharm/2024/06/the-state-of-django/), conducted by JetBrains and the Django Software Foundation with around 4,000 respondents, only 14% of Django developers actually use async views. And that's despite this feature being available since 2020. More tellingly, when Django developers do need async capabilities, they're more likely to reach for FastAPI than Django's own async features.
 
 This isn't developer inertia; it's a silent consensus. When faced with a slow task, the pragmatic, battle-tested answer remains the same as it always has been: "put it in the background”. That simple, robust pattern is the true Django way, leaving async as a solution for a problem most of us will never have. A six-year engineering marathon that 86% of Django developers have chosen not to run.
+
+I wonder if Django is falling prey to the sunken cost fallacy. What other improvements could have been made to the framework with the thousands of hours poured into async? Instead of trying to be competitive on every front, perhaps Django's strength lies in doubling down on what it has always done best: providing a robust, batteries-included framework for rapid, pragmatic development. The reality is, many developers who need async are leaving for FastAPI anyway, which makes the entire effort feel like it may have been wasted.
