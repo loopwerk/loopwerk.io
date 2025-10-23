@@ -41,6 +41,10 @@ RUN echo "Prefetching and prebuilding dependencies..." \
 # Copy all source files
 COPY . .
 
+# Restore file creation dates from git history
+RUN echo "Restoring file creation dates from git history..." \
+    && python3 restore-creation-dates.py
+
 # Build the site with verbose output for debugging
 RUN echo "Starting website build..." \
     && .build/release/Loopwerk createArticleImages \

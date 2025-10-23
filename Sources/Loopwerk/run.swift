@@ -45,66 +45,30 @@ extension Item where M == ArticleMetadata {
   }
   
   var creationDate: Date {
-    guard shouldCreateImages() else {
-      return self.date
-    }
-
-    // Try to get creation date from git history
-    let process = Process()
-    process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
-    process.arguments = ["log", "--follow", "--format=%aI", "--reverse", self.relativeSource.string]
-
-    // Extract path up to and including "content"
-    let pathComponents = self.absoluteSource.string.components(separatedBy: "/")
-    if let contentIndex = pathComponents.firstIndex(of: "content") {
-      let contentPath = pathComponents[0...contentIndex].joined(separator: "/")
-      process.currentDirectoryPath = contentPath
-    }
-
-    let pipe = Pipe()
-    process.standardOutput = pipe
-    process.standardError = Pipe()
-
-    do {
-      try process.run()
-      process.waitUntilExit()
-
-      let data = pipe.fileHandleForReading.readDataToEndOfFile()
-      if let output = String(data: data, encoding: .utf8), let firstLine = output.split(separator: "\n").first {
-        let iso8601Formatter = ISO8601DateFormatter()
-        if let gitDate = iso8601Formatter.date(from: String(firstLine)) {
-          // Convert git date to Amsterdam timezone to check if date matches
-          let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
-          var calendar = Calendar.current
-          calendar.timeZone = amsterdamTimeZone
-          
-          let gitDateComponents = calendar.dateComponents([.year, .month, .day], from: gitDate)
-          let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
-          
-          // Check if the dates match in Amsterdam timezone
-          if gitDateComponents.year == selfDateComponents.year &&
-             gitDateComponents.month == selfDateComponents.month &&
-             gitDateComponents.day == selfDateComponents.day {
-            return gitDate
-          }
-        }
-      }
-    } catch {
-      // If git fails, fall back to the date from filename
-    }
-    
-    // Fallback: use the date from filename with noon in Amsterdam timezone
+    // Use file creation date if it matches the filename date (accounting for timezone)
+    // The restore-creation-dates.py script should have set proper file timestamps
     let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
     var calendar = Calendar.current
     calendar.timeZone = amsterdamTimeZone
 
-    var components = calendar.dateComponents([.year, .month, .day], from: self.date)
+    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: self.created)
+    let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
+
+    // Check if the dates match in Amsterdam timezone
+    if fileCreationComponents.year == selfDateComponents.year &&
+       fileCreationComponents.month == selfDateComponents.month &&
+       fileCreationComponents.day == selfDateComponents.day {
+      return self.created
+    }
+
+    // Fallback to self.date (filename date at noon)
+    var components = Calendar.current.dateComponents([.year, .month, .day], from: self.date)
     components.hour = 12
     components.minute = 0
     components.second = 0
-    components.timeZone = amsterdamTimeZone
+    components.timeZone = TimeZone.current
 
-    return calendar.date(from: components) ?? self.date
+    return Calendar.current.date(from: components) ?? self.date
   }
 }
 
