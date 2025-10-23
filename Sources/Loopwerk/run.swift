@@ -43,6 +43,69 @@ extension Item where M == ArticleMetadata {
   var year: Int {
     return Calendar.current.component(.year, from: self.date)
   }
+  
+  var creationDate: Date {
+    guard shouldCreateImages() else {
+      return self.date
+    }
+
+    // Try to get creation date from git history
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
+    process.arguments = ["log", "--follow", "--format=%aI", "--reverse", self.relativeSource.string]
+
+    // Extract path up to and including "content"
+    let pathComponents = self.absoluteSource.string.components(separatedBy: "/")
+    if let contentIndex = pathComponents.firstIndex(of: "content") {
+      let contentPath = pathComponents[0...contentIndex].joined(separator: "/")
+      process.currentDirectoryPath = contentPath
+    }
+
+    let pipe = Pipe()
+    process.standardOutput = pipe
+    process.standardError = Pipe()
+
+    do {
+      try process.run()
+      process.waitUntilExit()
+
+      let data = pipe.fileHandleForReading.readDataToEndOfFile()
+      if let output = String(data: data, encoding: .utf8), let firstLine = output.split(separator: "\n").first {
+        let iso8601Formatter = ISO8601DateFormatter()
+        if let gitDate = iso8601Formatter.date(from: String(firstLine)) {
+          // Convert git date to Amsterdam timezone to check if date matches
+          let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
+          var calendar = Calendar.current
+          calendar.timeZone = amsterdamTimeZone
+          
+          let gitDateComponents = calendar.dateComponents([.year, .month, .day], from: gitDate)
+          let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
+          
+          // Check if the dates match in Amsterdam timezone
+          if gitDateComponents.year == selfDateComponents.year &&
+             gitDateComponents.month == selfDateComponents.month &&
+             gitDateComponents.day == selfDateComponents.day {
+            return gitDate
+          }
+        }
+      }
+    } catch {
+      // If git fails, fall back to the date from filename
+    }
+    
+    // Fallback: use the date from filename with noon in Amsterdam timezone
+    let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
+    var calendar = Calendar.current
+    calendar.timeZone = amsterdamTimeZone
+
+    var components = calendar.dateComponents([.year, .month, .day], from: self.date)
+    components.hour = 12
+    components.minute = 0
+    components.second = 0
+    components.timeZone = amsterdamTimeZone
+
+    return calendar.date(from: components) ?? self.date
+  }
 }
 
 enum SiteMetadata {
@@ -95,8 +158,8 @@ struct Run {
           .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
-          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.date), output: "feed.xml"),
-          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.date), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "feed.xml"),
+          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
         ]
       )
       .register(
