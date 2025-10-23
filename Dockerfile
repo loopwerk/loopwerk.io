@@ -42,9 +42,12 @@ RUN echo "Prefetching and prebuilding dependencies..." \
 # Copy all source files
 COPY . .
 
-# Restore file modification dates from git history (oldest commit time)
-RUN echo "Restoring file timestamps from git history..." \
-    && git restore-mtime --oldest-time
+# Clone the repository to get .git directory for git-restore-mtime
+# This is necessary because Coolify doesn't include .git in build context
+RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
+    && cp -r /tmp/repo/.git . \
+    && git restore-mtime --oldest-time \
+    && rm -rf .git /tmp/repo
 
 # Build the site with verbose output for debugging
 RUN echo "Starting website build..." \
