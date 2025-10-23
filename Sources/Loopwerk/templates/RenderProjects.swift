@@ -10,7 +10,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
       }
     }
 
-    ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
+    ["Swift", "Python", "JavaScript", "Objective-C", "Other"].map { category -> Node in
       let projects = context.items.filter { $0.metadata.category == category }
       return renderCategory(category: category, projects: projects)
     }
