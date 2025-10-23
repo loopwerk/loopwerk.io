@@ -51,14 +51,14 @@ extension Item where M == ArticleMetadata {
     var calendar = Calendar.current
     calendar.timeZone = amsterdamTimeZone
 
-    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: self.created)
+    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: self.lastModified)
     let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
 
     // Check if the dates match in Amsterdam timezone
     if fileCreationComponents.year == selfDateComponents.year &&
        fileCreationComponents.month == selfDateComponents.month &&
        fileCreationComponents.day == selfDateComponents.day {
-      return self.created
+      return self.lastModified
     }
 
     // Fallback to self.date (filename date at noon)
