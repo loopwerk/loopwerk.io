@@ -45,8 +45,8 @@ extension Item where M == ArticleMetadata {
   }
   
   var creationDate: Date {
-    // Use file creation date if it matches the filename date (accounting for timezone)
-    // The restore-creation-dates.py script should have set proper file timestamps
+    // Use file modification date if it matches the filename date (accounting for timezone)
+    // The git-restore-mtime script should have set proper file timestamps to the FIRST commit
     let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
     var calendar = Calendar.current
     calendar.timeZone = amsterdamTimeZone
