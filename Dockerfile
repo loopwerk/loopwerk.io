@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libavif-dev \
     python3 \
     git \
+    git-restore-mtime \
     curl wget \
     nodejs npm \
     && rm -rf /var/lib/apt/lists/*
@@ -40,6 +41,10 @@ RUN echo "Prefetching and prebuilding dependencies..." \
 
 # Copy all source files
 COPY . .
+
+# Restore file modification dates from git history (oldest commit time)
+RUN echo "Restoring file timestamps from git history..." \
+    && git restore-mtime --oldest-time
 
 # Build the site with verbose output for debugging
 RUN echo "Starting website build..." \

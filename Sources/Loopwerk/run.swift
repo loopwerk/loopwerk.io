@@ -43,6 +43,33 @@ extension Item where M == ArticleMetadata {
   var year: Int {
     return Calendar.current.component(.year, from: self.date)
   }
+  
+  var creationDate: Date {
+    // Use file modification date if it matches the filename date (accounting for timezone)
+    // The git-restore-mtime script should have set proper file timestamps to the FIRST commit
+    let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
+    var calendar = Calendar.current
+    calendar.timeZone = amsterdamTimeZone
+
+    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: self.lastModified)
+    let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
+
+    // Check if the dates match in Amsterdam timezone
+    if fileCreationComponents.year == selfDateComponents.year &&
+       fileCreationComponents.month == selfDateComponents.month &&
+       fileCreationComponents.day == selfDateComponents.day {
+      return self.lastModified
+    }
+
+    // Fallback to self.date (filename date at noon)
+    var components = Calendar.current.dateComponents([.year, .month, .day], from: self.date)
+    components.hour = 12
+    components.minute = 0
+    components.second = 0
+    components.timeZone = TimeZone.current
+
+    return Calendar.current.date(from: components) ?? self.date
+  }
 }
 
 enum SiteMetadata {
@@ -95,8 +122,8 @@ struct Run {
           .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
-          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.date), output: "feed.xml"),
-          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.date), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "feed.xml"),
+          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
         ]
       )
       .register(
