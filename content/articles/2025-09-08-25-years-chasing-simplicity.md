@@ -37,7 +37,7 @@ Eventually, the pendulum swung back.
 
 TypeScript brought sanity to JavaScript. Svelte and SvelteKit made complexity vanish into the background, giving me the power of modern frameworks without the headaches of endless configuration. Writing code felt fun again.
 
-Then came htmx and Alpine AJAX. Suddenly I was back to building multi-page apps without a build step, just like in the early days, but now with smooth interactivity. It felt almost old-school, but in the best way.
+Then came htmx and [Alpine AJAX](/articles/2025/alpine-ajax-django/). Suddenly I was back to building multi-page apps without a build step, just like in the early days, but now with smooth interactivity. It felt almost old-school, but in the best way.
 
 When it comes to deployment, I’ve seen it all over the years:
 
@@ -48,14 +48,13 @@ When it comes to deployment, I’ve seen it all over the years:
 5.	GitHub webhooks running a deploy script on that bare metal server (automation!)
 6.	Coolify (the sweet spot: self-hosted, automated, free, and simple)
 	
-Push to GitHub, and it’s live. I think the deployment story is still too complex when it comes to Python apps, but with Coolify it got so much better than anything I’ve had before.
+Push to GitHub, and it’s live. I think the deployment story is still too complex when it comes to Python apps, but [with Coolify it got so much better](/articles/2025/coolify-django/) than anything I’ve had before.
 
 ## The lessons learned
 
 A quarter of a century later, I see the pattern clearly: technology cycles from simple to complex and back to simple again. But the return to simplicity isn't automatic. It's a choice. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity. The best tools are the ones that get out of your way, letting you focus on the creative act of building rather than wrestling with the machinery. 
 
 My 25-year journey has crystalized a few truths. If I could share the lessons from all those years with a new developer, they would be these:
-
 
 1.  **Keep it simple.** This applies everywhere. As the chef Marco Pierre White says, “Perfection is lots of little things done well”, and "Consistency is born out of simplicity”. A clever one-liner might feel smart today, but it will be unreadable to your future self or a teammate tomorrow. Don't over-engineer. The chances you'll need to scale to millions of users are slim; build for the problem you have now, not the one you might have in five years.
 2.  **Just start building.** Don’t worry about the perfect architecture. It’s so much more important to get your hands dirty and get the code flowing. You will naturally discover what works and what doesn’t, and you will find the patterns to organize your code. Action creates clarity.
