@@ -45,7 +45,7 @@ When it comes to deployment, I’ve seen it all over the years:
 2.	A complex deploy process built by specialized DevOps people (a black box to everyone else)
 3.	Heroku (easy, but expensive and a lack of control)
 4.	`git pull` on a bare-metal server (full control but so complex to get everything running correctly)
-5.	GitHub webhooks running a deploy script on that bare metal server (automation!)
+5.	GitHub webhooks running a deploy script on that bare metal server ([automation](/articles/2024/auto-deploying/)!)
 6.	Coolify (the sweet spot: self-hosted, automated, free, and simple)
 	
 Push to GitHub, and it’s live. I think the deployment story is still too complex when it comes to Python apps, but [with Coolify it got so much better](/articles/2025/coolify-django/) than anything I’ve had before.
