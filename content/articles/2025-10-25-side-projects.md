@@ -25,7 +25,7 @@ I did not start another user-facing side project for almost fifteen years.
 
 Fast forward to 2020. The itch returned, and I embarked on a new adventure: [critical-notes.com](https://www.critical-notes.com). I started with Svelte and Firebase, eventually evolving the stack to SvelteKit and Django by late 2021. My day job was firmly rooted in iOS app development, making this side project a completely different kind of experience. I loved working on this site.
 
-Then came 2023. I decided to [pivot professionally](/articles/2025/thoughts-on-apple/) and return to the open web. My new project involved a SvelteKit frontend and a Django backend: the exact same technologies powering Critical Notes. "Brilliant!" I thought. "I can leverage my side project knowledge at work, and vice versa!"
+Then came 2023. I decided to [pivot professionally](/articles/2025/thoughts-on-apple/) and return to the open web. My new client's project involved a SvelteKit frontend and a Django backend: the exact same technologies powering Critical Notes. "Brilliant!" I thought. "I can leverage my side project knowledge at work, and vice versa!"
 
 Oh, how quickly we forget the lessons of the past.
 
