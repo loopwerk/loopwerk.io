@@ -15,19 +15,19 @@ I mean a dedicated tester. A human whose full-time job is to poke, prod, stretch
 
 And let me say this plainly: a good tester is worth their weight in gold.
 
-##  Beyond the happy path
+## Beyond the happy path
 
 Developers are optimists at heart. We don’t like to admit it, but we assume the world will behave. We build a feature, run through the happy path, write a few unit tests, try it once or twice locally, and think: looks good.
 
-A tester is the natural counterbalance to that optimism. 
+A tester is the natural counterbalance to that optimism.
 
 Where you see a clean form, they see a dozen questions:
 
--	What if I paste 6000 characters into the first field?
--	What happens if my internet drops halfway through?
--	Why is the button slightly misaligned on only this screen size?
--	Why does pressing “Back” take me somewhere that makes no sense?
--	Why does this error message sound like it was written by a robot from 1998?
+- What if I paste 6000 characters into the first field?
+- What happens if my internet drops halfway through?
+- Why is the button slightly misaligned on only this screen size?
+- Why does pressing “Back” take me somewhere that makes no sense?
+- Why does this error message sound like it was written by a robot from 1998?
 
 Unit tests are great. You should write them. But they’re also narrow by design: they check the code you expect to run, under the conditions you expect to happen.
 
