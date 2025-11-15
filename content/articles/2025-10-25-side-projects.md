@@ -29,7 +29,7 @@ Then came 2023. I decided to [pivot professionally](/articles/2025/thoughts-on-a
 
 Oh, how quickly we forget the lessons of the past.
 
-Predictably, the motivation began to fade. After a full day immersed in SvelteKit and Django at work, the thought of spending my free time tackling SvelteKit 5 updates, Tailwind migrations, or building new features for CN felt like, well, *work*. The struggle to find energy for something I used to love became very real.
+Predictably, the motivation began to fade. After a full day immersed in SvelteKit and Django at work, the thought of spending my free time tackling SvelteKit 5 updates, Tailwind migrations, or building new features for CN felt like, well, _work_. The struggle to find energy for something I used to love became very real.
 
 ## Protect your creative energy
 
