@@ -1,6 +1,6 @@
 ---
 tags: insights
-summary: In software development, we talk a lot about velocity. Shipping faster. Automating more. Reducing friction. But there’s one role that rarely gets the attention it deserves, one that quietly holds the entire operation together.
+summary: Here’s to the curious ones. The bug finders. The rebels of the happy path. The troublemakers for our assumptions. The round pegs who try every square hole just to see what breaks.
 ---
 
 # An ode to the tester
@@ -45,4 +45,4 @@ So if you run a software team: hire a tester. A real one. Someone who takes prid
 
 The answer to that question has saved countless releases.
 
-So, here’s to the curious ones. The bug finders. The rebels of the happy path. The troublemakers for our assumptions. The round pegs who try every square hole just to see what breaks. While some may see them as blockers, we see genius. Because the ones who are crazy enough to think they can break the system are the ones who make it unbreakable.
+Here’s to the curious ones. The bug finders. The rebels of the happy path. The troublemakers for our assumptions. The round pegs who try every square hole just to see what breaks. While some may see them as blockers, we see genius. Because the ones who are crazy enough to think they can break the system are the ones who make it unbreakable.
