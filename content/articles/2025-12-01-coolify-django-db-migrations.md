@@ -51,7 +51,7 @@ Verdict: massive complexity, no real benefit.
 
 ## The real solution: the two-phase deploy
 
-The hard truth is that database migrations cannot be strictly zero-downtime if they break backward compatibility. The root problem is not *when* migrations run. The problem is that old and new code are talking to the same database during the deploy, so the schema must be compatible with both.
+The hard truth is that destructive migrations can’t be made safe unless the schema stays compatible with both old and new code during the rollout.
 
 The solution is not infrastructure; it's application patterns. The key idea: Decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.  
 
