@@ -131,7 +131,7 @@ Then add a data migration to your migration file:
 from django.db.models import F
 
 def copy_old_to_new(apps, schema_editor):
-    User = apps.get_model('auth', 'User')
+    User = apps.get_model('accounts', 'User')
     User.objects.filter(new_name__isnull=True).update(new_name=F('old_name'))
 
 class Migration(migrations.Migration):
