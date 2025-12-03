@@ -1,9 +1,9 @@
 ---
 tags: coolify, django, python, deployment, insights, howto
-summary: How to deploy Django applications to Coolify without breaking your running containers during schema-changing migrations.
+summary: How to run schema-changing Django migrations safely, avoiding schema/code mismatches and server errors during rolling deploys.
 ---
 
-# Safe Django database migrations on Coolify
+# Safe Django migrations without server errors
 
 Deploying Django on Coolify has been fantastic so far: automatic builds, atomic releases, ephemeral containers, and simple scaling. In a [previous article](/articles/2025/coolify-django/) I explained how I set up my Django projects in Coolify, including the fact that migrations run as part of the build step. This works great for most migrations: failures abort the build, no partial deploys, no surprises.
 
