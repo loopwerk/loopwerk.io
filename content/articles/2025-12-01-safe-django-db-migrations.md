@@ -5,20 +5,22 @@ summary: How to run schema-changing Django migrations safely, avoiding schema/co
 
 # Safe Django migrations without server errors
 
-Deploying Django on Coolify has been fantastic so far: automatic builds, atomic releases, ephemeral containers, and simple scaling. In a [previous article](/articles/2025/coolify-django/) I explained how I set up my Django projects in Coolify, including the fact that migrations run as part of the build step. This works great for most migrations: failures abort the build, no partial deploys, no surprises.
+One of the best features of modern container-based deployment platforms (Coolify included) is that they give you zero downtime rolling updates out of the box. When you push code, a new image is built, migrations run, and traffic only shifts to the new container when it’s healthy.
 
-But it breaks down for one specific class of migrations: schema-destructive migrations, i.e. migrations that remove fields, drop tables, rename columns, or otherwise make the existing running code incompatible with the current database schema.
+However, this convenience creates a hidden trap for Django developers. Because Coolify performs a rolling update, there is a window of time (usually 1–2 minutes) where both the old and new versions of your application are running simultaneously against the same database.
 
-Coolify builds your new container, applies the migrations, and only afterwards starts replacing the running container with the new one. During that in-between period (usually 1–2 minutes depending on your image size) your *old* Django container is still running code that expects the *old* schema. If a column has just been removed… boom: 500 errors for users until the new container becomes healthy and takes over.
+This works fine if you are just adding a new table. But if you run a destructive migration, like removing a field or renaming a column, your deployment becomes a race condition. The new container runs the migration, the database schema changes, and your *old* container (which is still serving live traffic) immediately starts throwing 500 errors because it's trying to query a column that no longer exists.
 
-## Why you can't just move the migration step
+This isn't a limitation of Coolify; it is a fundamental constraint of rolling deployments. Heroku, Render, Fly.io, ECS, Kubernetes — anything that swaps containers while the old version is still serving traffic has the same constraint. You cannot fix this by changing where the migration runs in your Dockerfile. You have to fix it by changing how you write migrations.
 
-Your first instinct might be to change when the migrations run. Let's look at some alternatives and why they don't solve the root problem.
+## Why you can't just fix the infrastructure
+
+Your first instinct might be to tweak the deployment settings to avoid the overlap. Let's look at why the common infrastructure workarounds don't actually solve the problem.
 
 ### Strategy A: the post-deploy hook
-You could remove `migrate` from the `Dockerfile` and run it in a "Post-Deploy" hook (or as part of the container startup command). This means migrations run *after* the new container starts or *just before* the switch-over.
+You could remove `migrate` from the build step and run it in a "Post-Deploy" hook. This means migrations run *after* the new container is live and the old one is dead.
 
-This fixes the “removing a field” problem, because the schema change happens after all old containers are gone. But it breaks the “adding a field” problem: if you add a new required column, the new code in the new container might start up and try to query that column *before* the migration finishes. Result: the new app crashes on startup, and the deployment fails.
+This fixes the “removing a field” problem, because the schema change happens after the old container is no longer serving traffic. But it breaks the “adding a field” problem: if you add a new required column, the new code in the new container might start up and try to query that column *before* the migration finishes. Result: the new app crashes on startup, and the deployment fails.
 
 Another issue: if migrations fail, your *deployment still succeeds*, leaving your app running with mismatched code and schema.
 
@@ -53,7 +55,7 @@ Verdict: massive complexity, no real benefit.
 
 The hard truth is that destructive migrations can’t be made safe unless the schema stays compatible with both old and new code during the rollout.
 
-The solution is not infrastructure; it's application patterns. The key idea: Decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.  
+The solution is not infrastructure; it's application patterns. The key idea: decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.  
 
 ## Example 1: removing a field safely
 
