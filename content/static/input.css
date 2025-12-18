@@ -4,7 +4,8 @@
 
 @font-face {
   font-family: "IBM Plex Sans";
-  src: local("IBM Plex Sans Regular"), url(/static/IBMPlexSans-Regular.ttf);
+  src: local("IBM Plex Sans Regular"), url(/static/IBMPlexSans-Regular.woff2) format("woff2");
+  font-display: swap;
 }
 
 /* BODY */
