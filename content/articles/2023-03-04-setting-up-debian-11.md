@@ -16,7 +16,7 @@ I am a software developer and setting up servers and hosting isn't something I n
 - https://www.howtogeek.com/675010/how-to-secure-your-linux-computer-with-fail2ban/
 - https://linuxiac.com/how-to-set-up-automatic-updates-on-debian/
 
-In this article many commands have placeholders like <var>$SERVER_IP_ADDRESS</var> which you need to replace with the actual value.
+In this article many commands have placeholders like `<var>$SERVER_IP_ADDRESS</var>` which you need to replace with the actual value.
 
 - `<var>$SERVER_IP_ADDRESS</var>`: the IP address of your server. You got this from Hetzner.
 - `<var>$PROJECT_USER</var>`: the user that will be running your project. This can be your name, or for a server that is used for one project, the name of your project. Examples: `kevin` or `criticalnotes` or `loopwerk`.
