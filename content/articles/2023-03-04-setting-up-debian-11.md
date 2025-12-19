@@ -292,7 +292,7 @@ rsync -avH ~/backups <var>your_rsync_username</var>@<var>your_rsync_instance</va
 
 But to enable this to run without having to enter a password, let's enable SSH key authentication.
 
-On your server, logged in as <var>$PROJECT_USER</var>, create a new SSH key:
+On your server, logged in as `<var>$PROJECT_USER</var>`, create a new SSH key:
 
 ```
 ssh-keygen -t rsa -b 4096
@@ -637,7 +637,7 @@ sudo ln -s ../sites-available/<var>$FRONTEND_DOMAIN</var>
 
 Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`.
 
-Now we can run Certbot again - after making sure the DNS has an entry for <var>$FRONTEND_DOMAIN</var> and <var>$NAKED_DOMAIN</var>:
+Now we can run Certbot again - after making sure the DNS has an entry for `<var>$FRONTEND_DOMAIN</var>` and `<var>$NAKED_DOMAIN</var>`:
 
 ```
 sudo certbot
