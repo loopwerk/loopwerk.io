@@ -137,11 +137,11 @@ Now, update your template to use this new filter. Remember to load your custom t
 
 #### <i class="fa-regular fa-file-code"></i> post.html
 ```html
-/*HLS*/{% load localtime %}/*HLE*/
+<mark>{% load localtime %}</mark>
 
 {% for comment in post.comment_set.all %}
   <div>
-    <h3>From {{ comment.user.name }} on /*HLS*/{{ comment.added|localtime }}/*HLE*/</h3>
+    <h3>From {{ comment.user.name }} on <mark>{{ comment.added|localtime }}</mark></h3>
     <p>{{ comment.comment }}</p>
   </div>
 {% endfor %}

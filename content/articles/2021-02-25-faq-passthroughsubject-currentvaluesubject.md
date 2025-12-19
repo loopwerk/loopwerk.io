@@ -12,11 +12,11 @@ Consider this simple example, where we have a `SomeBookSDK` that has a `fetchBoo
 
 ```swift
 struct ViewModel {
-  let books = /*HLS*/PassthroughSubject<[Book], Never>()/*HLE*/
+  let books = <mark>PassthroughSubject<[Book], Never>()</mark>
 
   func fetchBooks() {
     SomeBookSDK.fetchBooks { fetchedBooks in
-      /*HLS You can send values to PassthroughSubject*/self.books.send(fetchedBooks)/*HLE*/
+      <mark title="You can send values to PassthroughSubject">self.books.send(fetchedBooks)</mark>
     }
   }
 }
@@ -72,7 +72,7 @@ Now you can simply subscribe to the `books` publisher without worrying about del
 
 ```swift
 struct ViewModel {
-  let books = /*HLS*/CurrentValueSubject<[Book], Never>([])/*HLE*/
+  let books = <mark>CurrentValueSubject<[Book], Never>([])</mark>
   // You need to give CurrentValueSubject an initial value,
   // here I'm simply using an empty array.
 
@@ -102,11 +102,11 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return /*HLS*/viewModel.books.value.count/*HLE*/
+    return <mark>viewModel.books.value.count</mark>
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let book = /*HLS*/viewModel.books.value[indexPath.row]/*HLE*/
+    let book = <mark>viewModel.books.value[indexPath.row]</mark>
     let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookCell
     cell.configure(with: book)
     return cell

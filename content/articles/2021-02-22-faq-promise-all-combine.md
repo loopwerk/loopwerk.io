@@ -83,7 +83,7 @@ Now `$0` is the deeply nested tuple `(((1, 2), 3), 4)`.
 A much bigger problem with `combineLatest` is that it doesn't work if you have an array of publishers, which is not uncommon. So, how would you know when an array of publishers are all complete, and also get the results in the same order? The answer is CombineExt's [combineLatest function](https://github.com/CombineCommunity/CombineExt#CombineLatestMany), which _does_ work on an array of publishers.
 
 ```swift
-/*HLS*/import CombineExt/*HLE*/
+<mark>import CombineExt</mark>
 import Combine
 
 let one = PassthroughSubject<Int, Never>()
@@ -92,7 +92,7 @@ let three = PassthroughSubject<Int, Never>()
 let four = PassthroughSubject<Int, Never>()
 
 [one, two, three, four]
-  /*HLS*/.combineLatest()/*HLE*/
+  <mark>.combineLatest()</mark>
   .sink {
     print("All done!")
     print($0)

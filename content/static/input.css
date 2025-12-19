@@ -84,15 +84,30 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply text-sm;
 }
 
-code .highlight {
+code mark {
   border: 1px solid var(--color-orange);
   padding: 2px 4px;
+  background: transparent;
+  color: inherit;
 }
 
-code .template {
+code mark[title] {
+  cursor: help;
+}
+
+code mark[title]::after {
+  content: "?";
+  margin: -2px -4px -2px 4px;
+  border: 2px solid var(--color-orange);
+  background-color: var(--color-orange);
+  color: white;
+}
+
+code var {
   background: #1c6b86;
   color: #eeeeee;
   padding: 2px;
+  font-style: normal;
 }
 
 .prose hr {
@@ -199,9 +214,9 @@ code .template {
 }
 
 .pagefind-modular-list-link:hover {
-  border-bottom: 1px solid var(--color-orange)
+  border-bottom: 1px solid var(--color-orange);
 }
 
 .pagefind-modular-list-excerpt mark {
-  background: var(--color-orange)
+  background: var(--color-orange);
 }

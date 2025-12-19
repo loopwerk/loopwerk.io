@@ -16,13 +16,13 @@ I am a software developer and setting up servers and hosting isn't something I n
 - https://www.howtogeek.com/675010/how-to-secure-your-linux-computer-with-fail2ban/
 - https://linuxiac.com/how-to-set-up-automatic-updates-on-debian/
 
-In this article many commands have placeholders like `/*TMS*/$SERVER_IP_ADDRESS/*TME*/` which you need to replace with the actual value.
+In this article many commands have placeholders like `<var>$SERVER_IP_ADDRESS</var>` which you need to replace with the actual value.
 
-- `/*TMS*/$SERVER_IP_ADDRESS/*TME*/`: the IP address of your server. You got this from Hetzner.
-- `/*TMS*/$PROJECT_USER/*TME*/`: the user that will be running your project. This can be your name, or for a server that is used for one project, the name of your project. Examples: `kevin` or `criticalnotes` or `loopwerk`.
-- `/*TMS*/$BACKEND_DOMAIN/*TME*/`: domain that's used for your backend, like `api.example.com` (without `http://` or `https://`)
-- `/*TMS*/$FRONTEND_DOMAIN/*TME*/`: domain that's used for your frontend, like `www.example.com` (again without `http://` or `https://`)
-- `/*TMS*/$NAKED_DOMAIN/*TME*/`: the "naked" domain that's used for your frontend, without the `www` like `example.com` (you guessed it, without `http://` or `https://`)
+- `<var>$SERVER_IP_ADDRESS</var>`: the IP address of your server. You got this from Hetzner.
+- `<var>$PROJECT_USER</var>`: the user that will be running your project. This can be your name, or for a server that is used for one project, the name of your project. Examples: `kevin` or `criticalnotes` or `loopwerk`.
+- `<var>$BACKEND_DOMAIN</var>`: domain that's used for your backend, like `api.example.com` (without `http://` or `https://`)
+- `<var>$FRONTEND_DOMAIN</var>`: domain that's used for your frontend, like `www.example.com` (again without `http://` or `https://`)
+- `<var>$NAKED_DOMAIN</var>`: the "naked" domain that's used for your frontend, without the `www` like `example.com` (you guessed it, without `http://` or `https://`)
 
 # Table of contents
 
@@ -35,15 +35,15 @@ In this article many commands have placeholders like `/*TMS*/$SERVER_IP_ADDRESS/
 First we're going to login as root, create a new user, and then allow the new user to run commands as root with `sudo`.
 
 ```
-ssh root@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
-adduser /*TMS*/$PROJECT_USER/*TME*/
-usermod -aG sudo /*TMS*/$PROJECT_USER/*TME*/
+ssh root@<var>$SERVER_IP_ADDRESS</var>
+adduser <var>$PROJECT_USER</var>
+usermod -aG sudo <var>$PROJECT_USER</var>
 ```
 
 Open a new terminal (keep the one where you're logged in as root open), and test if you can indeed login as the new user, and run commands as sudo:
 
 ```
-ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
+ssh <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
 sudo echo "I am root!"
 ```
 
@@ -93,13 +93,13 @@ You don't have to enter a passphrase when creating a key, just press enter for n
 Now we're going to copy the public key to your server with the following command:
 
 ```
-ssh-copy-id /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
+ssh-copy-id <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
 ```
 
 Now, try logging into the server again. Open a new terminal and enter the following. This time you should not be asked for your password:
 
 ```
-ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
+ssh <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
 ```
 
 If that worked, you can close the second terminal and go back to the one where you're logged in as root.
@@ -132,13 +132,13 @@ service ssh restart
 Open a new terminal and test logging in as root:
 
 ```
-ssh root@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
+ssh root@<var>$SERVER_IP_ADDRESS</var>
 ```
 
 This should fail with the message `Permission denied (publickey)`. Now make sure logging in as the normal user still works:
 
 ```
-ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
+ssh <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
 ```
 
 You can now close the other SSH sessions, including the one where you are still logged in as root.
@@ -218,11 +218,11 @@ sudo -u postgres psql
 Run the following commands to create a new database user, set some parameters on the user as [recommended by Django](https://docs.djangoproject.com/en/4.2/ref/databases/#optimizing-postgresql-s-configuration), and then finally we create a new database for the new user:
 
 ```
-postgres=# CREATE USER /*TMS*/$PROJECT_USER/*TME*/ WITH PASSWORD 'password';
-postgres=# ALTER ROLE /*TMS*/$PROJECT_USER/*TME*/ SET client_encoding TO 'utf8';
-postgres=# ALTER ROLE /*TMS*/$PROJECT_USER/*TME*/ SET default_transaction_isolation TO 'read committed';
-postgres=# ALTER ROLE /*TMS*/$PROJECT_USER/*TME*/ SET timezone TO 'UTC';
-postgres=# CREATE DATABASE my_database_name OWNER /*TMS*/$PROJECT_USER/*TME*/;
+postgres=# CREATE USER <var>$PROJECT_USER</var> WITH PASSWORD 'password';
+postgres=# ALTER ROLE <var>$PROJECT_USER</var> SET client_encoding TO 'utf8';
+postgres=# ALTER ROLE <var>$PROJECT_USER</var> SET default_transaction_isolation TO 'read committed';
+postgres=# ALTER ROLE <var>$PROJECT_USER</var> SET timezone TO 'UTC';
+postgres=# CREATE DATABASE my_database_name OWNER <var>$PROJECT_USER</var>;
 ```
 
 Press command+d to exit the PostgreSQL session.
@@ -244,7 +244,7 @@ Enter the following contents:
 set -x
 
 # Location to place backups
-backup_dir="/home//*TMS*/$PROJECT_USER/*TME*//backups/"
+backup_dir="/home/<var>$PROJECT_USER</var>/backups/"
 
 # String to append to the name of the backup files
 backup_date=`date +%Y-%m-%d`
@@ -276,7 +276,7 @@ Enter the following contents:
 
 ```
 # m h dom mon dow command
-0 6 * * * /home//*TMS*/$PROJECT_USER/*TME*//backup.sh
+0 6 * * * /home/<var>$PROJECT_USER</var>/backup.sh
 ```
 
 This will run the script every day at 6:00.
@@ -287,12 +287,12 @@ The backups are now stored on the same server as the PostgreSQL database itself.
 
 ```
 # Immediately store off-site
-rsync -avH ~/backups /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:
+rsync -avH ~/backups <var>your_rsync_username</var>@<var>your_rsync_instance</var>.rsync.net:
 ```
 
 But to enable this to run without having to enter a password, let's enable SSH key authentication.
 
-On your server, logged in as `/*TMS*/$PROJECT_USER/*TME*/`, create a new SSH key:
+On your server, logged in as `<var>$PROJECT_USER</var>`, create a new SSH key:
 
 ```
 ssh-keygen -t rsa -b 4096
@@ -301,13 +301,13 @@ ssh-keygen -t rsa -b 4096
 Accept the defaults and do **NOT** enter a passphrase. Then upload it to the rsync.net server:
 
 ```
-scp ~/.ssh/id_rsa.pub /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net:.ssh/authorized_keys
+scp ~/.ssh/id_rsa.pub <var>your_rsync_username</var>@<var>your_rsync_instance</var>.rsync.net:.ssh/authorized_keys
 ```
 
 Test that your key works by ssh'ing to your rsync.net filesystem:
 
 ```
-ssh /*TMS*/your_rsync_username/*TME*/@/*TMS*/your_rsync_instance/*TME*/.rsync.net ls
+ssh <var>your_rsync_username</var>@<var>your_rsync_instance</var>.rsync.net ls
 ```
 
 You should not be asked for a password.
@@ -337,8 +337,8 @@ First we're going to clone the git project, and open the directory:
 
 ```
 cd ~
-git clone your_backend_git_repo_address /*TMS*/$BACKEND_DOMAIN/*TME*/
-cd /*TMS*/$BACKEND_DOMAIN/*TME*/
+git clone your_backend_git_repo_address <var>$BACKEND_DOMAIN</var>
+cd <var>$BACKEND_DOMAIN</var>
 ```
 
 Then we'll instruct uv install the dependencies, including the ones from the `prod` group:
@@ -362,25 +362,25 @@ We now need to make sure that the Django server is automatically started when th
 Create a new service config:
 
 ```
-sudo pico /etc/systemd/system//*TMS*/$BACKEND_DOMAIN/*TME*/.service
+sudo pico /etc/systemd/system/<var>$BACKEND_DOMAIN</var>.service
 ```
 
 With the following contents:
 
 ```
 [Unit]
-Description=/*TMS*/$BACKEND_DOMAIN/*TME*/
+Description=<var>$BACKEND_DOMAIN</var>
 
 [Service]
-User=/*TMS*/$PROJECT_USER/*TME*/
-Group=/*TMS*/$PROJECT_USER/*TME*/
+User=<var>$PROJECT_USER</var>
+Group=<var>$PROJECT_USER</var>
 Restart=on-failure
-WorkingDirectory=/home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$BACKEND_DOMAIN/*TME*/
-ExecStart=/home//*TMS*/$PROJECT_USER/*TME*//.local/bin/uv run gunicorn \
+WorkingDirectory=/home/<var>$PROJECT_USER</var>/<var>$BACKEND_DOMAIN</var>
+ExecStart=/home/<var>$PROJECT_USER</var>/.local/bin/uv run gunicorn \
           --access-logfile - \
           --workers 2 \
           --bind=127.0.0.1:8000 --bind=[::1]:8000 \
-          /*TMS*/your_project_name/*TME*/.wsgi:application
+          <var>your_project_name</var>.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -389,19 +389,19 @@ WantedBy=multi-user.target
 To make sure the service automatically starts when the server starts, run the following command:
 
 ```
-systemctl enable /*TMS*/$BACKEND_DOMAIN/*TME*/
+systemctl enable <var>$BACKEND_DOMAIN</var>
 ```
 
 And finally, start the server using:
 
 ```
-service /*TMS*/$BACKEND_DOMAIN/*TME*/ start
+service <var>$BACKEND_DOMAIN</var> start
 ```
 
 Check if it is indeed running:
 
 ```
-service /*TMS*/$BACKEND_DOMAIN/*TME*/ status
+service <var>$BACKEND_DOMAIN</var> status
 ```
 
 ## 3.5 - Nginx
@@ -412,23 +412,23 @@ Install Nginx and then create a site config file:
 
 ```
 sudo apt install nginx
-sudo pico /etc/nginx/sites-available//*TMS*/$BACKEND_DOMAIN/*TME*/
+sudo pico /etc/nginx/sites-available/<var>$BACKEND_DOMAIN</var>
 ```
 
 With the following contents:
 
 ```
 server {
-    server_name /*TMS*/$BACKEND_DOMAIN/*TME*/;
+    server_name <var>$BACKEND_DOMAIN</var>;
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
 
     location /static/ {
-        alias /home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$BACKEND_DOMAIN/*TME*//static_root/;
+        alias /home/<var>$PROJECT_USER</var>/<var>$BACKEND_DOMAIN</var>/static_root/;
     }
 
     location /media/ {
-        alias /home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$BACKEND_DOMAIN/*TME*//media_root/;
+        alias /home/<var>$PROJECT_USER</var>/<var>$BACKEND_DOMAIN</var>/media_root/;
     }
 
     location / {
@@ -456,7 +456,7 @@ Then to enable the site:
 
 ```
 cd /etc/nginx/sites-enabled/
-sudo ln -s ../sites-available//*TMS*/$BACKEND_DOMAIN/*TME*/
+sudo ln -s ../sites-available/<var>$BACKEND_DOMAIN</var>
 ```
 
 Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`.
@@ -467,7 +467,7 @@ Finally, we need to configure the firewall to open up the ports for the Nginx:
 sudo ufw allow "Nginx Full"
 ```
 
-Your backend should now be reachable on `http:///*TMS*/$BACKEND_DOMAIN/*TME*//` if you already changed the domain's DNS settings, otherwise it's reachable via `http:///*TMS*/$SERVER_IP_ADDRESS//*TME*/`.
+Your backend should now be reachable on `http://<var>$BACKEND_DOMAIN</var>/` if you already changed the domain's DNS settings, otherwise it's reachable via `http://<var>$SERVER_IP_ADDRESS/</var>`.
 
 Let's make it run on HTTPS though. For this the DNS settings of the domain should be in order, so an `A` record pointing your (sub)domain to the server's IP address should be in place.
 
@@ -486,7 +486,7 @@ With all that done, simply run Certbot:
 sudo certbot
 ```
 
-Answer the questions and select your domain for which you want to active HTTPS. Certbot then does the rest and you should be able to visit `https:///*TMS*/$BACKEND_DOMAIN/*TME*//`. Hooray!
+Answer the questions and select your domain for which you want to active HTTPS. Certbot then does the rest and you should be able to visit `https://<var>$BACKEND_DOMAIN</var>/`. Hooray!
 
 ## 3.6 - Deploying changes
 
@@ -496,14 +496,14 @@ I use a really simple deploy script in my backend project:
 git pull
 uv sync --group prod
 uv run ./manage.py migrate
-sudo /usr/sbin/service /*TMS*/$BACKEND_DOMAIN/*TME*/ restart
+sudo /usr/sbin/service <var>$BACKEND_DOMAIN</var> restart
 ```
 
 So whenever I want to deploy changes I simply run these three commands:
 
 ```
-ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
-cd /*TMS*/$BACKEND_DOMAIN/*TME*/
+ssh <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
+cd <var>$BACKEND_DOMAIN</var>
 ./deploy.sh
 ```
 
@@ -516,8 +516,8 @@ sudo pico /etc/sudoers.d/user_restart
 With the following contents:
 
 ```
-/*TMS*/$PROJECT_USER/*TME*/ ALL=NOPASSWD: /usr/sbin/service /*TMS*/$BACKEND_DOMAIN/*TME*/ restart
-/*TMS*/$PROJECT_USER/*TME*/ ALL=NOPASSWD: /usr/sbin/service /*TMS*/$FRONTEND_DOMAIN/*TME*/ restart
+<var>$PROJECT_USER</var> ALL=NOPASSWD: /usr/sbin/service <var>$BACKEND_DOMAIN</var> restart
+<var>$PROJECT_USER</var> ALL=NOPASSWD: /usr/sbin/service <var>$FRONTEND_DOMAIN</var> restart
 ```
 
 This will allow the user to restart the backend and the future frontend services without having to type a password.
@@ -535,8 +535,8 @@ sudo apt install nodejs
 
 ```
 cd ~
-git clone your_frontend_git_repo_address /*TMS*/$FRONTEND_DOMAIN/*TME*/
-cd /*TMS*/$FRONTEND_DOMAIN/*TME*/
+git clone your_frontend_git_repo_address <var>$FRONTEND_DOMAIN</var>
+cd <var>$FRONTEND_DOMAIN</var>
 npm install
 npm run build
 mv build deploy
@@ -547,19 +547,19 @@ mv build deploy
 Create a new service config:
 
 ```
-sudo pico /etc/systemd/system//*TMS*/$FRONTEND_DOMAIN/*TME*/.service
+sudo pico /etc/systemd/system/<var>$FRONTEND_DOMAIN</var>.service
 ```
 
 With the following contents:
 
 ```
 [Unit]
-Description=/*TMS*/$FRONTEND_DOMAIN/*TME*/
+Description=<var>$FRONTEND_DOMAIN</var>
 
 [Service]
-User=/*TMS*/$PROJECT_USER/*TME*/
-Group=/*TMS*/$PROJECT_USER/*TME*/
-WorkingDirectory=/home//*TMS*/$PROJECT_USER/*TME*///*TMS*/$FRONTEND_DOMAIN/*TME*/
+User=<var>$PROJECT_USER</var>
+Group=<var>$PROJECT_USER</var>
+WorkingDirectory=/home/<var>$PROJECT_USER</var>/<var>$FRONTEND_DOMAIN</var>
 Environment="HOST=127.0.0.1"
 Environment="PORT=3000"
 ExecStart=node deploy/index.js
@@ -573,19 +573,19 @@ WantedBy=multi-user.target
 To make sure the service automatically starts when the server starts, run the following command:
 
 ```
-systemctl enable /*TMS*/$FRONTEND_DOMAIN/*TME*/
+systemctl enable <var>$FRONTEND_DOMAIN</var>
 ```
 
 And finally, start the server using:
 
 ```
-service /*TMS*/$FRONTEND_DOMAIN/*TME*/ start
+service <var>$FRONTEND_DOMAIN</var> start
 ```
 
 Check if it is indeed running:
 
 ```
-service /*TMS*/$FRONTEND_DOMAIN/*TME*/ status
+service <var>$FRONTEND_DOMAIN</var> status
 ```
 
 ## 4.4 - Nginx
@@ -593,14 +593,14 @@ service /*TMS*/$FRONTEND_DOMAIN/*TME*/ status
 Create a site config file:
 
 ```
-sudo pico /etc/nginx/sites-available//*TMS*/$FRONTEND_DOMAIN/*TME*/
+sudo pico /etc/nginx/sites-available/<var>$FRONTEND_DOMAIN</var>
 ```
 
 With the following contents:
 
 ```
 server {
-    server_name /*TMS*/$FRONTEND_DOMAIN/*TME*/;
+    server_name <var>$FRONTEND_DOMAIN</var>;
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
 
@@ -621,8 +621,8 @@ server {
 }
 
 server {
-    server_name /*TMS*/$NAKED_DOMAIN/*TME*/;
-    return 301 http:///*TMS*/$FRONTEND_DOMAIN/*TME*/$request_uri;
+    server_name <var>$NAKED_DOMAIN</var>;
+    return 301 http://<var>$FRONTEND_DOMAIN</var>$request_uri;
     listen 80;
     listen [::]:80
 }
@@ -632,18 +632,18 @@ Then to enable the site:
 
 ```
 cd /etc/nginx/sites-enabled/
-sudo ln -s ../sites-available//*TMS*/$FRONTEND_DOMAIN/*TME*/
+sudo ln -s ../sites-available/<var>$FRONTEND_DOMAIN</var>
 ```
 
 Run `sudo nginx -t` to check if the config has no errors, and then reload Nginx with `service nginx reload`.
 
-Now we can run Certbot again - after making sure the DNS has an entry for `/*TMS*/$FRONTEND_DOMAIN/*TME*/` and `/*TMS*/$NAKED_DOMAIN/*TME*/`:
+Now we can run Certbot again - after making sure the DNS has an entry for `<var>$FRONTEND_DOMAIN</var>` and `<var>$NAKED_DOMAIN</var>`:
 
 ```
 sudo certbot
 ```
 
-This time choosing the newly added domains. You should be able to visit `https:///*TMS*/$FRONTEND_DOMAIN/*TME*//`.
+This time choosing the newly added domains. You should be able to visit `https://<var>$FRONTEND_DOMAIN</var>/`.
 
 ## 4.5 - Deploying changes
 
@@ -655,13 +655,13 @@ nice -15 npm install
 nice -15 npm run build
 rm -rf deploy
 mv build deploy
-sudo /usr/sbin/service /*TMS*/$FRONTEND_DOMAIN/*TME*/ restart
+sudo /usr/sbin/service <var>$FRONTEND_DOMAIN</var> restart
 ```
 
 So whenever I want to deploy changes I simply run these three commands:
 
 ```
-ssh /*TMS*/$PROJECT_USER/*TME*/@/*TMS*/$SERVER_IP_ADDRESS/*TME*/
-cd /*TMS*/$FRONTEND_DOMAIN/*TME*/
+ssh <var>$PROJECT_USER</var>@<var>$SERVER_IP_ADDRESS</var>
+cd <var>$FRONTEND_DOMAIN</var>
 ./deploy.sh
 ```

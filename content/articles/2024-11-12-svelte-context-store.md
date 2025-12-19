@@ -62,7 +62,7 @@ At its core, the `Modal` component needs to know if its form has changes, and th
 let hasChanges = false;
 
 function handleKeydown(e: KeyboardEvent) {
-  if (e.key === "Escape" && isTopModal() /*HLS*/&& !hasChanges/*HLE*/) {
+  if (e.key === "Escape" && isTopModal() <mark>&& !hasChanges</mark>) {
     e.preventDefault();
     close();
   }

@@ -43,7 +43,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
-    /*HLS*/.package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0"),/*HLE*/
+    <mark>.package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0"),</mark>
   ],
   targets: [
     .target(

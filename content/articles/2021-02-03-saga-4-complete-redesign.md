@@ -43,7 +43,7 @@ Luckily the solution wasn't too bad. I am now first registering and storing step
 
 ``` swift
 try Saga(input: "content", output: "deploy", templates: "templates")
-  /*HLS*/.register/*HLE*/(
+  <mark>.register</mark>(
     folder: "articles",
     metadata: ArticleMetadata.self,
     readers: [.markdownReader(pageProcessor: pageProcessor)],
@@ -55,18 +55,18 @@ try Saga(input: "content", output: "deploy", templates: "templates")
       .yearWriter(template: "year.html"),
     ]
   )
-  /*HLS*/.register/*HLE*/(
+  <mark>.register</mark>(
     folder: "apps",
     metadata: AppMetadata.self,
     readers: [.markdownReader()],
     writers: [.listWriter(template: "apps.html")]
   )
-  /*HLS*/.register/*HLE*/(
+  <mark>.register</mark>(
     metadata: EmptyMetadata.self,
     readers: [.markdownReader()],
     writers: [.pageWriter(template: "page.html")]
   )
-  /*HLS*/.run()/*HLE*/
+  <mark>.run()</mark>
 ```
 
 That `run` function first runs all the readers for all the registered steps, saving the resulting pages into each step *and* to a global storage array. Then, it runs all the writers for all the steps, giving it the pages that "belong to" that step (as proper `Page<Metadata>` instances), *and* the global array's pages, which are of course forced to be `AnyPage` type erased versions.

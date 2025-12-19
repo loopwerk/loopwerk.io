@@ -91,7 +91,7 @@ Which can be used like this:
 ``` swift
 try Loopwerk().publish(using: [
   .addMarkdownFiles(),
-  /*HLS The new step*/.useDateFromFilename()/*HLE*/,
+  <mark title="The new step">.useDateFromFilename()</mark>,
   .copyResources(),
   .generateHTML(withTheme: .foundation),
   .generateSiteMap()

@@ -24,7 +24,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 class Article(models.Model):
     image = models.ImageField(upload_to="cms", blank=True, null=True)
     title = models.CharField(max_length=255)
-    /*HLS The important bit*/body = CKEditor5Field()/*HLE*/
+    <mark title="The important bit">body = CKEditor5Field()</mark>
     excerpt = models.TextField(blank=True)
     date = models.DateField(db_index=True, default=datetime.date.today)
     slug = models.SlugField(max_length=255, unique=True)
@@ -132,17 +132,17 @@ from django.db import models
 from bs4 import BeautifulSoup, Tag
 from django_ckeditor_5.fields import CKEditor5Field
 
-/*HLS*/from .utils import render_embeds/*HLE*/
+<mark>from .utils import render_embeds</mark>
 
 
 class Article(models.Model):
     # Previous fields...
-    /*HLS*/rendered_body = models.TextField(blank=True)/*HLE*/
+    <mark>rendered_body = models.TextField(blank=True)</mark>
     
     def save(self, *args, **kwargs):
         # Previous logic...
         self.body = str(soup)
-        /*HLS*/self.rendered_body = render_embeds(self.body)/*HLE*/
+        <mark>self.rendered_body = render_embeds(self.body)</mark>
 
         super().save(*args, **kwargs)
 ````
