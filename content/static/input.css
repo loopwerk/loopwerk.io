@@ -84,15 +84,18 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply text-sm;
 }
 
-code .highlight {
+code mark {
   border: 1px solid var(--color-orange);
   padding: 2px 4px;
+  background: transparent;
+  color: inherit;
 }
 
-code .template {
+code var {
   background: #1c6b86;
   color: #eeeeee;
   padding: 2px;
+  font-style: normal;
 }
 
 .prose hr {

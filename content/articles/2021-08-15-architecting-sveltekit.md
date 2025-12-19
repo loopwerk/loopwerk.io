@@ -105,13 +105,13 @@ I thought that the fix would be rather simple. Just check if we're running in th
 ``` javascript
 <script context="module">
   import { get } from "svelte/store";
-  /*HLS*/import { browser } from "$app/env";/*HLE*/
+  <mark>import { browser } from "$app/env";</mark>
   import { content } from "$lib/store";
 
   export async function load({ fetch }) {
     const storedContent = get(content);
 
-    if (/*HLS*/browser &&/*HLE*/ storedContent) {
+    if (<mark>browser &&</mark> storedContent) {
       return {
         props: {
           fetchedContent: storedContent
@@ -132,7 +132,7 @@ I thought that the fix would be rather simple. Just check if we're running in th
 <script>
   export let fetchedContent;
 
-  if (/*HLS*/browser &&/*HLE*/ fetchedContent) {
+  if (<mark>browser &&</mark> fetchedContent) {
     $content = fetchedContent;
   }
 </script>

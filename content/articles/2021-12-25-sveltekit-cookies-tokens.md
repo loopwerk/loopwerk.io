@@ -29,7 +29,7 @@ export async function post({ request }) {
   let body;
 
   try {
-    body = /*HLS This calls the external API*/await postApi(fetch, “auth/login", await request.json())/*HLE*/;
+    body = <mark title="This calls the external API">await postApi(fetch, “auth/login", await request.json())</mark>;
   } catch (error) {
     return {
       status: error.status,

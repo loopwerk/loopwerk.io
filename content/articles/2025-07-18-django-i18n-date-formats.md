@@ -151,12 +151,12 @@ We need to make three changes, the rest can stay as-is:
 #### <i class="fa-regular fa-file-code"></i> settings.py
 ```python
 USE_I18N = False
-/*HLS*/LANGUAGE_CODE = "en"/*HLE*/
-/*HLS*/LANGUAGES = [("en", "English")]/*HLE*/
+<mark>LANGUAGE_CODE = "en"</mark>
+<mark>LANGUAGES = [("en", "English")]</mark>
 USE_TZ = True
 TIME_ZONE = "UTC"
 FORMAT_MODULE_PATH = "formats"
-/*HLS*/LOCALE_PATHS = [BASE_DIR / "locale"]/*HLE*/
+<mark>LOCALE_PATHS = [BASE_DIR / "locale"]</mark>
 ```
 
 You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file.”

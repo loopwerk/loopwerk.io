@@ -122,7 +122,7 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    /*HLS*/coordinator?.openDetail(book: books[indexPath.row])/*HLE*/
+    <mark>coordinator?.openDetail(book: books[indexPath.row])</mark>
   }
 }
 ```
@@ -140,12 +140,12 @@ Let's look at an example that uses closures:
 
 ```swift
 class ListViewController: UIViewController {
-  /*HLS*/var openDetail: ((Book) -> Void)?/*HLE*/
+  <mark>var openDetail: ((Book) -> Void)?</mark>
 }
 
 extension ListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    /*HLS*/openDetail?(books[indexPath.row])/*HLE*/
+    <mark>openDetail?(books[indexPath.row])</mark>
   }
 }
 
@@ -154,7 +154,7 @@ struct Coordinator {
 
   func showList() {
     let listViewController = ListViewController()
-    /*HLS*/listViewController.openDetail = self.openDetail(book:)/*HLE*/
+    <mark>listViewController.openDetail = self.openDetail(book:)</mark>
     navigationController.pushViewController(listViewController, animated: false)
   }
 
@@ -171,17 +171,17 @@ Now, `ListViewController` doesn't even know about the existence of a coordinator
 You can get the same effect using delegates, which is what most coordinator implementations use:
 
 ```swift
-/*HLS*/protocol ListViewControllerDelegate/*HLE*/: AnyObject {
+<mark>protocol ListViewControllerDelegate</mark>: AnyObject {
   func openDetail(book: Book)
 }
 
 class ListViewController: UIViewController {
-  /*HLS*/weak var delegate: ListViewControllerDelegate?/*HLE*/
+  <mark>weak var delegate: ListViewControllerDelegate?</mark>
 }
 
 extension ListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    /*HLS*/delegate?.openDetail(book: books[indexPath.row])/*HLE*/
+    <mark>delegate?.openDetail(book: books[indexPath.row])</mark>
   }
 }
 
@@ -194,12 +194,12 @@ class Coordinator {
 
   func showList() {
     let listViewController = ListViewController()
-    /*HLS*/listViewController.delegate = self/*HLE*/
+    <mark>listViewController.delegate = self</mark>
     navigationController.pushViewController(listViewController, animated: false)
   }
 }
 
-extension Coordinator: /*HLS*/ListViewControllerDelegate/*HLE*/ {
+extension Coordinator: <mark>ListViewControllerDelegate</mark> {
   func openDetail(book: Book) {
     let detailViewController = DetailViewController()
     detailViewController.book = book

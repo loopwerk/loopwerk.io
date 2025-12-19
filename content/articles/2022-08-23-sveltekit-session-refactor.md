@@ -83,12 +83,12 @@ All this does is make the data available to the root `+layout.js` file, which we
 
 #### <i class="fa-regular fa-file-code"></i> /routes/+layout.js
 ``` javascript
-export async function load({ fetch, /*HLS*/data/*HLE*/ }) {
+export async function load({ fetch, <mark>data</mark> }) {
   // you now have access to `data.token`
-  const fetchedUser = await getApi(fetch, "/auth/me", /*HLS*/data.token/*HLE*/);
+  const fetchedUser = await getApi(fetch, "/auth/me", <mark>data.token</mark>);
 
   return {
-    /*HLS*/...data/*HLE*/,
+    <mark>...data</mark>,
     fetchedUser
   };
 }

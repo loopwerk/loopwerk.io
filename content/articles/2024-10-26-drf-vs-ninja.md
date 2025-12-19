@@ -148,16 +148,16 @@ And we change our view to make use of it:
 from rest_framework import viewsets
 from .models import Character
 from .serializers import CharacterSerializer
-/*HLS*/from .permissions import CampaignMemberOrPublicReadOnlyPermission/*HLE*/
+<mark>from .permissions import CampaignMemberOrPublicReadOnlyPermission</mark>
 
 class CharacterViewSet(viewsets.ModelViewSet):
-    /*HLS*/permission_classes = (CampaignMemberOrPublicReadOnlyPermission,)/*HLE*/
+    <mark>permission_classes = (CampaignMemberOrPublicReadOnlyPermission,)</mark>
     serializer_class = CharacterSerializer
 
     def get_queryset(self):
         qs = Character.objects.filter(campaign_id=self.kwargs["campaign_id"])
-        if not /*HLS The membership gets added to the request in the CampaignMemberOrPublicReadOnlyPermission class*/self.request.membership.is_dm/*HLE*/:
-            /*HLS Filter out hidden characters*/qs = qs.filter(is_hidden=False)/*HLE*/
+        if not <mark title="The membership gets added to the request in the CampaignMemberOrPublicReadOnlyPermission class">self.request.membership.is_dm</mark>:
+            <mark title="Filter out hidden characters">qs = qs.filter(is_hidden=False)</mark>
         
         return qs
 ```

@@ -18,8 +18,19 @@ func tagnameToSpacing(_ tag: String) -> String {
 extension String {
   func improveHTML() -> String {
     do {
+      // Unescape <mark> and <var> tags that were escaped by the markdown parser
+      var html = self
+        .replacingOccurrences(of: "&lt;mark&gt;", with: "<mark>")
+        .replacingOccurrences(of: "&lt;/mark&gt;", with: "</mark>")
+        .replacingOccurrences(of: "&lt;var&gt;", with: "<var>")
+        .replacingOccurrences(of: "&lt;/var&gt;", with: "</var>")
+
+      // Handle <mark title="...">
+      let markAttrRegex = try NSRegularExpression(pattern: #"&lt;mark\s+title=&quot;([^&]*)&quot;&gt;"#)
+      html = markAttrRegex.stringByReplacingMatches(in: html, range: NSRange(html.startIndex..., in: html), withTemplate: #"<mark title="$1">"#)
+
       // Using SwiftSoup, we turn the HTML string into a proper document
-      let doc = try SwiftSoup.parseBodyFragment(self)
+      let doc = try SwiftSoup.parseBodyFragment(html)
 
       // Find all links with an href attribute
       let links = try doc.select("a[href]")
@@ -55,22 +66,6 @@ extension String {
         if hasSeenTocTemplate {
           toc.append("\(tagnameToSpacing(tagName))- [\(text)](#\(slug))")
         }
-      }
-
-      // Search all code blocks and replace /*HLS [optional title]*/[content]/*HLE*/ with a highlight span
-      let codeBlocks = try doc.select("code")
-      for codeBlock in codeBlocks {
-        var content = try codeBlock.html()
-
-        let regex = try NSRegularExpression(pattern: #"(?s)/\*HLS(?:(?!\*/)\W)?((?:(?!/\*HLS).)*?)\*/(.*?)/\*HLE\*/"#)
-        let range = NSRange(content.startIndex ..< content.endIndex, in: content)
-        content = regex.stringByReplacingMatches(in: content, options: [], range: range, withTemplate: #"<span class="highlight" title="$1">$2</span>"#)
-
-        let regex2 = try NSRegularExpression(pattern: #"(?s)/\*TMS(?:(?!\*/)\W)?((?:(?!/\*TMS).)*?)\*/(.*?)/\*TME\*/"#)
-        let range2 = NSRange(content.startIndex ..< content.endIndex, in: content)
-        content = regex2.stringByReplacingMatches(in: content, options: [], range: range2, withTemplate: #"<span class="template" title="$1">$2</span>"#)
-
-        try codeBlock.html(content)
       }
 
       let result = try doc.body()?.html() ?? self

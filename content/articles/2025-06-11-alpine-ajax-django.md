@@ -200,11 +200,11 @@ First, we define our partial block in the main template:
 {# full.html #}
 <html>
 <body>
-  /*HLS*/{% partialdef details inline %}/*HLE*/
+  <mark>{% partialdef details inline %}</mark>
     <div id="user_details">
       ... contact details and edit link ...
     </div>
-  /*HLS*/{% endpartialdef %}/*HLE*/
+  <mark>{% endpartialdef %}</mark>
 </body>
 </html>
 ```
@@ -218,7 +218,7 @@ def contact_view(request, pk: int):
     context = {"contact": contact}
 
     if "X-Alpine-Request" in request.headers:
-        return TemplateResponse(request, /*HLS*/"full.html#details"/*HLE*/, context)
+        return TemplateResponse(request, <mark>"full.html#details"</mark>, context)
     
     return TemplateResponse(request, "full.html", context)
 ```

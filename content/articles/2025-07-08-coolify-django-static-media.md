@@ -62,8 +62,8 @@ ARG DATABASE_URL
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl wget \
-    /*HLS*/supervisor \/*HLE*/
-    /*HLS*/caddy \/*HLE*/
+    <mark>supervisor \</mark>
+    <mark>caddy \</mark>
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
@@ -85,14 +85,14 @@ RUN uv run --no-sync ./manage.py collectstatic --noinput
 # Migrate the database
 RUN uv run --no-sync ./manage.py migrate
 
-/*HLS*/EXPOSE 80/*HLE*/
+<mark>EXPOSE 80</mark>
 
 # Copy configs
-/*HLS*/COPY .config/Caddyfile /etc/caddy/Caddyfile/*HLE*/
-/*HLS*/COPY .config/supervisord.conf /etc/supervisord.conf/*HLE*/
+<mark>COPY .config/Caddyfile /etc/caddy/Caddyfile</mark>
+<mark>COPY .config/supervisord.conf /etc/supervisord.conf</mark>
 
 # Run with supervisord
-/*HLS*/CMD ["supervisord", "-c", "/etc/supervisord.conf"]/*HLE*/
+<mark>CMD ["supervisord", "-c", "/etc/supervisord.conf"]</mark>
 ```
 
 The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy. You’ll need to update the “Ports Exposes” setting in the General Configuration tab (under “Network”) from `8000` to `80`.
