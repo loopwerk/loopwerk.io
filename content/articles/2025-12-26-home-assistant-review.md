@@ -1,6 +1,6 @@
 ---
 tags: review
-summary: Almost a year ago I bought a Home Assistant Green. Here’s my real-world, long-term review.
+summary: Nearly a year ago I replaced a pile of smart-home apps, hubs, and subscriptions with Home Assistant Green. This is a long-term review of what changed, what didn’t, and whether the promise of one local system actually holds up.
 ---
 
 # Home Assistant review after one year of use
@@ -15,19 +15,11 @@ Before Home Assistant, my smart home setup already looked fairly complete. I had
 
 But in practice, it was messy.
 
-I had a Philips Hue hub sitting in a closet, plus Tado’s “internet bridge”. Each system came with its own app. Hue synced to Apple HomeKit, but Tado didn’t, which meant I could use Siri for lighting but not for heating. My solar panels had yet another app, entirely separate from the rest of my smart home, just to get basic insights into energy production. On top of that, Tado charges a monthly subscription to enable automatic home/away geofencing, so the heating would turn off when I left the house.
+I had a Philips Hue hub sitting in a closet, plus Tado’s “internet bridge”. Each system came with its own app. Hue synced to Apple HomeKit, but Tado didn’t, which meant I could use Siri for lighting but not for heating. My solar panels had yet another app, entirely separate from the rest of my smart home, just to get basic insights into energy production. On top of that, Tado charged a monthly subscription to enable automatic home/away geofencing, so the heating would turn off when I left the house.
 
 I was getting increasingly fed up with the situation: too many apps, too many hubs, too much cloud dependency, and a subscription for something that really shouldn’t require one. That’s when I started looking for alternatives and quickly ran into Home Assistant.
 
-## Before and after
-
-Before Home Assistant, Philips Hue lights and buttons were managed through the Hue app and Hue hub, then synced to HomeKit. That worked reasonably well. I could control lights with Siri and set up basic automations, like turning on the downstairs lights before sunset.
-
-Tado’s smart radiators were a different story. They were managed entirely through Tado’s app and cloud, with no HomeKit integration at all. I couldn’t use Siri to change the temperature in a room, and I had to pay €4 per month for geofencing.
-
-My solar panel installation also lived completely on its own. It was Wi-Fi connected, but only accessible through the manufacturer’s app, which showed daily and monthly production numbers but wasn’t connected to anything else in my home.
-
-The Logitech Circle View camera worked directly with Apple HomeKit and Apple’s Secure Video, recording footage to iCloud without additional fees. It did not integrate with Home Assistant and still doesn’t — it lives purely inside Apple’s Home app. That part of the setup was, and remains, separate.
+## What changed
 
 After switching to Home Assistant, things became a lot simpler.
 
@@ -35,7 +27,7 @@ I was able to completely ditch the Hue hub and app. All my Hue lights and button
 
 Tado is the one remaining exception. I still use their internet bridge, which means the radiators are cloud-connected. Home Assistant talks to them via Tado’s API. It’s not ideal — I’d much rather have everything running locally — but I’m not eager to replace perfectly good hardware just to move from cloud to Thread + Matter.
 
-The Logitech camera remains outside of Home Assistant entirely, but that’s fine: it works well in Apple Home, and I don’t feel a strong need to pull camera feeds into my automation system.
+The Logitech Circle View camera also remains outside of Home Assistant entirely. It still lives purely inside Apple’s Home app, and that’s fine: it works well there, and I don’t feel a strong need to pull camera feeds into my automation system.
 
 The big difference is that everything else is now coordinated through Home Assistant, and it’s simply far more powerful than HomeKit on its own.
 
@@ -51,7 +43,7 @@ Instead, Home Assistant immediately discovered them and exposed them to the Home
 
 Because everything is available in Apple Home, I can also control my house when I’m away. I can pre-heat the house on the way back, or make sure all the lights are turned off.
 
-Home Assistant does have its own iPhone app, but remote access requires setting up your own VPN and port forwarding, which is a fair amount of work. There’s also Home Assistant Cloud, which offers easy and secure remote access, but it costs €75 per year. No thanks, I just do everything via the Home app for free.
+Home Assistant does have its own iPhone app, but remote access requires setting up your own VPN and port forwarding, which is a fair amount of work. There’s also Home Assistant Cloud, which offers easy and secure remote access, but it costs €75 per year. No thanks — I just do everything via the Home app for free.
 
 One of my main motivations for switching was getting rid of Tado’s subscription, and that worked out perfectly.
 
@@ -71,13 +63,13 @@ This enables some wonderfully nerdy automations. When a smart plug detects that 
 
 Compared to HomeKit alone, it’s on a completely different level. And all of this runs locally on my own hardware, configured through a clean web interface.
 
-## Conclusion
+## Verdict
 
 If you buy a Home Assistant Green today, along with the newer ZBT-2 antenna for Zigbee and Thread, the total cost is about €154.
 
 I was able to cancel my Tado subscription, which means that after roughly three years the hardware will have paid for itself. But that’s not the main point.
 
-The real value is having everything in one system. 
+The real value is having everything in one system.
 
 One place to manage all devices, one automation engine, no forced subscriptions, minimal cloud dependency, and full Siri and Apple Home integration. I no longer need separate apps for Hue, Tado, my air conditioners, my solar panels, or my smart plugs.
 
