@@ -10,7 +10,7 @@ I created my first website in 2000, and got my first job as a PHP developer in 2
 
 My hobbies and interests include playing PC games, playing Dungeons & Dragons, watching tv shows (a list of my all-time favs can be [found on IMDB](https://www.imdb.com/list/ls047084150/)), cooking, [photography](https://glass.photo/kevinrenskers) and architecture. 
 
-I’m drawn to tightly designed, story-driven games and deep strategy or simulation games built around meaningful decisions. If a game leans on battle passes, “end-game content,” loot treadmills, or 400 identical map icons to clear, it’s probably not for me. Some of my all-time favorites include The Last of Us, Lies of P, Uncharted, Crusader Kings III, Europa Universalis IV, Cyberpunk 2077, Elden Ring, Baldur’s Gate 3, Divinity: Original Sin 2, Horizon Zero Dawn, God of War, RimWorld, Brotato, Rainbow Six Vegas, Titanfall 2, Dishonored, Hades, Dead Cells, No Rest for the Wicked, and No One Lives Forever.
+I’m drawn to tightly designed, single-player story-driven games and deep strategy where decisions actually matter. If a game leans on battle passes, “end-game content”, loot treadmills, or 400 identical map icons to clear, it’s probably not for me. Some of my all-time favorites include The Last of Us, Lies of P, Uncharted, Crusader Kings III, Europa Universalis IV, Cyberpunk 2077, Elden Ring, Baldur’s Gate 3, Divinity: Original Sin 2, Horizon Zero Dawn, God of War, Brotato, Rainbow Six Vegas, Titanfall 2, Dishonored, Hades, No Rest for the Wicked, and No One Lives Forever.
 
 I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/projects/), and I’m a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
