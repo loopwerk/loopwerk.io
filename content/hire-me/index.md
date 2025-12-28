@@ -24,7 +24,7 @@ Over my 25 years of experience, [I've learned that the best solution is often th
 
 > "I worked with Kevin on the Last.fm Scrobbler App for iOS. The app was a very complicated and challenging build that had to be completed to a tight deadline. From the first day of development Kevin proved to be personally invested in the project, suggesting ways to make it more powerful and useful, ideas that resulted in great user feedback. Amazingly, **the app was fully fleshed out and crash free so early in the process that we could focus on performance, and even add a few features.**"
 >
-> > <cite>&mdash; Graham Todman, former Design Director at Last.fm</cite>
+> <cite>&mdash; Graham Todman, former Design Director at Last.fm</cite>
 
 ### Tech
 
