@@ -170,8 +170,7 @@ This is all great, but how do we handle this on the Django side? An AJAX request
 
 Alpine AJAX (and htmx) sends a special header with its requests. We can check for this header in our view to decide what to render.
 
-```python
-# views.py
+```python title="views.py"
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 
@@ -195,8 +194,7 @@ A fantastic third-party package called [`django-template-partials`](https://gith
 
 First, we define our partial block in the main template:
 
-```django
-{# full.html #}
+```django title="full.html"
 <html>
 <body>
   <mark>{% partialdef details inline %}</mark>
@@ -210,8 +208,7 @@ First, we define our partial block in the main template:
 
 Now, our view can choose to render the whole template or just the `details` partial from it:
 
-```python
-# views.py
+```python title="views.py"
 def contact_view(request, pk: int):
     contact = Contact.objects.get(pk=pk)
     context = {"contact": contact}
@@ -228,8 +225,7 @@ Much cleaner! We only have one template to maintain.
 
 We can abstract this logic away into a custom `TemplateResponse` class to make our views even cleaner. Alpine AJAX sends another header, `X-Alpine-Target`, which tells us which partial it's expecting. We can use this to automatically determine the partial name.
 
-```python
-# a custom lib.py or utils.py
+```python title="lib.py"
 from django.template.response import TemplateResponse as BaseTemplateResponse
 from django.http import HttpRequest
 
@@ -254,8 +250,7 @@ class AlpineTemplateResponse(BaseTemplateResponse):
 
 Now our view is blissfully unaware of the implementation details:
 
-```python
-# views.py
+```python title="views.py"
 from .lib import AlpineTemplateResponse
 
 def contact_view(request, pk: int):
@@ -343,7 +338,7 @@ How do you make this message appear when you're only returning a partial HTML te
 
 The trick is to use Alpine AJAX's `x-sync` attribute. Change your `base.html` to include the following snippet:
 
-```html
+```html title="base.html"
 {% partialdef messages inline %}
 <div id="messages" x-sync x-merge="append" class="toast toast-top toast-end">
   {% for message in messages %}
@@ -364,7 +359,7 @@ The trick is to use Alpine AJAX's `x-sync` attribute. Change your `base.html` to
 
 And then include the following middleware into your project (and add it to `MIDDLEWARE` in `settings.py`):
 
-```python
+```python title="middleware.py"
 class AlpineMessageMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response

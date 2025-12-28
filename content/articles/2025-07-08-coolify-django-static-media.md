@@ -156,7 +156,9 @@ Supervisor is responsible for starting and managing our two processes: Gunicorn 
 
 An added benefit of this supervisor is that it's super easy to add a long running process into the mix, for example for [django-tasks](https://github.com/RealOrangeOne/django-tasks):
 
-```
+```ini title=".config/supervisord.conf"
+# ...
+
 [program:django-tasks]
 command=uv run --no-sync ./manage.py db_worker
 stdout_logfile=/dev/stdout

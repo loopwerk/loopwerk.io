@@ -4,7 +4,8 @@
 
 @font-face {
   font-family: "IBM Plex Sans";
-  src: local("IBM Plex Sans Regular"), url(/static/IBMPlexSans-Regular.woff2) format("woff2");
+  src: local("IBM Plex Sans Regular"),
+    url(/static/IBMPlexSans-Regular.woff2) format("woff2");
   font-display: swap;
 }
 
@@ -48,13 +49,15 @@ a.orange:hover {
   @apply underline;
 }
 
-a[href^="https://github.com"].app {
+a[href^="https://github.com"].app
+{
   background: transparent url("images/github.svg") no-repeat;
   background-size: 1em 1em;
   padding-left: 20px;
 }
 
-a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
+a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app
+{
   background: transparent url("images/apple.svg") no-repeat;
   background-size: 1em 1em;
   padding-left: 20px;
@@ -90,9 +93,9 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
 }
 
 .prose pre[data-title] .code-title {
-  @apply block text-sm text-gray py-2 pl-6 mb-4 border-b border-light/20;
+  @apply block text-sm text-gray py-2 pl-10 mb-4 -mx-4 border-b border-light/20;
   background-repeat: no-repeat;
-  background-position: 0 center;
+  background-position: 1rem center;
   background-size: 16px 16px;
   background-image: url("icons/document.svg");
 }
@@ -207,13 +210,14 @@ code var {
 }
 
 @media (min-width: 860px) {
-  .prose pre, body.projects .bg-sub {
+  .prose pre,
+  body.projects .bg-sub {
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   .hero-image {
     margin-left: -20px;
     width: 840px;

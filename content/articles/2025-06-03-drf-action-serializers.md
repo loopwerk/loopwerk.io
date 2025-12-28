@@ -130,7 +130,7 @@ $ uv add drf-action-serializers[spectacular]
 
 Simply add the following to settings.py and it's automatically used:
 
-```python
+```python title="settings.py"
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_action_serializer.spectacular.ActionSerializerAutoSchema",
 }

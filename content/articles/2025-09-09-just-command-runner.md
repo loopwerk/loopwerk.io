@@ -15,7 +15,7 @@ I finally understood the value of `just`. It's not just (heh) about running comp
 
 For example, for a Django project:
 
-```makefile
+```makefile title="justfile"
 run:
     uv run ./manage.py tailwind runserver
 
@@ -33,7 +33,7 @@ check:
 
 And for a SvelteKit project it might look like this:
 
-```makefile
+```makefile title="justfile"
 run:
     pnpm vite dev --port 3000
 

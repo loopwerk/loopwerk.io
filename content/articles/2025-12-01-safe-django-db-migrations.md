@@ -72,8 +72,7 @@ We stop using the field in code, but we keep the column in the database and make
 
 First we make the field nullable so the new code can ignore it:
 
-```python
-# models.py
+```python title="models.py"
 class User(models.Model):
     ...
     # We want to delete this, but first we make it nullable
@@ -95,8 +94,7 @@ Even if some old code hits that field for a moment, it still exists, so nothing 
 
 Now that the production code no longer uses `phone_number`, we can safely drop it. Delete the field from `models.py`:
 
-```python
-# models.py
+```python title="models.py"
 class User(models.Model):
     ...
     # phone_number is gone
