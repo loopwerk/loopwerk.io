@@ -90,7 +90,19 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
       
       if let heroImage = context.item.metadata.heroImage {
-        img(class:"hero-image", src: "/articles/heroes/\(heroImage)")
+        let baseName = (heroImage as NSString).deletingPathExtension
+        let srcset = """
+          /articles/heroes/\(baseName)-315w.webp 315w, \
+          /articles/heroes/\(baseName)-630w.webp 630w, \
+          /articles/heroes/\(baseName)-840w.webp 840w, \
+          /articles/heroes/\(baseName)-1680w.webp 1680w
+          """
+        img(
+          class: "hero-image",
+          sizes: "(max-width: 799px) 315px, 840px",
+          src: "/articles/heroes/\(baseName)-1680w.webp",
+          srcset: srcset,
+        )
       }
       
       Node.raw(context.item.body)
