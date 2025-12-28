@@ -84,11 +84,11 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       div(class: "-mt-6") {
         renderArticleInfo(context.item)
       }
-      
+
       if context.item.archive {
         p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
       }
-      
+
       if let heroImage = context.item.metadata.heroImage {
         let baseName = (heroImage as NSString).deletingPathExtension
         let srcset = """
@@ -98,6 +98,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
           /articles/heroes/\(baseName)-1680w.webp 1680w
           """
         img(
+          alt: "Hero image",
           class: "hero-image",
           sizes: "(max-width: 799px) 315px, 840px",
           src: "/articles/heroes/\(baseName)-1680w.webp",
@@ -105,7 +106,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
           customAttributes: ["fetchpriority": "high"]
         )
       }
-      
+
       Node.raw(context.item.body)
     }
 
@@ -113,7 +114,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
       div(class: "flex flex-col lg:flex-row gap-8 lg:items-center") {
         div(class: "flex-[0_0_120px]") {
-          img(class: "w-[120px] h-[120px] rounded-full", src: "/articles/images/kevin.png")
+          img(alt: "Avatar", class: "w-[120px] h-[120px] rounded-full", src: "/articles/images/kevin.png")
         }
 
         div(class: "prose") {
