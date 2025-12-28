@@ -1,6 +1,6 @@
 ---
 tags: django, python, deployment, coolify, howto
-summary: Let’s solve the challenge of serving media files for your Coolified Django site.
+summary: Let's solve the challenge of serving media files for your Coolified Django site.
 ---
 
 # Handling static and media files in your Django app running on Coolify
@@ -9,17 +9,16 @@ In a previous article, I detailed my journey of [hosting Django sites with Cooli
 
 If your application only serves static files - the CSS, JavaScript, and images that are part of your core application - the solution is thankfully really simple: use [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/). It is, by far, the easiest way to serve static files directly from your Django application in production without needing a separate web server just for them.
 
-However, if you’re also dealing with user-uploaded media files then you have to deal with two challenges: where to store the files and how to serve them. Let’s assume you have a standard configuration in your `settings.py`:
+However, if you're also dealing with user-uploaded media files then you have to deal with two challenges: where to store the files and how to serve them. Let's assume you have a standard configuration in your `settings.py`:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 STATIC_ROOT = BASE_DIR / "static_root"
 STATIC_URL = "/static/"
 MEDIA_ROOT = BASE_DIR / "media_root"
 MEDIA_URL = "/media/"
 ```
 
-The primary problem is that media files uploaded by users will be saved inside the Docker container. Because Coolify creates a fresh container from your image every time you deploy, any user-uploaded files will be permanently lost. That’s not exactly great.
+The primary problem is that media files uploaded by users will be saved inside the Docker container. Because Coolify creates a fresh container from your image every time you deploy, any user-uploaded files will be permanently lost. That's not exactly great.
 
 A common and effective solution is to store these files on a dedicated cloud storage service, like Amazon S3 or Cloudflare R2. The excellent [django-storages](https://django-storages.readthedocs.io/en/latest/) package makes this integration fairly straightforward. You could configure it to handle only your media files while letting WhiteNoise continue to serve your static files, or you could delegate both tasks to `django-storages` and remove WhiteNoise entirely.
 
@@ -29,11 +28,11 @@ In my case, however, I preferred to keep all my project's files on my own server
 
 Thankfully, the storage problem is simple to solve with a built-in Coolify feature: Persistent Storage. This allows you to map a directory on your host server to a directory inside your container.
 
-In your Django application's resource view in Coolify, navigate to the **Persistent Storage** section in the sidebar and click the “Add” button. You'll need to create a new Volume Mount with the following settings:
+In your Django application's resource view in Coolify, navigate to the **Persistent Storage** section in the sidebar and click the "Add” button. You'll need to create a new Volume Mount with the following settings:
 
-*   **Name**: a descriptive name, like `media`.
-*   **Source Path**: an absolute path to a folder on the host server, for example `/root/my-app-media`.
-*   **Destination Path**: the path inside the container where your media files are stored. This should match the `MEDIA_ROOT` from `settings.py`, which in our case is `/app/media_root`.
+- **Name**: a descriptive name, like `media`.
+- **Source Path**: an absolute path to a folder on the host server, for example `/root/my-app-media`.
+- **Destination Path**: the path inside the container where your media files are stored. This should match the `MEDIA_ROOT` from `settings.py`, which in our case is `/app/media_root`.
 
 ![](/articles/images/coolify_persistent_storage.png)
 
@@ -43,10 +42,9 @@ With this volume mount in place, all uploaded media files will be saved to the `
 
 While the files are now stored safely, they aren't being served yet. Django's development server doesn't run in production, and WhiteNoise is designed to handle only static files, not media files. The solution is to add a lightweight, production-ready web server to our container that will serve the media (and static) files and proxy all other requests to our Django application.
 
-For this, we'll use Caddy as our web server and Supervisor to manage both the Caddy and Gunicorn processes. This requires a few changes to our `Dockerfile` and two new configuration files. Let’s start by updating our `Dockerfile`. We need to install Caddy and Supervisor, copy their configuration files, and run `supervisord` as the main command.
+For this, we'll use Caddy as our web server and Supervisor to manage both the Caddy and Gunicorn processes. This requires a few changes to our `Dockerfile` and two new configuration files. Let's start by updating our `Dockerfile`. We need to install Caddy and Supervisor, copy their configuration files, and run `supervisord` as the main command.
 
-#### <i class="fa-regular fa-file-code"></i> Dockerfile
-```dockerfile
+```dockerfile title="Dockerfile"
 # Use a slim Debian image as our base
 # (we don't use a Python image because Python will be installed with uv)
 
@@ -95,10 +93,9 @@ RUN uv run --no-sync ./manage.py migrate
 <mark>CMD ["supervisord", "-c", "/etc/supervisord.conf"]</mark>
 ```
 
-The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy. You’ll need to update the “Ports Exposes” setting in the General Configuration tab (under “Network”) from `8000` to `80`.
+The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy. You'll need to update the "Ports Exposes" setting in the General Configuration tab (under "Network") from `8000` to `80`.
 
-#### <i class="fa-regular fa-file-code"></i> .config/Caddyfile
-```
+```text title=".config/Caddyfile"
 :80
 
 handle_path /static/* {
@@ -128,8 +125,7 @@ handle {
 
 This configuration tells Caddy to serve any requests for `/static/*` and `/media/*` from their respective directories on the filesystem. All other requests are reverse-proxied to our Django application, which Gunicorn is running on `127.0.0.1:8000`.
 
-#### <i class="fa-regular fa-file-code"></i> .config/supervisord.conf
-```
+```ini title=".config/supervisord.conf"
 [supervisord]
 nodaemon=true
 logfile=/dev/null
@@ -158,7 +154,7 @@ startretries=3
 
 Supervisor is responsible for starting and managing our two processes: Gunicorn and Caddy. It ensures that both our application server and our file server are running concurrently.
 
-An added benefit of this supervisor is that it’s super easy to add a long running process into the mix, for example for [django-tasks](https://github.com/RealOrangeOne/django-tasks):
+An added benefit of this supervisor is that it's super easy to add a long running process into the mix, for example for [django-tasks](https://github.com/RealOrangeOne/django-tasks):
 
 ```
 [program:django-tasks]
@@ -172,7 +168,7 @@ startretries=3
 priority=30
 ```
 
-> Side note: you might wonder why we don’t use Docker Compose to run Django, Caddy, and the `db_worker` process all in their own containers. We’d get separate logs which would be very nice, containers can be restarted individually, and one crashing container won’t bring down the others. Those are all really great benefits, but we’d loose rolling updates, so your app would be down for a short time every time you deploy changes. I also found that dealing with build-time environment variables was a lot more complex with Docker Compose.
+> Side note: you might wonder why we don't use Docker Compose to run Django, Caddy, and the `db_worker` process all in their own containers. We'd get separate logs which would be very nice, containers can be restarted individually, and one crashing container won't bring down the others. Those are all really great benefits, but we'd loose rolling updates, so your app would be down for a short time every time you deploy changes. I also found that dealing with build-time environment variables was a lot more complex with Docker Compose.
 
 ## Step 3: profit
 

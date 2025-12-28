@@ -11,7 +11,7 @@ Twenty-five years ago, in 2000, I built my first website. It was for me and the 
 
 My professional journey began in 2001 as a sysadmin at the University of Groningen. While I was wrangling Windows workstations and a few Debian servers, the real magic was happening next to me: my colleagues were building dynamic websites in PHP.
 
-By this time my Flash website was now a collection of 15 static HTML pages. And every time I wanted to change the navigation menu, I had to meticulously edit all 15 files. It was a nightmare! Hearing about my struggle, a colleague showed me a single line of PHP that would change everything: 
+By this time my Flash website was now a collection of 15 static HTML pages. And every time I wanted to change the navigation menu, I had to meticulously edit all 15 files. It was a nightmare! Hearing about my struggle, a colleague showed me a single line of PHP that would change everything:
 
 ```php
 <?php include 'header.html'; ?>
@@ -23,13 +23,13 @@ Back then, building websites was pure joy. The stack: PHP + HTML, with a sprinkl
 
 ## Welcome to the build step
 
-But things didn’t stay simple.
+But things didn't stay simple.
 
-JavaScript libraries started multiplying, and I started using Angular. Suddenly I was building Single Page Apps and the backend (Python instead of PHP by 2009) was reduced to a JSON API. And for the first time, I needed a build step. My simple workflow of “edit file → reload browser” was gone.
+JavaScript libraries started multiplying, and I started using Angular. Suddenly I was building Single Page Apps and the backend (Python instead of PHP by 2009) was reduced to a JSON API. And for the first time, I needed a build step. My simple workflow of "edit file → reload browser” was gone.
 
-Then came the real tidal wave: ES6, CommonJS, Babel, Webpack, npm. JavaScript as a language was improving, but the tooling exploded. My `webpack.config.js` became its own mini-project. The `node_modules` folder turned into a black hole of dependencies. Even the simplest “hello world” app pulled in hundreds of megabytes. And it was fragile too; half the time a fresh install broke the build because of some upstream change.
+Then came the real tidal wave: ES6, CommonJS, Babel, Webpack, npm. JavaScript as a language was improving, but the tooling exploded. My `webpack.config.js` became its own mini-project. The `node_modules` folder turned into a black hole of dependencies. Even the simplest "hello world” app pulled in hundreds of megabytes. And it was fragile too; half the time a fresh install broke the build because of some upstream change.
 
-Deployment became a mysterious black box handled by CI/CD pipelines built by a separate DevOps team. The directness was gone, replaced by layers of abstraction and fragility. Progress didn’t always feel like progress.
+Deployment became a mysterious black box handled by CI/CD pipelines built by a separate DevOps team. The directness was gone, replaced by layers of abstraction and fragility. Progress didn't always feel like progress.
 
 ## Back to sanity
 
@@ -39,27 +39,27 @@ TypeScript brought sanity to JavaScript. Svelte and SvelteKit made complexity va
 
 Then came htmx and [Alpine AJAX](/articles/2025/alpine-ajax-django/). Suddenly I was back to building multi-page apps without a build step, just like in the early days, but now with smooth interactivity. It felt almost old-school, but in the best way.
 
-When it comes to deployment, I’ve seen it all over the years:
+When it comes to deployment, I've seen it all over the years:
 
-1.	SFTP (the beginning)
-2.	A complex deploy process built by specialized DevOps people (a black box to everyone else)
-3.	Heroku (easy, but expensive and a lack of control)
-4.	`git pull` on a bare-metal server (full control but so complex to get everything running correctly)
-5.	GitHub webhooks running a deploy script on that bare metal server ([automation](/articles/2024/auto-deploying/)!)
-6.	Coolify (the sweet spot: self-hosted, automated, free, and simple)
-	
-Push to GitHub, and it’s live. I think the deployment story is still too complex when it comes to Python apps, but [with Coolify it got so much better](/articles/2025/coolify-django/) than anything I’ve had before.
+1. SFTP (the beginning)
+2. A complex deploy process built by specialized DevOps people (a black box to everyone else)
+3. Heroku (easy, but expensive and a lack of control)
+4. `git pull` on a bare-metal server (full control but so complex to get everything running correctly)
+5. GitHub webhooks running a deploy script on that bare metal server ([automation](/articles/2024/auto-deploying/)!)
+6. Coolify (the sweet spot: self-hosted, automated, free, and simple)
+
+Push to GitHub, and it's live. I think the deployment story is still too complex when it comes to Python apps, but [with Coolify it got so much better](/articles/2025/coolify-django/) than anything I've had before.
 
 ## The lessons learned
 
-A quarter of a century later, I see the pattern clearly: technology cycles from simple to complex and back to simple again. But the return to simplicity isn't automatic. It's a choice. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity. The best tools are the ones that get out of your way, letting you focus on the creative act of building rather than wrestling with the machinery. 
+A quarter of a century later, I see the pattern clearly: technology cycles from simple to complex and back to simple again. But the return to simplicity isn't automatic. It's a choice. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity. The best tools are the ones that get out of your way, letting you focus on the creative act of building rather than wrestling with the machinery.
 
 My 25-year journey has crystalized a few truths. If I could share the lessons from all those years with a new developer, they would be these:
 
-1.  **Keep it simple.** This applies everywhere. As the chef Marco Pierre White says, “Perfection is lots of little things done well”, and "Consistency is born out of simplicity”. A clever one-liner might feel smart today, but it will be unreadable to your future self or a teammate tomorrow. Don't over-engineer. The chances you'll need to scale to millions of users are slim; build for the problem you have now, not the one you might have in five years.
-2.  **Just start building.** Don’t worry about the perfect architecture. It’s so much more important to get your hands dirty and get the code flowing. You will naturally discover what works and what doesn’t, and you will find the patterns to organize your code. Action creates clarity.
-3.  **Embrace practicing the craft.** Programming is a craft learned through practice, mistakes, and repetition. Struggling with a problem, debugging for hours, rewriting code until it finally clicks—that’s where real understanding is forged. AI coding assistants [can be great](/articles/2025/garbage-in-garbage-out/), but if they do the bulk of the work for you, you’re not actually learning. The hard way is the lasting way. As the quote from *Bojack Horseman* says, “It gets easier. Every day it gets a little easier. But you gotta do it every day — that’s the hard part. But it does get easier.”
-4.  **Increase locality of behavior.** Code is easier to understand when related logic, markup, and styles live close together. The more you have to jump between files to see how something works, the harder it is to grasp the whole picture. That’s why Svelte files feel right, why TailwindCSS makes sense, and why htmx feels so natural. Keeping things local makes the system obvious.
+1.  **Keep it simple.** This applies everywhere. As the chef Marco Pierre White says, "Perfection is lots of little things done well”, and "Consistency is born out of simplicity”. A clever one-liner might feel smart today, but it will be unreadable to your future self or a teammate tomorrow. Don't over-engineer. The chances you'll need to scale to millions of users are slim; build for the problem you have now, not the one you might have in five years.
+2.  **Just start building.** Don't worry about the perfect architecture. It's so much more important to get your hands dirty and get the code flowing. You will naturally discover what works and what doesn't, and you will find the patterns to organize your code. Action creates clarity.
+3.  **Embrace practicing the craft.** Programming is a craft learned through practice, mistakes, and repetition. Struggling with a problem, debugging for hours, rewriting code until it finally clicks—that's where real understanding is forged. AI coding assistants [can be great](/articles/2025/garbage-in-garbage-out/), but if they do the bulk of the work for you, you're not actually learning. The hard way is the lasting way. As the quote from _Bojack Horseman_ says, "It gets easier. Every day it gets a little easier. But you gotta do it every day — that's the hard part. But it does get easier.”
+4.  **Increase locality of behavior.** Code is easier to understand when related logic, markup, and styles live close together. The more you have to jump between files to see how something works, the harder it is to grasp the whole picture. That's why Svelte files feel right, why TailwindCSS makes sense, and why htmx feels so natural. Keeping things local makes the system obvious.
 5.  **Less is more**, especially with dependencies. Every dependency is a moving part you don't control. Fewer parts mean fewer surprises, easier upgrades, and a codebase that remains understandable years later.
 6.  **Tend your code like a garden.** Code is not a static artifact; it's a living system. It needs regular maintenance, or it will be overgrown with weeds. Technical debt is real. Prune old functions, remove dead styles, and refactor messy parts. A little cleanup regularly prevents the project from becoming an unmaintainable wilderness.
 7.  **Automate the arguments away.** Debates over the placement of curly braces or variable naming are a waste of creative energy. Pick a code style, use a formatter like Prettier or Ruff, and set it to run automatically on commit. This eliminates an entire class of pointless pull request comments and lets everyone focus on what actually matters: the logic.

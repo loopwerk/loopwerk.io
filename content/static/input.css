@@ -84,6 +84,69 @@ a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app {
   @apply text-sm;
 }
 
+/* Code block with filename */
+.prose pre[data-title] {
+  @apply pt-0;
+}
+
+.prose pre[data-title] .code-title {
+  @apply block text-sm text-gray py-2 pl-6 mb-4 border-b border-light/20;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  background-size: 16px 16px;
+  background-image: url("icons/document.svg");
+}
+
+/* File icons based on language */
+.prose pre[data-title].language-python .code-title {
+  background-image: url("icons/python.svg");
+}
+
+.prose pre[data-title].language-javascript .code-title,
+.prose pre[data-title].language-js .code-title {
+  background-image: url("icons/javascript.svg");
+}
+
+.prose pre[data-title].language-typescript .code-title,
+.prose pre[data-title].language-ts .code-title {
+  background-image: url("icons/typescript.svg");
+}
+
+.prose pre[data-title].language-swift .code-title {
+  background-image: url("icons/swift.svg");
+}
+
+.prose pre[data-title].language-svelte .code-title {
+  background-image: url("icons/svelte.svg");
+}
+
+.prose pre[data-title].language-html .code-title {
+  background-image: url("icons/html.svg");
+}
+
+.prose pre[data-title].language-css .code-title {
+  background-image: url("icons/css.svg");
+}
+
+.prose pre[data-title].language-bash .code-title,
+.prose pre[data-title].language-shell .code-title,
+.prose pre[data-title].language-sh .code-title {
+  background-image: url("icons/console.svg");
+}
+
+.prose pre[data-title].language-json .code-title {
+  background-image: url("icons/json.svg");
+}
+
+.prose pre[data-title].language-yaml .code-title,
+.prose pre[data-title].language-yml .code-title {
+  background-image: url("icons/yaml.svg");
+}
+
+.prose pre[data-title].language-dockerfile .code-title {
+  background-image: url("icons/docker.svg");
+}
+
 code mark {
   border: 1px solid var(--color-orange);
   padding: 2px 4px;
@@ -117,10 +180,6 @@ code var {
 
 .prose h1 {
   @apply font-semibold mt-12;
-}
-
-.fa-regular {
-  font-weight: normal;
 }
 
 /* SCREENSHOTS */

@@ -5,11 +5,11 @@ summary: How to run schema-changing Django migrations safely, avoiding schema/co
 
 # Safe Django migrations without server errors
 
-One of the best features of modern container-based deployment platforms (Coolify included) is that they give you zero downtime rolling updates out of the box. When you push code, a new image is built, migrations run, and traffic only shifts to the new container when it’s healthy.
+One of the best features of modern container-based deployment platforms (Coolify included) is that they give you zero downtime rolling updates out of the box. When you push code, a new image is built, migrations run, and traffic only shifts to the new container when it's healthy.
 
 However, this convenience creates a hidden trap for Django developers. Because Coolify performs a rolling update, there is a window of time (usually 1–2 minutes) where both the old and new versions of your application are running simultaneously against the same database.
 
-This works fine if you are just adding a new table. But if you run a destructive migration, like removing a field or renaming a column, your deployment becomes a race condition. The new container runs the migration, the database schema changes, and your *old* container (which is still serving live traffic) immediately starts throwing 500 errors because it's trying to query a column that no longer exists.
+This works fine if you are just adding a new table. But if you run a destructive migration, like removing a field or renaming a column, your deployment becomes a race condition. The new container runs the migration, the database schema changes, and your _old_ container (which is still serving live traffic) immediately starts throwing 500 errors because it's trying to query a column that no longer exists.
 
 This isn't a limitation of Coolify; it is a fundamental constraint of rolling deployments. Heroku, Render, Fly.io, ECS, Kubernetes — anything that swaps containers while the old version is still serving traffic has the same constraint. You cannot fix this by changing where the migration runs in your Dockerfile. You have to fix it by changing how you write migrations.
 
@@ -18,24 +18,27 @@ This isn't a limitation of Coolify; it is a fundamental constraint of rolling de
 Your first instinct might be to tweak the deployment settings to avoid the overlap. Let's look at why the common infrastructure workarounds don't actually solve the problem.
 
 ### Strategy A: the post-deploy hook
-You could remove `migrate` from the build step and run it in a "Post-Deploy" hook. This means migrations run *after* the new container is live and the old one is dead.
 
-This fixes the “removing a field” problem, because the schema change happens after the old container is no longer serving traffic. But it breaks the “adding a field” problem: if you add a new required column, the new code in the new container might start up and try to query that column *before* the migration finishes. Result: the new app crashes on startup, and the deployment fails.
+You could remove `migrate` from the build step and run it in a "Post-Deploy" hook. This means migrations run _after_ the new container is live and the old one is dead.
 
-Another issue: if migrations fail, your *deployment still succeeds*, leaving your app running with mismatched code and schema.
+This fixes the "removing a field” problem, because the schema change happens after the old container is no longer serving traffic. But it breaks the "adding a field” problem: if you add a new required column, the new code in the new container might start up and try to query that column _before_ the migration finishes. Result: the new app crashes on startup, and the deployment fails.
+
+Another issue: if migrations fail, your _deployment still succeeds_, leaving your app running with mismatched code and schema.
 
 Verdict: worse than before.
 
 ### Strategy B: separate migration job
+
 You could create a second service in the same project that runs migrations as a one-shot job.
 
-The problem is that you still have to choose: run it before the deploy, or after? 
+The problem is that you still have to choose: run it before the deploy, or after?
 
-You’ve essentially re-implemented either Strategy A or the original “migrate during build” approach, just in a second container. The core compatibility problem remains.
+You've essentially re-implemented either Strategy A or the original "migrate during build” approach, just in a second container. The core compatibility problem remains.
 
 Verdict: more complex and still unsafe.
 
 ### Strategy C: blue/green databases
+
 This is the most elaborate workaround: copy production to a new database, run migrations there, and then point the new code to the new DB.
 
 This is incredibly complex to manage for data consistency, and it would be catastrophic for any e-commerce site:
@@ -47,15 +50,15 @@ This is incredibly complex to manage for data consistency, and it would be catas
 10:02:00 - Switch to new DB
 10:02:01 - Previous order and user... GONE 💀
 
-You’re solving the wrong problem with a rocket launcher. This is enterprise-grade DevOps machinery for a basic schema compatibility issue.
+You're solving the wrong problem with a rocket launcher. This is enterprise-grade DevOps machinery for a basic schema compatibility issue.
 
 Verdict: massive complexity, no real benefit.
 
 ## The real solution: the two-phase deploy
 
-The hard truth is that destructive migrations can’t be made safe unless the schema stays compatible with both old and new code during the rollout.
+The hard truth is that destructive migrations can't be made safe unless the schema stays compatible with both old and new code during the rollout.
 
-The solution is not infrastructure; it's application patterns. The key idea: decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.  
+The solution is not infrastructure; it's application patterns. The key idea: decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.
 
 ## Example 1: removing a field safely
 
@@ -64,7 +67,8 @@ Let's say we want to remove the `phone_number` field from our `User` model. The 
 Instead, split it into two deploys.
 
 ### Phase 1: expand (make schema compatible with both versions)
-We stop using the field in code, but we keep the column in the database and make sure it doesn’t break either version.
+
+We stop using the field in code, but we keep the column in the database and make sure it doesn't break either version.
 
 First we make the field nullable so the new code can ignore it:
 
@@ -73,21 +77,22 @@ First we make the field nullable so the new code can ignore it:
 class User(models.Model):
     ...
     # We want to delete this, but first we make it nullable
-    phone_number = models.TextField(null=True, blank=True) 
+    phone_number = models.TextField(null=True, blank=True)
 ```
 
-Then remove all references to `user.phone_number` in templates, views, and serializers. Now it’s safe to create a migration and deploy this version.
+Then remove all references to `user.phone_number` in templates, views, and serializers. Now it's safe to create a migration and deploy this version.
 
 **Result:**
 
 - Migration runs safely during build.
 - Old code still reads `phone_number`, which still exists.
-- New code ignores `phone_number` and doesn’t break if it's missing.
+- New code ignores `phone_number` and doesn't break if it's missing.
 - During the rollout window, both versions remain fully compatible.
 
 Even if some old code hits that field for a moment, it still exists, so nothing crashes.
 
 ### Phase 2: contract (remove old schema elements)
+
 Now that the production code no longer uses `phone_number`, we can safely drop it. Delete the field from `models.py`:
 
 ```python
@@ -109,7 +114,7 @@ No server errors.
 
 ## Example 2: renaming a field safely
 
-Renaming a field is just “remove old field + add new field,” so the same pattern applies. 
+Renaming a field is just "remove old field + add new field,” so the same pattern applies.
 
 ### Phase 1: add new field + dual-write + data migration
 
@@ -154,7 +159,7 @@ class User(models.Model):
     new_name = models.CharField(max_length=100)
 ```
 
-Generate the migration, deploy, and you’re done.
+Generate the migration, deploy, and you're done.
 
 ## Summary
 
@@ -172,4 +177,4 @@ You should use this pattern for all kinds of destructive changes:
 - **Decreasing field size** (old code may write longer values)
 - **Changing field types** (old code expects different type)
 
-It’s simple, safe, predictable, and works with every hosting platform, including Coolify.
+It's simple, safe, predictable, and works with every hosting platform, including Coolify.

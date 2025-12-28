@@ -1,6 +1,6 @@
 ---
 tags: javascript, sveltekit, howto
-summary: Solving problems by putting writable reactive stores in Svelte’s context.
+summary: Solving problems by putting writable reactive stores in Svelte's context.
 ---
 
 # Putting Svelte stores inside context for fun and profit
@@ -25,8 +25,7 @@ Modals can be nested infinitely. Inside of this character form are multiple butt
 
 Every modal has code that detects when the escape key is pressed, and then it will close the top-most modal. The core of the code looks like this:
 
-#### <i class="fa-regular fa-file-code"></i> Modal.svelte
-``` typescript
+```svelte title="Modal.svelte"
 <script lang="ts">
   export let title: string;
   export let close = () => {};
@@ -54,11 +53,11 @@ Every modal has code that detects when the escape key is pressed, and then it wi
 </div>
 ```
 
-Every modal listens for key presses, and if the escape key is pressed and the modal has no child modals, then the modal closes itself. When multiple modals are opened, you can press the escape key multiple times to close them all. This works perfectly fine, but there is one problem: it’s way too easy to accidentally close a modal with a bunch of unsaved changes, just by pressing the wrong key. I wanted to make it impossible to close the modal with the escape key when there are unsaved changed in the form.
+Every modal listens for key presses, and if the escape key is pressed and the modal has no child modals, then the modal closes itself. When multiple modals are opened, you can press the escape key multiple times to close them all. This works perfectly fine, but there is one problem: it's way too easy to accidentally close a modal with a bunch of unsaved changes, just by pressing the wrong key. I wanted to make it impossible to close the modal with the escape key when there are unsaved changed in the form.
 
 At its core, the `Modal` component needs to know if its form has changes, and then just ignore the escape key:
 
-``` typescript
+```typescript
 let hasChanges = false;
 
 function handleKeydown(e: KeyboardEvent) {
@@ -69,23 +68,21 @@ function handleKeydown(e: KeyboardEvent) {
 }
 ```
 
-But how can the modal know that its form has changes? It doesn’t even know which form is shown, it just has a `<slot />` tag and that’s it. My first instinct was to use an event dispatcher to communicate from the child to the parent:
+But how can the modal know that its form has changes? It doesn't even know which form is shown, it just has a `<slot />` tag and that's it. My first instinct was to use an event dispatcher to communicate from the child to the parent:
 
-#### <i class="fa-regular fa-file-code"></i> Form.svelte
-``` typescript
+```svelte title="Form.svelte"
 <script>
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
-    
+
     function handleFormChanges() {
         dispatch('change', { hasChanges: true });
     }
 </script>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> Modal.svelte
-``` typescript
+```svelte title="Modal.svelte"
 <script>
     let hasChanges = false;
 
@@ -99,32 +96,30 @@ But how can the modal know that its form has changes? It doesn’t even know whi
 </div>
 ```
 
-Sadly though this doesn’t work: Svelte will give the error `slot cannot have directives`.
+Sadly though this doesn't work: Svelte will give the error `slot cannot have directives`.
 
-One possible solution was to move the event listener to the character page, where the modal is created, and to pass `hasChanges` from the character page to the modal. But there are many many pages with modals throughout the site, and I really didn’t want to have to update all of them. I wanted a self-contained solution that didn’t involve changing every page, every modal or every form.
+One possible solution was to move the event listener to the character page, where the modal is created, and to pass `hasChanges` from the character page to the modal. But there are many many pages with modals throughout the site, and I really didn't want to have to update all of them. I wanted a self-contained solution that didn't involve changing every page, every modal or every form.
 
 My first thought was to just use a global store to store the `hasChanges` value. Write to it from the forms, listen to it from the modals, done. But the nested modals make that problematic: changes made to a child modal would now also affect the parent modal, since they use the same store. And then I remembered that you can [set context variables](https://v4.svelte.dev/docs/svelte#setcontext), which are stored per component. And you can store a writable store inside the context just fine.
 
-#### <i class="fa-regular fa-file-code"></i> Modal.svelte
-``` typescript
+```svelte title="Modal.svelte"
 <script lang="ts">
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
   import type { Writable } from "svelte/store";
-  
+
   export const hasChanges: Writable<boolean> = writable(false);
   setContext("hasChanges", hasChanges);
 </script>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> Form.svelte
-``` typescript
+```svelte title="Form.svelte"
 <script lang="ts">
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
 
   const hasChangesStore: Writable<boolean> | undefined = getContext("hasChanges");
-  
+
   // My form logic ends up calling this function when something changes
   function formChanged(hasChanges) {
     if (hasChangesStore) {

@@ -1,6 +1,6 @@
 ---
 tags: django, python, deployment, howto
-summary: I'm a big fan of the django-tailwind-cli package, but I ran into problems deploying it to production. Here’s how to make sure you cache-bust tailwind.css.
+summary: I'm a big fan of the django-tailwind-cli package, but I ran into problems deploying it to production. Here's how to make sure you cache-bust tailwind.css.
 ---
 
 # Production-ready cache-busting for Django and Tailwind CSS
@@ -9,14 +9,13 @@ I'm a big fan of the [django-tailwind-cli](https://github.com/django-commons/dja
 
 However, when I first deployed a project using this setup, I ran into a classic problem: caching. You see, `django-tailwind-cli` creates a single `tailwind.css` file that you load in your base template. In production, browsers and CDNs will aggressively cache this file to improve performance. This is normally a good thing! But when you deploy an update, like adding a new Tailwind class to a template, your users might not see the changes. Their browser will continue to serve the old, cached `tailwind.css` file, leading to broken or outdated styling.
 
-Luckily, Django has a built-in cache-busting mechanism in the form of `ManifestStaticFilesStorage`. But, there’s one important caveat: you need to make sure that `css/source.css` is not processed by `ManifestStaticFilesStorage` or things will break.
+Luckily, Django has a built-in cache-busting mechanism in the form of `ManifestStaticFilesStorage`. But, there's one important caveat: you need to make sure that `css/source.css` is not processed by `ManifestStaticFilesStorage` or things will break.
 
 ## Step 1: configure the storage
 
 Update `settings.py`:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 STATIC_ROOT = BASE_DIR / "static_root"
 STATIC_URL = "/static/"
 
@@ -42,6 +41,6 @@ With the settings configured, your deployment process for static files will now 
 
 First, `tailwind build` creates the final `tailwind.css` file. Then, `collectstatic` picks it up, hashes it with a unique name like `tailwind.4e3e58f1a4a4.css`, and places it in your `STATIC_ROOT` directory, ready to be served.
 
-That’s it! Your Tailwind styles are now production-ready and properly cache-busted.
+That's it! Your Tailwind styles are now production-ready and properly cache-busted.
 
-> **Update August 2, 2025**: the initial version of this article used a custom subclass of `ManifestStaticFilesStorage` to ignore `css/source.css`, but then James was kind enough to tell me about `collectstatic`’s `--ignore` option. Thanks!
+> **Update August 2, 2025**: the initial version of this article used a custom subclass of `ManifestStaticFilesStorage` to ignore `css/source.css`, but then James was kind enough to tell me about `collectstatic`'s `--ignore` option. Thanks!

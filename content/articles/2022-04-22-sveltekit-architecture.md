@@ -13,8 +13,7 @@ The first version of my solution used either `context` (since renamed to `stuff`
 
 Let's dig in!
 
-#### <i class="fa-regular fa-file-code"></i> /routes/__layout.svelte
-```javascript
+```svelte title="/routes/__layout.svelte"
 <script context="module">
   import { fetchBooksStore } from "$lib/utils";
   export async function load({ fetch, stuff }) {
@@ -35,8 +34,7 @@ Let's dig in!
 <slot />
 ```
 
-#### <i class="fa-regular fa-file-code"></i> /routes/index.svelte
-```javascript
+```svelte title="/routes/index.svelte"
 <script context="module">
   // Pass the `stuff` from __layout into the props of this page
   export async function load({ stuff }) {
@@ -57,8 +55,7 @@ Let's dig in!
 </ul>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> /routes/[id].svelte
-```javascript
+```svelte title="/routes/[id].svelte"
 <script context="module">
   import { get } from "svelte/store";
 
@@ -89,14 +86,12 @@ Let's dig in!
 
 That was all the layout code, and now for the utility code:
 
-#### <i class="fa-regular fa-file-code"></i> /lib/store.js
-```javascript
+```javascript title="/lib/store.js"
 import { writable } from "svelte/store";
 export const books = writable({});
 ```
 
-#### <i class="fa-regular fa-file-code"></i> /lib/utils.js
-```javascript
+```javascript title="/lib/utils.js"
 import { get, readable } from "svelte/store";
 import { browser } from "$app/env";
 import { books as booksStore } from "$lib/store";

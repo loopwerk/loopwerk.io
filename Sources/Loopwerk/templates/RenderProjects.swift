@@ -6,7 +6,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
     div(class: "prose") {
       h1 { "Open Source" }
       p {
-        "These are some of the more interesting open source projects I’ve created over the years."
+        "These are some of the more interesting open source projects I've created over the years."
       }
     }
 

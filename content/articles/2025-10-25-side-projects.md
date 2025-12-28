@@ -5,7 +5,7 @@ summary: What if the secret to a thriving side project isn't more expertise, but
 
 # My #1 rule for lasting side project passion
 
-We all love a good side project. It’s our playground, our laboratory, the place where we get to build things purely for the joy of it, free from corporate mandates and stakeholder meetings. It is where we explore new tech, hone our skills, and maybe even stumble upon our next big idea.
+We all love a good side project. It's our playground, our laboratory, the place where we get to build things purely for the joy of it, free from corporate mandates and stakeholder meetings. It is where we explore new tech, hone our skills, and maybe even stumble upon our next big idea.
 
 Yet there is a subtle trap I have walked into not once, but twice. Each time, it cost me a project I cared about.
 

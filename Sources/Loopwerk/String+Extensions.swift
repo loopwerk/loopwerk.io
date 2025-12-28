@@ -68,6 +68,13 @@ extension String {
         }
       }
 
+      // Convert data-title attributes on pre elements into spans
+      let preElements = try doc.select("pre[data-title]")
+      for pre in preElements {
+        let title = try pre.attr("data-title")
+        try pre.prepend("<span class=\"code-title\">\(title)</span>")
+      }
+
       let result = try doc.body()?.html() ?? self
       let tocString = toc.joined(separator: "\n")
       let tocHtml = try Parsley.html(tocString)

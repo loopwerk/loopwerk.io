@@ -17,35 +17,35 @@ To understand why this "new" approach feels so simple, we need to look back at t
 
 When Roy Fielding defined REST in his 2000 dissertation, JSON didn't even exist. REST was a description of the web itself, where hypermedia (i.e., HTML with links and forms) is the Engine of Application State (HATEOAS).
 
-In a true RESTful system, a client (like a browser) doesn't need to know any specific API endpoints besides a single entry point. It discovers what it can do next simply by parsing the HTML it receives. The links and forms *are the API*, and they fully describe the available actions. This is why Fielding gets frustrated with what we call REST APIs today:
+In a true RESTful system, a client (like a browser) doesn't need to know any specific API endpoints besides a single entry point. It discovers what it can do next simply by parsing the HTML it receives. The links and forms _are the API_, and they fully describe the available actions. This is why Fielding gets frustrated with what we call REST APIs today:
 
-> "I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today’s example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating."
+> "I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today's example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating."
 >
 > — Roy Fielding
 
 If you've ever built a standard server-rendered Django app, congratulations: you've built something more RESTful than 99.9% of JSON APIs. The only problem is that the full-page reloads of these Multi-Page Applications feel clunky. This is the exact problem that libraries like htmx and Alpine AJAX solve: they let us keep the robust, simple, and truly RESTful architecture of an MPA, while adding the smooth user experience of an SPA.
 
-*(For a much deeper dive into the philosophy of hypermedia as the engine of state, I highly recommend the essays on the [htmx.org website](https://htmx.org/essays/), as well as the book [Hypermedia Systems](https://hypermedia.systems) by the creator of htmx.)*
+_(For a much deeper dive into the philosophy of hypermedia as the engine of state, I highly recommend the essays on the [htmx.org website](https://htmx.org/essays/), as well as the book [Hypermedia Systems](https://hypermedia.systems) by the creator of htmx.)_
 
 ## The promise of htmx
 
 htmx is a brilliant library that "completes" HTML as a hypertext. It lets you trigger AJAX requests from any element, not just links and forms, and swap the response HTML into any part of the page.
 
-For example, here’s a classic "click-to-edit" pattern. Initially, the page shows user details with an "Edit" button:
+For example, here's a classic "click-to-edit" pattern. Initially, the page shows user details with an "Edit" button:
 
 ```html
 <!-- Initial state -->
 <html>
-<body>
-  <div hx-target="this" hx-swap="outerHTML">
-    <div><label>First Name</label>: Joe</div>
-    <div><label>Last Name</label>: Blow</div>
-    <div><label>Email</label>: joe@blow.com</div>
-    <button hx-get="/contact/1/edit" class="btn primary">
-      Click To Edit
-    </button>
-  </div>
-</body>
+  <body>
+    <div hx-target="this" hx-swap="outerHTML">
+      <div><label>First Name</label>: Joe</div>
+      <div><label>Last Name</label>: Blow</div>
+      <div><label>Email</label>: joe@blow.com</div>
+      <button hx-get="/contact/1/edit" class="btn primary">
+        Click To Edit
+      </button>
+    </div>
+  </body>
 </html>
 ```
 
@@ -56,15 +56,15 @@ When you click the button, htmx sends a `GET` request to `/contact/1/edit`. The 
 <form hx-put="/contact/1" hx-target="this" hx-swap="outerHTML">
   <div>
     <label>First Name</label>
-    <input type="text" name="firstName" value="Joe">
+    <input type="text" name="firstName" value="Joe" />
   </div>
   <div>
     <label>Last Name</label>
-    <input type="text" name="lastName" value="Blow">
+    <input type="text" name="lastName" value="Blow" />
   </div>
   <div>
     <label>Email Address</label>
-    <input type="email" name="email" value="joe@blow.com">
+    <input type="email" name="email" value="joe@blow.com" />
   </div>
   <button class="btn">Submit</button>
   <button class="btn" hx-get="/contact/1">Cancel</button>
@@ -82,14 +82,12 @@ You can build incredible features like [infinite scroll](https://htmx.org/exampl
 htmx really is a fantastic library, but there is one big downside: it encourages you to add behavior to elements that have no native function. Look at that "Click To Edit" button again:
 
 ```html
-<button hx-get="/contact/1/edit" class="btn primary">
-  Click To Edit
-</button>
+<button hx-get="/contact/1/edit" class="btn primary">Click To Edit</button>
 ```
 
 If JavaScript is disabled<sup>1</sup> or fails to load, this button does... nothing. It's not wrapped in a form, so it has no default action. The same is true for the "Cancel" button in the edit form. The application is broken. This violates the principle of **Progressive Enhancement**, where a site should be functional at a baseline level (plain HTML) and enhanced with JavaScript.
 
-You *can* write progressively enhanced code with htmx, but it often requires attribute repetition and constant vigilance from you, the developer.
+You _can_ write progressively enhanced code with htmx, but it often requires attribute repetition and constant vigilance from you, the developer.
 
 > <sup>1</sup> JavaScript fails more often than people think. Not just because some users disable it (which is admittedly very rare), but because of things like flaky networks, aggressive content blockers, misconfigured scripts, browser extensions, corporate firewalls, or even just unhandled JS errors. When your site depends entirely on JavaScript to function, any one of those issues can leave users with a broken or unusable experience. Having a site work without JS is also good for SEO and for accessibility technology such as screenreaders.
 
@@ -116,7 +114,7 @@ I was already including Alpine for this kind of light interactivity, and then I 
 1.  It's smaller (3kB vs 14kB for htmx). A nice bonus, but not the deciding factor.
 2.  It only enhances `<a>` and `<form>` tags.
 
-This second point is the game-changer. By design, Alpine AJAX prevents you from making the progressive enhancement mistake. Your application *must* work with plain HTML first. Any AJAX functionality is purely an enhancement. For me, that's a win-win: a more resilient site with less JavaScript, built with a tool I'm already using.
+This second point is the game-changer. By design, Alpine AJAX prevents you from making the progressive enhancement mistake. Your application _must_ work with plain HTML first. Any AJAX functionality is purely an enhancement. For me, that's a win-win: a more resilient site with less JavaScript, built with a tool I'm already using.
 
 ## Let's rebuild it with Alpine AJAX
 
@@ -127,18 +125,16 @@ First, the initial state. The `<button>` is now an `<a>` tag, which has a meanin
 ```html
 <!-- Initial state with Alpine AJAX -->
 <html>
-<body>
-  <div id="user_details">
-    <div><label>First Name</label>: Joe</div>
-    <div><label>Last Name</label>: Blow</div>
-    <div><label>Email</label>: joe@blow.com</div>
-    <a href="/contact/1/edit"
-       x-target="user_details"
-       class="btn primary">
-      Click To Edit
-    </a>
-  </div>
-</body>
+  <body>
+    <div id="user_details">
+      <div><label>First Name</label>: Joe</div>
+      <div><label>Last Name</label>: Blow</div>
+      <div><label>Email</label>: joe@blow.com</div>
+      <a href="/contact/1/edit" x-target="user_details" class="btn primary">
+        Click To Edit
+      </a>
+    </div>
+  </body>
 </html>
 ```
 
@@ -148,13 +144,15 @@ The server returns the edit form. This is a standard HTML `<form>` that works pe
 
 ```html
 <!-- HTML returned from server -->
-<form method="post"
-      action="/contacts/1"
-      id="user_details"
-      x-target="user_details">
+<form
+  method="post"
+  action="/contacts/1"
+  id="user_details"
+  x-target="user_details"
+>
   <div>
     <label>First Name</label>
-    <input type="text" name="firstName" value="Joe">
+    <input type="text" name="firstName" value="Joe" />
   </div>
   <!-- ... other fields ... -->
   <button type="submit">Submit</button>
@@ -184,11 +182,12 @@ def contact_view(request, pk: int):
     if "X-Alpine-Request" in request.headers:
         # It's an AJAX request, return just the partial
         return TemplateResponse(request, "partial.html", context)
-    
+
     # It's a normal request, return the full page
     return TemplateResponse(request, "full.html", context)
 ```
-This works, but maintaining two separate templates (`full.html` and `partial.html`) is a pain. Yes we can use Django’s `include` tag to include the partial template into the full template, but we can do better.
+
+This works, but maintaining two separate templates (`full.html` and `partial.html`) is a pain. Yes we can use Django's `include` tag to include the partial template into the full template, but we can do better.
 
 ### A better way: django-template-partials
 
@@ -219,7 +218,7 @@ def contact_view(request, pk: int):
 
     if "X-Alpine-Request" in request.headers:
         return TemplateResponse(request, <mark>"full.html#details"</mark>, context)
-    
+
     return TemplateResponse(request, "full.html", context)
 ```
 
@@ -272,10 +271,14 @@ Here's how a "search-as-you-type" feature looks with our Alpine stack. Alpine ha
 <h3>Search Contacts</h3>
 
 <form x-target="search-results" action="/contacts" autocomplete="off">
-  <input class="form-control" type="search"
-         name="search" placeholder="Begin Typing To Search Users..."
-         @input.debounce="$el.form.requestSubmit()"
-         @search="$el.form.requestSubmit()">
+  <input
+    class="form-control"
+    type="search"
+    name="search"
+    placeholder="Begin Typing To Search Users..."
+    @input.debounce="$el.form.requestSubmit()"
+    @search="$el.form.requestSubmit()"
+  />
   <button x-show="false">Search</button>
 </form>
 
@@ -300,11 +303,15 @@ Compare this with the htmx version:
 ```html
 <h3>Search Contacts</h3>
 
-<input class="form-control" type="search"
-       name="search" placeholder="Begin Typing To Search Users..."
-       hx-post="/search"
-       hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
-       hx-target="#search-results">
+<input
+  class="form-control"
+  type="search"
+  name="search"
+  placeholder="Begin Typing To Search Users..."
+  hx-post="/search"
+  hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+  hx-target="#search-results"
+/>
 
 <table class="table">
   <thead>
@@ -320,35 +327,38 @@ Compare this with the htmx version:
 </table>
 ```
 
-Instead of leaning on Alpine for the trigger logic, htmx has its own DSL for triggers. And like I said before: most people who use htmx, also use Alpine, so it’s a bit strange to use two different syntaxes side by side. But more importantly this version doesn’t work without JavaScript, it’s not a progressive enhancement.
+Instead of leaning on Alpine for the trigger logic, htmx has its own DSL for triggers. And like I said before: most people who use htmx, also use Alpine, so it's a bit strange to use two different syntaxes side by side. But more importantly this version doesn't work without JavaScript, it's not a progressive enhancement.
 
-Yes, you *can* make this htmx example work without JavaScript, but it’s not enforced, none of the official examples do so, and it results in a lot of added HTML attributes. It’s not as ergonomic as Alpine AJAX in my experience.
+Yes, you _can_ make this htmx example work without JavaScript, but it's not enforced, none of the official examples do so, and it results in a lot of added HTML attributes. It's not as ergonomic as Alpine AJAX in my experience.
 
 ## Make Django messages work with Alpine AJAX
-It’s incredibly easy to make Django’s messages framework work with Alpine AJAX. Let’s say we have a view that sets a success message:
+
+It's incredibly easy to make Django's messages framework work with Alpine AJAX. Let's say we have a view that sets a success message:
 
 ```python
 messages.success(request, "Success!")
 ```
 
-How do you make this message appear when you’re only returning a partial HTML template as a response to an AJAX request?
+How do you make this message appear when you're only returning a partial HTML template as a response to an AJAX request?
 
-The trick is to use Alpine AJAX’s `x-sync` attribute. Change your `base.html` to include the following snippet:
+The trick is to use Alpine AJAX's `x-sync` attribute. Change your `base.html` to include the following snippet:
 
 ```html
 {% partialdef messages inline %}
-  <div id="messages" x-sync x-merge="append" class="toast toast-top toast-end">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} flex"
-           x-data="{ open: false }"
-           x-show="open"
-           x-init="$nextTick(() => open = true); setTimeout(() => open = false, 3000)"
-           x-transition.duration.500ms>
-        <div>{{ message.message }}</div>
-        <button class="btn btn-circle btn-ghost" @click="open = false">x</button>
-      </div>
-    {% endfor %}
+<div id="messages" x-sync x-merge="append" class="toast toast-top toast-end">
+  {% for message in messages %}
+  <div
+    class="alert alert-{{ message.tags }} flex"
+    x-data="{ open: false }"
+    x-show="open"
+    x-init="$nextTick(() => open = true); setTimeout(() => open = false, 3000)"
+    x-transition.duration.500ms
+  >
+    <div>{{ message.message }}</div>
+    <button class="btn btn-circle btn-ghost" @click="open = false">x</button>
   </div>
+  {% endfor %}
+</div>
 {% endpartialdef %}
 ```
 
@@ -380,7 +390,7 @@ class AlpineMessageMiddleware:
 
 This includes the `messages` partial from `base.html` into any partial template response, as a result of an Alpine AJAX request. Alpine AJAX sees the `x-sync` attribute, finds the same element in the webpage, and merges the content.
 
-The result is that you can use Django’s messages framework and those messages are shown as expected, even when you return a partial template that doesn’t include those messages. The middleware takes care of all of that.
+The result is that you can use Django's messages framework and those messages are shown as expected, even when you return a partial template that doesn't include those messages. The middleware takes care of all of that.
 
 ## Closing thoughts
 

@@ -15,8 +15,8 @@ Around the start of November 2025, my build times jumped from one minute to near
 
 Dependencies that should have been cached were being reinstalled every time:
 
-* apt-get install: 73 seconds to download and install 152 MB of packages.
-* Swift package build: 83 seconds to resolve and compile dependencies.
+- apt-get install: 73 seconds to download and install 152 MB of packages.
+- Swift package build: 83 seconds to resolve and compile dependencies.
 
 This made no sense. None of my dependency files had changed, so Docker should have reused the cached layers.
 
@@ -43,13 +43,13 @@ During a build, Docker checks whether each step is identical to last time:
 4. Same `pnpm install` command? → reuse
 5. Source files changed? → rebuild that layer and everything past it
 
-Critical rule: if anything about a step changes, the cache for that step and all later steps becomes invalid. This includes build arguments, even if your Dockerfile doesn’t reference them.
+Critical rule: if anything about a step changes, the cache for that step and all later steps becomes invalid. This includes build arguments, even if your Dockerfile doesn't reference them.
 
-That’s important, and it’s exactly where things broke.
+That's important, and it's exactly where things broke.
 
 ## The culprit: a Coolify bug that breaks layer caching
 
-My Dockerfile and dependency files were not changing, so layer caching *should* have been working perfectly. The reason it was failing was hidden deep in the build command itself. [Coolify](https://coolify.io), my deployment platform, was injecting several build arguments automatically:
+My Dockerfile and dependency files were not changing, so layer caching _should_ have been working perfectly. The reason it was failing was hidden deep in the build command itself. [Coolify](https://coolify.io), my deployment platform, was injecting several build arguments automatically:
 
 ```bash
 docker build \
@@ -60,13 +60,13 @@ docker build \
 
 These values change on every build.
 
-And because Docker treats build arguments as part of every layer’s cache key, even unused ones, this causes a full cache invalidation.
+And because Docker treats build arguments as part of every layer's cache key, even unused ones, this causes a full cache invalidation.
 
 Effect:
 
-* The first layer becomes new.
-* Therefore every following layer becomes new.
-* Therefore nothing is cached, ever.
+- The first layer becomes new.
+- Therefore every following layer becomes new.
+- Therefore nothing is cached, ever.
 
 This has been reported in [Coolify issue #7040](https://github.com/coollabsio/coolify/issues/7040). The ticket confirms the problem:
 
@@ -78,7 +78,7 @@ Coolify had auto-updated, and my fast builds disappeared overnight.
 
 If layer caching is broken, your next-best tool is BuildKit cache mounts.
 
-Cache mounts provide persistent storage that commands can reuse between builds, even when their layers must be re-run. They don’t skip commands, but they make the commands faster by avoiding repetitive downloads.
+Cache mounts provide persistent storage that commands can reuse between builds, even when their layers must be re-run. They don't skip commands, but they make the commands faster by avoiding repetitive downloads.
 
 I modified my Dockerfile to use cache mounts for my package managers:
 
@@ -114,20 +114,20 @@ Need to get 0 B/44.5 MB of archives.
 
 The downloads were at least being cached again: a partial victory. Cache mounts fixed the downloading problem, but they did not fix the underlying issue. The commands were still being run every time.
 
-*   **What cache mounts fixed**: The time spent downloading packages for apt, npm, and Swift. This saved over a minute.
-*   **What cache mounts cannot fix**: The time spent installing the apt packages (about 35 seconds) and compiling the Swift code (about 80 seconds).
+- **What cache mounts fixed**: The time spent downloading packages for apt, npm, and Swift. This saved over a minute.
+- **What cache mounts cannot fix**: The time spent installing the apt packages (about 35 seconds) and compiling the Swift code (about 80 seconds).
 
 Only a functioning layer cache can skip these steps entirely. Cache mounts make the repeated steps faster, but they cannot eliminate them.
 
 ## Conclusion
 
-The root problem is clear: as long as Coolify injects changing build arguments, Docker’s layer cache cannot function. Cache mounts soften the pain, but they can’t skip installation or compilation. For that, we need the layer cache back.
+The root problem is clear: as long as Coolify injects changing build arguments, Docker's layer cache cannot function. Cache mounts soften the pain, but they can't skip installation or compilation. For that, we need the layer cache back.
 
 If your Coolify builds are slow:
 
 1.  **Implement cache mounts** for your package managers. This will at least prevent re-downloading dependencies on every build.
 2.  **Upvote [issue #7040](https://github.com/coollabsio/coolify/issues/7040)** so this can be fixed upstream.
 
-Until Coolify stops injecting ever-changing build arguments, fast Docker builds remain out of reach, but with cache mounts, at least they don’t have to be painfully slow.
+Until Coolify stops injecting ever-changing build arguments, fast Docker builds remain out of reach, but with cache mounts, at least they don't have to be painfully slow.
 
-> **Update December 1, 2025**: I’m happy to report that Coolify has fixed the issue by no longer automatically injecting the changing arguments. Update to v4.0.0-beta.450 or later and enjoy fast builds again.
+> **Update December 1, 2025**: I'm happy to report that Coolify has fixed the issue by no longer automatically injecting the changing arguments. Update to v4.0.0-beta.450 or later and enjoy fast builds again.

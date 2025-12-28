@@ -5,15 +5,15 @@ summary: A modern, flexible rewrite of django-generic-notifications is here. Eas
 
 # Announcing django-generic-notifications 1.0.0
 
-Back in 2011, I started a small Django package called [django-generic-notifications](https://github.com/loopwerk/django-generic-notifications). It was built for a project I was working on at the time, got seven releases over a few months... and then it more or less died. Once I moved on from that original project, there wasn’t much reason to keep maintaining the library. It never gained a big user base, no pull requests or issues came in, and eventually I archived the repository.
+Back in 2011, I started a small Django package called [django-generic-notifications](https://github.com/loopwerk/django-generic-notifications). It was built for a project I was working on at the time, got seven releases over a few months... and then it more or less died. Once I moved on from that original project, there wasn't much reason to keep maintaining the library. It never gained a big user base, no pull requests or issues came in, and eventually I archived the repository.
 
-Fast forward to a few weeks ago, and I found myself needing a good, flexible notification system for a new Django project. I checked out a few third-party options, but none of them quite fit what I had in mind. I wasn’t super eager to revive django-generic-notifications — it was very old, still using South for migrations (yes, that old) — but in the end, I decided to bring it back to life. Or rather, to start fresh.
+Fast forward to a few weeks ago, and I found myself needing a good, flexible notification system for a new Django project. I checked out a few third-party options, but none of them quite fit what I had in mind. I wasn't super eager to revive django-generic-notifications — it was very old, still using South for migrations (yes, that old) — but in the end, I decided to bring it back to life. Or rather, to start fresh.
 
-So here it is: version 1.0.0 of django-generic-notifications. A complete rewrite, with the same core architecture but a modern, cleaned-up implementation. It’s more flexible, more powerful, and a lot more useful.
+So here it is: version 1.0.0 of django-generic-notifications. A complete rewrite, with the same core architecture but a modern, cleaned-up implementation. It's more flexible, more powerful, and a lot more useful.
 
 ## What is django-generic-notifications?
 
-At its core, this package helps you send notifications to your users through different channels like email or your website. It’s built around the idea of defining notification types in your code, and then letting the library handle how and when to deliver them to your users.
+At its core, this package helps you send notifications to your users through different channels like email or your website. It's built around the idea of defining notification types in your code, and then letting the library handle how and when to deliver them to your users.
 
 Want to show a bell icon on your website when a user gets a new comment? Easy. Want to send them a weekly email digest with grouped notifications? Also easy. Want to build your own Slack or push notification integration? Go for it.
 

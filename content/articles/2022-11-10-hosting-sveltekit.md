@@ -11,8 +11,7 @@ I've been running my side project [Critical Notes](https://www.critical-notes.co
 ## Nginx
 The first part of the equation is the Nginx configuration for the website. Basically all it does is forward the request to the Node server coming with SvelteKit. It also redirects requests `critical-notes.com` to `www.critical-notes.com`.
 
-#### <i class="fa-regular fa-file-code"></i> /etc/nginx/sites-available/www.critical-notes.com
-```
+```nginx title="/etc/nginx/sites-available/www.critical-notes.com"
 server {
     server_name www.critical-notes.com;
     root /var/www/www.critical-notes.com;
@@ -50,8 +49,7 @@ $ certbot --nginx
 
 Afterwards your config will looks more like this:
 
-#### <i class="fa-regular fa-file-code"></i> /etc/nginx/sites-available/www.critical-notes.com
-```
+```nginx title="/etc/nginx/sites-available/www.critical-notes.com"
 server {
     server_name www.critical-notes.com;
     root /var/www/www.critical-notes.com;
@@ -114,8 +112,7 @@ Within my real site root `/opt/www` I can checkout my Git repo, and run `npm run
 
 To run the Node server, I am using systemd. I created a config file `/etc/systemd/system/www.critical-notes.com.service` with the following content:
 
-#### <i class="fa-regular fa-file-code"></i> /etc/systemd/system/www.critical-notes.com.service
-```
+```ini title="/etc/systemd/system/www.critical-notes.com.service"
 [Unit]
 Description=www.critical-notes.com
 

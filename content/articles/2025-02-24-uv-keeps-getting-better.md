@@ -1,11 +1,11 @@
 ---
 tags: python, uv
-summary: It’s been three months since I migrated all my Python projects over to uv. And it’s only gotten better! Let’s look at two recent major improvements.
+summary: It's been three months since I migrated all my Python projects over to uv. And it's only gotten better! Let's look at two recent major improvements.
 ---
 
 # uv just keeps on getting better
 
-It’s been three months since I [migrated](/articles/2024/migrate-poetry-to-uv/) all my Python projects over to uv. As a reminder, uv is a Python package and project manager, which replaces poetry, pip, pipx, pyenv, virtualenv, and more. I love it, especially for the way it handles the installing of the correct Python version for each project. I wrote a [series of articles](/articles/tag/uv/) about uv, check it out if you haven’t.
+It's been three months since I [migrated](/articles/2024/migrate-poetry-to-uv/) all my Python projects over to uv. As a reminder, uv is a Python package and project manager, which replaces poetry, pip, pipx, pyenv, virtualenv, and more. I love it, especially for the way it handles the installing of the correct Python version for each project. I wrote a [series of articles](/articles/tag/uv/) about uv, check it out if you haven't.
 
 In this article I want to take a closer look at two major improvement that were added to uv over the last three months.
 
@@ -45,8 +45,7 @@ $ nano script.py
 $ uv run script.py
 ```
 
-#### <i class="fa-regular fa-file-code"></i> script.py:
-```python
+```python title="script.py"
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
@@ -66,7 +65,7 @@ $ uv init --script script.py --python 3.12
 $ uv add requests --script script.py
 ```
 
-Alternatively, if you don’t want to use the embedded metadata, you can also run a script by specifying its dependencies on the command line, like so:
+Alternatively, if you don't want to use the embedded metadata, you can also run a script by specifying its dependencies on the command line, like so:
 
 ```shell
 $ uv run --with requests script.py
@@ -77,7 +76,8 @@ Personally I like the embedded metadata though, especially when the number of de
 For more information, check out the [official docs](https://docs.astral.sh/uv/guides/scripts/).
 
 ## Loading .env files
-If your project needs to read environment variables from a `.env` file, you’d have to use a package like [python-dotenv](https://github.com/theskumar/python-dotenv) and its `load_dotenv` function to load the `.env` file so that its values are available to Python’s own `os.getenv` function.
+
+If your project needs to read environment variables from a `.env` file, you'd have to use a package like [python-dotenv](https://github.com/theskumar/python-dotenv) and its `load_dotenv` function to load the `.env` file so that its values are available to Python's own `os.getenv` function.
 
 uv now makes this dependency obsolete by allowing you to load an `.env` file directly from the `uv run` command:
 
@@ -87,7 +87,7 @@ $ uv run --env-file .env ./manage.py runserver
 
 The contents of your `.env` file are made available to Python as environment variables and can be accessed using `os.getenv`.
 
-Of course you don’t want to use this full command every single time you run your script (or Django, in this case), but luckily it’s very easy to have your script use uv by default. In your script (for example `manage.py`!) change the first line from this:
+Of course you don't want to use this full command every single time you run your script (or Django, in this case), but luckily it's very easy to have your script use uv by default. In your script (for example `manage.py`!) change the first line from this:
 
 ```
 #!/usr/bin/env python

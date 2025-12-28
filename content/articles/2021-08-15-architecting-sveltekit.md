@@ -13,22 +13,19 @@ Obviously my first thought immediately went to Svelte's writable stores: when I 
 
 This is the basic idea that I came up with. Just a really basic example of two pages that should share the content, with a simple REST endpoint that logs to the console whenever someone fetches data.
 
-#### <i class="fa-regular fa-file-code"></i> lib/store.js
-``` javascript
+```javascript title="lib/store.js"
 import { writable } from "svelte/store";
 export const content = writable();
 ```
 
-#### <i class="fa-regular fa-file-code"></i> routes/index.json.js
-``` javascript
+```javascript title="routes/index.json.js"
 export const get = async (request) => {
   console.log("RECEIVED REQUEST");
   return { body: new Date().toISOString() };
-}; 
+};
 ```
 
-#### <i class="fa-regular fa-file-code"></i> routes/__layout.svelte
-``` javascript
+```svelte title="routes/__layout.svelte"
 <script context="module">
   import { get } from "svelte/store";
   import { content } from "$lib/store";
@@ -65,8 +62,7 @@ export const get = async (request) => {
 <slot />
 ```
 
-#### <i class="fa-regular fa-file-code"></i> routes/index.svelte
-``` javascript
+```svelte title="routes/index.svelte"
 <script>
   import { content } from "$lib/store";
 </script>
@@ -79,8 +75,7 @@ export const get = async (request) => {
 </p>
 ```
 
-#### <i class="fa-regular fa-file-code"></i> routes/subpage.svelte
-``` javascript
+```svelte title="routes/subpage.svelte"
 <script>
   import { content } from "$lib/store";
 </script>
@@ -101,8 +96,7 @@ However, when you refresh the page, you briefly see old content show up, and the
 
 I thought that the fix would be rather simple. Just check if we're running in the browser, and if not, just always do the fetch:
 
-#### <i class="fa-regular fa-file-code"></i> routes/__layout.svelte
-``` javascript
+```svelte title="routes/__layout.svelte"
 <script context="module">
   import { get } from "svelte/store";
   <mark>import { browser } from "$app/env";</mark>

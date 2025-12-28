@@ -1,17 +1,17 @@
 ---
 tags: django, python, howto
-summary: Paypal’s documentation only shows a JavaScript example. How do you validate the webhooks in Python though?
+summary: Paypal's documentation only shows a JavaScript example. How do you validate the webhooks in Python though?
 ---
 
 # Validate PayPal webhooks using Python
 
-One of my clients uses PayPal to accept payments for their webshop, and we wanted to implement PayPal’s webhooks to automatically deal with reversed payments, among other things.
+One of my clients uses PayPal to accept payments for their webshop, and we wanted to implement PayPal's webhooks to automatically deal with reversed payments, among other things.
 
-Paypal’s documentation is pretty good: there’s the [Overview](https://developer.paypal.com/api/rest/webhooks/) of how to subscribe to webhooks, and the [Integration guide](https://developer.paypal.com/api/rest/webhooks/rest/) explains how to validate that the request really comes from PayPal. Sadly the only example they’ve given uses JavaScript, and of course we’re interested in a Python version.
+Paypal's documentation is pretty good: there's the [Overview](https://developer.paypal.com/api/rest/webhooks/) of how to subscribe to webhooks, and the [Integration guide](https://developer.paypal.com/api/rest/webhooks/rest/) explains how to validate that the request really comes from PayPal. Sadly the only example they've given uses JavaScript, and of course we're interested in a Python version.
 
 Below you can find a basic webhook view which handles the validation using the self-verification method rather than the postback method (which needs to make an extra request on every received webhook event, no thanks). This example is written for Django, but the validation logic is of course completely independent from Django and can be used anywhere.
 
-``` python
+```python
 import base64
 import zlib
 
@@ -65,21 +65,21 @@ class PayPalWebhookView(View):
             # Validation failed, exit
             return HttpResponseBadRequest()
 
-        # Validation succeeded! 
+        # Validation succeeded!
         # Now you can inspect the webhook payload (request.data)
         # and handle each event (request.data.get("event_type"))
 
         return HttpResponse(status=200)
 ```
 
-The webhook ID (`settings.PAYPAL_WEBHOOK_ID`) you get when you edit your PayPal app and add the webhook URL. It’s not part of the webhook payload. I store mine in an `.env` file which [I read in my `settings.py` file](/articles/2024/django-settings/).
+The webhook ID (`settings.PAYPAL_WEBHOOK_ID`) you get when you edit your PayPal app and add the webhook URL. It's not part of the webhook payload. I store mine in an `.env` file which [I read in my `settings.py` file](/articles/2024/django-settings/).
 
 I also use an extremely simple cache model to store the certificate:
 
-``` python
+```python
 class KeyValueCache(models.Model):
     key = models.CharField(max_length=255, unique=True)
     value = models.TextField()
 ```
 
-It just makes sure that we don’t download the certificate file with every webhook event. You could use Redis or write it to disk or whatever else you want, but I chose a simple Django model.
+It just makes sure that we don't download the certificate file with every webhook event. You could use Redis or write it to disk or whatever else you want, but I chose a simple Django model.

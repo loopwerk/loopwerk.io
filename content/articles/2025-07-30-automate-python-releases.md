@@ -1,9 +1,10 @@
 ---
 tags: python, workflow, howto
-summary: I maintain a handful of Python packages. Here’s how I automate creating new releases, both on PyPI and GitHub.
+summary: I maintain a handful of Python packages. Here's how I automate creating new releases, both on PyPI and GitHub.
 ---
 
 # Automate Python package releases
+
 I maintain a handful of Python packages, such as [django-generic-notifications](https://github.com/loopwerk/django-generic-notifications), [drf-action-serializers](https://github.com/loopwerk/drf-action-serializers), [django-rss-filter](https://github.com/loopwerk/django-rss-filter) and [django-vrot](https://github.com/loopwerk/django-vrot). Whenever I finish a new feature or fix a bug in one of these packages, I of course need to release a new version.
 
 Until today I did this by hand:
@@ -15,7 +16,7 @@ Until today I did this by hand:
 5. Push a tag with the version number to Git
 6. Manually create a new release on Github, filling in the changes in the new release.
 
-It’s kind of time-consuming, especially the last step where I have to go to GitHub, create a new release based on a tag, and come up with a changelog. But now I’ve finally automated all this, and the steps are now much simpler:
+It's kind of time-consuming, especially the last step where I have to go to GitHub, create a new release based on a tag, and come up with a changelog. But now I've finally automated all this, and the steps are now much simpler:
 
 1. Update the version in `pyproject.toml`
 2. Push a tag with the version number to Git
@@ -26,12 +27,11 @@ And those two steps can be simplified even further by using tbump:
 
 1. Just run `tbump {new_version_number}`.
 
-It’ll update the version number in `pyproject.toml`, commit the changes, and create and push a new tag to Git. Check the [tbump website](https://github.com/your-tools/tbump) for instructions on how to set it up.
+It'll update the version number in `pyproject.toml`, commit the changes, and create and push a new tag to Git. Check the [tbump website](https://github.com/your-tools/tbump) for instructions on how to set it up.
 
-The workflow that does all the automated work should be added to the `.github/workflows/` folder in your repo. Here’s mine:
+The workflow that does all the automated work should be added to the `.github/workflows/` folder in your repo. Here's mine:
 
-#### <i class="fa-regular fa-file-code"></i> .github/workflows/release.yml
-```toml
+```yaml title=".github/workflows/release.yml"
 name: Release
 
 # This workflow runs on any tag push
