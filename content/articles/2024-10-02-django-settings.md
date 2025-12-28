@@ -1,15 +1,15 @@
 ---
 tags: django, python
-summary: There are many ways to configure Django, like multiple settings files or .env files. Here’s how I do it.
+summary: There are many ways to configure Django, like multiple settings files or .env files. Here's how I do it.
 ---
 
 # How I configure my Django projects
 
-When you create a brand new Django project using the `django-admin startproject` command it’ll have a `settings.py` file with all settings configured inside of it. This is nice and easy to get started and if you’d never deploy your website, it would work just fine. But of course things get more complicated: you’re going to need separate settings for your live production site, your staging site, your continuous integration server, etc.
+When you create a brand new Django project using the `django-admin startproject` command it'll have a `settings.py` file with all settings configured inside of it. This is nice and easy to get started and if you'd never deploy your website, it would work just fine. But of course things get more complicated: you're going to need separate settings for your live production site, your staging site, your continuous integration server, etc.
 
-For example when you’re going to deploy your site, you’re going to want to configure at least these settings:
+For example when you're going to deploy your site, you're going to want to configure at least these settings:
 
-``` python
+```python
 # Some of the settings in settings.py
 SECRET_KEY = "super-secret"
 DEBUG = True
@@ -26,9 +26,9 @@ When I just got started with Django, the way I dealt with having different setti
 - A base `settings.py` file with all the common settings
 - And a `settings_[environent].py` file per environment which imports the base settings, and then adds its own settings.
 
-For example I’d have a `settings_production.py` file that looked like this:
+For example I'd have a `settings_production.py` file that looked like this:
 
-``` python
+```python
 from settings import *
 
 DEBUG = False
@@ -43,9 +43,9 @@ DATABASES = {
 }
 ```
 
-You’d then run your Django site using this `settings_production.py` file - by passing that as a parameter to whatever you use to run your Django instance (like gunicorn).
+You'd then run your Django site using this `settings_production.py` file - by passing that as a parameter to whatever you use to run your Django instance (like gunicorn).
 
-While this multiple-settings-files solution works, I find it pretty hard to work with, since you now always have to deal with multiple files. You don’t have a single overview of all settings for an environment. There’s also the problem that database passwords and the `SECRET_KEY` are committed to git, which is of course a huge no-no.
+While this multiple-settings-files solution works, I find it pretty hard to work with, since you now always have to deal with multiple files. You don't have a single overview of all settings for an environment. There's also the problem that database passwords and the `SECRET_KEY` are committed to git, which is of course a huge no-no.
 
 So at some point, many years ago, I switched to [django-environ](https://github.com/joke2k/django-environ), a popular package that allows you to read an `.env` file and use those values in your `settings.py` file. And this `.env` file is **not committed to git**, instead you create this locally and on your server.
 
@@ -59,7 +59,7 @@ DATABASE_URL=postgres://username:password@localhost:5432/mydatabase
 
 And the `settings.py` file uses these values:
 
-``` python
+```python
 import environ
 
 env = environ.Env(
@@ -87,7 +87,7 @@ However! Before you switch to `django-environ`, I should mention that a recent u
 
 The `.env` file looks the same, the difference is in the `settings.py` file:
 
-``` python
+```python
 import os
 import dj_database_url
 from dotenv import load_dotenv
@@ -101,6 +101,6 @@ DATABASES = {
 }
 ```
 
-The difference with `django-environ` is that this solution doesn’t try to parse the values in the `.env` file at all, it doesn’t try to turn them into the right type (like a boolean for `DEBUG`), it’s just a “dumb” solution to read environment variables - no magic and thus less stuff to break. I’m a big fan of these two small packages that both do one small thing, and do it well. All that `python-dotenv` does is read the `.env` file, and makes those values available to Python’s built-in `os` module, so that you can read them using `os.getenv`. And `dj-database-url` simply parses a database URL like `postgres://mydatabase:password@localhost:5432/mydatabase` into the config format that Django expects. 
+The difference with `django-environ` is that this solution doesn't try to parse the values in the `.env` file at all, it doesn't try to turn them into the right type (like a boolean for `DEBUG`), it's just a "dumb" solution to read environment variables - no magic and thus less stuff to break. I'm a big fan of these two small packages that both do one small thing, and do it well. All that `python-dotenv` does is read the `.env` file, and makes those values available to Python's built-in `os` module, so that you can read them using `os.getenv`. And `dj-database-url` simply parses a database URL like `postgres://mydatabase:password@localhost:5432/mydatabase` into the config format that Django expects.
 
-I really feel that `django-environ` was trying to do too much magic and it was breaking stuff as a result. That issue that I linked to above has been open since February without any official replies. And while a fix has been committed, no release has been made. It doesn’t make me trust `django-environ` anymore.
+I really feel that `django-environ` was trying to do too much magic and it was breaking stuff as a result. That issue that I linked to above has been open since February without any official replies. And while a fix has been committed, no release has been made. It doesn't make me trust `django-environ` anymore.

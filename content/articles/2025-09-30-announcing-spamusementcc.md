@@ -5,9 +5,9 @@ summary: Remember the brilliant webcomic Spamusement.com? It ran from 2004 to 20
 
 # Announcing spamusement.cc
 
-Remember the brilliant webcomic Spamusement.com, with the tag line "Poorly-drawn cartoons inspired by actual spam subject lines”?
+Remember the brilliant webcomic Spamusement.com, with the tag line "Poorly-drawn cartoons inspired by actual spam subject lines"?
 
-Like this one, titled “Your Dog Will Love It!” 
+Like this one, titled "Your Dog Will Love It!"
 
 [![](https://www.spamusement.cc/images/313.webp)](https://www.spamusement.cc/313.html)
 
@@ -15,4 +15,4 @@ Spamusement.com was created by Steven Frank (yes, [that one](https://stevenf.com
 
 **I missed it so much that I put online an archive: [spamusement.cc](https://www.spamusement.cc).**
 
-The site is built using [Saga](https://github.com/loopwerk/Saga) (of course), and the source can be found on [GitHub](https://github.com/kevinrenskers/spamusement.cc). No matter if you’re already acquainted with Spamusement or it’s completely new to you, I hope the comics make your day a smiley day.
+The site is built using [Saga](https://github.com/loopwerk/Saga) (of course), and the source can be found on [GitHub](https://github.com/kevinrenskers/spamusement.cc). No matter if you're already acquainted with Spamusement or it's completely new to you, I hope the comics make your day a smiley day.

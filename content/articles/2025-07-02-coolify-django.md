@@ -14,9 +14,9 @@ I currently run four Django apps in production, with staging and production envi
 - A custom deploy service that listens for GitHub webhooks to pull and restart the right app
 - A custom backup script that archives configs and databases and ships them offsite to [rsync.net](https://rsync.net).
 
-I’ve written about this setup in detail, both in [“Setting up a Debian 11 server for SvelteKit and Django”](/articles/2023/setting-up-debian-11/) and more recently in [“Automatically deploy your site when you push the main branch”](/articles/2024/auto-deploying/).
+I've written about this setup in detail, both in ["Setting up a Debian 11 server for SvelteKit and Django"](/articles/2023/setting-up-debian-11/) and more recently in ["Automatically deploy your site when you push the main branch"](/articles/2024/auto-deploying/).
 
-While not rocket science, it’s a non-trivial setup. Each new app requires a checklist of configuration steps, and it's easy to miss one. Worse, my deploy script involves a brief moment of downtime as Gunicorn restarts. It’s only a second or two, but it’s not ideal. I’m more of a developer than an operations person, and building a zero-downtime, rolling deploy script myself feels like a step too far.
+While not rocket science, it's a non-trivial setup. Each new app requires a checklist of configuration steps, and it's easy to miss one. Worse, my deploy script involves a brief moment of downtime as Gunicorn restarts. It's only a second or two, but it's not ideal. I'm more of a developer than an operations person, and building a zero-downtime, rolling deploy script myself feels like a step too far.
 
 On the other end of the spectrum, I have a bunch of static sites hosted with Netlify. Its workflow is a dream: connect a GitHub repo, push changes, and Netlify automatically builds and deploys the site. It handles complex build steps for static site generators, even ones built with Swift like [Saga](https://github.com/loopwerk/Saga). But its magic is limited to static sites; you can't run a backend service like a Django app.
 
@@ -29,11 +29,11 @@ Enter [Coolify](https://coolify.io/). It promises a Heroku-like experience you c
 - Manage databases like PostgreSQL and Redis.
 - Handle backups, HTTPS certificates, and more.
 
-This looked like exactly what I needed. Here’s how I moved my Django apps to it.
+This looked like exactly what I needed. Here's how I moved my Django apps to it.
 
 ## Step 1: prepare a fresh server
 
-Before installing Coolify, it’s wise to perform some basic server hardening. I spun up a new VPS on Hetzner and logged in as root to get it ready.
+Before installing Coolify, it's wise to perform some basic server hardening. I spun up a new VPS on Hetzner and logged in as root to get it ready.
 
 First, I disabled password-based SSH login in favor of public key authentication. In `/etc/ssh/sshd_config`, I made these changes:
 
@@ -69,10 +69,9 @@ $ cp jail.conf jail.local
 $ nano jail.local
 ```
 
-I then enabled the SSH jail in `jail.local` and configured it to be quite strict, banning an IP after a single failed attempt. After all, we’re using SSH keys, not passwords.
+I then enabled the SSH jail in `jail.local` and configured it to be quite strict, banning an IP after a single failed attempt. After all, we're using SSH keys, not passwords.
 
-#### <i class="fa-regular fa-file-code"></i> /etc/fail2ban/jail.local
-```ini
+```ini title="/etc/fail2ban/jail.local"
 [sshd]
 enabled = true
 port = ssh
@@ -81,7 +80,7 @@ backend = systemd
 maxretry = 1
 ```
 
-You’ll also need to change the value of `banaction` to `ufw`. After saving, I enabled and started the service:
+You'll also need to change the value of `banaction` to `ufw`. After saving, I enabled and started the service:
 
 ```
 $ systemctl enable fail2ban
@@ -111,10 +110,9 @@ After a few minutes, Coolify is up and running, accessible via the server's IP a
 
 Coolify works by building and running your applications in Docker containers. This is a departure from my old setup of running Gunicorn directly on the host. The central piece of this is the `Dockerfile`, a recipe for creating your application's image.
 
-Here is a `Dockerfile` I've put together for a typical Django project. (It uses `uv`, because it’s awesome. I’ve written a [bunch of articles](/articles/tag/uv/) about it.)
+Here is a `Dockerfile` I've put together for a typical Django project. (It uses `uv`, because it's awesome. I've written a [bunch of articles](/articles/tag/uv/) about it.)
 
-#### <i class="fa-regular fa-file-code"></i> Dockerfile
-```dockerfile
+```dockerfile title="Dockerfile"
 # Use a slim Debian image as our base
 # (we don't use a Python image because Python will be installed with uv)
 FROM debian:bookworm-slim
@@ -169,55 +167,57 @@ Within the Coolify UI, I can now create a new application, point it to my GitHub
 
 I no longer have an `.env` file on the server with the environment variables (like `DATABASE_URL`), instead I use Coolify's Environment Variables within the project settings. The way [I configure my Django projects](/articles/2024/django-settings/) hasn't changed, only the `.env` file part has been replaced with Coolify's UI. However, there is one small gotcha: by default these Coolify environment variables are only available at runtime, but because I use code like `os.getenv("DATABASE_URL")` in my settings.py, these variables also need to be available at build-time when Django commands like `collectstatic` run. This is why we explicitly expose these three variables as build arguments in the Dockerfile with the `ARG` declarations, making them available during the Docker build process.
 
-As a final step when setting up the Django application you’ll want to add a health check. This can easily be done within your app configuration tab. This enables the rolling deployments where the new container is started while the old one is still running. Only when the health check is successful is the old container removed.
+As a final step when setting up the Django application you'll want to add a health check. This can easily be done within your app configuration tab. This enables the rolling deployments where the new container is started while the old one is still running. Only when the health check is successful is the old container removed.
 
-Oh, and make sure you include the following two lines in your `settings.py` file, or CSRF verification will fail and you won’t be able to log into the Django Admin:
+Oh, and make sure you include the following two lines in your `settings.py` file, or CSRF verification will fail and you won't be able to log into the Django Admin:
 
 ```python
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 ```
 
-For some reason this wasn’t necessary when I ran my Django app behind Nginx, but now it is.
+For some reason this wasn't necessary when I ran my Django app behind Nginx, but now it is.
 
-Don’t start the Django app just yet, as we still need to add a database.
+Don't start the Django app just yet, as we still need to add a database.
 
-> Note: static files and user-uploaded media files need to be handled a bit differently than you might be used to, if you’re coming from a bare-bones deployment strategy, like I was. This is addressed in a [separate article](/articles/2025/coolify-django-static-media/).
+> Note: static files and user-uploaded media files need to be handled a bit differently than you might be used to, if you're coming from a bare-bones deployment strategy, like I was. This is addressed in a [separate article](/articles/2025/coolify-django-static-media/).
 
 ## Step 4: Set up the database
 
 With our application containerized, the next piece of the puzzle is the database. Coolify can manage databases like PostgreSQL as first-class services, running them in their own secure containers right alongside your application.
 
-Here’s how to get a PostgreSQL database up and running for your Django project:
+Here's how to get a PostgreSQL database up and running for your Django project:
 
-1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **“Postgres URL (internal)”** and copy it. You’ll need this in a moment.
+1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **"Postgres URL (internal)"** and copy it. You'll need this in a moment.
 
 2.  **Create a dedicated database:** While you could use the default `postgres` database, it's good practice to create a separate one for each application.
-    *   Start the new PostgreSQL service.
-    *   Navigate to its "Terminal" tab in the Coolify UI and click "Connect."
-    *   This drops you into a shell inside the database container. Run `psql` to access the PostgreSQL prompt.
-    *   Create your application's database with a standard SQL command:
-        ```sql
-        CREATE DATABASE my_app_db;
-        ```
-    *   You can verify it was created by listing all databases with `\l`. Once confirmed, exit `psql` and the container shell with `exit` or `Ctrl+D`.
+
+    - Start the new PostgreSQL service.
+    - Navigate to its "Terminal" tab in the Coolify UI and click "Connect."
+    - This drops you into a shell inside the database container. Run `psql` to access the PostgreSQL prompt.
+    - Create your application's database with a standard SQL command:
+      ```sql
+      CREATE DATABASE my_app_db;
+      ```
+    - You can verify it was created by listing all databases with `\l`. Once confirmed, exit `psql` and the container shell with `exit` or `Ctrl+D`.
 
 3.  **Import existing data:** If you're moving an existing project, you'll need to import your data.
-    *   First, create a backup of your old database. The `pg_dump` command with the `-Fc` flag (custom format) is perfect for this. Using `--no-owner` and `--no-privileges` makes the dump more portable.
-        ```bash
-        $ pg_dump -Fc --no-owner --no-privileges my_app_db > my_app_db.dump
-        ```
-    *   In Coolify, go to your PostgreSQL service's "Import Backup" tab. Upload the `.dump` file.
-    *   **Important:** By default, Coolify's import command restores to the `postgres` database. You must modify the import command to target the database you just created. Use a command like this:
-        ```bash
-        pg_restore --clean --no-owner --no-privileges -U $POSTGRES_USER -d my_app_db
-        ```
+
+    - First, create a backup of your old database. The `pg_dump` command with the `-Fc` flag (custom format) is perfect for this. Using `--no-owner` and `--no-privileges` makes the dump more portable.
+      ```bash
+      $ pg_dump -Fc --no-owner --no-privileges my_app_db > my_app_db.dump
+      ```
+    - In Coolify, go to your PostgreSQL service's "Import Backup" tab. Upload the `.dump` file.
+    - **Important:** By default, Coolify's import command restores to the `postgres` database. You must modify the import command to target the database you just created. Use a command like this:
+      ```bash
+      pg_restore --clean --no-owner --no-privileges -U $POSTGRES_USER -d my_app_db
+      ```
 
 4.  **Connect Django to the database:** Now, let's tell our Django application where to find its database.
-    *   Go back to your Django application's settings in Coolify and open the "Environment Variables" tab.
-    *   Create a new variable named `DATABASE_URL`.
-    *   Paste the internal connection URL you copied in the first step, but **change the database name at the end** from `/postgres` to `/my_app_db`. The final URL should look like this: `postgres://postgres:random_password@container_name:5432/my_app_db`.
-    *   Finally, and this is crucial, check the “Is Build Variable” box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
+    - Go back to your Django application's settings in Coolify and open the "Environment Variables" tab.
+    - Create a new variable named `DATABASE_URL`.
+    - Paste the internal connection URL you copied in the first step, but **change the database name at the end** from `/postgres` to `/my_app_db`. The final URL should look like this: `postgres://postgres:random_password@container_name:5432/my_app_db`.
+    - Finally, and this is crucial, check the "Is Build Variable" box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
 
 With these steps complete, your Django application is now fully configured to communicate with its PostgreSQL database, all managed neatly within your Coolify project. You can now safely start the Django app.
 
@@ -225,7 +225,7 @@ With these steps complete, your Django application is now fully configured to co
 
 My old [custom backup script](/articles/2023/setting-up-debian-11/#2-2-backups) is no longer needed because Coolify has backups built-in. To enable off-site storage you need to configure a destination, which Coolify calls an "S3 Storage" target.
 
-I'm using [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) for this, as it offers a generous 10 GB of S3-compatible object storage for free. Here’s how to set it up:
+I'm using [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) for this, as it offers a generous 10 GB of S3-compatible object storage for free. Here's how to set it up:
 
 1.  **In Cloudflare:** Navigate to **R2 Object Storage** from your dashboard. Create a new bucket, giving it a unique name (e.g., `coolify-backups-your-name`).
 2.  Once the bucket is created, go to the R2 overview page and click **API** dropdown button. Choose **Manage API tokens**.
@@ -241,17 +241,17 @@ With these credentials in hand, head back to Coolify:
 
 With the S3 storage now configured, we can set up our backups.
 
-- Go to Settings -> Backup, and make sure backups are turned on. Then enable the “S3 Enabled” checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
-- Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the “Save to S3” checkmark to also store it remotely.
+- Go to Settings -> Backup, and make sure backups are turned on. Then enable the "S3 Enabled" checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
+- Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the "Save to S3" checkmark to also store it remotely.
 
 ## Step 6: remaining Coolify config
 
-To make sure you get important alerts, you’ll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the “use system wide (transactional) email settings” checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
+To make sure you get important alerts, you'll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the "use system wide (transactional) email settings" checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
 
 ## The way forward
 
 Moving to Coolify is a significant simplification of my infrastructure. It replaces my collection of custom scripts with a unified, robust system that provides the modern, git-based workflow I love from Netlify. The shift to containerization was long overdue, and Coolify makes it approachable.
 
-Another major benefit is that all the configuration of how to run an app now lives directly in the project’s repository, in the form of a Dockerfile. It no longer only lives on the server in the form of a bunch of config files and systemd services and crontabs.
+Another major benefit is that all the configuration of how to run an app now lives directly in the project's repository, in the form of a Dockerfile. It no longer only lives on the server in the form of a bunch of config files and systemd services and crontabs.
 
 Best of all, I get zero-downtime deployments out of the box, all while still running everything on my own server. It's the self-hosted PaaS I've been looking for.

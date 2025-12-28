@@ -156,7 +156,7 @@ sudo cp jail.conf jail.local
 sudo pico jail.local
 ```
 
-You’ll want to add or change the following variables in the `[DEFAULT]` section:
+You'll want to add or change the following variables in the `[DEFAULT]` section:
 
 ```
 bantime = 2h
@@ -164,7 +164,7 @@ maxretry = 3
 banaction = ufw
 ```
 
-And in the `‌[sshd]` section you’ll want to add these variables:
+And in the `‌[sshd]` section you'll want to add these variables:
 
 ```
 enabled = true
@@ -314,7 +314,7 @@ You should not be asked for a password.
 
 # Chapter 3 - the Django backend
 
-Debian doesn't come with the latest and greatest version of Python pre-installed, but that doesn’t matter since we should be using [uv](https://docs.astral.sh/uv/) as our dependency- and virtual-environment manager of choice. You can then specify the specific Python version to use inside of each Python project, and uv will install it automatically.
+Debian doesn't come with the latest and greatest version of Python pre-installed, but that doesn't matter since we should be using [uv](https://docs.astral.sh/uv/) as our dependency- and virtual-environment manager of choice. You can then specify the specific Python version to use inside of each Python project, and uv will install it automatically.
 
 ## 3.1 - uv
 
@@ -347,7 +347,7 @@ Then we'll instruct uv install the dependencies, including the ones from the `pr
 uv sync --group prod
 ```
 
-This will also install the Python version as specific in your project’s `.python-version` file.
+This will also install the Python version as specific in your project's `.python-version` file.
 
 Make sure the Django project's settings are using your server's PostgreSQL database (for example using an `.env` file - I use [django-environ](https://django-environ.readthedocs.io/en/latest/) for that) and let's run the Django migrations:
 

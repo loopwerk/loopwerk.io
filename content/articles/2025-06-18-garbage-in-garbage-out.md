@@ -13,17 +13,17 @@ You still need to know how to build a good app. You might not be the one typing 
 
 ## My experience with Claude Code and Saga
 
-I recently had a chance to put this to the test with my own project, [Saga](https://github.com/loopwerk/Saga), a static site generator written in Swift. I wanted to make it faster by [parallelizing its processing](https://github.com/loopwerk/Saga/pull/34). I had a good idea of how to do it, because I had in fact already done it myself in a [previous PR](https://github.com/loopwerk/Saga/pull/33), but I wasn’t happy with the modest speed increase. So I decided to try using Claude Code to help me make a better version.
+I recently had a chance to put this to the test with my own project, [Saga](https://github.com/loopwerk/Saga), a static site generator written in Swift. I wanted to make it faster by [parallelizing its processing](https://github.com/loopwerk/Saga/pull/34). I had a good idea of how to do it, because I had in fact already done it myself in a [previous PR](https://github.com/loopwerk/Saga/pull/33), but I wasn't happy with the modest speed increase. So I decided to try using Claude Code to help me make a better version.
 
 I'm happy to report that it was a resounding success. By working with Claude, I was able to make Saga 60% faster. My own site, which is built with Saga, used to take 2.5 seconds to generate. Now it only takes 1 second. That's a huge improvement, and I couldn't have done it without Claude's help.
 
-But here's the thing: I couldn't have done it *without my own expertise either*. When I decided to make Saga faster, I didn't just throw the problem at Claude and hope for the best. I had specific ideas about what could be parallelized:
+But here's the thing: I couldn't have done it _without my own expertise either_. When I decided to make Saga faster, I didn't just throw the problem at Claude and hope for the best. I had specific ideas about what could be parallelized:
 
 - File reading operations
 - Writer execution
 - Static file copying
 
-But here's where it gets interesting. Claude initially suggested parallelizing *everything*, including the processing steps. Sounds great, right? More parallelization = more speed? Not quite. I knew that the processing steps needed to remain sequential, because every step depends on knowing which files were handled by previous steps.
+But here's where it gets interesting. Claude initially suggested parallelizing _everything_, including the processing steps. Sounds great, right? More parallelization = more speed? Not quite. I knew that the processing steps needed to remain sequential, because every step depends on knowing which files were handled by previous steps.
 
 Claude also had no idea how to fix broken unit tests now that Saga was running all these things in parellel, and it went on a wild goose chase making weirder and weirder changes all over the codebase. I had to step in, stop Claude, and tell it how to properly mock things that needed to be mocked, that it should make array access safe in concurrent code, things like that.
 
@@ -40,7 +40,7 @@ When working on that Saga PR, I was constantly making decisions:
 - Which parts of the codebase to touch (and more importantly, which to leave alone)
 - How to maintain backward compatibility
 - Where to add concurrency primitives without introducing race conditions
-- When to stop optimizing (making the code massively more complex for a 2% speed increase isn’t worth it)
+- When to stop optimizing (making the code massively more complex for a 2% speed increase isn't worth it)
 
 None of these decisions could be made by Claude. It could suggest options, sure, but evaluating those options required understanding the broader context of the project, its users, and its goals.
 
@@ -48,32 +48,33 @@ None of these decisions could be made by Claude. It could suggest options, sure,
 
 Here's another thing AI can't do: design good user experiences. Sure, it can implement any interface you describe, but knowing what interface to build? That's on you.
 
-For instance, imagine you're building an admin interface for a content management system. An AI might generate a perfectly functional system with all the CRUD operations working correctly. But it wouldn't know that your editors need to see a preview of how the article will look on the site before publishing. It wouldn't think to add custom actions for common workflows like "duplicate this article as a draft" or "schedule for next Monday at 9 AM". 
+For instance, imagine you're building an admin interface for a content management system. An AI might generate a perfectly functional system with all the CRUD operations working correctly. But it wouldn't know that your editors need to see a preview of how the article will look on the site before publishing. It wouldn't think to add custom actions for common workflows like "duplicate this article as a draft" or "schedule for next Monday at 9 AM".
 
 These aren't groundbreaking features, but they're the difference between software that technically works and software that people actually enjoy using.
 
 ## Feature creep is real
 
-One danger I've noticed when using AI assistants: they're *too* helpful. Ask Claude to add a simple feature, and it might throw in logging, error handling, configuration options, and three different ways to extend it. Sounds great until you realize you've just added 500 lines of code for a feature that needed 50.
+One danger I've noticed when using AI assistants: they're _too_ helpful. Ask Claude to add a simple feature, and it might throw in logging, error handling, configuration options, and three different ways to extend it. Sounds great until you realize you've just added 500 lines of code for a feature that needed 50.
 
 Good developers know when to say "no" - to features, to complexity, to clever solutions that solve problems you don't have. AI assistants don't have this restraint. They'll happily implement whatever you ask for, even if what you're asking for is a bad idea.
 
 ## You need to spot the problems
 
-Perhaps most importantly, you need to be able to spot when things go wrong. AI-generated code often *looks* right but contains subtle bugs:
+Perhaps most importantly, you need to be able to spot when things go wrong. AI-generated code often _looks_ right but contains subtle bugs:
 
 - Race conditions in concurrent code
 - Memory leaks from retain cycles
 - Security vulnerabilities from improper input validation
 - Performance issues from accidentally doing N+1 queries
 
-During the Saga parallelization, I caught several of these. Claude's concurrent code was mostly correct, but it introduced bugs that would’ve resulted in sites being broken, and with flaky unit tests that didn’t always spot the problem. Spotting these requires not just knowing the language, but understanding the runtime environment, the platform differences, and the kinds of things that can go wrong.
+During the Saga parallelization, I caught several of these. Claude's concurrent code was mostly correct, but it introduced bugs that would've resulted in sites being broken, and with flaky unit tests that didn't always spot the problem. Spotting these requires not just knowing the language, but understanding the runtime environment, the platform differences, and the kinds of things that can go wrong.
 
 ## The future is bright
 
 AI coding assistants are game-changers. I'm writing more code faster than ever before. But they're tools, not replacements. The need for good developers hasn't gone away - it's just shifted.
 
 Instead of typing out every line, we're now:
+
 - Architecting systems that make sense
 - Designing APIs that feel good
 - Spotting problems before they hit production

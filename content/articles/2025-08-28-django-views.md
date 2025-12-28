@@ -65,17 +65,17 @@ And then you need to know its method resolution order, or what it calls internal
 - `get()`
 - `render_to_response()`
 
-That’s 11 methods spread across 5 classes and mixins. Debugging a view or figuring out exactly which method to override to make the view behave in a certain way quickly becomes a case of opening way too many files and jumping back and forth between different method declarations. It’s just too much.
+That's 11 methods spread across 5 classes and mixins. Debugging a view or figuring out exactly which method to override to make the view behave in a certain way quickly becomes a case of opening way too many files and jumping back and forth between different method declarations. It's just too much.
 
-The supposed benefit is to make your views simpler with less code, but honestly for simple views it doesn’t really save any lines, and for complex views you’re often fighting against the default behavior of the generic views.
+The supposed benefit is to make your views simpler with less code, but honestly for simple views it doesn't really save any lines, and for complex views you're often fighting against the default behavior of the generic views.
 
-There [is](https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-display/) [so](https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-editing/) [much](https://docs.djangoproject.com/en/5.2/topics/class-based-views/mixins/) [documentation](https://docs.djangoproject.com/en/5.2/ref/class-based-views/flattened-index/) about all these view classes and mixins, it really doesn’t make things any simpler. This complexity is why I'm a big fan of the argument made in [Django Views — The Right Way](https://spookylukey.github.io/django-views-the-right-way/) by Luke Plant. He advocates for using function-based views for everything. In his own words:
+There [is](https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-display/) [so](https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-editing/) [much](https://docs.djangoproject.com/en/5.2/topics/class-based-views/mixins/) [documentation](https://docs.djangoproject.com/en/5.2/ref/class-based-views/flattened-index/) about all these view classes and mixins, it really doesn't make things any simpler. This complexity is why I'm a big fan of the argument made in [Django Views — The Right Way](https://spookylukey.github.io/django-views-the-right-way/) by Luke Plant. He advocates for using function-based views for everything. In his own words:
 
-> One of the reasons for the pattern I’m recommending is that it makes a great starting point for doing anything. The body of the view — the function that takes a request and returns a response — is right there in front of you... If a developer understands what a view is... they will likely have a good idea of what code they need to write. The code structure in front of them will not be an obstacle. The same is not true of using CBVs as a starting point. As soon as you need any logic... you’ve got to know which methods or attributes to define, which involves knowing a massive API.
+> One of the reasons for the pattern I'm recommending is that it makes a great starting point for doing anything. The body of the view — the function that takes a request and returns a response — is right there in front of you... If a developer understands what a view is... they will likely have a good idea of what code they need to write. The code structure in front of them will not be an obstacle. The same is not true of using CBVs as a starting point. As soon as you need any logic... you've got to know which methods or attributes to define, which involves knowing a massive API.
 
-It’s a great guide that shows how common CBV patterns can be implemented more explicitly and often more concisely with functions. I highly recommend reading it.
+It's a great guide that shows how common CBV patterns can be implemented more explicitly and often more concisely with functions. I highly recommend reading it.
 
-However, I take a slightly different approach in my own projects: I only use the base `View` class. I avoid both function-based views *and* the complex generic class-based views. This gives me what I consider the perfect middle ground. It provides a clean way to organize code by request method (get, post, put, etc.) and automatically handles `405 Method Not Allowed` responses for you.
+However, I take a slightly different approach in my own projects: I only use the base `View` class. I avoid both function-based views _and_ the complex generic class-based views. This gives me what I consider the perfect middle ground. It provides a clean way to organize code by request method (get, post, put, etc.) and automatically handles `405 Method Not Allowed` responses for you.
 
 So, instead of a function-based view with a big `if` block:
 
@@ -120,7 +120,7 @@ class CommentFormView(View):
             comment.post = post
             comment.save()
             return redirect(post)
-        
+
         return TemplateResponse(request, "form.html", {"form": form, "post": post})
 ```
 
@@ -149,11 +149,11 @@ class CommentFormView(View):
             comment.post = self.post_obj
             comment.save()
             return redirect(self.post_obj)
-        
+
         return TemplateResponse(request, "form.html", {"form": form, "post": self.post_obj})
 ```
 
-However, I don't really use this pattern in my own code, as it feels a bit too magical. Instead of a method that we explicitly call ourselves, it’s one more thing to have to know about Django’s `View` implementation.
+However, I don't really use this pattern in my own code, as it feels a bit too magical. Instead of a method that we explicitly call ourselves, it's one more thing to have to know about Django's `View` implementation.
 
 For a simple case like this, I often find the small duplication is actually the clearest option. It's explicit and requires zero cognitive overhead to understand what's happening in `get` and `post`. If the setup logic becomes more complex, or when there is a bigger shared context with more variables in play, then instead of using `dispatch` I'll extract it into a simple helper method that I can call from both places. This keeps the control flow explicit:
 
@@ -183,13 +183,13 @@ class CommentFormView(View):
             comment.post = post
             comment.save()
             return redirect(post)
-        
+
         return TemplateResponse(request, "form.html", context)
 ```
 
 This, for me, is the sweet spot. We've eliminated the code duplication, but in a way that remains completely explicit. The `get` and `post` methods are in full control. There's no "magic" state being set behind the scenes. We get the simplicity and explicitness of a function, but with better organization, automatic HTTP method handling, and the ability to share logic on our own terms.
 
-And yes, Django’s `FormView` is smaller in its most basic form:
+And yes, Django's `FormView` is smaller in its most basic form:
 
 ```python
 from django.views.generic.edit import FormView

@@ -5,7 +5,7 @@ summary: Celebrating Django's 20th birthday by looking back at 16 years of perso
 
 # Django at 20: a personal journey through 16 years
 
-Django turned 20 [a few days ago](https://www.djangoproject.com/weblog/2025/jul/13/happy-20th-birthday-django/), which is a remarkable milestone for any software project. I've been along for most of that ride, starting my Django journey in September 2009. That’s almost 16 years ago! It's been fascinating to watch both Django and my use of it evolve over time.
+Django turned 20 [a few days ago](https://www.djangoproject.com/weblog/2025/jul/13/happy-20th-birthday-django/), which is a remarkable milestone for any software project. I've been along for most of that ride, starting my Django journey in September 2009. That's almost 16 years ago! It's been fascinating to watch both Django and my use of it evolve over time.
 
 ## From server-rendered pages to APIs and back
 
@@ -43,7 +43,7 @@ No framework is an island, and Django's rich ecosystem of third-party packages i
 
 ### Frontend and styling
 
-- [**django-tailwind-cli**](https://pypi.org/project/django-tailwind-cli/): Integrates Tailwind CSS with Django using the standalone CLI. No Node.js required! Check out [this article](/articles/2025/django-tailwind-production/) to learn about cache-busting Tailwind’s generated CSS in production.
+- [**django-tailwind-cli**](https://pypi.org/project/django-tailwind-cli/): Integrates Tailwind CSS with Django using the standalone CLI. No Node.js required! Check out [this article](/articles/2025/django-tailwind-production/) to learn about cache-busting Tailwind's generated CSS in production.
 - [**django-template-partials**](https://pypi.org/project/django-template-partials/): Reusable template fragments that work great with Alpine AJAX.
 - [**django-browser-reload**](https://pypi.org/project/django-browser-reload/): Automatically reloads your browser during development. A massive time-saver.
 
@@ -76,7 +76,7 @@ Over the years, I've created several Django packages to scratch my own itches:
 - [**django-vrot**](https://pypi.org/project/django-vrot/): A collection of Django templatetags and middleware for common web development tasks.
 - [**drf-action-serializers**](https://pypi.org/project/drf-action-serializers/): Use different serializers for different viewset actions in Django REST Framework.
 
-I’ve also written [quite a few](/articles/tag/django/) articles on Django, and have been made a [Django Software Foundation member](https://www.djangoproject.com/foundation/individual-members/).
+I've also written [quite a few](/articles/tag/django/) articles on Django, and have been made a [Django Software Foundation member](https://www.djangoproject.com/foundation/individual-members/).
 
 ## Looking forward
 

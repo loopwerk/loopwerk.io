@@ -7,28 +7,26 @@ summary: A dive into why Django's DATETIME_FORMAT setting seems to do nothing, a
 
 When you start a new Django project, you get a handful of default settings for localization and timezones:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 USE_I18N = True
 LANGUAGE_CODE = "en-us"
 USE_TZ = True
 TIME_ZONE = "UTC"
 ```
 
-I’ve written before about the default timezone being a silly choice for sites with a global user base, both on [the backend](/articles/2025/django-admin-datetime/) and [the frontend](/articles/2025/django-local-times/). 
+I've written before about the default timezone being a silly choice for sites with a global user base, both on [the backend](/articles/2025/django-admin-datetime/) and [the frontend](/articles/2025/django-local-times/).
 
 But today, I want to talk about internationalization (`I18N`) and language settings. For my sites, `LANGUAGE_CODE = "en-us"` is perfectly fine; all my admin users speak English, and we prefer American spelling over the British variant. But there are some weird things going on in Django that I want to address.
 
 ## The `USE_I18N` puzzle
 
-Here's the first weird thing. The default settings have `USE_I18N = True`, which enables Django’s internationalization features. The default `LANGUAGES` setting also includes a massive list of every language under the sun.
+Here's the first weird thing. The default settings have `USE_I18N = True`, which enables Django's internationalization features. The default `LANGUAGES` setting also includes a massive list of every language under the sun.
 
 You'd think this means the Django Admin would automatically switch languages. If I set my browser's preferred language to Dutch, shouldn't the Admin follow suit? Nope. It remains stubbornly English.
 
 It turns out you need to add this to your middleware for the translation to actually happen:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 MIDDLEWARE = [
     # ...
     "django.middleware.locale.LocaleMiddleware",
@@ -37,12 +35,11 @@ MIDDLEWARE = [
 
 Only after adding `LocaleMiddleware` will the Admin honor your browser's language preference. This feels weird to me. Why enable `USE_I18N` by default, which has a small performance cost, if it doesn't do anything without manual intervention?
 
-It’s also very strange to me that there isn’t a language drop-down in the Admin, where users can choose from the available languages (as defined by the `LANGUAGES` setting). That seems like such an obvious improvement to the Admin, in the same way that there really should be a timezone dropdown as well, to render dates and times in your local timezone.
+It's also very strange to me that there isn't a language drop-down in the Admin, where users can choose from the available languages (as defined by the `LANGUAGES` setting). That seems like such an obvious improvement to the Admin, in the same way that there really should be a timezone dropdown as well, to render dates and times in your local timezone.
 
 But since I never add translations for my own code (models and templates), I only ever want my Admin in English anyway, so I just turn the whole translation system off. My settings become:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 USE_I18N = False
 LANGUAGE_CODE = "en-us"
 LANGUAGES = [("en-us", "English")]
@@ -52,12 +49,11 @@ TIME_ZONE = "UTC"
 
 ## Formatting settings are ignored
 
-With `LANGUAGE_CODE = "en-us"`, Django formats all dates and times according to US conventions. This means using the 12-hour clock with "a.m." and “p.m.”. As a European, this format is just hard to read, especially when you have to mentally parse "12 a.m." and "12 p.m." We want a simple 24-hour clock.
+With `LANGUAGE_CODE = "en-us"`, Django formats all dates and times according to US conventions. This means using the 12-hour clock with "a.m." and "p.m.". As a European, this format is just hard to read, especially when you have to mentally parse "12 a.m." and "12 p.m." We want a simple 24-hour clock.
 
 Let's test this with a basic model:
 
-#### <i class="fa-regular fa-file-code"></i> models.py
-```python
+```python title="models.py"
 from django.db import models
 
 class Appointment(models.Model):
@@ -66,8 +62,7 @@ class Appointment(models.Model):
 
 And a simple admin:
 
-#### <i class="fa-regular fa-file-code"></i> admin.py
-```python
+```python title="admin.py"
 from django.contrib import admin
 from .models import Appointment
 
@@ -78,8 +73,7 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 As expected, the admin form widget and the list display both render the time in the 12-hour format. No problem, I thought. Django has settings for this! I'll just force the 24-hour format everywhere.
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 DATETIME_FORMAT = "N j, Y, H:i"
 TIME_FORMAT = "H:i"
 ```
@@ -116,8 +110,7 @@ myproject/
 
 Inside `formats.py` we can define our own formats for the `en` language code. We'll specify the 24-hour clock using `H` for the hour.
 
-#### <i class="fa-regular fa-file-code"></i> myproject/formats/en/formats.py
-```python
+```python title="myproject/formats/en/formats.py"
 DATETIME_FORMAT = "N j, Y, H:i"
 TIME_FORMAT = "H:i"
 SHORT_DATETIME_FORMAT = "m/d/Y H:i"
@@ -129,14 +122,13 @@ You can add a few other locate-related formats you want to override here, see [t
 
 Finally, in your `settings.py`, tell Django where to find this new module, by adding one line:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 FORMAT_MODULE_PATH = "formats"
 ```
 
 And voilà! The Django admin now displays all times in the glorious, unambiguous 24-hour format, even while `LANGUAGE_CODE` is still `en-us`.
 
-It’s definitely more work than you'd expect for such a simple change. I really do think they should change the precedence order, but now you know how to change formatting settings for an existing locale.
+It's definitely more work than you'd expect for such a simple change. I really do think they should change the precedence order, but now you know how to change formatting settings for an existing locale.
 
 ## Override the time picker options
 
@@ -148,8 +140,7 @@ To change these, we need to override the text itself, which means we have to div
 
 We need to make three changes, the rest can stay as-is:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 USE_I18N = False
 <mark>LANGUAGE_CODE = "en"</mark>
 <mark>LANGUAGES = [("en", "English")]</mark>
@@ -159,7 +150,7 @@ FORMAT_MODULE_PATH = "formats"
 <mark>LOCALE_PATHS = [BASE_DIR / "locale"]</mark>
 ```
 
-You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file.”
+You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file."
 
 The beauty is that any strings we don't override in our `en` file will automatically fall back to the built-in `en-us` defaults, so we get the best of both worlds.
 
@@ -167,8 +158,7 @@ The beauty is that any strings we don't override in our `en` file will automatic
 
 Next, create the following file in the root (same level as `manage.py`):
 
-#### <i class="fa-regular fa-file-code"></i> locale/en/LC_MESSAGES/djangojs.po
-```
+```text title="locale/en/LC_MESSAGES/djangojs.po"
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"

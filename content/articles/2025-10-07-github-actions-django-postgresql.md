@@ -5,12 +5,11 @@ summary: Did you know that you can run unit tests for your Django app, in GitHub
 
 # Run Django tests using PostgreSQL in GitHub Actions
 
-Did you know that you can run unit tests for your Django app, in GitHub Actions, using PostgreSQL? I’m a little bit ashamed to admit that I had absolutely no idea until today. I really thought that I was forced to run my unit tests using Sqlite. And while most of the time that works perfectly fine, there are times when your Django app is using PostgreSQL-exclusive features and having to work around that in CI becomes a real pain. It’s also just a good idea to stay as close to the production setup as possible when running your tests.
+Did you know that you can run unit tests for your Django app, in GitHub Actions, using PostgreSQL? I'm a little bit ashamed to admit that I had absolutely no idea until today. I really thought that I was forced to run my unit tests using Sqlite. And while most of the time that works perfectly fine, there are times when your Django app is using PostgreSQL-exclusive features and having to work around that in CI becomes a real pain. It's also just a good idea to stay as close to the production setup as possible when running your tests.
 
-Turns out that it’s actually really simple to use a real PostgreSQL database in GitHub Actions! Here’s a minimal example workflow that installs your dependencies, starts a PostgreSQL 15 service, and runs your Django tests, all inside CI:
+Turns out that it's actually really simple to use a real PostgreSQL database in GitHub Actions! Here's a minimal example workflow that installs your dependencies, starts a PostgreSQL 15 service, and runs your Django tests, all inside CI:
 
-#### <i class="fa-regular fa-file-code"></i> .github/workflows/tests.yml
-```
+```yaml title=".github/workflows/tests.yml"
 name: Unit tests
 
 on:
@@ -27,7 +26,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres:15
@@ -51,12 +50,11 @@ jobs:
       - run: uv run ./manage.py test --noinput
 ```
 
-Until today I didn’t have the `services` section where the database is configured, and my `DATABASE_URL` was set to `sqlite://:memory:`. Everything else in this file is unchanged.
+Until today I didn't have the `services` section where the database is configured, and my `DATABASE_URL` was set to `sqlite://:memory:`. Everything else in this file is unchanged.
 
 My Django project is configured to read environment variables using [python-dotenv](https://github.com/theskumar/python-dotenv), and to parse a database URL from those environment variables using [dj-database-url](https://github.com/jazzband/dj-database-url), as I described in my article [How I configure my Django projects](/articles/2024/django-settings/). My `settings.py` looks like this:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```
+```python title="settings.py"
 import os
 import dj_database_url
 from dotenv import load_dotenv

@@ -51,7 +51,6 @@ func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "og:image")
   meta(content: "1014", name: "og:image:width")
   meta(content: "530", name: "og:image:height")
-  script(crossorigin: "anonymous", src: "https://kit.fontawesome.com/f209982030.js")
 }
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {

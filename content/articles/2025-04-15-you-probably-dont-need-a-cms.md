@@ -1,20 +1,19 @@
 ---
 tags: django, python, insights
-summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here’s how to use a simple Django model with a CKEditor 5 WYSIWYG field, including embedded media like YouTube.
+summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here's how to use a simple Django model with a CKEditor 5 WYSIWYG field, including embedded media like YouTube.
 ---
 
-# You probably don’t need a CMS
+# You probably don't need a CMS
 
-When I took over development and maintenance of the [Sound Radix](https://www.soundradix.com) site and backend in January of 2023, it had a full blown CMS system ([puput](https://github.com/APSL/puput)) for the artist interviews. The administrators used the regular ol’ Django Admin site to manage everything except for the interviews which were handled in a completely separate CMS environment, reached on its own URL. Similarly I see plenty of people recommending Wagtail or Django CMS or Mezzanine when somebody asks how to get started building a simple blog.
+When I took over development and maintenance of the [Sound Radix](https://www.soundradix.com) site and backend in January of 2023, it had a full blown CMS system ([puput](https://github.com/APSL/puput)) for the artist interviews. The administrators used the regular ol' Django Admin site to manage everything except for the interviews which were handled in a completely separate CMS environment, reached on its own URL. Similarly I see plenty of people recommending Wagtail or Django CMS or Mezzanine when somebody asks how to get started building a simple blog.
 
-I’m always very surprised by this. These are big dependencies that do a lot of stuff, and usually you only need a very small portion of their functionality - especially when getting started. I think it makes a lot more sense to build something yourself, which is also a great learning exercise when getting started.
+I'm always very surprised by this. These are big dependencies that do a lot of stuff, and usually you only need a very small portion of their functionality - especially when getting started. I think it makes a lot more sense to build something yourself, which is also a great learning exercise when getting started.
 
-For example the artist interviews on Sound Radix basically consist of a title, excerpt, a body, and a few other metadata fields such as a published date and slug. The body field should be a nice WYSIWYG editor because that’s what our marketing guys are comfortable with. But in no way does this require a complete CMS when a simple WYSIWYG text field does the job. So in this article I want to share our setup, how we get a nice editor experience, and how I made it possible to embed any kind of content (YouTube, Spotify, Apple Music, Instagram) without needing any special editor plugins.
+For example the artist interviews on Sound Radix basically consist of a title, excerpt, a body, and a few other metadata fields such as a published date and slug. The body field should be a nice WYSIWYG editor because that's what our marketing guys are comfortable with. But in no way does this require a complete CMS when a simple WYSIWYG text field does the job. So in this article I want to share our setup, how we get a nice editor experience, and how I made it possible to embed any kind of content (YouTube, Spotify, Apple Music, Instagram) without needing any special editor plugins.
 
-It all starts with our model, which in our case looks like this, but really it’s the `body` field that’s the important bit:
+It all starts with our model, which in our case looks like this, but really it's the `body` field that's the important bit:
 
-#### <i class="fa-regular fa-file-code"></i> models.py
-```python
+```python title="models.py"
 import datetime
 from django.db import models
 from bs4 import BeautifulSoup, Tag
@@ -54,8 +53,7 @@ class Article(models.Model):
 
 The `CKEditor5Field` field comes from the [django-ckeditor-5](https://github.com/hvlads/django-ckeditor-5) project, for which we use the following config:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 CKEDITOR_5_CUSTOM_CSS = "css/ckeditor5/admin_dark_mode_fix.css"
 CKEDITOR_5_CONFIGS = {
     "default": {
@@ -99,34 +97,32 @@ CKEDITOR_5_CONFIGS = {
 }
 ```
 
-By default this editor doesn’t work so well when the Django Admin is in dark mode, which is why this extra css is needed:
+By default this editor doesn't work so well when the Django Admin is in dark mode, which is why this extra css is needed:
 
-#### <i class="fa-regular fa-file-code"></i> admin_dark_mode_fix.css
-```css
+```css title="admin_dark_mode_fix.css"
 .ck.ck-editor {
-    color: black;
+  color: black;
 }
 ```
 
-So instead of a complete CMS we now have a Django model with a `CKEditor5Field` instance. Our model becomes the CMS, and our admins manage everything within the normal Django Admin interface that they’re already familiar with. They don’t have to use multiple URLs, like `/admin/` and `/cms/` to manage different kinds of things on the site.
+So instead of a complete CMS we now have a Django model with a `CKEditor5Field` instance. Our model becomes the CMS, and our admins manage everything within the normal Django Admin interface that they're already familiar with. They don't have to use multiple URLs, like `/admin/` and `/cms/` to manage different kinds of things on the site.
 
-We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn’t support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibility from the text editor, and instead we parse the body text for special tags like this:
+We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn't support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibility from the text editor, and instead we parse the body text for special tags like this:
 
 ```
 Lorem ipsum dolor sit amet, consectetur adipiscing elit
 sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua. Ut enim ad minim veniam. 
+aliqua. Ut enim ad minim veniam.
 
 [[https://www.youtube.com/watch?v=dQw4w9WgXcQ]]
 
-Excepteur sint occaecat cupidatat non proident, 
+Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.
 ```
 
 Basically any link placed between two square brackets get transformed into a piece of embedded content. We do this when we save the model, with the following code:
 
-#### <i class="fa-regular fa-file-code"></i> models.py
-```python
+```python title="models.py"
 import datetime
 from django.db import models
 from bs4 import BeautifulSoup, Tag
@@ -138,17 +134,16 @@ from django_ckeditor_5.fields import CKEditor5Field
 class Article(models.Model):
     # Previous fields...
     <mark>rendered_body = models.TextField(blank=True)</mark>
-    
+
     def save(self, *args, **kwargs):
         # Previous logic...
         self.body = str(soup)
         <mark>self.rendered_body = render_embeds(self.body)</mark>
 
         super().save(*args, **kwargs)
-````
+```
 
-#### <i class="fa-regular fa-file-code"></i> utils.py
-```python
+```python title="utils.py"
 import re
 
 
@@ -188,12 +183,11 @@ def render_embeds(body: str) -> str:
     return body
 ```
 
-This `render_embeds` function can easily be extended with more replacement logic, all without having to deal with CKEditor plugins. It makes it really easy for us to switch to another editor if we’d want to, since the source of truth is simple text containing template tags.
+This `render_embeds` function can easily be extended with more replacement logic, all without having to deal with CKEditor plugins. It makes it really easy for us to switch to another editor if we'd want to, since the source of truth is simple text containing template tags.
 
 Finally, we hide the `rendered_body` in the Django Admin:
 
-#### <i class="fa-regular fa-file-code"></i> admin.py
-``` python
+```python title="admin.py"
 class ArticleAdminForm(forms.ModelForm):
     class Meta:
         model = Article
@@ -206,4 +200,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
 And with that we have a simple and user friendly text editor without having to include a big dependency like Django CMS or Wagtail. Our admins can upload images into their articles, and we can easily embed anything we want. We have a single Django Admin interface where all content is managed, including the articles.
 
-So next time you’re reaching for a CMS when you’re building a blog, I would suggest to first start with a simple model and a WYSIWYG field.
+So next time you're reaching for a CMS when you're building a blog, I would suggest to first start with a simple model and a WYSIWYG field.

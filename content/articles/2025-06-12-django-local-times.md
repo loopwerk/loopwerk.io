@@ -1,21 +1,20 @@
 ---
 tags: django, python, howto
-summary: A robust, two-part solution for showing dates and times in your visitor’s local timezone, handling the tricky first-visit problem.
+summary: A robust, two-part solution for showing dates and times in your visitor's local timezone, handling the tricky first-visit problem.
 ---
 
-# Make Django show dates and times in the visitor’s local timezone
+# Make Django show dates and times in the visitor's local timezone
 
 When building a web app, handling timezones correctly is crucial for a good user experience. Django's timezone support is powerful but requires understanding two key settings:
 
-* `USE_TZ = True`: When enabled, Django stores all datetimes in your database in UTC. This is a fundamental best practice that ensures your data is consistent and unambiguous, regardless of where your servers or users are located.
-* `TIME_ZONE`: This setting (e.g., `"America/New_York"` or `"Europe/London"`) defines the default timezone for your project. Django uses it to display datetimes in your templates.
+- `USE_TZ = True`: When enabled, Django stores all datetimes in your database in UTC. This is a fundamental best practice that ensures your data is consistent and unambiguous, regardless of where your servers or users are located.
+- `TIME_ZONE`: This setting (e.g., `"America/New_York"` or `"Europe/London"`) defines the default timezone for your project. Django uses it to display datetimes in your templates.
 
 The problem arises because your application serves users across the globe, yet your `TIME_ZONE` setting is a single, fixed value. A user in Tokyo doesn't want to see timestamps in your server's New York time. They expect to see times converted to their own local timezone.
 
-Let’s start with a typical scenario. You have a `Comment` model that stores when a comment was added:
+Let's start with a typical scenario. You have a `Comment` model that stores when a comment was added:
 
-#### <i class="fa-regular fa-file-code"></i> models.py
-```python
+```python title="models.py"
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,15 +22,14 @@ class Comment(models.Model):
     added = models.DateTimeField(auto_now_add=True)
 ```
 
-When you render these comments in a template, you’ll find the problem right away:
+When you render these comments in a template, you'll find the problem right away:
 
-#### <i class="fa-regular fa-file-code"></i> post.html
-```html
+```html title="post.html"
 {% for comment in post.comment_set.all %}
-  <div>
-    <h3>From {{ comment.user.name }} on {{ comment.added }}</h3>
-    <p>{{ comment.comment }}</p>
-  </div>
+<div>
+  <h3>From {{ comment.user.name }} on {{ comment.added }}</h3>
+  <p>{{ comment.comment }}</p>
+</div>
 {% endfor %}
 ```
 
@@ -47,8 +45,7 @@ The most robust way to solve this is on the server. If Django knows the user's t
 
 First, let's create the middleware. This small piece of code will check for a `timezone` cookie and, if it exists, activate it for the current request.
 
-#### <i class="fa-regular fa-file-code"></i> myapp/middleware.py
-```python
+```python title="myapp/middleware.py"
 from zoneinfo import ZoneInfo
 from django.utils import timezone
 
@@ -74,8 +71,7 @@ class TimezoneMiddleware:
 
 Don't forget to add the middleware to your `settings.py`:
 
-#### <i class="fa-regular fa-file-code"></i> settings.py
-```python
+```python title="settings.py"
 # settings.py
 MIDDLEWARE = [
     # ...
@@ -85,16 +81,16 @@ MIDDLEWARE = [
 
 Next, we need to set that cookie. A tiny snippet of JavaScript in your base template is all it takes. The `Intl` object in modern browsers makes this incredibly easy.
 
-#### <i class="fa-regular fa-file-code"></i> base.html
-```html
+```html title="base.html"
 <script>
-  document.cookie = "timezone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + "; path=/";
+  document.cookie =
+    "timezone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + "; path=/";
 </script>
 ```
 
 With this in place, every rendered `datetime` object will now be in the user's local timezone. Hooray!
 
-Except for one small catch: it only works *after* the first page load. On the very first visit, the browser hasn't sent the cookie yet. Django renders the page in UTC, *then* the JavaScript runs and sets the cookie for the *next* request. This means new visitors get UTC times on their first impression. We can do better.
+Except for one small catch: it only works _after_ the first page load. On the very first visit, the browser hasn't sent the cookie yet. Django renders the page in UTC, _then_ the JavaScript runs and sets the cookie for the _next_ request. This means new visitors get UTC times on their first impression. We can do better.
 
 ## Fixing the First-Visit Problem with a Template Tag and JavaScript
 
@@ -102,8 +98,7 @@ To create a seamless experience, we need to handle that first visit gracefully. 
 
 First, we create a custom template tag that wraps our timestamp in a semantically-correct `<time>` element. This element includes a machine-readable `datetime` attribute, which is perfect for our JavaScript to hook into.
 
-#### <i class="fa-regular fa-file-code"></i> myapp/templatetags/localtime.py
-```python
+```python title="myapp/templatetags/localtime.py"
 from django import template
 from django.template.defaultfilters import date
 from django.utils.html import format_html
@@ -135,55 +130,55 @@ def localtime(value):
 
 Now, update your template to use this new filter. Remember to load your custom tags first.
 
-#### <i class="fa-regular fa-file-code"></i> post.html
-```html
+```html title="post.html"
 <mark>{% load localtime %}</mark>
 
 {% for comment in post.comment_set.all %}
-  <div>
-    <h3>From {{ comment.user.name }} on <mark>{{ comment.added|localtime }}</mark></h3>
-    <p>{{ comment.comment }}</p>
-  </div>
+<div>
+  <h3>
+    From {{ comment.user.name }} on <mark>{{ comment.added|localtime }}</mark>
+  </h3>
+  <p>{{ comment.comment }}</p>
+</div>
 {% endfor %}
 ```
 
 Finally, add a bit of JavaScript to your base template. This script will find all our `<time>` elements and re-format their content using the browser's knowledge of the local timezone.
 
-#### <i class="fa-regular fa-file-code"></i> base.html
-```html
+```html title="base.html"
 <script>
   // Define the formatting options to precisely match our Django filter.
   const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
     hour12: true,
   };
 
-  document.querySelectorAll('.local-time').forEach((el) => {
-    const utcDate = new Date(el.getAttribute('datetime'));
-    
-    // Explicitly use the 'en-US' locale to ensure the format is consistent 
+  document.querySelectorAll(".local-time").forEach(el => {
+    const utcDate = new Date(el.getAttribute("datetime"));
+
+    // Explicitly use the 'en-US' locale to ensure the format is consistent
     // with the server-rendered template tag.
-    el.textContent = utcDate.toLocaleString('en-US', options);
+    el.textContent = utcDate.toLocaleString("en-US", options);
   });
 </script>
 ```
 
-Just make sure that the way Python formats the dates and times matches the way the JavaScript code does it, or you’ll get flickering content updates. My code uses the `en-us` locale for all users (`LANGUAGE_CODE = "en-us"` in settings.py).
+Just make sure that the way Python formats the dates and times matches the way the JavaScript code does it, or you'll get flickering content updates. My code uses the `en-us` locale for all users (`LANGUAGE_CODE = "en-us"` in settings.py).
 
 ## The Best of Both Worlds
 
-So why use both the middleware *and* the JavaScript? Because together, they cover all bases and provide the best user experience.
+So why use both the middleware _and_ the JavaScript? Because together, they cover all bases and provide the best user experience.
 
-*   **On the first visit:** The user has no `timezone` cookie and the middleware does nothing. The `localtime` template tag renders the time in your server's default timezone (`setting.TIME_ZONE`). Immediately after the page loads, the JavaScript runs, finds the `.local-time` element, and instantly rewrites its content to the user's actual local time. There might be a barely-perceptible flicker, but only on this very first page view.
+- **On the first visit:** The user has no `timezone` cookie and the middleware does nothing. The `localtime` template tag renders the time in your server's default timezone (`setting.TIME_ZONE`). Immediately after the page loads, the JavaScript runs, finds the `.local-time` element, and instantly rewrites its content to the user's actual local time. There might be a barely-perceptible flicker, but only on this very first page view.
 
-*   **On all subsequent visits:** The user has the cookie. The `TimezoneMiddleware` activates their timezone. The `localtime` template tag now renders the time correctly, right from the server. The JavaScript still runs, but it essentially replaces the already-correct time with the same correct time, resulting in no visible change.
+- **On all subsequent visits:** The user has the cookie. The `TimezoneMiddleware` activates their timezone. The `localtime` template tag now renders the time correctly, right from the server. The JavaScript still runs, but it essentially replaces the already-correct time with the same correct time, resulting in no visible change.
 
 This two-part approach gives you the best of server-side rendering (no content-shifting for returning visitors) while using client-side JavaScript as a progressive enhancement to fix the one edge case where the server can't know better.
 
-If rendering dates and times and dealing with timezones interests you, also check out the article [“Django Admin’s handling of dates and times is very confusing”](/articles/2025/django-admin-datetime/) I wrote earlier this year.
+If rendering dates and times and dealing with timezones interests you, also check out the article ["Django Admin's handling of dates and times is very confusing"](/articles/2025/django-admin-datetime/) I wrote earlier this year.
 
 > **Update July 30, 2025**: all the code necessary to make this work on your website (so the templatetag, middleware and javascript code) is now available as part of [django-vrot](https://github.com/loopwerk/django-vrot).

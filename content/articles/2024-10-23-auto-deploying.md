@@ -5,24 +5,22 @@ summary: The best feature of Heroku is the ability to just push a branch, and it
 
 # Automatically deploy your site when you push the main branch
 
-When I [setup my own Debian server back in 2023](/articles/2023/setting-up-debian-11/) I didn’t really have a good way to automatically deploy my site. Instead I’d have to SSH into the server, go into the right folder, and execute a script that would pull the changes, run the migrations and restart the service. Something like this, for my Django backend:
+When I [setup my own Debian server back in 2023](/articles/2023/setting-up-debian-11/) I didn't really have a good way to automatically deploy my site. Instead I'd have to SSH into the server, go into the right folder, and execute a script that would pull the changes, run the migrations and restart the service. Something like this, for my Django backend:
 
-#### <i class="fa-regular fa-file-code"></i> /home/example/api.example.com/deploy.sh
-```
+```bash title="/home/example/api.example.com/deploy.sh"
 git pull
 poetry install --with prod --sync
 poetry run ./manage.py migrate
 sudo /usr/sbin/service api.example.com restart
 ```
 
-Obviously this isn’t ideal, and a far cry from the usability of something like Heroku, where you just push a git branch and it gets deployed. So I wanted to replicate the same kind of workflow, but on my own VPS, without resorting to big complex tools to get the job done.
+Obviously this isn't ideal, and a far cry from the usability of something like Heroku, where you just push a git branch and it gets deployed. So I wanted to replicate the same kind of workflow, but on my own VPS, without resorting to big complex tools to get the job done.
 
-Turns out that this is pretty simple using GitHub’s webhooks. If you have an endpoint that can be POSTed to by GitHub whenever something is pushed to your main branch, then this endpoint can easily run that `deploy.sh` script for you.
+Turns out that this is pretty simple using GitHub's webhooks. If you have an endpoint that can be POSTed to by GitHub whenever something is pushed to your main branch, then this endpoint can easily run that `deploy.sh` script for you.
 
-Here’s my version, using the `express` framework:
+Here's my version, using the `express` framework:
 
-#### <i class="fa-regular fa-file-code"></i> /home/example/deploy.example.com/index.js
-``` javascript
+```javascript title="/home/example/deploy.example.com/index.js"
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import crypto from "crypto";
@@ -42,11 +40,19 @@ function isSignatureOk(secret, req) {
     return false;
   }
 
-  const expectedSignature = "sha256=" + crypto.createHmac("sha256", secret).update(JSON.stringify(req.body)).digest("hex");
+  const expectedSignature =
+    "sha256=" +
+    crypto
+      .createHmac("sha256", secret)
+      .update(JSON.stringify(req.body))
+      .digest("hex");
 
   const a = Buffer.from(incomingSignature);
   const b = Buffer.from(expectedSignature);
-  return Buffer.byteLength(a) === Buffer.byteLength(b) && crypto.timingSafeEqual(a, b);
+  return (
+    Buffer.byteLength(a) === Buffer.byteLength(b) &&
+    crypto.timingSafeEqual(a, b)
+  );
 }
 
 function deploy(body, res) {
@@ -104,16 +110,13 @@ This script actually works for two sites running on the same server, and sharing
 
 Also create a `.env` file containing a webhook secret. It can be anything you want, just create something long and random:
 
-#### <i class="fa-regular fa-file-code"></i> /home/example/deploy.example.com/.env
-
-```
+```bash title="/home/example/deploy.example.com/.env"
 GITHUB_WEBHOOK_SECRET="my_secret_value_here"
 ```
 
 To get this `express` site up and running I created a `systemd` service file:
 
-#### <i class="fa-regular fa-file-code"></i> /etc/systemd/system/deploy.example.com.service
-```
+```ini title="/etc/systemd/system/deploy.example.com.service"
 [Unit]
 Description=node daemon for deploy.example.com
 
@@ -131,8 +134,7 @@ WantedBy=multi-user.target
 
 And an Nginx site to host it:
 
-#### <i class="fa-regular fa-file-code"></i> /etc/nginx/sites-enabled/deploy.example.com
-```
+```nginx title="/etc/nginx/sites-enabled/deploy.example.com"
 server {
     server_name deploy.example.com;
     root /var/www/html;
@@ -171,4 +173,4 @@ server {
 }
 ```
 
-With all of that up and running you can edit the webhook config on GitHub and enter `https://deploy.example.com/` as the payload URL, triggered by push events. Don’t forget to fill in your secret value as well.
+With all of that up and running you can edit the webhook config on GitHub and enter `https://deploy.example.com/` as the payload URL, triggered by push events. Don't forget to fill in your secret value as well.

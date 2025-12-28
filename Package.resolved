@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/LRUCache.git",
       "state" : {
-        "revision" : "e0e9e039b33db8f2ef39b8e25607e38f46b13584",
-        "version" : "1.1.2"
+        "revision" : "0d91406ecd4d6c1c56275866f00508d9aeacc92a",
+        "version" : "1.2.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "ad35091c7a790f04fc5a912c8bde8963eba753d2",
-        "version" : "0.9.1"
+        "revision" : "abf4122c3ed594539a275b555ede7a12329be8b4",
+        "version" : "1.0.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "b5f26f35d8843b01bd9a884a6a9d9922c58b1cba",
-        "version" : "1.0.1"
+        "revision" : "5a9fa57a5b123afa4acdb0800e348aef549bceba",
+        "version" : "1.1.0"
       }
     },
     {
@@ -87,7 +87,7 @@
       "location" : "https://github.com/twostraws/SwiftGD",
       "state" : {
         "branch" : "main",
-        "revision" : "07650dcb343d5b045598459fd3aad0936e0259bf"
+        "revision" : "58ad3b3960bcbeb2dc58cae3cabb033df44bef82"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "4206bc7b8bd9a4ff8e9511211e1b4bff979ef9c4",
-        "version" : "2.11.1"
+        "revision" : "d86f244ed497d48012782e2f59c985a55e77b3f5",
+        "version" : "2.11.3"
       }
     },
     {

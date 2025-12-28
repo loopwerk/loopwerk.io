@@ -5,4 +5,5 @@ date: 2015-12-01
 ---
 
 # Sling
-"Your business in your pocket." This is the iOS app for Sling, which I’ve built with a team of other developers.
+
+"Your business in your pocket." This is the iOS app for Sling, which I've built with a team of other developers.

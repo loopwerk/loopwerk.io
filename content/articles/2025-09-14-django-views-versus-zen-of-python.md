@@ -1,15 +1,15 @@
 ---
 tags: django, python, insights
-summary: Django’s generic class-based views often clash with the Zen of Python. Here’s why the base View class feels more Pythonic.
+summary: Django's generic class-based views often clash with the Zen of Python. Here's why the base View class feels more Pythonic.
 ---
 
 # Django views versus the Zen of Python
 
-A while ago, I wrote about [how I write Django views](/articles/2025/django-views/), arguing that the base `View` class hits the sweet spot between the simplicity of function-based views and the often-overwhelming complexity of generic class-based views. The response to that article made it clear that I’m not alone in this thinking.
+A while ago, I wrote about [how I write Django views](/articles/2025/django-views/), arguing that the base `View` class hits the sweet spot between the simplicity of function-based views and the often-overwhelming complexity of generic class-based views. The response to that article made it clear that I'm not alone in this thinking.
 
-It got me wondering: *why* does this approach feel so right? The answer, I believe, lies in the guiding principles of Python itself. The [Zen of Python](https://en.m.wikipedia.org/wiki/Zen_of_Python) isn't just a collection of clever aphorisms; it's a framework for writing clear, maintainable, and effective code. When we look at Django's view layer through this lens, it becomes apparent where things start to go astray.
+It got me wondering: _why_ does this approach feel so right? The answer, I believe, lies in the guiding principles of Python itself. The [Zen of Python](https://en.m.wikipedia.org/wiki/Zen_of_Python) isn't just a collection of clever aphorisms; it's a framework for writing clear, maintainable, and effective code. When we look at Django's view layer through this lens, it becomes apparent where things start to go astray.
 
-Here are all the ways that Django’s views (especially the generic class-based kind) break the Zen of Python.
+Here are all the ways that Django's views (especially the generic class-based kind) break the Zen of Python.
 
 ### "There should be one - and preferably only one - obvious way to do it."
 
@@ -18,6 +18,7 @@ Python developers cherish this principle. It promotes consistency and readabilit
 Just look at the many ways to accomplish this simple task:
 
 The simple function:
+
 ```python
 from django.http import HttpResponse
 
@@ -26,6 +27,7 @@ def hello_world(request):
 ```
 
 The base `View` class:
+
 ```python
 from django.http import HttpResponse
 from django.views import View
@@ -36,6 +38,7 @@ class HelloWorldView(View):
 ```
 
 The generic `TemplateView`:
+
 ```python
 from django.views.generic import TemplateView
 
@@ -44,6 +47,7 @@ class HelloWorldView(TemplateView):
 ```
 
 The `render` shortcut:
+
 ```python
 from django.shortcuts import render
 
@@ -52,6 +56,7 @@ def hello_world(request):
 ```
 
 The `TemplateResponse`:
+
 ```python
 from django.template.response import TemplateResponse
 
@@ -77,15 +82,15 @@ One of these is a bad idea. When you have to keep a mental map of a framework's 
 
 ### "Errors should never pass silently."
 
-This is one of my biggest frustrations, and it lies in Django’s template language. By design, the template engine swallows errors. If you make a typo in a variable name, it doesn't raise an `AttributeError` or `KeyError`. It fails silently, rendering an empty string.
+This is one of my biggest frustrations, and it lies in Django's template language. By design, the template engine swallows errors. If you make a typo in a variable name, it doesn't raise an `AttributeError` or `KeyError`. It fails silently, rendering an empty string.
 
-This design decision has a direct impact on debugging our views. Did I forget to add `user_profile` to my context dictionary in the `get_context_data` method? Did I misspell it as `user_pofile` in the view? Or did I misspell it in the template? The silent failure makes it much harder to pinpoint the source of the bug, forcing you to debug in three places at once. This is a clear violation of a principle designed to make debugging *easier*.
+This design decision has a direct impact on debugging our views. Did I forget to add `user_profile` to my context dictionary in the `get_context_data` method? Did I misspell it as `user_pofile` in the view? Or did I misspell it in the template? The silent failure makes it much harder to pinpoint the source of the bug, forcing you to debug in three places at once. This is a clear violation of a principle designed to make debugging _easier_.
 
 ### "Practicality beats purity."
 
 The Django template language was designed with the "purity" of separating logic from presentation in mind. It's a noble goal, but in practice, it has led to some deeply impractical limitations.
 
-It’s wild to me that after all these years, we still can’t do something as basic as `mydict[key]` or `mylist[0]` in a template. Instead, we have to reinvent the same `getitem` template tag in nearly every project.
+It's wild to me that after all these years, we still can't do something as basic as `mydict[key]` or `mylist[0]` in a template. Instead, we have to reinvent the same `getitem` template tag in nearly every project.
 
 This is a classic case of purity getting in the way of practicality. The template language is intentionally crippled in its capabilities to enforce a philosophical ideal, leaving developers with a less powerful and more frustrating tool.
 
@@ -93,6 +98,6 @@ This is a classic case of purity getting in the way of practicality. The templat
 
 Django is a powerful and wonderful framework, but like any tool, it can be misused. The generic class-based view system, in its attempt to be a one-size-fits-all solution, often creates more complexity than it saves.
 
-By returning to the principles of the Zen of Python, we can find a better way. The base `View` class offers a more Pythonic path. It’s simple, not complex. It’s flat, not nested. Its implementation is easy to explain. It encourages us to be explicit and to build solutions that are practical and maintainable for the long term.
+By returning to the principles of the Zen of Python, we can find a better way. The base `View` class offers a more Pythonic path. It's simple, not complex. It's flat, not nested. Its implementation is easy to explain. It encourages us to be explicit and to build solutions that are practical and maintainable for the long term.
 
-Django doesn’t force you to write views in a way that violates the Zen of Python, but it often nudges you there. By resisting the pull of generic CBVs and sticking with simpler patterns, you can build Django projects that feel a lot more like Python itself.
+Django doesn't force you to write views in a way that violates the Zen of Python, but it often nudges you there. By resisting the pull of generic CBVs and sticking with simpler patterns, you can build Django projects that feel a lot more like Python itself.

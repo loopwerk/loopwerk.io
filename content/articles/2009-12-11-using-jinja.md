@@ -4,13 +4,14 @@ archive: true
 ---
 
 # Using Jinja2 templates in Django
-In my previous post [Things I “hate” about Python and Django](/articles/2009/things-i-hate-about-python-and-django/), I said that one of the things I  "hate" about Django is its template language. While very easy to use and pretty extensible, it's missing some important (and basic, to be honest) features like in-template creation of variables, a good `if` syntax and the ability to use variable variables (variable interpolating).
+
+In my previous post [Things I "hate" about Python and Django](/articles/2009/things-i-hate-about-python-and-django/), I said that one of the things I "hate" about Django is its template language. While very easy to use and pretty extensible, it's missing some important (and basic, to be honest) features like in-template creation of variables, a good `if` syntax and the ability to use variable variables (variable interpolating).
 
 I have been looking for a template replacement and looked into [Mako](http://www.makotemplates.org/), [Cheetah](http://www.cheetahtemplate.org/) and [Jinja2](http://jinja.pocoo.org/).
 
-* Mako is easily plugged into a Django project thanks to the [django-mako](http://code.google.com/p/django-mako/) project. I don't really like its syntax though.
-* Cheetah has a very nice syntax (but completely different from the normal Django templates). Getting it to play nice with Django is a lot harder though. Simple things like `direct_to_template` are easy enough, but once you start extending templates with each other, it gets nasty.
-* Jinja2 uses almost exactly the same syntax as the normal Django template language, while adding extra features and (a lot of) extra power. It looks very easy to use as a drop-in replacement.
+- Mako is easily plugged into a Django project thanks to the [django-mako](http://code.google.com/p/django-mako/) project. I don't really like its syntax though.
+- Cheetah has a very nice syntax (but completely different from the normal Django templates). Getting it to play nice with Django is a lot harder though. Simple things like `direct_to_template` are easy enough, but once you start extending templates with each other, it gets nasty.
+- Jinja2 uses almost exactly the same syntax as the normal Django template language, while adding extra features and (a lot of) extra power. It looks very easy to use as a drop-in replacement.
 
 Based on this I chose Jinja2 as the winner, and started a small project to see how easy it is to plug into Django. The easiest way to use it, is by using the [Coffin](http://github.com/dcramer/coffin) library, which adds Jinja2 versions of things like `direct_to_template` and `render_to_response`, and even ports the most useful Django filters like `{% url %}`.
 

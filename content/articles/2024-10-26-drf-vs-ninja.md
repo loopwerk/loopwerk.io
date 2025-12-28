@@ -1,16 +1,15 @@
 ---
 tags: review, django, python
-summary: Let’s compare Django REST Framework with new kid on the block, Ninja.
+summary: Let's compare Django REST Framework with new kid on the block, Ninja.
 ---
 
 # Django REST Framework versus Django Ninja
 
-I’m a big fan of Django REST Framework (DRF), which I’ve been using since 2017 or so. I’ve also dabbled with Vapor (a web framework for Swift) and have written two articles comparing it to DRF: [Vapor 3 versus Django REST Framework](/articles/2019/vapor-vs-drf/) in 2019 and [Vapor 4 versus Django REST Framework](/articles/2021/vapor4-vs-drf/) in 2021. Since that 2021 article I’ve exclusively used DRF for all my API projects.
+I'm a big fan of Django REST Framework (DRF), which I've been using since 2017 or so. I've also dabbled with Vapor (a web framework for Swift) and have written two articles comparing it to DRF: [Vapor 3 versus Django REST Framework](/articles/2019/vapor-vs-drf/) in 2019 and [Vapor 4 versus Django REST Framework](/articles/2021/vapor4-vs-drf/) in 2021. Since that 2021 article I've exclusively used DRF for all my API projects.
 
 Recently I became aware of [Django Ninja](https://django-ninja.dev), another API framework for Django, and decided to try it out. For this I am going to compare it with DRF using the following models, inspired by my real Dungeons & Dragons note-taking tool [critical-notes.com](https://www.critical-notes.com):
 
-#### <i class="fa-regular fa-file-code"></i> models.py
-``` python
+```python title="models.py"
 from django.conf import settings
 from django.db import models
 
@@ -38,20 +37,20 @@ class Character(models.Model):
         return self.name
 ```
 
-As you can see, a D&D campaign has multiple members, and each member has a role: player or dungeon master (this is stored in the `is_dm` boolean field). Campaigns can be public or private (`is_private`). Then there’s a `Character` model, because of course we want to store the characters we play in our D&D campaigns.
+As you can see, a D&D campaign has multiple members, and each member has a role: player or dungeon master (this is stored in the `is_dm` boolean field). Campaigns can be public or private (`is_private`). Then there's a `Character` model, because of course we want to store the characters we play in our D&D campaigns.
 
 ## Django REST Framework
-I’m going to start by building the characters endpoints in DRF. I’m going to assume that people reading this article already have at least a basic knowledge of DRF so I am not going to explain every line of code in detail, but most things should be pretty clear.
 
-There are two important rules for the character API: 
+I'm going to start by building the characters endpoints in DRF. I'm going to assume that people reading this article already have at least a basic knowledge of DRF so I am not going to explain every line of code in detail, but most things should be pretty clear.
 
-1. You can fetch a list of characters in a campaign as long as you’re a member of that campaign, or if it’s a public campaign - but only members can add characters or make other changes.
+There are two important rules for the character API:
+
+1. You can fetch a list of characters in a campaign as long as you're a member of that campaign, or if it's a public campaign - but only members can add characters or make other changes.
 2. A character can be marked as hidden (`is_hidden`), in which case only the DM should be able to fetch or modify it. Normal players should never know about the hidden characters.
 
-But let’s start simple and not worry about these rules just yet.
+But let's start simple and not worry about these rules just yet.
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-``` python
+```python title="views.py"
 from rest_framework import viewsets
 from .models import Character
 from .serializers import CharacterSerializer
@@ -63,8 +62,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
         return Character.objects.filter(campaign_id=self.kwargs["campaign_id"])
 ```
 
-#### <i class="fa-regular fa-file-code"></i> serializers.py
-``` python
+```python title="serializers.py"
 from .models import Character
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -73,8 +71,7 @@ class CharacterSerializer(serializers.ModelSerializer):
         fields = "__all__"
 ```
 
-#### <i class="fa-regular fa-file-code"></i> urls.py
-``` python
+```python title="urls.py"
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
@@ -83,7 +80,7 @@ from .views import CharacterViewSet
 router = SimpleRouter(use_regex_path=False)
 router.register(
     "api/campaigns/<int:campaign_id>/characters",
-    CharacterViewSet, 
+    CharacterViewSet,
     basename="character",
 )
 
@@ -97,15 +94,14 @@ With that little bit of code in place we can access the URL `/api/campaigns/1/ch
 
 However, there are some problems to fix:
 
-1. We need to make sure that you’re allowed to access the characters (i.e. you need to be a logged-in member of the campaign, or it needs to be a public campaign).
-2. You should only be allowed to create characters or make other changes when you’re a member of the campaign.
+1. We need to make sure that you're allowed to access the characters (i.e. you need to be a logged-in member of the campaign, or it needs to be a public campaign).
+2. You should only be allowed to create characters or make other changes when you're a member of the campaign.
 3. Only DMs should be able to see hidden characters.
-4. When you create a new character by POSTing to `/api/campaigns/1/characters/`, you shouldn’t be able to give a different `campaign_id` in the POST payload: it needs to be “locked” to the campaign that’s in the URL. In the same way you shouldn’t be able to edit the `campaign_id` when you update a character.
+4. When you create a new character by POSTing to `/api/campaigns/1/characters/`, you shouldn't be able to give a different `campaign_id` in the POST payload: it needs to be "locked" to the campaign that's in the URL. In the same way you shouldn't be able to edit the `campaign_id` when you update a character.
 
-Let’s tackle the first three points all at the same time, by creating a custom permissions class:
+Let's tackle the first three points all at the same time, by creating a custom permissions class:
 
-#### <i class="fa-regular fa-file-code"></i> permissions.py
-``` python
+```python title="permissions.py"
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 from .models import Campaign, Membership
 
@@ -136,15 +132,14 @@ class CampaignMemberOrPublicReadOnlyPermission(BasePermission):
             request.membership = Membership()
             if not request.campaign.is_private:
                 return request.method in SAFE_METHODS
-            
+
             # Private campaign: no access at all
             return False
 ```
 
 And we change our view to make use of it:
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-``` python
+```python title="views.py"
 from rest_framework import viewsets
 from .models import Character
 from .serializers import CharacterSerializer
@@ -158,16 +153,15 @@ class CharacterViewSet(viewsets.ModelViewSet):
         qs = Character.objects.filter(campaign_id=self.kwargs["campaign_id"])
         if not <mark title="The membership gets added to the request in the CampaignMemberOrPublicReadOnlyPermission class">self.request.membership.is_dm</mark>:
             <mark title="Filter out hidden characters">qs = qs.filter(is_hidden=False)</mark>
-        
+
         return qs
 ```
 
-With this change users can only fetch characters for campaigns they’re a member of, and of public campaigns. Furthermore, only members can make non-GET requests, meaning that only members can create new characters, edit characters, or delete characters. And only DMs can fetch hidden characters.
+With this change users can only fetch characters for campaigns they're a member of, and of public campaigns. Furthermore, only members can make non-GET requests, meaning that only members can create new characters, edit characters, or delete characters. And only DMs can fetch hidden characters.
 
-All that’s left to do is to make sure the `campaign_id` can’t be changed when creating or updating a character. That’s very easy with a small addition to our `CharacterViewSet` as well:
+All that's left to do is to make sure the `campaign_id` can't be changed when creating or updating a character. That's very easy with a small addition to our `CharacterViewSet` as well:
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-``` python
+```python title="views.py"
 class CharacterViewSet(viewsets.ModelViewSet):
     # ...
 
@@ -178,13 +172,13 @@ class CharacterViewSet(viewsets.ModelViewSet):
         serializer.save(campaign_id=self.kwargs["campaign_id"])
 ```
 
-That’s our characters API done, in DRF. Now let’s recreate this with Ninja.
+That's our characters API done, in DRF. Now let's recreate this with Ninja.
 
 ## Django Ninja
+
 To create the basic CRUD functionality for characters, a lot more code is needed.
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-``` python
+```python title="views.py"
 from typing import List
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI
@@ -236,8 +230,7 @@ def character_delete(request, campaign_id: int, id: int):
     return {"success": True}
 ```
 
-#### <i class="fa-regular fa-file-code"></i> schemas.py
-``` python
+```python title="schemas.py"
 from ninja import ModelSchema
 from .models import Character
 
@@ -252,8 +245,7 @@ class CharacterIn(ModelSchema):
         exclude = ["id", "campaign"]
 ```
 
-#### <i class="fa-regular fa-file-code"></i> urls.py
-``` python
+```python title="urls.py"
 from django.contrib import admin
 from django.urls import include, path
 from .views import api
@@ -264,15 +256,15 @@ urlpatterns = [
 ]
 ```
 
-Our basic `CharacterViewSet` for DRF was literally four lines of code, and it did the same as what Ninja needs thirty lines for (excluding newlines, so in reality it’s even more). The problem is that Ninja doesn’t have something like a `ViewSet` which bundles the CRUD operations; you need to write an endpoint for every operation. I also don’t really like how we need to use `get_object_or_404` all over the place, because Ninja doesn’t handle exceptions itself, unlike DRF.
+Our basic `CharacterViewSet` for DRF was literally four lines of code, and it did the same as what Ninja needs thirty lines for (excluding newlines, so in reality it's even more). The problem is that Ninja doesn't have something like a `ViewSet` which bundles the CRUD operations; you need to write an endpoint for every operation. I also don't really like how we need to use `get_object_or_404` all over the place, because Ninja doesn't handle exceptions itself, unlike DRF.
 
-And we haven’t even started on permissions, making sure people only view characters of campaigns they have access to, making sure only the DM has access to the hidden characters, all the stuff we did before with DRF with very few lines of code. Then I came across a third party package called `django-ninja-crud`, which aims to solve this boilerplate code. Let’s refactor our views.
+And we haven't even started on permissions, making sure people only view characters of campaigns they have access to, making sure only the DM has access to the hidden characters, all the stuff we did before with DRF with very few lines of code. Then I came across a third party package called `django-ninja-crud`, which aims to solve this boilerplate code. Let's refactor our views.
 
 ## Django Ninja CRUD
-After reading Django Ninja CRUD’s documentation I changed my views and URL config as such:
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-``` python
+After reading Django Ninja CRUD's documentation I changed my views and URL config as such:
+
+```python title="views.py"
 from ninja import Router
 from ninja_crud import views, viewsets
 from .models import Character
@@ -293,8 +285,7 @@ class CharacterViewSet(viewsets.APIViewSet):
     delete_character = views.DeleteView()
 ```
 
-#### <i class="fa-regular fa-file-code"></i> urls.py
-``` python
+```python title="urls.py"
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
@@ -309,12 +300,11 @@ urlpatterns = [
 ]
 ```
 
-It’s definitely shorter than the code we had before, but it’s still a far cry from DRF (also, it’s missing a PATCH endpoint since there’s no view for that). And then my half-optimism got replaced by sadness because it’s not possible to access the `campaign_id` path parameter from within the `CharacterViewSet`. So that means that it’s impossible to filter characters, or to do any sort of campaign permission checks.
+It's definitely shorter than the code we had before, but it's still a far cry from DRF (also, it's missing a PATCH endpoint since there's no view for that). And then my half-optimism got replaced by sadness because it's not possible to access the `campaign_id` path parameter from within the `CharacterViewSet`. So that means that it's impossible to filter characters, or to do any sort of campaign permission checks.
 
 Instead the code has to be changed like so:
 
-#### <i class="fa-regular fa-file-code"></i> views.py
-```python
+```python title="views.py"
 from ninja import Router
 from ninja_crud import views, viewsets
 from .models import Character
@@ -359,8 +349,7 @@ class CharactersViewSet(viewsets.APIViewSet):
     )
 ```
 
-#### <i class="fa-regular fa-file-code"></i> permissions.py
-```python
+```python title="permissions.py"
 from functools import wraps
 from django.core.exceptions import PermissionDenied
 from .models import Campaign, Membership
@@ -405,8 +394,7 @@ def campaignMemberOrPublicReadOnlyPermission(func):
     return wrapper
 ```
 
-#### <i class="fa-regular fa-file-code"></i> urls.py
-```python
+```python title="urls.py"
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
@@ -423,13 +411,14 @@ urlpatterns = [
 
 This is a huge bummer. Not only do we have to repeat the full path in every single CRUD operation for every single model, we also have to override a lot more code to make filtering and permissions work. There is no single method or thing to override which would check permissions, so we have to include the `decorators` parameter into every CRUD operation as well.
 
-And I haven’t even added things like only returning hidden characters to DMs. The problem with that is that `request.membership` does not exist within the `get_queryset` method, even though it’s been set inside of the `campaignMemberOrPublicReadOnlyPermission` decorator. So we’d have to fetch the membership object yet again inside of `get_queryset`, making yet another query, just because we can’t read the one we’ve already set.
+And I haven't even added things like only returning hidden characters to DMs. The problem with that is that `request.membership` does not exist within the `get_queryset` method, even though it's been set inside of the `campaignMemberOrPublicReadOnlyPermission` decorator. So we'd have to fetch the membership object yet again inside of `get_queryset`, making yet another query, just because we can't read the one we've already set.
 
 ## Conclusion
-It was at this moment that I made my conclusion: Django Ninja is not for me. While DRF certainly has its problems (there are just way too many `View` and `ViewSet` subclasses and mixins and multiple inheritance), it is super flexible, you can make any kind of API you want, and it’s very easy to centralize things like permission checks, filtering on querysets, etc. Creating nested endpoints such as `/campaigns/{campaign_id}/characters/*` is absolutely no problem without having to repeat this prefix into every endpoint.
 
-Django Ninja and the CRUD project have quite bad documentation and almost no examples. It’s just so much easier to get stuff done with DRF. Things like error handling, which “just works” with DRF, needs a bunch of custom code in Ninja.
+It was at this moment that I made my conclusion: Django Ninja is not for me. While DRF certainly has its problems (there are just way too many `View` and `ViewSet` subclasses and mixins and multiple inheritance), it is super flexible, you can make any kind of API you want, and it's very easy to centralize things like permission checks, filtering on querysets, etc. Creating nested endpoints such as `/campaigns/{campaign_id}/characters/*` is absolutely no problem without having to repeat this prefix into every endpoint.
 
-For this article I was originally planning to also build the API endpoints for fetching and creating campaigns, which has its own list of rules and complexities to deal with, but I already know that this is fairly straightforward with DRF and a big problem with Ninja. Sure: anything is possible with Ninja as long as you don’t use its CRUD package and write every single endpoint by hand, but there is way too much boilerplate involved. There’s a `django-ninja-extra` package which does have a class-based way of encapsulating multiple endpoints with shared behavior, for example for permissions, but then you still need to write every endpoint for every CRUD operation.
+Django Ninja and the CRUD project have quite bad documentation and almost no examples. It's just so much easier to get stuff done with DRF. Things like error handling, which "just works" with DRF, needs a bunch of custom code in Ninja.
+
+For this article I was originally planning to also build the API endpoints for fetching and creating campaigns, which has its own list of rules and complexities to deal with, but I already know that this is fairly straightforward with DRF and a big problem with Ninja. Sure: anything is possible with Ninja as long as you don't use its CRUD package and write every single endpoint by hand, but there is way too much boilerplate involved. There's a `django-ninja-extra` package which does have a class-based way of encapsulating multiple endpoints with shared behavior, for example for permissions, but then you still need to write every endpoint for every CRUD operation.
 
 I think that if you have a very straightforward API with a few endpoints that don't do too much custom logic, then Django Ninja could be very well suited for that. I really had some "oh, wow!" moments while playing around with it. But for anything more complex... I'm sticking with DRF.
