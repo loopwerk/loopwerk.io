@@ -13,7 +13,7 @@ This website is a statically generated site (using [Saga, my own static site gen
 
 I am a big fan of Mastodon (you can find me on [hachyderm](https://hachyderm.io/@kevinrenskers)) and it seemed pretty cool to embed replies to a toot as comments on an article. I found a [really nice open source project](https://github.com/dpecos/mastodon-comments): just a simple JavaScript file that you embed into the website, it pulls down the replies to a toot with a specific ID, and then inserts them into the DOM. Extremely easy to customize and style however you want! Sadly, that's kind of the only positive things about this solution, with plenty of downsides:
 
-- Every article needs to know the "root” toot ID. So that means publishing the article, tooting about it, then updating the article with that ID. I'd also have to edit all existing articles with their toot ID, but I haven't been on Mastodon for nearly as long as I've had this site, so older articles can't have comments since I've never announced those articles on Mastodon. And it's silly to create such posts now, way after the fact.
+- Every article needs to know the "root" toot ID. So that means publishing the article, tooting about it, then updating the article with that ID. I'd also have to edit all existing articles with their toot ID, but I haven't been on Mastodon for nearly as long as I've had this site, so older articles can't have comments since I've never announced those articles on Mastodon. And it's silly to create such posts now, way after the fact.
 - Read-only. This script only shows comments, people can't actually comment or like on the site itself. They have to open the link to that root toot, and comment there.
 - Not everyone's on Mastodon, so the possible audience is rather limited.
 - It's not possible to moderate or filter replies, so any off-topic replies to the toot are also shown on the site.
@@ -33,7 +33,7 @@ Compared to the Mastodon solution this has some really big upsides:
 
 There are a few downsides though:
 
-- When you log in with your GitHub account, the name "giscus” is mentioned rather than "Loopwerk”. While self-hosting the giscus app is possible, it seemed like too much work to maintain just for that reference.
+- When you log in with your GitHub account, the name "giscus" is mentioned rather than "Loopwerk". While self-hosting the giscus app is possible, it seemed like too much work to maintain just for that reference.
 - Since I don't control the frontend script, I can't exactly control the layout and styling. The comments section lives in its own iframe and as such can't be styled with my site CSS which is a bit of a bummer. Custom themes are possible but a hassle, especially when you want those to work locally as well.
 
 I think the upsides by far outweigh the downsides and so I added giscus to this site, and you can now comment on all articles! I have no idea if anyone will actually use the comment section and if it turns out that nobody does then I'll probably remove it again, we'll see :)

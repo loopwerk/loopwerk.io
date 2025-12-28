@@ -2,7 +2,7 @@
 tags: python, django, review
 ---
 
-# Things I "hate” about Python and Django
+# Things I "hate" about Python and Django
 
 I have been a PHP programmer for the last 9 years, and only in September of 2009 I switched to Python and the Django framework. While I really love the Python language and the Django framework (especially compared to something like the Zend PHP framework), there are a couple of things that are really bugging me.
 

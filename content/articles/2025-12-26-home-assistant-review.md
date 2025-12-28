@@ -15,7 +15,7 @@ Before Home Assistant, my smart home setup already looked fairly complete. I had
 
 But in practice, it was messy.
 
-I had a Philips Hue hub sitting in a closet, plus Tado's "internet bridge”. Each system came with its own app. Hue synced to Apple HomeKit, but Tado didn't, which meant I could use Siri for lighting but not for heating. My solar panels had yet another app, entirely separate from the rest of my smart home, just to get basic insights into energy production. On top of that, Tado charged a monthly subscription to enable automatic home/away geofencing, so the heating would turn off when I left the house.
+I had a Philips Hue hub sitting in a closet, plus Tado's "internet bridge". Each system came with its own app. Hue synced to Apple HomeKit, but Tado didn't, which meant I could use Siri for lighting but not for heating. My solar panels had yet another app, entirely separate from the rest of my smart home, just to get basic insights into energy production. On top of that, Tado charged a monthly subscription to enable automatic home/away geofencing, so the heating would turn off when I left the house.
 
 I was getting increasingly fed up with the situation: too many apps, too many hubs, too much cloud dependency, and a subscription for something that really shouldn't require one. That's when I started looking for alternatives and quickly ran into Home Assistant.
 

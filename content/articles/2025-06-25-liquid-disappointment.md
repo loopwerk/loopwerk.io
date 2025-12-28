@@ -43,13 +43,13 @@ This is [one of the reasons](/articles/2025/thoughts-on-apple/) why I left Apple
 
 > I keep looking at all the changes Liquid Glass brings, and I cannot find one instance where it has markedly improved the experience in any way. Everything that got rounder—except for the things that didn't—why? Everything that got inset that wasn't before—why? Everything that is now blurry—why? I don't think it's a secret that the content area of some apps decreased. The margins and padding increased—except where it didn't.
 
-Yup, this. Things changed, but it really didn't get better. One change that I was excited about, was a redesigned Photos app, because iOS 18 really messed up the usability of this app. And yes, Apple did reintroduce a tab bar at the bottom to switch between your library and your albums ("collections”). But the tab bar disappears as soon as you scroll, and gets replaced by a year/month/week switch for your library. Which then disappears when you scroll the other direction. It's absolutely bonkers and super distracting.
+Yup, this. Things changed, but it really didn't get better. One change that I was excited about, was a redesigned Photos app, because iOS 18 really messed up the usability of this app. And yes, Apple did reintroduce a tab bar at the bottom to switch between your library and your albums ("collections"). But the tab bar disappears as soon as you scroll, and gets replaced by a year/month/week switch for your library. Which then disappears when you scroll the other direction. It's absolutely bonkers and super distracting.
 
 The default tab bar in Safari no longer has a share button, or the tab overview button - they're now buried inside of a submenu. The URL bar meanwhile is tiny, and almost completely disappears when you scroll, in a very distracting way. Luckily you can switch back to another version of the bottom tab bar which is more like iOS 18, except that it takes more space and has serious legibility issues because of all the transparency.
 
 Apple is creating all these problems while trying to fix a problem that simply didn't exist.
 
-> Liquid Glass and the general implementation of it will not meaningfully change during the beta phase of the "26” release cycle. They're not going to backtrack. And they're not going to address long-standing concerns all of a sudden.
+> Liquid Glass and the general implementation of it will not meaningfully change during the beta phase of the "26" release cycle. They're not going to backtrack. And they're not going to address long-standing concerns all of a sudden.
 
 I'm afraid that Louie is right. I also don't think Apple's going to backtrack these changes, because the people in charge have no taste, no sense of usability, and simply don't care about all the problems this new design brings. We're going to be stuck with this look and feel for the next decade, and there's no way we can all stay on iOS 18 for ten years.
 

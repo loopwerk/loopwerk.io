@@ -17,6 +17,6 @@ So now I am blocking these kinds of requests directly within CloudFlare, by usin
 (http.request.uri wildcard r"*.php") or (http.request.uri wildcard r"*.php7")
 ```
 
-To create such a rule for your domain navigate to Security -> WAF -> Custom rules, and press the "Create rule” button. On this page you can click the "Edit expression” link, and then you can paste in the expression from above. Choose the block action, save the form, and you're done!
+To create such a rule for your domain navigate to Security -> WAF -> Custom rules, and press the "Create rule" button. On this page you can click the "Edit expression" link, and then you can paste in the expression from above. Choose the block action, save the form, and you're done!
 
 I've seen this rule block close to 11,000 requests in 24 hours on one of my domains. That's 11,000 requests that didn't even make it to my server that day 🎉

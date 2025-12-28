@@ -15,7 +15,7 @@ On the big stage, Apple will loudly praise developers as the heart of their ecos
 
 Look no further than their response to the EU's Digital Markets Act. Specifically alternative app stores, alternative browser engines, and allowing developers to link to external payment methods. Instead of embracing a more open future, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the very freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring announced with great fanfare, only to find them perpetually unavailable. We are an afterthought.
 
-For developers there's also a constant, lingering fear of being "Sherlocked”; the phenomenon where you build a beloved and successful app, only for Apple to copy its core functions into the next OS update, effectively killing your business. It turns the App Store from a marketplace into a minefield, where your success can be the very trigger for your extinction.
+For developers there's also a constant, lingering fear of being "Sherlocked"; the phenomenon where you build a beloved and successful app, only for Apple to copy its core functions into the next OS update, effectively killing your business. It turns the App Store from a marketplace into a minefield, where your success can be the very trigger for your extinction.
 
 ## Swift no longer sparks joy
 
@@ -49,7 +49,7 @@ The reason for this is clear: greed. From OWA:
 
 > Safari is the highest margin product Apple has ever made, accounts for 14-16% of Apple's annual operating profit and brings in $20 billion per year in search engine revenue from Google. For each 1% browser market share that Apple loses for Safari, Apple is set to lose $200 million in revenue per year.
 
-Or what about the iMessage lock-in? By refusing to adopt modern, open messaging standards and instead stigmatizing non-iPhones with "green bubbles”, Apple actively degrades the experience of communicating with friends and family who dare to live outside their walls. It's a calculated strategy to leverage social pressure for profit, a perfect metaphor for their entire ecosystem.
+Or what about the iMessage lock-in? By refusing to adopt modern, open messaging standards and instead stigmatizing non-iPhones with "green bubbles", Apple actively degrades the experience of communicating with friends and family who dare to live outside their walls. It's a calculated strategy to leverage social pressure for profit, a perfect metaphor for their entire ecosystem.
 
 And the control doesn't stop at software. With their war on repair, using serialized parts that only they can authenticate, Apple has tried to redefine the very concept of ownership. The device you paid a premium for is never truly yours to fix or modify. It's another wall in the garden, designed to lock you into their expensive services and push you towards the next upgrade cycle rather than a simple, sustainable repair.
 

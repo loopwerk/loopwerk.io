@@ -40,7 +40,7 @@ The biggest problem when it came to build quality was wind noise coming from the
 
 The interior of the car is quite minimalist and while everything felt sturdy enough, it definitely didn't feel like a $45,000 car. Neither of us found the seats to be comfortable and absolutely not in the same class as my much cheaper Golf.
 
-I did like the "easy entry” feature where the seat would move back and the steering wheel would move up to make getting in and out of the car easier, but still I found it surprisingly difficult to get out of the car. Meanwhile my girlfriend had problems getting into the car. Neither of us ever experienced something like this in any other car before.
+I did like the "easy entry" feature where the seat would move back and the steering wheel would move up to make getting in and out of the car easier, but still I found it surprisingly difficult to get out of the car. Meanwhile my girlfriend had problems getting into the car. Neither of us ever experienced something like this in any other car before.
 
 ## Driving experience
 

@@ -49,7 +49,7 @@ TIME_ZONE = "UTC"
 
 ## Formatting settings are ignored
 
-With `LANGUAGE_CODE = "en-us"`, Django formats all dates and times according to US conventions. This means using the 12-hour clock with "a.m." and "p.m.”. As a European, this format is just hard to read, especially when you have to mentally parse "12 a.m." and "12 p.m." We want a simple 24-hour clock.
+With `LANGUAGE_CODE = "en-us"`, Django formats all dates and times according to US conventions. This means using the 12-hour clock with "a.m." and "p.m.". As a European, this format is just hard to read, especially when you have to mentally parse "12 a.m." and "12 p.m." We want a simple 24-hour clock.
 
 Let's test this with a basic model:
 
@@ -150,7 +150,7 @@ FORMAT_MODULE_PATH = "formats"
 <mark>LOCALE_PATHS = [BASE_DIR / "locale"]</mark>
 ```
 
-You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file.”
+You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file."
 
 The beauty is that any strings we don't override in our `en` file will automatically fall back to the built-in `en-us` defaults, so we get the best of both worlds.
 

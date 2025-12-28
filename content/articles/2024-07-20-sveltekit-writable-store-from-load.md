@@ -5,7 +5,7 @@ summary: How do you update content in real time when that content was fetched fr
 
 # SvelteKit architecture tip: return a writable store from your load function
 
-In my SvelteKit app I fetch some "core” data which is needed everywhere, such as the currently logged-in user, in the root `LayoutLoad` function. Something like this (simplified) example:
+In my SvelteKit app I fetch some "core" data which is needed everywhere, such as the currently logged-in user, in the root `LayoutLoad` function. Something like this (simplified) example:
 
 ```typescript
 export const load: LayoutLoad = async ({ fetch, data }) => {

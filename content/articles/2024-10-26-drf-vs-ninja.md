@@ -97,7 +97,7 @@ However, there are some problems to fix:
 1. We need to make sure that you're allowed to access the characters (i.e. you need to be a logged-in member of the campaign, or it needs to be a public campaign).
 2. You should only be allowed to create characters or make other changes when you're a member of the campaign.
 3. Only DMs should be able to see hidden characters.
-4. When you create a new character by POSTing to `/api/campaigns/1/characters/`, you shouldn't be able to give a different `campaign_id` in the POST payload: it needs to be "locked” to the campaign that's in the URL. In the same way you shouldn't be able to edit the `campaign_id` when you update a character.
+4. When you create a new character by POSTing to `/api/campaigns/1/characters/`, you shouldn't be able to give a different `campaign_id` in the POST payload: it needs to be "locked" to the campaign that's in the URL. In the same way you shouldn't be able to edit the `campaign_id` when you update a character.
 
 Let's tackle the first three points all at the same time, by creating a custom permissions class:
 
@@ -417,7 +417,7 @@ And I haven't even added things like only returning hidden characters to DMs. Th
 
 It was at this moment that I made my conclusion: Django Ninja is not for me. While DRF certainly has its problems (there are just way too many `View` and `ViewSet` subclasses and mixins and multiple inheritance), it is super flexible, you can make any kind of API you want, and it's very easy to centralize things like permission checks, filtering on querysets, etc. Creating nested endpoints such as `/campaigns/{campaign_id}/characters/*` is absolutely no problem without having to repeat this prefix into every endpoint.
 
-Django Ninja and the CRUD project have quite bad documentation and almost no examples. It's just so much easier to get stuff done with DRF. Things like error handling, which "just works” with DRF, needs a bunch of custom code in Ninja.
+Django Ninja and the CRUD project have quite bad documentation and almost no examples. It's just so much easier to get stuff done with DRF. Things like error handling, which "just works" with DRF, needs a bunch of custom code in Ninja.
 
 For this article I was originally planning to also build the API endpoints for fetching and creating campaigns, which has its own list of rules and complexities to deal with, but I already know that this is fairly straightforward with DRF and a big problem with Ninja. Sure: anything is possible with Ninja as long as you don't use its CRUD package and write every single endpoint by hand, but there is way too much boilerplate involved. There's a `django-ninja-extra` package which does have a class-based way of encapsulating multiple endpoints with shared behavior, for example for permissions, but then you still need to write every endpoint for every CRUD operation.
 

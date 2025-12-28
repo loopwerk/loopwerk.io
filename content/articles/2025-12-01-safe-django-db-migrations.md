@@ -21,7 +21,7 @@ Your first instinct might be to tweak the deployment settings to avoid the overl
 
 You could remove `migrate` from the build step and run it in a "Post-Deploy" hook. This means migrations run _after_ the new container is live and the old one is dead.
 
-This fixes the "removing a field” problem, because the schema change happens after the old container is no longer serving traffic. But it breaks the "adding a field” problem: if you add a new required column, the new code in the new container might start up and try to query that column _before_ the migration finishes. Result: the new app crashes on startup, and the deployment fails.
+This fixes the "removing a field" problem, because the schema change happens after the old container is no longer serving traffic. But it breaks the "adding a field" problem: if you add a new required column, the new code in the new container might start up and try to query that column _before_ the migration finishes. Result: the new app crashes on startup, and the deployment fails.
 
 Another issue: if migrations fail, your _deployment still succeeds_, leaving your app running with mismatched code and schema.
 
@@ -33,7 +33,7 @@ You could create a second service in the same project that runs migrations as a 
 
 The problem is that you still have to choose: run it before the deploy, or after?
 
-You've essentially re-implemented either Strategy A or the original "migrate during build” approach, just in a second container. The core compatibility problem remains.
+You've essentially re-implemented either Strategy A or the original "migrate during build" approach, just in a second container. The core compatibility problem remains.
 
 Verdict: more complex and still unsafe.
 
@@ -114,7 +114,7 @@ No server errors.
 
 ## Example 2: renaming a field safely
 
-Renaming a field is just "remove old field + add new field,” so the same pattern applies.
+Renaming a field is just "remove old field + add new field," so the same pattern applies.
 
 ### Phase 1: add new field + dual-write + data migration
 

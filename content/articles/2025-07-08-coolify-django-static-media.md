@@ -28,7 +28,7 @@ In my case, however, I preferred to keep all my project's files on my own server
 
 Thankfully, the storage problem is simple to solve with a built-in Coolify feature: Persistent Storage. This allows you to map a directory on your host server to a directory inside your container.
 
-In your Django application's resource view in Coolify, navigate to the **Persistent Storage** section in the sidebar and click the "Add” button. You'll need to create a new Volume Mount with the following settings:
+In your Django application's resource view in Coolify, navigate to the **Persistent Storage** section in the sidebar and click the "Add" button. You'll need to create a new Volume Mount with the following settings:
 
 - **Name**: a descriptive name, like `media`.
 - **Source Path**: an absolute path to a folder on the host server, for example `/root/my-app-media`.

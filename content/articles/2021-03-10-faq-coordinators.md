@@ -4,7 +4,7 @@ tags: faq, iOS, swift
 
 # Mentee Question 5: What's the deal with coordinators?
 
-A few weeks while ago in my [how to get started](/articles/2021/faq-getting-started/) article I mentioned coordinators in the "What architecture should I use?” section, and how they allow you to decouple your view controllers from one another, and improve the way you can test your code. Yesterday one of my mentees asked about the coordinator pattern: how to implement it, how to deal with various scenarios, and what the big deal is about decoupling view controllers.
+A few weeks while ago in my [how to get started](/articles/2021/faq-getting-started/) article I mentioned coordinators in the "What architecture should I use?" section, and how they allow you to decouple your view controllers from one another, and improve the way you can test your code. Yesterday one of my mentees asked about the coordinator pattern: how to implement it, how to deal with various scenarios, and what the big deal is about decoupling view controllers.
 
 ## What does "decoupling" mean?
 

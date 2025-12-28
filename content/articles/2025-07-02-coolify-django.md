@@ -14,7 +14,7 @@ I currently run four Django apps in production, with staging and production envi
 - A custom deploy service that listens for GitHub webhooks to pull and restart the right app
 - A custom backup script that archives configs and databases and ships them offsite to [rsync.net](https://rsync.net).
 
-I've written about this setup in detail, both in ["Setting up a Debian 11 server for SvelteKit and Django”](/articles/2023/setting-up-debian-11/) and more recently in ["Automatically deploy your site when you push the main branch”](/articles/2024/auto-deploying/).
+I've written about this setup in detail, both in ["Setting up a Debian 11 server for SvelteKit and Django"](/articles/2023/setting-up-debian-11/) and more recently in ["Automatically deploy your site when you push the main branch"](/articles/2024/auto-deploying/).
 
 While not rocket science, it's a non-trivial setup. Each new app requires a checklist of configuration steps, and it's easy to miss one. Worse, my deploy script involves a brief moment of downtime as Gunicorn restarts. It's only a second or two, but it's not ideal. I'm more of a developer than an operations person, and building a zero-downtime, rolling deploy script myself feels like a step too far.
 
@@ -188,7 +188,7 @@ With our application containerized, the next piece of the puzzle is the database
 
 Here's how to get a PostgreSQL database up and running for your Django project:
 
-1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **"Postgres URL (internal)”** and copy it. You'll need this in a moment.
+1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **"Postgres URL (internal)"** and copy it. You'll need this in a moment.
 
 2.  **Create a dedicated database:** While you could use the default `postgres` database, it's good practice to create a separate one for each application.
 
@@ -217,7 +217,7 @@ Here's how to get a PostgreSQL database up and running for your Django project:
     - Go back to your Django application's settings in Coolify and open the "Environment Variables" tab.
     - Create a new variable named `DATABASE_URL`.
     - Paste the internal connection URL you copied in the first step, but **change the database name at the end** from `/postgres` to `/my_app_db`. The final URL should look like this: `postgres://postgres:random_password@container_name:5432/my_app_db`.
-    - Finally, and this is crucial, check the "Is Build Variable” box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
+    - Finally, and this is crucial, check the "Is Build Variable" box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
 
 With these steps complete, your Django application is now fully configured to communicate with its PostgreSQL database, all managed neatly within your Coolify project. You can now safely start the Django app.
 
@@ -241,12 +241,12 @@ With these credentials in hand, head back to Coolify:
 
 With the S3 storage now configured, we can set up our backups.
 
-- Go to Settings -> Backup, and make sure backups are turned on. Then enable the "S3 Enabled” checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
-- Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the "Save to S3” checkmark to also store it remotely.
+- Go to Settings -> Backup, and make sure backups are turned on. Then enable the "S3 Enabled" checkmark. You can choose the local and remote retention; I keep 30 days of backups both locally and remotely.
+- Go to your Django project, then to its database, then to the Backups tab. Here you can create a new scheduled backup, which will be stored locally. Enable the "Save to S3" checkmark to also store it remotely.
 
 ## Step 6: remaining Coolify config
 
-To make sure you get important alerts, you'll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the "use system wide (transactional) email settings” checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
+To make sure you get important alerts, you'll want to configure the email settings in Settings -> Transactional Email, using an SMTP server. Then go to the Notification menu and enable the "use system wide (transactional) email settings" checkbox. You can choose when to receive notifications, for example when a build fails, a backup fails, or when disk usage gets too high.
 
 ## The way forward
 

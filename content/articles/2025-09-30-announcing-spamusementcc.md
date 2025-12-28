@@ -5,9 +5,9 @@ summary: Remember the brilliant webcomic Spamusement.com? It ran from 2004 to 20
 
 # Announcing spamusement.cc
 
-Remember the brilliant webcomic Spamusement.com, with the tag line "Poorly-drawn cartoons inspired by actual spam subject lines”?
+Remember the brilliant webcomic Spamusement.com, with the tag line "Poorly-drawn cartoons inspired by actual spam subject lines"?
 
-Like this one, titled "Your Dog Will Love It!”
+Like this one, titled "Your Dog Will Love It!"
 
 [![](https://www.spamusement.cc/images/313.webp)](https://www.spamusement.cc/313.html)
 

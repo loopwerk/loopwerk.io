@@ -80,7 +80,7 @@ I think this doesn't make much sense. The way that the uv CLI is structured is c
 
 ## uv replaces pipx
 
-One of the goals of uv is to replace a bunch of different Python tools, amongst which is pipx. pipx is used to "install and run Python applications in isolated environments”. For example:
+One of the goals of uv is to replace a bunch of different Python tools, amongst which is pipx. pipx is used to "install and run Python applications in isolated environments". For example:
 
 ```
 $ pipx install cowsay
@@ -119,7 +119,7 @@ The big downside with Poetry's approach is that merely changing the value of `.p
 
 ## Conclusion
 
-I appreciate that uv is an all-in-one tool replacing both pipx and pyenv. While replacing pipx is a "nice to have”, it's the way it replaces pyenv that I really love. The ability to change the version number in `.python-version`, push this to production, and it installs the new Python version, it's amazing. I really love that.
+I appreciate that uv is an all-in-one tool replacing both pipx and pyenv. While replacing pipx is a "nice to have", it's the way it replaces pyenv that I really love. The ability to change the version number in `.python-version`, push this to production, and it installs the new Python version, it's amazing. I really love that.
 
 But I don't see myself switching to uv yet, and that's because of its command line interface. Just look at the list of commands over at https://docs.astral.sh/uv/reference/cli/, and you'll see what I mean. The `uv pip` and `uv lock` interfaces don't make sense to me at all.
 
