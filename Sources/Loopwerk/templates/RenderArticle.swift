@@ -101,7 +101,8 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
           class: "hero-image",
           sizes: "(max-width: 799px) 315px, 840px",
           src: "/articles/heroes/\(baseName)-1680w.webp",
-          srcset: srcset
+          srcset: srcset,
+          customAttributes: ["fetchpriority": "high"]
         )
       }
       
