@@ -104,17 +104,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
             a(href: "mailto:kevin@loopwerk.io") { "Email" }
           }
         }
-
-        if section == .articles {
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js")
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js")
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js")
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js")
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js")
-          script(defer: true, src: "https://unpkg.com/prism-svelte@0.5.0/index.js")
-          script(defer: true, src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js")
-        }
       }
-    },
+    }
   ]
 }
