@@ -27,6 +27,24 @@ The turning point for me began around Swift 5.5. The introduction of `async`/`aw
 
 Then came the real friction: `@Sendable` and the strict data-race protections. While noble in their goal, in practice they often lead to a demoralizing battle with the compiler. You spend less time building features and more time trying to appease the type checker, deciphering alien error messages about a type not conforming to Sendable. The language that once felt like a helpful partner now felt like a pedantic adversary.
 
+```swift
+// What you want:
+func doThing() {
+  thing()
+}
+
+// What Swift 6 demands:
+@MainActor
+nonisolated(unsafe)
+func doThing() async throws -> sending some Sendable { 
+  await withCheckedThrowingContinuation { continuation in
+    Task { @MainActor in
+      // 47 compiler warnings later
+    }
+  }
+}
+```
+
 This trend continued. Features like property wrappers and result builders, while powerful, added layers of "magic" that obscured what was actually happening. And the recent introduction of macros feels like the final departure from Swift's original promise of clarity. The code on the screen is no longer the code that runs; it's a template for generating other code, demanding a whole new level of mental gymnastics to debug and maintain.
 
 Each new feature added power, yes, but at the cost of immense cognitive overhead. The language that once empowered the solo developer now feels tailored to large, specialized teams who can afford to have experts in its arcane corners. The joy was gone, replaced by burnout.
