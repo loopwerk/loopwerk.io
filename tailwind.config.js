@@ -25,6 +25,7 @@ module.exports = {
       sub: "#252f3f",
       light: "#64748b",
       gray: "#93a3b8",
+      black: "#000000",
     },
     extend: {
       fontFamily: {
@@ -68,7 +69,6 @@ module.exports = {
     contain: false,
     ringWidth: false,
     backdropFilter: false,
-    transform: false,
     filter: false,
     backgroundOpacity: false,
     textOpacity: false,

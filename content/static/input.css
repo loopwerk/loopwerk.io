@@ -9,6 +9,37 @@
   font-display: swap;
 }
 
+/* MOBILE MENU */
+
+.hamburger:hover .hamburger-line {
+  @apply bg-orange;
+}
+
+#mobile-menu-toggle:checked ~ .mobile-overlay {
+  @apply opacity-100 pointer-events-auto;
+}
+
+/* Navigation panel - slide animation */
+#mobile-menu-toggle:checked ~ header .nav-panel {
+  @apply translate-x-0;
+}
+
+/* Close button X shape */
+.nav-close::before,
+.nav-close::after {
+  @apply absolute w-6 h-[2px] bg-gray rotate-45;
+  content: "";
+}
+
+.nav-close::after {
+  @apply -rotate-45
+}
+
+.nav-close:hover::before,
+.nav-close:hover::after {
+  @apply bg-orange;
+}
+
 /* BODY */
 
 body.home .site-footer {
@@ -21,15 +52,15 @@ body.home .images img {
 
 /* LINKS */
 
-nav a {
-  @apply block border-b-2 border-transparent;
+nav ul a {
+  @apply block border-b-2 border-transparent max-lg:text-lg max-lg:py-2;
 }
 
-nav a:hover {
+nav ul a:hover {
   @apply border-orange;
 }
 
-nav a.active {
+nav ul a.active {
   @apply border-orange text-white;
 }
 

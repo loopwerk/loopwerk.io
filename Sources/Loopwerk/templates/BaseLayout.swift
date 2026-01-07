@@ -45,38 +45,62 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
       body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
+        input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
+
+        // Mobile overlay (click to close)
+        label(class: "mobile-overlay fixed inset-0 z-40 bg-black/80 opacity-0 transition-opacity pointer-events-none lg:hidden", for: "mobile-menu-toggle")
+
         header(class: "bg-nav text-gray py-3 text-base/6 lg:fixed w-full z-10") {
           nav(class: "container flex gap-x-5 lg:gap-x-7 items-center lg:h-[44px]") {
-            img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
-
-            ul(class: "flex flex-wrap gap-x-2 lg:gap-x-5 flex-1") {
-              li {
-                a(class: section == .home ? "active" : "", href: "/") { "Home" }
-              }
-
-              li {
-                a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
-              }
-
-              li {
-                a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
-              }
-
-              li {
-                a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
-              }
-
-              li {
-                a(class: section == .about ? "active" : "", href: "/about/") { "About" }
-              }
-
-              li {
-                a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
-              }
+            // Logo
+            a(href: "/") {
+              img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
             }
-            
-            form(action: "/search/", class: "hidden lg:block relative", id:"search-form") {
-              input(class: "w-[260px]", id: "search", name: "q", placeholder: "Search articles", type: "text")
+
+            // Spacer for mobile
+            div(class: "flex-1 lg:hidden")
+
+            // Hamburger menu button
+            label(class: "hamburger cursor-pointer flex flex-col justify-center items-center w-10 h-10 gap-[5px] lg:hidden", for: "mobile-menu-toggle") {
+              span(class: "sr-only") { "Open menu" }
+              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
+              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
+              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
+            }
+
+            // Navigation panel - sidebar on mobile, inline on desktop
+            div(class: "nav-panel max-lg:fixed top-0 right-0 h-full max-lg:w-[280px] bg-nav z-50 flex flex-col lg:flex-row lg:flex-1 max-lg:p-6 max-lg:pt-16 lg:items-center max-lg:translate-x-full transition-transform") {
+              // Close button (mobile only)
+              label(class: "nav-close absolute top-4 right-4 w-10 h-10 cursor-pointer flex items-center justify-center lg:hidden", for: "mobile-menu-toggle") {
+                span(class: "sr-only") { "Close menu" }
+              }
+
+              // Navigation links
+              ul(class: "flex flex-col lg:flex-row gap-4 lg:gap-5 lg:flex-1 max-lg:order-2") {
+                li {
+                  a(class: section == .home ? "active" : "", href: "/") { "Home" }
+                }
+                li {
+                  a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
+                }
+                li {
+                  a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
+                }
+                li {
+                  a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
+                }
+                li {
+                  a(class: section == .about ? "active" : "", href: "/about/") { "About" }
+                }
+                li {
+                  a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
+                }
+              }
+              
+              // Search form
+              form(action: "/search/", class: "relative max-lg:mb-6", id: "search-form") {
+                input(class: "w-full lg:w-[260px]", id: "search", name: "q", placeholder: "Search articles", type: "text")
+              }
             }
           }
         }
