@@ -22,6 +22,8 @@ swift run watch content Sources deploy
 This builds the website and creates a static server showing the contents of the `deploy` folder. It then watches for changes in the `content` and `Sources` folders, recreates the website, and refreshes the browser.
 
 ## License
-This code is made publicly available to get ideas on how to create a site using [Saga](https://github.com/loopwerk/Saga), but the design and content are NOT available to copy to your site. Or in more technical terms:
+This repository is **not open source**.
 
-The source code of this website is licensed under the MIT License. However, this license explicitly excludes the design, visual elements, and written content of the website. The design, layout, css, and content, including text, images, and other graphics, may not be copied, reproduced, or distributed without prior permission.
+The source is publicly available for educational purposes only, so others can learn how to build a website using [Saga](https://github.com/loopwerk/Saga).
+
+All code, design, layout, and content are the intellectual property of Loopwerk and may not be reused, modified, or redistributed.

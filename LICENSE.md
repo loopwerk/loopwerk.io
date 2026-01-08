@@ -1,9 +1,16 @@
-The MIT License (MIT)
+Copyright © Loopwerk
 
-Copyright (c) 2009 Loopwerk
+All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+This repository is made publicly available for educational and reference purposes only.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+You may view and study the source code to learn how this website is built, including how [Saga](https://github.com/loopwerk/Saga) is used to generate the site.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+You may NOT:
+
+- copy or reuse this code in your own projects
+- create derivative works based on this code
+- redistribute this repository or parts of it
+- use the design, layout, or content for another website
+
+No permission is granted for commercial or non-commercial reuse.

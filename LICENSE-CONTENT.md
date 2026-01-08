@@ -1,1 +1,0 @@
-The source code of this website is licensed under the MIT License. However, this license explicitly excludes the design, visual elements, and written content of the website. The design, layout, css, and content, including text, images, and other graphics, may not be copied, reproduced, or distributed without prior permission.
