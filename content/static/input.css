@@ -87,7 +87,8 @@ a[href^="https://github.com"].app
   padding-left: 20px;
 }
 
-a[href^="https://itunes.apple.com"].app, a[href^="https://apps.apple.com"].app
+a[href^="https://itunes.apple.com"].app, 
+a[href^="https://apps.apple.com"].app
 {
   background: transparent url("images/apple.svg") no-repeat;
   background-size: 1em 1em;
@@ -207,27 +208,17 @@ code var {
   font-style: normal;
 }
 
-.prose hr {
-  margin-left: 140px;
-  margin-right: 140px;
-}
-
 .prose h1 {
   @apply font-semibold mt-12;
 }
 
 .prose aside {
-  border: 1px solid var(--color-orange);
-  padding: 0 1em 0 1em;
+  @apply px-4 border border-orange my-5;
   font-size: 90%;
 }
 
 .prose aside .title {
-  @apply text-orange pt-4 block;
-}
-
-.prose aside > p:first-of-type {
-  @apply mt-0;
+  @apply text-orange block -mb-4;
 }
 
 /* SCREENSHOTS */
@@ -254,15 +245,7 @@ code var {
   border-radius: 10%/4.7%;
 }
 
-@media (min-width: 860px) {
-  .prose pre,
-  body.projects .bg-sub {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
+@media (min-width: 1000px) {
   .hero-image {
     margin-left: -20px;
     width: 840px;

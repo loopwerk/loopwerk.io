@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "abf4122c3ed594539a275b555ede7a12329be8b4",
-        "version" : "1.0.0"
+        "revision" : "3de7eebc252450414fa91d96ec2dedf4785994e9",
+        "version" : "1.0.1"
       }
     },
     {

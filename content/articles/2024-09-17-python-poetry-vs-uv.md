@@ -133,7 +133,7 @@ Adding and removing dependencies works just fine, until you want to support mult
 
 So for now I am sticking with pipx, pyenv, and Poetry. All tools written in Python, and maintained by Pythonistas. I am looking forward to seeing what uv might become and I'll surely be tempted to try it again in the future. But I do think their corporate backing and lack of business plan is a huge downside, but [other](https://mastodon.social/@glyph/113093806840686501) [people](https://cloudisland.nz/@freakboy3742/113093889194737339) [said](https://mastodon.social/@glyph/113094489990995018) it better.
 
-> [!UPDATE]
+> [!UPDATES] 
 > **Oct 4, 2024**: I wrote [another article where I looked at PDM](/articles/2024/trying-pdm/), comparing that with Poetry and uv. Check it out!
 > **Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!
 > **Nov 18, 2024**: I've written an article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/).

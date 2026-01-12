@@ -9,11 +9,12 @@ module.exports = {
       center: true,
       padding: {
         DEFAULT: "0",
+        lg: "20px",
       },
     },
     screens: {
       sm: "315px",
-      lg: "800px",
+      lg: "840px",
     },
     colors: {
       inherit: "inherit",
@@ -26,7 +27,7 @@ module.exports = {
       light: "#64748b",
       gray: "#93a3b8",
       black: "#000000",
-      quotes: "#dddddd",
+      quotes: "#d9dde0",
     },
     extend: {
       fontFamily: {
@@ -43,14 +44,13 @@ module.exports = {
             "--tw-prose-bullets": theme("colors.gray"),
             "--tw-prose-counters": theme("colors.gray"),
             "--tw-prose-quotes": theme("colors.quotes"),
-            "--tw-prose-quote-borders": theme("colors.quotes"),
+            "--tw-prose-quote-borders": theme("colors.orange"),
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
             blockquote: {
-              fontWeight: "normal",
               fontStyle: "normal",
               borderInlineStartWidth: "1px",
-              marginLeft: "4px",
+              marginLeft: "3px",
             },
             a: {
               color: theme("colors.orange"),
@@ -61,7 +61,7 @@ module.exports = {
               },
             },
             strong: {
-              color: theme("colors.white"),
+              color: "inherit",
               fontWeight: "800",
             },
           },

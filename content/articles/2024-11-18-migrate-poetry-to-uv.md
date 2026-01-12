@@ -5,9 +5,10 @@ summary: So, like me you've decided to switch from Poetry to uv, and now you're 
 
 # How to migrate your Poetry project to uv
 
-**Please note that this article was written before any automated migration tools were available. But now there's [migrate-to-uv](https://github.com/mkniewallner/migrate-to-uv) which is a lot easier to use than the manual steps described below.**
-
 So, like me you've decided to switch from Poetry to uv, and now you're wondering how to actually migrate your `pyproject.toml` file? You've come to the right place!
+
+> [!SIDENOTE]
+> Please note that this article was written before any automated migration tools were available. But now there's [migrate-to-uv](https://github.com/mkniewallner/migrate-to-uv) which is a lot easier to use than the manual steps described below.
 
 While uv sadly doesn't come with a migration command (yet), we _can_ use PDM's migration tool, which gets us 95% of the way there since PDM and uv both use mostly the same configuration format. Let's use a basic project that uses Django, gunicorn and ruff (using two optional dependency groups), to illustrate the different steps. Our `pyproject.toml` file, as created by Poetry, will look something like this:
 

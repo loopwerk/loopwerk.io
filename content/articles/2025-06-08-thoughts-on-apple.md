@@ -36,7 +36,7 @@ func doThing() {
 // What Swift 6 demands:
 @MainActor
 nonisolated(unsafe)
-func doThing() async throws -> sending some Sendable { 
+func doThing() async throws -> sending some Sendable {
   await withCheckedThrowingContinuation { continuation in
     Task { @MainActor in
       // 47 compiler warnings later
@@ -65,7 +65,7 @@ This gatekeeping extends even to the web itself. For over a decade, Apple mandat
 
 The reason for this is clear: greed. From OWA:
 
-> Safari is the highest margin product Apple has ever made, accounts for 14-16% of Apple's annual operating profit and brings in $20 billion per year in search engine revenue from Google. For each 1% browser market share that Apple loses for Safari, Apple is set to lose $200 million in revenue per year.
+> "Safari is the highest margin product Apple has ever made, accounts for 14-16% of Apple's annual operating profit and brings in $20 billion per year in search engine revenue from Google. For each 1% browser market share that Apple loses for Safari, Apple is set to lose $200 million in revenue per year."
 
 Or what about the iMessage lock-in? By refusing to adopt modern, open messaging standards and instead stigmatizing non-iPhones with "green bubbles", Apple actively degrades the experience of communicating with friends and family who dare to live outside their walls. It's a calculated strategy to leverage social pressure for profit, a perfect metaphor for their entire ecosystem.
 

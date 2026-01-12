@@ -142,7 +142,7 @@ I like this option, as we're prepared for the future where Django's built-in tas
 
 To me, reading through the documentation, it seems quite complex to set up. There are a lot of moving parts, and a big departure of the current setup. I think it's too much just to add one-off tasks to our current system.
 
----
+## None of these options are ideal
 
 Honestly, none of these four options are exactly great. I think that simply adding `django-tasks` to the mix is the easiest option with the least amount of work. All the periodic tasks just keep working as they do, nothing changes there. It just doesn't feel great that we're using two different task runners.
 
@@ -151,3 +151,6 @@ I'm not sure if switching from `django-apscheduler` to `django-q2` is worth the 
 Switching to Celery seems like way too much work just to add non-scheduled tasks.
 
 It seems I have to choose between running `django-apscheduler` and `django-tasks` side-by-side, or running `django-tasks` in combination with cron for scheduled tasks (and `runmailer` for now). Since both options add `django-tasks`, I think it makes sense to just start there and keep `django-apscheduler` alone. I can always replace that with cron later on.
+
+> [!UPDATE]
+> We did end up adding `django-tasks` next to our existing `django-apscheduler` implementation. It's not ideal that we now have two task runners, each with their own process, but it was by far the simplest option. And we're quite happy with it, `django-tasks` is really nice to work with.

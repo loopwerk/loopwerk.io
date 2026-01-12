@@ -5,7 +5,9 @@ summary: While a technical marvel, async Django has been quietly rejected by the
 
 # Async Django: a solution in search of a problem?
 
-A client recently asked me a seemingly simple question: "If we switch our Django backend to run on an ASGI server, will it get faster?"
+A client recently asked me a seemingly simple question:
+
+> "If we switch our Django backend to run on an ASGI server, will it get faster?"
 
 The short answer is no. The slightly longer answer is that switching the server from WSGI to ASGI does nothing on its own. To see any change, you have to start rewriting your views to be `async`, and even then, the benefits are marginal at best for 99% of web applications. For their specific workload, offloading heavy tasks to a background worker is a far simpler and more effective solution.
 
@@ -50,7 +52,7 @@ The journey to bring async to Django has been a marathon, not a sprint. It offic
 
 This timeline represents a colossal investment of time from numerous core contributors. I wonder if it was worth it, and I am certainly not alone with this question. Will it ever be finished? And at what cost? Even Andrew Godwin [said](https://forum.djangoproject.com/t/is-dep009-async-capable-django-still-relevant/30132/2) the following:
 
-> I do think we'll never be able to make it fully async only in the ORM core, as the slowdown in sync mode will just be too much. Given that, I'm very realistic about the fact that we may just not be able to write and maintain what are two parallel ORM cores
+> "I do think we'll never be able to make it fully async only in the ORM core, as the slowdown in sync mode will just be too much. Given that, I'm very realistic about the fact that we may just not be able to write and maintain what are two parallel ORM cores"
 
 ## My verdict: an impressive feat for a problem that rarely exists
 

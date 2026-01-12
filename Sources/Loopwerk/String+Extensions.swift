@@ -97,7 +97,7 @@ extension String {
             let aside = try doc.createElement("aside")
             try aside.addClass(alertType)
             let title = String(text[typeRange])
-            try aside.html("<span class='title'>\(title)</span>" + blockquote.html())
+            try aside.html("<p class='title'>\(title)</p>" + blockquote.html())
             try blockquote.replaceWith(aside)
           }
         }

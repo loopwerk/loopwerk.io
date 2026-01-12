@@ -18,6 +18,9 @@ Obviously this isn't ideal, and a far cry from the usability of something like H
 
 Turns out that this is pretty simple using GitHub's webhooks. If you have an endpoint that can be POSTed to by GitHub whenever something is pushed to your main branch, then this endpoint can easily run that `deploy.sh` script for you.
 
+> [!SIDENOTE]
+> I've moved on from the approach as described in this article, to Coolify. Please check my article [Hosting your Django sites with Coolify](/articles/2025/coolify-django/).
+
 Here's my version, using the `express` framework:
 
 ```javascript title="/home/example/deploy.example.com/index.js"
@@ -158,8 +161,8 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/deploy.example.com/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
 }
+
 server {
     if ($host = deploy.example.com) {
         return 301 https://$host$request_uri;
