@@ -43,5 +43,5 @@ First, `tailwind build` creates the final `tailwind.css` file. Then, `collectsta
 
 That's it! Your Tailwind styles are now production-ready and properly cache-busted.
 
-> [!UPDATED]
+> [!UPDATE] 
 > **August 2, 2025**: the initial version of this article used a custom subclass of `ManifestStaticFilesStorage` to ignore `css/source.css`, but then James was kind enough to tell me about `collectstatic`'s `--ignore` option. Thanks!

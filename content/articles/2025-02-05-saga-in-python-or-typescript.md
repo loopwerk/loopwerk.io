@@ -230,7 +230,7 @@ The big question is then if I will finish porting the Swift version to Python. I
 
 So please let me know if you're interested in Saga's syntax, flexibility and functionality yet were turned off because it's written in Swift. Would you use a Python version of Saga?
 
-> [!UPDATED]
+> [!UPDATE] 
 > **June 18, 2025**: I completed the Python port of Saga, and I was able to port this website from the Swift version to the Python version in an evening (with a lot of help from Claude Code). It all works, it's basically feature complete, but it's a bit slow. Where the Swift version takes about 1 second to generate this website, the Python version takes slightly more than 2 seconds. It's literally twice as slow. Still, with Python being a dynamic scripting language it's not a bad result, compared to the compiled Swift version of Saga.
 > But here's the thing: even though I was able to port this website to the Python version of Saga, that was just a test that won't be published. This site will stay with the Swift version of Saga, because Saga is just better in Swift. Like I said above: "I personally have no need for a Python version."
 > So yes, the Python port of Saga is basically feature complete and ready in a private GitHub repo, but I think it'll stay private for ever. I don't want to take on the burden of supporting and maintaining this Python port going forward, as I won't be a user myself.

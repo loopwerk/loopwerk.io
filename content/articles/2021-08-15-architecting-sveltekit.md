@@ -19,7 +19,7 @@ export const content = writable();
 ```
 
 ```javascript title="routes/index.json.js"
-export const get = async (request) => {
+export const get = async request => {
   console.log("RECEIVED REQUEST");
   return { body: new Date().toISOString() };
 };
@@ -90,7 +90,7 @@ export const get = async (request) => {
 
 The good thing is that the content is only fetched once, so when you go from the homepage to the subpage, it doesn't fetch anything from the server (keep an eye on the terminal for the `RECEIVED REQUEST` messages). I can add a single WebSocket listener that would update the `content` store, and both pages would immediately update their content. So far so good!
 
-However, when you refresh the page, you briefly see old content show up, and then it suddenly refreshes itself. See also [this issue](https://github.com/sveltejs/kit/issues/2213) I created. Even worse: this old content is visible on ALL webbrowsers. Turns out using Svelte stores from SSR is a *really* bad idea, as the state is shared between all clients, not just the current one. As the docs say: 
+However, when you refresh the page, you briefly see old content show up, and then it suddenly refreshes itself. See also [this issue](https://github.com/sveltejs/kit/issues/2213) I created. Even worse: this old content is visible on ALL webbrowsers. Turns out using Svelte stores from SSR is a _really_ bad idea, as the state is shared between all clients, not just the current one. As the docs say:
 
 > Mutating any shared state on the server will affect all clients, not just the current one.
 
@@ -138,6 +138,6 @@ Sadly this doesn't work because the SSR version of the page now has no content, 
 
 I've created a GitHub repo with a minimal, reproducible example of a bunch of problems I've come across with this architecture: [https://github.com/kevinrenskers/sveltekit-reproduce](https://github.com/kevinrenskers/sveltekit-reproduce). I would love it if people could play around with it and send a PR with a better architecture that does manage to tick my boxes: don't fetch content from the server more than absolutely necessary, make it possible to update content from a single place (for WebSocket updates), and don't leak data from one client to another.
 
-> [!UPDATED]
+> [!UPDATE] 
 > **August 16, 2021**: I've created [a pull request](https://github.com/kevinrenskers/sveltekit-reproduce/pull/2) with a solution to my problem. Sadly it does come with considerable boilerplate.
 > **April 22, 2022**: I've written a [follow up article with a proper solution](/articles/2022/sveltekit-architecture/). Almost no boilerplate anymore!

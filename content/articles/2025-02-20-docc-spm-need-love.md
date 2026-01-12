@@ -92,7 +92,7 @@ echo "Documentation generated successfully."
 
 So now I have a commented-out dependency to `swift-docc-plugin` in my `Package.swift` file, which this script can enable before generating the documentation, and then it can comment it out again. It's just so weird that this is necessary, and so clunky.
 
-> [!UPDATED]
+> [!UPDATE]
 > It turns out that there is now a command to add a new dependency to your project: `swift package add-dependency`. It was added with Swift 6.0, see the proposal [here](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0301-package-editing-commands.md). But there's no command to delete a dependency, so it's still not very useful in the context of temporarily adding the `swift-docc-plugin` dependency just to generate documentation. Thanks [Ole](https://hachyderm.io/@ole@chaos.social/114037168018204405) for letting me know!
 
 If Xcode simply wouldn't download unused dependencies none of this would be necessary. It would even make monorepos for Swift packages a viable thing. Right now if you have a monorepo with multiple targets, each of which has one or more dependencies, the result is that anyone using even a single target from the monorepo ends up downloading _all dependencies of all targets_. Apollo [ran into the exact same problem](https://www.apollographql.com/blog/how-apollo-manages-swift-packages-in-a-monorepo-with-git-subtrees) and ended up with a complex workflow where they use git subtrees.

@@ -32,7 +32,7 @@
 }
 
 .nav-close::after {
-  @apply -rotate-45
+  @apply -rotate-45;
 }
 
 .nav-close:hover::before,
@@ -222,17 +222,11 @@ code var {
   font-size: 90%;
 }
 
-.prose aside.sidenote::before {
-  content: "SIDENOTE";
+.prose aside .title {
   @apply text-orange pt-4 block;
 }
 
-.prose aside.updated::before {
-  content: "UPDATED";
-  @apply text-orange pt-4 block;
-}
-
-.prose aside.sidenote > p:first-of-type, .prose aside.updated > p:first-of-type {
+.prose aside > p:first-of-type {
   @apply mt-0;
 }
 
