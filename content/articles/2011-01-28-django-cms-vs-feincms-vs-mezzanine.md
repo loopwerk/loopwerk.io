@@ -32,7 +32,8 @@ It's a very good CMS that's very easy to work with as a developer. However, I fe
 
 The thing I absolutely like the most about Django-CMS is the way you define one or more placeholders directly in your HTML templates. Then, when you create a new page, you select one of your templates and it scans the source to find the placeholders you've defined. No config, no code, very very easy.
 
-> **Update** - just to clarify: I'm not suggesting to drop the plugin system, just its current (backend) admin interface. Maybe when the frontend editing gets even better, it could completely replace it and thus solving the biggest problems I am having with Django-CMS. See also one of my other posts [here][6].
+> [!SIDENOTE]
+> just to clarify: I'm not suggesting to drop the plugin system, just its current (backend) admin interface. Maybe when the frontend editing gets even better, it could completely replace it and thus solving the biggest problems I am having with Django-CMS. See also one of my other posts [here][6].
 
 ## FeinCMS
 

@@ -138,6 +138,6 @@ Sadly this doesn't work because the SSR version of the page now has no content, 
 
 I've created a GitHub repo with a minimal, reproducible example of a bunch of problems I've come across with this architecture: [https://github.com/kevinrenskers/sveltekit-reproduce](https://github.com/kevinrenskers/sveltekit-reproduce). I would love it if people could play around with it and send a PR with a better architecture that does manage to tick my boxes: don't fetch content from the server more than absolutely necessary, make it possible to update content from a single place (for WebSocket updates), and don't leak data from one client to another.
 
-> **Update August 16, 2021**: I've created [a pull request](https://github.com/kevinrenskers/sveltekit-reproduce/pull/2) with a solution to my problem. Sadly it does come with considerable boilerplate.
-
-> **Update April 22, 2022**: I've written a [follow up article with a proper solution](/articles/2022/sveltekit-architecture/). Almost no boilerplate anymore!
+> [!UPDATED]
+> **August 16, 2021**: I've created [a pull request](https://github.com/kevinrenskers/sveltekit-reproduce/pull/2) with a solution to my problem. Sadly it does come with considerable boilerplate.
+> **April 22, 2022**: I've written a [follow up article with a proper solution](/articles/2022/sveltekit-architecture/). Almost no boilerplate anymore!

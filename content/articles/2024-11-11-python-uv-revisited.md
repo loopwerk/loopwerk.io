@@ -58,4 +58,5 @@ You can see that the latest update for Django is listed in that tree. My only wi
 
 In case you don't use dependency groups then you might want to use `uv pip list --outdated` rather than `uv tree --outdated`, since it only shows actually outdated packages. But sadly `uv pip list` doesn't take the `--group` parameter so you can't view updates for non-installed dependencies, like you can with `uv tree`. It also doesn't support `--depth=1` which is a bummer.
 
-> **Update Nov 18, 2024**: I wrote a quick article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/).
+> [!UPDATED]
+> **Nov 18, 2024**: I wrote a quick article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/).

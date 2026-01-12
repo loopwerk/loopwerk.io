@@ -108,4 +108,5 @@ If PyCharm was less buggy, there would be no contest to me, even considering its
 
 Right now I just can't decide between the two. I'll keep testing and comparing them both. I have to say though: while I expect that PyCharm will get less buggy very soon, I don't think Eclipse based products like Aptana will ever get user friendly.
 
-> **Update August 2012**: I've neglected to update the conclusion of this blog post, sorry for that. In the end I decided to go with PyCharm and I couldn't be happier with it. It quickly got stable and even better, and I have been enjoying it daily since May 2011.
+> [!UPDATED]
+> **August 2012**: I've neglected to update the conclusion of this blog post, sorry for that. In the end I decided to go with PyCharm and I couldn't be happier with it. It quickly got stable and even better, and I have been enjoying it daily since May 2011.

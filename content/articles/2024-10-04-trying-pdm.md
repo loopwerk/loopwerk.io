@@ -9,7 +9,8 @@ Two weeks ago I wrote [an article pitting uv against Poetry](/articles/2024/pyth
 
 It really seems that this combines all the best things of Poetry and uv, without their downsides. Let's take a look!
 
-> **Update October 12, 2024:** a previous version of this article made some comments about PDM not being able to add dependencies to an optional dependency group, without them also immediately getting installed. This turns out to not be correct, when using the `--no-sync` option. The article and its conclusion have been updated.
+> [!UPDATED]
+> **October 12, 2024:** a previous version of this article made some comments about PDM not being able to add dependencies to an optional dependency group, without them also immediately getting installed. This turns out to not be correct, when using the `--no-sync` option. The article and its conclusion have been updated.
 
 ## Getting started
 
@@ -246,4 +247,5 @@ With all of that said, which package manager would I use? Stick with Poetry or s
 
 I'm sticking with Poetry for now, mainly because PDM feels too rough around the edges -- especially when using uv as the resolver and installer. I'm really hoping that Poetry will add Python management, or that uv will improve its CLI, or that PDM will improve all the things mentioned in this article, as well as their cryptic errors in general. My money is that uv will make the biggest improvements in the shortest time.
 
-> **Update Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!
+> [!UPDATED]
+> **Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!

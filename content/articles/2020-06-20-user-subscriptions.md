@@ -57,7 +57,8 @@ Gumroad is mostly targeted towards "digital creators" selling ebooks, webinars, 
 * No redirect url support after a payment is complete.
 
 The lack of support for redirecting to a thank you page is actually a pretty big problem. Imagine this scenario: you have a "Subscribe now" button somewhere on your website, and when the user clicks on it, the Gumroad checkout page is shown as an overlay. The user completes their payment, and they are still left on the same page on your website with that overlay still open. So the user closes the overlay... and sees the same "Subscribe now" button. This happens because the webhook wasn't called yet (that takes about 10 seconds), so our server doesn't know yet that the user is now a subscriber. This is extremely confusing to the user - it takes a good 10 seconds or so for the UI to update, finally replacing the "Subscribe now" button with a "Thank you for subscribing" text.
-	
+
+> [!SIDENOTE]
 > Gumroad actually offers `redirect_url` support for selling digital goods, but not for memberships. They told me it's on their roadmap but they don't have an ETA yet.
 
 ## Patreon

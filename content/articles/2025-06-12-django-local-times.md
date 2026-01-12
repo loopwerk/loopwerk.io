@@ -181,4 +181,5 @@ This two-part approach gives you the best of server-side rendering (no content-s
 
 If rendering dates and times and dealing with timezones interests you, also check out the article ["Django Admin's handling of dates and times is very confusing"](/articles/2025/django-admin-datetime/) I wrote earlier this year.
 
-> **Update July 30, 2025**: all the code necessary to make this work on your website (so the templatetag, middleware and javascript code) is now available as part of [django-vrot](https://github.com/loopwerk/django-vrot).
+> [!UPDATED]
+> **July 30, 2025**: all the code necessary to make this work on your website (so the templatetag, middleware and javascript code) is now available as part of [django-vrot](https://github.com/loopwerk/django-vrot).

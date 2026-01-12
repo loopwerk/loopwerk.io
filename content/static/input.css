@@ -216,6 +216,26 @@ code var {
   @apply font-semibold mt-12;
 }
 
+.prose aside {
+  border: 1px solid var(--color-orange);
+  padding: 0 1em 0 1em;
+  font-size: 90%;
+}
+
+.prose aside.sidenote::before {
+  content: "SIDENOTE";
+  @apply text-orange pt-4 block;
+}
+
+.prose aside.updated::before {
+  content: "UPDATED";
+  @apply text-orange pt-4 block;
+}
+
+.prose aside.sidenote > p:first-of-type, .prose aside.updated > p:first-of-type {
+  @apply mt-0;
+}
+
 /* SCREENSHOTS */
 
 .screenshots.break_1 span {

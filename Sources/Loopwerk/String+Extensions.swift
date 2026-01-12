@@ -75,6 +75,33 @@ extension String {
         try pre.prepend("<span class=\"code-title\">\(title)</span>")
       }
 
+      // Convert blockquotes with [!TYPE] syntax to <aside class="type">
+      let alertRegex = try NSRegularExpression(pattern: #"^\[!([A-Z]+)\]\s*(?:<br\s*/?>)?\s*"#)
+      let blockquotes = try doc.select("blockquote")
+      for blockquote in blockquotes {
+        // Get the first paragraph to check for alert syntax
+        if let firstP = try blockquote.select("p").first() {
+          let text = try firstP.html()
+          if let match = alertRegex.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)), let typeRange = Range(match.range(at: 1), in: text) {
+            let alertType = String(text[typeRange]).lowercased()
+
+            // Remove the [!TYPE] marker and any following <br> from the first paragraph
+            let cleanedText = alertRegex.stringByReplacingMatches(
+              in: text,
+              range: NSRange(text.startIndex..., in: text),
+              withTemplate: ""
+            )
+            try firstP.html(cleanedText)
+
+            // Create aside element and replace blockquote
+            let aside = try doc.createElement("aside")
+            try aside.addClass(alertType)
+            try aside.html(blockquote.html())
+            try blockquote.replaceWith(aside)
+          }
+        }
+      }
+
       let result = try doc.body()?.html() ?? self
       let tocString = toc.joined(separator: "\n")
       let tocHtml = try Parsley.html(tocString)

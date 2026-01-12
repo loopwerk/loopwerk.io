@@ -26,6 +26,7 @@ module.exports = {
       light: "#64748b",
       gray: "#93a3b8",
       black: "#000000",
+      quotes: "#dddddd",
     },
     extend: {
       fontFamily: {
@@ -41,12 +42,15 @@ module.exports = {
             "--tw-prose-hr": theme("colors.light"),
             "--tw-prose-bullets": theme("colors.gray"),
             "--tw-prose-counters": theme("colors.gray"),
-            "--tw-prose-quotes": theme("colors.gray"),
-            "--tw-prose-quote-borders": theme("colors.gray"),
+            "--tw-prose-quotes": theme("colors.quotes"),
+            "--tw-prose-quote-borders": theme("colors.quotes"),
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
             blockquote: {
               fontWeight: "normal",
+              fontStyle: "normal",
+              borderInlineStartWidth: "1px",
+              marginLeft: "4px",
             },
             a: {
               color: theme("colors.orange"),

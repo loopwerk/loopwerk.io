@@ -170,7 +170,8 @@ startretries=3
 priority=30
 ```
 
-> Side note: you might wonder why we don't use Docker Compose to run Django, Caddy, and the `db_worker` process all in their own containers. We'd get separate logs which would be very nice, containers can be restarted individually, and one crashing container won't bring down the others. Those are all really great benefits, but we'd loose rolling updates, so your app would be down for a short time every time you deploy changes. I also found that dealing with build-time environment variables was a lot more complex with Docker Compose.
+> [!SIDENOTE]
+> You might wonder why we don't use Docker Compose to run Django, Caddy, and the `db_worker` process all in their own containers. We'd get separate logs which would be very nice, containers can be restarted individually, and one crashing container won't bring down the others. Those are all really great benefits, but we'd loose rolling updates, so your app would be down for a short time every time you deploy changes. I also found that dealing with build-time environment variables was a lot more complex with Docker Compose.
 
 ## Step 3: profit
 

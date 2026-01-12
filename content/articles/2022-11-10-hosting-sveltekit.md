@@ -38,6 +38,7 @@ server {
 }
 ```
 
+> [!SIDENOTE]
 > The folder `/var/www/www.critical-notes.com` that is used in the config file above is an empty folder, the website isn't actually served from there. All that Nginx does, is forward to the request to Node, which serves the site from the real site root, `/opt/www`.
 
 ### Get HTTPS working with Certbot

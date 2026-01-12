@@ -67,4 +67,5 @@ If I'm looking at traction and adoption, then I guess I have to call Saga a flop
 
 I do invite everyone to [take a look at Saga](https://github.com/loopwerk/Saga) and its [documentation](https://loopwerk.github.io/Saga/documentation/saga/), check out the [source of loopwerk.io](https://github.com/loopwerk/loopwerk.io/blob/master/Sources/Loopwerk/run.swift) for an idea of what Saga can do, and please do let me know if you've built something with Saga -- it would really make my day.
 
-> **Update February 5, 2025:** I did make two prototypes of Saga, in Python and TypeScript, and wrote about it in a [new article](/articles/2025/saga-in-python-or-typescript/).
+> [!UPDATED]
+> **February 5, 2025:** I did make two prototypes of Saga, in Python and TypeScript, and wrote about it in a [new article](/articles/2025/saga-in-python-or-typescript/).
