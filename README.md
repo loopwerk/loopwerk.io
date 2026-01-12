@@ -14,9 +14,10 @@ The source of loopwerk.io, a static website generated with [Saga](https://github
 A standard build from Xcode or the command line (`swift run`) skips the `createArticleImages` step, since it's rather slow. To include this step as well, run `swift run Loopwerk createArticleImages` from the command line.
 
 ## Development server with auto reload
-```
-pnpm add --global browser-sync
-swift run watch content Sources deploy
+```shell-session
+$ pnpm add --global browser-sync
+$ brew install just
+$ just run
 ```
 
 This builds the website and creates a static server showing the contents of the `deploy` folder. It then watches for changes in the `content` and `Sources` folders, recreates the website, and refreshes the browser.

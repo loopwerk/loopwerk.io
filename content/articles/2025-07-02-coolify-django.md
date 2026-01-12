@@ -44,13 +44,13 @@ PubkeyAuthentication yes
 
 I supplied my SSH public key to Hetzner during the server creation process, so it was already stored on the server for me. If you didn't do that, you'll need to copy your public key to the server yourself. The easiest way is with the `ssh-copy-id` command from your local machine:
 
-```bash
+```shell-session
 $ ssh-copy-id root@YOUR_SERVER_IP
 ```
 
 Next, I set up UFW (Uncomplicated Firewall) to control network traffic:
 
-```
+```shell-session
 $ apt install ufw
 $ ufw default deny incoming
 $ ufw default allow outgoing
@@ -62,7 +62,7 @@ $ ufw enable
 
 To protect against brute-force attacks, I installed [Fail2ban](https://github.com/fail2ban/fail2ban).
 
-```
+```shell-session
 $ apt install fail2ban python3-systemd
 $ cd /etc/fail2ban
 $ cp jail.conf jail.local
@@ -82,14 +82,14 @@ maxretry = 1
 
 You'll also need to change the value of `banaction` to `ufw`. After saving, I enabled and started the service:
 
-```
+```shell-session
 $ systemctl enable fail2ban
 $ service fail2ban start
 ```
 
 Finally, I enabled automatic security updates to keep the system patched without manual intervention.
 
-```
+```shell-session
 $ apt install unattended-upgrades
 $ dpkg-reconfigure --priority=low unattended-upgrades
 ```
@@ -100,7 +100,7 @@ With the server secured, it was time for the main event.
 
 This is the easiest part. Coolify provides a simple installation script that handles everything.
 
-```bash
+```shell-session
 $ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | sudo bash
 ```
 
@@ -206,13 +206,13 @@ Here's how to get a PostgreSQL database up and running for your Django project:
 3.  **Import existing data:** If you're moving an existing project, you'll need to import your data.
 
     - First, create a backup of your old database. The `pg_dump` command with the `-Fc` flag (custom format) is perfect for this. Using `--no-owner` and `--no-privileges` makes the dump more portable.
-      ```bash
+      ```shell-session
       $ pg_dump -Fc --no-owner --no-privileges my_app_db > my_app_db.dump
       ```
     - In Coolify, go to your PostgreSQL service's "Import Backup" tab. Upload the `.dump` file.
     - **Important:** By default, Coolify's import command restores to the `postgres` database. You must modify the import command to target the database you just created. Use a command like this:
-      ```bash
-      pg_restore --clean --no-owner --no-privileges -U $POSTGRES_USER -d my_app_db
+      ```shell-session
+      $ pg_restore --clean --no-owner --no-privileges -U $POSTGRES_USER -d my_app_db
       ```
 
 4.  **Connect Django to the database:** Now, let's tell our Django application where to find its database.

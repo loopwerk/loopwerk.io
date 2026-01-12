@@ -11,7 +11,7 @@ The biggest problem I had was the cleaning up of baskets when sessions expire. W
 
 My first instinct was to model the basket like this:
 
-``` python
+```python
 class Basket(Model):
     owner = ForeignKey(User, blank=True, null=True, on_delete=CASCADE)
     session = ForeignKey(Session, blank=True, null=True, on_delete=CASCADE)
@@ -27,7 +27,7 @@ In the end I removed the `session` field from my `Basket` model, and I am storin
 
 Let's look at the code. The code to get the basket for the current request is rather simple:
 
-``` python
+```python
 def get_basket(request):
     if request.user and request.user.is_authenticated:
         return Basket.objects.get_or_create(owner=request.user, status=Basket.Status.OPEN)[0]
@@ -48,7 +48,7 @@ If the user is logged in we get (or create) a basket for the user. Otherwise we 
 
 Of course I want baskets to be removed when sessions expire, which is what the following signal handler does:
 
-``` python
+```python
 @receiver(pre_delete, sender=Session)
 def session_deleted(instance, **kwargs):
     if instance.expire_date < timezone.now():

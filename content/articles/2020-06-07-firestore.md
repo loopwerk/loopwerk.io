@@ -4,6 +4,7 @@ summary: Over a year ago I wrote that I started working on a brand new side proj
 ---
 
 # After Vapor and Django comes.. Firestore
+
 Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I [started with Vapor 3](/articles/2019/vapor/), then [made the same backend in Django REST Framework](/articles/2019/vapor-vs-drf/), and couldn't really choose between the two. What did I end up choosing? Neither!
 
 I ended up scrapping my backend completely, and went with Firebase's Firestore instead. I actually [wrote about Firebase](/articles/2016/next-gen-backend/) back in 2016 when I was searching for my ideal "next gen backend", when Firestore didn't exist yet (only the older Firebase Realtime Database), and Cloud Functions weren't offered yet either as far as I can remember. But in the summer of 2019 Firebase was mature enough for me to make the switch, and I am super happy that I did.
@@ -12,7 +13,7 @@ For those of you who don't know Firestore, let me give you the elevator pitch. T
 
 Of course you can set permission rules so that for example only logged-in users can access certain collections, or certain documents in those collections, or that only users with a certain value for a certain field can update certain documents. It's all very flexible and powerful, although it can be a bit repetitive to write these rules:
 
-```
+```firestore-security-rules
 service cloud.firestore {
   match /databases/{database}/documents {
     // Block all access to everything by default
@@ -21,15 +22,15 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
-      allow create: if 
-        userId == request.auth.uid && 
+      allow create: if
+        userId == request.auth.uid &&
 
         // status and subscription related fields must be omitted
         !("status" in request.resource.data) &&
         !("appleSubscription" in request.resource.data) &&
         !("webSubscription" in request.resource.data);
 
-      allow update: if 
+      allow update: if
         userId == request.auth.uid &&
 
         // status must be omitted or must be the same as existing data
@@ -49,7 +50,7 @@ service cloud.firestore {
           request.resource.data.webSubscription == resource.data.webSubscription ||
           !("webSubscription" in request.resource.data)
         );
-  
+
       allow read: if userId == request.auth.uid;
       allow delete: if false;
     }
@@ -70,7 +71,7 @@ It's not all perfect. Their Swift SDK doesn't natively support Codable models, y
 
 There are more problems due to the way Firestore stores its data. For example you can't just get a count of documents in a collection without reading all those documents - and you pay per read, so that is not smart. You can also only write to each document just once per second, so Firestore is completely unusable for a bunch of real-time apps. I would also really love it if their permission system with the rules would act like a filter, so that you automatically only get the data that you have permissions for. But instead you still have to basically duplicate the server side rules in the client and query for specific data, or you'll end up getting access errors.
 
-The biggest problem of all though is their JavaScript SDK: it's really really big, pardon the pun. It's literally over 80% of the size of my web client bundle size. But, they're working on reducing it and there is just no way I am going to switch backends *again*!
+The biggest problem of all though is their JavaScript SDK: it's really really big, pardon the pun. It's literally over 80% of the size of my web client bundle size. But, they're working on reducing it and there is just no way I am going to switch backends _again_!
 
 Overall, I am really super happy with Firestore and would highly recommend anyone to check it out, especially for mobile apps (a bit less for web apps due to the SDK size).
 

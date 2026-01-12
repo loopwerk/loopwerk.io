@@ -20,7 +20,7 @@ When looking at the Django docs I came across something called [Admin actions](h
 
 This was really easy: just override the `has_change_permission` and `has_delete_permission` methods of your `ModelAdmin` subclass.
 
-``` python
+```python
 class EducationalDiscountApplicationAdmin(admin.ModelAdmin):
     list_display = ["user", "type", "institute", "program", "created"]
     list_filter = ["type", "created"]
@@ -41,7 +41,7 @@ Now when opening an `EducationalDiscountApplication` object in the admin, the de
 
 I created a new template called `submit_line.html`, in the `templates/admin/[app_name]/[model_name]/` folder, with the following code:
 
-```
+```text
 {% extends "admin/submit_line.html" %}
 {% load i18n admin_urls %}
 {% block submit-row %}
@@ -50,7 +50,7 @@ I created a new template called `submit_line.html`, in the `templates/admin/[app
 {% endblock %}
 ```
 
-And already when I open the change form of an `EducationalDiscountApplication` object, I can see the new buttons! 
+And already when I open the change form of an `EducationalDiscountApplication` object, I can see the new buttons!
 
 ![screenshot](/articles/images/django-admin-actions-1.png)
 
@@ -60,7 +60,7 @@ Clicking on them doesn't do anything yet, as these URLs are not recognized by th
 
 Add the `get_urls` method to the `ModelAdmin` subclass:
 
-``` python
+```python
 class EducationalDiscountApplicationAdmin(admin.ModelAdmin):
     list_display = ["user", "type", "institute", "program", "created"]
     list_filter = ["type", "created"]
@@ -95,14 +95,14 @@ class EducationalDiscountApplicationAdmin(admin.ModelAdmin):
             title="Deny Application?",
         )
         return TemplateResponse(request, "admin/sr_app/educationaldiscountapplication/deny_application.html", context)
-        
+
     def approve_view(self, request, pk):
         # ...
-````
+```
 
 And the template:
 
-```
+```text
 {% extends "admin/base_site.html" %}
 {% load i18n admin_urls static %}
 

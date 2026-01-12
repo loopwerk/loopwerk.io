@@ -3,9 +3,10 @@ tags: swift, saga
 ---
 
 # Swift generics and arrays
+
 I'm in the very early stages of building my own static site generator in Swift. I want the library to provide a basic `Page` type, that the user can then extend with custom metadata, and I need to be able to put Pages with different kinds of metadata into one array, which currently does work:
 
-``` swift
+```swift
 // ---- LIBRARY
 
 protocol Metadata: Decodable {}
@@ -47,11 +48,11 @@ print(allPages.filter { page in
 })
 ```
 
-So here's the thing: in that last example where I filter only public articles from the array of all pages, it's quite annoying that I have to typecast the metadata, since it's just any Decodable, no other type info is present. 
+So here's the thing: in that last example where I filter only public articles from the array of all pages, it's quite annoying that I have to typecast the metadata, since it's just any Decodable, no other type info is present.
 
 If I want to make it generic though, I am running into different problems:
 
-``` swift
+```swift
 // ---- LIBRARY
 
 protocol Metadata: Decodable {}
@@ -87,7 +88,7 @@ let allPages = articles + apps
 
 I thought that type erasure might help, but then you're still forced to type cast the metadata so I'm back at the beginning just with an added layer of AnyMetadata complexity.
 
-``` swift
+```swift
 // ---- LIBRARY
 
 protocol Metadata: Decodable {}
@@ -135,9 +136,9 @@ print(allPages.filter { page in
 })
 ```
 
-I don't think I can use an enum for the metadata, since enums can't be extended with new cases, and the library doesn't know what cases should be available. As you can see in the example below, the library would now have to ship with this `PageMetadata` enum, which is not possible since the library doesn't know about `ArticleMetadata` and `AppMetadata`. 
+I don't think I can use an enum for the metadata, since enums can't be extended with new cases, and the library doesn't know what cases should be available. As you can see in the example below, the library would now have to ship with this `PageMetadata` enum, which is not possible since the library doesn't know about `ArticleMetadata` and `AppMetadata`.
 
-``` swift
+```swift
 import Foundation
 
 // ---- LIBRARY

@@ -57,8 +57,8 @@ A very important thing that I loved having in liquidluck was its development ser
 
 It does depend on a globally installed [lite-server](https://github.com/johnpapa/lite-server), but after that you can simply run one command from within your website project and you're off to the races.
 
-```
-swift run watch [input-folder] [output-folder]
+```shell-session
+$ swift run watch [input-folder] [output-folder]
 ```
 
 The work that went into this can be viewed in [this pull request](https://github.com/loopwerk/Saga/pull/7).

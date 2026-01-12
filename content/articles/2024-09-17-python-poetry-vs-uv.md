@@ -15,13 +15,17 @@ Recently Astral (known for their very fast Python formatter [ruff](https://astra
 
 The easiest way to install Poetry is with [pipx](https://pipx.pypa.io), which is a great tool to use for globally installing Python applications:
 
-`$ pipx install poetry`
+```shell-session
+$ pipx install poetry
+```
 
 You can also use their install script (`curl -sSL https://install.python-poetry.org | python3 -`) but I wouldn't recommend it. Poetry then tends to break whenever you upgrade Python, requiring you to reinstall Poetry again. That's what so great about pipx: every application gets its own isolated environment.
 
 Installing uv is even easier. You don't even need pipx installed - which makes sense since uv replaces pipx among other tools:
 
-`$ brew install uv`
+```shell-session
+$ brew install uv
+```
 
 This is a small win for uv since you don't need to first install pipx. uv really is meant to replace a whole bunch of Python tools.
 
@@ -29,7 +33,7 @@ This is a small win for uv since you don't need to first install pipx. uv really
 
 I think both tools are about equally easy to get started with. Creating a new project with their `init` commands, adding dependencies, it's all very similar:
 
-```
+```shell-session
 $ poetry init
 $ poetry add django
 $ poetry add ruff --group dev
@@ -37,7 +41,7 @@ $ poetry install --with dev
 $ poetry run ./manage.py
 ```
 
-```
+```shell-session
 $ uv init
 $ uv add django
 $ uv add ruff --dev
@@ -63,7 +67,7 @@ This is not possible with uv, as far as I can see. There are dev dependencies, b
 
 Updating dependencies is quite easy in Poetry:
 
-```
+```shell-session
 $ poetry show --outdated --top-level --with dev --with prod
 $ poetry update
 $ poetry update --with dev
@@ -84,7 +88,7 @@ I think this doesn't make much sense. The way that the uv CLI is structured is c
 
 One of the goals of uv is to replace a bunch of different Python tools, amongst which is pipx. pipx is used to "install and run Python applications in isolated environments". For example:
 
-```
+```shell-session
 $ pipx install cowsay
 $ cowsay mooo
 ```
@@ -93,7 +97,7 @@ This installs the Python application cowsay into its own isolated environment, a
 
 uv replaces pipx with familiar commands:
 
-```
+```shell-session
 $ uv tool install cowsay
 $ cowsay mooo
 ```
@@ -108,7 +112,7 @@ And here we get to the very best feature of uv: it completely replaces [pyenv](h
 
 The best part is that the Python version is stored in the git repo, so when you deploy the changes to production uv will automatically install and use the same Python version there as well. This is an amazing feature and something I really wish Poetry did as well. But instead you'll need to combine Poetry with pyenv like so:
 
-```
+```shell-session
 $ poetry config virtualenvs.prefer-active-python true
 $ pyenv install 3.12.6
 $ pyenv local 3.12.6
@@ -129,7 +133,7 @@ Adding and removing dependencies works just fine, until you want to support mult
 
 So for now I am sticking with pipx, pyenv, and Poetry. All tools written in Python, and maintained by Pythonistas. I am looking forward to seeing what uv might become and I'll surely be tempted to try it again in the future. But I do think their corporate backing and lack of business plan is a huge downside, but [other](https://mastodon.social/@glyph/113093806840686501) [people](https://cloudisland.nz/@freakboy3742/113093889194737339) [said](https://mastodon.social/@glyph/113094489990995018) it better.
 
-> [!UPDATE] 
+> [!UPDATE]
 > **Oct 4, 2024**: I wrote [another article where I looked at PDM](/articles/2024/trying-pdm/), comparing that with Poetry and uv. Check it out!
 > **Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!
 > **Nov 18, 2024**: I've written an article describing [how to migrate your Poetry project to uv](/articles/2024/migrate-poetry-to-uv/).

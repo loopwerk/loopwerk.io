@@ -11,7 +11,7 @@ Hosting this generated documentation actually used to be really hard to do at fi
 
 By far the biggest problem is the way the generated documentation site is structured. When I create the documentation site for Saga using [`swift-docc-plugin`](https://github.com/swiftlang/swift-docc-plugin), it creates a structure such as this:
 
-```
+```text
 docs/
 ├── css/
 ├── data/

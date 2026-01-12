@@ -13,7 +13,7 @@ In this article I want to take a closer look at two major improvement that were 
 
 In the olden days if I wanted to create a one-off script to quickly fetch some data from the internet, I'd have to create a virtual environment by hand, activate it, pip install the dependencies I'd need, and run the script. Something like this:
 
-```shell
+```shell-session
 $ mkdir cd ~/Workspace/playground
 $ cd ~/Workspace/playground
 $ python3 -m venv .venv
@@ -27,7 +27,7 @@ That's a lot of steps! But the biggest problem with this is that Python already 
 
 But as we know from my [first article on uv](/articles/2024/python-poetry-vs-uv/), uv dramatically improves the project workflow, so that the steps look more like this:
 
-```shell
+```shell-session
 $ mkdir cd ~/Workspace/playground
 $ cd ~/Workspace/playground
 $ uv init
@@ -40,7 +40,7 @@ Uv makes things easier by handling the virtual environment for you. You never ha
 
 This is where embedded metadata comes in. Using embedded metadata you can now simply create a Python file, declare the dependencies inline, and run it. That's it. Uv will create a temporary virtual environment, install the right Python version, install the dependencies, activate it the virtual environment, and run the script.
 
-```shell
+```shell-session
 $ nano script.py
 $ uv run script.py
 ```
@@ -60,14 +60,14 @@ print(resp)
 
 The syntax for the embedded metadata can be a bit hard to remember though, so uv added some useful commands to help with this:
 
-```shell
+```shell-session
 $ uv init --script script.py --python 3.12
 $ uv add requests --script script.py
 ```
 
 Alternatively, if you don't want to use the embedded metadata, you can also run a script by specifying its dependencies on the command line, like so:
 
-```shell
+```shell-session
 $ uv run --with requests script.py
 ```
 
@@ -81,7 +81,7 @@ If your project needs to read environment variables from a `.env` file, you'd ha
 
 uv now makes this dependency obsolete by allowing you to load an `.env` file directly from the `uv run` command:
 
-```shell
+```shell-session
 $ uv run --env-file .env ./manage.py runserver
 ```
 
@@ -89,13 +89,13 @@ The contents of your `.env` file are made available to Python as environment var
 
 Of course you don't want to use this full command every single time you run your script (or Django, in this case), but luckily it's very easy to have your script use uv by default. In your script (for example `manage.py`!) change the first line from this:
 
-```
+```python
 #!/usr/bin/env python
 ```
 
 To this:
 
-```
+```python
 #!/usr/bin/env -S uv run --env-file .env
 ```
 

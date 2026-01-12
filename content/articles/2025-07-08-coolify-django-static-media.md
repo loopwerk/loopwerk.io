@@ -95,7 +95,7 @@ RUN uv run --no-sync ./manage.py migrate
 
 The key changes here are installing `supervisor` and `caddy`, exposing port `80` for Caddy, and updating the `CMD` to launch Supervisor, which will in turn start Gunicorn and Caddy. You'll need to update the "Ports Exposes" setting in the General Configuration tab (under "Network") from `8000` to `80`.
 
-```text title=".config/Caddyfile"
+```apacheconf title=".config/Caddyfile"
 :80
 
 handle_path /static/* {

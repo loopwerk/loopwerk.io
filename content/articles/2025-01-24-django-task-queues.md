@@ -123,7 +123,7 @@ There is already a reference implementation available to use right now, called [
 
 All our scheduled tasks are run as management.py commands, so why not add all of them to the cron? We could have a text file in our repo that has the crontab config, something like this:
 
-```
+```text
 * * * * * ~/.local/bin/uv run ~/api.soundradix.com/manage.py send_mail
 * * * * * ~/.local/bin/uv run ~/api.soundradix.com/manage.py retry_deferred
 27 14 * * * ~/.local/bin/uv run ~/api.soundradix.com/manage.py purge_sessions

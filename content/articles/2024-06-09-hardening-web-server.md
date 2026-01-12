@@ -7,7 +7,7 @@ summary: Webservers get hit by hundreds of thousands of requests to random (non-
 
 My webserver is constantly getting hit by requests to random PHP files, even though I don't host any PHP files at all:
 
-```
+```text
 5.161.49.218 - - [30/May/2024:00:43:02 +0000] "GET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.1" 404 153 "-" "Custom-AsyncHttpClient"
 5.161.49.218 - - [30/May/2024:00:43:03 +0000] "GET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.1" 404 153 "-" "Custom-AsyncHttpClient"
 5.161.49.218 - - [30/May/2024:00:43:03 +0000] "GET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.1" 404 153 "-" "Custom-AsyncHttpClient"
@@ -37,7 +37,7 @@ When someone accesses a non-existing PHP file on my server, I don't want my Svel
 
 For this I created a file `/etc/nginx/deny_rules.conf` with the following contents:
 
-```
+```nginx
 location ~ \.php$ {
     deny all;
 }
@@ -45,7 +45,7 @@ location ~ \.php$ {
 
 And then within my virtual hosts I simply include this file:
 
-```
+```nginx
 server {
     server_name www.critical-notes.com;
     include /etc/nginx/deny_rules.conf;
@@ -67,7 +67,7 @@ We can configure Nginx to rate limit certain requests. Rate limited requests wil
 
 Edit `/etc/nginx/nginx.conf`:
 
-```
+```nginx
 http {
     limit_req_zone $binary_remote_addr zone=deny_rules:10m rate=1r/m;
     # The rest of the config
@@ -78,7 +78,7 @@ With this we create a special zone called `deny_rules` (you can name it whatever
 
 Now we edit our `/etc/nginx/deny_rules.conf` file like so:
 
-```
+```nginx
 location ~ \.php$ {
     limit_req zone=deny_rules nodelay;
     deny all;
@@ -95,7 +95,7 @@ We can easily configure fail2ban to automatically jail anyone caught by the rate
 
 Edit your `/etc/fail2ban/jail.local` file, search for the `[nginx-limit-req]` section, and edit it so that it looks like this:
 
-```
+```toml
 [nginx-limit-req]
 port    = http,https
 logpath = %(nginx_error_log)s
@@ -105,7 +105,7 @@ maxretry = 0
 
 Restart fail2ban:
 
-```
+```shell-session
 $ service fail2ban restart
 ```
 
@@ -117,7 +117,7 @@ If you proxy your site through CloudFlare then a bit more work is needed, becaus
 
 First we need to make sure that Nginx has access to the user's real IP address, by using the `real_ip` module. Edit `/etc/nginx/nginx.conf`:
 
-```
+```nginx
 http {
     # Define CloudFlare IP ranges
     set_real_ip_from 173.245.48.0/20;
@@ -152,7 +152,7 @@ Edit `/etc/fail2ban/action.d/cloudflare.conf`, and at the bottom fill in the `cf
 
 Now edit `/etc/fail2ban/jail.local` and edit the `[nginx-limit-req]` section again so that it looks like this:
 
-```
+```toml
 [nginx-limit-req]
 port    = http,https
 logpath = %(nginx_error_log)s
@@ -166,5 +166,4 @@ Now the offending user's IP address is sent to CloudFlare's firewall and to the 
 
 If you want to see the list of blocked IP addresses you can run `fail2ban-client status nginx-limit-req`. You can also view CloudFlare's firewall in Security -> WAF -> Tools.
 
-> [!UPDATE] 
-> **April 28, 2025**: I wrote [another article](/articles/2025/cloudflare-waf-block-php/) about blocking these sort of requests directly within CloudFlare using their custom WAF rules. This prevents the requests from making it to your server in the first place.
+> [!UPDATE] > **April 28, 2025**: I wrote [another article](/articles/2025/cloudflare-waf-block-php/) about blocking these sort of requests directly within CloudFlare using their custom WAF rules. This prevents the requests from making it to your server in the first place.

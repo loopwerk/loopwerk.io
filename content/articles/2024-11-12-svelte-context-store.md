@@ -7,7 +7,7 @@ summary: Solving problems by putting writable reactive stores in Svelte's contex
 
 In [Critical Notes](https://www.critical-notes.com) I use modals with forms inside of them. The basic (simplified) layout is like this, inside a detail page:
 
-```
+```svelte
 {#if editModalOpen}
   <Modal title="Edit Character" close={() => editModalOpen = false}>
     <CharacterForm {character} />

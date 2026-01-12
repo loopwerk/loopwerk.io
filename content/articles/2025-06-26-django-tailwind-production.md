@@ -34,14 +34,14 @@ STORAGES = {
 
 With the settings configured, your deployment process for static files will now be a two-step command:
 
-```sh
-./manage.py tailwind build
-./manage.py collectstatic --noinput --ignore css/source.css
+```shell-session
+$ ./manage.py tailwind build
+$ ./manage.py collectstatic --noinput --ignore css/source.css
 ```
 
 First, `tailwind build` creates the final `tailwind.css` file. Then, `collectstatic` picks it up, hashes it with a unique name like `tailwind.4e3e58f1a4a4.css`, and places it in your `STATIC_ROOT` directory, ready to be served.
 
 That's it! Your Tailwind styles are now production-ready and properly cache-busted.
 
-> [!UPDATE] 
+> [!UPDATE]
 > **August 2, 2025**: the initial version of this article used a custom subclass of `ManifestStaticFilesStorage` to ignore `css/source.css`, but then James was kind enough to tell me about `collectstatic`'s `--ignore` option. Thanks!

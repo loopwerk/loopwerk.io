@@ -108,7 +108,7 @@ RUN --mount=type=cache,id=swift-pm,target=/root/.cache/org.swift.swiftpm \
 
 With these changes, my build times improved from 4.5 minutes to about 3 minutes. The build log for the `apt-get` step confirmed the fix:
 
-```
+```text
 Need to get 0 B/44.5 MB of archives.
 ```
 
@@ -130,5 +130,5 @@ If your Coolify builds are slow:
 
 Until Coolify stops injecting ever-changing build arguments, fast Docker builds remain out of reach, but with cache mounts, at least they don't have to be painfully slow.
 
-> [!UPDATE] 
+> [!UPDATE]
 > **December 1, 2025**: I'm happy to report that Coolify has fixed the issue by no longer automatically injecting the changing arguments. Update to v4.0.0-beta.450 or later and enjoy fast builds again.

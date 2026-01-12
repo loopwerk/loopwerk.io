@@ -11,7 +11,7 @@ So, like me you've decided to switch from Poetry to uv, and now you're wondering
 
 While uv sadly doesn't come with a migration command (yet), we _can_ use PDM's migration tool, which gets us 95% of the way there since PDM and uv both use mostly the same configuration format. Let's use a basic project that uses Django, gunicorn and ruff (using two optional dependency groups), to illustrate the different steps. Our `pyproject.toml` file, as created by Poetry, will look something like this:
 
-```
+```toml
 [tool.poetry]
 name = "poetrytest"
 version = "0.1.0"
@@ -46,7 +46,7 @@ Don't worry if you don't use dependency groups in your project; the process is s
 
 We start by running `uvx pdm import pyproject.toml`. This will modify the `pyproject.toml` to be almost uv compatible. Our file now looks like this:
 
-```
+```toml
 [tool.poetry]
 name = "poetrytest"
 version = "0.1.0"
@@ -103,7 +103,7 @@ readme = "README.md"
 
 Every section that starts with `tool.poetry` can be removed, as well as the `build-system` section. The newly added `tool.pdm.build` section can also be removed. Our file now looks like this:
 
-```
+```toml
 [tool.pdm.dev-dependencies]
 dev = [
     "ruff<1.0.0,>=0.7.4",
@@ -136,7 +136,7 @@ I've also reordered the items within `[project]` and I've switched the order of 
 
 The `pyproject.toml` file now looks like this and is done:
 
-```
+```toml
 [project]
 name = "poetrytest"
 version = "0.1.0"

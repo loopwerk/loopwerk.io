@@ -4,14 +4,16 @@ summary: Part 2, where I'm looking back at the current API of Saga.
 ---
 
 # Building my own static site generator, part 2: API design
-*I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here.*
 
-*If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/).*
+_I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here._
+
+_If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/)._
 
 ## Part 2: API design
+
 To explain the basic API design, let's start with a simple usage example, that we will then improve upon and extend later.
 
-``` swift
+```swift
 try Saga(input: "content", output: "deploy")
   .read(
     readers: [.markdownReader()]
@@ -28,7 +30,7 @@ Above is the most simple example that simply reads all Markdown files inside of 
 
 Another goal I set for Saga was the ability to extend pages with your own metadata. Let's imagine we want to create a blog with articles that have tags, a summary and a `public` boolean. And of course we still have "normal" pages like the homepage, about page, things like that.
 
-``` swift
+```swift
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
@@ -62,29 +64,29 @@ try Saga(input: "content", output: "deploy")
     writers: [
       // Articles
       .pageWriter(
-        template: "article.html", 
+        template: "article.html",
         filter: \.isPublicArticle
       ),
       .listWriter(
-        template: "articles.html", 
-        output: "articles/index.html", 
+        template: "articles.html",
+        output: "articles/index.html",
         filter: \.isPublicArticle
       ),
       .tagWriter(
-        template: "tag.html", 
-        output: "articles/[tag]/index.html", 
-        tags: \.tags, 
+        template: "tag.html",
+        output: "articles/[tag]/index.html",
+        tags: \.tags,
         filter: \.isPublicArticle
       ),
       .yearWriter(
-        template: "year.html", 
-        output: "articles/[year]/index.html", 
+        template: "year.html",
+        output: "articles/[year]/index.html",
         filter: \.isPublicArticle
       ),
 
       // Other pages
       .pageWriter(
-        template: "page.html", 
+        template: "page.html",
         filter: { $0.metadata is EmptyMetadata }
       ),
     ]
@@ -93,7 +95,7 @@ try Saga(input: "content", output: "deploy")
 
 As you can see, a lot more is going on now. First of all we declare our own metadata type, `ArticleMetadata`. In our case we declare this type to have an array of tags, an optional summary and an optional `public` flag, that we default to `true` via the `isPublic` computed property. This means that we can write articles like this and the metadata contained within the Markdown file will be parsed as expected:
 
-```
+```markdown
 ---
 tags: article, news
 summary: First!
@@ -107,7 +109,7 @@ It's strongly typed too, so when the parsing fails, you'll be notified.
 
 Let's look at how running Saga has changed. You'll notice that we're now calling the `read` function twice:
 
-``` swift
+```swift
 .read(
   folder: "articles",
   metadata: ArticleMetadata.self,
@@ -122,35 +124,35 @@ First we tell Saga that the files with the `articles` folder should use `Article
 
 Now comes the `write` step, which has a lot more lines than before:
 
-``` swift
+```swift
 .write(
   templates: "templates",
   writers: [
     // Articles
     .pageWriter(
-      template: "article.html", 
+      template: "article.html",
       filter: \.isPublicArticle
     ),
     .listWriter(
-      template: "articles.html", 
-      output: "articles/index.html", 
+      template: "articles.html",
+      output: "articles/index.html",
       filter: \.isPublicArticle
     ),
     .tagWriter(
-      template: "tag.html", 
-      output: "articles/[tag]/index.html", 
-      tags: \.tags, 
+      template: "tag.html",
+      output: "articles/[tag]/index.html",
+      tags: \.tags,
       filter: \.isPublicArticle
     ),
     .yearWriter(
-      template: "year.html", 
-      output: "articles/[year]/index.html", 
+      template: "year.html",
+      output: "articles/[year]/index.html",
       filter: \.isPublicArticle
     ),
 
     // Other pages
     .pageWriter(
-      template: "page.html", 
+      template: "page.html",
       filter: { $0.metadata is EmptyMetadata }
     ),
   ]
@@ -161,7 +163,7 @@ As you can see, we heavily rely on the `filter` parameter to tell the writers on
 
 You may notice that the four writers that deal with articles have a lot of repeated logic, like the filter and the `articles/` prefix in the output parameters. That's why this can be simplified using the `section` writer, which acts like a wrapper:
 
-``` swift
+```swift
 .write(
   templates: "templates",
   writers: [
@@ -172,7 +174,7 @@ You may notice that the four writers that deal with articles have a lot of repea
       .tagWriter(template: "tag.html", tags: \.tags),
       .yearWriter(template: "year.html"),
     ]),
-    
+
     // Other pages
     .pageWriter(template: "page.html", filter: { $0.metadata is EmptyMetadata }),
   ]
@@ -183,7 +185,7 @@ That looks a lot better!
 
 And of course we're able to have different kinds of metadata for different kinds of pages, which was a huge goal I had for Saga. In the example below we have the articles like before using `ArticleMetadata`, but we now also have "apps" using `AppMetadata`, which are only written using the `listWriter`:
 
-``` swift
+```swift
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
@@ -235,17 +237,17 @@ try Saga(input: "content", output: "deploy")
         .tagWriter(template: "tag.html", tags: \.tags),
         .yearWriter(template: "year.html"),
       ]),
-      
+
       // Apps
       .listWriter(
-        template: "apps.html", 
-        output: "apps/index.html", 
+        template: "apps.html",
+        output: "apps/index.html",
         filter: \.isApp
       ),
 
       // Other pages
       .pageWriter(
-        template: "page.html", 
+        template: "page.html",
         filter: { $0.metadata is EmptyMetadata }
       ),
     ]
@@ -259,7 +261,7 @@ Finally we end with a call to `.staticFiles()`, which takes all the files in the
 
 All the `read` steps write the resulting pages into an internal storage array, which all subsequent steps have access to. This means it's very easy to add your own step which has full access to all pages with the freedom to modify them however you wish. Let's see this in action with a very silly example, that appends an exclamation mark to the title of all pages:
 
-``` swift
+```swift
 extension Saga {
   @discardableResult
   func modifyPages() -> Self {
@@ -287,7 +289,7 @@ try Saga(input: "content", output: "deploy")
 
 Another way to do this is by supplying a processor function to the reader itself, like this:
 
-``` swift
+```swift
 func pageProcessor(page: Page) {
   page.title.append("!")
 }
@@ -304,7 +306,7 @@ try Saga(input: "content", output: "deploy")
   )
 ```
 
-The `pageProcessor` way is a bit simpler, but the custom step is more powerful since it has access to *all* files, even the ones not transformed to a `Page` using one of the read steps.
+The `pageProcessor` way is a bit simpler, but the custom step is more powerful since it has access to _all_ files, even the ones not transformed to a `Page` using one of the read steps.
 
 Check out the [example that ships with Saga](https://github.com/loopwerk/Saga/blob/main/Example/Sources/Example/main.swift) for more use cases, such as transforming files with filenames like `2021-01-31-saga-2-api-design.md` into articles with that date as the published date, and creating Twitter preview images for all articles.
 

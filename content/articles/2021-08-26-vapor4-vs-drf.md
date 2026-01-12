@@ -19,7 +19,7 @@ This time I've written the code for only one the features of my project, first i
 
 ### Django
 
-``` python
+```python
 class User(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(blank=True, null=True, unique=True)
@@ -54,7 +54,7 @@ class Membership(models.Model):
 
 ### Vapor
 
-``` swift
+```swift
 final class User: Model, Content {
   struct FieldKeys {
     static var avatar: FieldKey { "avatar" }
@@ -202,12 +202,14 @@ Winner: a big win for Django. Not only because there is a lot less repeating of 
 ## Migrations
 
 ### Django
+
 It's all done automatically. When you create or change your models, you run `manage.py makemigrations` to create the migration definitions, and then run `manage.py migrate` to apply them to the database. It couldn't be more simple. It's one of the best features of Django.
 
 ### Vapor
-Sadly, a *lot* of work is involved.
 
-``` swift
+Sadly, a _lot_ of work is involved.
+
+```swift
 struct CreateUserMigration: Migration {
   func prepare(on database: Database) -> EventLoopFuture<Void> {
     database.schema(User.schema)
@@ -273,7 +275,7 @@ struct AddIsFeaturedMigration: Migration {
 struct AddIsFeaturedIndexToCampaign: Migration {
   func prepare(on database: Database) -> EventLoopFuture<Void> {
     let sqlDB = (database as! SQLDatabase)
-    
+
     return sqlDB
       .create(index: "is_featured_idx")
       .on(Campaign.schema)
@@ -333,10 +335,12 @@ That is an example of only three database tables: `users`, `campaigns` and `memb
 Winner: Django, with a HUGE margin.
 
 ## Views
+
 Let's take a look at 3 endpoints: `GET /campaigns`, `POST /campaigns` and `GET /campaigns/[id]`. One thing to note is that the public representation of a campaign (the response of these endpoints) is not the same as the actual Campaign database model. There are some fields that we don't want to include, for example the `is_featured` field, or for the owner and the members we definitely don't want to include all user model fields: the email address for example is private. So how do both frameworks make this possible?
 
 ### Django
-``` python
+
+```python
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -426,14 +430,15 @@ Then there is the `CampaignsController` which includes all the logic for returni
 
 Hooking all this up to the router is very simple:
 
-``` python
+```python
 router = SimpleRouter(trailing_slash=False)
 router.register('/?', CampaignsController, basename='campaign')
 urlpatterns = router.urls
 ```
 
 ### Vapor
-``` swift
+
+```swift
 struct PublicUser: Content {
   let id: UUID
   let avatar: String?
@@ -563,7 +568,7 @@ Then, in `CreateCampaign` you can see that I had to add my own validation logic 
 
 Let's move on to the view code.
 
-``` swift
+```swift
 struct CampaignController: RouteCollection {
   func boot(routes: RoutesBuilder) throws {
     routes.group("campaigns") { unprotectedRoutes in
@@ -597,7 +602,7 @@ struct CampaignController: RouteCollection {
       .get()
       .map { try PublicCampaign.init(from: $0) }
   }
-  
+
   /// GET /api/campaigns/:campaignID
   func get(req: Request) async throws -> PublicCampaign {
     let campaign = try await Campaign
@@ -644,13 +649,14 @@ Another nice thing is that everything is very explicit, it's easy to read the co
 But boy, working with the data transfer objects and having to write all those really is a huge bummer.
 
 ## Conclusion
-I hate writing models, model migrations and the data transfer objects in Vapor - it's so much *boring* repeated code to write! Validation needs to be witten by hand as well. But on the other hand, the view code is pretty nice to write. Yes, it's a bit longer than the DRF version, but it's understandable, fully customizable to exactly how I want it to work, and I know that if it compiles, that I won't have weird crashes because some property wasn't found on an object.
+
+I hate writing models, model migrations and the data transfer objects in Vapor - it's so much _boring_ repeated code to write! Validation needs to be witten by hand as well. But on the other hand, the view code is pretty nice to write. Yes, it's a bit longer than the DRF version, but it's understandable, fully customizable to exactly how I want it to work, and I know that if it compiles, that I won't have weird crashes because some property wasn't found on an object.
 
 DRF on the other hand really excels in the models, automatic migrations and the serializers which are based on the models but really easily modified without having to redefine the entire model minus one field or something like that. The one controller that I showed above was also very readable and understandable. In reality most controllers for most of my apps's features would be a lot simpler, making the difference with Vapor even bigger.
 
 For example, here is the entire controller for the party loot feature. You can fetch the list of all loot, post a new one, get, update or delete an existing one:
 
-``` python
+```python
 class LootSerializer(serializers.ModelSerializer):
     class Meta:
         model = Loot
@@ -669,7 +675,7 @@ class LootController(viewsets.ModelViewSet):
 
 The equivalent Vapor code is something like this, and that doesn't even include the DELETE endpoint!
 
-``` swift
+```swift
 struct CreateLoot: Content {
   var text: String
   var isHidden: Bool?
@@ -758,7 +764,7 @@ struct LootController: RouteCollection {
 }
 ```
 
-So even though writing the controller in Vapor is kind of fun to do and extremely explicit and customizable.. there is just *so much of it to write*! It takes a bit longer to figure out how to do certain things with Django REST Framework (there are so many layers involved) but once you do, everything is super fast.
+So even though writing the controller in Vapor is kind of fun to do and extremely explicit and customizable.. there is just _so much of it to write_! It takes a bit longer to figure out how to do certain things with Django REST Framework (there are so many layers involved) but once you do, everything is super fast.
 
 Not to mention simple developer quality-of-life things like Django automatically restarting the server on code changes, or not having to compile first, which can literally take four minutes with my tiny Vapor project. It's a lot easier to get the Django server hosted somewhere, it should use less memory, has a much bigger community around it when you hit a dead-end, many more packages are available to use, the list goes on honestly.
 

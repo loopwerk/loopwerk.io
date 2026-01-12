@@ -17,7 +17,7 @@ Based on this I chose Jinja2 as the winner, and started a small project to see h
 
 First, install Jinja2, and then install Coffin with the following commands:
 
-```bash
+```shell-session
 $ cd /tmp
 $ git clone git://github.com/dcramer/coffin.git
 $ cd coffin/

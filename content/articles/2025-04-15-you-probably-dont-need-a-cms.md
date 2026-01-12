@@ -109,7 +109,7 @@ So instead of a complete CMS we now have a Django model with a `CKEditor5Field` 
 
 We embed a bunch of things in our articles, such as Instagram photos, YouTube videos, Spotify, Tidal and Apple Music songs, and more. While CKEditor 5 has built-in support for some embeds (when you paste in a link to a YouTube video it turns into embed code by default), it doesn't support everything we need. Instead of building complicated plugins, we decided to completely remove this responsibility from the text editor, and instead we parse the body text for special tags like this:
 
-```
+```markdown
 Lorem ipsum dolor sit amet, consectetur adipiscing elit
 sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Ut enim ad minim veniam.

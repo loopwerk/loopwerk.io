@@ -44,7 +44,7 @@ server {
 ### Get HTTPS working with Certbot
 Right now the website is only accessible using HTTP requests on port 80, which is not so good. Luckily getting HTTPS support is as easy and running one simple command:
 
-```
+```shell-session
 $ certbot --nginx
 ```
 

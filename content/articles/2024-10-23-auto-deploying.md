@@ -110,7 +110,7 @@ This script actually works for two sites running on the same server, and sharing
 
 Also create a `.env` file containing a webhook secret. It can be anything you want, just create something long and random:
 
-```bash title="/home/example/deploy.example.com/.env"
+```text title="/home/example/deploy.example.com/.env"
 GITHUB_WEBHOOK_SECRET="my_secret_value_here"
 ```
 

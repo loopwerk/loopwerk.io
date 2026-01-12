@@ -9,23 +9,23 @@ I'm very busy migrating a big SvelteKit project to Svelte 5's [new runes syntax]
 
 For example, what used to be a single line:
 
-```
+```typescript
 export let user: User | undefined;
 ```
 
 Now takes 5 lines because of the added effort to properly type everything:
 
-```
+```typescript
 interface Props {
-   user?: User;
- }
+  user?: User;
+}
 
 let { user }: Props = $props();
 ```
 
 And yeah of course in this simple case I could do the type inline:
 
-```
+```typescript
 let { user }: { user?: User } = $props();
 ```
 
@@ -37,7 +37,7 @@ Also, the [Svelte 4 docs](https://v4.svelte.dev/docs/introduction) don't use str
 
 It's also very annoying that the Svelte 5 migration script decides to use `let` for these props instead of `const`, which results in hundreds of ESLint warnings like "'user' is never reassigned. Use 'const' instead". Luckily ESLint can automatically fix most of them, but not all. For example I have a NumberPicker component that used to have three props:
 
-```
+```typescript
 export let min = 0;
 export let value = 0;
 export let max = 99;
@@ -45,7 +45,7 @@ export let max = 99;
 
 The page using the component would bind to the `value`. With Svelte 5 the component now looks like this:
 
-```
+```typescript
 interface Props {
   min?: number;
   value?: number;

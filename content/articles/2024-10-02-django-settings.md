@@ -51,7 +51,7 @@ So at some point, many years ago, I switched to [django-environ](https://github.
 
 Your `.env` file has the config values:
 
-```
+```text
 DEBUG=True
 SECRET_KEY=secret-key
 DATABASE_URL=postgres://username:password@localhost:5432/mydatabase

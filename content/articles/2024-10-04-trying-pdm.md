@@ -9,7 +9,7 @@ Two weeks ago I wrote [an article pitting uv against Poetry](/articles/2024/pyth
 
 It really seems that this combines all the best things of Poetry and uv, without their downsides. Let's take a look!
 
-> [!UPDATE] 
+> [!UPDATE]
 > **October 12, 2024:** a previous version of this article made some comments about PDM not being able to add dependencies to an optional dependency group, without them also immediately getting installed. This turns out to not be correct, when using the `--no-sync` option. The article and its conclusion have been updated.
 
 ## Getting started
@@ -18,7 +18,7 @@ There are multiple installation methods: via a script, via pipx (or `uv tool`), 
 
 Most of the commands to install packages are very similar to Poetry:
 
-```
+```shell-session
 $ pdm config use_uv true
 $ pdm init
 $ pdm add django
@@ -31,7 +31,7 @@ $ pdm install --group dev
 
 PDM supports multiple optional dependency groups, just like Poetry does. One big difference with Poetry is that by default every single dependency from every group gets installed, because running `pdm add` immediately installs the dependency, even when it's for an optional group. After initializing an empty PDM project I ran the following commands:
 
-```
+```shell-session
 $ pdm add django
 $ pdm add ruff --group dev
 $ pdm add gunicorn --group prod
@@ -39,7 +39,7 @@ $ pdm add gunicorn --group prod
 
 They all got installed to my machine. When you then run `pdm install --group dev` PDM _claims_ that it's removing gunicorn, but it's still in the virtual environment:
 
-```
+```shell-session
 $ pdm install --group dev
 ⠋ Resolving packages from lockfile...⠋ Resolving dependencies...                                                                                                                       Resolved 6 packages in 3ms
 Removed gunicorn v23.0.0
@@ -51,7 +51,7 @@ Probably a bug where it says it's removing a package, but in reality it's not (s
 
 Luckily this has a simple solution: the `--no-sync` option when adding a package.
 
-```
+```shell-session
 $ pdm add gunicorn --group prod --no-sync
 ```
 
@@ -63,7 +63,7 @@ The reason why I don't want production packages to get installed on my local mac
 
 One thing that does bother me about PDM is the weirdness of its output when you add a new dependency. For example when I run `pdm add django` in a completely new project, the output is what I expect (albeit quite verbose):
 
-```
+```shell-session
 $ pdm add django
 Adding packages to default dependencies: django
 Resolved 5 packages in 98ms
@@ -83,7 +83,7 @@ Installed 3 packages in 79ms
 
 When I then add a second package, the output becomes weird:
 
-```
+```shell-session
 $ pdm add ruff --group dev
 Adding packages to dev dependencies: ruff
 Resolved 6 packages in 41ms
@@ -104,7 +104,7 @@ Why does it say that it's removing Django and its dependencies? Which is also ab
 
 When you don't use uv as the resolver and installer, the output becomes a lot better:
 
-```
+```shell-session
 $ pdm add django
 Adding packages to default dependencies: django
   0:00:00 🔒 Lock successful.
@@ -142,7 +142,7 @@ My biggest disappointment with Poetry, by far, is that it doesn't manage the Pyt
 
 PDM can also do this, albeit with some weirdness. The general workflow looks like this: when you run `pdm init` you need to select which Python interpreter to use:
 
-```
+```shell-session
 $ pdm init
 Creating a pyproject.toml for PDM...
 Please enter the Python interpreter to use
@@ -161,7 +161,7 @@ I would **much** rather prefer if I could simply say that this project uses Pyth
 
 Okay, so I initialized my project using Python 3.8, I added Django as a dependency, everything is running as expected. Now I want to update my project to Python 3.10, which is also not installed on my system yet. I can run `pdm use 3.10` which then installs Python 3.10, but it doesn't change the `requires-python` config in the `pyproject.toml` file and you get this error:
 
-```
+```shell-session
 $ pdm use 3.10
 Successfully installed cpython@3.10.15
 Version: 3.10.15
@@ -171,7 +171,7 @@ Executable: /Users/kevin/Library/Application Support/pdm/python/cpython@3.10.15/
 
 To fix this discrepancy we can manually edit the `pyproject.toml` file, changing the value of `requires-python` from `==3.8.*` to `==3.10.*`. Now there's yet another error:
 
-```
+```shell-session
 $ pdm install
 WARNING: Lockfile hash doesn't match pyproject.toml, packages may be outdated
 Updating the lock file...
@@ -190,7 +190,7 @@ When you compare this with uv or pnpm (a JavaScript dependency manager) this is 
 
 As I said above, you need to choose a Python interpreter when you initialize a new PDM project.
 
-```
+```shell-session
 $ pdm init
 Creating a pyproject.toml for PDM...
 Please enter the Python interpreter to use
@@ -207,7 +207,7 @@ Please select (0):
 
 The weird thing is that this doesn't properly work when you use uv. When I chose option 3 for example, this is what I got:
 
-```
+```shell-session
 Please select (0): 3
 INFO: Using uv is experimental and might break due to uv updates.
 Using Python 3.11.10
@@ -247,5 +247,5 @@ With all of that said, which package manager would I use? Stick with Poetry or s
 
 I'm sticking with Poetry for now, mainly because PDM feels too rough around the edges -- especially when using uv as the resolver and installer. I'm really hoping that Poetry will add Python management, or that uv will improve its CLI, or that PDM will improve all the things mentioned in this article, as well as their cryptic errors in general. My money is that uv will make the biggest improvements in the shortest time.
 
-> [!UPDATE] 
+> [!UPDATE]
 > **Nov 11, 2024**: uv has released multiple updates solving my biggest gripes, and I am now in the process of switching my projects over from Poetry to uv. Check my [new article about those updates](/articles/2024/python-uv-revisited/)!

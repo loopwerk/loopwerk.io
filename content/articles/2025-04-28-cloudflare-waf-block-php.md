@@ -11,7 +11,7 @@ This setup works fine, and is active on all servers I maintain, but there is one
 
 So now I am blocking these kinds of requests directly within CloudFlare, by using a custom WAF rule with the following expression:
 
-```
+```text
 (http.request.uri wildcard r"/wp-*") or (http.request.uri wildcard r"/*/wp-*") or
 (http.request.uri wildcard r"/wordpress*") or (http.request.uri wildcard r"/*/wordpress*") or
 (http.request.uri wildcard r"*.php") or (http.request.uri wildcard r"*.php7")

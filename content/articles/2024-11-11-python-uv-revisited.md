@@ -13,7 +13,7 @@ I'm very happy to say that both these issues have been solved in recent updates 
 
 Since version 0.4.27 dependency groups are properly supported in uv, and now you can add dependencies to any custom group you want:
 
-```
+```shell-session
 $ uv add django
 $ uv add --group dev ruff
 $ uv add --group prod --no-sync gunicorn
@@ -29,7 +29,7 @@ And just like that, the biggest problem I had with uv is now completely gone.
 
 Previously it wasn't possible to see a list of outdated packages, but I'm happy to say that this has been added in uv 0.5.0:
 
-```
+```shell-session
 $ uv tree --outdated
 $ uv tree --outdated --depth=1
 ```
@@ -38,13 +38,13 @@ This will show a tree of all dependencies, with their latest version noted, if a
 
 Now, this will only show the update information for installed dependencies. Meaning that if you added production dependencies to a `prod` group (like I've done with gunicorn in the example above), you won't know if there's an update available. Luckily uv makes it easy to see outdated packages in all groups, even when those groups are not installed:
 
-```
+```shell-session
 $ uv tree --group prod --group dev --outdated --depth=1
 ```
 
 The output for my simple test project looks like this, when I installed an older version of Django:
 
-```
+```shell-session
 $ uv tree --group prod --group dev --outdated --depth=1
 Resolved 11 packages in 0.64ms
 uvtestproject v0.1.0

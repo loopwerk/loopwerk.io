@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/LRUCache.git",
       "state" : {
-        "revision" : "0d91406ecd4d6c1c56275866f00508d9aeacc92a",
-        "version" : "1.2.0"
+        "revision" : "cb5b2bd0da83ad29c0bec762d39f41c8ad0eaf3e",
+        "version" : "1.2.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "c28b5c2da918bf5e873a5bb87d9e739e09ac7b97",
-        "version" : "2.7.0"
+        "revision" : "075ba234ac16d99d862a37e0e9f1116b96dbc49a",
+        "version" : "2.8.1"
       }
     },
     {
@@ -61,6 +61,15 @@
       "state" : {
         "revision" : "26cc5e9ae0947092c7139ef7ba612e34646086c7",
         "version" : "0.10.1"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
       }
     },
     {

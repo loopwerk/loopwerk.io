@@ -96,7 +96,7 @@ Django provides a clean, if somewhat hidden, way to do this with the `FORMAT_MOD
 
 In your project directory (the one with `manage.py`), create a new package for our custom formats. I'll call mine `formats`.
 
-```
+```text
 myproject/
 ├── formats/
 │   ├── __init__.py
@@ -158,7 +158,7 @@ The beauty is that any strings we don't override in our `en` file will automatic
 
 Next, create the following file in the root (same level as `manage.py`):
 
-```text title="locale/en/LC_MESSAGES/djangojs.po"
+```po title="locale/en/LC_MESSAGES/djangojs.po"
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
@@ -184,8 +184,8 @@ msgstr "18:00"
 
 Finally, run a management command to compile this text file into a format Django can use efficiently:
 
-```
-./manage.py compilemessages
+```shell-session
+$ ./manage.py compilemessages
 ```
 
 Restart your development server, and the time picker dropdown will now show your clean, 24-hour options. With that, the Django Admin is fully converted to a sensible clock, from the list display right down to the picker shortcuts.

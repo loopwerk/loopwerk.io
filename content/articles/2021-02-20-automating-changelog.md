@@ -3,6 +3,7 @@ tags: javascript, workflow, news
 ---
 
 # Announcing tag-changelog: automate your changelog and GitHub releases
+
 In a short time I've created 25 releases for my static site generator [Saga](https://github.com/loopwerk/Saga). For each release I've manually updated the `CHANGELOG.md` file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was already using to automatically run unit tests on every commit to the main branch, and for every pull request. I searched the [GitHub Marketplace](https://github.com/marketplace) for Actions that would suit my needs, but sadly couldn't find any.
 
 - I create releases by pushing tags, so my workflow needs to be triggered by, and be based on, tags.
@@ -11,7 +12,7 @@ In a short time I've created 25 releases for my static site generator [Saga](htt
 
 Maybe there's an existing Action that would be the perfect fit for me, but I also thought it would be interesting to create my own. It took a bit longer than I thought it would, mostly due to the difficulty to set up a development environment where I can run GitHub Actions locally, but the Action is done! It's called [tag-changelog](https://github.com/loopwerk/tag-changelog) and can be used in your GitHub Actions workflows too.
 
-My Action simply takes the commits between the last two tags, and turns that into a changelog string which is then made available for other Actions. 
+My Action simply takes the commits between the last two tags, and turns that into a changelog string which is then made available for other Actions.
 
 ```yml
 - name: Create changelog text
@@ -30,7 +31,7 @@ name: Create Release
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   create-release:
@@ -90,8 +91,7 @@ Which brings me to the actual development process that I'm using. Normally you'd
 ```yml
 name: My Workflow
 
-on:
-  push
+on: push
 
 jobs:
   my-workflow:
@@ -119,7 +119,7 @@ The second gotcha is that `uses: ./` parameter for the Action you're working on.
 
 4. If your Action depends on `${{ secrets.GITHUB_TOKEN }}`, you have some extra work to do which wasn't clear to me: you'll need to manually create a personal access token and store it in a `.secrets` file like this:
 
-```
+```text
 GITHUB_TOKEN=ABC123ABC123ABC123ABC123ABC123
 ```
 

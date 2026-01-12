@@ -116,7 +116,7 @@ And it also works for any extra actions you add onto the ViewSet. So you can hav
 
 The code is [published on PyPI](https://pypi.org/project/drf-action-serializers/) and can be installed with one command:
 
-```bash
+```shell-session
 $ uv add drf-action-serializers
 ```
 
@@ -124,7 +124,7 @@ There's nothing to configure, there is no step 2. Now you can use the ViewSets f
 
 If you're using [drf-spectacular](https://drf-spectacular.readthedocs.io/) to document your API (and if you're not - you should), then there's a cool optional package to install:
 
-```bash
+```shell-session
 $ uv add drf-action-serializers[spectacular]
 ```
 
