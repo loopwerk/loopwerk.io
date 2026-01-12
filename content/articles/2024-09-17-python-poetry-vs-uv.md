@@ -61,7 +61,7 @@ Poetry supports multiple groups of dependencies within a project. For example yo
 This is not possible with uv, as far as I can see. There are dev dependencies, but they are always getting installed. It seems this is only useful for when you publish your code to PyPI, not for when you're writing an app, like a Django site. This is too bad, since now all dependencies for development, production and testing are always getting installed in every environment. Yes, that installation is very fast but it would still be good to be able to have separate dependencies for production which you might not want to (or can not) install on your MacBook.
 
 > [!SIDENOTE]
-> This is no longer correct, after uv released version 0.4.7 which support dependency groups. Check out my [revisiting uv](/articles/2024/python-uv-revisited/) article for more information.
+> This is no longer correct, after uv released version 0.4.7 which supports dependency groups. Check out my [revisiting uv](/articles/2024/python-uv-revisited/) article for more information.
 
 ## Updating dependencies
 
