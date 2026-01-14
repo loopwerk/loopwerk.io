@@ -1,24 +1,19 @@
-# syntax=docker/dockerfile:1.4
 # Multi-stage build for loopwerk.io static site
 
 # Stage 1: Build environment
 # Using Ubuntu 24.04 (Noble) for libgd 2.3.2+ with AVIF support
 FROM swift:6.0-noble AS builder
 
-# Configure apt to keep cache for BuildKit cache mounts
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-
-# Install system dependencies with cache mount for apt
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get --no-install-recommends install -y \
+# Install system dependencies
+RUN apt-get update && apt-get --no-install-recommends install -y \
     libgd-dev \
     libavif-dev \
     python3 \
     git \
     git-restore-mtime \
     curl wget \
-    nodejs npm
+    nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -30,10 +25,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 # Install Node dependencies (including devDependencies needed for build)
-# Use pnpm cache mount to speed up reinstalls
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm config set store-dir /pnpm/store && \
-    pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # Copy Swift package files AND source code needed to build
 COPY Package.swift ./
@@ -43,9 +35,7 @@ COPY Tests ./Tests
 
 # Pre-fetch and pre-build Swift dependencies
 # This layer will be cached as long as Package files and Sources don't change
-# Use cache mount for Swift package manager's cache to speed up dependency downloads
-RUN --mount=type=cache,id=swift-pm,target=/root/.cache/org.swift.swiftpm \
-    echo "Prefetching and prebuilding dependencies..." \
+RUN echo "Prefetching and prebuilding dependencies..." \
     && swift package resolve \
     && swift build --product Loopwerk -c release
 
