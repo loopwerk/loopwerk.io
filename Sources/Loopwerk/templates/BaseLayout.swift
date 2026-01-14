@@ -105,7 +105,21 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
         }
 
-        div(class: "container pt-12 lg:pt-28") {
+        if section != .home {
+          div(class: "container pt-4 lg:pt-20") {
+            div(class: "bg-orange p-4 text-lg") {
+              "For the first time since 2023 I'm available again for a new project. If you need a developer with 25 of years of experience building websites and iOS app, check out the "
+              a(class: "underline", href: "/hire-me/") {
+                "Hire me"
+              }
+              "page."
+            }
+          }
+        } else {
+          div(class: "container lg:pt-16") {}
+        }
+
+        div(class: "container pt-12") { // lg:pt-28
           children()
         }
 

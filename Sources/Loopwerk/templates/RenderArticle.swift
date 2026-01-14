@@ -124,9 +124,9 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             a(href: "/apps/") { "many apps" }
             %", and maintain a bunch of"
             a(href: "/projects/") { "open source projects" }
-            %". I'm available "
+            %". I'm currently available "
             a(href: "/hire-me/") { "for hire" }
-            %" and for podcast interviews about modern web development. Connect with me on"
+            %"! Connect with me on"
             a(href: "https://hachyderm.io/@kevinrenskers", target: "_blank") { "Mastodon" }
             %" or "
             a(href: "mailto:kevin@loopwerk.io") { "email" }
