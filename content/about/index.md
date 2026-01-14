@@ -16,6 +16,6 @@ I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of 
 
 I choose cats over dogs, tea over coffee, and winter over summer. I've lived in Iceland for almost four years, and my favorite foods are ramen, hamburgers, tacos, and Thai.
 
-You can reach me via email at <kevin@loopwerk.io>, and on [Mastodon](https://hachyderm.io/@kevinrenskers).
+You can reach me at <kevin@loopwerk.io>, [LinkedIn](https://www.linkedin.com/in/kevinrenskers/), and on [Mastodon](https://hachyderm.io/@kevinrenskers).
 
 ![A photo of Kevin](kevin.webp)

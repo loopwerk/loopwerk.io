@@ -48,4 +48,4 @@ I work fully remote from my own office in Winterswijk, the Netherlands. I work f
 
 ### Let's work together!
 
-Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [Mastodon](https://hachyderm.io/@kevinrenskers).
+Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [LinkedIn](https://www.linkedin.com/in/kevinrenskers/) or [Mastodon](https://hachyderm.io/@kevinrenskers).
