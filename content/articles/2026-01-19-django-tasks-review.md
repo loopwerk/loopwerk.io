@@ -25,7 +25,7 @@ Django's task system only supports one-off execution. There is no notion of sche
 
 What makes this particularly frustrating is that Django had a clear opportunity to do more.
 
-[DEP 14](https://github.com/django/deps/blob/main/accepted/0014-background-workers.rst) explicitly talks about a database backend, deferring tasks to run at a specific time in the future, and a new email backend that offloads work to the background. None of that has made it into Django itself yet. Why wasn't the database worker from [django-tasks](https://github.com/RealOrangeOne/django-tasks) at least added to Django , or something equivalent? This would have covered a large percentage of real-world use cases with minimal operational complexity.
+[DEP 14](https://github.com/django/deps/blob/main/accepted/0014-background-workers.rst) explicitly talks about a database backend, deferring tasks to run at a specific time in the future, and a new email backend that offloads work to the background. None of that has made it into Django itself yet. Why wasn't the database worker from [django-tasks](https://github.com/RealOrangeOne/django-tasks) at least added to Django, or something equivalent? This would have covered a large percentage of real-world use cases with minimal operational complexity.
 
 Instead, we got an abstraction without an implementation.
 
