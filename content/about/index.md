@@ -4,7 +4,7 @@ section: about
 
 # About me
 
-Hi there! My name is **Kevin Renskers**, and I'm a creative software developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces and their APIs.
+Hi there! My name is **Kevin Renskers**, and I'm a creative product-minded software developer with a passion for good usability and great design. I love working on intuitive, user friendly interfaces and their APIs.
 
 I created my first website in 2000, and got my first job as a PHP developer in 2001. In 2009 I switched to **Python** and **Django**, and in 2010 I created my first **iOS** app. I've been a fully remote freelance software developer since 2016, working for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever, and Emmy and Oscar winner Sound Radix. In 2023 I switched my focus from doing mostly iOS work back towards the open web.
 
