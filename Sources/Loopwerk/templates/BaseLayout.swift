@@ -96,7 +96,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
                   a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
                 }
               }
-              
+
               // Search form
               form(action: "/search/", class: "relative max-lg:mb-6", id: "search-form") {
                 input(class: "w-full lg:w-[260px]", id: "search", name: "q", placeholder: "Search articles", type: "text")
@@ -145,6 +145,6 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
         }
       }
-    }
+    },
   ]
 }

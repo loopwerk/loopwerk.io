@@ -27,3 +27,6 @@ resize:
 			fi
 		done
 	done
+
+format:
+  swiftformat --swift-version 5 .

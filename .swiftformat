@@ -2,3 +2,5 @@
 --indentcase true
 --patternlet inline
 --disable unusedArguments
+--disable redundantReturn
+--disable redundantSelf

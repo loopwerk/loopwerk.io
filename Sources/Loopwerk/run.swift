@@ -39,11 +39,11 @@ extension Item where M == ArticleMetadata {
   var archive: Bool {
     return metadata.archive ?? false
   }
-  
+
   var year: Int {
     return Calendar.current.component(.year, from: self.date)
   }
-  
+
   var creationDate: Date {
     // Use file modification date if it matches the filename date (accounting for timezone)
     // The git-restore-mtime script should have set proper file timestamps to the FIRST commit
@@ -56,8 +56,9 @@ extension Item where M == ArticleMetadata {
 
     // Check if the dates match in Amsterdam timezone
     if fileCreationComponents.year == selfDateComponents.year &&
-       fileCreationComponents.month == selfDateComponents.month &&
-       fileCreationComponents.day == selfDateComponents.day {
+      fileCreationComponents.month == selfDateComponents.month &&
+      fileCreationComponents.day == selfDateComponents.day
+    {
       return self.lastModified
     }
 
@@ -77,6 +78,11 @@ enum SiteMetadata {
   static let name = "Loopwerk"
   static let author = "Kevin Renskers"
   static let now = Date()
+  static let projectRoot = URL(fileURLWithPath: #file)
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .path
 }
 
 func improveHTML<M>(item: Item<M>) {
@@ -92,15 +98,11 @@ func permalink(item: Item<ArticleMetadata>) {
   item.relativeDestination = Path(components: components)
 }
 
-let imageExtensions: Set<String> = ["webp", "jpg", "png"]
-
 func heroImage(item: Item<ArticleMetadata>) {
-  for imageExtension in imageExtensions {
-    let imageFilename = item.filenameWithoutExtension + ".\(imageExtension)"
-    if (Path("content/articles/heroes") + imageFilename).exists {
-      item.metadata.heroImage = imageFilename
-      break
-    }
+  let imageFilename = item.filenameWithoutExtension + "-1680w.webp"
+  let heroesPath = Path(SiteMetadata.projectRoot) + "content/articles/heroes"
+  if (heroesPath + imageFilename).exists {
+    item.metadata.heroImage = "/articles/heroes/" + imageFilename
   }
 }
 
@@ -122,8 +124,8 @@ struct Run {
           .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
-          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "feed.xml"),
-          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.self.metadata.summary, dateKeyPath: \.creationDate), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.metadata.summary, image: \.metadata.heroImage, dateKeyPath: \.creationDate), output: "feed.xml"),
+          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.metadata.summary, image: \.metadata.heroImage, dateKeyPath: \.creationDate), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
         ]
       )
       .register(
@@ -171,12 +173,7 @@ extension Saga {
       return self
     }
 
-    let rootPath = String(URL(fileURLWithPath: #file)
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-      .pathComponents
-      .joined(separator: "/")
-      .dropFirst())
+    let sourcesPath = SiteMetadata.projectRoot + "/Sources"
 
     let createArticleImagesDateFormatter = DateFormatter()
     createArticleImagesDateFormatter.dateFormat = "MMMM dd, yyyy"
@@ -186,7 +183,7 @@ extension Saga {
 
     for article in articles {
       let destination = (outputPath + "static" + "images" + article.filenameWithoutExtension).string + ".png"
-      let generator = ImageGenerator(rootPath: rootPath)
+      let generator = ImageGenerator(rootPath: sourcesPath)
       generator?.generate(article: article, outputPath: destination)
     }
 

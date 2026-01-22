@@ -31,7 +31,7 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
         %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-         %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+        %a(href: "/articles/tag/\(tag.slugified)/") { tag },
       ])
     }
   }
@@ -89,19 +89,18 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
       }
 
-      if let heroImage = context.item.metadata.heroImage {
-        let baseName = (heroImage as NSString).deletingPathExtension
+      if context.item.metadata.heroImage != nil {
         let srcset = """
-          /articles/heroes/\(baseName)-315w.webp 315w, \
-          /articles/heroes/\(baseName)-630w.webp 630w, \
-          /articles/heroes/\(baseName)-840w.webp 840w, \
-          /articles/heroes/\(baseName)-1680w.webp 1680w
-          """
+        /articles/heroes/\(context.item.filenameWithoutExtension)-315w.webp 315w, \
+        /articles/heroes/\(context.item.filenameWithoutExtension)-630w.webp 630w, \
+        /articles/heroes/\(context.item.filenameWithoutExtension)-840w.webp 840w, \
+        /articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp 1680w
+        """
         img(
           alt: "Hero image",
           class: "hero-image",
           sizes: "(max-width: 799px) 315px, 840px",
-          src: "/articles/heroes/\(baseName)-1680w.webp",
+          src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp",
           srcset: srcset,
           customAttributes: ["fetchpriority": "high"]
         )

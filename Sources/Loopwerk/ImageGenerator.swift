@@ -1,6 +1,6 @@
 import Foundation
-import SwiftGD
 import Saga
+import SwiftGD
 
 class ImageGenerator {
   private let background: Image
@@ -36,7 +36,7 @@ class ImageGenerator {
     // Draw the tags on the image
     let tags = article.metadata.tags.sorted().map { "#\($0)" }.joined(separator: ", ")
     background.renderText(tags, from: Point(x: 90, y: 580), fontList: [fontPath], color: Color.white, size: 20)
-    
+
     // Save the image as a PNG
     background.write(to: URL(fileURLWithPath: outputPath))
   }

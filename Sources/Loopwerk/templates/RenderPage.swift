@@ -19,15 +19,15 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
-  
+
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     div {
       img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/loopwerk.svg")
-      
+
       div(class: "my-24 uppercase font-helvetica text-[40px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
         Node.raw(context.item.body)
       }
-      
+
       div(class: "text-center images") {
         a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
         a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
@@ -47,30 +47,30 @@ func getSearchHeader() -> NodeConvertible {
   script(src: "/pagefind/pagefind-modular-ui.js")
   script {
     Node.raw(
-    """
-    window.addEventListener('DOMContentLoaded', (event) => {
-        let q = new URLSearchParams(window.location.search).get("q");
-    
-        const instance = new PagefindModularUI.Instance();
-        instance.add(new PagefindModularUI.Input({
-            inputElement: "#search"
-        }));
-        instance.add(new PagefindModularUI.ResultList({
-            containerElement: "#results"
-        }));
-        instance.add(new PagefindModularUI.Summary({
-          containerElement: "#summary"
-        }));
-        instance.triggerSearch(q);
-    });
-    """
+      """
+      window.addEventListener('DOMContentLoaded', (event) => {
+          let q = new URLSearchParams(window.location.search).get("q");
+
+          const instance = new PagefindModularUI.Instance();
+          instance.add(new PagefindModularUI.Input({
+              inputElement: "#search"
+          }));
+          instance.add(new PagefindModularUI.ResultList({
+              containerElement: "#results"
+          }));
+          instance.add(new PagefindModularUI.Summary({
+            containerElement: "#summary"
+          }));
+          instance.triggerSearch(q);
+      });
+      """
     )
   }
 }
 
 func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
-  
+
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title, extraHeader: getSearchHeader()) {
     div(id: "summary")
     div(id: "results")
@@ -79,7 +79,7 @@ func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func renderNonHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
-  
+
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     article {
       div(class: "prose") {
@@ -92,15 +92,15 @@ func renderNonHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func render404(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
-  
+
   let articles = context.allItems
     .compactMap { $0 as? Item<ArticleMetadata> }
     .prefix(10)
-  
+
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     article(class: "prose") {
       Node.raw(context.item.body)
-      
+
       ul {
         articles.map { article in
           li {
@@ -108,7 +108,7 @@ func render404(context: ItemRenderingContext<PageMetadata>) -> Node {
           }
         }
       }
-      
+
       div {
         a(href: "/articles/") { "› See all articles" }
       }
