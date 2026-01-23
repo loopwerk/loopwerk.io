@@ -25,7 +25,6 @@ struct PageMetadata: Metadata {
 struct ProjectMetadata: Metadata {
   let category: String
   let repo: String
-  let image: String?
   let order: Int?
 }
 

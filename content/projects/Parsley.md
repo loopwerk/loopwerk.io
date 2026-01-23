@@ -1,7 +1,6 @@
 ---
 category: Swift
 repo: loopwerk/Parsley
-image: parsley-social-image.png
 order: 2
 ---
 
