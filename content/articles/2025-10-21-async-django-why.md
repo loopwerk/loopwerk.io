@@ -37,7 +37,10 @@ The practical reality is that after years and countless hours of effort to add a
 
 Furthermore, the heart of Django - the ORM - is still a work in progress. To call a synchronous piece of code from an `async` view, you must wrap it in `sync_to_async`. While functional, this bridge highlights the inherent friction between the two paradigms and serves as a constant reminder that the async path is still evolving. For new developers, this duality can make the documentation harder to navigate.
 
-If you truly need raw, async-first performance, frameworks like FastAPI are [objectively better](https://github.com/AakarSharma/fastapi-vs-django-benchmark). Built on Starlette, FastAPI is async from the ground up and consistently outperforms Django in high-concurrency benchmarks. This isn't just because of async, but also because it's a lighter framework with less built-in machinery. No batteries included.
+If you truly need raw, async-first performance, frameworks like FastAPI [might be better](https://github.com/AakarSharma/fastapi-vs-django-benchmark). Built on Starlette, FastAPI is async from the ground up and consistently outperforms Django in high-concurrency benchmarks. This isn't just because of async, but also because it's a lighter framework with less built-in machinery. No batteries included.
+
+> [!UPDATE]
+> Hackeryarn wrote a really interesting [article with benchmarks](https://hackeryarn.com/post/async-python-benchmarks/) showing that in most real-world scenarios, like when a database is involved, sync Django actually outperforms FastAPI. His conclusion: *"If your service talks to a database directly, it is unlikely that your service is the bottleneck. To get the best performance you should stick with a sync webserver and ensure that you pool your database connections. As the ecosystem stands, async introduces too much overhead to make sense."*
 
 ## A monumental and unending effort
 
