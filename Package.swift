@@ -13,7 +13,7 @@ let package = Package(
     .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "1.0.0"),
     .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.8.2"),
     .package(url: "https://github.com/twostraws/SwiftGD", branch: "main"),
-    .package(path: "../Moon"),
+    .package(url: "https://github.com/loopwerk/Moon", from: "1.2.0"),
   ],
   targets: [
     .executableTarget(

@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "moon",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loopwerk/Moon",
+      "state" : {
+        "revision" : "6dd45165fe70c7e51a65cd53acb1e4765ec54df1",
+        "version" : "1.2.0"
+      }
+    },
+    {
       "identity" : "parsley",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
