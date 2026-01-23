@@ -8,7 +8,7 @@ FROM swift:6.0-noble AS builder
 RUN apt-get update && apt-get --no-install-recommends install -y \
     libgd-dev \
     libavif-dev \
-    libjavascriptcoregtk-4.0-dev \
+    libjavascriptcoregtk-4.1-dev \
     python3 \
     git \
     git-restore-mtime \
