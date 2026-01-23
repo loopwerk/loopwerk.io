@@ -1,6 +1,15 @@
 import Foundation
+import Moon
 import Parsley
 import SwiftSoup
+
+private let syntaxHighlighter: Moon = {
+  do {
+    return try Moon(additionalPlugins: ["prism-svelte.js"], bundle: Bundle.module)
+  } catch {
+    fatalError("Failed to initialize Moon: \(error)")
+  }
+}()
 
 func tagnameToSpacing(_ tag: String) -> String {
   switch tag {
@@ -103,10 +112,15 @@ extension String {
         }
       }
 
-      let result = try doc.body()?.html() ?? self
+      var result = try doc.body()?.html() ?? self
       let tocString = toc.joined(separator: "\n")
       let tocHtml = try Parsley.html(tocString)
-      return result.replacingOccurrences(of: "<p>%TOC%</p>", with: tocHtml)
+      result = result.replacingOccurrences(of: "<p>%TOC%</p>", with: tocHtml)
+
+      // Syntax highlighting for code blocks
+      result = syntaxHighlighter.highlightCodeBlocks(in: result)
+      
+      return result
     } catch {
       return self
     }
