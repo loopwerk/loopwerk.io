@@ -9,12 +9,14 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     libgd-dev \
     libavif-dev \
     libjavascriptcoregtk-4.1-dev \
+    pkg-config \
     python3 \
     git \
     git-restore-mtime \
     curl wget \
     nodejs npm \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && pkg-config --libs javascriptcoregtk-4.1
 
 # Install pnpm
 RUN npm install -g pnpm
