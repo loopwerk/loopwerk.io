@@ -3,10 +3,10 @@
     {
       "identity" : "jxkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loopwerk/JXKit",
+      "location" : "https://github.com/jectivex/JXKit",
       "state" : {
-        "revision" : "733bc1fc7b3a26ffb84c0c6fdb3b0958bf3d3f86",
-        "version" : "4.0.0"
+        "revision" : "a4c1872d36036fe4ade4b1cadb268603e89e25f0",
+        "version" : "3.6.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Moon",
       "state" : {
-        "revision" : "ac51301e70816d32afbbb221420936b2eb79d373",
-        "version" : "1.2.2"
+        "revision" : "a7fc37ea83092707f54ff0f193996ebbed05a65e",
+        "version" : "1.2.3"
       }
     },
     {
