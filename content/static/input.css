@@ -208,12 +208,24 @@ code var {
 }
 
 .prose aside {
-  @apply px-4 border border-orange my-5;
+  @apply px-4 border border-orange my-5 rounded-md;
   font-size: 90%;
 }
 
 .prose aside .title {
   @apply text-orange block -mb-4;
+}
+
+.prose blockquote {
+  @apply ml-[3px] text-xl py-3 font-title font-thin leading-8;
+}
+
+.prose blockquote p:first-child {
+  @apply mt-0;
+}
+
+.prose blockquote p:last-child {
+  @apply mb-0;
 }
 
 /* SCREENSHOTS */

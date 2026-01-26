@@ -49,8 +49,7 @@ module.exports = {
             "blockquote p:last-of-type::after": false,
             blockquote: {
               fontStyle: "normal",
-              borderInlineStartWidth: "1px",
-              marginLeft: "3px",
+              borderInlineStartWidth: "2px",
             },
             a: {
               color: theme("colors.orange"),

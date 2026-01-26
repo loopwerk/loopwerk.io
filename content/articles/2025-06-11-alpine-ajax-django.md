@@ -19,7 +19,7 @@ When Roy Fielding defined REST in his 2000 dissertation, JSON didn't even exist.
 
 In a true RESTful system, a client (like a browser) doesn't need to know any specific API endpoints besides a single entry point. It discovers what it can do next simply by parsing the HTML it receives. The links and forms _are the API_, and they fully describe the available actions. This is why Fielding gets frustrated with what we call REST APIs today:
 
-> "I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today's example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating."
+> I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today's example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating.
 >
 > — Roy Fielding
 

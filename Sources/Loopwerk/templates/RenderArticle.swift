@@ -109,7 +109,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       Node.raw(context.item.body)
     }
 
-    div(class: "border-t border-light mt-8 pt-8") {
+    div(class: "border-t-2 border-light mt-8 pt-8") {
       h2(class: "font-title text-5xl font-bold mb-8") { "Written by" }
       div(class: "flex flex-col lg:flex-row gap-8 lg:items-center") {
         div(class: "flex-[0_0_120px]") {
@@ -149,7 +149,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
     }
 
-    div(class: "border-t border-light mt-8 pt-8") {
+    div(class: "border-t-2 border-light mt-8 pt-8") {
       Node.raw("""
       <script src="https://giscus.app/client.js"
             data-repo="loopwerk/loopwerk.io"

@@ -7,7 +7,7 @@ summary: While a technical marvel, async Django has been quietly rejected by the
 
 A client recently asked me a seemingly simple question:
 
-> "If we switch our Django backend to run on an ASGI server, will it get faster?"
+> If we switch our Django backend to run on an ASGI server, will it get faster?
 
 The short answer is no. The slightly longer answer is that switching the server from WSGI to ASGI does nothing on its own. To see any change, you have to start rewriting your views to be `async`, and even then, the benefits are marginal at best for 99% of web applications. For their specific workload, offloading heavy tasks to a background worker is a far simpler and more effective solution.
 
@@ -40,7 +40,7 @@ Furthermore, the heart of Django - the ORM - is still a work in progress. To cal
 If you truly need raw, async-first performance, frameworks like FastAPI [might be better](https://github.com/AakarSharma/fastapi-vs-django-benchmark). Built on Starlette, FastAPI is async from the ground up and consistently outperforms Django in high-concurrency benchmarks. This isn't just because of async, but also because it's a lighter framework with less built-in machinery. No batteries included.
 
 > [!UPDATE]
-> Hackeryarn wrote a really interesting [article with benchmarks](https://hackeryarn.com/post/async-python-benchmarks/) showing that in most real-world scenarios, like when a database is involved, sync Django actually outperforms FastAPI. His conclusion: *"If your service talks to a database directly, it is unlikely that your service is the bottleneck. To get the best performance you should stick with a sync webserver and ensure that you pool your database connections. As the ecosystem stands, async introduces too much overhead to make sense."*
+> Hackeryarn wrote a really interesting [article with benchmarks](https://hackeryarn.com/post/async-python-benchmarks/) showing that in most real-world scenarios, like when a database is involved, sync Django actually outperforms FastAPI. His conclusion: _"If your service talks to a database directly, it is unlikely that your service is the bottleneck. To get the best performance you should stick with a sync webserver and ensure that you pool your database connections. As the ecosystem stands, async introduces too much overhead to make sense."_
 
 ## A monumental and unending effort
 
@@ -55,7 +55,7 @@ The journey to bring async to Django has been a marathon, not a sprint. It offic
 
 This timeline represents a colossal investment of time from numerous core contributors. I wonder if it was worth it, and I am certainly not alone with this question. Will it ever be finished? And at what cost? Even Andrew Godwin [said](https://forum.djangoproject.com/t/is-dep009-async-capable-django-still-relevant/30132/2) the following:
 
-> "I do think we'll never be able to make it fully async only in the ORM core, as the slowdown in sync mode will just be too much. Given that, I'm very realistic about the fact that we may just not be able to write and maintain what are two parallel ORM cores"
+> I do think we'll never be able to make it fully async only in the ORM core, as the slowdown in sync mode will just be too much. Given that, I'm very realistic about the fact that we may just not be able to write and maintain what are two parallel ORM cores
 
 ## My verdict: an impressive feat for a problem that rarely exists
 

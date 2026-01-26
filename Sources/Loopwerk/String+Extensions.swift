@@ -119,7 +119,7 @@ extension String {
 
       // Syntax highlighting for code blocks
       result = syntaxHighlighter.highlightCodeBlocks(in: result)
-      
+
       return result
     } catch {
       return self

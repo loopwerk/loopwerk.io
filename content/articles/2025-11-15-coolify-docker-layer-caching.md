@@ -70,7 +70,7 @@ Effect:
 
 This has been reported in [Coolify issue #7040](https://github.com/coollabsio/coolify/issues/7040). The ticket confirms the problem:
 
-> "Since v432 or so, docker compose builds are no longer utilizing build cache... `COOLIFY_CONTAINER_NAME` changes on every run. Therefore nothing will ever get cached."
+> Since v432 or so, docker compose builds are no longer utilizing build cache... `COOLIFY_CONTAINER_NAME` changes on every run. Therefore nothing will ever get cached.
 
 Coolify had auto-updated, and my fast builds disappeared overnight.
 

@@ -141,25 +141,27 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           children()
         }
 
-        div(class: "site-footer container text-gray gray-links border-t border-light text-center pt-6 mt-8 text-sm font-anonymous") {
-          p {
-            "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
-          }
-          p {
-            "Built in Swift using"
-            a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
-            "("
-            %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
-            %")."
-          }
-          p {
-            a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
-            " | "
-            a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
-            " | "
-            a(href: "https://www.linkedin.com/in/kevinrenskers/", target: "_blank") { "LinkedIn" }
-            " | "
-            a(href: "mailto:kevin@loopwerk.io") { "Email" }
+        div(class: "site-footer container text-gray gray-links text-center text-sm font-mono") {
+          div(class: "border-t-2 border-light pt-6 mt-8") {
+            p {
+              "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
+            }
+            p {
+              "Built in Swift using"
+              a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
+              "("
+              %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
+              %")."
+            }
+            p {
+              a(href: "\(SiteMetadata.url.absoluteString)/articles/\(rssLink)feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+              " | "
+              a(href: "https://hachyderm.io/@kevinrenskers", rel: "me", target: "_blank") { "Mastodon" }
+              " | "
+              a(href: "https://www.linkedin.com/in/kevinrenskers/", target: "_blank") { "LinkedIn" }
+              " | "
+              a(href: "mailto:kevin@loopwerk.io") { "Email" }
+            }
           }
         }
       }

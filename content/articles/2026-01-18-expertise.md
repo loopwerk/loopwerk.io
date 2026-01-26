@@ -1,6 +1,6 @@
 ---
 tags: insights
-summary: Trying to “master” a programming language is a trap. Real expertise comes from learning what you need, when you need it, and ignoring the rest on purpose.
+summary: Trying to "master" a programming language is a trap. Real expertise comes from learning what you need, when you need it, and ignoring the rest on purpose.
 ---
 
 # Expertise is the art of ignoring
@@ -11,13 +11,13 @@ The first eight of those years were spent writing PHP, and then I made the switc
 
 **I felt more like an expert after eight years of PHP than I do after seventeen years of Python.**
 
-This isn’t impostor syndrome. It isn’t a lack of confidence. And it isn’t because I somehow regressed as a developer. It’s because the idea of “mastering a language” no longer makes sense, if it ever did.
+This isn’t impostor syndrome. It isn’t a lack of confidence. And it isn’t because I somehow regressed as a developer. It’s because the idea of "mastering a language" no longer makes sense, if it ever did.
 
 ## When mastery felt possible
 
 Early-2000s PHP had a very narrow job: generate HTML and talk to a database.
 
-If you understood string manipulation, forms, sessions, and a handful of database functions, you essentially knew PHP. The official manual was finite. The ecosystem was small. The distance between “language knowledge” and “shipping a product” was almost zero.
+If you understood string manipulation, forms, sessions, and a handful of database functions, you essentially knew PHP. The official manual was finite. The ecosystem was small. The distance between "language knowledge" and "shipping a product" was almost zero.
 
 You could realistically reach a point where you felt done. Not perfect, but complete. That feeling of mastery wasn’t arrogance. It was a side effect of a small problem space.
 
@@ -52,9 +52,7 @@ Just in case it’s needed someday.
 
 That instinct is understandable. It’s also deeply counter-productive. After decades of doing this professionally, I’m convinced of the opposite approach.
 
-At this point, a cynical reader might object:
-
-> “Isn’t this just an excuse to be a mediocre developer who doesn’t understand how things work under the hood?”
+At this point, a cynical reader might object: "Isn’t this just an excuse to be a mediocre developer who doesn’t understand how things work under the hood?"
 
 That’s a fair concern. It’s also not what I’m arguing for.
 
@@ -90,7 +88,7 @@ Feeling comfortable with what you don’t know is not a weakness. It’s the onl
 
 ## Final thought
 
-“Mastering a programming language” is a comforting idea, especially when you’re starting out. It’s also a lie that creates unnecessary pressure.
+"Mastering a programming language" is a comforting idea, especially when you’re starting out. It’s also a lie that creates unnecessary pressure.
 
 The goal isn’t mastery. The goal is usefulness.
 
