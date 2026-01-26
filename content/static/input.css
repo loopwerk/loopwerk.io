@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: local("IBM Plex Sans Regular"),
-    url(/static/IBMPlexSans-Regular.woff2) format("woff2");
-  font-display: swap;
-}
-
 /* MOBILE MENU */
 
 .hamburger:hover .hamburger-line {
@@ -80,16 +73,14 @@ a.orange:hover {
   @apply underline;
 }
 
-a[href^="https://github.com"].app
-{
+a[href^="https://github.com"].app {
   background: transparent url("images/github.svg") no-repeat;
   background-size: 1em 1em;
   padding-left: 20px;
 }
 
-a[href^="https://itunes.apple.com"].app, 
-a[href^="https://apps.apple.com"].app
-{
+a[href^="https://itunes.apple.com"].app,
+a[href^="https://apps.apple.com"].app {
   background: transparent url("images/apple.svg") no-repeat;
   background-size: 1em 1em;
   padding-left: 20px;
@@ -209,7 +200,11 @@ code var {
 }
 
 .prose h1 {
-  @apply font-semibold mt-12;
+  @apply font-title font-bold mt-12 text-5xl;
+}
+
+.prose h2 {
+  @apply font-title text-4xl;
 }
 
 .prose aside {

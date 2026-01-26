@@ -110,7 +110,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     }
 
     div(class: "border-t border-light mt-8 pt-8") {
-      h2(class: "text-4xl font-extrabold mb-8") { "Written by" }
+      h2(class: "font-title text-5xl font-bold mb-8") { "Written by" }
       div(class: "flex flex-col lg:flex-row gap-8 lg:items-center") {
         div(class: "flex-[0_0_120px]") {
           img(alt: "Avatar", class: "w-[120px] h-[120px] rounded-full", src: "/articles/images/kevin.png")
@@ -138,7 +138,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     }
 
     div(class: "mt-16") {
-      h2(class: "text-4xl font-extrabold mb-8") { seeMoreArticlesTitle }
+      h2(class: "font-title text-5xl font-bold mb-8") { seeMoreArticlesTitle }
 
       div(class: "grid lg:grid-cols-2 gap-8") {
         seeMoreArticles.map { renderArticleForGrid(article: $0) }

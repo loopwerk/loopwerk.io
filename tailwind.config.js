@@ -31,8 +31,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        helvetica: ["Helvetica", ...defaultTheme.fontFamily.sans],
-        ibm: ["IBM Plex Sans", ...defaultTheme.fontFamily.sans],
+        main: ['"Main Sans"', ...defaultTheme.fontFamily.sans],
+        title: ['"Title Serif"', ...defaultTheme.fontFamily.serif],
       },
       typography: theme => ({
         DEFAULT: {

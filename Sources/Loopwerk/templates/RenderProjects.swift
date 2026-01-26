@@ -20,7 +20,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
 @NodeBuilder
 private func renderCategory(category: String, projects: [Item<ProjectMetadata>]) -> Node {
   div(class: "mt-12") {
-    h1(class: "text-2xl font-bold mb-6 border-b border-light") { category }
+    h1(class: "font-title text-4xl font-bold mb-6") { category }
 
     projects
       .sorted { ($0.order, $0.title) < ($1.order, $1.title) }

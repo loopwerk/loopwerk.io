@@ -7,3 +7,5 @@ xcuserdata/
 env
 deploy
 node_modules
+.claude
+.playwright-mcp

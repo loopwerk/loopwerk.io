@@ -12,7 +12,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
 
     context.items.map { app in
       div(class: "mt-12 prose") {
-        h2(class: "text-2xl font-bold !mb-0") { app.title }
+        h3(class: "text-2xl font-bold !mb-0") { app.title }
 
         div(class: "mb-4 flex flex-wrap screenshots\(app.metadata.roundOffImages ?? true ? " rounded" : "") break_\(app.metadata.breakImages ?? (app.metadata.images.count % 2 == 0 ? 2 : app.metadata.images.count))") {
           app.metadata.images.map { src in

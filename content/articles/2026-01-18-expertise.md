@@ -43,18 +43,14 @@ This is why newer iOS developers can be productive in SwiftUI without having a d
 
 Expertise has moved up the stack.
 
-## The trap of Just-In-Case learning
+## Just-In-Time beats Just-In-Case
 
 Many developers, especially early in their careers, respond to this sprawl by trying to learn everything.
 
 Every module. Every feature. Every corner case.  
 Just in case it’s needed someday.
 
-That instinct is understandable. It’s also deeply counter-productive.
-
-After decades of doing this professionally, I’m convinced of the opposite approach.
-
-### Just-In-Time beats Just-In-Case
+That instinct is understandable. It’s also deeply counter-productive. After decades of doing this professionally, I’m convinced of the opposite approach.
 
 At this point, a cynical reader might object:
 

@@ -16,7 +16,7 @@ enum Section: String {
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
-    html(class: "bg-nav h-full font-ibm", lang: "en-US") {
+    html(class: "bg-nav h-full font-main", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
@@ -32,6 +32,24 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         meta(content: "@kevinrenskers@hachyderm.io", name: "fediverse:creator")
         title { SiteMetadata.name + ": \(pageTitle)" }
         link(href: "/static/output.css", rel: "stylesheet")
+        style {
+          Node.raw("""
+          @font-face {
+            font-family: "Title Serif";
+            src: url(/static/fonts/title.woff2) format("woff2");
+            font-style: normal;
+            font-weight: 100 900;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Main Sans";
+            src: url(/static/fonts/main.woff2) format("woff2");
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+          }
+          """)
+        }
         link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
         link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
         link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
@@ -108,7 +126,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         if section != .home {
           div(class: "container pt-4 lg:pt-20") {
             div(class: "bg-orange p-4 text-black text-lg rounded-md shadow-lg shadow-nav") {
-              "For the first time since 2023 I'm available again for a new project. If you need a developer with 25 of years of experience building websites and iOS apps, check out the "
+              "For the first time since 2023 I'm available again for new projects. If you need a developer with 25 years of experience building websites and iOS apps, check out the "
               a(class: "underline", href: "/hire-me/") {
                 "Hire me"
               }
