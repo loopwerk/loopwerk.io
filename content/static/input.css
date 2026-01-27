@@ -76,6 +76,7 @@ a.orange:hover {
 a[href^="https://github.com"].app {
   background: transparent url("images/github.svg") no-repeat;
   background-size: 1em 1em;
+  background-position: left center;
   padding-left: 20px;
 }
 
@@ -83,6 +84,7 @@ a[href^="https://itunes.apple.com"].app,
 a[href^="https://apps.apple.com"].app {
   background: transparent url("images/apple.svg") no-repeat;
   background-size: 1em 1em;
+  background-position: left center;
   padding-left: 20px;
 }
 
