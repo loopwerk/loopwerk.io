@@ -32,7 +32,7 @@ Bert Verstappen, former Project Manager at Tessa (a Unilever project):
 
 Dan Raviv, CTO at Sound Radix:
 
-> Kevin is the most professional full-stack web developer I’ve worked with. He took end-to-end project ownership and reworked our entire website, **improving the UX as well as internals beyond recognition**. I had complete confidence in Kevin to handle any technical challenge on his own.
+> Kevin is the most professional full-stack web developer I’ve worked with. It’s very hard to find engineers who take pride in their craft and are also able to take end-to-end project ownership; Kevin did just that at Sound Radix and reworked our entire website, **improving the UX as well as internals beyond recognition**. I had complete confidence in Kevin to handle any technical challenge on his own.
 
 ## Tech
 
