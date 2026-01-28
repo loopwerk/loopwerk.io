@@ -22,11 +22,11 @@ Over my 25 years of experience, [I've learned that the best solution is often th
 
 ## What clients say
 
-Michael Hodges, former CTO at Skippit:
+Michael Hodges, CTO at Skippit:
 
 > Kevin is a highly skilled software engineer with a wide breadth of experience allowing him to work across the product sphere. His insight and talent proved invaluable when building our team and product. **He has an exceptional understanding of product development and design** and keeps the rest of the team focused on the user experience. Kevin is a thought leader and someone I wouldn't hesitate to work with again.
 
-Bert Verstappen, former Project Manager at Tessa (a Unilever project):
+Bert Verstappen, Project Manager at Tessa (a Unilever project):
 
 > From the moment he joined our development team **the quality of the code base increased quickly and our release cycles shortened significantly.** Kevin also has a healthy knowledge of UX and UI, which made me and the team always consider his valuable input. Besides being a solid rock in your team, Kevin is also just a super nice and pleasant guy.
 
