@@ -3,11 +3,18 @@ import PathKit
 import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
+import SwiftGD
+
+struct HeroImage: Decodable {
+  let path: String
+  let width: Int
+  let height: Int
+}
 
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
-  var heroImage: String?
+  var heroImage: HeroImage?
   var archive: Bool?
 }
 
@@ -98,10 +105,21 @@ func permalink(item: Item<ArticleMetadata>) {
 }
 
 func heroImage(item: Item<ArticleMetadata>) {
+  // Check if a hero image exists for this article. If so, get its dimensions.
   let imageFilename = item.filenameWithoutExtension + "-1680w.webp"
   let heroesPath = Path(SiteMetadata.projectRoot) + "content/articles/heroes"
-  if (heroesPath + imageFilename).exists {
-    item.metadata.heroImage = "/articles/heroes/" + imageFilename
+  let imagePath = heroesPath + imageFilename
+
+  if imagePath.exists {
+    if let data = try? Data(contentsOf: URL(fileURLWithPath: imagePath.string)),
+       let image = try? Image(data: data, as: .webp)
+    {
+      item.metadata.heroImage = HeroImage(
+        path: "/articles/heroes/" + imageFilename,
+        width: image.size.width,
+        height: image.size.height
+      )
+    }
   }
 }
 
@@ -123,8 +141,28 @@ struct Run {
           .yearWriter(swim(renderYear)),
 
           // Atom feed for all articles, and a feed per tag
-          .listWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.metadata.summary, image: \.metadata.heroImage, dateKeyPath: \.creationDate), output: "feed.xml"),
-          .tagWriter(atomFeed(title: SiteMetadata.name, author: SiteMetadata.author, baseURL: SiteMetadata.url, summary: \.metadata.summary, image: \.metadata.heroImage, dateKeyPath: \.creationDate), output: "tag/[key]/feed.xml", tags: \.metadata.tags),
+          .listWriter(
+            atomFeed(
+              title: SiteMetadata.name,
+              author: SiteMetadata.author,
+              baseURL: SiteMetadata.url,
+              summary: \.metadata.summary,
+              image: \.metadata.heroImage?.path,
+              dateKeyPath: \.creationDate
+            ),
+            output: "feed.xml"
+          ),
+          .tagWriter(
+            atomFeed(
+              title: SiteMetadata.name,
+              author: SiteMetadata.author,
+              baseURL: SiteMetadata.url,
+              summary: \.metadata.summary,
+              image: \.metadata.heroImage?.path,
+              dateKeyPath: \.creationDate
+            ),
+            output: "tag/[key]/feed.xml", tags: \.metadata.tags
+          ),
         ]
       )
       .register(
