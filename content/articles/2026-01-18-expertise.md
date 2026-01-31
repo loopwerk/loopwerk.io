@@ -31,7 +31,7 @@ After seventeen years, I know my slice extremely well. I can design, build, scal
 
 That doesn’t make me uncomfortable. It makes me honest. It doesn’t mean I don’t know Python well enough. It means the language outgrew the idea of total knowledge.
 
-## Frameworks didn’t make you worse
+## Expertise has moved up the stack
 
 Modern development adds another layer of confusion.
 
