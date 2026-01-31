@@ -76,16 +76,6 @@ Some lessons I wish I’d learned much earlier:
 >
 > It’s worth separating passing interviews from being effective at the job. The former often incentivizes breadth without context. The latter rewards depth, judgment, and the ability to learn quickly when something new actually matters. If you’re studying for interviews, some Just-In-Case learning is unavoidable. Just don’t confuse that game with the thing it’s supposed to measure.
 
-## Why senior developers feel less like experts
-
-Here’s the paradox: the more experienced you become, the less complete your knowledge feels.
-
-That isn’t failure. It’s perspective.
-
-When the room is small, it’s easy to feel like an expert. When the room turns into a cathedral, you stop pretending you understand every stone and start focusing on the parts that keep the structure standing.
-
-Feeling comfortable with what you don’t know is not a weakness. It’s the only way to avoid being crushed by the weight of the stones.
-
 ## Final thought
 
 "Mastering a programming language" is a comforting idea, especially when you’re starting out. It’s also a lie that creates unnecessary pressure.
