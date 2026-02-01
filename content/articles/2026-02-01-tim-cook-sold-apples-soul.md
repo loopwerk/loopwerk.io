@@ -61,7 +61,7 @@ The honest answer is simple: I am trapped in their walled garden.
 
 I could switch from macOS to Linux. It would be painful (some apps I rely on don't exist on Linux), but it's theoretically possible. But what about my iPhone? Switch to Android? [Google is no better than Apple.](https://en.wikipedia.org/wiki/Criticism_of_Google) A de-Googled Android flavor like /e/OS? You can still install most Android apps, but it's a compromised experience, and Android apps are generally worse than their iOS counterparts anyway. Plus there's CarPlay, which works far better than my car's built-in infotainment system. A de-Googled phone means no Android Auto either, which is close to a dealbreaker on its own.
 
-More importantly, leaving Apple doesn't mean switching a device. It means abandoning an ecosystem I've been slowly locked into for years. Notes. Contacts. Apple Music. Safari bookmarks and Reading List. iCloud Drive. Passwords and Passkeys. AirTags. And I absolutely refuse to swap iMessage for WhatsApp, because Meta is far worse than Apple.
+More importantly, leaving Apple doesn't mean switching a device. It means abandoning an ecosystem I've been slowly locked into for years. Photos. Notes. Contacts. Apple Music. Safari bookmarks and Reading List. iCloud Drive. Passwords and Passkeys. AirTags. And I absolutely refuse to swap iMessage for WhatsApp, because Meta is far worse than Apple.
 
 And my iPad? I can't run Linux on it, and Android tablets are still bad. I could keep the iPad, but at that point the whole promise of ecosystem convenience disappears.
 
