@@ -73,7 +73,7 @@ I've decided I won't spend another cent on Apple hardware. My M1 MacBook, my iPh
 
 This is an imperfect solution. I'm still in the ecosystem, still contributing to their services revenue, still implicitly supporting a company whose values I no longer recognize. But it's the compromise I've found between my principles and the practical reality of my digital life.
 
-In 2026 I want to set up [Nextcloud](https://nextcloud.com) or [ownCloud](https://owncloud.online) for me and my family, so that I start to move away from Apple's ecosystem, bit by bit. I'll probably add a self-hosted Bitwarden instance for password storage. Last year I already moved my smart home brains off of Apple's Home app and [onto Home Assistant](/articles/2025/home-assistant-review/). I suspect I'll keep using Apple Music going forward: it works on Android (if I would switch to that), it has a web-based player that works on Linux, and my family all use it too. And we love to make collaborative playlists for road trips.
+In 2026 I want to set up [Nextcloud](https://nextcloud.com) or [ownCloud](https://owncloud.online) for me and my family, so that I start to move away from Apple's ecosystem, bit by bit. I'll probably add a self-hosted Bitwarden instance for password storage. Last year I already moved my smart home brains off of Apple's Home app and [onto Home Assistant](/articles/2025/home-assistant-review/). I suspect I'll keep using Apple Music going forward: it works on Android (if I would switch to that), it has a web-based player that works on Linux, and my family all use it too (and we love to make collaborative playlists for road trips).
 
 ## Final thoughts
 
