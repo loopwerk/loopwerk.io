@@ -67,11 +67,15 @@ And my iPad? I can't run Linux on it, and Android tablets are still bad. I could
 
 The task of switching everything feels impossibly large. This is, of course, by design. Apple has spent decades building walls around their garden, making it progressively harder to leave.
 
-## My compromise
+## Finding my way out
 
 I've decided I won't spend another cent on Apple hardware. My M1 MacBook, my iPhone 14 Pro, my 2018 iPad Pro: I'll use them until they die or become unusable. Apple won't earn another cent from me for hardware.
 
 This is an imperfect solution. I'm still in the ecosystem, still contributing to their services revenue, still implicitly supporting a company whose values I no longer recognize. But it's the compromise I've found between my principles and the practical reality of my digital life.
+
+In 2026 I want to set up [Nextcloud](https://nextcloud.com) or [ownCloud](https://owncloud.online) for me and my family, so that I start to move away from Apple's ecosystem, bit by bit. I'll probably add a self-hosted Bitwarden instance for password storage. Last year I already moved my smart home brains off of Apple's Home app and [onto Home Assistant](/articles/2025/home-assistant-review/). I suspect I'll keep using Apple Music going forward: it works on Android (if I would switch to that), it has a web-based player that works on Linux, and my family all use it too. And we love to make collaborative playlists for road trips.
+
+## Final thoughts
 
 I used to love Apple. I became a fan when they were the underdog, when they had something to prove, when the Human Interface Guidelines were treated as something approaching scripture. When "Think Different" actually meant something.
 
@@ -81,4 +85,4 @@ Tim Cook is [destroying his legacy](https://www.theverge.com/podcast/870717/tim-
 
 I think of it this way: I would never buy a Tesla, because I don't want to drive a car built by a fascist. [Many people think like me.](https://www.theverge.com/transportation/869603/tesla-q4-2025-earnings-revenue-profit-musk-robotaxis) Apple is dangerously close to suffering the same fate.
 
-The Apple I fell in love with is dead. What remains is a $3 trillion company that has traded its soul for stock price stability. And I'm stuck here, in their garden, watching the walls grow higher.
+The Apple I fell in love with is dead. What remains is a $3 trillion company that has traded its soul for stock price stability. I'm still in their garden - but at least now I'm looking for the gate.
