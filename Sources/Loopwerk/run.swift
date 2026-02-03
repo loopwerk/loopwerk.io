@@ -18,7 +18,7 @@ struct ArticleMetadata: Metadata {
   var archive: Bool?
 }
 
-struct AppMetadata: Metadata {
+struct WorkProjectMetadata: Metadata {
   let images: [String]
   let roundOffImages: Bool?
   let breakImages: Int?
@@ -29,13 +29,13 @@ struct PageMetadata: Metadata {
   let section: String?
 }
 
-struct ProjectMetadata: Metadata {
+struct OpenSourceProjectMetadata: Metadata {
   let category: String
   let repo: String
   let order: Int?
 }
 
-extension Item where M == ProjectMetadata {
+extension Item where M == OpenSourceProjectMetadata {
   var order: Int {
     return metadata.order ?? 999
   }
@@ -176,18 +176,18 @@ struct Run {
         ]
       )
       .register(
-        folder: "apps",
-        metadata: AppMetadata.self,
+        folder: "work",
+        metadata: WorkProjectMetadata.self,
         readers: [.parsleyMarkdownReader],
         itemProcessor: improveHTML,
-        writers: [.listWriter(swim(renderApps))]
+        writers: [.listWriter(swim(renderWork))]
       )
       .register(
-        folder: "projects",
-        metadata: ProjectMetadata.self,
+        folder: "open-source",
+        metadata: OpenSourceProjectMetadata.self,
         readers: [.parsleyMarkdownReader],
         itemProcessor: improveHTML,
-        writers: [.listWriter(swim(renderProjects))]
+        writers: [.listWriter(swim(renderOpenSource))]
       )
       .register(
         metadata: PageMetadata.self,

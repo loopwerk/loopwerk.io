@@ -4,8 +4,8 @@ import HTML
 enum Section: String {
   case home
   case articles
-  case apps
-  case projects
+  case work
+  case openSource
   case mentorshipProgram
   case about
   case hireMe
@@ -102,10 +102,10 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
                   a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
                 }
                 li {
-                  a(class: section == .apps ? "active" : "", href: "/apps/") { "Apps" }
+                  a(class: section == .work ? "active" : "", href: "/work/") { "Work" }
                 }
                 li {
-                  a(class: section == .projects ? "active" : "", href: "/projects/") { "Open Source" }
+                  a(class: section == .openSource ? "active" : "", href: "/open-source/") { "Open Source" }
                 }
                 li {
                   a(class: section == .about ? "active" : "", href: "/about/") { "About" }

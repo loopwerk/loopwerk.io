@@ -1,8 +1,8 @@
 import HTML
 import Saga
 
-func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
-  baseLayout(canocicalURL: "/projects/", section: .projects, title: "Open Source") {
+func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
+  baseLayout(canocicalURL: "/open-source/", section: .openSource, title: "Open Source") {
     div(class: "prose") {
       h1 { "Open Source" }
       p {
@@ -18,7 +18,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
 }
 
 @NodeBuilder
-private func renderCategory(category: String, projects: [Item<ProjectMetadata>]) -> Node {
+private func renderCategory(category: String, projects: [Item<OpenSourceProjectMetadata>]) -> Node {
   div(class: "mt-12") {
     h1(class: "font-title text-4xl font-bold mb-6") { category }
 
@@ -31,7 +31,7 @@ private func renderCategory(category: String, projects: [Item<ProjectMetadata>])
 }
 
 @NodeBuilder
-private func renderProject(project: Item<ProjectMetadata>) -> Node {
+private func renderProject(project: Item<OpenSourceProjectMetadata>) -> Node {
   div(class: "pb-10 lg:pb-8") {
     h3(class: "text-xl font-bold") {
       project.title

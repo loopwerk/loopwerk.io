@@ -12,7 +12,7 @@ My hobbies and interests include playing PC games, playing Dungeons & Dragons, w
 
 Some of my all-time favorites PC games include The Last of Us, Lies of P, Uncharted, Crusader Kings III, Europa Universalis IV, Cyberpunk 2077, Elden Ring, Baldur's Gate 3, Divinity: Original Sin 2, Horizon Zero Dawn, God of War, Brotato, Rainbow Six Vegas, Titanfall 2, Dishonored, Hades, No Rest for the Wicked, and No One Lives Forever.
 
-I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/projects/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
+I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/open-source/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
 I choose cats over dogs, tea over coffee, and winter over summer. I've lived in Iceland for almost four years, and my favorite foods are ramen, hamburgers, tacos, and Thai.
 

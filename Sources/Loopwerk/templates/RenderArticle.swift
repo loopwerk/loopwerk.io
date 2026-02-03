@@ -122,9 +122,9 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
           h3(class: "!m-0") { "Kevin Renskers" }
           p(class: "text-gray gray-links") {
             "I'm a freelance software developer with over 25 years of experience. I write articles about Swift, Python, and TypeScript. I've worked on "
-            a(href: "/apps/") { "many apps" }
+            a(href: "/work/") { "many apps" }
             %", and maintain a bunch of"
-            a(href: "/projects/") { "open source projects" }
+            a(href: "/open-source/") { "open source projects" }
             %". I'm currently available "
             a(href: "/hire-me/") { "for hire" }
             %"! Connect with me on"

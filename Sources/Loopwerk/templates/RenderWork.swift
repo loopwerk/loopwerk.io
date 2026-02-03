@@ -1,10 +1,10 @@
 import HTML
 import Saga
 
-func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
-  baseLayout(canocicalURL: "/apps/", section: .apps, title: "Apps") {
+func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
+  baseLayout(canocicalURL: "/work/", section: .work, title: "Work") {
     div(class: "prose") {
-      h1 { "Apps" }
+      h1 { "Work" }
       p {
         "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
       }
@@ -16,7 +16,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
 
         div(class: "mb-4 flex flex-wrap screenshots\(app.metadata.roundOffImages ?? true ? " rounded" : "") break_\(app.metadata.breakImages ?? (app.metadata.images.count % 2 == 0 ? 2 : app.metadata.images.count))") {
           app.metadata.images.map { src in
-            %span(class: "block") { %img(src: "/apps/images/\(src)") }
+            %span(class: "block") { %img(src: "/work/images/\(src)") }
           }
         }
 
