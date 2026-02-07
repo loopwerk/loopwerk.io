@@ -27,8 +27,6 @@ Yesterday, Heroku published a post titled [An Update on Heroku](https://www.hero
 
 The reason? Salesforce (who acquired Heroku back in 2010) is "focusing its product and engineering investments on areas where it can deliver the greatest long-term customer value, including helping organizations build and deploy enterprise-grade AI." Translation: Heroku doesn't make enough money, and Salesforce would rather invest in AI hype.
 
-Simon Willison [called the announcement "ominous"](https://simonwillison.net/2026/Feb/6/an-update-on-heroku/) and said he plans to migrate his blog off Heroku. A [former Heroku product lead](https://www.infoworld.com/article/2264177/the-decline-of-heroku.html) described years of underinvestment: "a starvation over a six-, seven-, eight-year period" where more apps and users were supported by fewer engineers.
-
 This is the classic pattern: stop selling new contracts, honor existing ones, then eventually wind down. If you're still on Heroku, the writing is on the wall.
 
 ## What leaving Heroku looks like
