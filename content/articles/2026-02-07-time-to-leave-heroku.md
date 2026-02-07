@@ -21,8 +21,6 @@ And beyond the outages, Heroku simply stopped evolving. Yefim Natis of Gartner [
 
 Unsurprisingly, competitors sprung up to fill the void: [Fly.io](https://fly.io/), [Railway](https://railway.com/), [Render](https://render.com/), [DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform), and self-hosted solutions like [Coolify](https://coolify.io/) and [Dokku](https://dokku.com/). Developers were already leaving in droves.
 
-## The final nail
-
 Yesterday, Heroku published a post titled [An Update on Heroku](https://www.heroku.com/blog/an-update-on-heroku/), announcing they are transitioning to a "sustaining engineering model", "with an emphasis on maintaining quality and operational excellence rather than introducing new features." They also stopped offering enterprise contracts to new customers. 
 
 The reason? Salesforce (who acquired Heroku back in 2010) is "focusing its product and engineering investments on areas where it can deliver the greatest long-term customer value, including helping organizations build and deploy enterprise-grade AI." Translation: Heroku doesn't make enough money, and Salesforce would rather invest in AI hype.
