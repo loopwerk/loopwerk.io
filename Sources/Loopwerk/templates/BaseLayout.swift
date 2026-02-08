@@ -59,7 +59,13 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
-        script(defer: true, src: "https://stats.loopwerk.io/js/script.js", customAttributes: ["data-domain": "loopwerk.io"])
+        script(defer: true, src: "/js/pa-v-AgZeFDGuKeuyxUlSkso.js")
+        script {
+          Node.raw("""
+          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+          plausible.init({endpoint:"/api/event"});
+          """)
+        }
       }
       body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
