@@ -60,7 +60,13 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
 
         extraHeader
-        script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
+        script(async: true, src: "/js/script.js")
+        script {
+          Node.raw("""
+          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+          plausible.init({endpoint:"/api/event"});
+          """)
+        }
       }
       body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
