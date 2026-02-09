@@ -4,4 +4,4 @@ repo: loopwerk/Saga
 order: 1
 ---
 
-A static site generator written in Swift.
+A code-first static site generator in Swift. No config files, no implicit behavior, no magic conventions.
