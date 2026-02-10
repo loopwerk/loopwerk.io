@@ -8,6 +8,11 @@ func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
       p {
         "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
       }
+      p {
+        "If you are looking for a developer to work on your project,"
+        a(href: "/hire-me/") { "check if I am available"}
+        %"."
+      }
     }
 
     context.items.map { app in

@@ -4,6 +4,9 @@ section: hireMe
 
 # Hire me
 
+> [!AVAILABILITY]
+> I am currently available for new projects!
+
 I’m a creative product-minded software engineer with a strong background in web development and backend systems, and a long-standing passion for good design and usability.
 
 I enjoy working on the "back-of-the-front-end": building clean APIs, thoughtful data models, and well-structured systems that enable great user experiences. I care deeply about API design, documentation, and code quality, and I value pragmatic solutions that balance clarity, maintainability, and performance.

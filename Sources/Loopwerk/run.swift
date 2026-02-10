@@ -183,6 +183,13 @@ struct Run {
         writers: [.listWriter(swim(renderWork))]
       )
       .register(
+        folder: "open-source/support",
+        metadata: PageMetadata.self,
+        readers: [.parsleyMarkdownReader],
+        itemProcessor: improveHTML,
+        writers: [.itemWriter(swim(renderPage))]
+      )
+      .register(
         folder: "open-source",
         metadata: OpenSourceProjectMetadata.self,
         readers: [.parsleyMarkdownReader],

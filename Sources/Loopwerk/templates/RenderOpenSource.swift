@@ -7,6 +7,11 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
       h1 { "Open Source" }
       p {
         "These are some of the more interesting open source projects I've created over the years."
+        "For teams using my open source projects in production, I offer"
+        a(href: "/open-source/support/") {
+          "commercial support and consulting"
+        }
+        %"."
       }
     }
 
