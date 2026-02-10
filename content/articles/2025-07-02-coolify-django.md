@@ -128,7 +128,7 @@ ARG DATABASE_URL
 # Install system dependencies needed by our app
 RUN apt-get update && apt-get install -y \
     build-essential \
-    curl wget \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv, the fast Python package manager
@@ -193,7 +193,6 @@ Here's how to get a PostgreSQL database up and running for your Django project:
 1.  **Add a PostgreSQL service:** In your Coolify project, click to add a new resource, but this time select "PostgreSQL" from the list of services. Coolify pre-fills sensible defaults, which will create a `postgres` user with a secure, random password, and an initial `postgres` database. Before you do anything else, find the **"Postgres URL (internal)"** and copy it. You'll need this in a moment.
 
 2.  **Create a dedicated database:** While you could use the default `postgres` database, it's good practice to create a separate one for each application.
-
     - Start the new PostgreSQL service.
     - Navigate to its "Terminal" tab in the Coolify UI and click "Connect."
     - This drops you into a shell inside the database container. Run `psql` to access the PostgreSQL prompt.
@@ -204,7 +203,6 @@ Here's how to get a PostgreSQL database up and running for your Django project:
     - You can verify it was created by listing all databases with `\l`. Once confirmed, exit `psql` and the container shell with `exit` or `Ctrl+D`.
 
 3.  **Import existing data:** If you're moving an existing project, you'll need to import your data.
-
     - First, create a backup of your old database. The `pg_dump` command with the `-Fc` flag (custom format) is perfect for this. Using `--no-owner` and `--no-privileges` makes the dump more portable.
       ```shell-session
       $ pg_dump -Fc --no-owner --no-privileges my_app_db > my_app_db.dump

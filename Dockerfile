@@ -11,7 +11,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     python3 \
     git \
     git-restore-mtime \
-    curl wget \
+    curl \
     nodejs npm \
     && apt-get install -y libjavascriptcoregtk-4.1-dev \
     && rm -rf /var/lib/apt/lists/* \

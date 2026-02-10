@@ -59,7 +59,7 @@ ARG DATABASE_URL
 # Install system dependencies needed by our app
 RUN apt-get update && apt-get install -y \
     build-essential \
-    curl wget \
+    curl \
     <mark>supervisor \</mark>
     <mark>caddy \</mark>
     && rm -rf /var/lib/apt/lists/*
