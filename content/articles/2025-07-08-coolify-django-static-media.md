@@ -45,8 +45,9 @@ While the files are now stored safely, they aren't being served yet. Django's de
 For this, we'll use Caddy as our web server and Supervisor to manage both the Caddy and Gunicorn processes. This requires a few changes to our `Dockerfile` and two new configuration files. Let's start by updating our `Dockerfile`. We need to install Caddy and Supervisor, copy their configuration files, and run `supervisord` as the main command.
 
 ```dockerfile title="Dockerfile"
-# Use a slim Debian image as our base
+# Use a slim Debian Trixie image as our base
 # (we don't use a Python image because Python will be installed with uv)
+FROM ghcr.io/astral-sh/uv:trixie-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -63,10 +64,6 @@ RUN apt-get update && apt-get install -y \
     <mark>supervisor \</mark>
     <mark>caddy \</mark>
     && rm -rf /var/lib/apt/lists/*
-
-# Install uv, the fast Python package manager
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.local/bin:${PATH}"
 
 # Copy only the dependency definitions first to leverage Docker's layer caching
 COPY pyproject.toml uv.lock .python-version ./

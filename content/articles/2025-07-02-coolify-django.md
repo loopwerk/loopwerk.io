@@ -113,9 +113,9 @@ Coolify works by building and running your applications in Docker containers. Th
 Here is a `Dockerfile` I've put together for a typical Django project. (It uses `uv`, because it's awesome. I've written a [bunch of articles](/articles/tag/uv/) about it.)
 
 ```dockerfile title="Dockerfile"
-# Use a slim Debian image as our base
+# Use a slim Debian Trixie image as our base
 # (we don't use a Python image because Python will be installed with uv)
-FROM debian:bookworm-slim
+FROM ghcr.io/astral-sh/uv:trixie-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -130,10 +130,6 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     && rm -rf /var/lib/apt/lists/*
-
-# Install uv, the fast Python package manager
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.local/bin:${PATH}"
 
 # Copy only the dependency definitions first to leverage Docker's layer caching
 COPY pyproject.toml uv.lock .python-version ./
