@@ -16,26 +16,21 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
-    div(class: "flex flex-row") {
-//      span(class: "w-[100px] text-gray text-sm pt-2") {
-//        article.date.formatted("MMM dd")
-//      }
-      
-      div(class: "flex-1") {
-        a(class: "hover:text-orange", href: article.url) {
-          h2(class: "text-2xl font-bold") {
-            article.title
-          }
+    div {
+      a(class: "hover:text-orange", href: article.url) {
+        h2(class: "text-2xl font-bold") {
+          article.title
         }
-        
-        div(class: "text-gray gray-links text-sm") {
-          "\(article.date.formatted("MMM dd")), in "
-          article.metadata.tags.sorted().enumerated().map { index, tag in
-            Node.fragment([
-              %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-               %a(href: "/articles/tag/\(tag.slugified)/") { tag },
-            ])
-          }
+      }
+      
+      div(class: "text-gray gray-links text-sm") {
+        article.date.formatted("MMM dd, YYYY")
+        "in "
+        article.metadata.tags.sorted().enumerated().map { index, tag in
+          Node.fragment([
+            %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+             %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+          ])
         }
       }
     }
@@ -64,14 +59,10 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 
     // Articles by year
     sortedByYearDescending.map { year, articles in
-      div(class: "flex gap-4 mb-16") {
-        div(class: "w-28 shrink-0") {
-          div(class: "sticky top-[75px] bg-page py-2") {
-            h1(class: "text-4xl font-extrabold") { "\(year)" }
-          }
-        }
+      div {
+        h1(class: "text-4xl font-extrabold mb-12") { "\(year)" }
 
-        div(class: "flex-1 grid gap-8") {
+        div(class: "grid gap-8 mb-16") {
           articles.map { renderArticleForGrid(article: $0) }
         }
       }
