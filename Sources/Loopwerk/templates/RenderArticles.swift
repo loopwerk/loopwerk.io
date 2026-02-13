@@ -22,7 +22,7 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
           article.title
         }
       }
-      
+
       div(class: "text-gray gray-links text-sm") {
         article.date.formatted("MMM dd, YYYY")
         "in "
