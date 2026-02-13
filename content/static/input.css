@@ -92,6 +92,7 @@ a[href^="https://apps.apple.com"].app {
 
 .prose {
   @apply prose-code:before:hidden prose-code:after:hidden;
+  font-size: 18px;
 }
 
 .prose code {
@@ -254,11 +255,11 @@ code var {
   border-radius: 10%/4.7%;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
   .hero-image {
     margin-left: -20px;
-    width: 840px;
-    max-width: 840px;
+    width: 740px;
+    max-width: 740px;
   }
 }
 
@@ -289,7 +290,7 @@ code var {
 #search {
   background: var(--color-sub);
   height: 44px;
-  padding: 0 70px 0 54px;
+  padding: 0 10px 0 54px;
   border-radius: 6px;
   color: var(--color-white);
 }

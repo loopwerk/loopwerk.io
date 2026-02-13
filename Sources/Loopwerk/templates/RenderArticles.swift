@@ -16,28 +16,27 @@ func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)]
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
-    div(class: "bg-sub rounded-md") {
-      a(class: "group", href: article.url) {
-        h2(class: "bg-light rounded-md text-2xl font-bold p-4 min-h-[4em] flex items-end group-hover:bg-orange") {
-          article.title
+    div(class: "flex flex-row") {
+//      span(class: "w-[100px] text-gray text-sm pt-2") {
+//        article.date.formatted("MMM dd")
+//      }
+      
+      div(class: "flex-1") {
+        a(class: "hover:text-orange", href: article.url) {
+          h2(class: "text-2xl font-bold") {
+            article.title
+          }
         }
-      }
-
-      div(class: "text-gray gray-links text-sm p-4") {
-        span(class: "border-r border-gray pr-2 mr-2") {
-          article.date.formatted("MMMM dd, YYYY")
+        
+        div(class: "text-gray gray-links text-sm") {
+          "\(article.date.formatted("MMM dd")), in "
+          article.metadata.tags.sorted().enumerated().map { index, tag in
+            Node.fragment([
+              %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+               %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+            ])
+          }
         }
-
-        article.metadata.tags.sorted().enumerated().map { index, tag in
-          Node.fragment([
-            %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-            %a(href: "/articles/tag/\(tag.slugified)/") { tag },
-          ])
-        }
-      }
-
-      p(class: "p-4 pt-0") {
-        a(href: article.url) { article.summary }
       }
     }
   }
@@ -65,10 +64,14 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 
     // Articles by year
     sortedByYearDescending.map { year, articles in
-      div {
-        h1(class: "text-4xl font-extrabold mb-12") { "\(year)" }
+      div(class: "flex gap-4 mb-16") {
+        div(class: "w-28 shrink-0") {
+          div(class: "sticky top-[75px] bg-page py-2") {
+            h1(class: "text-4xl font-extrabold") { "\(year)" }
+          }
+        }
 
-        div(class: "grid lg:grid-cols-2 gap-8 mb-16") {
+        div(class: "flex-1 grid gap-8") {
           articles.map { renderArticleForGrid(article: $0) }
         }
       }
@@ -80,7 +83,7 @@ func _renderArticles(_ articles: [Item<ArticleMetadata>], canocicalURL: String, 
   return baseLayout(canocicalURL: canocicalURL, section: .articles, title: "articles in \(pageTitle)", rssLink: rssLink, extraHeader: extraHeader) {
     h1(class: "text-4xl font-extrabold mb-12") { pageTitle }
 
-    div(class: "grid lg:grid-cols-2 gap-8 mb-16") {
+    div(class: "grid gap-8 mb-16") {
       articles.map { renderArticleForGrid(article: $0) }
     }
   }

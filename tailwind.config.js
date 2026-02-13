@@ -14,7 +14,7 @@ module.exports = {
     },
     screens: {
       sm: "315px",
-      lg: "840px",
+      lg: "740px",
     },
     colors: {
       inherit: "inherit",

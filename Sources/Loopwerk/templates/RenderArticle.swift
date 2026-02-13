@@ -93,15 +93,15 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         let srcset = """
         /articles/heroes/\(context.item.filenameWithoutExtension)-315w.webp 315w, \
         /articles/heroes/\(context.item.filenameWithoutExtension)-630w.webp 630w, \
-        /articles/heroes/\(context.item.filenameWithoutExtension)-840w.webp 840w, \
-        /articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp 1680w
+        /articles/heroes/\(context.item.filenameWithoutExtension)-740w.webp 740w, \
+        /articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp 1480w
         """
         img(
           alt: "Hero image",
           class: "hero-image",
           height: "\(heroImage.height)",
-          sizes: "(max-width: 799px) 315px, 840px",
-          src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp",
+          sizes: "(max-width: 739px) 315px, 740px",
+          src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp",
           srcset: srcset,
           width: "\(heroImage.width)",
           customAttributes: ["fetchpriority": "high"]
@@ -142,7 +142,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     div(class: "mt-16") {
       h2(class: "font-title text-5xl font-bold mb-8") { seeMoreArticlesTitle }
 
-      div(class: "grid lg:grid-cols-2 gap-8") {
+      div(class: "grid gap-8") {
         seeMoreArticles.map { renderArticleForGrid(article: $0) }
       }
 
