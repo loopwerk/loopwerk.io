@@ -15,23 +15,14 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "text-gray gray-links text-sm") {
-    span(class: "border-r border-gray pr-2 mr-2") {
-      article.date.formatted("MMMM dd, yyyy")
-    }
-
-    %.text("\(article.body.withoutHtmlTags.numberOfWords) words")
-
-    if article.archive {
-      %.text(", previously posted in ")
-    } else {
-      %.text(", posted in ")
-    }
+  div(class: "text-gray gray-links text-xs font-mono") {
+    article.date.formatted("MMMM dd, yyyy")
+    "in "
 
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
         %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-        %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+        %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
       ])
     }
   }

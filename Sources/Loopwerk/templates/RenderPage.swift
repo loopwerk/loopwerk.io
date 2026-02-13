@@ -24,7 +24,7 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
     div {
       img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/loopwerk.svg")
 
-      div(class: "my-24 uppercase text-[43px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
+      div(class: "my-24 uppercase text-[38px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
         Node.raw(context.item.body)
       }
 

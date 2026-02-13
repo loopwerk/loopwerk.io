@@ -2,36 +2,28 @@ import Foundation
 import HTML
 import Saga
 
-func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)] {
-  let tags = articles.flatMap { $0.metadata.tags }
-  let tagsWithCounts = tags.reduce(into: [:]) { $0[$1, default: 0] += 1 }
-  return tagsWithCounts.sorted {
-    // Sort by number of articles (descending). If that's the same, sort by title (ascending).
-    if $0.1 == $1.1 {
-      return $0.0 < $1.0
-    }
-    return $0.1 > $1.1
-  }
-}
-
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   section {
     div {
       a(class: "hover:text-orange", href: article.url) {
-        h2(class: "text-2xl font-bold") {
+        h2(class: "text-2xl font-bold mb-3") {
           article.title
         }
       }
 
-      div(class: "text-gray gray-links text-sm") {
-        article.date.formatted("MMM dd, YYYY")
+      div(class: "text-gray gray-links text-xs font-mono") {
+        article.date.formatted("MMMM dd, YYYY")
         "in "
         article.metadata.tags.sorted().enumerated().map { index, tag in
           Node.fragment([
             %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-             %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+             %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
           ])
         }
+      }
+      
+      p(class: "text-gray text-sm mt-3") {
+        article.metadata.summary ?? ""
       }
     }
   }
@@ -41,29 +33,21 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   let articlesPerYear = Dictionary(grouping: context.items, by: { $0.year })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
 
-  let tagsWithCounts = uniqueTagsWithCount(context.items)
-
   return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles", rssLink: "") {
-    // Tag cloud section
-    div(class: "mb-12") {
-      h2(class: "text-lg font-light") { "Browse by tag" }
-
-      div(class: "flex flex-wrap gap-x-2 text-gray gray-links text-sm") {
-        tagsWithCounts.map { tag, count in
-          a(href: "/articles/tag/\(tag.slugified)/") {
-            "\(tag) (\(count))"
-          }
-        }
-      }
+    // Search
+    form(action: "/search/", class: "relative mb-20", id: "search-form") {
+      input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
     }
 
     // Articles by year
-    sortedByYearDescending.map { year, articles in
-      div {
-        h1(class: "text-4xl font-extrabold mb-12") { "\(year)" }
-
-        div(class: "grid gap-8 mb-16") {
-          articles.map { renderArticleForGrid(article: $0) }
+    div(class: "flex flex-col gap-20 pb-12") {
+      sortedByYearDescending.map { year, articles in
+        div {
+          h1(class: "font-title font-bold text-5xl mb-12") { "\(year)" }
+          
+          div(class: "flex flex-col gap-12") {
+            articles.map { renderArticleForGrid(article: $0) }
+          }
         }
       }
     }
@@ -72,9 +56,14 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 
 func _renderArticles(_ articles: [Item<ArticleMetadata>], canocicalURL: String, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
   return baseLayout(canocicalURL: canocicalURL, section: .articles, title: "articles in \(pageTitle)", rssLink: rssLink, extraHeader: extraHeader) {
-    h1(class: "text-4xl font-extrabold mb-12") { pageTitle }
+    // Search
+    form(action: "/search/", class: "relative mb-20", id: "search-form") {
+      input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
+    }
 
-    div(class: "grid gap-8 mb-16") {
+    h1(class: "font-title font-bold text-5xl mb-12") { pageTitle }
+
+    div(class: "flex flex-col gap-12 pb-12") {
       articles.map { renderArticleForGrid(article: $0) }
     }
   }
