@@ -89,7 +89,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         """
         img(
           alt: "Hero image",
-          class: "hero-image",
+          class: "hero-image shadow-lg shadow-nav rounded-md bg-sub object-cover aspect-hero",
           height: "\(heroImage.height)",
           sizes: "(max-width: 739px) 315px, 740px",
           src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp",

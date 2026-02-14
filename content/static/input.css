@@ -104,10 +104,6 @@ a[href^="https://apps.apple.com"].app {
   overflow-y: hidden;
 }
 
-.hero-image {
-  @apply shadow-lg shadow-nav rounded-md bg-sub;
-}
-
 .prose pre code {
   @apply text-base;
 }

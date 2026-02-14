@@ -3,29 +3,36 @@ import HTML
 import Saga
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
-  section {
-    div() {
-      a(class: "hover:text-orange", href: article.url) {
-        h2(class: "font-bold text-2xl mb-3") {
-          article.title
-        }
+  section(class: "relative group") {
+    a(class: "hover:text-orange", href: article.url) {
+      h2(class: "font-bold text-2xl mb-3") {
+        article.title
       }
+    }
 
-      div(class: "text-gray gray-links text-xs font-mono mb-4") {
-        article.date.formatted("MMMM dd, YYYY")
-        Node.raw("&bull; ")
+    div(class: "text-gray gray-links text-xs font-mono mb-4") {
+      article.date.formatted("MMMM dd, YYYY")
+      Node.raw("&bull; ")
 
-        article.metadata.tags.sorted().enumerated().map { index, tag in
-          Node.fragment([
-            %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-             %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
-          ])
-        }
+      article.metadata.tags.sorted().enumerated().map { index, tag in
+        Node.fragment([
+          %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+           %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
+        ])
       }
+    }
 
-      a(class: "text-gray", href: article.url) {
-        article.metadata.summary ?? ""
-      }
+    a(class: "text-gray", href: article.url) {
+      article.metadata.summary ?? ""
+    }
+
+    if article.metadata.heroImage != nil {
+      img(
+        alt: "",
+        class: "hidden min-[1200px]:block absolute top-0 left-full ml-8 w-[200px] aspect-hero object-cover rounded-md opacity-0 group-hover:opacity-100",
+        src: "/articles/heroes/\(article.filenameWithoutExtension)-315w.webp",
+        customAttributes: ["loading": "lazy"]
+      )
     }
   }
 }
