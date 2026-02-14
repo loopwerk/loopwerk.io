@@ -111,7 +111,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
-          p(class: "text-gray gray-links") {
+          p(class: "text-gray gray-links text-base") {
             "I'm a freelance software developer with over 25 years of experience. I write articles about Swift, Python, and TypeScript. I've worked on "
             a(href: "/work/") { "many apps" }
             %", and maintain a bunch of"

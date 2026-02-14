@@ -3,11 +3,9 @@ import HTML
 import Saga
 
 func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
-  section(class: "relative group") {
-    a(class: "hover:text-orange", href: article.url) {
-      h2(class: "font-bold text-2xl mb-3") {
-        article.title
-      }
+  a(class: "relative group hover:text-orange", href: article.url) {
+    h2(class: "font-bold text-2xl mb-3") {
+      article.title
     }
 
     div(class: "text-gray gray-links text-xs font-mono mb-4") {
@@ -17,19 +15,19 @@ func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
       article.metadata.tags.sorted().enumerated().map { index, tag in
         Node.fragment([
           %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-           %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
+           Node.text("#\(tag)")
         ])
       }
     }
 
-    a(class: "text-gray", href: article.url) {
+    p(class: "text-gray") {
       article.metadata.summary ?? ""
     }
 
     if article.metadata.heroImage != nil {
       img(
         alt: "",
-        class: "hidden min-[1200px]:block absolute top-0 left-full ml-8 w-[200px] aspect-hero object-cover rounded-md opacity-0 group-hover:opacity-100",
+        class: "hidden min-[1200px]:block absolute top-0 left-full pl-8 w-[200px] aspect-hero object-cover rounded-md opacity-0 group-hover:opacity-100",
         src: "/articles/heroes/\(article.filenameWithoutExtension)-315w.webp",
         customAttributes: ["loading": "lazy"]
       )
