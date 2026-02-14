@@ -130,7 +130,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
 
         if section != .home {
           div(class: "container pt-4 lg:pt-20") {
-            div(class: "bg-orange p-4 text-black rounded-md shadow-lg shadow-nav") {
+            div(class: "bg-orange p-4 text-black rounded-md shadow-lg shadow-nav text-sm lg:text-base") {
               "For the first time since 2023 I'm available again for new projects!"
               a(class: "underline", href: "/hire-me/") {
                 "Hire me"

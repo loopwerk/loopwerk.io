@@ -91,7 +91,7 @@ a[href^="https://apps.apple.com"].app {
 /* PROSE */
 
 .prose {
-  @apply prose-code:before:hidden prose-code:after:hidden text-lg;
+  @apply prose-code:before:hidden prose-code:after:hidden lg:text-lg;
 }
 
 .prose code {
@@ -105,7 +105,7 @@ a[href^="https://apps.apple.com"].app {
 }
 
 .prose pre code {
-  @apply text-base;
+  @apply text-sm lg:text-base;
 }
 
 /* Code block with filename */
@@ -198,11 +198,11 @@ code var {
 }
 
 .prose h1 {
-  @apply font-title font-bold mt-12 text-5xl;
+  @apply font-title font-bold mt-12 text-4xl lg:text-5xl;
 }
 
 .prose h2 {
-  @apply font-title text-4xl;
+  @apply font-title text-3xl lg:text-4xl;
 }
 
 .prose aside {

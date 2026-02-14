@@ -41,10 +41,12 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 
 func _renderArticles(_ articles: [Item<ArticleMetadata>], canocicalURL: String, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
   return baseLayout(canocicalURL: canocicalURL, section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
-    h1(class: "font-title font-bold text-5xl mb-12") { pageTitle }
+    div(class: "prose") {
+      h1 { pageTitle }
+    }
 
     // Search
-    form(action: "/search/", class: "relative mb-20", id: "search-form") {
+    form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
       input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
     }
     

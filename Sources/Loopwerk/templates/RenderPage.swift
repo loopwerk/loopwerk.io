@@ -73,8 +73,12 @@ func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
 
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title, extraHeader: getSearchHeader()) {
+    div(class: "prose") {
+      h1 { "Search" }
+    }
+
     // Search
-    form(action: "/search/", class: "relative mb-20", id: "search-form") {
+    form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
       input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
     }
 
