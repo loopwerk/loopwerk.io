@@ -42,13 +42,13 @@ private func renderProject(project: Item<OpenSourceProjectMetadata>) -> Node {
       project.title
     }
 
-    div(class: "[&_a]:underline") {
+    div(class: "[&_a]:underline lg:text-lg") {
       Node.raw(project.body)
     }
 
     div(class: "mt-2 lg:mt-0 flex gap-1 lg:gap-4 items-start lg:items-center flex-col lg:flex-row") {
       div {
-        a(class: "orange app text-sm lg:text-base", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
+        a(class: "orange app lg:text-lg", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
           project.metadata.repo
         }
       }
