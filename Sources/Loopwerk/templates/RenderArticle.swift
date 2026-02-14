@@ -133,11 +133,11 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     div(class: "mt-16") {
       h2(class: "font-title text-5xl font-bold mb-8") { seeMoreArticlesTitle }
 
-      div(class: "grid gap-8") {
-        seeMoreArticles.map { renderArticleForGrid(article: $0) }
+      div(class: "flex flex-col gap-8 pb-8") {
+        seeMoreArticles.map { _renderArticleForGrid(article: $0) }
       }
 
-      p(class: "prose mt-8") {
+      p(class: "prose") {
         a(href: "/articles/") { "› See all articles" }
       }
     }

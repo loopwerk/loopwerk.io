@@ -2,66 +2,70 @@ import Foundation
 import HTML
 import Saga
 
-func renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
+func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   a(class: "relative group hover:text-orange", href: article.url) {
-    h2(class: "font-bold text-2xl mb-3") {
+    h2(class: "font-bold text-base text-pretty") {
       article.title
-    }
-
-    div(class: "text-gray gray-links text-xs font-mono mb-4") {
-      article.date.formatted("MMMM dd, YYYY")
-      Node.raw("&bull; ")
-
-      article.metadata.tags.sorted().enumerated().map { index, tag in
-        Node.fragment([
-          %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-           Node.text("#\(tag)")
-        ])
+      
+      span(class: "font-thin text-xs text-light ml-3 whitespace-nowrap") {
+        article.date.formatted("MMM dd, YYYY")
       }
     }
-
+    
     p(class: "text-gray") {
       article.metadata.summary ?? ""
-    }
-
-    if article.metadata.heroImage != nil {
-      img(
-        alt: "",
-        class: "hidden min-[1200px]:block absolute top-0 left-full pl-8 w-[200px] aspect-hero object-cover rounded-md opacity-0 group-hover:opacity-100",
-        src: "/articles/heroes/\(article.filenameWithoutExtension)-315w.webp",
-        customAttributes: ["loading": "lazy"]
-      )
     }
   }
 }
 
-func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  _renderArticles(context.items, canocicalURL: "/articles/", title: "Articles")
-}
-
-func _renderArticles(_ articles: [Item<ArticleMetadata>], canocicalURL: String, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([])) -> Node {
-  return baseLayout(canocicalURL: canocicalURL, section: .articles, title: pageTitle, rssLink: rssLink, extraHeader: extraHeader) {
+func _renderArticlesHeader(title: String) -> Node {
+  return Node.fragment([
     div(class: "prose") {
-      h1 { pageTitle }
-    }
-
+      h1 { title }
+    },
+    
     // Search
     form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
       input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
     }
+  ])
+}
+
+
+func _renderArticlesList(_ articles: [Item<ArticleMetadata>]) -> Node {
+  div(class: "flex flex-col gap-8 pb-12") {
+    articles.map { _renderArticleForGrid(article: $0) }
+  }
+}
+
+func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
+  let articlesPerYear = Dictionary(grouping: context.items, by: { $0.year })
+  let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
+  
+  return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles") {
+    _renderArticlesHeader(title: "Articles")
     
-    div(class: "flex flex-col gap-14 pb-14") {
-      articles.map { renderArticleForGrid(article: $0) }
+    sortedByYearDescending.map { year, articles in
+      Node.fragment([
+        h1(class: "font-title font-bold text-4xl mb-8") { "\(year)" },
+        _renderArticlesList(articles)
+      ])
     }
   }
 }
 
 func renderTag<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
-
-  return _renderArticles(context.items, canocicalURL: "/articles/tag/\(context.key.slugified)/", title: "#\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader)
+  
+  return baseLayout(canocicalURL: "/articles/tag/\(context.key.slugified)/", section: .articles, title: "Articles in #\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
+    _renderArticlesHeader(title: "#\(context.key)")
+    _renderArticlesList(context.items)
+  }
 }
 
 func renderYear<T>(context: PartitionedRenderingContext<T, ArticleMetadata>) -> Node {
-  _renderArticles(context.items, canocicalURL: "/articles/\(context.key)/", title: "\(context.key)")
+  baseLayout(canocicalURL: "/articles/\(context.key)/", section: .articles, title: "Articles in \(context.key)") {
+    _renderArticlesHeader(title: "\(context.key)")
+    _renderArticlesList(context.items)
+  }
 }
