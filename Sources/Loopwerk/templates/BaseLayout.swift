@@ -74,7 +74,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         label(class: "mobile-overlay fixed inset-0 z-40 bg-black/80 opacity-0 transition-opacity pointer-events-none lg:hidden", for: "mobile-menu-toggle")
 
         header(class: "bg-nav text-gray py-3 text-base/6 lg:fixed w-full z-10") {
-          nav(class: "container flex gap-x-5 lg:gap-x-7 items-center lg:h-[44px]") {
+          nav(class: "container flex gap-x-5 lg:gap-x-8 items-center lg:h-[44px]") {
             // Logo
             a(href: "/") {
               img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
@@ -99,30 +99,30 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
               }
 
               // Navigation links
-              ul(class: "flex flex-col lg:flex-row gap-4 lg:gap-5 lg:flex-1 max-lg:order-2") {
+              ul(class: "flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 lg:flex-1 max-lg:order-2") {
                 li {
                   a(class: section == .home ? "active" : "", href: "/") { "Home" }
                 }
+                li(class: "text-orange/70 max-lg:hidden") { "/" }
                 li {
                   a(class: section == .articles ? "active" : "", href: "/articles/") { "Articles" }
                 }
+                li(class: "text-orange/70 max-lg:hidden") { "/" }
                 li {
                   a(class: section == .work ? "active" : "", href: "/work/") { "Work" }
                 }
+                li(class: "text-orange/70 max-lg:hidden") { "/" }
                 li {
                   a(class: section == .openSource ? "active" : "", href: "/open-source/") { "Open Source" }
                 }
+                li(class: "text-orange/70 max-lg:hidden") { "/" }
                 li {
                   a(class: section == .about ? "active" : "", href: "/about/") { "About" }
                 }
+                li(class: "text-orange/70 max-lg:hidden") { "/" }
                 li {
                   a(class: section == .hireMe ? "active" : "", href: "/hire-me/") { "Hire me" }
                 }
-              }
-
-              // Search form
-              form(action: "/search/", class: "relative max-lg:mb-6", id: "search-form") {
-                input(class: "w-full lg:w-[260px]", id: "search", name: "q", placeholder: "Search articles", type: "text")
               }
             }
           }
@@ -130,12 +130,11 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
 
         if section != .home {
           div(class: "container pt-4 lg:pt-20") {
-            div(class: "bg-orange p-4 text-black text-lg rounded-md shadow-lg shadow-nav") {
-              "For the first time since 2023 I'm available again for new projects. If you need a developer with 25 years of experience building websites and iOS apps, check out the "
+            div(class: "bg-orange p-4 text-black rounded-md shadow-lg shadow-nav text-sm lg:text-base") {
+              "For the first time since 2023 I'm available again for new projects!"
               a(class: "underline", href: "/hire-me/") {
                 "Hire me"
               }
-              "page."
             }
           }
         } else {

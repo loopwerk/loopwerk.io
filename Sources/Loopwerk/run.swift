@@ -106,7 +106,7 @@ func permalink(item: Item<ArticleMetadata>) {
 
 func heroImage(item: Item<ArticleMetadata>) {
   // Check if a hero image exists for this article. If so, get its dimensions.
-  let imageFilename = item.filenameWithoutExtension + "-1680w.webp"
+  let imageFilename = item.filenameWithoutExtension + "-1480w.webp"
   let heroesPath = Path(SiteMetadata.projectRoot) + "content/articles/heroes"
   let imagePath = heroesPath + imageFilename
 

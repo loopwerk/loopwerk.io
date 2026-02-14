@@ -1,6 +1,6 @@
 ---
 tags: swift, iOS, insights
-summary: With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions.
+summary: SwiftUI's @Binding property wrapper makes it easy to create two-way databindings, but in the UIKit world it's slightly less easy. Let's explore some solutions.
 ---
 
 # Exploring two-way databinding solutions in UIKit

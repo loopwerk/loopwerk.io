@@ -1,6 +1,6 @@
 ---
 tags: personal
-summary: I often get my best coding inspiration late at night, and when I go to bed with an unsolved problem, I literally write lines of code in my dreams. It's exhausting but I usually wake up with the solution!
+summary: I often get my best coding inspiration late at night, and when I go to bed with an unsolved problem, I literally write lines of code in my dreams.
 ---
 
 # I code in my dreams

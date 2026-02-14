@@ -14,7 +14,7 @@ module.exports = {
     },
     screens: {
       sm: "315px",
-      lg: "840px",
+      lg: "740px",
     },
     colors: {
       inherit: "inherit",
@@ -30,6 +30,9 @@ module.exports = {
       quotes: "#d9dde0",
     },
     extend: {
+      aspectRatio: {
+        hero: "200 / 98",
+      },
       fontFamily: {
         main: ['"Main Sans"', ...defaultTheme.fontFamily.sans],
         title: ['"Title Serif"', ...defaultTheme.fontFamily.serif],

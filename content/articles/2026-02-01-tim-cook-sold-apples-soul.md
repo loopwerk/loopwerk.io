@@ -1,6 +1,6 @@
 ---
 tags: apple, insights
-summary: Apple used to stand for something. Now Tim Cook gifts golden statues to Trump, removes apps at the administration's request, and cozies up to accused rapists at White House screenings. The company I once admired has become morally bankrupt, but leaving the ecosystem feels almost impossible.
+summary: The company I once admired has become morally bankrupt, but leaving the ecosystem feels almost impossible.
 ---
 
 # Tim Cook sold Apple's soul

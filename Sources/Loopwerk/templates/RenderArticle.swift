@@ -15,23 +15,14 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "text-gray gray-links text-sm") {
-    span(class: "border-r border-gray pr-2 mr-2") {
-      article.date.formatted("MMMM dd, yyyy")
-    }
-
-    %.text("\(article.body.withoutHtmlTags.numberOfWords) words")
-
-    if article.archive {
-      %.text(", previously posted in ")
-    } else {
-      %.text(", posted in ")
-    }
+  div(class: "text-gray gray-links text-xs font-mono") {
+    article.date.formatted("MMMM dd, yyyy")
+    Node.raw("&bull; ")
 
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
         %tagPrefix(index: index, totalTags: article.metadata.tags.count),
-        %a(href: "/articles/tag/\(tag.slugified)/") { tag },
+        %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
       ])
     }
   }
@@ -40,14 +31,14 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   link(href: "/static/prism.css", rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"])
-  meta(content: article.summary, name: "description")
+  meta(content: article.metadata.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
   meta(content: article.title, name: "twitter:image:alt")
   meta(content: "article", name: "og:type")
   meta(content: SiteMetadata.url.appendingPathComponent(article.url).absoluteString, name: "og:url")
   meta(content: article.title, name: "og:title")
-  meta(content: article.summary, name: "og:description")
+  meta(content: article.metadata.summary, name: "og:description")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "og:image")
   meta(content: "1014", name: "og:image:width")
   meta(content: "530", name: "og:image:height")
@@ -93,15 +84,15 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         let srcset = """
         /articles/heroes/\(context.item.filenameWithoutExtension)-315w.webp 315w, \
         /articles/heroes/\(context.item.filenameWithoutExtension)-630w.webp 630w, \
-        /articles/heroes/\(context.item.filenameWithoutExtension)-840w.webp 840w, \
-        /articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp 1680w
+        /articles/heroes/\(context.item.filenameWithoutExtension)-740w.webp 740w, \
+        /articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp 1480w
         """
         img(
           alt: "Hero image",
-          class: "hero-image",
+          class: "hero-image shadow-lg shadow-nav rounded-md bg-sub object-cover aspect-hero",
           height: "\(heroImage.height)",
-          sizes: "(max-width: 799px) 315px, 840px",
-          src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1680w.webp",
+          sizes: "(max-width: 739px) 315px, 740px",
+          src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp",
           srcset: srcset,
           width: "\(heroImage.width)",
           customAttributes: ["fetchpriority": "high"]
@@ -120,7 +111,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
-          p(class: "text-gray gray-links") {
+          p(class: "text-gray gray-links text-base") {
             "I'm a freelance software developer with over 25 years of experience. I write articles about Swift, Python, and TypeScript. I've worked on "
             a(href: "/work/") { "many apps" }
             %", and maintain a bunch of"
@@ -142,11 +133,11 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     div(class: "mt-16") {
       h2(class: "font-title text-5xl font-bold mb-8") { seeMoreArticlesTitle }
 
-      div(class: "grid lg:grid-cols-2 gap-8") {
-        seeMoreArticles.map { renderArticleForGrid(article: $0) }
+      div(class: "flex flex-col gap-8 pb-8") {
+        seeMoreArticles.map { _renderArticleForGrid(article: $0) }
       }
 
-      p(class: "prose mt-8") {
+      p(class: "prose") {
         a(href: "/articles/") { "› See all articles" }
       }
     }

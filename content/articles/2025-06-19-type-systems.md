@@ -1,6 +1,6 @@
 ---
 tags: python, swift, javascript, saga, insights
-summary: I recently ported my static site generator Saga from Swift to both Python and TypeScript. It was a fascinating exercise in cognitive dissonance, especially when it came to their type systems. This is a tale of that experience.
+summary: I recently ported Saga from Swift to both Python and TypeScript. It was a fascinating exercise in cognitive dissonance, especially when it came to their type systems.
 ---
 
 # A tale of three type systems: Python, TypeScript, and Swift

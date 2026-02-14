@@ -1,5 +1,6 @@
 ---
 tags: javascript, workflow, news
+summary: I've released a GitHub Action that automatically generates a changelog when you push a tag.
 ---
 
 # Announcing tag-changelog: automate your changelog and GitHub releases

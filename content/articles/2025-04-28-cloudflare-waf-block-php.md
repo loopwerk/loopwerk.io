@@ -1,6 +1,6 @@
 ---
 tags: deployment, howto
-summary: Webservers get hit by hundreds of thousands of requests to random (non-existing) PHP files. Previously I dealt with this on the server level, now I'm doing it directly within CloudFlare.
+summary: Webservers get hit by hundreds of thousands of requests to random (non-existing) PHP files. Let's block it using CloudFlare's WAF rules.
 ---
 
 # Blocking PHP requests using CloudFlare's WAF rules

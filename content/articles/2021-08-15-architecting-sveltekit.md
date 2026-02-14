@@ -1,6 +1,6 @@
 ---
 tags: javascript, sveltekit
-summary: I was working to architect a SvelteKit app so that it does as few requests as possible, from a central place, so that all subpages have access to the content. Sadly dealing with SSR makes it very hard to achieve my goals.
+summary: Trying to architect a SvelteKit app so that it does as few requests as possible, from a central place, so that all subpages have access to the content.
 ---
 
 # Architecting a SvelteKit app - and failing

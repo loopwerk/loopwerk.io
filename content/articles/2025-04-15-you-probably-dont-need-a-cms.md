@@ -1,6 +1,6 @@
 ---
 tags: django, python, insights
-summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here's how to use a simple Django model with a CKEditor 5 WYSIWYG field, including embedded media like YouTube.
+summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here's how to use a simple Django model with a CKEditor 5 WYSIWYG field.
 ---
 
 # You probably don't need a CMS

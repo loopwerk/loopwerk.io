@@ -84,7 +84,7 @@ func renderFeed(context: ItemsRenderingContext<ArticleMetadata, SiteMetadata>) -
     items: Array(context.items.prefix(20)),
     summary: { item in
       if let article = item as? Item<ArticleMetadata> {
-        return article.summary
+        return article.metadata.summary
       }
       return nil
     }

@@ -8,9 +8,9 @@ run:
 
 # Remove generated responsive hero image variants
 clean:
-	rm -f content/articles/heroes/*-315w.webp content/articles/heroes/*-630w.webp content/articles/heroes/*-840w.webp content/articles/heroes/*-1680w.webp
+	rm -f content/articles/heroes/*-315w.webp content/articles/heroes/*-630w.webp content/articles/heroes/*-740w.webp content/articles/heroes/*-1480w.webp
 
-# Generate responsive hero image variants (315w, 630w, 840w, 1680w)
+# Generate responsive hero image variants (315w, 630w, 740w, 1480w)
 resize:
 	#!/usr/bin/env bash
 	cd content/articles/heroes
@@ -19,7 +19,7 @@ resize:
 		[[ "$img" =~ -[0-9]+w\.webp$ ]] && continue
 
 		base="${img%.webp}"
-		for size in 315 630 840 1680; do
+		for size in 315 630 740 1480; do
 			variant="${base}-${size}w.webp"
 			if [[ ! -f "$variant" ]]; then
 				echo "Generating: $variant"

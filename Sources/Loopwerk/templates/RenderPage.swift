@@ -24,7 +24,7 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
     div {
       img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/loopwerk.svg")
 
-      div(class: "my-24 uppercase text-[43px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
+      div(class: "my-24 uppercase text-[38px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
         Node.raw(context.item.body)
       }
 
@@ -50,6 +50,7 @@ func getSearchHeader() -> NodeConvertible {
       """
       window.addEventListener('DOMContentLoaded', (event) => {
           let q = new URLSearchParams(window.location.search).get("q");
+          document.getElementById("search").value = q;
 
           const instance = new PagefindModularUI.Instance();
           instance.add(new PagefindModularUI.Input({
@@ -72,6 +73,15 @@ func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
 
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title, extraHeader: getSearchHeader()) {
+    div(class: "prose") {
+      h1 { "Search" }
+    }
+
+    // Search
+    form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
+      input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
+    }
+
     div(id: "summary")
     div(id: "results")
   }
