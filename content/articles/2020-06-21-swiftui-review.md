@@ -1,6 +1,6 @@
 ---
 tags: review, iOS, swift
-summary: I've been working with SwiftUI for almost half a year now, and in that time I've learned a lot. I love a lot about it, but there are also so many bugs and issues that need workarounds that it's kind of maddening.
+summary: I've been working with SwiftUI for almost half a year now I love a lot about it, but there are also so many bugs and issues that need workarounds that it's kind of maddening.
 ---
 
 # A review of SwiftUI problems

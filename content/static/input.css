@@ -91,8 +91,7 @@ a[href^="https://apps.apple.com"].app {
 /* PROSE */
 
 .prose {
-  @apply prose-code:before:hidden prose-code:after:hidden;
-  font-size: 18px;
+  @apply prose-code:before:hidden prose-code:after:hidden text-lg;
 }
 
 .prose code {
@@ -110,7 +109,7 @@ a[href^="https://apps.apple.com"].app {
 }
 
 .prose pre code {
-  @apply text-sm;
+  @apply text-base;
 }
 
 /* Code block with filename */

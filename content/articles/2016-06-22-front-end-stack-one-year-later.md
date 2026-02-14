@@ -1,5 +1,6 @@
 ---
 tags: javascript, insights
+summary: After a year of researching front end tools, how has Sling evolved?
 ---
 
 # Our front end stack one year later

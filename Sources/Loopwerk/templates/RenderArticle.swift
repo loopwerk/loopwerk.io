@@ -17,7 +17,7 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "text-gray gray-links text-xs font-mono") {
     article.date.formatted("MMMM dd, yyyy")
-    "in "
+    Node.raw("&bull; ")
 
     article.metadata.tags.sorted().enumerated().map { index, tag in
       Node.fragment([
@@ -31,14 +31,14 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   link(href: "/static/prism.css", rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"])
-  meta(content: article.summary, name: "description")
+  meta(content: article.metadata.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
   meta(content: article.title, name: "twitter:image:alt")
   meta(content: "article", name: "og:type")
   meta(content: SiteMetadata.url.appendingPathComponent(article.url).absoluteString, name: "og:url")
   meta(content: article.title, name: "og:title")
-  meta(content: article.summary, name: "og:description")
+  meta(content: article.metadata.summary, name: "og:description")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "og:image")
   meta(content: "1014", name: "og:image:width")
   meta(content: "530", name: "og:image:height")

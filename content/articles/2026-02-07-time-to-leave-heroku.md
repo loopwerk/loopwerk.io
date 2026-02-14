@@ -1,6 +1,6 @@
 ---
 tags: deployment, django, python, insights, coolify
-summary: Heroku just announced it's entering "sustaining engineering mode". No new features, no enterprise contracts for new customers. After years of security breaches, outages, price hikes, and technological stagnation, it's time to leave.
+summary: Heroku just announced it's entering "sustaining engineering mode". No more new features. After years of security breaches, outages, and price hikes, it's time to leave.
 ---
 
 # It's time to leave Heroku

@@ -1,6 +1,6 @@
 ---
 tags: review
-summary: As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can already subscribe in the iOS app, but of course not everyone uses iOS, so I need to build something for the web client too.
+summary: Comparing Stripe, Gumroad, Patreon, and Memberstack.
 ---
 
 # User subscriptions on the web

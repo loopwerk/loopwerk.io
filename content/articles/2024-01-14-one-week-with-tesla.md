@@ -1,6 +1,6 @@
 ---
 tags: review, personal
-summary: In December of 2023 my girlfriend and I went on an eight day vacation to Iceland, where we wanted to rent a car and travel the south coast. This seemed like the perfect chance to try out living with an electric car, since the charging infrastructure in Iceland is very good, and their electricity very cheap. So we rented a Tesla model 3 and let's just say I have some opinions.
+summary: I rented a Tesla model 3 in Iceland, and let's just say I have some opinions.
 ---
 
 # My one week with a Tesla
