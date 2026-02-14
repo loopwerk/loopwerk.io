@@ -4,7 +4,7 @@ run:
 	pnpm css-watch &
 	CSS_PID=$!
 	trap "kill $CSS_PID 2>/dev/null" EXIT
-	swift run watch --watch content --watch Sources --output deploy --ignore input.css
+	saga dev --ignore input.css
 
 # Remove generated responsive hero image variants
 clean:

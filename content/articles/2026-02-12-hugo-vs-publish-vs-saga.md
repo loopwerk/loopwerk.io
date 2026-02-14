@@ -25,7 +25,7 @@ Before we even look at templates and content, the setup experience is worth ment
 
 Before you've written a single line of template code, you've already written a lot of boilerplate to satisfy the framework. It doesn't help that Publish's documentation is rudimentary. The README covers the basics, but once you need anything beyond the happy path, you're reading source code. And Publish is effectively unmaintained at this point: pull requests sit unreviewed for years, bug reports aren't welcome, and the last meaningful update was a long time ago.
 
-**Saga** is also a Swift package, but setup is minimal: write a `run.swift` with the pipeline and add template functions for the pages you want. No required protocols to satisfy, no boilerplate to set up. The trade-off is that Saga is a much smaller project: you won't find a large community or ecosystem around it.
+**Saga** is also a Swift package, but it has a companion CLI you can install via Homebrew or Mint. Run `saga init mysite` and you get a complete project with articles, tags, templates, and a stylesheet, ready to build and serve. Under the hood you write a `run.swift` with the pipeline and add template functions for the pages you want. No required protocols to satisfy, no boilerplate to set up. The trade-off is that Saga is a much smaller project: you won't find a large community or ecosystem around it.
 
 ## Step 1: Simple markdown pages
 
@@ -741,9 +741,9 @@ With the full site built ([source on GitHub](https://github.com/loopwerk/realwor
 
 **Publish** and **Saga** are both Swift packages, which means you get the compiler on your side. Xcode gives you autocomplete, jump-to-definition, and inline errors. Rename a metadata field and the compiler shows you every template that needs updating. Pass the wrong type to a function and it won't build. This is a real advantage over Hugo's "run it and see" workflow. That said, Publish's type safety has a ceiling: with one shared `ItemMetadata` for all sections, most fields end up optional, and the compiler can't tell you that you're accessing an article field on a project page. Saga's per-section metadata types give you the full benefit.
 
-The dev server story is less rosy. **Publish** has a `publish run` command, but it's minimal. It compiles your Swift package, generates the site, and then launches Python's built-in `http.server` to serve the output folder. That's it. No file watching, no live reload, no auto-rebuild. When you change a markdown file or a Swift source file, you have to stop the server, rebuild, and restart. If you're using Xcode, the workflow is Cmd+R to rebuild, then manually refresh your browser.
+The dev server story for Publish isn't great. **Publish** has a `publish run` command, but it's minimal. It compiles your Swift package, generates the site, and then launches Python's built-in `http.server` to serve the output folder. That's it. No file watching, no live reload, no auto-rebuild. When you change a markdown file or a Swift source file, you have to stop the server, rebuild, and restart. If you're using Xcode, the workflow is Cmd+R to rebuild, then manually refresh your browser.
 
-**Saga** includes a `watch` command that monitors your content and source folders using macOS's native FSEvents. When a file changes, it triggers a rebuild. For browser auto-reload, it uses [browser-sync](https://github.com/BrowserSync/browser-sync), which watches the output folder and refreshes connected browsers when new files appear. It requires browser-sync to be installed separately, and the watch command only works on macOS. Not as seamless as Hugo's all-in-one approach, but it gets the job done.
+**Saga** has a `saga dev` command that watches your content and source folders, triggers a rebuild when a file changes, and live-reloads the browser. It works on both macOS and Linux, so developing or deploying on a Linux server is no problem.
 
 ## Extensibility
 
