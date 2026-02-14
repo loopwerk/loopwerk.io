@@ -306,13 +306,9 @@ code var {
 }
 
 .pagefind-modular-list-link {
-  @apply font-bold text-2xl;
-}
-
-.pagefind-modular-list-link:hover {
-  border-bottom: 1px solid var(--color-orange);
+  @apply font-bold text-2xl mb-3 hover:text-orange;
 }
 
 .pagefind-modular-list-excerpt mark {
-  background: var(--color-orange);
+  @apply bg-orange;
 }
