@@ -22,21 +22,20 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     div {
-      img(alt: "Loopwerk logo", class: "my-24 w-[315px] h-200px mx-auto", src: "/static/images/loopwerk.svg")
-
-      div(class: "my-24 uppercase text-[38px] leading-[1.25] font-thin text-center [&>h1>strong]:font-bold") {
+      div(class: "prose") {
         Node.raw(context.item.body)
+        h2(class: "pb-9") { "Latest articles" }
       }
 
-      div(class: "text-center images") {
-        a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
-        a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
-        a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
-        a(href: "https://www.unilever.nl", title: "Unilever") { img(alt: "Unilever logo", src: "/static/images/unilever.svg") }
-        a(href: "https://www.last.fm", title: "Last.fm") { img(alt: "Last.fm logo", src: "/static/images/lastfm.svg") }
-        a(href: "https://www.siminn.is", title: "Siminn") { img(alt: "Siminn logo", src: "/static/images/siminn.svg") }
-        a(href: "https://www.cbs.com", title: "CBS") { img(alt: "CBS logo", src: "/static/images/cbs.svg") }
-        a(href: "https://www.metrolyrics.com", title: "Metrolyrics") { img(alt: "Metrolyrics logo", src: "/static/images/metrolyrics.svg") }
+      div(class: "flex flex-col gap-8") {
+        context.allItems
+          .compactMap { $0 as? Item<ArticleMetadata> }
+          .prefix(5)
+          .map { _renderArticleForGrid(article: $0) }
+
+        p(class: "prose") {
+          a(href: "/articles/") { "› See all articles" }
+        }
       }
     }
   }

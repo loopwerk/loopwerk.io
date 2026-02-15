@@ -14,7 +14,7 @@ func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
         %"."
       }
     }
-
+    
     context.items.map { app in
       div(class: "mt-12 prose") {
         h3(class: "text-2xl font-bold !mb-0") { app.title }

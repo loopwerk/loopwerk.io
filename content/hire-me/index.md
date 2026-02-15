@@ -4,9 +4,6 @@ section: hireMe
 
 # Hire me
 
-> [!AVAILABILITY]
-> I am currently available for new projects!
-
 I’m a creative product-minded software engineer with a strong background in web development and backend systems, and a long-standing passion for good design and usability.
 
 I enjoy working on the "back-of-the-front-end": building clean APIs, thoughtful data models, and well-structured systems that enable great user experiences. I care deeply about API design, documentation, and code quality, and I value pragmatic solutions that balance clarity, maintainability, and performance.
@@ -21,7 +18,11 @@ My CV can be downloaded [here](/about/KevinRenskers.pdf).
 
 ## My philosophy: keep it simple
 
-Over my 25 years of experience, [I've learned that the best solution is often the simplest one](/articles/2025/25-years-chasing-simplicity/). I believe in building robust, maintainable software by avoiding unnecessary complexity. My goal is to deliver clean, straightforward code that solves complex problems effectively, and which can still be understood a year later. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity.
+Over my 25 years of experience, [I've learned that the best solution is often the simplest one](/articles/2025/25-years-chasing-simplicity/). I believe in building robust, maintainable software by avoiding unnecessary complexity. 
+
+As I like to say: "A good app is like a mechanical watch. Lots of moving parts all working together to create a beautiful and simple interface."
+
+My goal is to deliver clean, straightforward code that solves complex problems effectively, and which can still be understood a year later. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity.
 
 ## What clients say
 
@@ -60,3 +61,14 @@ I work fully remote from my own office in Winterswijk, the Netherlands. I work f
 ## Let's work together!
 
 Email me at <kevin@loopwerk.io> to discuss your project, or reach out to me on [LinkedIn](https://www.linkedin.com/in/kevinrenskers/) or [Mastodon](https://hachyderm.io/@kevinrenskers).
+
+<div class="text-center company-logos mt-16">
+  <a href="https://www.soundradix.com" title="Sound Radix"><img alt="Sound Radix logo" src="/static/images/soundradix.svg"></a>
+  <a href="https://www.wetransfer.com" title="WeTransfer"><img alt="WeTransfer logo" src="/static/images/we.svg"></a>
+  <a href="https://www.sentry.io" title="Sentry"><img alt="Sentry logo" src="/static/images/sentry.svg"></a>
+  <a href="https://www.unilever.nl" title="Unilever"><img alt="Unilever logo" src="/static/images/unilever.svg"></a>
+  <a href="https://www.last.fm" title="Last.fm"><img alt="Last.fm logo" src="/static/images/lastfm.svg"></a>
+  <a href="https://www.siminn.is" title="Siminn"><img alt="Siminn logo" src="/static/images/siminn.svg"></a>
+  <a href="https://www.cbs.com" title="CBS"><img alt="CBS logo" src="/static/images/cbs.svg"></a>
+  <a href="https://www.metrolyrics.com" title="Metrolyrics"><img alt="Metrolyrics logo" src="/static/images/metrolyrics.svg"></a>
+</div>
