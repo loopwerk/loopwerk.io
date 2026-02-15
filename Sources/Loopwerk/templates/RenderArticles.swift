@@ -6,9 +6,9 @@ func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   a(class: "relative group hover:text-orange", href: article.url) {
     h2(class: "font-bold text-base text-pretty") {
       article.title
-      
+      Node.trim
       span(class: "font-thin text-xs text-light ml-3 whitespace-nowrap") {
-        article.date.formatted("MMM dd, YYYY")
+        "\u{00A0}\(article.date.formatted("MMM dd, YYYY"))"
       }
     }
     
