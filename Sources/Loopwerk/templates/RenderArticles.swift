@@ -4,7 +4,7 @@ import Saga
 
 func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
   a(class: "relative group hover:text-orange", href: article.url) {
-    h2(class: "font-bold text-base text-pretty") {
+    h2(class: "font-bold text-lg text-pretty") {
       article.title
       Node.trim
       span(class: "font-thin text-xs text-light ml-3 whitespace-nowrap") {
