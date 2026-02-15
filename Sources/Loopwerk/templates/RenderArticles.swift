@@ -25,7 +25,7 @@ func _renderArticlesHeader(title: String) -> Node {
     },
     
     // Search
-    form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
+    form(action: "/search/", class: "relative mt-8 mb-12 lg:mt-12 lg:mb-16", id: "search-form") {
       input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
     }
   ])
@@ -33,7 +33,7 @@ func _renderArticlesHeader(title: String) -> Node {
 
 
 func _renderArticlesList(_ articles: [Item<ArticleMetadata>]) -> Node {
-  div(class: "flex flex-col gap-8 pb-12") {
+  div(class: "flex flex-col gap-8") {
     articles.map { _renderArticleForGrid(article: $0) }
   }
 }
@@ -45,11 +45,13 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles") {
     _renderArticlesHeader(title: "Articles")
     
-    sortedByYearDescending.map { year, articles in
-      Node.fragment([
-        h1(class: "font-title font-bold text-4xl mb-8") { "\(year)" },
-        _renderArticlesList(articles)
-      ])
+    div(class: "flex flex-col gap-16 pb-8") {
+      sortedByYearDescending.map { year, articles in
+        div {
+          h1(class: "font-title font-bold text-4xl mb-8") { "\(year)" }
+          _renderArticlesList(articles)
+        }
+      }
     }
   }
 }
