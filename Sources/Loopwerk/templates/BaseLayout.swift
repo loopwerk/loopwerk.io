@@ -59,13 +59,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
-        script(defer: true, src: "/js/pa-v-AgZeFDGuKeuyxUlSkso.js")
-        script {
-          Node.raw("""
-          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-          plausible.init({endpoint:"/api/event"});
-          """)
-        }
+        script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875"])
       }
       body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
