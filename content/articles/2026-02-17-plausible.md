@@ -1,5 +1,5 @@
 ---
-tags: review, insights
+tags: review, analytics
 summary: After years on Plausible I switched to self-hosting and discovered just how much they hold back from their open source version.
 ---
 
@@ -37,4 +37,7 @@ In fact, in the case of funnels they even show the missing feature in a useless 
 
 ![Funnels: 'This feature is unavailable'](/articles/images/funnels.webp)
 
-Not a great look for an open source project. Personally I'm looking for alternatives -- more on that soon.
+Not a great look for an open source project. Personally I'm looking for alternatives.
+
+> [!UPDATE]
+> **February 18, 2026:** I've written a follow up, [comparing Umami to Plausible](/articles/2026/umami-vs-plausible/).

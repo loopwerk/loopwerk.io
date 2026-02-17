@@ -246,6 +246,15 @@ code var {
   border-radius: 10%/4.7%;
 }
 
+.prose .images {
+  @apply flex flex-col lg:flex-row gap-4;
+  margin: 2em 0;
+}
+
+.prose .images img {
+  @apply m-0 h-auto flex-1 min-w-0 rounded-md;
+}
+
 @media (min-width: 900px) {
   .hero-image {
     margin-left: -20px;
