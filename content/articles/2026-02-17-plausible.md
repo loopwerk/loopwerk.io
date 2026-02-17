@@ -29,4 +29,10 @@ Without proper bot filtering, the numbers stop representing real people. At that
 
 And it doesn't stop there. Funnels and revenue tracking are also locked to the paid cloud version. Look, I don't mind that some premium features are reserved for the cloud version. But bot filtering isn't a nice-to-have; it's what makes the numbers meaningful. Without it, at least for sites like mine that get hammered by bots, the self-hosted version is essentially useless.
 
-Offering managed hosting and backups should be enough to justify a paid tier. Instead, Plausible talks up being open source while they strip out core functionality to push you towards it. Personally I'm looking for alternatives -- more on that soon.
+Offering managed hosting and backups should be enough to justify a paid tier. Instead, Plausible talks up being open source while they strip out core functionality to push you towards it.
+
+In fact, in the case of funnels they even show the missing feature in a useless report that can't be removed, always in your face:
+
+![Funnels: 'This feature is unavailable'](/articles/images/funnels.webp)
+
+Kind of petty. Personally I'm looking for alternatives -- more on that soon.
