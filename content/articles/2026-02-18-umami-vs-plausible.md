@@ -130,4 +130,5 @@ and
 
 This adds a layer of bot filtering before the traffic even reaches Umami. It's too early to say how much of a difference it makes, but the idea is simple: if Cloudflare already knows it's a bot or coming from a data center, don't let it pollute the analytics.
 
-I'll update this article once the Cloudflare WAF rule has had time to prove itself.
+> [!UPDATE]
+> **February 19, 2026**: Cloudflare's security rule works brilliantly! I've written a follow up article describing the set up in more detail: [Protect your analytics with Cloudflare](/articles/2026/protect-analytics/)
