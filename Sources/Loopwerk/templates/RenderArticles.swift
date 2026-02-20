@@ -7,12 +7,12 @@ func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
     h2(class: "font-bold text-lg text-pretty") {
       article.title
       Node.trim
-      span(class: "font-thin text-xs text-light ml-3 whitespace-nowrap") {
+      span(class: "font-thin text-xs text-tertiarytext ml-3 whitespace-nowrap") {
         "\u{00A0}\(article.date.formatted("MMM dd, YYYY"))"
       }
     }
     
-    p(class: "text-gray") {
+    p(class: "text-secondarytext") {
       article.metadata.summary ?? ""
     }
   }

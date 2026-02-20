@@ -15,7 +15,7 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 }
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
-  div(class: "text-gray gray-links text-xs font-mono") {
+  div(class: "text-secondarytext secondarytext-links text-xs font-mono") {
     article.date.formatted("MMMM dd, yyyy")
     Node.raw("&bull; ")
 
@@ -77,7 +77,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
 
       if context.item.archive {
-        p(class: "text-gray text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
+        p(class: "text-secondarytext text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
       }
 
       if let heroImage = context.item.metadata.heroImage {
@@ -89,7 +89,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         """
         img(
           alt: "Hero image",
-          class: "hero-image shadow-lg shadow-nav rounded-md bg-sub",
+          class: "hero-image shadow-lg shadow-shadowbg rounded-md bg-code",
           height: "\(heroImage.height)",
           sizes: "(max-width: 739px) 315px, 740px",
           src: "/articles/heroes/\(context.item.filenameWithoutExtension)-1480w.webp",
@@ -102,7 +102,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       Node.raw(context.item.body)
     }
 
-    div(class: "border-t-2 border-light mt-12 pt-12") {
+    div(class: "border-t-2 border-divider mt-12 pt-12") {
       h2(class: "font-title text-5xl font-bold mb-8") { "Written by" }
       div(class: "flex flex-col lg:flex-row gap-8 lg:items-center") {
         div(class: "flex-[0_0_120px]") {
@@ -111,7 +111,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
         div(class: "prose") {
           h3(class: "!m-0") { "Kevin Renskers" }
-          p(class: "text-gray gray-links text-base") {
+          p(class: "text-secondarytext secondarytext-links text-base") {
             "I'm a freelance software developer with over 25 years of experience. I write articles about Swift, Python, and TypeScript. I've worked on "
             a(href: "/work/") { "many apps" }
             %", and maintain a bunch of"
@@ -142,7 +142,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
     }
 
-    div(class: "border-t-2 border-light mt-12 pt-12") {
+    div(class: "border-t-2 border-divider mt-12 pt-12") {
       Node.raw("""
       <script src="https://giscus.app/client.js"
             data-repo="loopwerk/loopwerk.io"
