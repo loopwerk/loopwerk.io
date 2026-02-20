@@ -3,6 +3,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = require("tailwind-mode-aware-colors")({
+  darkMode: "selector",
   content: ["./Sources/Loopwerk/templates/*.swift"],
   theme: {
     container: {
@@ -30,7 +31,7 @@ module.exports = require("tailwind-mode-aware-colors")({
       nav: { dark: "#0e1112", light: "#252f3f" },
       codebg: { dark: "#252f3f", light: "#E5E8EA" },
       codefg: { dark: "#f1f5f9", light: "#252f3f" },
-      divider: { dark: "#64748b", light: "#252f3f" },
+      divider: { dark: "#64748b", light: "#5F6F84" },
       searchbg: { dark: "#252f3f", light: "#E5E8EA" },
       searchfg: { dark: "#f1f5f9", light: "#252f3f" },
       shadowbg: { dark: "#0e1112", light: "#E5E8EA" },

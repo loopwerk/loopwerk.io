@@ -34,33 +34,31 @@
   }
 
   /* Dark mode colors */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --token-comment: #7c7c7c;
-      --token-punctuation: #c5c8c6;
-      --token-property: #96cbfe;
-      --token-keyword: #96cbfe;
-      --token-tag: #96cbfe;
-      --token-class-name: #ffffb6;
-      --token-boolean: #99cc99;
-      --token-constant: #99cc99;
-      --token-symbol: #f92672;
-      --token-number: #ff73fd;
-      --token-selector: #a8ff60;
-      --token-attr-name: #a8ff60;
-      --token-inserted: #a8ff60;
-      --token-string: #a8ff60;
-      --token-builtin: #a8ff60;
-      --token-variable: #c6c5fe;
-      --token-operator: #ededed;
-      --token-entity: #ffffb6;
-      --token-url: #96cbfe;
-      --token-atrule: #f9ee98;
-      --token-attr-value: #f9ee98;
-      --token-function: #dad085;
-      --token-regex: #e9c062;
-      --token-important: #fd971f;
-    }
+  .dark {
+    --token-comment: #7c7c7c;
+    --token-punctuation: #c5c8c6;
+    --token-property: #96cbfe;
+    --token-keyword: #96cbfe;
+    --token-tag: #96cbfe;
+    --token-class-name: #ffffb6;
+    --token-boolean: #99cc99;
+    --token-constant: #99cc99;
+    --token-symbol: #f92672;
+    --token-number: #ff73fd;
+    --token-selector: #a8ff60;
+    --token-attr-name: #a8ff60;
+    --token-inserted: #a8ff60;
+    --token-string: #a8ff60;
+    --token-builtin: #a8ff60;
+    --token-variable: #c6c5fe;
+    --token-operator: #ededed;
+    --token-entity: #ffffb6;
+    --token-url: #96cbfe;
+    --token-atrule: #f9ee98;
+    --token-attr-value: #f9ee98;
+    --token-function: #dad085;
+    --token-regex: #e9c062;
+    --token-important: #fd971f;
   }
 
   .token.comment,
