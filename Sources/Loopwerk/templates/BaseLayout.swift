@@ -59,15 +59,17 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
-        script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875"])
+        if shouldCreateImages() {
+          script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875"])
+        }
       }
-      body(class: "bg-page text-white pb-5 min-h-full \(section.rawValue)") {
+      body(class: "bg-page text-primarytext pb-5 min-h-full \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
 
         // Mobile overlay (click to close)
-        label(class: "mobile-overlay fixed inset-0 z-40 bg-black/80 opacity-0 transition-opacity pointer-events-none lg:hidden", for: "mobile-menu-toggle")
+        label(class: "mobile-overlay fixed inset-0 z-40 bg-[#000000]/80 opacity-0 transition-opacity pointer-events-none lg:hidden", for: "mobile-menu-toggle")
 
-        header(class: "bg-nav text-gray py-3 text-base/6 lg:fixed w-full z-10") {
+        header(class: "bg-nav text-navlink py-3 text-base/6 lg:fixed w-full z-10") {
           nav(class: "container flex gap-x-5 lg:gap-x-8 items-center lg:h-[44px]") {
             // Logo
             a(href: "/") {
@@ -80,9 +82,9 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
             // Hamburger menu button
             label(class: "hamburger cursor-pointer flex flex-col justify-center items-center w-10 h-10 gap-[5px] lg:hidden", for: "mobile-menu-toggle") {
               span(class: "sr-only") { "Open menu" }
-              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
-              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
-              span(class: "hamburger-line block w-6 h-[2px] bg-gray transition-all duration-300")
+              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
+              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
+              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
             }
 
             // Navigation panel - sidebar on mobile, inline on desktop
@@ -124,7 +126,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
 
         if section != .home {
           div(class: "container pt-4 lg:pt-20") {
-            div(class: "bg-orange p-4 text-black rounded-md shadow-lg shadow-nav text-sm lg:text-base") {
+            div(class: "bg-orange p-4 text-[#000000] rounded-md shadow-lg shadow-shadowbg text-sm lg:text-base") {
               "For the first time since 2023 I'm available again for new projects!"
               a(class: "underline", href: "/hire-me/") {
                 "Hire me"
@@ -139,8 +141,8 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           children()
         }
 
-        div(class: "site-footer container text-gray gray-links text-center text-sm font-mono") {
-          div(class: "border-t-2 border-light pt-6 mt-8") {
+        div(class: "site-footer container text-secondarytext secondarytext-links text-center text-sm font-mono") {
+          div(class: "border-t-2 border-divider pt-6 mt-8") {
             p {
               "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
             }

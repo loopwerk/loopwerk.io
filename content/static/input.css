@@ -20,7 +20,7 @@
 /* Close button X shape */
 .nav-close::before,
 .nav-close::after {
-  @apply absolute w-6 h-[2px] bg-gray rotate-45;
+  @apply absolute w-6 h-[2px] bg-secondarytext rotate-45;
   content: "";
 }
 
@@ -50,14 +50,14 @@ nav ul a:hover {
 }
 
 nav ul a.active {
-  @apply border-orange text-white;
+  @apply border-orange text-navactivelink;
 }
 
-.gray-links a {
+.secondarytext-links a {
   @apply underline text-inherit;
 }
 
-.gray-links a:hover {
+.secondarytext-links a:hover {
   @apply text-orange;
 }
 
@@ -91,11 +91,11 @@ a[href^="https://apps.apple.com"].app {
 }
 
 .prose code {
-  @apply font-normal text-base text-white bg-sub p-1;
+  @apply font-normal text-base text-codefg bg-codebg p-1;
 }
 
 .prose pre {
-  @apply shadow-lg shadow-nav py-4 rounded-md bg-sub;
+  @apply shadow-lg shadow-shadowbg py-4 rounded-md text-codefg bg-codebg;
   overflow: auto;
   overflow-y: hidden;
 }
@@ -110,7 +110,7 @@ a[href^="https://apps.apple.com"].app {
 }
 
 .prose pre[data-title] .code-title {
-  @apply block text-sm text-gray py-2 pl-10 mb-4 -mx-4 border-b border-light/20;
+  @apply block text-sm text-secondarytext py-2 pl-10 mb-4 -mx-4 border-b border-secondarytext/20;
   background-repeat: no-repeat;
   background-position: 1rem center;
   background-size: 16px 16px;
@@ -168,10 +168,8 @@ a[href^="https://apps.apple.com"].app {
 }
 
 code mark {
-  border: 1px solid var(--color-orange);
+  @apply border border-orange bg-transparent text-inherit;
   padding: 2px 4px;
-  background: transparent;
-  color: inherit;
 }
 
 code mark[title] {
@@ -181,9 +179,7 @@ code mark[title] {
 code mark[title]::after {
   content: "?";
   margin: -2px -4px -2px 4px;
-  border: 2px solid var(--color-orange);
-  background-color: var(--color-orange);
-  color: white;
+  @apply bg-orange text-primarytext border-2 border-orange;
 }
 
 code var {
@@ -202,12 +198,12 @@ code var {
 }
 
 .prose aside {
-  @apply px-4 border border-orange my-5 rounded-md;
+  @apply px-4 border border-orange my-5 rounded-md bg-asidebg text-asidefg;
   font-size: 90%;
 }
 
 .prose aside .title {
-  @apply text-orange block -mb-4;
+  @apply text-orange block -mb-2;
 }
 
 .prose blockquote {
@@ -274,7 +270,7 @@ code var {
 }
 
 #search-form::before {
-  background-color: var(--color-gray);
+  @apply bg-searchfg;
   width: 18px;
   height: 18px;
   top: 13px;
@@ -292,15 +288,14 @@ code var {
 }
 
 #search {
-  background: var(--color-sub);
   height: 44px;
   padding: 0 10px 0 54px;
   border-radius: 6px;
-  color: var(--color-white);
+  @apply bg-searchbg text-searchfg;
 }
 
 #search::placeholder {
-  color: var(--color-gray);
+  @apply text-searchplaceholder;
   font-weight: 200;
 }
 

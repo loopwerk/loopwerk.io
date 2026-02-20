@@ -1,36 +1,66 @@
 /**
- * atom-dark theme for `prism.js`
- * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
- * @author Joe Gibson (@gibsjose)
+ * Prism.js theme with light/dark mode support.
+ * Light: Based on Atom's `one-light` theme
+ * Dark: Based on Atom's `atom-dark` theme by Joe Gibson (@gibsjose)
  */
 
 @media screen {
-  /* Colors */
+  /* Light mode colors (default) */
   :root {
-    --token-comment: #7c7c7c;
-    --token-punctuation: #c5c8c6;
-    --token-property: #96cbfe;
-    --token-keyword: #96cbfe;
-    --token-tag: #96cbfe;
-    --token-class-name: #ffffb6;
-    --token-boolean: #99cc99;
-    --token-constant: #99cc99;
-    --token-symbol: #f92672;
-    --token-number: #ff73fd;
-    --token-selector: #a8ff60;
-    --token-attr-name: #a8ff60;
-    --token-inserted: #a8ff60;
-    --token-string: #a8ff60;
-    --token-builtin: #a8ff60;
-    --token-variable: #c6c5fe;
-    --token-operator: #ededed;
-    --token-entity: #ffffb6;
-    --token-url: #96cbfe;
-    --token-atrule: #f9ee98;
-    --token-attr-value: #f9ee98;
-    --token-function: #dad085;
-    --token-regex: #e9c062;
-    --token-important: #fd971f;
+    --token-comment: #a0a1a7;
+    --token-punctuation: #383a42;
+    --token-property: #e45649;
+    --token-keyword: #a626a4;
+    --token-tag: #e45649;
+    --token-class-name: #c18401;
+    --token-boolean: #986801;
+    --token-constant: #986801;
+    --token-symbol: #e45649;
+    --token-number: #986801;
+    --token-selector: #50a14f;
+    --token-attr-name: #986801;
+    --token-inserted: #50a14f;
+    --token-string: #50a14f;
+    --token-builtin: #0184bc;
+    --token-variable: #e45649;
+    --token-operator: #a626a4;
+    --token-entity: #4078f2;
+    --token-url: #0184bc;
+    --token-atrule: #a626a4;
+    --token-attr-value: #50a14f;
+    --token-function: #4078f2;
+    --token-regex: #986801;
+    --token-important: #c18401;
+  }
+
+  /* Dark mode colors */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --token-comment: #7c7c7c;
+      --token-punctuation: #c5c8c6;
+      --token-property: #96cbfe;
+      --token-keyword: #96cbfe;
+      --token-tag: #96cbfe;
+      --token-class-name: #ffffb6;
+      --token-boolean: #99cc99;
+      --token-constant: #99cc99;
+      --token-symbol: #f92672;
+      --token-number: #ff73fd;
+      --token-selector: #a8ff60;
+      --token-attr-name: #a8ff60;
+      --token-inserted: #a8ff60;
+      --token-string: #a8ff60;
+      --token-builtin: #a8ff60;
+      --token-variable: #c6c5fe;
+      --token-operator: #ededed;
+      --token-entity: #ffffb6;
+      --token-url: #96cbfe;
+      --token-atrule: #f9ee98;
+      --token-attr-value: #f9ee98;
+      --token-function: #dad085;
+      --token-regex: #e9c062;
+      --token-important: #fd971f;
+    }
   }
 
   .token.comment,
