@@ -7,30 +7,30 @@
 @media screen {
   /* Light mode colors (default) */
   :root {
-    --token-comment: #a0a1a7;
+    --token-comment: #8b8d93;
     --token-punctuation: #383a42;
-    --token-property: #e45649;
+    --token-property: #ca3e31;
     --token-keyword: #a626a4;
-    --token-tag: #e45649;
-    --token-class-name: #c18401;
-    --token-boolean: #986801;
-    --token-constant: #986801;
-    --token-symbol: #e45649;
-    --token-number: #986801;
-    --token-selector: #50a14f;
-    --token-attr-name: #986801;
-    --token-inserted: #50a14f;
-    --token-string: #50a14f;
-    --token-builtin: #0184bc;
-    --token-variable: #e45649;
+    --token-tag: #ca3e31;
+    --token-class-name: #d58110;
+    --token-boolean: #866001;
+    --token-constant: #866001;
+    --token-symbol: #ca3e31;
+    --token-number: #866001;
+    --token-selector: #3e8640;
+    --token-attr-name: #866001;
+    --token-inserted: #3e8640;
+    --token-string: #3e8640;
+    --token-builtin: #016e9d;
+    --token-variable: #ca3e31;
     --token-operator: #a626a4;
-    --token-entity: #4078f2;
-    --token-url: #0184bc;
+    --token-entity: #3564cf;
+    --token-url: #016e9d;
     --token-atrule: #a626a4;
-    --token-attr-value: #50a14f;
-    --token-function: #4078f2;
-    --token-regex: #986801;
-    --token-important: #c18401;
+    --token-attr-value: #3e8640;
+    --token-function: #3564cf;
+    --token-regex: #866001;
+    --token-important: #d58110;
   }
 
   /* Dark mode colors */

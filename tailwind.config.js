@@ -20,7 +20,7 @@ module.exports = require("tailwind-mode-aware-colors")({
     colors: {
       inherit: "inherit",
       transparent: "transparent",
-      orange: "#f1a948",
+      orange: { dark: "#f1a948", light: "#d58110" },
       primarytext: { dark: "#f1f5f9", light: "#252f3f" },
       secondarytext: { dark: "#93a3b8", light: "#5F6F84" },
       tertiarytext: { dark: "#64748b", light: "#93a3b8" },
@@ -29,7 +29,7 @@ module.exports = require("tailwind-mode-aware-colors")({
       navactivelink: { dark: "#f1f5f9", light: "#f1f5f9" },
       page: { dark: "#1a202b", light: "#f1f5f9" },
       nav: { dark: "#0e1112", light: "#252f3f" },
-      codebg: { dark: "#252f3f", light: "#E5E8EA" },
+      codebg: { dark: "#252f3f", light: "#EAECEF" },
       codefg: { dark: "#f1f5f9", light: "#252f3f" },
       divider: { dark: "#64748b", light: "#5F6F84" },
       searchbg: { dark: "#252f3f", light: "#E5E8EA" },
