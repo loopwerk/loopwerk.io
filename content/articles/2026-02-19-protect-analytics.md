@@ -44,15 +44,18 @@ This blocks specific bots by user agent. You configure it via AI Crawl Control â
 
 This rule blocked 2.5k events in 24 hours.
 
-3. **Challenge Asian countries**
+3. **Challenge likely bot countries**
 ```
-(ip.src.country eq "SG") or (ip.src.country eq "CN") or 
-(ip.src.country eq "JP") or (ip.src.country eq "HK")
+(ip.src.country eq "SG") or (ip.src.country eq "CN") or
+(ip.src.country eq "JP") or (ip.src.country eq "HK") or
+(ip.src.country eq "VN") or (ip.src.country eq "IN") or
+(ip.src.country eq "BR") or (ip.src.country eq "IQ") or
+(ip.src.country eq "BD")
 ```
 
-Unlike the other rules, this one doesn't have the block action, but rather the "managed challenge" action. Visitors from Singapore, China, Japan, or Hong Kong need to pass Cloudflare's captcha page before they are allowed to visit the site. The challenge solve rate is 0.2%, so that's proof that almost all visitors from these countries are bots.
+Unlike the other rules, this one doesn't have the block action, but rather the "managed challenge" action. Visitors from Singapore, China, Japan, and some other countries, need to pass Cloudflare's captcha page before they are allowed to visit the site. The challenge solve rate is 0.9%, so that's proof that almost all visitors from these countries are bots.
 
-Amazingly, this rule blocked close to 6k events, even though it sits behind the other rules. That means that these bots aren't identifying themselves properly - otherwise they would've been caught in an earlier rule.
+Amazingly, this rule blocked close to 10k events in just 24 hours, even though it sits behind the other rules. That means that these bots aren't identifying themselves properly - otherwise they would've been caught in an earlier rule.
 
 4. **Block bots from analytics**
 ```
