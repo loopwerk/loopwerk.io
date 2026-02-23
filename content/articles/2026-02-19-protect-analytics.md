@@ -83,10 +83,12 @@ and
 
 Finally, the one from my [previous article](/articles/2026/umami-vs-plausible/). This one specifically blocks bots and visits coming from data centers from accessing the analytics endpoints. They are allowed to crawl the site, but they cannot trigger anything in Umami. 
 
-This blocked almost 3k events, which would otherwise have made it to Umami.
+This blocks an average of 1000 events per day, which would otherwise have made it to Umami.
 
 > [!SIDENOTE]
 > Plus of course I have my [anti-PHP-scraper rule](/articles/2025/cloudflare-waf-block-php/) active too, which blocks about 1000 events per day on average.
+
+![](/articles/images/blocking_bots.webp)
 
 ## Proxying your analytics endpoints
 
