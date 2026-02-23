@@ -17,15 +17,16 @@ In Security → Security rules:
 (cf.verified_bot_category eq "Search Engine Optimization")
 ```
 
-This blocks two bot categories: AI and SEO crawlers. They don't get access to my site at all. This rule blocked 3.4k events in the past 24 hours.
+This blocks two bot categories: AI and SEO crawlers. They don't get access to my site at all. This rule blocked 2.8k events in the past 24 hours.
 
 2. **AI Crawl Control - Block AI bots by User Agent** 
 ```
 (http.request.uri.path ne "/robots.txt") and 
 (
   (http.user_agent contains "Amazonbot") or 
-  (http.user_agent contains "Anchor Browser") or
-  (http.user_agent contains "bingbot") or
+  (http.user_agent contains "Anchor Browser") or 
+  (http.user_agent contains "Applebot") or 
+  (http.user_agent contains "bingbot") or 
   (http.user_agent contains "Bytespider") or 
   (http.user_agent contains "CCBot") or 
   (http.user_agent contains "ClaudeBot") or 
@@ -34,6 +35,8 @@ This blocks two bot categories: AI and SEO crawlers. They don't get access to my
   (http.user_agent contains "GPTBot") or 
   (http.user_agent contains "meta-externalagent") or 
   (http.user_agent contains "Novellum") or 
+  (http.user_agent contains "OAI-SearchBot") or 
+  (http.user_agent contains "PerplexityBot") or 
   (http.user_agent contains "PetalBot") or 
   (http.user_agent contains "ProRataInc") or 
   (http.user_agent contains "Timpibot")
@@ -42,7 +45,7 @@ This blocks two bot categories: AI and SEO crawlers. They don't get access to my
 
 This blocks specific bots by user agent. You configure it via AI Crawl Control → Crawlers, where you can see how often each bot visits your site and block them individually. Under the hood it gets stored as a security rule.
 
-This rule blocked 2.5k events in 24 hours.
+This rule blocked 3.1k events in 24 hours.
 
 3. **Challenge likely bot countries**
 ```
