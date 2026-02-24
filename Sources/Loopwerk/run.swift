@@ -127,6 +127,9 @@ func heroImage(item: Item<ArticleMetadata>) {
 struct Run {
   static func main() async throws {
     try await Saga(input: "content", output: "deploy")
+      // Non-archived articles (`$0.archive == false`)
+      // We make sure that the filtered-out articles (i.e. archived articles) are NOT
+      // marked as handled. Otherwise the next step can't process the archived articles.
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
@@ -165,6 +168,8 @@ struct Run {
           ),
         ]
       )
+    
+      // Archived articles: they get their own detail page but are not part of the list pages nor atom feeds
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
@@ -175,6 +180,8 @@ struct Run {
           .itemWriter(swim(renderArticle)),
         ]
       )
+    
+      // Portfolio stuff (paid work and open source projects)
       .register(
         folder: "work",
         metadata: WorkProjectMetadata.self,
@@ -196,42 +203,45 @@ struct Run {
         itemProcessor: improveHTML,
         writers: [.listWriter(swim(renderOpenSource))]
       )
+
+      // Render the homepage with its own template
       .register(
         metadata: PageMetadata.self,
         readers: [.parsleyMarkdownReader],
         itemProcessor: improveHTML,
-        itemWriteMode: .keepAsFile, // need to keep 404.md as 404.html, not 404/index.html
+        filter: { $0.relativeSource.string == "index.md" },
+        writers: [.itemWriter(swim(renderHome))]
+      )
+
+      // Other content pages (about, hire me)
+      .register(
+        metadata: PageMetadata.self,
+        readers: [.parsleyMarkdownReader],
+        itemProcessor: improveHTML,
         writers: [.itemWriter(swim(renderPage))]
       )
+
+      // Hardcoded pages, no markdown file backing them
+      .createPage("404.html", using: swim(render404))
+      .createPage("search/index.html", using: swim(renderSearch))
+
+      // Create article images
+      .register { saga in
+        guard shouldCreateImages() else {
+          return
+        }
+
+        let generator = ImageGenerator(rootPath: SiteMetadata.projectRoot + "/Sources")
+
+        let articles = saga.allItems.compactMap { $0 as? Item<ArticleMetadata> }
+        for article in articles {
+          let destination = (saga.outputPath + "static" + "images" + article.filenameWithoutExtension).string + ".png"
+          generator?.generate(article: article, outputPath: destination)
+        }
+      }
+
+      // Run everything!
       .run()
-      .staticFiles()
-      .createArticleImages()
-  }
-}
-
-extension Saga {
-  @discardableResult
-  func createArticleImages() -> Self {
-    guard shouldCreateImages() else {
-      print("Skipping createArticleImages")
-      return self
-    }
-
-    let sourcesPath = SiteMetadata.projectRoot + "/Sources"
-
-    let createArticleImagesDateFormatter = DateFormatter()
-    createArticleImagesDateFormatter.dateFormat = "MMMM dd, yyyy"
-    createArticleImagesDateFormatter.timeZone = .current
-
-    let articles = fileStorage.compactMap { $0.item as? Item<ArticleMetadata> }
-
-    for article in articles {
-      let destination = (outputPath + "static" + "images" + article.filenameWithoutExtension).string + ".png"
-      let generator = ImageGenerator(rootPath: sourcesPath)
-      generator?.generate(article: article, outputPath: destination)
-    }
-
-    return self
   }
 }
 

@@ -18,12 +18,14 @@ class ImageGenerator {
   }
 
   func generate(article: Item<ArticleMetadata>, outputPath: String) {
+    guard let image = background.cloned() else { return }
+
     let wrappedText = article.title.splitByLineWidth(width: 25)
 
     // Draw the title on the image
     var offsetY = 160
     for line in wrappedText {
-      background.renderText(line, from: Point(x: 90, y: offsetY), fontList: [fontPath], color: Color.white, size: fontSize)
+      image.renderText(line, from: Point(x: 90, y: offsetY), fontList: [fontPath], color: Color.white, size: fontSize)
       offsetY += Int(fontSize) + 24
     }
 
@@ -31,14 +33,14 @@ class ImageGenerator {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MMMM dd, yyyy"
     let date = dateFormatter.string(from: article.date)
-    background.renderText(date, from: Point(x: 90, y: 540), fontList: [fontPath], color: Color.white, size: 20)
+    image.renderText(date, from: Point(x: 90, y: 540), fontList: [fontPath], color: Color.white, size: 20)
 
     // Draw the tags on the image
     let tags = article.metadata.tags.sorted().map { "#\($0)" }.joined(separator: ", ")
-    background.renderText(tags, from: Point(x: 90, y: 580), fontList: [fontPath], color: Color.white, size: 20)
+    image.renderText(tags, from: Point(x: 90, y: 580), fontList: [fontPath], color: Color.white, size: 20)
 
     // Save the image as a PNG
-    background.write(to: URL(fileURLWithPath: outputPath))
+    image.write(to: URL(fileURLWithPath: outputPath))
   }
 }
 

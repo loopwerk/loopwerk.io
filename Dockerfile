@@ -13,6 +13,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     git-restore-mtime \
     curl \
     nodejs npm \
+    just \
     && apt-get install -y libjavascriptcoregtk-4.1-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pkg-config --libs javascriptcoregtk-4.1
@@ -37,9 +38,7 @@ COPY Tests ./Tests
 
 # Pre-fetch and pre-build Swift dependencies
 # This layer will be cached as long as Package files and Sources don't change
-RUN echo "Prefetching and prebuilding dependencies..." \
-    && swift package resolve \
-    && swift build --product Loopwerk -c release
+RUN echo "Prefetching and prebuilding dependencies..." && just compile
 
 # Copy all source files
 COPY . .
@@ -51,14 +50,8 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
     && git restore-mtime --oldest-time \
     && rm -rf .git /tmp/repo
 
-# Build the site with verbose output for debugging
-RUN echo "Starting website build..." \
-    && .build/release/Loopwerk createArticleImages \
-    && pnpm index \
-    && pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
-
-# Build the CSS, give it a unique name, and replace the path in all the HTML files
-RUN pnpm css-build && ./hash-css.sh
+# Build the site: generate images, index, minify HTML, build & hash CSS
+RUN echo "Starting website build..." && just build
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine

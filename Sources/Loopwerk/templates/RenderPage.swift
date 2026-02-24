@@ -1,22 +1,6 @@
 import HTML
 import Saga
 
-func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let section = Section(rawValue: context.item.metadata.section ?? "")
-  assert(section != nil)
-
-  switch section {
-    case .home:
-      return renderHome(context: context)
-    case .search:
-      return renderSearch(context: context)
-    case .notFound:
-      return render404(context: context)
-    default:
-      return renderNonHome(context: context)
-  }
-}
-
 func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
 
@@ -36,6 +20,19 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
         p(class: "prose") {
           a(href: "/articles/") { "› See all articles" }
         }
+      }
+    }
+  }
+}
+
+func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
+  let section = Section(rawValue: context.item.metadata.section ?? "")!
+  
+  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
+    article {
+      div(class: "prose") {
+        h1 { context.item.title }
+        Node.raw(context.item.body)
       }
     }
   }
@@ -68,10 +65,8 @@ func getSearchHeader() -> NodeConvertible {
   }
 }
 
-func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let section = Section(rawValue: context.item.metadata.section ?? "")!
-
-  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title, extraHeader: getSearchHeader()) {
+func renderSearch(context: PageRenderingContext) -> Node {
+  return baseLayout(canocicalURL: context.outputPath.url, section: .search, title: "Search", extraHeader: getSearchHeader()) {
     div(class: "prose") {
       h1 { "Search" }
     }
@@ -86,29 +81,17 @@ func renderSearch(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-func renderNonHome(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let section = Section(rawValue: context.item.metadata.section ?? "")!
-
-  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
-    article {
-      div(class: "prose") {
-        h1 { context.item.title }
-        Node.raw(context.item.body)
-      }
-    }
-  }
-}
-
-func render404(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let section = Section(rawValue: context.item.metadata.section ?? "")!
-
+func render404(context: PageRenderingContext) -> Node {
   let articles = context.allItems
     .compactMap { $0 as? Item<ArticleMetadata> }
     .prefix(10)
 
-  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
+  return baseLayout(canocicalURL: context.outputPath.url, section: .notFound, title: "404") {
     article(class: "prose") {
-      Node.raw(context.item.body)
+      h1 { "404" }
+      h2 { "Oops!" }
+      p { "Your page was not found." }
+      p { "Looking for one of the articles?" }
 
       ul {
         articles.map { article in
