@@ -136,7 +136,7 @@ struct Run {
         readers: [.parsleyMarkdownReader],
         itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
         filter: { $0.archive == false },
-        filteredOutItemsAreHandled: false,
+        claimExcludedItems: false,
         writers: [
           .itemWriter(swim(renderArticle)),
           .listWriter(swim(renderArticles)),
@@ -210,7 +210,7 @@ struct Run {
         readers: [.parsleyMarkdownReader],
         itemProcessor: improveHTML,
         filter: { $0.relativeSource.string == "index.md" },
-        filteredOutItemsAreHandled: false,
+        claimExcludedItems: false,
         writers: [.itemWriter(swim(renderHome))]
       )
 

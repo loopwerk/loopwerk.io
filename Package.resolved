@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "3de7eebc252450414fa91d96ec2dedf4785994e9",
-        "version" : "1.0.1"
+        "revision" : "e7c825b00846c3006a1ed2d75d9674ee69cadbf6",
+        "version" : "1.1.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "552ab62806c7214ad2ac740990f93b95322b2c5e",
-        "version" : "2.14.1"
+        "revision" : "fb870d05a995a8b4ab528deff051148e64aa37cf",
+        "version" : "2.15.0"
       }
     },
     {
@@ -100,12 +100,12 @@
       }
     },
     {
-      "identity" : "swift-cmark-gfm",
+      "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/stackotter/swift-cmark-gfm",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
-        "revision" : "7ec44e7384793e507cf046336aef68586719a24e",
-        "version" : "1.0.2"
+        "revision" : "5d9bdaa4228b381639fff09403e39a04926e2dbe",
+        "version" : "0.7.1"
       }
     },
     {
