@@ -210,6 +210,7 @@ struct Run {
         readers: [.parsleyMarkdownReader],
         itemProcessor: improveHTML,
         filter: { $0.relativeSource.string == "index.md" },
+        filteredOutItemsAreHandled: false,
         writers: [.itemWriter(swim(renderHome))]
       )
 
