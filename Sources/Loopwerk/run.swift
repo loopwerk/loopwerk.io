@@ -1,9 +1,10 @@
+import Bonsai
 import Foundation
 import PathKit
 import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
-import SwiftGD
+import SagaUtils
 
 struct HeroImage: Decodable {
   let path: String
@@ -91,37 +92,14 @@ enum SiteMetadata {
     .path
 }
 
-func improveHTML<M>(item: Item<M>) {
-  // Improve the HTML by adding target="_blank" to external links
-  item.body = item.body.improveHTML()
-}
-
-func permalink(item: Item<ArticleMetadata>) {
-  // Insert the publication year into the permalink.
-  // If the `relativeDestination` was "articles/looking-for-django-cms/index.html", then it becomes "articles/2009/looking-for-django-cms/index.html"
-  var components = item.relativeDestination.components
-  components.insert("\(Calendar.current.component(.year, from: item.date))", at: 1)
-  item.relativeDestination = Path(components: components)
-}
-
-func heroImage(item: Item<ArticleMetadata>) {
-  // Check if a hero image exists for this article. If so, get its dimensions.
-  let imageFilename = item.filenameWithoutExtension + "-1480w.webp"
-  let heroesPath = Path(SiteMetadata.projectRoot) + "content/articles/heroes"
-  let imagePath = heroesPath + imageFilename
-
-  if imagePath.exists {
-    if let data = try? Data(contentsOf: URL(fileURLWithPath: imagePath.string)),
-       let image = try? Image(data: data, as: .webp)
-    {
-      item.metadata.heroImage = HeroImage(
-        path: "/articles/heroes/" + imageFilename,
-        width: image.size.width,
-        height: image.size.height
-      )
-    }
-  }
-}
+let articleProcessor = sequence(
+  unescapeMarkVar,
+  swiftSoupProcessor(generateTOC, convertAsides, processExternalLinks, addCodeBlockTitles),
+  syntaxHighlight,
+  publicationDateInFilename,
+  permalink,
+  heroImage
+)
 
 @main
 struct Run {
@@ -134,7 +112,7 @@ struct Run {
         folder: "articles",
         metadata: ArticleMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
+        itemProcessor: articleProcessor,
         filter: { $0.archive == false },
         claimExcludedItems: false,
         writers: [
@@ -168,39 +146,39 @@ struct Run {
           ),
         ]
       )
-    
+
       // Archived articles: they get their own detail page but are not part of the list pages nor atom feeds
       .register(
         folder: "articles",
         metadata: ArticleMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: sequence(improveHTML, publicationDateInFilename, permalink, heroImage),
+        itemProcessor: articleProcessor,
         filter: { $0.archive == true },
         writers: [
           .itemWriter(swim(renderArticle)),
         ]
       )
-    
+
       // Portfolio stuff (paid work and open source projects)
       .register(
         folder: "work",
         metadata: WorkProjectMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: improveHTML,
+        itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
         writers: [.listWriter(swim(renderWork))]
       )
       .register(
         folder: "open-source/support",
         metadata: PageMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: improveHTML,
+        itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
         writers: [.itemWriter(swim(renderPage))]
       )
       .register(
         folder: "open-source",
         metadata: OpenSourceProjectMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: improveHTML,
+        itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
         writers: [.listWriter(swim(renderOpenSource))]
       )
 
@@ -208,7 +186,7 @@ struct Run {
       .register(
         metadata: PageMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: improveHTML,
+        itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
         filter: { $0.relativeSource.string == "index.md" },
         claimExcludedItems: false,
         writers: [.itemWriter(swim(renderHome))]
@@ -218,7 +196,7 @@ struct Run {
       .register(
         metadata: PageMetadata.self,
         readers: [.parsleyMarkdownReader],
-        itemProcessor: improveHTML,
+        itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
         writers: [.itemWriter(swim(renderPage))]
       )
 
@@ -226,11 +204,13 @@ struct Run {
       .createPage("404.html", using: swim(render404))
       .createPage("search/index.html", using: swim(renderSearch))
 
-      // Create article images
+      // Create article images (prod only)
       .register { saga in
-        guard shouldCreateImages() else {
+        guard !isDev else {
           return
         }
+
+        print("Generating article images, this takes a bit. If this unexpected, set SAGA_DEV=1.")
 
         let generator = ImageGenerator(rootPath: SiteMetadata.projectRoot + "/Sources")
 
@@ -241,15 +221,13 @@ struct Run {
         }
       }
 
+      // Minify all HTML output (prod only)
+      .postProcess { html, _ in
+        guard !isDev else { return html }
+        return Bonsai.minifyHTML(html)
+      }
+
       // Run everything!
       .run()
   }
-}
-
-func shouldCreateImages() -> Bool {
-  if CommandLine.arguments.count == 2 {
-    let command = CommandLine.arguments[1]
-    return command == "createArticleImages"
-  }
-  return false
 }

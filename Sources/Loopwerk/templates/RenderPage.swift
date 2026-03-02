@@ -27,7 +27,7 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
-  
+
   return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
     article {
       div(class: "prose") {

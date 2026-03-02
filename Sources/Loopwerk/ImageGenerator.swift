@@ -45,7 +45,7 @@ class ImageGenerator {
 }
 
 extension String {
-  // A simple helper method to break text into lines
+  /// A simple helper method to break text into lines
   func splitByLineWidth(width: Int) -> [String] {
     return components(separatedBy: .whitespaces).reduce([String]()) { acc, word in
       var acc = acc

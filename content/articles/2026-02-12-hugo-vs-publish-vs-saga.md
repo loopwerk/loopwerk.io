@@ -783,5 +783,7 @@ Which one you prefer depends on how much control you want, and how much magic yo
 
 *The full source code for all three implementations is on GitHub: [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg). Clone it, check the code, build each one, compare the output. Consider starring [Saga](https://github.com/loopwerk/Saga) or the RealWorld SSG repo.*
 
-> [!UPDATE]
+> [!UPDATES]
 > **February 24, 2026**: I've added a new example to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): creating a page that isn't backed by a markdown file at all, like a contact form. Hugo requires a "content adapter" file that defines a custom type, plus a custom type template tied together through naming conventions. Publish needs a custom publishing step that imperatively writes the file to disk, and a line in the pipeline to wire it all up. Saga: one line in the pipeline. The [full comparison](https://github.com/loopwerk/realworld-ssg/commit/50f9ed1e02a23d8694458dabc58f0769527359ca) is worth a look.
+>
+> **March 2, 2026**: I've added a new comparison to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): how do the generators deal with creating cache-busting filenames for long-cached static resources such as CSS file? (Spoiler: doable with Hugo, Publish doesn't offer support for it, and super easy with Saga.)

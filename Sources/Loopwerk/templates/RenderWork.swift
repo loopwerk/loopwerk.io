@@ -10,11 +10,11 @@ func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
       }
       p {
         "If you are looking for a developer to work on your project,"
-        a(href: "/hire-me/") { "check if I am available"}
+        a(href: "/hire-me/") { "check if I am available" }
         %"."
       }
     }
-    
+
     context.items.map { app in
       div(class: "mt-12 prose") {
         h3(class: "text-2xl font-bold !mb-0") { app.title }

@@ -8,12 +8,13 @@ let package = Package(
     .macOS(.v12),
   ],
   dependencies: [
-    .package(url: "https://github.com/loopwerk/Saga", from: "2.3.0"),
+    .package(url: "https://github.com/loopwerk/Saga", from: "2.16.0"),
     .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "1.0.0"),
     .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "1.0.0"),
-    .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.8.2"),
+    .package(url: "https://github.com/loopwerk/SagaUtils", from: "1.0.2"),
     .package(url: "https://github.com/twostraws/SwiftGD", branch: "main"),
     .package(url: "https://github.com/loopwerk/Moon", from: "1.2.3"),
+    .package(url: "https://github.com/loopwerk/Bonsai", from: "1.0.0"),
   ],
   targets: [
     .executableTarget(
@@ -22,17 +23,14 @@ let package = Package(
         "Saga",
         "SagaParsleyMarkdownReader",
         "SagaSwimRenderer",
-        "SwiftSoup",
+        "SagaUtils",
         "SwiftGD",
         "Moon",
+        "Bonsai",
       ],
       resources: [
         .copy("Resources/prism-svelte.js"),
       ]
-    ),
-    .testTarget(
-      name: "LoopwerkTests",
-      dependencies: ["Loopwerk"]
     ),
   ]
 )

@@ -35,10 +35,9 @@ build:
   #!/usr/bin/env bash
   set -e
   rm -rf deploy
-  .build/release/Loopwerk createArticleImages
+  pnpm css-build
+  .build/release/Loopwerk
   pnpm index
-  pnpm html-minifier --collapse-whitespace --input-dir deploy --file-ext html --output-dir deploy
-  pnpm css-build && ./hash-css.sh
 
 format:
   swiftformat --swift-version 5 .

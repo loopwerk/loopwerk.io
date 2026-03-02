@@ -1,5 +1,6 @@
 import Foundation
 import HTML
+import Saga
 
 enum Section: String {
   case home
@@ -46,7 +47,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         meta(content: "freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html, javascript, typescript, review, full-stack, open source", name: "keywords")
         meta(content: "@kevinrenskers@hachyderm.io", name: "fediverse:creator")
         title { SiteMetadata.name + ": \(pageTitle)" }
-        link(href: "/static/output.css", rel: "stylesheet")
+        link(href: hashed("/static/output.css"), rel: "stylesheet")
         style {
           Node.raw("""
           @font-face {
@@ -74,7 +75,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
-        if shouldCreateImages() {
+        if !isDev {
           script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875"])
         }
       }

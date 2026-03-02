@@ -30,7 +30,7 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
-  link(href: "/static/prism.css", rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"])
+  link(href: hashed("/static/prism.css"), rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"])
   meta(content: article.metadata.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
