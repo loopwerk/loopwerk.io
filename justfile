@@ -29,14 +29,14 @@ resize:
   done
 
 compile:
-  swift package resolve && swift build --product Loopwerk -c release
+  swift package resolve && swift build --product Loopwerk
 
 build:
   #!/usr/bin/env bash
   set -e
   rm -rf deploy
   pnpm css-build
-  .build/release/Loopwerk
+  .build/debug/Loopwerk
   pnpm index
 
 format:
