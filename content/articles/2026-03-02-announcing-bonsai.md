@@ -43,7 +43,7 @@ These choices keep it fast. On a ~143 KB HTML file, benchmarked over 1,000 itera
 | html-minifier-next (Node.js) | 0.6 ms |
 | **Bonsai (Swift)** | **0.9 ms** |
 
-Bonsai is roughly 15x faster than html-minifier, and only fractionally slower than html-minifier-next, which is its direct inspiration. For any realistic workload (hundreds of pages), the difference is negligible.
+Bonsai is almost 15x faster than html-minifier, and only fractionally slower than html-minifier-next, which is its direct inspiration. For any realistic workload (hundreds of pages), the difference is negligible.
 
 ## Using Bonsai with Saga
 
