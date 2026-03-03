@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Bonsai",
       "state" : {
-        "revision" : "b3478ddb364124758230d1478e3ff77adaf762cd",
-        "version" : "1.0.0"
+        "revision" : "2d1df296d4a8f26f6050693143a48adcfce32a07",
+        "version" : "1.1.0"
       }
     },
     {
