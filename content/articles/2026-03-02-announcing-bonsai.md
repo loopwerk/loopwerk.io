@@ -55,7 +55,7 @@ try await Saga(input: "content", output: "deploy")
     readers: [.parsleyMarkdownReader()],
     writers: [.itemWriter(swim(renderPage))]
   )
-  .postProcess { html, _ in
+  .postProcess { html, path in
     guard !isDev else { return html }
     return Bonsai.minifyHTML(html)
   }
