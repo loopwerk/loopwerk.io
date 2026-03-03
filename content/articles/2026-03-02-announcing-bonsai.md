@@ -47,7 +47,7 @@ Bonsai is roughly 15x faster than html-minifier, and only fractionally slower th
 
 ## Using Bonsai with Saga
 
-The timing of this release isn't a coincidence. [Saga 2.16.0](https://github.com/loopwerk/Saga/releases/tag/2.16.0) shipped today with a few new features, one of which is the `postProcess` hook. This lets you transform every HTML file after it's been written, which is exactly what you need for minification:
+The timing of this release isn't a coincidence. [Saga 2.16.0](https://github.com/loopwerk/Saga/releases/tag/2.16.0) shipped today with a few new features, one of which is the `postProcess` hook. This lets you transform every HTML file just before it's written to disk, which is exactly what you need for minification:
 
 ```swift
 try await Saga(input: "content", output: "deploy")
@@ -62,7 +62,7 @@ try await Saga(input: "content", output: "deploy")
   .run()
 ```
 
-The `isDev` flag is another Saga 2.16.0 addition. Saga's `dev`  command now automatically set this flag, so you can skip expensive work like minification and image generation during development. In production builds, every HTML file passes through Bonsai before being written to disk.
+The `isDev` flag is another Saga 2.16.0 addition. Saga's `dev` command now automatically sets this flag, so you can skip expensive work like minification and image generation during development. In production builds, every HTML file passes through Bonsai before being written to disk.
 
 ## Try it out
 
