@@ -1,10 +1,5 @@
 run:
-  #!/usr/bin/env bash
-  set -m
-  pnpm css-watch &
-  CSS_PID=$!
-  trap "kill $CSS_PID 2>/dev/null" EXIT
-  saga dev --ignore input.css
+  saga dev --ignore output.css
 
 # Remove generated responsive hero image variants
 clean:
@@ -32,12 +27,7 @@ compile:
   swift package resolve && swift build --product Loopwerk
 
 build:
-  #!/usr/bin/env bash
-  set -e
-  rm -rf deploy
-  pnpm css-build
   .build/debug/Loopwerk
-  pnpm index
 
 format:
   swiftformat --swift-version 5 .

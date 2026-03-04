@@ -5,6 +5,7 @@ import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 import SagaUtils
+import SwiftTailwind
 
 struct HeroImage: Decodable {
   let path: String
@@ -104,6 +105,14 @@ let articleProcessor = sequence(
 @main
 struct Run {
   static func main() async throws {
+    // Compile tailwind to output.css
+    let tailwind = SwiftTailwind(version: "3.4.17")
+    try await tailwind.run(
+      input: "content/static/input.css",
+      output: "content/static/output.css",
+      options: .minify
+    )
+
     try await Saga(input: "content", output: "deploy")
       // Non-archived articles (`$0.archive == false`)
       // We make sure that the filtered-out articles (i.e. archived articles) are NOT
@@ -229,5 +238,18 @@ struct Run {
 
       // Run everything!
       .run()
+
+    // Index the site with Pagefind (prod only)
+    if !isDev {
+      let pagefind = Process()
+      pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+      pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
+      pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
+      try pagefind.run()
+      pagefind.waitUntilExit()
+      if pagefind.terminationStatus != 0 {
+        print("pagefind failed with exit code \(pagefind.terminationStatus)")
+      }
+    }
   }
 }

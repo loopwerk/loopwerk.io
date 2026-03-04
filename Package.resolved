@@ -163,6 +163,15 @@
       }
     },
     {
+      "identity" : "swifttailwind",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loopwerk/SwiftTailwind",
+      "state" : {
+        "revision" : "47966d8f942e9de53d26f141d4f7ee8ec3f1487d",
+        "version" : "1.0.1"
+      }
+    },
+    {
       "identity" : "swim",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/robb/Swim",

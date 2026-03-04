@@ -51,7 +51,8 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
     && rm -rf .git /tmp/repo
 
 # Build the site: generate images, index, minify HTML, build & hash CSS
-RUN echo "Starting website build..." && just build
+RUN --mount=type=cache,target=/root/.swifttailwind \
+    echo "Starting website build..." && just build
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
