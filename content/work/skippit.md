@@ -1,5 +1,5 @@
 ---
-images: skippit_1.jpg, skippit_2.jpg, skippit_3.jpg, skippit_4.jpg
+images: skippit_1.webp, skippit_2.webp, skippit_3.webp, skippit_4.webp
 url: https://apps.apple.com/us/app/skippit/id1475092571?ls=1
 date: 2019-12-01
 ---

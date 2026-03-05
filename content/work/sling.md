@@ -1,5 +1,5 @@
 ---
-images: sling_1.jpg, sling_2.jpg, sling_3.jpg, sling_4.jpg
+images: sling_1.webp, sling_2.webp, sling_3.webp, sling_4.webp
 url: https://itunes.apple.com/us/app/sling-stay-in-sync-your-team/id922995624?mt=8
 date: 2015-12-01
 ---

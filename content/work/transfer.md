@@ -1,5 +1,5 @@
 ---
-images: transfer_1.png, transfer_2.png, transfer_3.png, transfer_4.png
+images: transfer_1.webp, transfer_2.webp, transfer_3.webp, transfer_4.webp
 url: https://apps.apple.com/nl/app/wetransfer/id1569379048?l=en
 date: 2021-10-06
 ---

@@ -1,5 +1,5 @@
 ---
-images: rssfiltercom.png
+images: rssfilter_1.webp, rssfilter_2.webp
 roundOffImages: false
 breakImages: 1
 url: https://rssfilter.com
