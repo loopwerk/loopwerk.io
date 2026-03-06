@@ -13,7 +13,7 @@ You still need to know how to build a good app. You might not be the one typing 
 
 ## My experience with Claude Code and Saga
 
-I recently had a chance to put this to the test with my own project, [Saga](https://github.com/loopwerk/Saga), a static site generator written in Swift. I wanted to make it faster by [parallelizing its processing](https://github.com/loopwerk/Saga/pull/34). I had a good idea of how to do it, because I had in fact already done it myself in a [previous PR](https://github.com/loopwerk/Saga/pull/33), but I wasn't happy with the modest speed increase. So I decided to try using Claude Code to help me make a better version.
+I recently had a chance to put this to the test with my own project, [Saga](https://getsaga.dev), a static site generator written in Swift. I wanted to make it faster by [parallelizing its processing](https://github.com/loopwerk/Saga/pull/34). I had a good idea of how to do it, because I had in fact already done it myself in a [previous PR](https://github.com/loopwerk/Saga/pull/33), but I wasn't happy with the modest speed increase. So I decided to try using Claude Code to help me make a better version.
 
 I'm happy to report that it was a resounding success. By working with Claude, I was able to make Saga 60% faster. My own site, which is built with Saga, used to take 2.5 seconds to generate. Now it only takes 1 second. That's a huge improvement, and I couldn't have done it without Claude's help.
 

@@ -7,7 +7,7 @@ summary: I've added a comment section to the articles, powered by GitHub Discuss
 
 I don't write that many articles on this site, but when I do I always feel like I am writing for a void: there are no comments, no likes, no reactions at all. Nobody that says thanks for the info, nobody who reports a spelling mistake. Obviously that's my own fault for not having a comment section, and for not being on Twitter. Since I'll never go back to Twitter I figured I'd add a comment section to my articles - but how?
 
-This website is a statically generated site (using [Saga, my own static site generator written in Swift](https://github.com/loopwerk/Saga)) and as such adding a comment section isn't very straightforward. There are third party solutions like [Disqus](https://disqus.com), but those usually track and spy on users, have bad privacy practices, and I don't own the data. On the other side of the spectrum are [webmentions](https://indieweb.org/Webmention) but that seemed rather complicated to set up. In the end I decided to look into two solutions: comments via Mastodon, and comments via GitHub.
+This website is a statically generated site (using [Saga, my own static site generator written in Swift](https://getsaga.dev)) and as such adding a comment section isn't very straightforward. There are third party solutions like [Disqus](https://disqus.com), but those usually track and spy on users, have bad privacy practices, and I don't own the data. On the other side of the spectrum are [webmentions](https://indieweb.org/Webmention) but that seemed rather complicated to set up. In the end I decided to look into two solutions: comments via Mastodon, and comments via GitHub.
 
 ## Mastodon
 

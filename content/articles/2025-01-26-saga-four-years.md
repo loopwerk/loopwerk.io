@@ -5,7 +5,7 @@ summary: I started building Saga, my own static site generator written in Swift,
 
 # Looking back at four years of Saga
 
-Back in January of 2021 (four years ago already!) I started working on my own static site generator [Saga](https://github.com/loopwerk/Saga). I wrote a whole [series of articles](/articles/tag/saga/) on the inspiration and goals, the API design, and how it evolved over time.
+Back in January of 2021 (four years ago already!) I started working on my own static site generator [Saga](https://getsaga.dev). I wrote a whole [series of articles](/articles/tag/saga/) on the inspiration and goals, the API design, and how it evolved over time.
 
 My main goal was flexibility; specifically the ability to have multiple sets of items, each with their own (strongly typed) metadata. This is something that most other generators do not support. For example you could have a website where you have blog articles under `/blog/`, where each article has one or more tags. You'd have a page for each tag (`/blog/[tag]/`), and you also want an archive per year (`/blog/[year]/`). And of course it all has to be paginated, showing 20 articles per page. You want an RSS feed of all your articles, and a feed per tag. So far, this is nothing special, basically any static site generator can do this.
 
@@ -65,7 +65,7 @@ Another reason why Swift wasn't the ideal choice is the lack of good Markdown re
 
 If I'm looking at traction and adoption, then I guess I have to call Saga a flop. I really wish that more people would've built sites using it, that there were more contributors. I did (very briefly) consider to rebuild my site in Hugo, archive Saga on GitHub, mark it as unmaintained. But no, screw that. I really do enjoy using it, and I honestly do think it's unique enough that it should stay around, even it's just me using it. Maybe I _should_ port it to TypeScript though? Or Python with type hints? It would be an interesting experiment for sure!
 
-I do invite everyone to [take a look at Saga](https://github.com/loopwerk/Saga) and its [documentation](https://loopwerk.github.io/Saga/documentation/saga/), check out the [source of loopwerk.io](https://github.com/loopwerk/loopwerk.io/blob/master/Sources/Loopwerk/run.swift) for an idea of what Saga can do, and please do let me know if you've built something with Saga -- it would really make my day.
+I do invite everyone to [take a look at Saga](https://github.com/loopwerk/Saga) and its [documentation](https://getsaga.dev/docs/), check out the [source of loopwerk.io](https://github.com/loopwerk/loopwerk.io/blob/master/Sources/Loopwerk/main.swift) for an idea of what Saga can do, and please do let me know if you've built something with Saga -- it would really make my day.
 
-> [!UPDATE] 
+> [!UPDATE]
 > **February 5, 2025:** I did make two prototypes of Saga, in Python and TypeScript, and wrote about it in a [new article](/articles/2025/saga-in-python-or-typescript/).

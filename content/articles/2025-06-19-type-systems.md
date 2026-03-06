@@ -5,7 +5,7 @@ summary: I recently ported Saga from Swift to both Python and TypeScript. It was
 
 # A tale of three type systems: Python, TypeScript, and Swift
 
-For the longest time I've been juggling three languages: Python for backends and scripting, TypeScript for web frontends, and Swift for native app development and of course my [static site generator, Saga](https://github.com/loopwerk/Saga). Hopping between them is always an exercise in cognitive dissonance, but this was put into sharp relief recently when I decided to try and [port Saga from Swift to both Python and TypeScript](/articles/2025/saga-in-python-or-typescript/).
+For the longest time I've been juggling three languages: Python for backends and scripting, TypeScript for web frontends, and Swift for native app development and of course my [static site generator, Saga](https://getsaga.dev). Hopping between them is always an exercise in cognitive dissonance, but this was put into sharp relief recently when I decided to try and [port Saga from Swift to both Python and TypeScript](/articles/2025/saga-in-python-or-typescript/).
 
 What started as an experiment quickly became a perfect case study. It forced me to implement the same complex, generic-heavy logic in three different ecosystems. I learned very viscerally that while they all claim to offer "types," what that means for my day-to-day experience - my productivity, my confidence, my frustration - couldn't be more different.
 

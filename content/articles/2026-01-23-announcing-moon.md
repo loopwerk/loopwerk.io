@@ -5,7 +5,7 @@ summary: I've created a new Swift package that does server-side syntax highlight
 
 # Announcing Moon, a new HTML syntax highlighter for Swift projects
 
-My website is built using [Saga](https://github.com/loopwerk/Saga), a static site generator written in Swift. Overall it's a great experience, but there was always one problem: there are no HTML syntax highlighters for Swift. To get around this I used the [Prism.js](https://prismjs.com) JavaScript library in the browser. It finds all the code blocks on the web page and automatically highlights them.
+My website is built using [Saga](https://getsaga.dev), a static site generator written in Swift. Overall it's a great experience, but there was always one problem: there are no HTML syntax highlighters for Swift. To get around this I used the [Prism.js](https://prismjs.com) JavaScript library in the browser. It finds all the code blocks on the web page and automatically highlights them.
 
 This works fine, but it requires every visitor to load quite a bit of JavaScript just for syntax highlighting. This is something that really should be done server side, without the browser having to download any JavaScript files.
 

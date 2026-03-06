@@ -5,7 +5,7 @@ summary: What would Saga look like if it were written in Python or TypeScript, r
 
 # Saga... but in Python? Or TypeScript?
 
-About a week and a half ago I wrote [an article](/articles/2025/saga-four-years/) looking back at four years of [Saga](https://github.com/loopwerk/Saga), my static site generator written in Swift. As I said in that article, overall I am very happy with Saga's API and capabilities, but I do wonder if choosing Swift over Python or TypeScript was a mistake. The initial compilation step is slow, there aren't many good options for markdown parsers, nor code syntax highlighters, nor HTML template languages, and Swift probably isn't a logical choice for most (web) developers who want a static site. I ended the article wondering if I should port Saga to Python or TypeScript - which is exactly what I've been working on for the past few days.
+About a week and a half ago I wrote [an article](/articles/2025/saga-four-years/) looking back at four years of [Saga](https://getsaga.dev), my static site generator written in Swift. As I said in that article, overall I am very happy with Saga's API and capabilities, but I do wonder if choosing Swift over Python or TypeScript was a mistake. The initial compilation step is slow, there aren't many good options for markdown parsers, nor code syntax highlighters, nor HTML template languages, and Swift probably isn't a logical choice for most (web) developers who want a static site. I ended the article wondering if I should port Saga to Python or TypeScript - which is exactly what I've been working on for the past few days.
 
 I have working prototypes in both languages, and I have some thoughts I want to share. Now, both these prototypes are quite limited compared to the full Swift version: only the item writer works for example. But it is possible to render markdown files, using embedded metadata (with different metadata per folder!), to HTML files using renderers, which opens up the possibility to use any template language you could ever want.
 
@@ -192,7 +192,7 @@ export type Writer<M> = {
   run: (
     items: Item<M>[],
     outputPath: string,
-    relativeDestination: string
+    relativeDestination: string,
   ) => void;
 };
 ```

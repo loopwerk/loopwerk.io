@@ -5,7 +5,7 @@ summary: I've created a new HTML minifier in pure Swift, with zero dependencies 
 
 # Announcing Bonsai, a new HTML minifier in pure Swift
 
-This site is built with [Saga](https://github.com/loopwerk/Saga), my static site generator written in Swift. For a long time I relied on the Node project [html-minifier](https://github.com/kangax/html-minifier) to minify the generated HTML. It worked fine, but it always bugged me that my otherwise all-Swift build pipeline had this one Node.js dependency just for minification. So I built [Bonsai](https://github.com/loopwerk/Bonsai), a pure Swift HTML minifier with zero external dependencies.
+This site is built with [Saga](https://getsaga.dev), my static site generator written in Swift. For a long time I relied on the Node project [html-minifier](https://github.com/kangax/html-minifier) to minify the generated HTML. It worked fine, but it always bugged me that my otherwise all-Swift build pipeline had this one Node.js dependency just for minification. So I built [Bonsai](https://github.com/loopwerk/Bonsai), a pure Swift HTML minifier with zero external dependencies.
 
 ## What it does
 
@@ -36,12 +36,12 @@ let minified = Bonsai.minifyHTML(html)
 
 These choices keep it fast. On a ~143 KB HTML file, benchmarked over 1,000 iterations on an M1 Max:
 
-| Tool | Avg time per page |
-|---|---|
-| html-minifier (Node.js) | 12.1 ms |
-| html-minifier-terser (Node.js) | 14.3 ms |
-| html-minifier-next (Node.js) | 0.6 ms |
-| **Bonsai (Swift)** | **0.9 ms** |
+| Tool                           | Avg time per page |
+| ------------------------------ | ----------------- |
+| html-minifier (Node.js)        | 12.1 ms           |
+| html-minifier-terser (Node.js) | 14.3 ms           |
+| html-minifier-next (Node.js)   | 0.6 ms            |
+| **Bonsai (Swift)**             | **0.9 ms**        |
 
 Bonsai is almost 15x faster than html-minifier, and only fractionally slower than html-minifier-next, which is its direct inspiration. For any realistic workload (hundreds of pages), the difference is negligible.
 
@@ -73,4 +73,3 @@ Bonsai is available on GitHub: [github.com/loopwerk/Bonsai](https://github.com/l
 ```
 
 It works with any Swift project that produces HTML, not just Saga. If you've been looking for a way to minify HTML without pulling in Node.js, give it a try.
-

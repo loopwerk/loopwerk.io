@@ -7,7 +7,7 @@ summary: I built the same site with Hugo, Publish, and Saga to compare how each 
 
 I've been building static sites for a very long time, and I've always been curious how different generators handle the same requirements. Not toy examples, but real features like blog pagination, RSS feeds, custom URL schemes, and multiple content types with different metadata.
 
-So I built the same site three times to find out: once with [Hugo](https://gohugo.io/), once with [Publish](https://github.com/JohnSundell/Publish), and once with [Saga](https://github.com/loopwerk/Saga). Same content, same URLs, same output. The full source code is available at [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg).
+So I built the same site three times to find out: once with [Hugo](https://gohugo.io/), once with [Publish](https://github.com/JohnSundell/Publish), and once with [Saga](https://getsaga.dev). Same content, same URLs, same output. The full source code is available at [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg).
 
 Full disclosure: I'm the author of Saga. I'll try to be fair, but I obviously have opinions about how a static site generator should work. That's why I built one.
 
@@ -25,7 +25,7 @@ Before we even look at templates and content, the setup experience is worth ment
 
 Before you've written a single line of template code, you've already written a lot of boilerplate to satisfy the framework. It doesn't help that Publish's documentation is rudimentary. The README covers the basics, but once you need anything beyond the happy path, you're reading source code. And Publish is effectively unmaintained at this point: pull requests sit unreviewed for years, bug reports aren't welcome, and the last meaningful update was a long time ago.
 
-**Saga** is also a Swift package, but it has a companion CLI you can install via Homebrew or Mint. Run `saga init mysite` and you get a complete project with articles, tags, templates, and a stylesheet, ready to build and serve. Under the hood you write a `run.swift` with the pipeline and add template functions for the pages you want. No required protocols to satisfy, no boilerplate to set up. The trade-off is that Saga is a much smaller project: you won't find a large community or ecosystem around it.
+**Saga** is also a Swift package, but it has a companion CLI you can install via Homebrew or Mint. Run `saga init mysite` and you get a complete project with articles, tags, templates, and a stylesheet, ready to build and serve. Under the hood you write a `main.swift` with the pipeline and add template functions for the pages you want. No required protocols to satisfy, no boilerplate to set up. The trade-off is that Saga is a much smaller project: you won't find a large community or ecosystem around it.
 
 ## Step 1: Simple markdown pages
 
@@ -48,21 +48,19 @@ Hugo uses Go's `text/template` language. You need three template files even for 
 ```html title="layouts/baseof.html"
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{{ .Title }} - {{ .Site.Title }}</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-        </nav>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+      </nav>
     </header>
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
-</body>
+    <main>{{ block "main" . }}{{ end }}</main>
+  </body>
 </html>
 ```
 
@@ -71,8 +69,7 @@ A homepage template:
 ```html title="layouts/home.html"
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
-{{ .Content }}
-{{ end }}
+{{ .Content }} {{ end }}
 ```
 
 And the same thing again for the about page:
@@ -80,8 +77,7 @@ And the same thing again for the about page:
 ```html title="layouts/single.html"
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
-{{ .Content }}
-{{ end }}
+{{ .Content }} {{ end }}
 ```
 
 The two page templates are identical, but Hugo needs them as separate files because the homepage is a different "kind" than a regular page.
@@ -136,14 +132,14 @@ struct RealWorldHTMLFactory: HTMLFactory {
       )
     )
   }
-  
+
   func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
     baseLayout(title: "\(index.content.title) - \(context.site.name)", .group(
       .h1(.text(index.content.title)),
       .div(.raw(index.content.body.html))
     ))
   }
-  
+
   func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
     baseLayout(title: "\(page.title) - \(context.site.name)",
       .h1(.text(page.title)),
@@ -159,7 +155,7 @@ struct RealWorldHTMLFactory: HTMLFactory {
 }
 ```
 
-This is type-safe Swift, which is great. But the dot-syntax is verbose. Every element is `.element`, every attribute is `.attribute(value)`, every piece of text needs `.text()`. A simple link becomes `.a(.href("/"), .text("Home"))`. It's correct, but it doesn't *read* like HTML. 
+This is type-safe Swift, which is great. But the dot-syntax is verbose. Every element is `.element`, every attribute is `.attribute(value)`, every piece of text needs `.text()`. A simple link becomes `.a(.href("/"), .text("Home"))`. It's correct, but it doesn't _read_ like HTML.
 
 And just as with Hugo, we have duplicate templates for the homepage and the about page.
 
@@ -264,21 +260,21 @@ author: Kevin Renskers
 Hugo is one of the most popular static site generators [...]
 ```
 
-Hugo requires the title in frontmatter and wants tags as a YAML sequence. 
+Hugo requires the title in frontmatter and wants tags as a YAML sequence.
 
-Saga derives the title from the first `#` heading in the content and removes it from the body, so you can render the title, then the date and author, then the body — each separately. 
+Saga derives the title from the first `#` heading in the content and removes it from the body, so you can render the title, then the date and author, then the body — each separately.
 
-Publish *can* also read the title from a `#` heading, but it leaves the heading in the body HTML. That means if you want to render anything between the title and the body (like a date or author byline), you need the title in frontmatter instead. 
+Publish _can_ also read the title from a `#` heading, but it leaves the heading in the body HTML. That means if you want to render anything between the title and the body (like a date or author byline), you need the title in frontmatter instead.
 
 Publish also requires a time component on dates (`12:00`) and uses `description` instead of `summary`. That's a fixed field name you can't change.
 
 > [!SIDENOTE]
 > On loopwerk.io, my article files are named with a date prefix, like `2024-06-10-building-with-hugo.md`. So instead of having to add a frontmatter `date` property, can the static site generators take the date from the filename?
-> 
+>
 > Saga handles this with the `publicationDateInFilename` item processor, stripping the date prefix from the filename to derive the slug, so that you end up with the URL `/articles/building-with-hugo/` (without the date).
-> 
+>
 > Hugo can handle this too, with a [special config option](https://gohugo.io/configuration/front-matter/#filename). It's amazing how many special options Hugo has to add (and document) to enable all of its flexibility!
->  
+>
 > Publish derives the slug directly from the filename with no way to strip a prefix at all. Your file `2024-06-10-building-with-hugo.md` would produce the URL `/articles/2024-06-10-building-with-hugo/`. I [wrote about this](/articles/2021/static-site-publish/) back in 2021, and sadly nothing has changed.
 
 ### Metadata types
@@ -562,12 +558,12 @@ func renderTag(context: PartitionedRenderingContext<String, ArticleMetadata>) ->
 The key path `\.metadata.tags` is what makes this type-safe. Saga knows it's partitioning `ArticleMetadata` items by their `tags` field. If you renamed the field or changed its type, the compiler would catch it.
 
 > [!SIDENOTE]
-> What if you also wanted category pages, not just tag pages? 
-> 
-> Hugo handles this out of the box: `tags` and `categories` are both built-in taxonomies, and you can add custom ones (like `authors`) with a few lines in your config. 
-> 
-> Saga just needs another `.tagWriter` with a different key path. 
-> 
+> What if you also wanted category pages, not just tag pages?
+>
+> Hugo handles this out of the box: `tags` and `categories` are both built-in taxonomies, and you can add custom ones (like `authors`) with a few lines in your config.
+>
+> Saga just needs another `.tagWriter` with a different key path.
+>
 > Publish, however, has tags hardcoded into the framework. There's a single `Tag` type, a single `tags` property on items, and exactly one `makeTagDetailsHTML` method. To add a second taxonomy you'd have to store the data in `ItemMetadata` and build the pages yourself in a custom publishing step.
 
 ## Step 3: A projects section
@@ -585,7 +581,6 @@ category: Swift
 repo: https://github.com/loopwerk/Saga
 order: 1
 ---
-
 Saga is a static site generator written in Swift.
 ```
 
@@ -594,21 +589,18 @@ And a custom list template for the projects section:
 ```html title="layouts/projects/list.html"
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
-{{ .Content }}
-
-{{ range sort (sort .Pages "Title") "Params.order" }}  
+{{ .Content }} {{ range sort (sort .Pages "Title") "Params.order" }}
 <article>
-    <h2>{{ .Title }}</h2>
-    {{ .Content }}
-    <dl>
-        <dt>Category</dt>
-        <dd>{{ .Params.category }}</dd>
-        <dt>Repository</dt>
-        <dd><a href="{{ .Params.repo }}">{{ .Params.repo }}</a></dd>
-    </dl>
+  <h2>{{ .Title }}</h2>
+  {{ .Content }}
+  <dl>
+    <dt>Category</dt>
+    <dd>{{ .Params.category }}</dd>
+    <dt>Repository</dt>
+    <dd><a href="{{ .Params.repo }}">{{ .Params.repo }}</a></dd>
+  </dl>
 </article>
-{{ end }}
-{{ end }}
+{{ end }} {{ end }}
 ```
 
 This works fine. Hugo sorts by `.Params.order`, renders each project's markdown body and metadata, done. The downside is familiar by now: custom frontmatter fields like `category` and `repo` are loosely typed. Misspell a field name in your markdown and you get empty output, not an error.
@@ -747,7 +739,7 @@ The dev server story for Publish isn't great. **Publish** has a `publish run` co
 
 ## Extensibility
 
-The comparison above covers what each generator provides. But what happens when you need something it *doesn't* provide? Say you want a different template language, or you need to read content from something other than Markdown.
+The comparison above covers what each generator provides. But what happens when you need something it _doesn't_ provide? Say you want a different template language, or you need to read content from something other than Markdown.
 
 ### Template languages
 
@@ -781,7 +773,7 @@ Saga takes a different approach: explicit pipelines, typed metadata per section,
 
 Which one you prefer depends on how much control you want, and how much magic you're willing to tolerate.
 
-*The full source code for all three implementations is on GitHub: [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg). Clone it, check the code, build each one, compare the output. Consider starring [Saga](https://github.com/loopwerk/Saga) or the RealWorld SSG repo.*
+_The full source code for all three implementations is on GitHub: [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg). Clone it, check the code, build each one, compare the output. Consider starring [Saga](https://github.com/loopwerk/Saga) or the RealWorld SSG repo._
 
 > [!UPDATES]
 > **February 24, 2026**: I've added a new example to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): creating a page that isn't backed by a markdown file at all, like a contact form. Hugo requires a "content adapter" file that defines a custom type, plus a custom type template tied together through naming conventions. Publish needs a custom publishing step that imperatively writes the file to disk, and a line in the pipeline to wire it all up. Saga: one line in the pipeline. The [full comparison](https://github.com/loopwerk/realworld-ssg/commit/50f9ed1e02a23d8694458dabc58f0769527359ca) is worth a look.

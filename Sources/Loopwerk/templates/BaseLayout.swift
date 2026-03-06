@@ -171,7 +171,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
             }
             p {
               "Built in Swift using"
-              a(href: "https://github.com/loopwerk/Saga", rel: "nofollow", target: "_blank") { "Saga" }
+              a(href: "https://getsaga.dev", rel: "nofollow", target: "_blank") { "Saga" }
               "("
               %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
               %")."

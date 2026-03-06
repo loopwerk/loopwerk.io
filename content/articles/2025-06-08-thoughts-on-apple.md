@@ -49,7 +49,7 @@ This trend continued. Features like property wrappers and result builders, while
 
 Each new feature added power, yes, but at the cost of immense cognitive overhead. The language that once empowered the solo developer now feels tailored to large, specialized teams who can afford to have experts in its arcane corners. The joy was gone, replaced by burnout.
 
-I still haven't updated [Saga](https://github.com/loopwerk/Saga), my static site generator written in Swift, to use Swift 6. I just can't be bothered, to be honest.
+I still haven't updated [Saga](https://getsaga.dev), my static site generator written in Swift, to use Swift 6. I just can't be bothered, to be honest.
 
 ## It just... doesn't work as well
 

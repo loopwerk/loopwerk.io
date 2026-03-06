@@ -18,7 +18,7 @@ I've written about this setup in detail, both in ["Setting up a Debian 11 server
 
 While not rocket science, it's a non-trivial setup. Each new app requires a checklist of configuration steps, and it's easy to miss one. Worse, my deploy script involves a brief moment of downtime as Gunicorn restarts. It's only a second or two, but it's not ideal. I'm more of a developer than an operations person, and building a zero-downtime, rolling deploy script myself feels like a step too far.
 
-On the other end of the spectrum, I have a bunch of static sites hosted with Netlify. Its workflow is a dream: connect a GitHub repo, push changes, and Netlify automatically builds and deploys the site. It handles complex build steps for static site generators, even ones built with Swift like [Saga](https://github.com/loopwerk/Saga). But its magic is limited to static sites; you can't run a backend service like a Django app.
+On the other end of the spectrum, I have a bunch of static sites hosted with Netlify. Its workflow is a dream: connect a GitHub repo, push changes, and Netlify automatically builds and deploys the site. It handles complex build steps for static site generators, even ones built with Swift like [Saga](https://getsaga.dev). But its magic is limited to static sites; you can't run a backend service like a Django app.
 
 I've been looking for a solution that combines the best of both worlds: the simplicity of Netlify with the power to run my own backend services, all self-hosted, open-source, and on my own hardware.
 
