@@ -1,4 +1,5 @@
 {
+  "originHash" : "c72df466918f0fc73d5b33b921a7f67d7acf188e087bd690f98bf13cb0963ef5",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -19,21 +20,12 @@
       }
     },
     {
-      "identity" : "lrucache",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nicklockwood/LRUCache.git",
-      "state" : {
-        "revision" : "cb5b2bd0da83ad29c0bec762d39f41c8ad0eaf3e",
-        "version" : "1.2.1"
-      }
-    },
-    {
       "identity" : "moon",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Moon",
       "state" : {
-        "revision" : "a7fc37ea83092707f54ff0f193996ebbed05a65e",
-        "version" : "1.2.3"
+        "revision" : "439d48259e278863203f5a6f67bb45c84ffbd360",
+        "version" : "1.3.0"
       }
     },
     {
@@ -59,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "3174f1afd22ecd759deba7358c9b0c974d60f2b2",
-        "version" : "2.17.0"
+        "revision" : "bf3b9a9662bf1ff7e7bf8c38c85f6f1546d05718",
+        "version" : "2.18.9"
       }
     },
     {
@@ -68,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "5a9fa57a5b123afa4acdb0800e348aef549bceba",
-        "version" : "1.1.0"
+        "revision" : "479229014d96435cd289ba478de90d81ee1557e9",
+        "version" : "1.2.0"
       }
     },
     {
@@ -77,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "3ae2675d1a7feedb92b72796198c74956e5671f6",
-        "version" : "1.0.1"
+        "revision" : "feab8b81d1adca3abe98724d3e001f8c0d8c742f",
+        "version" : "1.1.1"
       }
     },
     {
@@ -86,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaUtils",
       "state" : {
-        "revision" : "6085503d0166f7c1ecb943b49a189f699e3cb691",
-        "version" : "1.0.2"
+        "revision" : "2a2fa274c5799ca96d6e6ff1bb8fc65c693d7c96",
+        "version" : "1.2.2"
       }
     },
     {
@@ -104,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
-        "version" : "1.7.0"
+        "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
+        "version" : "1.6.2"
       }
     },
     {
@@ -113,17 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "810496cf121e525d660cd0ea89a758740476b85f",
-        "version" : "1.5.1"
-      }
-    },
-    {
-      "identity" : "swift-atomics",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-atomics.git",
-      "state" : {
-        "revision" : "b601256eab081c0f92f059e12818ac1d4f178ff7",
-        "version" : "1.3.0"
+        "revision" : "f70225981241859eb4aa1a18a75531d26637c8cc",
+        "version" : "1.4.0"
       }
     },
     {
@@ -156,10 +139,10 @@
     {
       "identity" : "swiftsoup",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/scinfu/SwiftSoup",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "d86f244ed497d48012782e2f59c985a55e77b3f5",
-        "version" : "2.11.3"
+        "revision" : "dba183c96b2da4e4b80bb31b1e2e59cb9542b8fc",
+        "version" : "2.13.0"
       }
     },
     {
@@ -167,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SwiftTailwind",
       "state" : {
-        "revision" : "47966d8f942e9de53d26f141d4f7ee8ec3f1487d",
-        "version" : "1.0.1"
+        "revision" : "afad3ef3a071639ced34aa95f9b24f40e8288b41",
+        "version" : "1.0.2"
       }
     },
     {
@@ -181,5 +164,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -60,7 +60,7 @@ func syntaxHighlight<M>(item: Item<M>) {
 }
 
 /// Convert `<pre data-title="...">` to visible `<span class="code-title">` elements.
-public func addCodeBlockTitles(_ doc: Document) throws {
+public func addCodeBlockTitles<M>(_ doc: Document, item: Item<M>) throws {
   let preElements = try doc.select("pre[data-title]")
   for pre in preElements {
     let title = try pre.attr("data-title")

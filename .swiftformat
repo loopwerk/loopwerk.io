@@ -4,3 +4,4 @@
 --disable unusedArguments
 --disable redundantReturn
 --disable redundantSelf
+--disable opaqueGenericParameters

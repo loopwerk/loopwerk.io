@@ -1,11 +1,11 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
   name: "Loopwerk",
   platforms: [
-    .macOS(.v12),
+    .macOS(.v14),
   ],
   dependencies: [
     .package(url: "https://github.com/loopwerk/Saga", from: "2.16.0"),

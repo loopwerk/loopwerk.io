@@ -30,4 +30,4 @@ build:
   .build/debug/Loopwerk
 
 format:
-  swiftformat --swift-version 5 .
+  swiftformat --swift-version 6 .
