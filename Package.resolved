@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "3f597bb89172a8deb43e090ed90c6fb1ab86b7eb",
-        "version" : "2.21.0"
+        "revision" : "164c6c9d7a96f9fda46660d8a07ed1f8cbdbed24",
+        "version" : "2.23.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "b14e06fa8f0549c385f89d4e5debd2656e47167d",
-        "version" : "1.2.1"
+        "revision" : "a6eee7dec6cc360a5e363d731566a96bd6d42b49",
+        "version" : "1.3.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaUtils",
       "state" : {
-        "revision" : "ab3a53e008b00ad2751f13fe047035b9efd2f2b0",
-        "version" : "1.3.1"
+        "revision" : "ea26f03c934e0c2755e38eb9ae6dfa2d008c1b9d",
+        "version" : "1.4.0"
       }
     },
     {
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SwiftTailwind",
       "state" : {
-        "revision" : "afad3ef3a071639ced34aa95f9b24f40e8288b41",
-        "version" : "1.0.2"
+        "revision" : "64403a012c4461148751c141b29a34b0af21c087",
+        "version" : "1.0.3"
       }
     },
     {

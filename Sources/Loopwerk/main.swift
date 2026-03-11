@@ -86,7 +86,7 @@ enum SiteMetadata {
   static let name = "Loopwerk"
   static let author = "Kevin Renskers"
   static let now = Date()
-  static let projectRoot = URL(fileURLWithPath: #file)
+  static let projectRoot = URL(fileURLWithPath: #filePath)
     .deletingLastPathComponent()
     .deletingLastPathComponent()
     .deletingLastPathComponent()
