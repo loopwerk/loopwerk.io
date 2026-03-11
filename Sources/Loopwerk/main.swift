@@ -1,6 +1,6 @@
 import Bonsai
 import Foundation
-import PathKit
+import SagaPathKit
 import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer

@@ -1,6 +1,6 @@
 import Foundation
 import Moon
-import PathKit
+import SagaPathKit
 import Saga
 import SwiftGD
 import SwiftSoup

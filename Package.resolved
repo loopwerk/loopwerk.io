@@ -38,21 +38,12 @@
       }
     },
     {
-      "identity" : "pathkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loopwerk/PathKit",
-      "state" : {
-        "revision" : "a444cb21b8e588d6fc24af988c9cafaf82bf1d58",
-        "version" : "1.3.0"
-      }
-    },
-    {
       "identity" : "saga",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "fda049c8996ee1a123a07f9600cde52a315e8deb",
-        "version" : "2.20.0"
+        "revision" : "3f597bb89172a8deb43e090ed90c6fb1ab86b7eb",
+        "version" : "2.21.0"
       }
     },
     {
@@ -60,8 +51,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "479229014d96435cd289ba478de90d81ee1557e9",
-        "version" : "1.2.0"
+        "revision" : "3c4199255d0812363adfaee3990359aaa96de4ee",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "sagapathkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loopwerk/SagaPathKit",
+      "state" : {
+        "revision" : "3d8c6ba5c2b89f83fe55f9f494dea26922e0629c",
+        "version" : "1.4.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "feab8b81d1adca3abe98724d3e001f8c0d8c742f",
-        "version" : "1.1.1"
+        "revision" : "b14e06fa8f0549c385f89d4e5debd2656e47167d",
+        "version" : "1.2.1"
       }
     },
     {
@@ -78,17 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaUtils",
       "state" : {
-        "revision" : "c91a3636336de545f3ea7767524840ced79a00c3",
-        "version" : "1.3.0"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
-      "state" : {
-        "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
-        "version" : "1.6.2"
+        "revision" : "ab3a53e008b00ad2751f13fe047035b9efd2f2b0",
+        "version" : "1.3.1"
       }
     },
     {
@@ -96,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "f70225981241859eb4aa1a18a75531d26637c8cc",
-        "version" : "1.4.0"
+        "revision" : "810496cf121e525d660cd0ea89a758740476b85f",
+        "version" : "1.5.1"
       }
     },
     {
