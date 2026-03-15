@@ -7,7 +7,7 @@ import SagaSwimRenderer
 import SagaUtils
 import SwiftTailwind
 
-struct HeroImage: Decodable {
+struct HeroImage: Codable {
   let path: String
   let width: Int
   let height: Int
