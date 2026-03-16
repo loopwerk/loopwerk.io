@@ -1,5 +1,5 @@
 ---
-tags: review, tools
+tags: review
 archive: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: I've created a new HTML minifier in pure Swift, with zero dependencies and performance on par with the best Node.js minifiers.
 ---
 

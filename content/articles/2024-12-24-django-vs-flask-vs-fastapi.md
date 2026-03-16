@@ -1,5 +1,5 @@
 ---
-tags: python, django, insights
+tags: django, insights
 summary: I started using Django in 2009, and fifteen years later I am still a happy user. It's clear that Django is rather special.
 ---
 

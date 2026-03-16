@@ -1,5 +1,5 @@
 ---
-tags: python, django, howto
+tags: django, howto
 archive: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: review, python, django
+tags: review, django
 ---
 
 # Django-CMS vs. FeinCMS vs. Mezzanine

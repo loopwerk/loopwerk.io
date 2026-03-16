@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit, howto
+tags: sveltekit, howto
 summary: Solving problems by putting writable reactive stores in Svelte's context.
 ---
 

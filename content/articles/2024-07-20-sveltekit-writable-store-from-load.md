@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit, insights
+tags: sveltekit, insights
 summary: How do you update content in real time when that content was fetched from the layout's load function?
 ---
 

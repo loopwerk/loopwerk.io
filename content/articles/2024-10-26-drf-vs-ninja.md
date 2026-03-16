@@ -1,5 +1,5 @@
 ---
-tags: review, django, python
+tags: review, django
 summary: Let's compare Django REST Framework with new kid on the block, Ninja.
 ---
 

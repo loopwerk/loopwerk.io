@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit
+tags: sveltekit
 summary: When HttpOnly cookies didn't work as expected in my SvelteKit project I had to find a workaround.
 ---
 

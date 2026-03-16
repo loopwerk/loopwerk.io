@@ -1,5 +1,5 @@
 ---
-tags: review, python, django, tools
+tags: review, django
 archive: true
 ---
 

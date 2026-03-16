@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: I've created a Swift package that wraps the Tailwind CSS standalone CLI, removing the need for Node.js or npm in your build pipeline.
 ---
 

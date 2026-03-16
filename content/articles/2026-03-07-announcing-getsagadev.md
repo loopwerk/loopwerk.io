@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: I've created a brand new documentation website for Saga, built with Saga itself. It features full API reference docs, works without JavaScript, and looks pretty great.
 ---
 

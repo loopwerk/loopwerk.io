@@ -1,5 +1,5 @@
 ---
-tags: swift, saga
+tags: saga
 summary: I've replaced the Ink and Splash dependencies with my own SwiftMarkdown package.
 ---
 

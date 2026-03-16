@@ -1,5 +1,5 @@
 ---
-tags: swift, saga
+tags: saga
 summary: Working with generics in Swift becomes a headache when you want to put things in an array. Am I stuck with type erasure and type casting?
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: swift, saga
+tags: saga
 summary: In part 1 of a series of articles I'm looking at the inspiration behind my static site generator Saga, now available on Github.
 ---
 

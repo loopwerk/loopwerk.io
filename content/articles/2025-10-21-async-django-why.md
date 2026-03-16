@@ -1,5 +1,5 @@
 ---
-tags: django, python, insights
+tags: django, insights
 summary: While a technical marvel, async Django has been quietly rejected by the community it was built for, with the vast majority of developers sticking to simpler, proven solutions.
 ---
 

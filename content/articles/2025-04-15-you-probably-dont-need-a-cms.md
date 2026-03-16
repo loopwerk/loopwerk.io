@@ -1,5 +1,5 @@
 ---
-tags: django, python, insights
+tags: django, insights
 summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here's how to use a simple Django model with a CKEditor 5 WYSIWYG field.
 ---
 

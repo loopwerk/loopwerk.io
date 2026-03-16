@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: I've created a new Swift package that does server-side syntax highlighting of HTML content, using Prism.js.
 ---
 

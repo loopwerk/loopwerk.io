@@ -38,7 +38,7 @@ class ImageGenerator {
     image.renderText(date, from: Point(x: 90, y: 540), fontList: [bodyFontPath], color: Color.white, size: 20)
 
     // Draw the tags on the image
-    let tags = article.metadata.tags.sorted().map { "#\($0)" }.joined(separator: ", ")
+    let tags = article.expandedTags.sorted().map { "#\($0)" }.joined(separator: ", ")
     image.renderText(tags, from: Point(x: 90, y: 580), fontList: [bodyFontPath], color: Color.white, size: 20)
 
     // Save the image as a PNG

@@ -1,5 +1,5 @@
 ---
-tags: django, python, insights
+tags: django, insights
 summary: I never made the switch from unittest to pytest for my Django projects. And after years of building and maintaining Django applications, I still don't feel like I'm missing out.
 ---
 

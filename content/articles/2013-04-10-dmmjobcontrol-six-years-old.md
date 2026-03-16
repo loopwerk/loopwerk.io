@@ -1,5 +1,5 @@
 ---
-tags: open source
+tags: news
 archive: true
 ---
 

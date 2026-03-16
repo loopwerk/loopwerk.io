@@ -1,5 +1,5 @@
 ---
-tags: django, python, review
+tags: django, review
 summary: I use django-apscheduler to run a queue of scheduled tasks. Now I also need the ability to run one-off tasks and that turned out to not be so simple.
 ---
 

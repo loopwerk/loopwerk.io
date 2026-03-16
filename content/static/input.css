@@ -194,7 +194,7 @@ code var {
 }
 
 .prose h2 {
-  @apply font-title text-3xl lg:text-4xl;
+  @apply font-title text-3xl lg:text-4xl mb-4;
 }
 
 .prose aside {

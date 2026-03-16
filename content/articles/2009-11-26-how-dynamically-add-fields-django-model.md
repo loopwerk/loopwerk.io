@@ -1,5 +1,5 @@
 ---
-tags: python, django, howto
+tags: django, howto
 ---
 
 # How to dynamically add fields to a Django model

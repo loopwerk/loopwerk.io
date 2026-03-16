@@ -1,5 +1,5 @@
 ---
-tags: coolify, deployment, howto
+tags: coolify, howto
 summary: If your Coolify deployments are sometimes fast and sometimes mysteriously slow, Docker's BuildKit garbage collection is probably silently deleting your build cache.
 ---
 

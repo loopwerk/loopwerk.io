@@ -1,5 +1,5 @@
 ---
-tags: django, python, personal
+tags: django, personal
 summary: Celebrating Django's 20th birthday by looking back at 16 years of personal Django usage, how it evolved, favorite packages, and what I'd love to see in the future.
 ---
 

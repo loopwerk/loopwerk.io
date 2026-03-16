@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit
+tags: sveltekit
 summary: One pattern that I love to use in my SvelteKit projects is returning writable stores from the layout's load function. Can we migrate this to the new $state rune?
 ---
 

@@ -18,6 +18,7 @@ struct ArticleMetadata: Metadata {
   let summary: String?
   var heroImage: HeroImage?
   var archive: Bool?
+  var expandedTags: [String]?
 }
 
 struct WorkProjectMetadata: Metadata {
@@ -48,6 +49,10 @@ extension Item where M == ArticleMetadata {
     return metadata.archive ?? false
   }
 
+  var expandedTags: [String] {
+    return metadata.expandedTags ?? metadata.tags
+  }
+  
   var year: Int {
     return Calendar.current.component(.year, from: self.date)
   }
@@ -99,7 +104,8 @@ let articleProcessor = sequence(
   syntaxHighlight,
   publicationDateInFilename,
   permalink,
-  heroImage
+  heroImage,
+  expandTags
 )
 
 // Compile tailwind to output.css
@@ -124,7 +130,7 @@ try await Saga(input: "content", output: "deploy")
     writers: [
       .itemWriter(swim(renderArticle)),
       .listWriter(swim(renderArticles)),
-      .tagWriter(swim(renderTag), tags: \.metadata.tags),
+      .tagWriter(swim(renderTag), tags: \.expandedTags),
       .yearWriter(swim(renderYear)),
 
       // Atom feed for all articles, and a feed per tag
@@ -148,7 +154,7 @@ try await Saga(input: "content", output: "deploy")
           image: \.metadata.heroImage?.path,
           dateKeyPath: \.creationDate
         ),
-        output: "tag/[key]/feed.xml", tags: \.metadata.tags
+        output: "tag/[key]/feed.xml", tags: \.expandedTags
       ),
     ]
   )

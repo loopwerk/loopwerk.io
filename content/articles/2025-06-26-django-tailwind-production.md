@@ -1,5 +1,5 @@
 ---
-tags: django, python, deployment, howto
+tags: django, deployment, howto
 summary: I'm a big fan of the django-tailwind-cli package, but I ran into problems deploying it to production. Here's how to make sure you cache-bust tailwind.css.
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: python, uv
+tags: uv
 summary: It's been three months since I migrated all my Python projects over to uv. And it's only gotten better! Let's look at two recent major improvements.
 ---
 

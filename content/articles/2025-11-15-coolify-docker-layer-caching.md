@@ -1,5 +1,5 @@
 ---
-tags: coolify, deployment
+tags: coolify
 summary: A deep dive into Docker layer caching, BuildKit cache mounts, and how a Coolify bug can sabotage your build times, plus what you can (and can't) do about it.
 ---
 

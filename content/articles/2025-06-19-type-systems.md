@@ -1,5 +1,5 @@
 ---
-tags: python, swift, javascript, saga, insights
+tags: python, javascript, saga, insights
 summary: I recently ported Saga from Swift to both Python and TypeScript. It was a fascinating exercise in cognitive dissonance, especially when it came to their type systems.
 ---
 

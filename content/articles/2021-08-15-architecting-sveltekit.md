@@ -1,5 +1,5 @@
 ---
-tags: javascript, sveltekit
+tags: sveltekit
 summary: Trying to architect a SvelteKit app so that it does as few requests as possible, from a central place, so that all subpages have access to the content.
 ---
 

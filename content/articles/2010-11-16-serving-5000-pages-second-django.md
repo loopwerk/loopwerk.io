@@ -1,5 +1,5 @@
 ---
-tags: python, django
+tags: django
 archive: true
 ---
 

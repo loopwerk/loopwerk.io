@@ -1,5 +1,5 @@
 ---
-tags: django, python
+tags: django
 summary: There are many ways to configure Django, like multiple settings files or .env files. Here's how I do it, using python-dotenv.
 ---
 

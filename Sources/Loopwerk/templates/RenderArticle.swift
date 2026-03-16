@@ -19,9 +19,9 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
     article.date.formatted("MMMM dd, yyyy")
     Node.raw("&bull; ")
 
-    article.metadata.tags.sorted().enumerated().map { index, tag in
+    article.expandedTags.sorted().enumerated().map { index, tag in
       Node.fragment([
-        %tagPrefix(index: index, totalTags: article.metadata.tags.count),
+        %tagPrefix(index: index, totalTags: article.expandedTags.count),
         %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
       ])
     }

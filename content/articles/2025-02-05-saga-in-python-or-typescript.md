@@ -1,5 +1,5 @@
 ---
-tags: saga, swift
+tags: saga
 summary: What would Saga look like if it were written in Python or TypeScript, rather than in Swift? Is it worth the effort to port Saga to another language?
 ---
 

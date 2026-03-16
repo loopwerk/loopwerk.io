@@ -1,5 +1,5 @@
 ---
-tags: coolify, django, python, deployment, insights, howto
+tags: coolify, django, insights, howto
 summary: How to run schema-changing Django migrations safely, avoiding schema/code mismatches and server errors during rolling deploys.
 ---
 

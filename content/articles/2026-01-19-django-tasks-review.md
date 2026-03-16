@@ -1,5 +1,5 @@
 ---
-tags: django, python, review
+tags: django, review
 summary: Background tasks have always been essential in Django projects. Django 6.0 finally acknowledges that fact, but its new Tasks framework stops short of what real apps need.
 ---
 

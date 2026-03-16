@@ -1,5 +1,5 @@
 ---
-tags: python, django, howto, workflow
+tags: django, howto, workflow
 summary: Did you know that you can run unit tests for your Django app, in GitHub Actions, using PostgreSQL?
 ---
 

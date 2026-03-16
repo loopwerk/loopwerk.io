@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: A collection of reusable utilities for Saga, extracted from this very website: composable HTML transformations and useful String extensions.
 ---
 

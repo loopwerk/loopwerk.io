@@ -1,5 +1,5 @@
 ---
-tags: django, python, howto
+tags: django, howto
 summary: A robust, two-part solution for showing dates and times in your visitor's local timezone, handling the tricky first-visit problem.
 ---
 

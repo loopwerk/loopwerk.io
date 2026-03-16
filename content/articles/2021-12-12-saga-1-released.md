@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, news
+tags: saga, news
 summary: It's taken a little bit longer than I expected, but 1.0.0 has finally been released, with support for async readers and item processing functions.
 ---
 

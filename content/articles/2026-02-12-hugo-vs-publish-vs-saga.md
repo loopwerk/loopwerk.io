@@ -1,5 +1,5 @@
 ---
-tags: swift, saga, review
+tags: saga, review
 summary: I built the same site with Hugo, Publish, and Saga to compare how each static site generator handles real-world requirements.
 ---
 

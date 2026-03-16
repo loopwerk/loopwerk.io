@@ -1,5 +1,5 @@
 ---
-tags: review, saga, swift
+tags: review, saga
 summary: Comparing Parsley to Ink, Down, and MarkdownKit.
 ---
 

@@ -1,5 +1,5 @@
 ---
-tags: django, python, insights
+tags: django, insights
 summary: When you have admin users in multiple time zones, the way Django handles the input and display of dates and times is causing confusion. Here's how you can improve things.
 ---
 

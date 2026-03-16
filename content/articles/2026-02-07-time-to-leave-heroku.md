@@ -1,5 +1,5 @@
 ---
-tags: deployment, django, python, insights, coolify
+tags: django, insights, coolify
 summary: Heroku just announced it's entering "sustaining engineering mode". No more new features. After years of security breaches, outages, and price hikes, it's time to leave.
 ---
 

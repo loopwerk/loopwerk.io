@@ -1,5 +1,5 @@
 ---
-tags: python, django, review
+tags: django, review
 ---
 
 # Things I "hate" about Python and Django

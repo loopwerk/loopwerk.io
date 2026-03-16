@@ -1,5 +1,5 @@
 ---
-tags: deployment, python, django, sveltekit, howto
+tags: deployment, django, sveltekit, howto
 summary: A complete how-to guide for setting up Debian from scratch, for SvelteKit and Django.
 ---
 

@@ -13,6 +13,28 @@ private let syntaxHighlighter: Moon = {
   }
 }()
 
+// Some tags should automatically result on parent tags being added.
+// For example, all articles tagged with "django" should also be tagged with "python".
+// This tagHierarchy is used to automate this.
+let tagHierarchy: TagTree = [
+  "swift": ["saga"],
+  "python": ["django", "uv"],
+  "javascript": ["sveltekit"],
+  "deployment": ["coolify"],
+]
+
+let tagAncestors = ancestorsMap(tagHierarchy)
+
+func expandTags(item: Item<ArticleMetadata>) {
+  var expanded = Set(item.metadata.tags)
+  for tag in item.metadata.tags {
+    if let ancestors = tagAncestors[tag] {
+      expanded.formUnion(ancestors)
+    }
+  }
+  item.metadata.expandedTags = Array(expanded)
+}
+
 func permalink(item: Item<ArticleMetadata>) {
   // Insert the publication year into the permalink.
   // If the `relativeDestination` was "articles/looking-for-django-cms/index.html", then it becomes "articles/2009/looking-for-django-cms/index.html"

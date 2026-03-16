@@ -1,5 +1,5 @@
 ---
-tags: python, uv, review
+tags: uv, review
 summary: Two months ago I compared Poetry with uv, and for me uv had significant drawbacks that kept me from switching over. The situation has changed quite a bit since then!
 ---
 

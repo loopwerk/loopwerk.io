@@ -1,5 +1,5 @@
 {
-  "originHash" : "ea01e3a30022007794c4cfea0da4368a0267a80386afb9e3b40b422d6cc320b2",
+  "originHash" : "f1e7c8bfa6302a0d7192e8c0ab6cf2de016b1bae852e51ad5381acb94cf639c1",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -124,7 +124,7 @@
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
         "revision" : "dba183c96b2da4e4b80bb31b1e2e59cb9542b8fc",
-        "version" : "2.13.0"
+        "version" : "2.13.1"
       }
     },
     {
