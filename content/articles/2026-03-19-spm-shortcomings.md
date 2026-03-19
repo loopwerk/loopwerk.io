@@ -67,7 +67,15 @@ A second problem is that all targets in a monorepo share a single version number
 
 I [explored this problem](https://github.com/loopwerk/Saga/issues/24) and tried various workarounds without success. Apollo GraphQL ran into [the exact same problem](https://www.apollographql.com/blog/how-apollo-manages-swift-packages-in-a-monorepo-with-git-subtrees) with their iOS SDK. They wanted a monorepo for development (unified PRs, holistic code review) but separate repos for distribution (so users don't download everything). Their solution? Git subtrees with custom GitHub Actions that automatically split and push changes to individual repos when PRs merge. It works, but it's a significant amount of infrastructure to work around what is fundamentally a missing feature in SPM.
 
-## 5. Missing basic CLI tooling
+## 5. No dev dependencies
+
+SPM has no concept of development-only dependencies. If your package uses `swift-docc-plugin` to generate documentation, or a testing library like `swift-snapshot-testing`, that dependency is declared at the package level — and every consumer of your library downloads it too, even though they'll never use it.
+
+The `swift-docc-plugin` case is particularly absurd: even though it's added as a dependency of the *project* and not of any *target*, SPM still fetches it for everyone. The only workaround is to [comment out the dependency in Package.swift before tagging a release](https://www.loopwerk.io/articles/2025/docc-spm-need-love/), and uncomment it when you want to generate docs locally. That's not a workflow, that's a hack.
+
+This also makes the monorepo problem worse. It's not just that consumers download dependencies for targets they don't use — they also download your documentation tooling, your test helpers, and anything else that should be scoped to development.
+
+## 6. Missing basic CLI tooling
 
 Most package managers ship with commands for common dependency management tasks: adding, removing, listing outdated packages, updating a single dependency. SPM has... `swift package add-dependency`. And that's about it.
 
@@ -78,7 +86,9 @@ There's no `swift package outdated` to see which dependencies have newer version
 SPM doesn't need to copy npm. But a few targeted additions would make a huge difference for anyone maintaining packages with plugins or extensions:
 
 1. **Peer dependencies**: let a package declare that it needs a dependency without specifying the source. Let the consumer provide it.
-2. **Identity resolution**: if two sources resolve to the same package (same name, same targets), treat them as the same package instead of raising an unsolvable conflict.
-3. **Basic CLI commands**: `outdated`, `remove-dependency`, `update --package`. These should have existed years ago.
+2. **Dev dependencies**: dependencies that are only fetched during development, not by consumers of your package.
+3. **Lazy dependency fetching**: only download dependencies that are actually needed for the targets being compiled. This would make monorepos viable and dev dependencies less urgent in one stroke.
+4. **Identity resolution**: if two sources resolve to the same package (same name, same targets), treat them as the same package instead of raising an unsolvable conflict.
+5. **Basic CLI commands**: `outdated`, `remove-dependency`, `update --package`. These should have existed years ago.
 
 Until then, maintaining a plugin ecosystem in Swift remains more painful than it needs to be.
