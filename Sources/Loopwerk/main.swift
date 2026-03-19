@@ -135,7 +135,7 @@ try await Saga(input: "content", output: "deploy")
 
       // Atom feed for all articles, and a feed per tag
       .listWriter(
-        atomFeed(
+        Saga.atomFeed(
           title: SiteMetadata.name,
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
@@ -146,7 +146,7 @@ try await Saga(input: "content", output: "deploy")
         output: "feed.xml"
       ),
       .tagWriter(
-        atomFeed(
+        Saga.atomFeed(
           title: SiteMetadata.name,
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
@@ -218,7 +218,7 @@ try await Saga(input: "content", output: "deploy")
 
   // Create article images (prod only)
   .register { saga in
-    guard !isDev else {
+    guard !Saga.isDev else {
       return
     }
 
@@ -235,7 +235,7 @@ try await Saga(input: "content", output: "deploy")
 
   // Minify all HTML output (prod only)
   .postProcess { html, _ in
-    guard !isDev else { return html }
+    guard !Saga.isDev else { return html }
     return Bonsai.minifyHTML(html)
   }
 
@@ -243,7 +243,7 @@ try await Saga(input: "content", output: "deploy")
   .run()
 
 // Index the site with Pagefind (prod only)
-if !isDev {
+if !Saga.isDev {
   let pagefind = Process()
   pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
   pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]

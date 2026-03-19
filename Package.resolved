@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "4029d0797de4836d14ad6aba7923e9e37e640aec",
-        "version" : "2.24.0"
+        "revision" : "77306dae6a97624195a4182d3bebec30f165ec35",
+        "version" : "2.25.1"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaPathKit",
       "state" : {
-        "revision" : "4e5c09a4dcf6ff0e082ea918b9fb0323e8b071ce",
-        "version" : "1.6.0"
+        "revision" : "98e591dc42163f674f238c30b14c14e23f30e5a1",
+        "version" : "1.6.1"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "dba183c96b2da4e4b80bb31b1e2e59cb9542b8fc",
-        "version" : "2.13.1"
+        "revision" : "fd541c4b3fa7dcec2e7cfe049505b6e4382cd66b",
+        "version" : "2.13.2"
       }
     },
     {
