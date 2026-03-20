@@ -1,5 +1,6 @@
 ---
 tags: faq, iOS, swift
+summary: It's a question I asked myself too, when I just got started with Combine.
 ---
 
 # Mentee Question 4: When to use PassthroughSubject and CurrentValueSubject?

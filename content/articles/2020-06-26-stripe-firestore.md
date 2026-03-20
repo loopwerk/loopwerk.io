@@ -1,5 +1,6 @@
 ---
 tags: firebase, javascript, howto
+summary: Since it was a bit of a puzzle to get it working, I am sharing my backend and frontend code.
 ---
 
 # Connecting Stripe to Firestore via Cloud Functions and webhooks

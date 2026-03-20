@@ -1,5 +1,6 @@
 ---
 tags: faq, iOS, swift
+summary: One of my mentees asked about the coordinator pattern: how to implement it, and what the big deal is about decoupling view controllers.
 ---
 
 # Mentee Question 5: What's the deal with coordinators?

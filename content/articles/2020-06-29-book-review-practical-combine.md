@@ -1,5 +1,6 @@
 ---
 tags: review, iOS, swift
+summary: Great book, and well worth the $25.
 ---
 
 # Book review: Practical Combine
