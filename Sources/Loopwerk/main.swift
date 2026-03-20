@@ -35,13 +35,6 @@ struct PageMetadata: Metadata {
 struct OpenSourceProjectMetadata: Metadata {
   let category: String
   let repo: String
-  let order: Int?
-}
-
-extension Item where M == OpenSourceProjectMetadata {
-  var order: Int {
-    return metadata.order ?? 999
-  }
 }
 
 extension Item where M == ArticleMetadata {
@@ -191,6 +184,7 @@ try await Saga(input: "content", output: "deploy")
     metadata: OpenSourceProjectMetadata.self,
     readers: [.parsleyMarkdownReader],
     itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
+    sorting: { $0.title < $1.title },
     writers: [.listWriter(swim(renderOpenSource))]
   )
 
@@ -242,7 +236,7 @@ try await Saga(input: "content", output: "deploy")
   .run()
 
 // Index the site with Pagefind (prod only)
-//if !Saga.isDev {
+if !Saga.isDev {
   let pagefind = Process()
   pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
   pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
@@ -252,4 +246,4 @@ try await Saga(input: "content", output: "deploy")
   if pagefind.terminationStatus != 0 {
     print("pagefind failed with exit code \(pagefind.terminationStatus)")
   }
-//}
+}

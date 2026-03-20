@@ -25,10 +25,9 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
 @NodeBuilder
 private func renderCategory(category: String, projects: [Item<OpenSourceProjectMetadata>]) -> Node {
   div(class: "mt-12") {
-    h1(class: "font-title text-4xl font-bold mb-6") { category }
+    h1(class: "font-title text-4xl font-bold mb-6") { category == "JavaScript" ? "TypeScript / JavaScript" : category }
 
     projects
-      .sorted { ($0.order, $0.title) < ($1.order, $1.title) }
       .map { project -> Node in
         return renderProject(project: project)
       }
