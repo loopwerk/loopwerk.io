@@ -289,7 +289,7 @@ code var {
 
 #search {
   height: 44px;
-  padding: 0 10px 0 54px;
+  padding: 0 80px 0 54px;
   border-radius: 6px;
   @apply bg-searchbg text-searchfg;
 }
@@ -299,20 +299,6 @@ code var {
   font-weight: 200;
 }
 
-.pagefind-ui__message {
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-.pagefind-modular-list-result {
-  margin-top: 40px;
-  list-style: none;
-}
-
-.pagefind-modular-list-link {
-  @apply font-bold text-2xl mb-3 hover:text-orange;
-}
-
-.pagefind-modular-list-excerpt mark {
+#articles-list mark {
   @apply bg-orange;
 }

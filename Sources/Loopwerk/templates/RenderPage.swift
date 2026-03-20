@@ -38,49 +38,6 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-@NodeBuilder
-func getSearchHeader() -> NodeConvertible {
-  script(src: "/pagefind/pagefind-modular-ui.js")
-  script {
-    Node.raw(
-      """
-      window.addEventListener('DOMContentLoaded', (event) => {
-          let q = new URLSearchParams(window.location.search).get("q");
-          document.getElementById("search").value = q;
-
-          const instance = new PagefindModularUI.Instance();
-          instance.add(new PagefindModularUI.Input({
-              inputElement: "#search"
-          }));
-          instance.add(new PagefindModularUI.ResultList({
-              containerElement: "#results"
-          }));
-          instance.add(new PagefindModularUI.Summary({
-            containerElement: "#summary"
-          }));
-          instance.triggerSearch(q);
-      });
-      """
-    )
-  }
-}
-
-func renderSearch(context: PageRenderingContext) -> Node {
-  return baseLayout(canocicalURL: context.outputPath.url, section: .search, title: "Search", extraHeader: getSearchHeader()) {
-    div(class: "prose") {
-      h1 { "Search" }
-    }
-
-    // Search
-    form(action: "/search/", class: "relative mt-12 mb-20", id: "search-form") {
-      input(class: "w-full", id: "search", name: "q", placeholder: "Search articles", type: "text")
-    }
-
-    div(id: "summary")
-    div(id: "results")
-  }
-}
-
 func render404(context: PageRenderingContext) -> Node {
   let articles = context.allItems
     .compactMap { $0 as? Item<ArticleMetadata> }

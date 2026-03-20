@@ -214,7 +214,6 @@ try await Saga(input: "content", output: "deploy")
 
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))
-  .createPage("search/index.html", using: swim(renderSearch))
 
   // Create article images (prod only)
   .register { saga in
@@ -243,7 +242,7 @@ try await Saga(input: "content", output: "deploy")
   .run()
 
 // Index the site with Pagefind (prod only)
-if !Saga.isDev {
+//if !Saga.isDev {
   let pagefind = Process()
   pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
   pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
@@ -253,4 +252,4 @@ if !Saga.isDev {
   if pagefind.terminationStatus != 0 {
     print("pagefind failed with exit code \(pagefind.terminationStatus)")
   }
-}
+//}
