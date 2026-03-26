@@ -1,5 +1,5 @@
 run:
-  saga dev --ignore output.css
+  saga dev
 
 # Remove generated responsive hero image variants
 clean:

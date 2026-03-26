@@ -101,15 +101,19 @@ let articleProcessor = sequence(
   expandTags
 )
 
-// Compile tailwind to output.css
 let tailwind = SwiftTailwind(version: "3.4.17")
-try await tailwind.run(
-  input: "content/static/input.css",
-  output: "content/static/output.css",
-  options: .minify
-)
 
 try await Saga(input: "content", output: "deploy")
+  // Compile tailwind to output.css
+  .beforeRead { _ in
+    try await tailwind.run(
+      input: "content/static/input.css",
+      output: "content/static/output.css",
+      options: .minify
+    )
+  }
+  .ignore("output.css")
+
   // Non-archived articles (`$0.archive == false`)
   // We make sure that the filtered-out articles (i.e. archived articles) are NOT
   // marked as handled. Otherwise the next step can't process the archived articles.
@@ -232,18 +236,20 @@ try await Saga(input: "content", output: "deploy")
     return Bonsai.minifyHTML(html)
   }
 
+  // Index the site with Pagefind (prod only)
+  .afterWrite { _ in
+    if !Saga.isDev {
+      let pagefind = Process()
+      pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+      pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
+      pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
+      try pagefind.run()
+      pagefind.waitUntilExit()
+      if pagefind.terminationStatus != 0 {
+        print("pagefind failed with exit code \(pagefind.terminationStatus)")
+      }
+    }
+  }
+
   // Run everything!
   .run()
-
-// Index the site with Pagefind (prod only)
-if !Saga.isDev {
-  let pagefind = Process()
-  pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-  pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
-  pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
-  try pagefind.run()
-  pagefind.waitUntilExit()
-  if pagefind.terminationStatus != 0 {
-    print("pagefind failed with exit code \(pagefind.terminationStatus)")
-  }
-}
