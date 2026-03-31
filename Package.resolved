@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "13ed928bb0e4fb20ba489274f2483144edb76752",
-        "version" : "3.0.0"
+        "revision" : "4468c7de2ad8302ce19f388324e6c61591fdaf1d",
+        "version" : "3.1.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "e41e663985fed91f7db8906aea31f42cb72e3cf2",
-        "version" : "1.4.0"
+        "revision" : "05e68daf645d68cbb00658890a31083e9b1edb90",
+        "version" : "1.4.1"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "e40910293caa6d94802e1a69b80517c88e77eaff",
-        "version" : "2.13.3"
+        "revision" : "6c7915e16f729857aec3e99068c361e58a00ed68",
+        "version" : "2.13.4"
       }
     },
     {
