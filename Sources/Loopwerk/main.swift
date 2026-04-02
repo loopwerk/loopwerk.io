@@ -104,8 +104,14 @@ let articleProcessor = sequence(
 let tailwind = SwiftTailwind(version: "3.4.17")
 
 try await Saga(input: "content", output: "deploy")
-  // Compile tailwind to output.css
-  .beforeRead { _ in
+  // Compile tailwind to output.css, skip for markdown-only or non-template Swift changes
+  .beforeRead { saga in
+    if let path = saga.buildReason.changedFile() {
+      if path.extension == ".md" || (path.extension == ".swift" && !path.components.contains("templates")) {
+        return
+      }
+    }
+
     try await tailwind.run(
       input: "content/static/input.css",
       output: "content/static/output.css",
