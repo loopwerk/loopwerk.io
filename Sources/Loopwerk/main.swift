@@ -104,12 +104,11 @@ let articleProcessor = sequence(
 let tailwind = SwiftTailwind(version: "3.4.17")
 
 try await Saga(input: "content", output: "deploy")
-  // Compile tailwind to output.css, skip for markdown-only or non-template Swift changes
+  // Compile tailwind to output.css
   .beforeRead { saga in
-    if let path = saga.buildReason.changedFile() {
-      if path.extension == ".md" || (path.extension == ".swift" && !path.components.contains("templates")) {
-        return
-      }
+    if let path = saga.buildReason.changedFile(), path.extension != "css" && !path.components.contains("templates") {
+      // It needs to be a css file or a template file, otherwise, skip it
+      return
     }
 
     try await tailwind.run(
@@ -118,7 +117,9 @@ try await Saga(input: "content", output: "deploy")
       options: .minify
     )
   }
-  .ignore("output.css")
+
+  // Don't trigger a rebuild when output.css changes, otherwise we get into an endless loop
+  .ignoreChanges("output.css")
 
   // Non-archived articles (`$0.archive == false`)
   // We make sure that the filtered-out articles (i.e. archived articles) are NOT
