@@ -32,3 +32,27 @@ Apparently, plenty of people are fine with this new way of working. "I release p
 If I let AI solve those puzzles for me, then what's left? What's in it for me? The ability to quickly churn out more code doesn't make *my* life better. It will come with the expectation of ever-higher productivity, more and more AI usage, until we’re just babysitters, rubber-stamping pull requests we barely touched.
 
 What does this mean for my own AI usage in my own open source projects? I don't think it'll ever be gone completely, as it is an immensely useful tool. But instead of Claude Code writing the solution and me just checking its output, I want to reduce it to a very advanced rubber duck. Not only able to listen to my plans, ideas, and problems, but also to offer suggestions and brainstorm solutions with me. But that’s where it should stop. I want the puzzles back.
+
+## Links
+
+Other people have witten better articles about the pros and con of, and their feelings about AI, which I'd like to recommend.
+
+> Working with coding agents feels like a slot machine. You send a prompt, wait 30 seconds, and get something great or something useless. I found myself at 1am thinking "one more prompt" even when I knew it wouldn't work. When I was tired, my prompts got vague, the output got worse, and I'd try again anyway. It is a dopamine trap that prioritizes shipping over thinking.
+
+From [Eight years of wanting, three months of building with AI](https://lalitm.com/post/building-syntaqlite-ai/) by Lalit Maganti.
+
+> Bob has none of this. Take away the agent, and Bob is still a first-year student who hasn't started yet. The year happened around him but not inside him. He shipped a product, but he didn't learn a trade.
+
+From [The machines are fine. I'm worried about us.](https://ergosphere.blog/posts/the-machines-are-fine/) by Minas Karamanis.
+
+> "AI"-assisted programming’s a bit like pedal-assist on electric bicycles. It makes progress feel easy, but we might not realise the impact that’s having on our coding "muscles" – our ability to comprehend and reason about code. That is, until we run out of juice and have to pedal unaided. That’s when it becomes obvious just how much of our Code Fu we’ve lost as we’ve come to rely on that assistance more and more. Increasingly, I hear developers say "I’ve hit my token limit, so I’m blocked."
+
+From [Rely On AI And Get Left Behind](https://codemanship.wordpress.com/2026/02/21/is-comprehension-debt-in-your-risk-register/) by Jason Gorman.
+
+> I got into computers because solving puzzles was fun, and building worlds was fun, and making things — the process of making things — was fun, down at the granular level. It was nice to have something at the end, but the act of creation was the exciting part. [...] The journey actually was the reward for some subset of weird little freaks, but you can now skip all that crap and just jump to the end and get on with it.
+
+From [Lose Myself](https://www.eod.com/blog/2026/02/lose-myself/) by Greg Knauss.
+
+> I also just have trouble with the idea that this is my career and the thing I spend my limited time on earth doing and the quality of it doesn't matter. I delight in craftsmanship when I encounter it in almost any discipline. I love it when you walk into an old house and see all the hand crafted details everywhere that don't make economic sense but still look beautiful. I adore when someone has carefully selected the perfect font to match something.
+
+From [I Sold Out for $20 a Month and All I Got Was This Perfectly Generated Terraform](https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/) by Mat Duggan
