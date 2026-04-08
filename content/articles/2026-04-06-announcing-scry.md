@@ -1,6 +1,6 @@
 ---
 tags: swift, news
-summary: Saga 3 brings much faster builds and a more flexible pipeline, while Parsley 1.2 adds powerful Markdown attribute support.
+summary: Scry is a pure-Swift, dependency-free, and fully Linux-compatible EXIF parser.
 ---
 
 # Announcing Scry
