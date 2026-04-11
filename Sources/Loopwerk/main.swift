@@ -1,8 +1,8 @@
 import Bonsai
 import Foundation
-import SagaPathKit
 import Saga
 import SagaParsleyMarkdownReader
+import SagaPathKit
 import SagaSwimRenderer
 import SagaUtils
 import SwiftTailwind
@@ -45,9 +45,9 @@ extension Item where M == ArticleMetadata {
   var expandedTags: [String] {
     return metadata.expandedTags ?? metadata.tags
   }
-  
+
   var year: Int {
-    return Calendar.current.component(.year, from: self.date)
+    return Calendar.current.component(.year, from: date)
   }
 
   var creationDate: Date {
@@ -57,25 +57,25 @@ extension Item where M == ArticleMetadata {
     var calendar = Calendar.current
     calendar.timeZone = amsterdamTimeZone
 
-    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: self.lastModified)
-    let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: self.date)
+    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: lastModified)
+    let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
 
     // Check if the dates match in Amsterdam timezone
-    if fileCreationComponents.year == selfDateComponents.year &&
-      fileCreationComponents.month == selfDateComponents.month &&
-      fileCreationComponents.day == selfDateComponents.day
+    if fileCreationComponents.year == selfDateComponents.year,
+       fileCreationComponents.month == selfDateComponents.month,
+       fileCreationComponents.day == selfDateComponents.day
     {
-      return self.lastModified
+      return lastModified
     }
 
     // Fallback to self.date (filename date at noon)
-    var components = Calendar.current.dateComponents([.year, .month, .day], from: self.date)
+    var components = Calendar.current.dateComponents([.year, .month, .day], from: date)
     components.hour = 12
     components.minute = 0
     components.second = 0
     components.timeZone = TimeZone.current
 
-    return Calendar.current.date(from: components) ?? self.date
+    return Calendar.current.date(from: components) ?? date
   }
 }
 
@@ -106,7 +106,10 @@ let tailwind = SwiftTailwind(version: "3.4.17")
 try await Saga(input: "content", output: "deploy")
   // Compile tailwind to output.css
   .beforeRead { saga in
-    if let path = saga.buildReason.changedFile(), path.extension != "css" && !path.components.contains("templates") {
+    if let path = saga.buildReason.changedFile(),
+       path.extension != "css",
+       !path.components.contains("templates")
+    {
       // It needs to be a css file or a template file, otherwise, skip it
       return
     }

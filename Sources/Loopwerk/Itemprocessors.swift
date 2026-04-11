@@ -1,7 +1,7 @@
 import Foundation
 import Moon
-import SagaPathKit
 import Saga
+import SagaPathKit
 import SwiftGD
 import SwiftSoup
 
@@ -13,9 +13,9 @@ private let syntaxHighlighter: Moon = {
   }
 }()
 
-// Some tags should automatically result on parent tags being added.
-// For example, all articles tagged with "django" should also be tagged with "python".
-// This tagHierarchy is used to automate this.
+/// Some tags should automatically result on parent tags being added.
+/// For example, all articles tagged with "django" should also be tagged with "python".
+/// This tagHierarchy is used to automate this.
 let tagHierarchy: TagTree = [
   "swift": ["saga"],
   "python": ["django", "uv"],

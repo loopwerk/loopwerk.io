@@ -63,7 +63,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       }
       return $0.1 > $1.1
     }
-    .map { $0.0 } // extract the sorted articles
+    .map(\.0) // extract the sorted articles
     .prefix(2)
 
   let seeMoreArticles = relatedArticles.count >= 2 ? relatedArticles : latestArticles

@@ -1,11 +1,11 @@
 indirect enum TagTree: ExpressibleByArrayLiteral, ExpressibleByDictionaryLiteral {
   case leaves([String])
   case branches([String: TagTree])
-  
+
   init(arrayLiteral elements: String...) {
     self = .leaves(elements)
   }
-  
+
   init(dictionaryLiteral elements: (String, TagTree)...) {
     self = .branches(Dictionary(uniqueKeysWithValues: elements))
   }

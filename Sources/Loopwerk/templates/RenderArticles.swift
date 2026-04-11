@@ -3,7 +3,7 @@ import HTML
 import Saga
 
 func uniqueTagsWithCount(_ articles: [Item<ArticleMetadata>]) -> [(String, Int)] {
-  let tags = articles.flatMap { $0.expandedTags }
+  let tags = articles.flatMap(\.expandedTags)
   let tagsWithCounts = tags.reduce(into: [:]) { $0[$1, default: 0] += 1 }
   return tagsWithCounts.sorted {
     // Sort by number of articles (descending). If that's the same, sort by title (ascending).
@@ -100,7 +100,7 @@ func _renderArticlesHeader(title: String, allItems: [AnyItem]) -> Node {
 func _renderArticlesList(_ articles: [Item<ArticleMetadata>], groupByYear: Bool = true) -> Node {
   let articlesPerYear = Dictionary(grouping: articles, by: { $0.year })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
-  
+
   return div(class: "flex flex-col gap-16 pb-8", id: "articles-list") {
     sortedByYearDescending.map { year, articles in
       div {
