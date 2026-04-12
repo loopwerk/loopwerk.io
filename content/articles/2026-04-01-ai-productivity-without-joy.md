@@ -56,3 +56,7 @@ From [Lose Myself](https://www.eod.com/blog/2026/02/lose-myself/) by Greg Knauss
 > I also just have trouble with the idea that this is my career and the thing I spend my limited time on earth doing and the quality of it doesn't matter. I delight in craftsmanship when I encounter it in almost any discipline. I love it when you walk into an old house and see all the hand crafted details everywhere that don't make economic sense but still look beautiful. I adore when someone has carefully selected the perfect font to match something.
 
 From [I Sold Out for $20 a Month and All I Got Was This Perfectly Generated Terraform](https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/) by Mat Duggan
+
+> When I identified with the programmer culture, it was about programming. Now programming is a means to an end ("let’s see how fast we can build a surveillance state!") or simply an unwanted chore to be avoided.
+
+From [A programmer's loss of a social identity](https://ratfactor.com/tech-nope2) by Dave Gauer.
