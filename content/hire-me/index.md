@@ -4,15 +4,11 @@ section: hireMe
 
 # Hire me
 
-I’m a creative product-minded software engineer with a strong background in web development and backend systems, and a long-standing passion for good design and usability.
+I’m a creative product-minded software engineer with a strong background in web development, mobile apps and backend systems, and a long-standing passion for good design and usability.
 
-I enjoy working on the "back-of-the-front-end": building clean APIs, thoughtful data models, and well-structured systems that enable great user experiences. I care deeply about API design, documentation, and code quality, and I value pragmatic solutions that balance clarity, maintainability, and performance.
-
-Over the years I’ve worked across the full stack and on multiple platforms. My focus is firmly on web and backend development using Python, Django, and modern JavaScript/TypeScript frameworks, while my background in mobile development continues to inform how I think about product design.
+I enjoy working on the "back-of-the-front-end" using Python, TypeScript, and Swift: building clean APIs, thoughtful data models, and well-structured systems that enable great user experiences. I care deeply about API design, documentation, and code quality, and I value pragmatic solutions that balance clarity, maintainability, and performance.
 
 I've been online since 1994, creating websites since 2000 and iOS apps since 2010. I've been working as a fully remote freelance developer since 2016, fixing and finishing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix.
-
-Mentoring junior developers brings me great joy, which I've done both at other companies and in my own [mentorship program](/mentor/).
 
 My CV can be downloaded [here](/about/KevinRenskers.pdf).
 
