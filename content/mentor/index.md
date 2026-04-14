@@ -21,4 +21,7 @@ You're going to need a good enough internet connection to talk and share your sc
 Finally, as my preferred "office hours" are between 15:00 and 18:00 [Central European Time](https://time.is/CET) (Amsterdam), our schedules have to match as well. This means that it's probably not so easy to schedule meetings if you're in the United States for example.
 
 ## Interested?
-Contact me on [Mastodon](https://hachyderm.io/@kevinrenskers) or email me at <kevin@loopwerk.io>.
+~~Contact me on [Mastodon](https://hachyderm.io/@kevinrenskers) or email me at <kevin@loopwerk.io>.~~
+
+> [!APPLICATIONS CLOSED]
+> **The mentorship program isn't taking on new applicants at the moment.**
