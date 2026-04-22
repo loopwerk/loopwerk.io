@@ -76,7 +76,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
         if !Saga.isDev {
-          script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875"])
+          script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875", "data-performance": "true"])
         }
       }
       body(class: "bg-page text-primarytext pb-5 min-h-full \(section.rawValue)") {
