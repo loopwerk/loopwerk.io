@@ -15,8 +15,10 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
       }
     }
 
-    ["Swift", "Python", "JavaScript", "Objective-C", "Other"].map { category -> Node in
-      let projects = context.items.filter { $0.metadata.category == category }
+    let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
+
+    ["Python", "Swift", "JavaScript", "Objective-C", "Other"].map { category -> Node in
+      let projects = projectsByCategory[category] ?? []
       return renderCategory(category: category, projects: projects)
     }
   }

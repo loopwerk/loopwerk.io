@@ -223,14 +223,17 @@ try await Saga(input: "content", output: "deploy")
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))
 
+  // Minify all HTML output (prod only)
+  .postProcess { html, _ in
+    guard !Saga.isDev else { return html }
+    return Bonsai.minifyHTML(html)
+  }
+
   // Create article images (prod only)
-  .register { saga in
-    guard !Saga.isDev else {
-      return
-    }
+  .afterWrite { saga in
+    guard !Saga.isDev else { return }
 
     print("Generating article images, this takes a bit. If this unexpected, set SAGA_DEV=1.")
-
     let generator = ImageGenerator(rootPath: SiteMetadata.projectRoot + "/Sources")
 
     let articles = saga.allItems.compactMap { $0 as? Item<ArticleMetadata> }
@@ -240,24 +243,18 @@ try await Saga(input: "content", output: "deploy")
     }
   }
 
-  // Minify all HTML output (prod only)
-  .postProcess { html, _ in
-    guard !Saga.isDev else { return html }
-    return Bonsai.minifyHTML(html)
-  }
-
   // Index the site with Pagefind (prod only)
   .afterWrite { _ in
-    if !Saga.isDev {
-      let pagefind = Process()
-      pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-      pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
-      pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
-      try pagefind.run()
-      pagefind.waitUntilExit()
-      if pagefind.terminationStatus != 0 {
-        print("pagefind failed with exit code \(pagefind.terminationStatus)")
-      }
+    guard !Saga.isDev else { return }
+
+    let pagefind = Process()
+    pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
+    pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
+    try pagefind.run()
+    pagefind.waitUntilExit()
+    if pagefind.terminationStatus != 0 {
+      print("pagefind failed with exit code \(pagefind.terminationStatus)")
     }
   }
 

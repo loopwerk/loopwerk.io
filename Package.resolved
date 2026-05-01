@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "f1d1e1f0889945b26cba66e35ef87a817fcc3f9c",
-        "version" : "3.3.1"
+        "revision" : "4f031dff4e4b33524dab9d7151b578f26d56b851",
+        "version" : "3.4.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "9f542610331815e29cc3821d3b6f488db8715517",
-        "version" : "1.6.0"
+        "revision" : "eb50cbd14606a9161cbc5d452f18797c90ef0bab",
+        "version" : "1.7.0"
       }
     },
     {
@@ -115,7 +115,7 @@
       "location" : "https://github.com/twostraws/SwiftGD",
       "state" : {
         "branch" : "main",
-        "revision" : "58ad3b3960bcbeb2dc58cae3cabb033df44bef82"
+        "revision" : "ed65cf513453c1a046289e4d127a9697c81e02f3"
       }
     },
     {
