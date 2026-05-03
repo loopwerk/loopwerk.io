@@ -1,8 +1,69 @@
 import typography from "@tailwindcss/typography";
 import defaultTheme from "tailwindcss/defaultTheme";
 
+function hexToRgbTriple(color) {
+  if (color === "transparent") return { rgb: "0 0 0", opacity: "0%" };
+  const hex = color.replace("#", "");
+  const full = hex.length === 3 ? hex.split("").map(c => c + c).join("") : hex;
+  const r = parseInt(full.slice(0, 2), 16);
+  const g = parseInt(full.slice(2, 4), 16);
+  const b = parseInt(full.slice(4, 6), 16);
+  return { rgb: `${r} ${g} ${b}` };
+}
+
+function modeAwareColors(input) {
+  const lightVars = {};
+  const darkVars = {};
+  const colors = {};
+  for (const [name, value] of Object.entries(input)) {
+    if (value && typeof value === "object" && "light" in value && "dark" in value) {
+      const l = hexToRgbTriple(value.light);
+      const d = hexToRgbTriple(value.dark);
+      lightVars[`--color-${name}`] = l.rgb;
+      darkVars[`--color-${name}`] = d.rgb;
+      if (l.opacity) lightVars[`--opacity-${name}`] = l.opacity;
+      if (d.opacity) darkVars[`--opacity-${name}`] = d.opacity;
+      colors[name] = ({ opacityValue } = {}) => {
+        if (opacityValue) {
+          if (typeof opacityValue === "string" && opacityValue.startsWith("var(")) {
+            return `rgb(var(--color-${name}) / var(--opacity-${name}, ${opacityValue}))`;
+          }
+          return `rgb(var(--color-${name}) / ${opacityValue})`;
+        }
+        return `rgb(var(--color-${name}) / var(--opacity-${name}, 1))`;
+      };
+    } else {
+      colors[name] = value;
+    }
+  }
+  return { colors, lightVars, darkVars };
+}
+
+const { colors, lightVars, darkVars } = modeAwareColors({
+  inherit: "inherit",
+  transparent: "transparent",
+  orange: { dark: "#f1a948", light: "#d58110" },
+  primarytext: { dark: "#f1f5f9", light: "#252f3f" },
+  secondarytext: { dark: "#93a3b8", light: "#5F6F84" },
+  tertiarytext: { dark: "#64748b", light: "#93a3b8" },
+  quotetext: { dark: "#93a3b8", light: "#5F6F84" },
+  navlink: { dark: "#93a3b8", light: "#93a3b8" },
+  navactivelink: { dark: "#f1f5f9", light: "#f1f5f9" },
+  page: { dark: "#1a202b", light: "#f1f5f9" },
+  nav: { dark: "#0e1112", light: "#252f3f" },
+  codebg: { dark: "#252f3f", light: "#EAECEF" },
+  codefg: { dark: "#f1f5f9", light: "#252f3f" },
+  divider: { dark: "#64748b", light: "#5F6F84" },
+  searchbg: { dark: "#252f3f", light: "#E5E8EA" },
+  searchfg: { dark: "#f1f5f9", light: "#252f3f" },
+  shadowbg: { dark: "#0e1112", light: "#E5E8EA" },
+  asidebg: { dark: "transparent", light: "transparent" },
+  asidefg: { dark: "#93a3b8", light: "#5F6F84" },
+  searchplaceholder: { dark: "#93a3b8", light: "#93a3b8" },
+});
+
 /** @type {import('tailwindcss').Config} */
-module.exports = require("tailwind-mode-aware-colors")({
+module.exports = {
   darkMode: "selector",
   content: ["./Sources/Loopwerk/templates/*.swift"],
   theme: {
@@ -17,28 +78,7 @@ module.exports = require("tailwind-mode-aware-colors")({
       sm: "315px",
       lg: "740px",
     },
-    colors: {
-      inherit: "inherit",
-      transparent: "transparent",
-      orange: { dark: "#f1a948", light: "#d58110" },
-      primarytext: { dark: "#f1f5f9", light: "#252f3f" },
-      secondarytext: { dark: "#93a3b8", light: "#5F6F84" },
-      tertiarytext: { dark: "#64748b", light: "#93a3b8" },
-      quotetext: { dark: "#93a3b8", light: "#5F6F84" },
-      navlink: { dark: "#93a3b8", light: "#93a3b8" },
-      navactivelink: { dark: "#f1f5f9", light: "#f1f5f9" },
-      page: { dark: "#1a202b", light: "#f1f5f9" },
-      nav: { dark: "#0e1112", light: "#252f3f" },
-      codebg: { dark: "#252f3f", light: "#EAECEF" },
-      codefg: { dark: "#f1f5f9", light: "#252f3f" },
-      divider: { dark: "#64748b", light: "#5F6F84" },
-      searchbg: { dark: "#252f3f", light: "#E5E8EA" },
-      searchfg: { dark: "#f1f5f9", light: "#252f3f" },
-      shadowbg: { dark: "#0e1112", light: "#E5E8EA" },
-      asidebg: { dark: "transparent", light: "transparent" },
-      asidefg: { dark: "#93a3b8", light: "#5F6F84" },
-      searchplaceholder: { dark: "#93a3b8", light: "#93a3b8" },
-    },
+    colors,
     extend: {
       fontFamily: {
         main: ['"Main Sans"', ...defaultTheme.fontFamily.sans],
@@ -88,24 +128,11 @@ module.exports = require("tailwind-mode-aware-colors")({
   },
   plugins: [
     typography({ target: "legacy" }),
-
-    function ({ addBase, theme }) {
-      function extractColorVars(colorObj, colorGroup = "") {
-        return Object.keys(colorObj).reduce((vars, colorKey) => {
-          const value = colorObj[colorKey];
-
-          const newVars =
-            typeof value === "string"
-              ? { [`--color${colorGroup}-${colorKey}`]: value }
-              : extractColorVars(value, `-${colorKey}`);
-
-          return { ...vars, ...newVars };
-        }, {});
-      }
-
+    function ({ addBase }) {
       addBase({
-        ":root": extractColorVars(theme("colors")),
+        ":root": lightVars,
+        ".dark": darkVars,
       });
     },
   ],
-});
+};
