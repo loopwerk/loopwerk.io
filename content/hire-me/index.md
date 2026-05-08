@@ -4,9 +4,9 @@ section: hireMe
 
 # Hire me
 
-I’m a creative product-minded software engineer with a strong background in web development, mobile apps and backend systems, and a long-standing passion for good design and usability.
+I’m a creative product-minded software engineer with extensive experience building modern web applications, mobile apps, and backend systems, with a long-standing passion for good design and usability.
 
-I enjoy working on the "back-of-the-front-end" using Python, TypeScript, and Swift: building clean APIs, thoughtful data models, and well-structured systems that enable great user experiences. I care deeply about API design, documentation, and code quality, and I value pragmatic solutions that balance clarity, maintainability, and performance.
+I enjoy working across the stack: from designing intuitive user interfaces in TypeScript and SvelteKit to building clean APIs, thoughtful data models, and well-structured backend systems in Python and Swift. I care deeply about user experience, API design, code quality, and documentation. I value pragmatic solutions that balance clarity, maintainability, and performance.
 
 I've been online since 1994, creating websites since 2000 and iOS apps since 2010. I've been working as a fully remote freelance developer since 2016, fixing and finishing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix.
 

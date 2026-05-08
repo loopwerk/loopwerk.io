@@ -101,7 +101,7 @@ let articleProcessor = sequence(
   expandTags
 )
 
-let tailwind = SwiftTailwind(version: "3.4.17")
+let tailwind = SwiftTailwind(version: "4.2.4")
 
 try await Saga(input: "content", output: "deploy")
   // Compile tailwind to output.css

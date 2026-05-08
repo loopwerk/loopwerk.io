@@ -1,304 +1,410 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* MOBILE MENU */
-
-.hamburger:hover .hamburger-line {
-  @apply bg-orange;
+@plugin "@tailwindcss/typography" {
+  target: legacy;
 }
 
-#mobile-menu-toggle:checked ~ .mobile-overlay {
-  @apply opacity-100 pointer-events-auto;
+@source "../../Sources/Loopwerk/templates/*.swift";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-orange: #d58110;
+  --color-primarytext: #252f3f;
+  --color-secondarytext: #5f6f84;
+  --color-tertiarytext: #93a3b8;
+  --color-quotetext: #5f6f84;
+  --color-navlink: #93a3b8;
+  --color-navactivelink: #f1f5f9;
+  --color-page: #f1f5f9;
+  --color-nav: #252f3f;
+  --color-codebg: #eaecef;
+  --color-codefg: #252f3f;
+  --color-divider: #5f6f84;
+  --color-searchbg: #e5e8ea;
+  --color-searchfg: #252f3f;
+  --color-shadowbg: #e5e8ea;
+  --color-asidebg: transparent;
+  --color-asidefg: #5f6f84;
+  --color-searchplaceholder: #93a3b8;
+
+  --font-main: "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-title: "Title Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 315px;
+  --breakpoint-lg: 740px;
 }
 
-/* Navigation panel - slide animation */
-#mobile-menu-toggle:checked ~ header .nav-panel {
-  @apply translate-x-0;
+.dark {
+  --color-orange: #f1a948;
+  --color-primarytext: #f1f5f9;
+  --color-secondarytext: #93a3b8;
+  --color-tertiarytext: #64748b;
+  --color-quotetext: #93a3b8;
+  --color-navlink: #93a3b8;
+  --color-navactivelink: #f1f5f9;
+  --color-page: #1a202b;
+  --color-nav: #0e1112;
+  --color-codebg: #252f3f;
+  --color-codefg: #f1f5f9;
+  --color-divider: #64748b;
+  --color-searchbg: #252f3f;
+  --color-searchfg: #f1f5f9;
+  --color-shadowbg: #0e1112;
+  --color-asidebg: transparent;
+  --color-asidefg: #93a3b8;
+  --color-searchplaceholder: #93a3b8;
 }
 
-/* Close button X shape */
-.nav-close::before,
-.nav-close::after {
-  @apply absolute w-6 h-[2px] bg-secondarytext rotate-45;
-  content: "";
-}
-
-.nav-close::after {
-  @apply -rotate-45;
-}
-
-.nav-close:hover::before,
-.nav-close:hover::after {
-  @apply bg-orange;
-}
-
-/* BODY */
-
-body.home .site-footer {
-  @apply hidden;
-}
-
-/* LINKS */
-
-nav ul a {
-  @apply block border-b-2 border-transparent max-lg:text-lg max-lg:py-2;
-}
-
-nav ul a:hover {
-  @apply border-orange;
-}
-
-nav ul a.active {
-  @apply border-orange text-navactivelink;
-}
-
-.secondarytext-links a {
-  @apply underline text-inherit;
-}
-
-.secondarytext-links a:hover {
-  @apply text-orange;
-}
-
-a.orange {
-  @apply text-orange;
-}
-
-a.orange:hover {
-  @apply underline;
-}
-
-a[href^="https://github.com"].app {
-  background: transparent url("images/github.svg") no-repeat;
-  background-size: 1em 1em;
-  background-position: left center;
-  padding-left: 20px;
-}
-
-a[href^="https://itunes.apple.com"].app,
-a[href^="https://apps.apple.com"].app {
-  background: transparent url("images/apple.svg") no-repeat;
-  background-size: 1em 1em;
-  background-position: left center;
-  padding-left: 20px;
-}
-
-/* PROSE */
-
-.prose {
-  @apply prose-code:before:hidden prose-code:after:hidden lg:text-lg;
-}
-
-.prose code {
-  @apply font-normal text-base text-codefg bg-codebg p-1;
-}
-
-.prose pre {
-  @apply shadow-lg shadow-shadowbg py-4 rounded-md text-codefg bg-codebg;
-  overflow: auto;
-  overflow-y: hidden;
-}
-
-.prose pre code {
-  @apply text-sm lg:text-base;
-}
-
-/* Code block with filename */
-.prose pre[data-title] {
-  @apply pt-0;
-}
-
-.prose pre[data-title] .code-title {
-  @apply block text-sm text-secondarytext py-2 pl-10 mb-4 -mx-4 border-b border-secondarytext/20;
-  background-repeat: no-repeat;
-  background-position: 1rem center;
-  background-size: 16px 16px;
-  background-image: url("icons/document.svg");
-}
-
-/* File icons based on language */
-.prose pre[data-title]:has(code.language-python) .code-title {
-  background-image: url("icons/python.svg");
-}
-
-.prose pre[data-title]:has(code.language-javascript) .code-title,
-.prose pre[data-title]:has(code.language-js) .code-title {
-  background-image: url("icons/javascript.svg");
-}
-
-.prose pre[data-title]:has(code.language-typescript) .code-title,
-.prose pre[data-title]:has(code.language-ts) .code-title {
-  background-image: url("icons/typescript.svg");
-}
-
-.prose pre[data-title]:has(code.language-swift) .code-title {
-  background-image: url("icons/swift.svg");
-}
-
-.prose pre[data-title]:has(code.language-svelte) .code-title {
-  background-image: url("icons/svelte.svg");
-}
-
-.prose pre[data-title]:has(code.language-html) .code-title {
-  background-image: url("icons/html.svg");
-}
-
-.prose pre[data-title]:has(code.language-css) .code-title {
-  background-image: url("icons/css.svg");
-}
-
-.prose pre[data-title]:has(code.language-bash) .code-title,
-.prose pre[data-title]:has(code.language-shell) .code-title,
-.prose pre[data-title]:has(code.language-sh) .code-title {
-  background-image: url("icons/console.svg");
-}
-
-.prose pre[data-title]:has(code.language-json) .code-title {
-  background-image: url("icons/json.svg");
-}
-
-.prose pre[data-title]:has(code.language-yaml) .code-title,
-.prose pre[data-title]:has(code.language-yml) .code-title {
-  background-image: url("icons/yaml.svg");
-}
-
-.prose pre[data-title]:has(code.language-dockerfile) .code-title {
-  background-image: url("icons/docker.svg");
-}
-
-code mark {
-  @apply border border-orange bg-transparent text-inherit;
-  padding: 2px 4px;
-}
-
-code mark[title] {
-  cursor: help;
-}
-
-code mark[title]::after {
-  content: "?";
-  margin: -2px -4px -2px 4px;
-  @apply bg-orange text-primarytext border-2 border-orange;
-}
-
-code var {
-  background: #1c6b86;
-  color: #eeeeee;
-  padding: 2px;
-  font-style: normal;
-}
-
-.prose h1 {
-  @apply font-title font-bold mt-12 text-4xl lg:text-5xl;
-}
-
-.prose h2 {
-  @apply font-title text-3xl lg:text-4xl mb-4;
-}
-
-.prose aside {
-  @apply px-4 border border-orange my-5 rounded-md bg-asidebg text-asidefg;
-  font-size: 90%;
-}
-
-.prose aside .title {
-  @apply text-orange block -mb-2;
-}
-
-.prose blockquote {
-  @apply ml-[3px] text-xl py-3 font-title font-thin leading-8;
-}
-
-.prose blockquote p:first-child {
-  @apply mt-0;
-}
-
-.prose blockquote p:last-child {
-  @apply mb-0;
-}
-
-/* SCREENSHOTS */
-
-.screenshots.break_1 span {
-  @apply flex-1;
-}
-
-.screenshots.break_2 span {
-  @apply flex-[0_0_50%] lg:flex-1;
-}
-
-.screenshots.break_3 span {
-  @apply flex-[0_0_33%] lg:flex-1;
-}
-
-.screenshots img {
-  padding: 3px 3px 0 0;
-  border-radius: 0px;
-  margin: 0;
-}
-
-.screenshots.rounded img {
-  border-radius: 10%/4.7%;
-}
-
-.prose .images {
-  @apply flex flex-col lg:flex-row gap-4;
-  margin: 2em 0;
-}
-
-.prose .images img {
-  @apply m-0 h-auto flex-1 min-w-0 rounded-md;
-}
-
-@media (min-width: 900px) {
-  .hero-image {
-    margin-left: -20px;
-    width: 740px;
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  padding-inline: 0;
+  @media (width >= 315px) {
+    max-width: 315px;
+  }
+  @media (width >= 740px) {
     max-width: 740px;
+    padding-inline: 20px;
   }
 }
 
-.company-logos img {
-  @apply inline m-5 h-[28px];
-}
+@layer utilities {
+  .prose {
+    --tw-prose-body: var(--color-primarytext);
+    --tw-prose-headings: var(--color-primarytext);
+    --tw-prose-hr: var(--color-tertiarytext);
+    --tw-prose-bullets: var(--color-secondarytext);
+    --tw-prose-counters: var(--color-secondarytext);
+    --tw-prose-quotes: var(--color-quotetext);
+    --tw-prose-quote-borders: var(--color-orange);
+    max-width: 100%;
+  }
 
-/* PAGEFIND */
+  .prose blockquote {
+    font-style: normal;
+    border-inline-start-width: 2px;
+  }
 
-.pagefind-modular-list-image {
-  display: none;
-}
+  .prose blockquote p:first-of-type::before,
+  .prose blockquote p:last-of-type::after {
+    content: none;
+  }
 
-#search-form::before {
-  @apply bg-searchfg;
-  width: 18px;
-  height: 18px;
-  top: 13px;
-  left: 20px;
-  content: "";
-  position: absolute;
-  display: block;
-  opacity: 0.7;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A");
-  mask-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A");
-  -webkit-mask-size: 100%;
-  mask-size: 100%;
-  z-index: 9;
-  pointer-events: none;
-}
+  .prose a {
+    color: var(--color-orange);
+    text-decoration: none;
+    font-weight: 400;
+  }
 
-#search {
-  height: 44px;
-  padding: 0 80px 0 54px;
-  border-radius: 6px;
-  @apply bg-searchbg text-searchfg;
-}
+  .prose a:hover {
+    text-decoration: underline;
+  }
 
-#search::placeholder {
-  @apply text-searchplaceholder;
-  font-weight: 200;
-}
+  .prose strong {
+    color: inherit;
+    font-weight: 800;
+  }
 
-#articles-list mark {
-  @apply bg-orange;
+  /* MOBILE MENU */
+
+  .hamburger:hover .hamburger-line {
+    @apply bg-orange;
+  }
+
+  #mobile-menu-toggle:checked ~ .mobile-overlay {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* Navigation panel - slide animation */
+  #mobile-menu-toggle:checked ~ header .nav-panel {
+    @apply translate-x-0;
+  }
+
+  /* Close button X shape */
+  .nav-close::before,
+  .nav-close::after {
+    @apply absolute w-6 h-[2px] bg-secondarytext rotate-45;
+    content: "";
+  }
+
+  .nav-close::after {
+    @apply -rotate-45;
+  }
+
+  .nav-close:hover::before,
+  .nav-close:hover::after {
+    @apply bg-orange;
+  }
+
+  /* BODY */
+
+  body.home .site-footer {
+    @apply hidden;
+  }
+
+  /* LINKS */
+
+  nav ul a {
+    @apply block border-b-2 border-transparent max-lg:text-lg max-lg:py-2;
+  }
+
+  nav ul a:hover {
+    @apply border-orange;
+  }
+
+  nav ul a.active {
+    @apply border-orange text-navactivelink;
+  }
+
+  .secondarytext-links a {
+    @apply underline text-inherit;
+  }
+
+  .secondarytext-links a:hover {
+    @apply text-orange;
+  }
+
+  a.orange {
+    @apply text-orange;
+  }
+
+  a.orange:hover {
+    @apply underline;
+  }
+
+  a[href^="https://github.com"].app {
+    background: transparent url("images/github.svg") no-repeat;
+    background-size: 1em 1em;
+    background-position: left center;
+    padding-left: 20px;
+  }
+
+  a[href^="https://itunes.apple.com"].app,
+  a[href^="https://apps.apple.com"].app {
+    background: transparent url("images/apple.svg") no-repeat;
+    background-size: 1em 1em;
+    background-position: left center;
+    padding-left: 20px;
+  }
+
+  /* PROSE BODY OVERRIDES */
+
+  .prose {
+    @apply prose-code:before:hidden prose-code:after:hidden lg:text-lg;
+  }
+
+  .prose code {
+    @apply font-normal text-base text-codefg bg-codebg p-1;
+  }
+
+  .prose pre {
+    @apply shadow-lg shadow-shadowbg py-4 rounded-md text-codefg bg-codebg;
+    overflow: auto;
+    overflow-y: hidden;
+  }
+
+  .prose pre code {
+    @apply text-sm lg:text-base;
+  }
+
+  /* Code block with filename */
+  .prose pre[data-title] {
+    @apply pt-0;
+  }
+
+  .prose pre[data-title] .code-title {
+    @apply block text-sm text-secondarytext py-2 pl-10 mb-4 -mx-4 border-b border-secondarytext/20;
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    background-size: 16px 16px;
+    background-image: url("icons/document.svg");
+  }
+
+  /* File icons based on language */
+  .prose pre[data-title]:has(code.language-python) .code-title {
+    background-image: url("icons/python.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-javascript) .code-title,
+  .prose pre[data-title]:has(code.language-js) .code-title {
+    background-image: url("icons/javascript.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-typescript) .code-title,
+  .prose pre[data-title]:has(code.language-ts) .code-title {
+    background-image: url("icons/typescript.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-swift) .code-title {
+    background-image: url("icons/swift.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-svelte) .code-title {
+    background-image: url("icons/svelte.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-html) .code-title {
+    background-image: url("icons/html.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-css) .code-title {
+    background-image: url("icons/css.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-bash) .code-title,
+  .prose pre[data-title]:has(code.language-shell) .code-title,
+  .prose pre[data-title]:has(code.language-sh) .code-title {
+    background-image: url("icons/console.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-json) .code-title {
+    background-image: url("icons/json.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-yaml) .code-title,
+  .prose pre[data-title]:has(code.language-yml) .code-title {
+    background-image: url("icons/yaml.svg");
+  }
+
+  .prose pre[data-title]:has(code.language-dockerfile) .code-title {
+    background-image: url("icons/docker.svg");
+  }
+
+  code mark {
+    @apply border border-orange bg-transparent text-inherit;
+    padding: 2px 4px;
+  }
+
+  code mark[title] {
+    cursor: help;
+  }
+
+  code mark[title]::after {
+    content: "?";
+    margin: -2px -4px -2px 4px;
+    @apply bg-orange text-primarytext border-2 border-orange;
+  }
+
+  code var {
+    background: #1c6b86;
+    color: #eeeeee;
+    padding: 2px;
+    font-style: normal;
+  }
+
+  .prose h1 {
+    @apply font-title font-bold mt-12 text-4xl lg:text-5xl;
+  }
+
+  .prose h2 {
+    @apply font-title text-3xl lg:text-4xl mb-4;
+  }
+
+  .prose aside {
+    @apply px-4 border border-orange my-5 rounded-md bg-asidebg text-asidefg;
+    font-size: 90%;
+  }
+
+  .prose aside .title {
+    @apply text-orange block -mb-2;
+  }
+
+  .prose blockquote {
+    @apply ml-[3px] text-xl py-3 font-title font-thin leading-8;
+  }
+
+  .prose blockquote p:first-child {
+    @apply mt-0;
+  }
+
+  .prose blockquote p:last-child {
+    @apply mb-0;
+  }
+
+  /* SCREENSHOTS */
+
+  .screenshots.break_1 span {
+    @apply flex-1;
+  }
+
+  .screenshots.break_2 span {
+    @apply flex-[0_0_50%] lg:flex-1;
+  }
+
+  .screenshots.break_3 span {
+    @apply flex-[0_0_33%] lg:flex-1;
+  }
+
+  .screenshots img {
+    padding: 3px 3px 0 0;
+    border-radius: 0px;
+    margin: 0;
+  }
+
+  .screenshots.rounded img {
+    border-radius: 10%/4.7%;
+  }
+
+  .prose .images {
+    @apply flex flex-col lg:flex-row gap-4;
+    margin: 2em 0;
+  }
+
+  .prose .images img {
+    @apply m-0 h-auto flex-1 min-w-0 rounded-md;
+  }
+
+  @media (min-width: 900px) {
+    .hero-image {
+      margin-left: -20px;
+      width: 740px;
+      max-width: 740px;
+    }
+  }
+
+  .company-logos img {
+    @apply inline m-5 h-[28px];
+  }
+
+  /* PAGEFIND */
+
+  .pagefind-modular-list-image {
+    display: none;
+  }
+
+  #search-form::before {
+    @apply bg-searchfg;
+    width: 18px;
+    height: 18px;
+    top: 13px;
+    left: 20px;
+    content: "";
+    position: absolute;
+    display: block;
+    opacity: 0.7;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A");
+    mask-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A");
+    -webkit-mask-size: 100%;
+    mask-size: 100%;
+    z-index: 9;
+    pointer-events: none;
+  }
+
+  #search {
+    height: 44px;
+    padding: 0 80px 0 54px;
+    border-radius: 6px;
+    @apply bg-searchbg text-searchfg;
+  }
+
+  #search::placeholder {
+    @apply text-searchplaceholder;
+    font-weight: 200;
+  }
+
+  #articles-list mark {
+    @apply bg-orange;
+  }
 }
