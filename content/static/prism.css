@@ -175,4 +175,14 @@
   .token.italic {
     font-style: italic;
   }
+
+  code[class~="language-shell-session"] .token.bash .token {
+    color: inherit;
+  }
+
+  /* Tailwind's `.table` utility (display: table) collides with Prism's TOML/INI
+     section token, which uses the same class name. Force it back to inline. */
+  code .token.table {
+    display: inline;
+  }
 }
