@@ -93,7 +93,7 @@ enum SiteMetadata {
 
 let articleProcessor = sequence(
   unescapeMarkVar,
-  swiftSoupProcessor(generateTOC, convertAsides, processExternalLinks, addCodeBlockTitles),
+  swiftSoupProcessor(addHeadingAnchors, generateTOC, convertAsides, processExternalLinks, addCodeBlockTitles),
   syntaxHighlight,
   publicationDateInFilename,
   permalink,

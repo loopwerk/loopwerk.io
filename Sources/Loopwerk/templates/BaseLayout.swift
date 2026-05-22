@@ -17,7 +17,7 @@ enum Section: String {
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
-    html(class: "bg-nav h-full font-main", lang: "en-US") {
+    html(class: "bg-nav h-full font-main lg:scroll-pt-20", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         script {
