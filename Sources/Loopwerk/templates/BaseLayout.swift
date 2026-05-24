@@ -155,7 +155,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
         }
 
-        div(class: "container pt-28") {
+        div(class: "container pt-12 lg:pt-28") {
           children()
         }
 
