@@ -19,7 +19,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     && pkg-config --libs javascriptcoregtk-4.1
 
 # Install pnpm
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10
 
 # Set working directory
 WORKDIR /app
