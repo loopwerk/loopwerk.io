@@ -13,7 +13,7 @@
   --color-primarytext: #252f3f;
   --color-secondarytext: #5f6f84;
   --color-tertiarytext: #93a3b8;
-  --color-quotetext: #5f6f84;
+  --color-quotetext: #252f3f;
   --color-navlink: #93a3b8;
   --color-navactivelink: #f1f5f9;
   --color-page: #f1f5f9;
@@ -28,8 +28,11 @@
   --color-asidefg: #5f6f84;
   --color-searchplaceholder: #93a3b8;
 
-  --font-main: "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-title: "Title Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-main:
+    "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-title:
+    "Title Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
   --breakpoint-*: initial;
   --breakpoint-sm: 315px;
@@ -41,7 +44,7 @@
   --color-primarytext: #f1f5f9;
   --color-secondarytext: #93a3b8;
   --color-tertiarytext: #64748b;
-  --color-quotetext: #93a3b8;
+  --color-quotetext: #f1f5f9;
   --color-navlink: #93a3b8;
   --color-navactivelink: #f1f5f9;
   --color-page: #1a202b;
