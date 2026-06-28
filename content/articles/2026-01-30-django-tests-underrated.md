@@ -77,7 +77,6 @@ class SlugifyTests(SimpleTestCase):
     @parameterized.expand([
         ("Hello world", "hello-world"),
         ("Django's test runner", "djangos-test-runner"),
-        ("  trim  ", "trim"),
     ])
     def test_slugify(self, input_text, expected):
         self.assertEqual(slugify(input_text), expected)
@@ -91,7 +90,6 @@ import pytest
 @pytest.mark.parametrize("input_text,expected", [
     ("Hello world", "hello-world"),
     ("Django's test runner", "djangos-test-runner"),
-    ("  trim  ", "trim"),
 ])
 def test_slugify(input_text, expected):
     assert slugify(input_text) == expected
@@ -99,7 +97,23 @@ def test_slugify(input_text, expected):
 
 Both are readable. Both work well. The difference is that parameterized is a tiny, focused library that does one thing. It doesn't replace your test runner, introduce a new fixture system, or bring an ecosystem of plugins. It's a decorator, not a paradigm shift.
 
-Once I added parameterized, I realized pytest no longer solved a problem I actually had.
+And if you don't even want to install a dependency for this, the standard library has you covered: [`subTest`](https://docs.python.org/3/library/unittest.html#distinguishing-test-iterations-using-subtests) lets you loop over your cases inside a single test method while still reporting each failing input separately.
+
+```python
+from django.test import SimpleTestCase
+
+class SlugifyTests(SimpleTestCase):
+    def test_slugify(self):
+        cases = [
+            ("Hello world", "hello-world"),
+            ("Django's test runner", "djangos-test-runner"),
+        ]
+        for input_text, expected in cases:
+            with self.subTest(input_text=input_text):
+                self.assertEqual(slugify(input_text), expected)
+```
+
+Personally I like parameterized better, and once I installed it I realized pytest no longer solved a problem I actually had.
 
 ## Side by side: common test patterns
 
