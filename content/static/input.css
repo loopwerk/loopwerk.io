@@ -141,12 +141,6 @@
     @apply bg-orange;
   }
 
-  /* BODY */
-
-  body.home .site-footer {
-    @apply hidden;
-  }
-
   /* LINKS */
 
   nav ul a {

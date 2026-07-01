@@ -160,7 +160,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         }
 
         div(class: "site-footer container text-secondarytext secondarytext-links text-center text-sm font-mono") {
-          div(class: "border-t-2 border-divider pt-6 mt-8") {
+          div(class: "border-t-2 border-divider pt-6 mt-12") {
             p {
               "Copyright © Loopwerk 2009-\(Date().description.prefix(4))."
             }
