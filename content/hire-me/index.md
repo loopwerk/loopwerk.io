@@ -4,11 +4,13 @@ section: hireMe
 
 # Hire me
 
-I’m a creative product-minded software engineer with extensive experience building modern web applications, mobile apps, and backend systems, with a long-standing passion for good design and usability.
+I’m a product & engineering lead with 25 years of experience taking software from a vague idea to a product people actually enjoy using. I'm at my best when I own the whole picture: talking to users, deciding what's worth building, shaping the UX together with design, making the architectural calls, mentoring the team, and building the hard parts myself.
 
-I enjoy working across the stack: from designing intuitive user interfaces in TypeScript and SvelteKit to building clean APIs, thoughtful data models, and well-structured backend systems in Python and Swift. I care deeply about user experience, API design, code quality, and documentation. I value pragmatic solutions that balance clarity, maintainability, and performance.
+I care deeply about user experience, clean architecture, code quality, and long-term maintainability. I value pragmatic solutions that balance clarity and performance, and I'm comfortable moving between product decisions, design, and hands-on engineering in the same day.
 
-I've been online since 1994, creating websites since 2000 and iOS apps since 2010. I've been working as a fully remote freelance developer since 2016, fixing and finishing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix.
+The tools matter less than the judgment. I happen to work most in Python, TypeScript, and Swift, but what I really bring is the ability to make good technical and product decisions across the whole stack.
+
+I've been online since 1994, creating websites since 2000 and iOS apps since 2010. I've worked as a fully remote developer since 2016, fixing and finishing projects for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever and Emmy and Oscar winner Sound Radix.
 
 My CV can be downloaded [here](/about/KevinRenskers.pdf).
 
@@ -36,13 +38,13 @@ Dan Raviv, CTO at Sound Radix:
 
 ## Tech
 
-Technologies and tools I use include:
+I'm not attached to any particular stack, and good architecture travels well between them. That said, the technologies and tools I reach for most include:
 
 - **Languages:** Python, Swift, JavaScript, TypeScript, HTML, CSS.
 - **Frameworks & libraries:** Django, Django REST Framework, SvelteKit, UIKit, SwiftUI, Tailwind, htmx, Alpine, Alpine AJAX.
 - **Tools & platforms:** Git, GitHub, macOS, Debian, Coolify, uv, ruff, Claude Code, VS Code, and Xcode.
 
-But the list keeps on growing and if your tech stack doesn't completely match mine, let's talk anyway.
+The list keeps growing, and if your tech stack doesn't completely match mine, let's talk anyway.
 
 ## Ethics and turn-offs
 
