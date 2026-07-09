@@ -4,7 +4,7 @@ section: hireMe
 
 # Hire me
 
-I’m a product & engineering lead with 25 years of experience taking software from a vague idea to a product people actually enjoy using. I'm at my best when I own the whole picture: talking to users, deciding what's worth building, shaping the UX together with design, making the architectural calls, mentoring the team, and building the hard parts myself.
+I'm a product & engineering lead with 25 years of experience taking software from a vague idea to a product people actually enjoy using. I thrive at the intersection of product and engineering: helping decide what's worth building, shaping the UX together with design, guiding the architecture, mentoring the team, and staying hands-on in the code.
 
 I care deeply about user experience, clean architecture, code quality, and long-term maintainability. I value pragmatic solutions that balance clarity and performance, and I'm comfortable moving between product decisions, design, and hands-on engineering in the same day.
 
