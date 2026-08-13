@@ -10,7 +10,7 @@ The source of loopwerk.io, a static website generated with [Saga](https://github
 2. `cd loopwerk.io`
 3. `open Package.swift`
 
-A standard build from Xcode or the command line (`swift run`) skips the `createArticleImages` step, since it's rather slow. To include this step as well, run `swift run Loopwerk createArticleImages` from the command line.
+A standard build from Xcode or the command line (`saga dev`) skips the article images creation step, since it's rather slow. `saga build` does run this step.
 
 ## Development server with auto reload
 ```shell-session
