@@ -10,7 +10,7 @@ I created my first website in 2000, and got my first job as a PHP developer in 2
 
 My hobbies and interests include playing PC games, playing Dungeons & Dragons, watching [tv shows](https://www.bolhoed.net/shows/), cooking, [photography](https://glass.photo/kevinrenskers) and architecture.
 
-Some of my all-time favorites PC games include The Last of Us, Lies of P, Uncharted, Europa Universalis IV, Cyberpunk 2077, Elden Ring, Baldur's Gate 3, Brotato, Rainbow Six Las Vegas, Titanfall 2, Dishonored, RimWorld, Hades, Civilization V, and XCOM 2. A full list can be found on my [personal website](https://www.bolhoed.net/games/).
+Some of my all-time favorites PC games include The Last of Us, Lies of P, Elden Ring, Europa Universalis IV, Baldur's Gate, and Cyberpunk 2077. A full list can be found on my [personal website](https://www.bolhoed.net/games/).
 
 I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/open-source/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
