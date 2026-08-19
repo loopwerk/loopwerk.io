@@ -28,7 +28,7 @@ The old message system was flawed. It didn't support different message levels (n
 
 ## I18N/L10N improvements
 
-Django 1.2 can show dates and numbers in the right way. For example, in The Netherlands, we show dates as 13-02-1982, while in England they use 02/13/1982. Also big numbers with separators for groups of thousands are now locale aware. Since I am currently working on an application with support for English, Dutch and German, this is a very very welcome improvement to Django.
+Django 1.2 can show dates and numbers in the right way. For example, in the Netherlands, we show dates as 13-02-1982, while in England they use 02/13/1982. Also big numbers with separators for groups of thousands are now locale aware. Since I am currently working on an application with support for English, Dutch and German, this is a very very welcome improvement to Django.
 
 The only problems I had with getting this to work was finding out which setting to change, because this wasn't documented yet, or at the very least hard to find. If you are interested in the new L10N improvements, add this to your settings.py:
 
