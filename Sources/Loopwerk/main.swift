@@ -124,7 +124,7 @@ try await Saga(input: "content", output: "deploy")
   // Don't trigger a rebuild when output.css changes, otherwise we get into an endless loop
   .ignoreChanges("output.css")
 
-  // Non-archived articles (`$0.archive == false`)
+  // Non-archived articles with a publication date in the past.
   // We make sure that the filtered-out articles (i.e. archived articles) are NOT
   // marked as handled. Otherwise the next step can't process the archived articles.
   .register(
@@ -132,7 +132,7 @@ try await Saga(input: "content", output: "deploy")
     metadata: ArticleMetadata.self,
     readers: [.parsleyMarkdownReader],
     itemProcessor: articleProcessor,
-    filter: { $0.archive == false },
+    filter: { $0.archive == false && ($0.date < Date() || Saga.isDev) },
     claimExcludedItems: false,
     writers: [
       .itemWriter(swim(renderArticle)),
@@ -172,7 +172,7 @@ try await Saga(input: "content", output: "deploy")
     metadata: ArticleMetadata.self,
     readers: [.parsleyMarkdownReader],
     itemProcessor: articleProcessor,
-    filter: { $0.archive == true },
+    filter: { $0.archive == true && ($0.date < Date() || Saga.isDev) },
     writers: [
       .itemWriter(swim(renderArticle)),
     ]
