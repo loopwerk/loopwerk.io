@@ -20,6 +20,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
     html(class: "bg-nav h-full font-main lg:scroll-pt-20", lang: "en-US") {
       head {
         meta(charset: "utf-8")
+        meta(content: "#0e1112", name: "theme-color")
         script {
           Node.raw("""
           (function(){
@@ -34,17 +35,22 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
               f.contentWindow.postMessage({giscus:{setConfig:{theme:theme}}}, 'https://giscus.app');
             }
             window.syncGiscus = syncGiscus;
+            function syncThemeColor(){
+              var dark = document.documentElement.classList.contains('dark');
+              document.querySelector('meta[name=theme-color]').setAttribute('content', dark ? '#0e1112' : '#252f3f');
+            }
+            window.syncThemeColor = syncThemeColor;
+            syncThemeColor();
             m.addEventListener('change',function(e){
               if(!localStorage.getItem('theme')) {
                 document.documentElement.classList.toggle('dark',e.matches);
                 syncGiscus();
+                syncThemeColor();
               }
             })
           })()
           """)
         }
-        meta(content: "#0e1112", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: dark)"])
-        meta(content: "#566B78", name: "theme-color", customAttributes: ["media": "(prefers-color-scheme: light)"])
         meta(content: "Kevin Renskers", name: "author")
         meta(content: "Loopwerk", name: "apple-mobile-web-app-title")
         meta(content: "initial-scale=1.0, width=device-width", name: "viewport")
@@ -104,7 +110,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
             div(class: "flex-1 lg:hidden")
 
             // Theme toggle
-            button(class: "text-navlink hover:text-orange cursor-pointer lg:order-last", type: "button", customAttributes: ["onclick": "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light');window.syncGiscus&&window.syncGiscus()", "aria-label": "Toggle theme"]) {
+            button(class: "text-navlink hover:text-orange cursor-pointer lg:order-last", type: "button", customAttributes: ["onclick": "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light');window.syncGiscus&&window.syncGiscus();window.syncThemeColor&&window.syncThemeColor()", "aria-label": "Toggle theme"]) {
               Node.raw("""
               <svg class="dark:hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
               """)
