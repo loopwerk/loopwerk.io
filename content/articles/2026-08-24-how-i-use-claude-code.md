@@ -126,6 +126,7 @@ Fix what you find.
 
 - **Wrap code references in backticks** — function/variable/class names, symbols, file paths, regex/string literals, and hex character codes (e.g. `clean_cell_value`, `ILLEGAL_FOR_EXCEL_RE`, `0x80-0x9f`, `U+0094`). Plain prose stays unformatted.
 - **Keep the "why" short — a few plain sentences stating what changed and why.** Don't pad it with legacy-system asides, hedging parentheticals ("the old Django table did X, now shadowed…"), or every edge case surfaced during investigation. Those conflate the change with everything adjacent to it and make it harder to review. Put mechanical/technical detail in the diff or a "Changes" section, and edge cases in a table or the code — not the intro.
+- **No per-file "Changes" table.** Walking the reader file by file repeats what the diff already shows. Describe the change in plain English instead.
 ````
 
 During long coding sessions, Claude still seems to forget some of these rules. For example, I see Claude suddenly adding very long code comments that literally describe what the code is doing. This is not useful, as we can simply read the code itself. To combat this, there's one more piece to the puzzle: a self-review hook. It reads the "Self-review before committing" section straight out of `CLAUDE.md` and injects it into Claude's context before every `git commit`, so the diff gets checked against the rules before it's committed.

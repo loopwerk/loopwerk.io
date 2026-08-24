@@ -123,7 +123,7 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 }
 
 func renderTag(context: PartitionedRenderingContext<String, ArticleMetadata>) -> Node {
-  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/rss+xml")
+  let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/atom+xml")
 
   return baseLayout(canocicalURL: "/articles/tag/\(context.key.slugified)/", section: .articles, title: "Articles in #\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
     _renderArticlesHeader(title: "#\(context.key)", allItems: context.allItems)

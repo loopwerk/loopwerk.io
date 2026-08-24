@@ -80,7 +80,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
           """)
         }
-        link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/rss+xml")
+        link(href: "/articles/feed.xml", rel: "alternate", title: SiteMetadata.name, type: "application/atom+xml")
         link(href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png")
         link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
         link(href: "/favicon.ico", rel: "shortcut icon")
