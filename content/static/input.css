@@ -112,33 +112,18 @@
 
   /* MOBILE MENU */
 
-  .hamburger:hover .hamburger-line {
-    @apply bg-orange;
-  }
-
-  #mobile-menu-toggle:checked ~ .mobile-overlay {
-    @apply opacity-100 pointer-events-auto;
-  }
-
-  /* Navigation panel - slide animation */
+  /* Navigation panel - drops down below the header */
   #mobile-menu-toggle:checked ~ header .nav-panel {
-    @apply translate-x-0;
+    @apply max-lg:flex;
   }
 
-  /* Close button X shape */
-  .nav-close::before,
-  .nav-close::after {
-    @apply absolute w-6 h-[2px] bg-secondarytext rotate-45;
-    content: "";
+  /* Swap the hamburger for a close icon while the menu is open */
+  #mobile-menu-toggle:checked ~ header .menu-open {
+    @apply hidden;
   }
 
-  .nav-close::after {
-    @apply -rotate-45;
-  }
-
-  .nav-close:hover::before,
-  .nav-close:hover::after {
-    @apply bg-orange;
+  #mobile-menu-toggle:checked ~ header .menu-close {
+    @apply max-lg:flex;
   }
 
   /* LINKS */

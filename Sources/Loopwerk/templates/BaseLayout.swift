@@ -96,10 +96,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
       body(class: "bg-page text-primarytext pb-5 min-h-screen \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
 
-        // Mobile overlay (click to close)
-        label(class: "mobile-overlay fixed inset-0 z-40 bg-[#000000]/80 opacity-0 transition-opacity pointer-events-none lg:hidden", for: "mobile-menu-toggle")
-
-        header(class: "bg-nav text-navlink py-3 text-base/6 lg:fixed w-full z-10") {
+        header(class: "bg-nav text-navlink py-3 text-base/6 fixed w-full z-50") {
           nav(class: "container flex gap-x-5 lg:gap-x-8 items-center lg:h-[44px]") {
             // Logo
             a(href: "/") {
@@ -116,23 +113,20 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
               """)
             }
 
-            // Hamburger menu button
-            label(class: "hamburger cursor-pointer flex flex-col justify-center items-center w-10 h-10 gap-[5px] lg:hidden", for: "mobile-menu-toggle") {
-              span(class: "sr-only") { "Open menu" }
-              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
-              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
-              span(class: "hamburger-line block w-6 h-[2px] bg-secondarytext transition-all duration-300")
+            // Open menu button (mobile only)
+            label(class: "menu-open cursor-pointer flex justify-center items-center w-10 h-10 text-secondarytext hover:text-orange transition lg:hidden", for: "mobile-menu-toggle", customAttributes: ["aria-label": "Open menu"]) {
+              Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>"#)
             }
 
-            // Navigation panel - sidebar on mobile, inline on desktop
-            div(class: "nav-panel max-lg:fixed top-0 right-0 h-full max-lg:w-[280px] bg-nav z-50 flex flex-col lg:flex-row lg:flex-1 max-lg:p-6 max-lg:pt-16 lg:items-center max-lg:translate-x-full transition-transform") {
-              // Close button (mobile only)
-              label(class: "nav-close absolute top-4 right-4 w-10 h-10 cursor-pointer flex items-center justify-center lg:hidden", for: "mobile-menu-toggle") {
-                span(class: "sr-only") { "Close menu" }
-              }
+            // Close menu button (mobile only, shown while the menu is open)
+            label(class: "menu-close hidden cursor-pointer justify-center items-center w-10 h-10 text-secondarytext hover:text-orange transition", for: "mobile-menu-toggle", customAttributes: ["aria-label": "Close menu"]) {
+              Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>"#)
+            }
 
+            // Navigation panel - dropdown on mobile, inline on desktop
+            div(class: "nav-panel hidden flex-col lg:flex lg:flex-row lg:flex-1 lg:items-center max-lg:absolute max-lg:top-full max-lg:inset-x-0 max-lg:bg-nav max-lg:py-4") {
               // Navigation links
-              ul(class: "flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-5 lg:flex-1 max-lg:order-2") {
+              ul(class: "flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-5 lg:flex-1 max-lg:container") {
                 li {
                   a(class: section == .home ? "active" : "", href: "/") { "Home" }
                 }
@@ -161,7 +155,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
         }
 
-        div(class: "container pt-12 lg:pt-28") {
+        div(class: "container pt-22 lg:pt-28") {
           children()
         }
 
