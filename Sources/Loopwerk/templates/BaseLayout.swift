@@ -17,7 +17,7 @@ enum Section: String {
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   return [
     .documentType("html"),
-    html(class: "bg-nav h-full font-main lg:scroll-pt-20", lang: "en-US") {
+    html(class: "font-main lg:scroll-pt-20", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         meta(content: "#0e1112", name: "theme-color")
@@ -93,7 +93,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875", "data-performance": "true"])
         }
       }
-      body(class: "bg-page text-primarytext pb-5 min-h-full \(section.rawValue)") {
+      body(class: "bg-page text-primarytext pb-5 min-h-screen \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
 
         // Mobile overlay (click to close)
