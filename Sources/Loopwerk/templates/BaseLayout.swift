@@ -96,11 +96,11 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
       body(class: "bg-page text-primarytext pb-5 min-h-screen \(section.rawValue)") {
         input(class: "hidden", id: "mobile-menu-toggle", type: "checkbox")
 
-        header(class: "bg-nav text-navlink py-3 text-base/6 fixed w-full z-50") {
+        header(class: "bg-nav text-navlink py-1 lg:py-3 text-base/6 fixed w-full z-50") {
           nav(class: "container flex gap-x-5 lg:gap-x-8 items-center lg:h-[44px]") {
             // Logo
             a(href: "/") {
-              img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
+              img(alt: "Loopwerk logo", class: "w-6 h-6 lg:w-7 lg:h-7", height: "28", src: "/static/images/Loopwerk_mark.svg", width: "28")
             }
 
             // Spacer for mobile
@@ -155,7 +155,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
           }
         }
 
-        div(class: "container pt-22 lg:pt-28") {
+        div(class: "container pt-20 lg:pt-28") {
           children()
         }
 

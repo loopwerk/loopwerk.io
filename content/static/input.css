@@ -63,13 +63,10 @@
 @utility container {
   margin-inline: auto;
   width: 100%;
-  padding-inline: 0;
-  @media (width >= 315px) {
-    max-width: 315px;
-  }
+  max-width: 662px;
+  padding-inline: 20px;
   @media (width >= 740px) {
     max-width: 740px;
-    padding-inline: 20px;
   }
 }
 
