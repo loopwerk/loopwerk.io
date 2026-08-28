@@ -87,6 +87,9 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
+        meta(content: "https://www.loopwerk.io/static/images/opengraph.png", customAttributes: ["property": "og:image"])
+        meta(content: "1200", customAttributes: ["property": "og:image:width"])
+        meta(content: "630", customAttributes: ["property": "og:image:height"])
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
         extraHeader
         if !Saga.isDev {

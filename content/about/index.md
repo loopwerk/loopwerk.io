@@ -12,7 +12,7 @@ My hobbies and interests include playing PC games, playing Dungeons & Dragons, w
 
 Some of my all-time favorites PC games include The Last of Us, Lies of P, Elden Ring, Europa Universalis IV, Baldur's Gate, and Cyberpunk 2077. A full list can be found on my [personal website](https://www.bolhoed.net/games/).
 
-I built [Critical Notes](https://www.critical-notes.com), I maintain a bunch of [open source projects](/open-source/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
+I built [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https://rssfilter.com), I maintain a bunch of [open source projects](/open-source/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
 I choose cats over dogs, tea over coffee, and winter over summer. I've lived in Iceland for almost four years, and my favorite foods are ramen, hamburgers, tacos, and Thai.
 
