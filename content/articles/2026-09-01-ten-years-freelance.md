@@ -7,7 +7,7 @@ summary: It's ten years since I quit my job and started freelancing. Thinking ab
 
 I've been working as a professional software developer since 2001. That's twenty-five years now, and yes it blows my mind when I think about that. And for the last ten of those years, I've worked as a fully remote freelance developer for clients from all over the world.
 
-When people interested in freelancing hear this, they usually have three questions: "How do you get started?", "How do you actually find the work?", and "How much do you charge?" I'll try to answer those questions, along with some advice.
+When people interested in freelancing hear this, they usually have three questions: "How do you get started?", "How do you actually find the work?", and "How much should I charge?" I'll try to answer those questions, along with some advice.
 
 ## How I got started
 Freelancing started as a byproduct of wanting to move back home.
