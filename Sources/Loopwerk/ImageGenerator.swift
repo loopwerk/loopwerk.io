@@ -8,15 +8,20 @@ class ImageGenerator {
   private let titleFontPath: String
   private let bodyFontPath: String
 
-  init?(rootPath: String) {
-    guard let backgroundImage = Image(url: URL(fileURLWithPath: "\(rootPath)/ImageGenerator/background.png")) else {
-      print("Failed to load background image.")
+  init?() {
+    guard
+      let backgroundURL = Bundle.module.url(forResource: "background", withExtension: "png"),
+      let backgroundImage = Image(url: backgroundURL),
+      let titleFontURL = Bundle.module.url(forResource: "title", withExtension: "ttf"),
+      let bodyFontURL = Bundle.module.url(forResource: "main", withExtension: "ttf")
+    else {
+      print("Failed to load image generator resources.")
       return nil
     }
     background = backgroundImage
-    titleFontPath = "\(rootPath)/ImageGenerator/title.ttf"
-    bodyFontPath = "\(rootPath)/ImageGenerator/main.ttf"
-    fontSize = 58
+    titleFontPath = titleFontURL.path
+    bodyFontPath = bodyFontURL.path
+    fontSize = 52
   }
 
   func generate(article: Item<ArticleMetadata>, outputPath: String) {

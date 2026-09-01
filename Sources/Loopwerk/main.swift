@@ -234,7 +234,7 @@ try await Saga(input: "content", output: "deploy")
     guard !Saga.isDev else { return }
 
     print("Generating article images, this takes a bit. If this unexpected, set SAGA_DEV=1.")
-    let generator = ImageGenerator(rootPath: SiteMetadata.projectRoot + "/Sources")
+    let generator = ImageGenerator()
 
     let articles = saga.allItems.compactMap { $0 as? Item<ArticleMetadata> }
     for article in articles {

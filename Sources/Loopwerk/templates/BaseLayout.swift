@@ -15,6 +15,8 @@ enum Section: String {
 }
 
 func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
+  let extraHeaderNode = extraHeader.asNode()
+
   return [
     .documentType("html"),
     html(class: "font-main lg:scroll-pt-20", lang: "en-US") {
@@ -87,11 +89,16 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
-        meta(content: "https://www.loopwerk.io/static/images/opengraph.png", customAttributes: ["property": "og:image"])
-        meta(content: "1200", customAttributes: ["property": "og:image:width"])
-        meta(content: "630", customAttributes: ["property": "og:image:height"])
         link(href: "\(SiteMetadata.url)\(canocicalURL)", rel: "canonical")
-        extraHeader
+
+        meta(content: "1200", customAttributes: ["property":"og:image:width"])
+        meta(content: "630", customAttributes: ["property":"og:image:height"])
+        if !extraHeaderNode.containsMeta("og:image") {
+          meta(content: SiteMetadata.url.appendingPathComponent("/static/images/opengraph.png").absoluteString, customAttributes: ["property": "og:image"])
+        }
+
+        extraHeaderNode
+
         if !Saga.isDev {
           script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875", "data-performance": "true"])
         }

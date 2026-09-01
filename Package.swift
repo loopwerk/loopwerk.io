@@ -31,8 +31,14 @@ let package = Package(
         "Bonsai",
         "SwiftTailwind",
       ],
+      exclude: [
+        "Resources/background.pxd",
+      ],
       resources: [
         .copy("Resources/prism-svelte.js"),
+        .copy("Resources/background.png"),
+        .copy("Resources/main.ttf"),
+        .copy("Resources/title.ttf"),
       ]
     ),
   ]

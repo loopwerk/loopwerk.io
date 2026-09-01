@@ -2,9 +2,7 @@ import HTML
 import Saga
 
 func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let section = Section(rawValue: context.item.metadata.section ?? "")!
-
-  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
+  return baseLayout(canocicalURL: context.item.url, section: .home, title: context.item.title) {
     div {
       div(class: "prose") {
         Node.raw(context.item.body)
