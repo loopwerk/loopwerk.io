@@ -220,6 +220,9 @@ try await Saga(input: "content", output: "deploy")
     writers: [.itemWriter(swim(renderPage))]
   )
 
+  // Sitemap
+  .createPage("sitemap.xml", using: Saga.sitemap(baseURL: SiteMetadata.url))
+
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))
 
@@ -228,6 +231,9 @@ try await Saga(input: "content", output: "deploy")
     guard !Saga.isDev else { return html }
     return Bonsai.minifyHTML(html)
   }
+
+  // Markdown twins of articles, for content negotiation (see nginx.conf)
+  .afterWrite(writeMarkdownFiles)
 
   // Create article images (prod only)
   .afterWrite { saga in
