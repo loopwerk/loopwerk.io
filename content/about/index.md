@@ -4,7 +4,7 @@ section: about
 
 # About me
 
-Hi there! My name is **Kevin Renskers**, and I'm a product-minded engineering lead with a passion for good usability and great design. Over 25 years I've grown from writing code to owning products end to end: the user problem, the UX, the architecture, and the team building it. I care most about shipping software that people genuinely enjoy using, and that still makes sense a year later.
+Hi there! My name is **Kevin Renskers**, and I'm a product-minded senior software engineer who loves the logic that makes software tick: APIs and data models on the backend, authentication, data loading, and form validation on the frontend. Nothing beats that "eureka" feeling of cracking a complex problem in understandable code that still makes sense a year later.
 
 I created my first website in 2000, and got my first job as a PHP developer in 2001. In 2009 I switched to **Python** and **Django**, and in 2010 I created my first **iOS** app. I've worked as a fully remote developer since 2016, for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever, and Emmy and Oscar winner Sound Radix. In 2023 I shifted my focus from mostly iOS work back to the open web.
 

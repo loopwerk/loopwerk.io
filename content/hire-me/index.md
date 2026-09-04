@@ -4,9 +4,9 @@ section: hireMe
 
 # Hire me
 
-I'm a product & engineering lead with 25 years of experience taking software from a vague idea to a product people actually enjoy using. I thrive at the intersection of product and engineering: helping decide what's worth building, shaping the UX together with design, guiding the architecture, mentoring the team, and staying hands-on in the code.
+I'm a product-minded senior software engineer with 25 years of experience building web applications and APIs that solve complex problems and still make sense a year later. My focus is the logic that makes software tick: APIs and data models on the backend, authentication, data loading, and form validation on the frontend. Beyond the code itself, I guide the architecture, mentor the team, and help decide what's worth building.
 
-I care deeply about user experience, clean architecture, code quality, and long-term maintainability. I value pragmatic solutions that balance clarity and performance, and I'm comfortable moving between product decisions, design, and hands-on engineering in the same day.
+I care deeply about clean architecture, code quality, testing, and long-term maintainability. I value pragmatic solutions that balance clarity and performance, and I'm comfortable moving between backend and frontend in the same day.
 
 The tools matter less than the judgment. I happen to work most in Python, TypeScript, and Swift, but what I really bring is the ability to make good technical and product decisions across the whole stack.
 
@@ -20,7 +20,7 @@ Over my 25 years of experience, [I've learned that the best solution is often th
 
 As I like to say: "A good app is like a mechanical watch. Lots of moving parts all working together to create a beautiful and simple interface."
 
-My goal is to deliver clean, straightforward code that solves complex problems effectively, and which can still be understood a year later. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity.
+The best moments in this work are the "eureka" ones: a complex problem cracked with a simple solution, in code that still makes sense a year later. Left unchecked, complexity will always creep in, and you have to actively seek out and defend simplicity.
 
 ## What clients say
 

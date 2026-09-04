@@ -4,9 +4,9 @@ section: home
 
 # Home
 
-# Hi! I'm Kevin Renskers, a product & engineering lead.
+# Hi! I'm Kevin Renskers, a product-minded senior software engineer.
 
-I take software from a vague idea to a product people actually enjoy using. Twenty-five years in, what I care about isn't the framework of the week, it's making the right product and technical decisions and building things that still make sense a year later. I thrive at the intersection of product and engineering: helping decide what's worth building, shaping the UX together with design, guiding the architecture, mentoring the team, and staying hands-on in the code.
+I build web applications and APIs that solve complex problems and still make sense a year later. Twenty-five years in, what I care about isn't the framework of the week, it's the logic that makes software tick: APIs and data models on the backend, authentication, data loading, and form validation on the frontend. Beyond the code itself, I guide the architecture, mentor the team, and help decide what's worth building.
 
 I've fixed, finished, and shipped software for international clients such as Last.fm, Sentry, WeTransfer, and Unilever. I've also built [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https://rssfilter.com), from first idea to running product.
 
