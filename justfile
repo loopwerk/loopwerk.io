@@ -23,11 +23,5 @@ resize:
     done
   done
 
-compile:
-  swift package resolve && swift build --product Loopwerk
-
-build:
-  .build/debug/Loopwerk
-
 format:
   swiftformat --swift-version 6 .

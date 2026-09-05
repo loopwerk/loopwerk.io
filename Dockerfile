@@ -13,7 +13,6 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     git-restore-mtime \
     curl \
     nodejs npm \
-    just \
     && apt-get install -y libjavascriptcoregtk-4.1-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pkg-config --libs javascriptcoregtk-4.1
@@ -30,15 +29,20 @@ COPY package.json pnpm-lock.yaml ./
 # Install Node dependencies (including devDependencies needed for build)
 RUN pnpm install --frozen-lockfile
 
-# Copy Swift package files AND source code needed to build
-COPY Package.swift ./
-COPY Package.resolved ./
-COPY Sources ./Sources
-COPY justfile ./
+# Pre-fetch Swift dependencies (cached unless the Package files change)
+COPY Package.swift Package.resolved ./
+RUN --mount=type=cache,target=/app/.build,sharing=locked \
+    swift package resolve
 
-# Pre-fetch and pre-build Swift dependencies
-# This layer will be cached as long as Package files and Sources don't change
-RUN echo "Prefetching and prebuilding dependencies..." && just compile
+# Pre-build the site generator (cached unless the sources change).
+# .build is a cache mount so SwiftPM's incremental state survives between
+# deploys: only the changed module recompiles. Because a cache mount isn't
+# part of the image layer, the binary has to be copied out of it here, and
+# is run from /usr/local/bin below.
+COPY Sources ./Sources
+RUN --mount=type=cache,target=/app/.build,sharing=locked \
+    swift build --product Loopwerk -c release \
+    && cp .build/release/Loopwerk /usr/local/bin/loopwerk
 
 # Copy all source files
 COPY . .
@@ -52,7 +56,7 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
 
 # Build the site: generate images, index, minify HTML, build & hash CSS
 RUN --mount=type=cache,target=/root/.swifttailwind \
-    echo "Starting website build..." && just build
+    loopwerk
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
@@ -62,9 +66,3 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built static files from builder
 COPY --from=builder /app/deploy /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]

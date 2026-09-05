@@ -1,5 +1,6 @@
 .build
 deploy
 node_modules
+.git
 .DS_Store
 .vscode
