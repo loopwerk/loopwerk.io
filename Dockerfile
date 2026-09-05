@@ -41,8 +41,8 @@ RUN --mount=type=cache,target=/app/.build,sharing=locked \
 # is run from /usr/local/bin below.
 COPY Sources ./Sources
 RUN --mount=type=cache,target=/app/.build,sharing=locked \
-    swift build --product Loopwerk -c release \
-    && cp .build/release/Loopwerk /usr/local/bin/loopwerk
+    swift build --product Loopwerk \
+    && cp .build/debug/Loopwerk /usr/local/bin/loopwerk
 
 # Copy all source files
 COPY . .
