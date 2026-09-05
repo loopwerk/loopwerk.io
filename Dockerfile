@@ -38,13 +38,14 @@ RUN --mount=type=cache,target=/app/.build,sharing=locked \
 # .build is a cache mount so SwiftPM's incremental state survives between
 # deploys: only the changed module recompiles. Because a cache mount isn't
 # part of the image layer, the binary has to be copied out of it here, and
-# is run from /usr/local/bin below. The resource bundles (Bundle.module)
-# are looked up next to the executable, so they're copied along with it.
+# is run from /usr/local/bin below. The resource bundles (Bundle.module),
+# named *.resources on Linux, are looked up next to the executable, so
+# they're copied along with it.
 COPY Sources ./Sources
 RUN --mount=type=cache,target=/app/.build,sharing=locked \
     swift build --product Loopwerk \
     && cp .build/debug/Loopwerk /usr/local/bin/loopwerk \
-    && cp -r .build/debug/*.bundle /usr/local/bin/
+    && cp -r .build/debug/*.resources /usr/local/bin/
 
 # Copy all source files
 COPY . .
