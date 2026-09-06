@@ -1,9 +1,9 @@
 ---
 tags: personal, faq
-summary: It's ten years since I quit my job and started freelancing. Thinking about doing the same? I'm here to answer your questions.
+summary: It's ten years since I quit my job and started freelancing. Here's how I got started, how I find clients, how to figure out your rate, and what I'd tell anyone thinking about doing the same.
 ---
 
-# Ten years as a remote freelancer, ask me anything
+# Ten years of freelancing: lessons and advice
 
 I've been working as a professional software developer since 2001. That's twenty-five years now, and yes it blows my mind when I think about that. And for the last ten of those years, I've worked as a fully remote freelance developer for clients from all over the world.
 
@@ -102,5 +102,5 @@ One warning though: I personally find new projects are getting harder and harder
 
 You should think long and hard before taking the plunge. Is it worth it? Ten years in, it's still the best working arrangement I've had, but honestly I'm not sure I'd tell you to start freelancing today. At the very least, go in knowing exactly what it takes.
 
-## Ask me anything
+## Questions?
 If you have other questions about becoming a freelancer, feel free to ask in the comments below, or reach out directly: my details are in the author information below the article.
