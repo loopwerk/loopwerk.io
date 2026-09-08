@@ -1,11 +1,11 @@
 ---
 tags: django, personal
-summary: Celebrating Django's 20th birthday by looking back at 16 years of personal Django usage, how it evolved, favorite packages, and what I'd love to see in the future.
+summary: Django turned 20! A look back at my 16 years with it, my favorite packages, and what I'd love to see in the future.
 ---
 
 # Django at 20: a personal journey through 16 years
 
-Django turned 20 [a few days ago](https://www.djangoproject.com/weblog/2025/jul/13/happy-20th-birthday-django/), which is a remarkable milestone for any software project. I've been along for most of that ride, starting my Django journey in September 2009. That's almost 16 years ago! It's been fascinating to watch both Django and my use of it evolve over time.
+Django turned 20 [a few days ago](https://www.djangoproject.com/weblog/2025/jul/13/happy-20th-birthday-django/), which is a huge milestone for any software project. I've been along for most of that ride; I started using Django in September 2009. That's almost 16 years ago!
 
 ## From server-rendered pages to APIs and back
 
@@ -17,13 +17,13 @@ Fast forward to 2023, and I've [come full circle](/articles/2025/thoughts-on-app
 
 ## The deployment evolution
 
-My deployment story has changed as much as my use of Django. I started with the push-to-deploy magic of Heroku. Eventually, my desire for more control led me to self-hosting on a bare metal server, where I configured everything myself with systemd scripts and Nginx. I documented this journey in [Setting up a Debian 11 server for SvelteKit and Django](/articles/2023/setting-up-debian-11/). It gave me complete control but came with significant operational overhead.
+My deployment story has changed as much as my use of Django. I started with the push-to-deploy magic of Heroku. Eventually, my desire for more control led me to self-hosting on a bare metal server, where I configured everything myself with systemd scripts and Nginx. I documented all of this in [Setting up a Debian 11 server for SvelteKit and Django](/articles/2023/setting-up-debian-11/). It gave me complete control, but also a lot of manual work.
 
-More recently, I've found a happy medium with Coolify, a self-hosted PaaS that gives me a Heroku-like experience on my own hardware, as I detailed in my article on [hosting Django with Coolify](/articles/2025/coolify-django/). It provides the git-based, zero-downtime deployments I want without the manual configuration overhead.
+More recently, I've found a happy medium with Coolify, a self-hosted PaaS that gives me a Heroku-like experience on my own hardware, as I detailed in my article on [hosting Django with Coolify](/articles/2025/coolify-django/). It provides the git-based, zero-downtime deployments I want, without all the manual configuration.
 
 ## My favorite dependencies
 
-No framework is an island, and Django's rich ecosystem of third-party packages is a huge part of its power. Over the years, I've collected a set of favorite dependencies that I return to again and again.
+Django's ecosystem of third-party packages is a huge part of its power. Over the years, I've collected a set of favorite dependencies that I return to again and again.
 
 ### Core Django extensions
 
@@ -53,17 +53,17 @@ No framework is an island, and Django's rich ecosystem of third-party packages i
 - [**django-apscheduler**](https://pypi.org/project/django-apscheduler/): A pretty simple way of adding scheduling features to Django, with minimal dependencies. I use it for django-mailer and other tasks that need to run on a schedule.
 - [**django-storages**](https://pypi.org/project/django-storages/): Custom storage backends for Django. Essential for S3 or other cloud storage.
 
-## Django's enduring strengths
+## Django's biggest strengths
 
 There's a reason I've stuck with Django for so long. While other frameworks have come and gone, Django's core strengths have only become more apparent.
 
-First and foremost are the "big three": the ORM, the migrations system, and the Admin. When I started in 2009, migrations didn't even exist, but today, they are arguably Django's killer feature. The ORM is a joy to use, and the built-in Admin is an unparalleled tool for getting a project off the ground and managing data. As I've written before, these three features are the main reason [why I still choose Django over frameworks like Flask or FastAPI](/articles/2024/django-vs-flask-vs-fastapi/).
+First, the "big three": the ORM, the migrations system, and the Admin. When I started in 2009, migrations didn't even exist, but today they might just be Django's killer feature. The ORM is a joy to use, and the built-in Admin is unbeatable for getting a project off the ground and managing data. As I've written before, these three features are the main reason [why I still choose Django over frameworks like Flask or FastAPI](/articles/2024/django-vs-flask-vs-fastapi/).
 
-Beyond the code, the community is one of Django's greatest assets. It's mature, stable, and welcoming. You can find an answer to almost any problem, and there are countless high-quality packages to extend the framework. This maturity also leads to stability; you don't have to worry about crazy breaking changes every six months, which is a breath of fresh air compared to the churn in other ecosystems.
+And then there's the community, which is mature and welcoming. You can find an answer to almost any problem, and there are countless high-quality packages to extend the framework. You also don't have to worry about crazy breaking changes every six months, like in certain other ecosystems.
 
 ## Things I'd wish to see differently
 
-Despite my affection for it, Django isn't perfect. I'd love to see the Django Admin get a modern overhaul. It's incredibly functional, but its interface feels dated. I also believe it's time for a capable REST framework to be included in the core. So many Django projects today are APIs that it feels like a natural evolution. Finally, seeing the ORM lean more heavily on standard Python type hints and Pydantic-style models, much like FastAPI does, would be a fantastic modernization.
+Of course Django isn't perfect. I'd love to see the Django Admin get a modern overhaul; it's incredibly functional, but its interface feels dated. I also think it's time for a capable REST framework to be included in the core. So many Django projects today are APIs that it just makes sense. And finally, I'd love for the ORM to lean more on standard Python type hints and Pydantic-style models, like FastAPI does.
 
 ## My Django contributions
 
@@ -80,8 +80,8 @@ I've also written [quite a few](/articles/tag/django/) articles on Django, and h
 
 ## Looking forward
 
-Django at 20 is in a great place. It's mature without being stagnant, stable without being boring. The framework has evolved thoughtfully over the years, adding features like async support while maintaining backward compatibility.
+Django at 20 is in a great place: mature, but not stagnant or boring. The framework evolved carefully over the years, adding features like async support without breaking backward compatibility.
 
-For new projects, I still reach for Django. [Not Flask, not FastAPI](/articles/2024/django-vs-flask-vs-fastapi/) — Django. The "batteries included" philosophy means I can focus on building features instead of gluing libraries together. The boring, stable foundation lets me be creative where it matters.
+For new projects, I still reach for Django. [Not Flask, not FastAPI](/articles/2024/django-vs-flask-vs-fastapi/) - Django. The "batteries included" philosophy means I can focus on building features instead of gluing libraries together. The boring, stable foundation lets me be creative where it matters.
 
-Here's to another 20 years of Django. May it continue to be the reliable, productive framework that lets us turn ideas into working applications with minimum fuss. Happy birthday, Django!
+Here's to another 20 years. Happy birthday, Django!

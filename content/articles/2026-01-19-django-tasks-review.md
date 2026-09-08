@@ -15,7 +15,7 @@ Django 6.0 is the first release that acknowledges this problem at the framework 
 
 ## What Django 6.0 adds
 
-Django 6.0 introduces a brand new tasks framework. It’s not a queue, not a worker system, and not a scheduler. It only defines background work in a first-party, Django-native way, and provides hooks for someone else to execute that work.
+Django 6.0 introduces a brand new tasks framework. It's not a queue, not a worker system, and not a scheduler. It only defines background work in a first-party, Django-native way, and provides hooks for someone else to execute that work.
 
 As an abstraction, this is clean and sensible. It gives Django a shared language for background execution and removes a long-standing blind spot in the framework. But it also stops there.
 
@@ -35,7 +35,7 @@ I understand that building features takes time. What I struggle to understand is
 
 Currently, with Django 6.0, serious background processing still requires third-party tools for scheduling, retries, delayed execution, monitoring, and scaling workers. That was true before, and it remains true now. Even if one-off fire-and-forget tasks are all you need, you still need to install a third party package to get a database backend and worker.
 
-DEP 14 also explicitly states that the intention is *not* to build a replacement for Celery or RQ, because "that is a complex and nuanced undertaking". I think this is a mistake. The vast majority of Django applications need a robust task framework. A database-backed worker that handles delays, retries, and basic scheduling would cover most real-world needs without any of Celery's operational complexity. Django positions itself as a batteries-included framework, and background tasks are not an advanced feature. They are basic application infrastructure.
+DEP 14 also explicitly states that the intention is *not* to build a replacement for Celery or RQ, because "that is a complex and nuanced undertaking". I think this is a mistake. The vast majority of Django applications need a proper task framework. A database-backed worker that handles delays, retries, and basic scheduling would cover most real-world needs without any of Celery's operational complexity. Django positions itself as a batteries-included framework, and background tasks are not an advanced feature, they are basic application infrastructure.
 
 Otherwise, what is the point of Django's Task framework? Let's assume that it'll get a production-ready backend and worker soon. What then? It can still only run one-off tasks. As soon as you need to schedule tasks, you still need to reach for a third-party solution. I think it should have a first-party answer for the most common cases, even if it's complex.
 

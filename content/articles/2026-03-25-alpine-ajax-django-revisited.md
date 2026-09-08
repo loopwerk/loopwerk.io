@@ -202,7 +202,7 @@ The `is_alpine` check provides a redirect fallback for non-JavaScript POST reque
 
 There are a few downsides to this approach that are worth mentioning.
 
-**More templates.** For the article page, I went from one template to several: the include fragments (`_like_form.html`, `_comments.html`) that are shared between the full page and the AJAX responses. When an action needs to update multiple elements on the page, you also end up with small response templates that combine the right includes. For example, if submitting a comment should update both the comment list and a comment count elsewhere on the page:
+**More templates:** for the article page, I went from one template to several: the include fragments (`_like_form.html`, `_comments.html`) that are shared between the full page and the AJAX responses. When an action needs to update multiple elements on the page, you also end up with small response templates that combine the right includes. For example, if submitting a comment should update both the comment list and a comment count elsewhere on the page:
 
 ```jinja title="_add_comment_response.html"
 {% include "articles/_comments.html" %}
@@ -213,17 +213,17 @@ Trivial, but still a file you have to create and name.
 
 It's also harder to make sure that the template fragment has access to the context it needs when included into the big template via `{% include %}`, compared to `{% partialdef %}` and one single view always rendering it.
 
-**More views and URL routes.** Each action gets its own view class and its own `path()` entry. For a page with likes, comments, and subscriptions, that's three or four extra views.
+**More views and URL routes:** each action gets its own view class and its own `path()` entry. For a page with likes, comments, and subscriptions, that's three or four extra views.
 
 But here's what I got in return:
 
-**Actual performance improvement.** Not just smaller responses, but less work on the server. Each view only queries what it needs.
+**Actual performance improvement:** not just smaller responses, but less work on the server. Each view only queries what it needs.
 
-**Jinja2.** I'm using Jinja2 instead of the Django Template Language. I can call functions, I have proper expressions, and I don't need custom template tags for basic things. This alone was worth the switch.
+**Jinja2:** I'm using Jinja2 instead of the Django Template Language. I can call functions, I have proper expressions, and I don't need custom template tags for basic things. This alone was worth the switch.
 
-**Readable templates.** The main `article.html` is short and shows the page structure at a glance. Each fragment is self-contained. No `{% partialdef %}` blocks scattered everywhere.
+**Readable templates:** the main `article.html` is short and shows the page structure at a glance. Each fragment is self-contained. No `{% partialdef %}` blocks scattered everywhere.
 
-**Simple views.** Each view does exactly one thing. Easy to understand, easy to test, easy to optimize.
+**Simple views:** each view does exactly one thing. Easy to understand, easy to test, easy to optimize.
 
 ## Conclusion
 

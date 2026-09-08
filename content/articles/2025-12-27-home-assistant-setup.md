@@ -1,13 +1,13 @@
 ---
 tags: howto, workflow
-summary: Let's dive deeper into my Home Assistant setup. How do I sync everything to Apple's Home app, and how do I automate things.
+summary: A deeper look at my Home Assistant setup. How do I sync everything to Apple's Home app, and how do I automate my lights and heating?
 ---
 
 # My Home Assistant setup
 
 Yesterday I wrote my [review of Home Assistant](/articles/2025/home-assistant-review/) after one year of use. I mentioned that I sync everything to HomeKit and that I use Apple's Home app to detect when I am home, and sync this back to Home Assistant. I also mentioned some of my automations, but didn't explain how I actually set things up.
 
-This is not a general Home Assistant tutorial, and it's not the "best" or "most advanced" way to do things. It's simply the setup that has proven reliable for me over the past year. The guiding idea is simple: Apple Home for presence, voice control, and remote access; Home Assistant for logic, integrations, and automations. Everything below follows from that.
+This is not a general Home Assistant tutorial, and it's not the "best" or "most advanced" way to do things. It's simply the setup that has proven reliable for me over the past year. The idea: Apple Home handles presence, voice control, and remote access; Home Assistant handles logic, integrations, and automations.
 
 ## Syncing with HomeKit
 
@@ -91,7 +91,7 @@ mode: single
 
 When it's 30 minutes before sunset or later, but before sunrise, and I get home, the "Downstairs lights on" scene is triggered.
 
-Every day my lava lamp turns on automatically, but according to the manufacturer it should only be on for four hours at most. Luckily, because the lava lamp is connected via a smart plug, Home Assistant knows exactly when it turns on — regardless of whether that was via an automation, Siri, or a physical button. Another automation takes care of turning it off again after four hours:
+Every day my lava lamp turns on automatically, but according to the manufacturer it should only be on for four hours at most. Luckily, because the lava lamp is connected via a smart plug, Home Assistant knows exactly when it turns on - regardless of whether that was via an automation, Siri, or a physical button. Another automation takes care of turning it off again after four hours:
 
 ```yaml
 alias: Turn off lava lamp after 4 hours
@@ -189,10 +189,10 @@ My "Good night" scene sets all rooms to 13 °C, but this doesn't interfere with 
 
 I think it could be fun to experiment with room-based presence sensors, so lights automatically turn on and off as you move through the house, but I'm not quite there yet.
 
-Another idea is automating plant watering, both indoors using moisture sensors and outdoors using weather data. If it's been dry and warm for several days, Home Assistant could turn on the drip irrigation system in my garden — which I already have installed, but currently need to remember to turn on manually.
+Another idea is automating plant watering, both indoors using moisture sensors and outdoors using weather data. If it's been dry and warm for several days, Home Assistant could turn on the drip irrigation system in my garden - which I already have installed, but currently need to remember to turn on manually.
 
 It would also be nice to use my security cameras as automation triggers, but so far I haven't found a way to integrate them into Home Assistant.
 
 I also own a standing desk that can be controlled via an iPhone app using Bluetooth. I'd love to set up a schedule so the desk automatically goes up a few times a day. I bought the Bluetooth dongle for my Home Assistant Green and it can connect to the desk, but I haven't managed to control it from Home Assistant yet.
 
-There's an enormous amount you can do with relatively cheap hardware, which is one of Home Assistant's biggest strengths. So far I've been loving it: it's been reliable and reasonably easy to set up. I highly recommend getting your own and seeing what you can automate. In my case, I started with a few Philips Hue lights, and it just grew from there. Enjoy the ride!
+There's an enormous amount you can do with relatively cheap hardware, which is one of Home Assistant's biggest strengths. So far I've been loving it: it's been reliable and reasonably easy to set up. I highly recommend getting your own and seeing what you can automate. In my case, I started with a few Philips Hue lights, and it just grew from there.

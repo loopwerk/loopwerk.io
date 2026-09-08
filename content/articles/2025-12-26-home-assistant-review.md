@@ -23,9 +23,9 @@ I was getting increasingly fed up with the situation: too many apps, too many hu
 
 After switching to Home Assistant, things became a lot simpler.
 
-I was able to completely ditch the Hue hub and app. All my Hue lights and buttons now connect directly to Home Assistant using the ZBT-1 dongle. Home Assistant became the single place where almost all my devices live — the source of truth.
+I was able to completely ditch the Hue hub and app. All my Hue lights and buttons now connect directly to Home Assistant using the ZBT-1 dongle. Home Assistant became the single place where almost all my devices live - the source of truth.
 
-Tado is the one remaining exception. I still use their internet bridge, which means the radiators are cloud-connected. Home Assistant talks to them via Tado's API. It's not ideal — I'd much rather have everything running locally — but I'm not eager to replace perfectly good hardware just to move from cloud to Thread + Matter.
+Tado is the one remaining exception. I still use their internet bridge, which means the radiators are cloud-connected. Home Assistant talks to them via Tado's API. It's not ideal - I'd much rather have everything running locally - but I'm not eager to replace perfectly good hardware just to move from cloud to Thread + Matter.
 
 The Logitech Circle View camera also remains outside of Home Assistant entirely. It still lives purely inside Apple's Home app, and that's fine: it works well there, and I don't feel a strong need to pull camera feeds into my automation system.
 
@@ -43,7 +43,7 @@ Instead, Home Assistant immediately discovered them and exposed them to the Home
 
 Because everything is available in Apple Home, I can also control my house when I'm away. I can pre-heat the house on the way back, or make sure all the lights are turned off.
 
-Home Assistant does have its own iPhone app, but remote access requires setting up your own VPN and port forwarding, which is a fair amount of work. There's also Home Assistant Cloud, which offers easy and secure remote access, but it costs €75 per year. No thanks — I just do everything via the Home app for free.
+Home Assistant does have its own iPhone app, but remote access requires setting up your own VPN and port forwarding, which is a fair amount of work. There's also Home Assistant Cloud, which offers easy and secure remote access, but it costs €75 per year. No thanks - I just do everything via the Home app for free.
 
 One of my main motivations for switching was getting rid of Tado's subscription, and that worked out perfectly.
 
@@ -53,7 +53,7 @@ Instead of relying on Tado's geofencing, I now let Apple Home detect when I leav
 
 Home Assistant connects to far more than just lights and thermostats.
 
-It integrates with my solar panels and with my electricity and gas meters, using a [SlimmeLezer+](https://www.zuidwijk.com/product/slimmelezer-plus/). That means I can see exactly how much electricity I generate, how much I consume, how much goes back to the grid, and how much gas I use — all in clear, easy-to-understand graphs broken down per year, month, day, or even hour.
+It integrates with my solar panels and with my electricity and gas meters, using a [SlimmeLezer+](https://www.zuidwijk.com/product/slimmelezer-plus/). That means I can see exactly how much electricity I generate, how much I consume, how much goes back to the grid, and how much gas I use - all in clear, easy-to-understand graphs broken down per year, month, day, or even hour.
 
 What used to be a separate solar app is now just another data source inside the same system.
 

@@ -33,7 +33,7 @@ This looked like exactly what I needed. Here's how I moved my Django apps to it.
 
 ## Step 1: prepare a fresh server
 
-Before installing Coolify, it's wise to perform some basic server hardening. I spun up a new VPS on Hetzner and logged in as root to get it ready.
+Before installing Coolify, it's a good idea to do some basic server hardening. I spun up a new VPS on Hetzner and logged in as root to get it ready.
 
 First, I disabled password-based SSH login in favor of public key authentication. In `/etc/ssh/sshd_config`, I made these changes:
 
@@ -215,7 +215,7 @@ Here's how to get a PostgreSQL database up and running for your Django project:
     - Paste the internal connection URL you copied in the first step, but **change the database name at the end** from `/postgres` to `/my_app_db`. The final URL should look like this: `postgres://postgres:random_password@container_name:5432/my_app_db`.
     - Finally, and this is crucial, check the "Is Build Variable" box. This makes the `DATABASE_URL` variable available during the Docker build process (using the `ARG DATABASE_URL` instruction in the `Dockerfile`), and this allows commands like `manage.py migrate` to connect to the database during the image build.
 
-With these steps complete, your Django application is now fully configured to communicate with its PostgreSQL database, all managed neatly within your Coolify project. You can now safely start the Django app.
+And with that, Django can reach its PostgreSQL database, and you can safely start the app.
 
 ## Step 5: configure backups
 
@@ -246,7 +246,7 @@ To make sure you get important alerts, you'll want to configure the email settin
 
 ## The way forward
 
-Moving to Coolify is a significant simplification of my infrastructure. It replaces my collection of custom scripts with a unified, robust system that provides the modern, git-based workflow I love from Netlify. The shift to containerization was long overdue, and Coolify makes it approachable.
+Moving to Coolify hugely simplified my infrastructure. It replaces my collection of custom scripts with one system that gives me the git-based workflow I love from Netlify. The shift to containerization was long overdue, and Coolify makes it approachable.
 
 Another major benefit is that all the configuration of how to run an app now lives directly in the project's repository, in the form of a Dockerfile. It no longer only lives on the server in the form of a bunch of config files and systemd services and crontabs.
 

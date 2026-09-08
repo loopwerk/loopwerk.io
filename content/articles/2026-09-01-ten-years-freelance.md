@@ -39,7 +39,7 @@ I've built and maintain quite a few [open source projects](/open-source/), and t
 ### 3. Social media
 Social media is hit-or-miss, but it provided the rest. I landed **WeTransfer**, **Sentry** and **Video.io** through tweets from people I followed, although in Sentry's case it was the open source work that actually got me the job. Only one client found me on LinkedIn, and I found **Sound Radix** via the [Svelte Discord server](https://svelte.dev/chat).
 
-To summarize: hardly any of my work came from "hunting" for jobs. Just one job came from Upwork, and one from Remote OK. The rest came from being visible in the right niches and maintaining relationships with people I'd worked with years ago.
+So no, hardly any of my work came from "hunting" for jobs. Just one job came from Upwork, and one from Remote OK. The rest came from being visible in the right niches and maintaining relationships with people I'd worked with years ago.
 
 ## The pros and cons of freelancing
 Freelancing is often romanticized, but the trade-offs are heavy. 

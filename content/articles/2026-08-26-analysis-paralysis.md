@@ -22,7 +22,7 @@ So, get started without overthinking! Don't worry about architecture. Put all th
 I'm not saying you shouldn't learn how to write tests. But it's much more important to actually build stuff and learn the craft, and you'll learn the rest later. Don't let not knowing how to do something properly prevent you from doing it badly.
 
 ## Good enough should be good enough
-It's not just junior developers at the beginning of their journey that get trapped by analysis paralysis; seniors are just better at rationalizing it. 
+It's not just junior developers that get trapped by analysis paralysis; seniors are just better at rationalizing it. 
 
 A senior developer knows about all the things that can go wrong, so they start designing for all those hypothetical problems before they've established that any of them are real problems. Too many abstractions because they "might need it later". Designing for a scale the project will almost certainly never reach, increasing complexity and the maintenance burden for no real benefit.
 

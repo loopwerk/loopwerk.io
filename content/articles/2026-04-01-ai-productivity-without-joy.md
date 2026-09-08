@@ -29,13 +29,11 @@ I also feel less connected to this new code. Even though I went over all the cha
 
 Apparently, plenty of people are fine with this new way of working. "I release projects where I've not written a single line" is a new boast. But why did you become a programmer? Purely for the end result, or for the craft of making that product? For me it's always mostly been about the craft. I love the feeling of starting with a blank file, writing line by line, improving things as it grows, coming up with elegant and pragmatic solutions to hard problems, and then literally pumping my fist in the air at 2:00 a.m. when it all comes together. The thing that I built is usually less important to me. It could be an e-commerce site for a client or a static site generator for myself, it doesn't really matter that much what I work on. Every project has its unique puzzles to solve and its own interesting challenges.
 
-If I let AI solve those puzzles for me, then what's left? What's in it for me? The ability to quickly churn out more code doesn't make *my* life better. It will come with the expectation of ever-higher productivity, more and more AI usage, until we’re just babysitters, rubber-stamping pull requests we barely touched.
+If I let AI solve those puzzles for me, then what's left? What's in it for me? The ability to quickly churn out more code doesn't make *my* life better. It will come with the expectation of ever-higher productivity, more and more AI usage, until we're just babysitters, rubber-stamping pull requests we barely touched.
 
-What does this mean for my own AI usage in my own open source projects? I don't think it'll ever be gone completely, as it is an immensely useful tool. But instead of Claude Code writing the solution and me just checking its output, I want to reduce it to a very advanced rubber duck. Not only able to listen to my plans, ideas, and problems, but also to offer suggestions and brainstorm solutions with me. But that’s where it should stop. I want the puzzles back.
+What does this mean for my own AI usage in my own open source projects? I don't think it'll ever be gone completely, as it is an immensely useful tool. But instead of Claude Code writing the solution and me just checking its output, I want to reduce it to a very advanced rubber duck. Not only able to listen to my plans, ideas, and problems, but also to offer suggestions and brainstorm solutions with me. But that's where it should stop. I want the puzzles back.
 
 ## Further reading
-
-A list of recommended articles.
 
 - [Eight years of wanting, three months of building with AI](https://lalitm.com/post/building-syntaqlite-ai/)
 - [The machines are fine. I'm worried about us.](https://ergosphere.blog/posts/the-machines-are-fine/)
@@ -43,7 +41,7 @@ A list of recommended articles.
 - [Lose Myself](https://www.eod.com/blog/2026/02/lose-myself/)
 - [I Sold Out for $20 a Month and All I Got Was This Perfectly Generated Terraform](https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/)
 - [A programmer's loss of a social identity](https://ratfactor.com/tech-nope2)
-- [The job ain’t quite the same](https://prashanth.world/the-job-aint-the-same/)
+- [The job ain't quite the same](https://prashanth.world/the-job-aint-the-same/)
 - [AI is removing the middle class of software engineering](https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html)
 - [Taste Is All That's Left](https://notashelf.dev/posts/taste-is-all-thats-left)
 - ["Code was never the hard part" is an insult to all programmers](https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers)

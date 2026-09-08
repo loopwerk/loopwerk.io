@@ -11,7 +11,7 @@ So I built the same site three times to find out: once with [Hugo](https://gohug
 
 Full disclosure: I'm the author of Saga. I'll try to be fair, but I obviously have opinions about how a static site generator should work. That's why I built one.
 
-**TL;DR:** Hugo is the most mature option with an excellent dev server, but everything runs through untyped config and Go templates that fail silently. Publish had the right idea with Swift type safety, but a shared metadata type, no built-in pagination, limited flexibility, and hard dependencies on Plot and Ink hold it back. Saga offers typed metadata per section, pluggable readers and template languages, programmable URLs, and built-in pagination, all without the custom workarounds that Publish requires for basic features.
+TL;DR: Hugo is the most mature option with an excellent dev server, but everything runs through untyped config and Go templates that fail silently. Publish had the right idea with Swift type safety, but a shared metadata type, no built-in pagination, limited flexibility, and hard dependencies on Plot and Ink hold it back. Saga offers typed metadata per section, pluggable readers and template languages, programmable URLs, and built-in pagination, all without the custom workarounds that Publish requires for basic features.
 
 Let's start simple and add complexity step by step.
 
@@ -262,7 +262,7 @@ Hugo is one of the most popular static site generators [...]
 
 Hugo requires the title in frontmatter and wants tags as a YAML sequence.
 
-Saga derives the title from the first `#` heading in the content and removes it from the body, so you can render the title, then the date and author, then the body — each separately.
+Saga derives the title from the first `#` heading in the content and removes it from the body, so you can render the title, then the date and author, then the body - each separately.
 
 Publish _can_ also read the title from a `#` heading, but it leaves the heading in the body HTML. That means if you want to render anything between the title and the body (like a date or author byline), you need the title in frontmatter instead.
 
@@ -763,7 +763,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> String {
 
 **Saga** treats readers as plugins: you give each step in the pipeline a reader that handles the file conversion (for example `readers: [.parsleyMarkdownReader]`). Three Markdown readers already exist as separate packages ([Parsley](https://github.com/loopwerk/SagaParsleyMarkdownReader), [Ink](https://github.com/loopwerk/SagaInkMarkdownReader), and [Python-Markdown](https://github.com/loopwerk/SagaPythonMarkdownReader)), and writing one for a new format is straightforward. You can even pass multiple readers and Saga picks the right one based on file extension, so a folder can contain a mix of `.md` and `.rst` files.
 
-## Wrapping up
+## Conclusion
 
 Hugo is the most mature of the three and has a fantastic dev server. If your site fits Hugo's model, you can go far with just configuration, and if Hugo's conventions match your mental model, it's incredibly productive. But everything you do is mediated by config keys you have to look up and Go templates you can't type-check. When something doesn't work, you're searching docs and forums instead of reading compiler errors.
 

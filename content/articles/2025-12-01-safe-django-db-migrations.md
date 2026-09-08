@@ -7,11 +7,11 @@ summary: How to run schema-changing Django migrations safely, avoiding schema/co
 
 One of the best features of modern container-based deployment platforms (Coolify included) is that they give you zero downtime rolling updates out of the box. When you push code, a new image is built, migrations run, and traffic only shifts to the new container when it's healthy.
 
-However, this convenience creates a hidden trap for Django developers. Because Coolify performs a rolling update, there is a window of time (usually 1–2 minutes) where both the old and new versions of your application are running simultaneously against the same database.
+However, this convenience creates a hidden trap for Django developers. Because Coolify performs a rolling update, there is a window of time (usually 1-2 minutes) where both the old and new versions of your application are running simultaneously against the same database.
 
 This works fine if you are just adding a new table. But if you run a destructive migration, like removing a field or renaming a column, your deployment becomes a race condition. The new container runs the migration, the database schema changes, and your _old_ container (which is still serving live traffic) immediately starts throwing 500 errors because it's trying to query a column that no longer exists.
 
-This isn't a limitation of Coolify; it is a fundamental constraint of rolling deployments. Heroku, Render, Fly.io, ECS, Kubernetes — anything that swaps containers while the old version is still serving traffic has the same constraint. You cannot fix this by changing where the migration runs in your Dockerfile. You have to fix it by changing how you write migrations.
+This isn't a limitation of Coolify; it is a fundamental constraint of rolling deployments. Heroku, Render, Fly.io, ECS, Kubernetes - anything that swaps containers while the old version is still serving traffic has the same constraint. You can't fix this by changing where the migration runs in your Dockerfile; you have to fix how you write migrations.
 
 ## Why you can't just fix the infrastructure
 
@@ -56,9 +56,9 @@ Verdict: massive complexity, no real benefit.
 
 ## The real solution: the two-phase deploy
 
-The hard truth is that destructive migrations can't be made safe unless the schema stays compatible with both old and new code during the rollout.
+Destructive migrations simply can't be made safe unless the schema stays compatible with both old and new code during the rollout.
 
-The solution is not infrastructure; it's application patterns. The key idea: decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.
+The solution lives in your application code, not in your infrastructure. The key idea: decouple the code change from the schema change. This is known as the Two-Phase Deploy Pattern, also called expand-and-contract, non-breaking migrations, or safe migrations.
 
 ## Example 1: removing a field safely
 
@@ -161,9 +161,9 @@ Generate the migration, deploy, and you're done.
 
 ## Summary
 
-Running migrations during your Coolify build is good practice — it catches failures early and keeps your deploys atomic. But schema-destructive migrations will always conflict with rolling updates if they break compatibility between old code and the new schema.
+Running migrations during your Coolify build is good practice - it catches failures early and keeps your deploys atomic. But schema-destructive migrations will always conflict with rolling updates if they break compatibility between old code and the new schema.
 
-Instead of bending Coolify into a complicated orchestration engine, embrace the proven approach: deploy schema changes in two phases, keeping them backwards-compatible.
+Instead of bending Coolify into a complicated orchestration engine, stick with the proven approach: deploy schema changes in two phases, keeping them backwards-compatible.
 
 You should use this pattern for all kinds of destructive changes:
 

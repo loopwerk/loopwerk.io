@@ -13,11 +13,11 @@ The biggest difference is that Umami's self-hosted version is the full product. 
 
 Umami also offers some unique features:
 
-- **Specific screen sizes.** Umami shows you actual resolutions like 1920x1080 or 390x844. Plausible only shows device categories (desktop, mobile, tablet), which is far less useful when you're trying to make design decisions.
-- **[Individual session details.](https://umami.is/docs/sessions)** You can view exactly which pages a visitor viewed and which events they triggered, in order. Plausible shows aggregate stats but gives you no way to inspect individual visits.
-- **Visitor journeys.** Umami visualizes the paths visitors take through your site, showing how people actually navigate from page to page.
-- **Retention reports.** Track how many visitors come back over time, segmented by device, country, or traffic source. Plausible has no equivalent.
-- **[Cohorts.](https://umami.is/docs/cohorts)** Group users based on specific actions (like visiting a URL or triggering an event) within a date range, then track that group's behavior over time. Plausible has [audience segmentation](https://plausible.io/audience-segmentation) through filters, but no way to define and follow a fixed cohort.
+- **Specific screen sizes:** Umami shows you actual resolutions like 1920x1080 or 390x844. Plausible only shows device categories (desktop, mobile, tablet), which is far less useful when you're trying to make design decisions.
+- **[Individual session details](https://umami.is/docs/sessions):** you can view exactly which pages a visitor viewed and which events they triggered, in order. Plausible shows aggregate stats but gives you no way to inspect individual visits.
+- **Visitor journeys:** Umami visualizes the paths visitors take through your site, showing how people actually navigate from page to page.
+- **Retention reports:** track how many visitors come back over time, segmented by device, country, or traffic source. Plausible has no equivalent.
+- **[Cohorts](https://umami.is/docs/cohorts):** group users based on specific actions (like visiting a URL or triggering an event) within a date range, then track that group's behavior over time. Plausible has [audience segmentation](https://plausible.io/audience-segmentation) through filters, but no way to define and follow a fixed cohort.
 
 On the infrastructure side, Umami uses PostgreSQL. This makes backups straightforward and works perfectly with [Coolify](https://coolify.io)'s built-in backup features for offsite storage. Plausible uses ClickHouse, which is significantly harder to manage and back up; it's definitely not possible from within Coolify's interface.
 
@@ -41,11 +41,11 @@ Plausible also tracks scroll depth per page, which is useful for long-form conte
 
 On the practical side, Plausible supports data import from Google Analytics and via CSV files. Umami has no import at all; if you're switching, you start with a blank slate.
 
-And if you're willing to pay for Plausible's cloud offering, their bot filtering is genuinely good. Nothing in the open source self-hosted analytics space comes close to that.
+And if you're willing to pay for Plausible's cloud offering, their bot filtering is really good. Nothing in the open source self-hosted analytics space comes close to that.
 
 ## Why I switched to Umami
 
-I'll be honest: I do not really like Umami's UI, and it caused me to think long and hard before I switched over. Missing features such as the Google Search Console integration and scroll depth tracking didn't help either.
+To be honest, I do not really like Umami's UI, and it caused me to think long and hard before I switched over. Missing features such as the Google Search Console integration and scroll depth tracking didn't help either.
 
 But there are two big things that drew me in:
 
@@ -99,7 +99,7 @@ SKIP_LOCATION_HEADERS=1
 
 Here's the one thing that didn't improve. After switching [critical-notes.com](https://www.critical-notes.com) to Umami, I saw similarly inflated visitor numbers as I did with self-hosted Plausible. Umami uses the [isbot](https://github.com/omrilotan/isbot) library for bot detection, which filters based on user-agent strings. It catches the obvious crawlers, but anything pretending to be a regular browser sails right through.
 
-This isn't really Umami's fault. **No client-side analytics tool handles bots well without server-side infrastructure like data center IP blocking and behavioral analysis.**
+This isn't really Umami's fault. No client-side analytics tool handles bots well without server-side infrastructure like data center IP blocking and behavioral analysis.
 
 One thing I'm experimenting with is a Cloudflare WAF rule that blocks known bots, empty user-agents, and known datacenter IP addresses from hitting the analytics endpoints:
 

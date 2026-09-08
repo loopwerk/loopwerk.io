@@ -5,7 +5,7 @@ summary: Here's to the curious ones. The bug finders. The rebels of the happy pa
 
 # An ode to the tester
 
-In software development, we talk a lot about velocity. Shipping faster. Automating more. Reducing friction. But there's one role that rarely gets the attention it deserves, one that quietly holds the entire operation together.
+In software development, we talk a lot about velocity: shipping faster, automating more, reducing friction. But there's one role that rarely gets the attention it deserves.
 
 I'm talking about the tester.
 
@@ -13,7 +13,7 @@ Not "testing in production". Not "QA as a step in the pipeline". Not "we all own
 
 I mean a dedicated tester. A human whose full-time job is to poke, prod, stretch, twist, and sometimes outright abuse your software in ways you, as a developer, would never imagine.
 
-And let me say this plainly: a good tester is worth their weight in gold.
+A good tester is worth their weight in gold.
 
 ## Beyond the happy path
 
@@ -33,13 +33,13 @@ Unit tests are great. You should write them. But they're also narrow by design: 
 
 A tester exists for the opposite scenario: all the things you didn't expect. UX inconsistencies. Weird state transitions. Minor frictions that make an interface feel clumsy. Workflows that technically "work", but feel wrong. Bugs that only appear on Wednesdays when the moon is full.
 
-Every team has stories of bugs so bizarre or specific that no unit test suite on earth could have caught them. And yet… a tester somehow did.
+Every team has stories of bugs so bizarre or specific that no unit test suite on earth could have caught them. And yet... a tester somehow did.
 
 ## More than catching bugs
 
 Shared responsibility for quality doesn't replace expertise. We don't say, "everyone writes code, so we don't need developers," or "everyone thinks about UX, so we don't need a designer." Testing is a real discipline. It has craft, methodology, and intuition.
 
-The value of a great tester isn't just in the bugs they catch, it's in how they elevate the entire team. They ask questions that expose assumptions and reveal fuzzy product requirements. They don't just protect quality; they multiply it.
+The value of a great tester goes way beyond the bugs they catch. They ask questions that expose assumptions and reveal fuzzy product requirements, and that lifts the entire team.
 
 So if you run a software team: hire a tester. A real one. Someone who takes pride in breaking your assumptions before your users break your app. If you already have one, listen to them. Treat them as equals. Because for all our CI pipelines and end-to-end automation, nothing replaces the human who sits down, clicks around, and asks: "What happens if I try something stupid?"
 

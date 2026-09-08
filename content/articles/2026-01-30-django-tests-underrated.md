@@ -11,23 +11,23 @@ I never made that switch for my Django projects. And after years of building and
 
 ## What I actually want from tests
 
-Before we get into frameworks, let me be clear about what I need from a test suite:
+Before we get into frameworks, this is what I need from a test suite:
 
-1. Readable failures. When something breaks, I want to understand why in seconds, not minutes.
+1. Readable failures: when something breaks, I want to understand why in seconds, not minutes.
 
-2. Predictable setup. I want to know exactly what state my tests are running against.
+2. Predictable setup: I want to know exactly what state my tests are running against.
 
-3. Minimal magic. The less indirection between my test code and what's actually happening, the better.
+3. Minimal magic: the less indirection between my test code and what's actually happening, the better.
 
-4. Easy onboarding. New team members should be able to write tests on day one without learning a new paradigm.
+4. Easy onboarding: new team members should be able to write tests on day one without learning a whole new system.
 
-Django's built-in test framework delivers all of this. And honestly? That's enough for most projects.
+Django's built-in test framework delivers all of this. And honestly, that's enough for most projects.
 
 ## Django tests are just Python's unittest
 
 Here's something that surprises a lot of developers: Django's test framework isn't some exotic Django-specific system. Under the hood, it's Python's standard `unittest` module with a thin integration layer on top.
 
-`TestCase` extends `unittest.TestCase`. The `assertEqual`, `assertRaises`, and other assertion methods? Straight from the standard library. Test discovery, setup and teardown, skip decorators? All standard `unittest` behavior.
+`TestCase` extends `unittest.TestCase`. The `assertEqual`, `assertRaises`, and other assertion methods? Straight from the standard library. Test discovery, setup and teardown, and skip decorators are all standard `unittest` behavior too.
 
 What Django adds is integration: Database setup and teardown, the HTTP client, mail outbox, settings overrides.
 
@@ -37,7 +37,7 @@ Neither approach is wrong. But it's objectively more layers.
 
 ## The self.assert* complaint
 
-A common argument I hear against unittest-style tests is: "I can't remember all those assertion methods". But let's be honest. We're not writing tests in Notepad in 2026. Every editor has autocomplete. Type `self.assert` and pick from the list.
+A common argument I hear against unittest-style tests is: "I can't remember all those assertion methods". But we're not writing tests in Notepad in 2026. Every editor has autocomplete. Type `self.assert` and pick from the list.
 
 And in practice, how many assertion methods do you actually use? In my tests, it's mostly `assertEqual` and `assertRaises`. Maybe `assertTrue`, `assertFalse`, and `assertIn` once in a while. That's not a cognitive burden.
 
@@ -57,7 +57,7 @@ with pytest.raises(ValidationError):
     obj.full_clean()
 ```
 
-Yes, pytest's `assert` is shorter. It's a bit easier on the eyes. And I'll be honest: pytest's failure messages are better too. When an assertion fails, pytest shows you exactly what values differed with nice diffs. That's genuinely useful.
+Yes, pytest's `assert` is shorter. It's a bit easier on the eyes. And I'll be honest: pytest's failure messages are better too. When an assertion fails, pytest shows you exactly what values differed with nice diffs. That's really useful.
 
 But here's what makes that work: pytest rewrites your code. It hooks into Python's AST and transforms your test files before they run so it can produce those detailed failure messages from plain `assert` statements. That's not necessarily bad - it's been battle-tested for over a decade. But it is a layer of transformation between what you write and what executes, and I prefer to avoid magic when I can.
 
@@ -95,7 +95,7 @@ def test_slugify(input_text, expected):
     assert slugify(input_text) == expected
 ```
 
-Both are readable. Both work well. The difference is that parameterized is a tiny, focused library that does one thing. It doesn't replace your test runner, introduce a new fixture system, or bring an ecosystem of plugins. It's a decorator, not a paradigm shift.
+Both are readable. Both work well. The difference is that parameterized is a tiny, focused library that does one thing. It doesn't replace your test runner, introduce a new fixture system, or bring an ecosystem of plugins. It's a decorator, not a whole new way of writing tests.
 
 And if you don't even want to install a dependency for this, the standard library has you covered: [`subTest`](https://docs.python.org/3/library/unittest.html#distinguishing-test-iterations-using-subtests) lets you loop over your cases inside a single test method while still reporting each failing input separately.
 
@@ -209,7 +209,7 @@ When I'm debugging a test failure, I want to debug my code, not my test infrastr
 
 ## When I would recommend pytest
 
-I'm not anti-pytest. If your team already has deep pytest expertise and established patterns, switching to Django's runner would be a net negative. Switching costs are real. If I join a project that uses pytest? I use pytest. This is a preference for new projects, not a religion.
+I'm not anti-pytest. If your team already has deep pytest expertise and established patterns, switching to Django's runner would be a net negative. Switching costs are real. If I join a project that uses pytest? I use pytest. This is a preference for new projects, nothing more.
 
 It's also worth noting that pytest can run unittest-style tests without modification. You don't have to rewrite everything if you want to try it. That's a genuinely nice feature.
 
@@ -223,6 +223,4 @@ Add parameterized when you need parametrized tests.
 
 Switch to pytest only when you can name the specific problem Django's framework can't solve. Not because a podcast told you to, but because you've hit an actual wall.
 
-I've been building Django applications for a long time. I've tried both approaches. And I keep choosing boring.
-
-Boring is a feature in test infrastructure.
+I've been building Django applications for a long time, I've tried both approaches, and I keep choosing boring. Boring is a feature in test infrastructure.
