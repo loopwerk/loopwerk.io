@@ -12,9 +12,14 @@ This setup works fine, and is active on all servers I maintain, but there is one
 So now I am blocking these kinds of requests directly within CloudFlare, by using a custom WAF rule with the following expression:
 
 ```text
-(http.request.uri wildcard r"/wp-*") or (http.request.uri wildcard r"/*/wp-*") or
-(http.request.uri wildcard r"/wordpress*") or (http.request.uri wildcard r"/*/wordpress*") or
-(http.request.uri wildcard r"*.php") or (http.request.uri wildcard r"*.php7")
+(http.request.uri.path wildcard r"/wp-*") or
+(http.request.uri.path wildcard r"/*/wp-*") or
+(http.request.uri.path wildcard r"/wordpress*") or
+(http.request.uri.path wildcard r"/*/wordpress*") or
+(http.request.uri.path wildcard r"*.php") or
+(http.request.uri.path wildcard r"*.php7") or
+(http.request.uri.path wildcard r"*/.env*") or
+(http.request.uri.path wildcard r"*/.git")
 ```
 
 To create such a rule for your domain navigate to Security -> WAF -> Custom rules, and press the "Create rule" button. On this page you can click the "Edit expression" link, and then you can paste in the expression from above. Choose the block action, save the form, and you're done!
