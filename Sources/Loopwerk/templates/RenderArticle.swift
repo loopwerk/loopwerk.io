@@ -16,14 +16,21 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "text-secondarytext secondarytext-links text-xs font-mono") {
-    article.date.formatted("MMMM dd, yyyy")
-    Node.raw("&bull; ")
-
-    article.expandedTags.sorted().enumerated().map { index, tag in
-      Node.fragment([
-        %tagPrefix(index: index, totalTags: article.expandedTags.count),
-        %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
-      ])
+    if let summary = article.metadata.summary {
+      div(class: "mb-3") {
+        summary
+      }
+    }
+    div {
+      article.date.formatted("MMMM dd, yyyy")
+      Node.raw("&bull; ")
+      
+      article.expandedTags.sorted().enumerated().map { index, tag in
+        Node.fragment([
+          %tagPrefix(index: index, totalTags: article.expandedTags.count),
+           %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
+        ])
+      }
     }
   }
 }
