@@ -1,5 +1,6 @@
 ---
 tags: javascript
+summary: I liked React but wanted something smaller, so in part 2 I'm trying out Deku: pretty much the same, but 31 KB instead of 141. Plus page.js and cssnext.
 ---
 
 # Researching front end tools, part 2: Deku, page.js and cssnext

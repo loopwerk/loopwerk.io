@@ -1,5 +1,6 @@
 ---
 tags: review, swift, django
+summary: As an exercise I rebuilt my entire Vapor 3 backend in Django REST Framework. Now that I have two more-or-less identical backends, it's time to compare.
 ---
 
 # Vapor 3 versus Django REST Framework

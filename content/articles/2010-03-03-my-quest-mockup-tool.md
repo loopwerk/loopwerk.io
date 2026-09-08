@@ -1,6 +1,7 @@
 ---
 tags: review
 archive: true
+summary: I tested 15 mockup and wireframe tools for the Mac. And the winner is... OmniGraffle Pro.
 ---
 
 # My quest for a mockup tool

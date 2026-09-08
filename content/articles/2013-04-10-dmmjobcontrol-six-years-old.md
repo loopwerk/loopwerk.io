@@ -1,6 +1,7 @@
 ---
 tags: news
 archive: true
+summary: My very first open source project is having a birthday. JobControl was born in April 2007, got abandoned after I quit the company, and I ended up adopting it back.
 ---
 
 # JobControl is six years old

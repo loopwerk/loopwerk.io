@@ -1,5 +1,6 @@
 ---
 tags: review
+summary: I want one endpoint where the client asks for the data it needs, plus real time updates without the manual hassle.
 ---
 
 # Searching for a next gen back end

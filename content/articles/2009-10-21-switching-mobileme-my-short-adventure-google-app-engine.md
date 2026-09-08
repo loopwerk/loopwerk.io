@@ -1,6 +1,7 @@
 ---
 tags: review
 archive: true
+summary: I replaced my $99 MobileMe subscription with Google Apps, Flickr and Dropbox, and tried to host my new Django site on Google App Engine. That last part didn't go so well.
 ---
 
 # Switching from MobileMe & my short adventure with Google App Engine

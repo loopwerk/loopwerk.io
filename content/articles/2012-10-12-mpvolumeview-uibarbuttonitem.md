@@ -1,5 +1,6 @@
 ---
 tags: iOS, howto
+summary: The client wants an Airplay button in the navigation bar, with a custom background. The solution feels a bit hacky, but works perfectly.
 ---
 
 # MPVolumeView (Airplay button) on an UIBarButtonItem

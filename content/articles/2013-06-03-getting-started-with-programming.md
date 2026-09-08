@@ -1,5 +1,6 @@
 ---
 tags: faq, insights
+summary: My recommendation in a nutshell: begin with HTML and CSS, move on to Python and Django, and add Javascript.
 ---
 
 # Getting started with programming

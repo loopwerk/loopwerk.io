@@ -1,6 +1,7 @@
 ---
 tags: django, howto
 archive: true
+summary: Django's template language is missing some pretty basic features. I looked at Mako, Cheetah and Jinja2, and thanks to the Coffin library, Jinja2 turns out to be a very easy drop-in replacement.
 ---
 
 # Using Jinja2 templates in Django

@@ -1,6 +1,7 @@
 ---
 tags: review, django
 archive: true
+summary: Looking for a Python IDE with proper Django autocompletion and debugging, I tried Netbeans, Komodo, PyCharm, Wing and Aptana. If PyCharm was less buggy, there would be no contest.
 ---
 
 # Review roundup: the search for the perfect Python IDE (for Django)

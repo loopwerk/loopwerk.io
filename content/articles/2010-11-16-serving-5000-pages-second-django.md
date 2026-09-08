@@ -1,6 +1,7 @@
 ---
 tags: django
 archive: true
+summary: This website will never need to serve 5000 pages per second, but hey, it's possible now! Caching Django pages with StaticGenerator and Nginx.
 ---
 
 # Serving 5000 pages per second with Django

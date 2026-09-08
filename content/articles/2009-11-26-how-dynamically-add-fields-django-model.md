@@ -1,5 +1,6 @@
 ---
 tags: django, howto
+summary: It took me hours to get this to work, so to save you the time, here is the solution.
 ---
 
 # How to dynamically add fields to a Django model

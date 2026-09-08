@@ -1,5 +1,6 @@
 ---
 tags: javascript
+summary: Angular with Webpack, and then the same setup with Browserify. Falling down that particular rabbit hole made me appreciate Webpack's horrible config a whole lot more.
 ---
 
 # Researching front end tools, part 3: Angular & Webpack vs Browserify

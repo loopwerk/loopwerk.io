@@ -1,5 +1,6 @@
 ---
 tags: review, iOS
+summary: Comparing PonyDebugger, Spark Inspector and Reveal. The 3d view inspectors are great, I just wish they added a network traffic monitor.
 ---
 
 # Review roundup: iOS debug tools and inspectors

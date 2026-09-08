@@ -1,5 +1,6 @@
 ---
 tags: django, review
+summary: After nine years of PHP I switched to Python and Django. I really love both, but there are a couple of things that are really bugging me.
 ---
 
 # Things I "hate" about Python and Django

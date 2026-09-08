@@ -1,5 +1,6 @@
 ---
 tags: review, iOS
+summary: A funny, easy to follow book that teaches you all the basics of iPhone development. It just never goes beyond those basics.
 ---
 
 # Book review: Head First iPhone Development

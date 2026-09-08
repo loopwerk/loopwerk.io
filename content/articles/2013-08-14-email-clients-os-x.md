@@ -1,5 +1,6 @@
 ---
 tags: review, apple
+summary: Apple's Mail app keeps getting worse with Google Mail, so I tried Airmail, Inky, Thunderbird and Postbox. For now Airmail is the winner, at least until Apple fixes their client.
 ---
 
 # Review roundup: email clients for OS X

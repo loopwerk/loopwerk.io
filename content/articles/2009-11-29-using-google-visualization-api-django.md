@@ -1,5 +1,6 @@
 ---
 tags: django
+summary: How to feed Google's Visualization API from your own Django datasource, so your data is never sent to Google.
 ---
 
 # Using the Google Visualization API in Django

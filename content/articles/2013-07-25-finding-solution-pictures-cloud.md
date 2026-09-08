@@ -1,5 +1,6 @@
 ---
 tags: review
+summary: After almost losing my hard drive I need a cloud backup for well over 35 GB of pictures. I looked at Dropbox, Flickr, Picturelife, Everpix, Loom and more.
 ---
 
 # Searching for a solution to back up all my pictures to the cloud

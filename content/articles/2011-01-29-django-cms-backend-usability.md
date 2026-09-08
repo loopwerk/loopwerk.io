@@ -1,5 +1,6 @@
 ---
 tags: review, django
+summary: Django-CMS might be the best CMS for Django on paper, but its admin interface has some real usability problems. Here's what I don't like, and a possible solution.
 ---
 
 # Django-CMS backend usability

@@ -1,5 +1,6 @@
 ---
 tags: iOS
+summary: The client wants an Android app too, and I don't know Java. So, back to Appcelerator it is. So far so good, but will it last?
 ---
 
 # Once again I turn to Appcelerator

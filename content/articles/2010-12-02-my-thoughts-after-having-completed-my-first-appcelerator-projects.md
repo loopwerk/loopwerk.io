@@ -1,5 +1,6 @@
 ---
 tags: iOS, review
+summary: Appcelerator is nice for pretty simple, low-profile apps. But if the budget allows for it, building two native apps will result in higher quality apps.
 ---
 
 # My thoughts after having completed my first Appcelerator project

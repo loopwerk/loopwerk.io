@@ -1,6 +1,7 @@
 ---
 tags: review
 archive: true
+summary: I've switched between Firefox, Safari, Chrome and Opera many many times over the years. Why is there no perfect browser for me?
 ---
 
 # Why is there no perfect browser?

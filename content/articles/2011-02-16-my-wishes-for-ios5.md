@@ -1,6 +1,7 @@
 ---
 tags: iOS
 archive: true
+summary: The notification system needed to be replaced a long long time ago, the lockscreen is useless, and why can't I have custom SMS sounds? My wishlist for iOS 5.
 ---
 
 # My wishes for iOS 5

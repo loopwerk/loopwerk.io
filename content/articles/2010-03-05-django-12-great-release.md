@@ -1,6 +1,7 @@
 ---
 tags: review, django
 archive: true
+summary: I've been playing with the Beta of Django 1.2 and there's a lot to love, from the smarter if tag to the new message system and much better L10N support.
 ---
 
 # Django 1.2, a great release

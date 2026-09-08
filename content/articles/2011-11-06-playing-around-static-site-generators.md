@@ -1,6 +1,7 @@
 ---
 tags: review
 archive: true
+summary: I want to rebuild this website with a static site generator, so I looked at Jekyll, Octopress, Hyde and Blogofile. Sadly I wasn't very happy with any of them.
 ---
 
 # Playing around with static site generators

@@ -1,5 +1,6 @@
 ---
 tags: iOS
+summary: I tried to avoid Objective-C with PhoneGap and Appcelerator, but ended up having to learn it after all. These are the resources that really helped me.
 ---
 
 # Getting started with iPhone app development

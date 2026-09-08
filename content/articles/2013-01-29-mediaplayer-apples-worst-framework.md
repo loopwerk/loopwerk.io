@@ -1,5 +1,6 @@
 ---
 tags: iOS, insights
+summary: I thought the Scrobbler for iOS would be quite an easy app to create. Boy, was I wrong.
 ---
 
 # Apple's worst iOS framework: MediaPlayer

@@ -1,5 +1,6 @@
 ---
 tags: iOS, insights
+summary: In April 2010 I started to work on my very first iPhone app. Looking back at the advances with the biggest impact since then, from ARC to modern Objective-C.
 ---
 
 # iOS development: three years later

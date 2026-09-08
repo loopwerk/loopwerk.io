@@ -1,5 +1,6 @@
 ---
 tags: javascript
+summary: If I had to start a brand new webapp today, what would I use? In part 1 of my research I'm looking at Ampersand.js, React, Webpack, PostCSS and ESLint.
 ---
 
 # Researching front end tools, part 1: Ampersand.js, React, Webpack, PostCSS and ESLint

@@ -1,5 +1,6 @@
 ---
 tags: review, django
+summary: Comparing the three biggest content management systems for Django. In my head I know Django-CMS is the better CMS, but Mezzanine just feels better.
 ---
 
 # Django-CMS vs. FeinCMS vs. Mezzanine

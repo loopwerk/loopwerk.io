@@ -1,6 +1,7 @@
 ---
 tags: review, django
 archive: true
+summary: I need to build a content-based website with multiple writers and article moderation, and Django-CMS plus Zinnia isn't cutting it. Any ideas?
 ---
 
 # Looking for a Django CMS which suits my needs

@@ -1,5 +1,6 @@
 ---
 tags: javascript, insights
+summary: One year after my front end research we've moved Sling to ES6, CommonJS modules, webpack, NPM scripts and a ton of unit tests. A look at everything that changed.
 ---
 
 # Our front end stack one year later
