@@ -47,3 +47,4 @@ A list of recommended articles.
 - [AI is removing the middle class of software engineering](https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html)
 - [Taste Is All That's Left](https://notashelf.dev/posts/taste-is-all-thats-left)
 - ["Code was never the hard part" is an insult to all programmers](https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers)
+- [Programming is art](https://orchidfiles.com/programming-is-art/)

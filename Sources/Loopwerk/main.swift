@@ -221,7 +221,11 @@ try await Saga(input: "content", output: "deploy")
   )
 
   // Sitemap
-  .createPage("sitemap.xml", using: Saga.sitemap(baseURL: SiteMetadata.url))
+  .createPage("sitemap.xml", using: Saga.sitemap(baseURL: SiteMetadata.url, filter: { path, item in
+    if path.string.hasSuffix("feed.xml") { return false }
+    if let article = item as? Item<ArticleMetadata> { return !article.archive }
+    return true
+  }))
 
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))

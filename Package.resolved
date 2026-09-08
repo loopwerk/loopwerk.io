@@ -1,5 +1,5 @@
 {
-  "originHash" : "a8677a7ad8f64c2e5369fcb0bfdd37c21c4c09cfca85403deae6bf7a6a08aaa3",
+  "originHash" : "2c455997a8a8ec7800450b88c25f114847b0a8a4d58972f77c5c3cea9e2839a2",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "fc5cc54f8efedfb5b793fa9a257267d5bb4cdf12",
-        "version" : "3.5.5"
+        "revision" : "fdc7021056436b97bc91c98cffdfb1902908343f",
+        "version" : "3.6.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "a9a5efd40eaf558a2bcd48d64b1d1646be686008",
-        "version" : "1.7.1"
+        "revision" : "d9a5b37470adc940d22c3bcd5ca6953a516b727f",
+        "version" : "1.7.2"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "8d6ad267714cac3ae747cefdd21f7a6665006e1f",
-        "version" : "2.13.7"
+        "revision" : "18b80329749eca5ea29fc50211dca5c7eff5bfec",
+        "version" : "2.13.9"
       }
     },
     {
