@@ -1,6 +1,6 @@
 ---
 tags: ai, deployment, howto
-summary: AI agents ask for Markdown via their Accept header, so why not give it to them? Here's the nginx config, plus a Cloudflare caching gotcha.
+summary: AI agents ask for Markdown via their Accept header, so why not give it to them?
 ---
 
 # Serving Markdown to AI agents
