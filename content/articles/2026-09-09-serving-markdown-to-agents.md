@@ -21,7 +21,7 @@ curl -H "Accept: text/markdown" https://www.loopwerk.io/articles/2026/serving-ma
 
 Why bother? Mostly size: the HTML version of this article weighs 24 KB, the Markdown version just 6 KB. An agent pays for every token it reads, and everything it doesn't have to read leaves more room in its context window for actual work. Plus the Markdown isn't some lossy HTML-to-markdown conversion; it's the source itself, with headings, links, and code blocks with their language annotations all intact.
 
-There are other approaches to this problem. There's the [llms.txt proposal](https://llmstxt.org), and some documentation sites serve a parallel set of URLs where you can append `.md` to any page. But HTTP has had content negotiation since forever: the client says what it wants in the Accept header, and the server picks the best representation it has. One URL for humans and agents alike, no second URL scheme to maintain. It's great when boring old standards turn out to be exactly the right tool.
+There are other approaches to this problem. There's the [llms.txt proposal](https://llmstxt.org), and some documentation sites serve a parallel set of URLs where you can append `.md` to any page. But HTTP has had content negotiation since forever: the client says what it wants in the Accept header, and the server picks the best representation it has. One URL for humans and agents alike. It's great when old standards turn out to be exactly the right tool!
 
 ## Nginx
 
@@ -39,7 +39,6 @@ types {
 
 server {
     listen 80;
-    root /usr/share/nginx/html;
     index $negotiated_index index.html;
 
     charset utf-8;
