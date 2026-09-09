@@ -15,8 +15,8 @@ It's asking for Markdown, saying that HTML is also fine, and promising to make d
 
 This website now actually honors that header. Request any article with `Accept: text/markdown` and you get the article's raw Markdown source, the exact file I wrote, served from the same URL as the HTML version:
 
-```
-curl -H "Accept: text/markdown" https://www.loopwerk.io/articles/2026/serving-markdown-to-agents/
+```shell-session
+$ curl -H "Accept: text/markdown" https://www.loopwerk.io/articles/2026/serving-markdown-to-agents/
 ```
 
 Why bother? Mostly size: the HTML version of this article weighs 24 KB, the Markdown version just 6 KB. An agent pays for every token it reads, and everything it doesn't have to read leaves more room in its context window for actual work. Plus the Markdown isn't some lossy HTML-to-markdown conversion; it's the source itself, with headings, links, and code blocks with their language annotations all intact.
