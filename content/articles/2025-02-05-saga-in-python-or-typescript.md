@@ -5,9 +5,9 @@ summary: What would Saga look like if it were written in Python or TypeScript, r
 
 # Saga... but in Python? Or TypeScript?
 
-About a week and a half ago I wrote [an article](/articles/2025/saga-four-years/) looking back at four years of [Saga](https://getsaga.dev), my static site generator written in Swift. As I said in that article, overall I am very happy with Saga's API and capabilities, but I do wonder if choosing Swift over Python or TypeScript was a mistake. The initial compilation step is slow, there aren't many good options for markdown parsers, nor code syntax highlighters, nor HTML template languages, and Swift probably isn't a logical choice for most (web) developers who want a static site. I ended the article wondering if I should port Saga to Python or TypeScript - which is exactly what I've been working on for the past few days.
+About a week and a half ago I wrote [an article](/articles/2025/saga-four-years/) looking back at four years of [Saga](https://getsaga.dev), my static site generator written in Swift. As I said in that article, overall I am very happy with Saga's API and capabilities, but I do wonder if choosing Swift over Python or TypeScript was a mistake. The initial compilation step is slow, there aren't many good options for Markdown parsers, nor code syntax highlighters, nor HTML template languages, and Swift probably isn't a logical choice for most (web) developers who want a static site. I ended the article wondering if I should port Saga to Python or TypeScript - which is exactly what I've been working on for the past few days.
 
-I have working prototypes in both languages, and I have some thoughts I want to share. Now, both these prototypes are quite limited compared to the full Swift version: only the item writer works for example. But it is possible to render markdown files, using embedded metadata (with different metadata per folder!), to HTML files using renderers, which opens up the possibility to use any template language you could ever want.
+I have working prototypes in both languages, and I have some thoughts I want to share. Now, both these prototypes are quite limited compared to the full Swift version: only the item writer works for example. But it is possible to render Markdown files, using embedded metadata (with different metadata per folder!), to HTML files using renderers, which opens up the possibility to use any template language you could ever want.
 
 Let's start by looking at how an end-user would use the Swift version of Saga, so we have a basis to compare the new versions to.
 
@@ -55,7 +55,7 @@ summary: What would Saga look like if it were written in Python or TypeScript, r
 ---
 ```
 
-And markdown files in the `apps` folder contain embedded metadata like this:
+And Markdown files in the `apps` folder contain embedded metadata like this:
 
 ```markdown
 ---
@@ -67,9 +67,9 @@ date: 2020-06-23
 ---
 ```
 
-This maps to the `ArticleMetadata` and `AppMetadata` types, respectively. We tell Saga explicitly that it should parse markdown files in the `articles` folder parsing the `ArticleMetadata` from those files, and the same for `AppMetadata` inside of the `apps` folder. Finally, all other markdown files in all other folders will be parsed without metadata at all.
+This maps to the `ArticleMetadata` and `AppMetadata` types, respectively. We tell Saga explicitly that it should parse Markdown files in the `articles` folder parsing the `ArticleMetadata` from those files, and the same for `AppMetadata` inside of the `apps` folder. Finally, all other Markdown files in all other folders will be parsed without metadata at all.
 
-Saga validates and transforms the metadata. For example a markdown file inside of the `articles` folder that doesn't include any `tags` in its metadata will not be parsed, it won't be part of the HTML output. The user will get an error in the console telling them about the validation error. It also automatically transforms a comma-separated string (like `saga, open source, swift`) to an array of strings, fully automatic, by leveraging Swift's `Decodable` protocol and a [pretty gnarly custom decoder](https://github.com/loopwerk/Saga/blob/main/Sources/Saga/MetadataDecoder.swift). All that a user of Saga has to deal with are simple native Swift structs, strongly typed. Saga does the rest.
+Saga validates and transforms the metadata. For example a Markdown file inside of the `articles` folder that doesn't include any `tags` in its metadata will not be parsed, it won't be part of the HTML output. The user will get an error in the console telling them about the validation error. It also automatically transforms a comma-separated string (like `saga, open source, swift`) to an array of strings, fully automatic, by leveraging Swift's `Decodable` protocol and a [pretty gnarly custom decoder](https://github.com/loopwerk/Saga/blob/main/Sources/Saga/MetadataDecoder.swift). All that a user of Saga has to deal with are simple native Swift structs, strongly typed. Saga does the rest.
 
 The render functions (`renderArticle`, `renderApps`, and `renderPage`) all get handed an `Item<T>` instance where `T` is that strongly typed metadata - `ArticleMetadata` or `AppMetadata`. If the user opts to use a strongly typed template language or DSL such as [Swim](https://github.com/robb/Swim), everything is strongly typed from top to bottom. Pretty great!
 
@@ -112,7 +112,7 @@ As you can see, the API looks remarkably similar to the Swift version. We have t
 
 By using [Pydantic](https://docs.pydantic.dev/latest/) the Python version of Saga also validates and transforms metadata. So also in this case a missing `tag` in an article would result in an error, and a comma-separated string of tags results in an array of strings.
 
-There are very good markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren't any strongly typed template languages or DSLs as far as I know. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside markdown files, it's a shame that the HTML templates are unaware of exactly what kind of metadata they're dealing with. It's not strongly typed "top to bottom", as in the Swift version.
+There are very good Markdown readers (with support for code block syntax highlighting!) for Python. The only thing is that there aren't any strongly typed template languages or DSLs as far as I know. So while the strongly-typed metadata is absolutely useful for validating and auto-transforming the embedded metadata inside Markdown files, it's a shame that the HTML templates are unaware of exactly what kind of metadata they're dealing with. It's not strongly typed "top to bottom", as in the Swift version.
 
 ## TypeScript
 

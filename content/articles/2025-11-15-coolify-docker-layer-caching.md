@@ -12,7 +12,7 @@ This article breaks down the technical cause of the slowdown, explains the diffe
 
 ## Builds suddenly got slow
 
-Around the start of November 2025, my build times jumped from one minute to nearly five. The logs revealed that every step was running from scratch, even when I only changed a single markdown file.
+Around the start of November 2025, my build times jumped from one minute to nearly five. The logs revealed that every step was running from scratch, even when I only changed a single Markdown file.
 
 Dependencies that should have been cached were being reinstalled every time:
 

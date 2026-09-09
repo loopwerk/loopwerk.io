@@ -45,7 +45,7 @@ func _renderArticlesHeader(title: String, allItems: [AnyItem]) -> Node {
       a(class: "absolute right-[66px] top-2 h-7 w-7 rounded text-center text-lg leading-7 text-searchfg/50 hover:bg-searchfg/10 hover:text-searchfg no-underline hidden", href: "./", id: "search-clear") { "\u{00D7}" }
       input(class: "hidden peer", id: "tag-toggle", type: "checkbox")
       label(class: "absolute right-2 top-2 h-7 px-3 rounded text-[0.8rem] font-medium leading-7 cursor-pointer select-none bg-searchfg/10 text-searchfg hover:bg-searchfg/20 peer-checked:bg-searchfg/20", for: "tag-toggle") { "tags" }
-      div(class: "hidden peer-checked:block absolute top-full left-0 right-0 mt-2 p-4 rounded-md z-10 bg-searchbg") {
+      div(class: "hidden peer-checked:block absolute top-full left-0 right-0 p-4 rounded-md z-10 bg-searchbg") {
         div(class: "flex flex-wrap gap-x-2 text-secondarytext secondarytext-links text-sm") {
           a(href: "/articles/") { "all (\(articles.count))" }
           tagsWithCounts.map { tag, count in
@@ -97,7 +97,7 @@ func _renderArticlesHeader(title: String, allItems: [AnyItem]) -> Node {
   ])
 }
 
-func _renderArticlesList(_ articles: [Item<ArticleMetadata>], groupByYear: Bool = true) -> Node {
+func _renderArticlesList(_ articles: [Item<ArticleMetadata>], groupByYear: Bool) -> Node {
   let articlesPerYear = Dictionary(grouping: articles, by: { $0.year })
   let sortedByYearDescending = articlesPerYear.sorted { $0.key > $1.key }
 
@@ -118,7 +118,7 @@ func _renderArticlesList(_ articles: [Item<ArticleMetadata>], groupByYear: Bool 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles") {
     _renderArticlesHeader(title: "Articles", allItems: context.allItems)
-    _renderArticlesList(context.items)
+    _renderArticlesList(context.items, groupByYear: true)
   }
 }
 
@@ -127,7 +127,7 @@ func renderTag(context: PartitionedRenderingContext<String, ArticleMetadata>) ->
 
   return baseLayout(canocicalURL: "/articles/tag/\(context.key.slugified)/", section: .articles, title: "Articles in #\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
     _renderArticlesHeader(title: "#\(context.key)", allItems: context.allItems)
-    _renderArticlesList(context.items)
+    _renderArticlesList(context.items, groupByYear: true)
   }
 }
 

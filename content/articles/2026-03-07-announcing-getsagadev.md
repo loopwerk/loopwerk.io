@@ -40,9 +40,9 @@ init(
 
 You instead get an array of fragments that you have to piece together. Since it's not so trivial, I've turned the code responsible for this "symbol to HTML" logic into a brand new Swift package: [Sigil](https://github.com/loopwerk/Sigil).
 
-All of this is consumed by Saga using its recently added `register(metadata:fetch:itemProcessor:sorting:writers:)` method, which can programmatically load items, instead of reading them from markdown files on disk. I then have HTML templates written with [Swim](https://github.com/robb/Swim) that render the items to HTML pages.
+All of this is consumed by Saga using its recently added `register(metadata:fetch:itemProcessor:sorting:writers:)` method, which can programmatically load items, instead of reading them from Markdown files on disk. I then have HTML templates written with [Swim](https://github.com/robb/Swim) that render the items to HTML pages.
 
-Once again Saga's flexibility made this website possible. Multiple strongly typed metadata types, the ability to programmatically load items and create pages alongside the normal markdown-file-to-HTML workflow - it all made this website a joy to work on. In a way, GetSaga.dev is the best demonstration of what Saga can do.
+Once again Saga's flexibility made this website possible. Multiple strongly typed metadata types, the ability to programmatically load items and create pages alongside the normal Markdown-file-to-HTML workflow - it all made this website a joy to work on. In a way, GetSaga.dev is the best demonstration of what Saga can do.
 
 ## Auto-deploying on new Saga releases
 

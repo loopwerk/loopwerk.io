@@ -27,9 +27,9 @@ Before you've written a single line of template code, you've already written a l
 
 **Saga** is also a Swift package, but it has a companion CLI you can install via Homebrew or Mint. Run `saga init mysite` and you get a complete project with articles, tags, templates, and a stylesheet, ready to build and serve. Under the hood you write a `main.swift` with the pipeline and add template functions for the pages you want. No required protocols to satisfy, no boilerplate to set up. The trade-off is that Saga is a much smaller project: you won't find a large community or ecosystem around it.
 
-## Step 1: Simple markdown pages
+## Step 1: Simple Markdown pages
 
-Every static site generator needs to turn markdown into HTML using some kind of template. This is where the fundamental design difference between these three tools becomes clear.
+Every static site generator needs to turn Markdown into HTML using some kind of template. This is where the fundamental design difference between these three tools becomes clear.
 
 We're starting very simple with an `index.md` which will be rendered to `/index.html`, and `about.md` which will be rendered to `/about/index.html`.
 
@@ -221,7 +221,7 @@ Now things get interesting. We're adding articles with metadata (author, date, t
 
 ### Frontmatter
 
-The markdown content is almost identical across all three generators, with some notable differences when it comes to the frontmatter -- the embedded metadata at the top of the markdown file:
+The Markdown content is almost identical across all three generators, with some notable differences when it comes to the frontmatter -- the embedded metadata at the top of the Markdown file:
 
 ```text title="Hugo"
 ---
@@ -305,7 +305,7 @@ struct ArticleMetadata: Metadata {
 }
 ```
 
-`author` is a required `String`, not an optional. If you forget to add it to one of your markdown files, Saga logs an error pointing at the exact file and skips it. Publish would crash on the same mistake. Both catch the problem at build time, but Saga lets you keep working.
+`author` is a required `String`, not an optional. If you forget to add it to one of your Markdown files, Saga logs an error pointing at the exact file and skips it. Publish would crash on the same mistake. Both catch the problem at build time, but Saga lets you keep working.
 
 ### Rendering an article
 
@@ -568,11 +568,11 @@ The key path `\.metadata.tags` is what makes this type-safe. Saga knows it's par
 
 ## Step 3: A projects section
 
-The final requirement: a projects section where each project is a markdown file with its own metadata (category, repo URL, display order), rendered as a single list page. No individual project pages.
+The final requirement: a projects section where each project is a Markdown file with its own metadata (category, repo URL, display order), rendered as a single list page. No individual project pages.
 
 ### Hugo
 
-Hugo's approach is straightforward. Each project is a markdown file with custom frontmatter:
+Hugo's approach is straightforward. Each project is a Markdown file with custom frontmatter:
 
 ```yaml
 ---
@@ -603,7 +603,7 @@ And a custom list template for the projects section:
 {{ end }} {{ end }}
 ```
 
-This works fine. Hugo sorts by `.Params.order`, renders each project's markdown body and metadata, done. The downside is familiar by now: custom frontmatter fields like `category` and `repo` are loosely typed. Misspell a field name in your markdown and you get empty output, not an error.
+This works fine. Hugo sorts by `.Params.order`, renders each project's Markdown body and metadata, done. The downside is familiar by now: custom frontmatter fields like `category` and `repo` are loosely typed. Misspell a field name in your Markdown and you get empty output, not an error.
 
 ### Publish
 
@@ -696,7 +696,7 @@ struct ProjectMetadata: Metadata {
 }
 ```
 
-`category` and `repo` are required on projects. `author` is required on articles. If a markdown file is missing a required field, you get an error at build time. No silent failures, no `?? ""` fallbacks in templates.
+`category` and `repo` are required on projects. `author` is required on articles. If a Markdown file is missing a required field, you get an error at build time. No silent failures, no `?? ""` fallbacks in templates.
 
 The template is the most readable of the three:
 
@@ -733,7 +733,7 @@ With the full site built ([source on GitHub](https://github.com/loopwerk/realwor
 
 **Publish** and **Saga** are both Swift packages, which means you get the compiler on your side. Xcode gives you autocomplete, jump-to-definition, and inline errors. Rename a metadata field and the compiler shows you every template that needs updating. Pass the wrong type to a function and it won't build. This is a real advantage over Hugo's "run it and see" workflow. That said, Publish's type safety has a ceiling: with one shared `ItemMetadata` for all sections, most fields end up optional, and the compiler can't tell you that you're accessing an article field on a project page. Saga's per-section metadata types give you the full benefit.
 
-The dev server story for Publish isn't great. **Publish** has a `publish run` command, but it's minimal. It compiles your Swift package, generates the site, and then launches Python's built-in `http.server` to serve the output folder. That's it. No file watching, no live reload, no auto-rebuild. When you change a markdown file or a Swift source file, you have to stop the server, rebuild, and restart. If you're using Xcode, the workflow is Cmd+R to rebuild, then manually refresh your browser.
+The dev server story for Publish isn't great. **Publish** has a `publish run` command, but it's minimal. It compiles your Swift package, generates the site, and then launches Python's built-in `http.server` to serve the output folder. That's it. No file watching, no live reload, no auto-rebuild. When you change a Markdown file or a Swift source file, you have to stop the server, rebuild, and restart. If you're using Xcode, the workflow is Cmd+R to rebuild, then manually refresh your browser.
 
 **Saga** has a `saga dev` command that watches your content and source folders, triggers a rebuild when a file changes, and live-reloads the browser. It works on both macOS and Linux, so developing or deploying on a Linux server is no problem.
 
@@ -776,6 +776,6 @@ Which one you prefer depends on how much control you want, and how much magic yo
 _The full source code for all three implementations is on GitHub: [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg). Clone it, check the code, build each one, compare the output. Consider starring [Saga](https://github.com/loopwerk/Saga) or the RealWorld SSG repo._
 
 > [!UPDATES]
-> **February 24, 2026**: I've added a new example to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): creating a page that isn't backed by a markdown file at all, like a contact form. Hugo requires a "content adapter" file that defines a custom type, plus a custom type template tied together through naming conventions. Publish needs a custom publishing step that imperatively writes the file to disk, and a line in the pipeline to wire it all up. Saga: one line in the pipeline. The [full comparison](https://github.com/loopwerk/realworld-ssg/commit/50f9ed1e02a23d8694458dabc58f0769527359ca) is worth a look.
+> **February 24, 2026**: I've added a new example to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): creating a page that isn't backed by a Markdown file at all, like a contact form. Hugo requires a "content adapter" file that defines a custom type, plus a custom type template tied together through naming conventions. Publish needs a custom publishing step that imperatively writes the file to disk, and a line in the pipeline to wire it all up. Saga: one line in the pipeline. The [full comparison](https://github.com/loopwerk/realworld-ssg/commit/50f9ed1e02a23d8694458dabc58f0769527359ca) is worth a look.
 >
 > **March 2, 2026**: I've added a new comparison to [loopwerk/realworld-ssg](https://github.com/loopwerk/realworld-ssg): how do the generators deal with creating cache-busting filenames for long-cached static resources such as CSS file? (Spoiler: doable with Hugo, Publish doesn't offer support for it, and super easy with Saga.)

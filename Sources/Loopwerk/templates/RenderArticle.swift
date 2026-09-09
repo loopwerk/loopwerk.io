@@ -22,13 +22,14 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
       }
     }
     div {
+      "Posted on"
       article.date.formatted("MMMM dd, yyyy")
-      Node.raw("&bull; ")
-      
+      "in "
+
       article.expandedTags.sorted().enumerated().map { index, tag in
         Node.fragment([
           %tagPrefix(index: index, totalTags: article.expandedTags.count),
-           %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
+          %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
         ])
       }
     }
@@ -38,6 +39,7 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
 @NodeBuilder
 func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   link(href: Saga.hashed("/static/prism.css"), rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"])
+  link(href: SiteMetadata.url.appendingPathComponent(article.url).appendingPathComponent("index.md").absoluteString, rel: "alternate", type: "text/markdown")
   meta(content: article.metadata.summary, name: "description")
   meta(content: "summary_large_image", name: "twitter:card")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")

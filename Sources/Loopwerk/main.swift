@@ -222,8 +222,12 @@ try await Saga(input: "content", output: "deploy")
 
   // Sitemap
   .createPage("sitemap.xml", using: Saga.sitemap(baseURL: SiteMetadata.url, filter: { path, item in
-    if path.string.hasSuffix("feed.xml") { return false }
-    if let article = item as? Item<ArticleMetadata> { return !article.archive }
+    if path.string.hasSuffix("feed.xml") {
+      return false
+    }
+    if let article = item as? Item<ArticleMetadata> {
+      return !article.archive
+    }
     return true
   }))
 
