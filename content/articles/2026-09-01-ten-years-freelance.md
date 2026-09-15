@@ -103,4 +103,4 @@ One warning though: I personally find new projects are getting harder and harder
 You should think long and hard before taking the plunge. Is it worth it? Ten years in, it's still the best working arrangement I've had, but honestly I'm not sure I'd tell you to start freelancing today. At the very least, go in knowing exactly what it takes.
 
 ## Questions?
-If you have other questions about becoming a freelancer, feel free to ask in the comments below, or reach out directly: my details are in the author information below the article.
+If you have other questions about becoming a freelancer, feel free reach out to me: my details are in the author information below the article.

@@ -1,6 +1,7 @@
 ---
 tags: news
 summary: I've added a comment section to the articles, powered by GitHub Discussions.
+archive: true
 ---
 
 # Articles now with comments

@@ -148,34 +148,5 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         a(href: "/articles/") { "› See all articles" }
       }
     }
-
-    div(class: "border-t-2 border-divider mt-12 pt-12") {
-      Node.raw("""
-      <script>
-      (function(){
-        var dark = document.documentElement.classList.contains('dark');
-        var s = document.createElement('script');
-        s.src = 'https://giscus.app/client.js';
-        s.crossOrigin = 'anonymous';
-        s.async = true;
-        Object.assign(s.dataset, {
-          repo: 'loopwerk/loopwerk.io',
-          repoId: 'MDEwOlJlcG9zaXRvcnk0Nzg0NTA3MA==',
-          category: 'Article discussions',
-          categoryId: 'DIC_kwDOAtoOzs4Ciykw',
-          mapping: 'pathname',
-          strict: '1',
-          reactionsEnabled: '1',
-          emitMetadata: '0',
-          inputPosition: 'bottom',
-          theme: dark ? 'dark' : 'light',
-          lang: 'en',
-          loading: 'lazy'
-        });
-        document.currentScript.parentNode.appendChild(s);
-      })();
-      </script>
-      """)
-    }
   }
 }
