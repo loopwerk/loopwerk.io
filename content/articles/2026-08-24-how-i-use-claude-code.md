@@ -5,9 +5,7 @@ summary: Here's how I make the most out of Claude Code: my CLAUDE.md rules and a
 
 # How I use Claude Code
 
-I've made no secret of my mixed feelings about Claude Code, and AI in general. Yes, it makes me more productive, but [at the cost of pride and joy](/articles/2026/ai-productivity-without-joy/) in the craft of being a software developer.
-
-Still, I do use Claude Code to help me with tricky problems or boring busywork. I keep it very simple on purpose: no skills, no MCP, no subagents or multiple agents running in Git worktrees. I like to keep on top of what Claude is doing, interrupting and changing course whenever it goes off in the wrong direction (which it does all the time). It helps me to stay connected with the codebase, and it's the only way I get the highest-quality results that I would write myself.
+I use Claude Code to help me with tricky problems or boring busywork. I keep it very simple on purpose: no skills, no MCP, no subagents or multiple agents running in Git worktrees. I like to keep on top of what Claude is doing, interrupting and changing course whenever it goes off in the wrong direction (which it does all the time). It helps me to stay connected with the codebase, and it's the only way I get the highest-quality results that I would write myself.
 
 Over time I've turned the most common reasons to interrupt Claude into `CLAUDE.md` rules, and that does help to reduce the number of times I have to step in. Here's one from a Django project, which explains the Python specifics.
 

@@ -86,4 +86,4 @@ Luckily Cloudflare's Cache Rules have a Vary setting for exactly this. I added i
 
 The normalizing part matters. Real-world headers are all over the place, and if Cloudflare keyed the cache on the raw header value, every unique string would get its own cached copy and the hit rate would fall off a cliff. Normalizing collapses all of that into the two media types I listed, so each URL has exactly two variants at the edge: one HTML, one Markdown, both served with `cf-cache-status: HIT`.
 
-Is it a bit odd to optimize my site for robots when I have [mixed feelings about AI](/articles/2026/ai-productivity-without-joy/) and my robots.txt tells crawlers not to train on my articles? Maybe. But an agent fetching an article to answer somebody's question is, in the end, just a reader too. Might as well hand it an optimized version.
+Is it a bit odd to optimize my site for robots when my robots.txt tells crawlers not to train on my articles? Maybe. But an agent fetching an article to answer somebody's question is, in the end, just a reader too. Might as well hand it an optimized version.
