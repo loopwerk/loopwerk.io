@@ -5,9 +5,9 @@ summary: After years on Plausible I switched to self-hosting and discovered just
 
 # Self-hosting Plausible broke my analytics
 
-For years I used Google Analytics. It was free, it was powerful, and everyone used it. But I grew increasingly uncomfortable with what "free" actually meant: Google tracking visitors across the web, building advertising profiles from my site's data, and requiring cookie consent banners that annoyed everyone. I didn't want my websites to be part of that machine.
+For years I used Google Analytics, because it was free and powerful and everybody used it. But Google gives you all of that for a reason: they track your visitors across the web and build advertising profiles out of your site's data, and you get to put up one of those cookie consent banners that everybody hates. I didn't want my websites to be part of that machine.
 
-So, in July 2020 I switched to [Plausible Analytics](https://plausible.io). It was everything Google Analytics wasn't: lightweight, privacy-friendly, no cookies, no cross-site tracking, and fully compliant with GDPR without needing a consent banner. The trade-off was simple and honest: you pay with money instead of with your visitors' data. I was happy to make that deal.
+So, in July 2020 I switched to [Plausible Analytics](https://plausible.io): lightweight, privacy-friendly, no cookies, no cross-site tracking, and GDPR-compliant without a consent banner. You pay with money instead of with your visitors' data, and I was happy to pay.
 
 For a while I was able to stay on their 10k pageviews plan, which cost $48 per year. When I outgrew that in July 2022, their 100k plan had jumped from $96 to $190 per year. Luckily I was grandfathered into the old pricing and only had to pay $96. I stayed on that plan until about a week ago.
 
@@ -29,9 +29,9 @@ Without proper bot filtering, the numbers stop representing real people. At that
 
 ## When open source and making money collide
 
-And it doesn't stop there. Funnels and revenue tracking are also locked to the paid cloud version. I don't mind that some premium features are reserved for the cloud version. But bot filtering isn't a nice-to-have; it's what makes the numbers meaningful. Without it, at least for sites like mine that get hammered by bots, the self-hosted version is essentially useless.
+And it doesn't stop there. Funnels and revenue tracking are also locked to the paid cloud version. Which is fine by me, reserving some premium features for the cloud version is a totally reasonable way to make money. Bot filtering is different though. Without it the numbers don't mean anything, at least not for sites like mine that get hammered by bots, which makes the self-hosted version essentially useless for me.
 
-Offering managed hosting and backups should be enough to justify a paid tier. Instead, Plausible talks up being open source while they strip out core functionality to push you towards it.
+Managed hosting and backups should be more than enough to justify a paid tier. But Plausible loves to talk about how they're open source, while stripping core functionality out of that open source version to push you towards the paid one.
 
 In fact, in the case of funnels they even show the missing feature in a useless report that can't be removed, always in your face:
 

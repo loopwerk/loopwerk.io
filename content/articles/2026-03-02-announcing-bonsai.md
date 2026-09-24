@@ -31,8 +31,7 @@ import Bonsai
 let minified = Bonsai.minifyHTML(html)
 ```
 
-> [!NERD ALERT]
-> Under the hood, Bonsai operates in a single pass over the input, working directly on UTF-8 bytes rather than Swift `String` or `Character` types, because that's way too slow. No intermediate DOM or AST is constructed. Attribute names are compared using FNV-1a hashes against pre-computed lookup tables, avoiding string allocations for case-insensitive comparisons.
+Under the hood, Bonsai operates in a single pass over the input, working directly on UTF-8 bytes rather than Swift `String` or `Character` types, because that's way too slow. No intermediate DOM or AST is constructed. Attribute names are compared using FNV-1a hashes against pre-computed lookup tables, avoiding string allocations for case-insensitive comparisons.
 
 These choices keep it fast. On a ~143 KB HTML file, benchmarked over 1,000 iterations on an M1 Max:
 

@@ -39,16 +39,14 @@ I've built and maintain quite a few [open source projects](/open-source/), and t
 ### 3. Social media
 Social media is hit-or-miss, but it provided the rest. I landed **WeTransfer**, **Sentry** and **Video.io** through tweets from people I followed, although in Sentry's case it was the open source work that actually got me the job. Only one client found me on LinkedIn, and I found **Sound Radix** via the [Svelte Discord server](https://svelte.dev/chat).
 
-So no, hardly any of my work came from "hunting" for jobs. Just one job came from Upwork, and one from Remote OK. The rest came from being visible in the right niches and maintaining relationships with people I'd worked with years ago.
+So no, hardly any of my work came from "hunting" for jobs. Just one job came from Upwork, and one from Remote OK. Everything else happened because people already knew me: from a previous job, from open source, or from social media.
 
 ## The pros and cons of freelancing
-Freelancing is often romanticized, but the trade-offs are heavy. 
-
-On the pro side, there's of course the freedom. You choose who you work for, and if a project feels off, you can say no. It (potentially) pays significantly more than a standard salary, and you are largely insulated from corporate busy work like endless meetings and other bureaucracy. You are there to solve a problem, and when it's solved, you move on.
+Let's start with the pros, and the biggest one is of course the freedom: you choose who you work for, and if a project feels off, you can simply say no. It (potentially) pays significantly more than a standard salary, and you are largely insulated from corporate busy work like endless meetings and other bureaucracy. You are there to solve a problem, and when it's solved, you move on.
 
 There are some pretty serious cons to freelancing though. First of all, there is no paid time off. If you're sick, you're losing money, and if you take a vacation, it's lost billable hours. And something that maybe not everyone realizes: getting a mortgage as a freelancer is a struggle - at least here in the Netherlands. Banks don't really like to lend huge sums of money to people with no fixed guaranteed income.
 
-But the hardest part is the downtime anxiety. When a project ends and the next one isn't lined up, it's hard not to worry. Even after ten years, the period between contracts is stressful, especially when that downtime turns into months. My worst period as a freelancer was in 2018 after a fourteen-month job suddenly ended without warning, and I had nothing else lined up. It took me seven months to find the next project, during which I used up most of my savings. The anxiety was very real, and more than once I thought about leaving freelancing behind.
+But the hardest part is the downtime. When a project ends and there's nothing lined up after it, it's hard not to worry, and even after ten years I still get stressed between contracts. Especially when the downtime turns into months. My worst period as a freelancer was in 2018 after a fourteen-month job suddenly ended without warning, and I had nothing else lined up. It took me seven months to find the next project, during which I used up most of my savings. The anxiety was very real, and more than once I thought about leaving freelancing behind.
 
 ## What to charge
 Speaking of freelancing paying more than a standard salary, let's talk about another common question: what should you charge your clients? This is a difficult question to answer, since it really depends on your own situation. Here's how I think you should come up with your hourly rate:
@@ -66,39 +64,35 @@ Personally, I have two rates: my standard one for short-term projects, and a 25%
 Every freelancer has a "client from hell" story. I have two that taught me a lot about running a business.
 
 ### The shelf treatment
-For one long-term project, I was building an iOS app that was heavily dependent on a custom backend the client was building in-house. In theory, this was fine. In practice, I became a victim of their poor project management.
+For one long-term project I was building an iOS app on top of a custom backend that the client was building in-house, and their backend team was always behind schedule. Whenever I reached a point where I couldn't continue without a certain API endpoint, I'd get a message on Friday afternoon: "Hey, we're behind on the backend. Don't work next week while we catch up."
 
-Multiple times, I'd reach a point where I couldn't proceed until a specific API endpoint was finished. I'd be told on a Friday afternoon: "Hey, we're behind on the backend. Don't work next week while we catch up."
+Don't work next week. As if I'm a tool you can put back on the shelf whenever you don't need it, and my income is just... paused. When I asked for a minimum billable guarantee, so I could actually pay my bills during those forced gaps, they turned it into a massive fight. I should simply "find other projects" to fill the gaps, they said. Sure! The world is obviously full of clients looking to hire someone for exactly five days, starting next Monday.
 
-They essentially expected me to sit on a shelf like a tool they could pick up and put down at will, without any compensation for the dead air in my schedule. When I finally asked for a minimum billable guarantee, an insurance policy so I could actually pay my own bills while waiting for them, they turned it into a massive fight. They told me I should just "find other projects" to fill those random, week-long gaps, as if the world is full of clients waiting to hire someone for exactly five days on a moment's notice.
-
-I liked the app and the work, but I had to walk away. It was a hard lesson: if a client doesn't respect your time as a professional, they don't respect you.
+I liked the app and I liked the work, but I walked away. A client that doesn't respect your time doesn't respect you.
 
 ### The Xcode bait-and-switch
-The second story involves a CEO who was a master of the grand vision. He sold me on a revolutionary platform, a world-class engineering team, and a codebase that was "clean and ready to scale".
+Story number two is about a CEO with a grand vision, who promised me a revolutionary platform, built by a "world-class engineering team" on a codebase that was "clean and ready to scale". And I believed him! Then on my first day I opened the project in Xcode, and... yeah. Spaghetti code and hacks everywhere I looked. The world-class engineering team? One junior developer, building on top of the ruins left behind by five previous teams, who all left within six months. I spent a month fixing critical bugs and submitting pull requests, trying to somehow save this thing, but the amount of technical debt made it hopeless.
 
-I believed the hype. Then, on my first day, I opened the project in Xcode. My heart sank. It was a disaster zone of spaghetti code and hacks. That "world-class team" turned out to be a junior developer, who was building on top of the ruins of five previous teams that all left after six months. I spent a month trying to salvage the situation, submitting pull requests and fixing critical bugs from day one, but the technical debt was a mountain that couldn't be climbed.
+So I handed in my notice, and the CEO went ballistic. He refused to pay my invoice, claimed that I had "duped" him, that my month of bug fixing was actually "onboarding time", and then came the threats of legal action. In the end, after a whole lot of back and forth, I got half of the invoice paid. I never saw the other half.
 
-When I realized I'd been sold a lie and handed in my notice, the CEO went ballistic. He refused to pay my invoice, claiming I had "duped" him and that the month I spent fixing his broken app was actually just "onboarding time". He followed up with a stream of insults and threats of legal action. After a long, exhausting battle, I managed to get half the invoice paid. I never saw the other half.
-
-That experience taught me to trust my gut. I shouldn't have stayed even that one month.
+The lesson? Trust your gut. I shouldn't have stayed even that one month.
 
 ## My advice if you're thinking of freelancing
 If you're thinking of taking the plunge, don't just quit your job and hope for the best.
 
 First, grow your savings account. You will eventually hit a dry spell that lasts months. If you don't have at least six months of living expenses in the bank, the stress will force you to take bad jobs for low pay. Freelancing is only fun when you have the power to say no.
 
-Second, protect yourself legally and financially. Get the agreement in writing, and push for a kill fee or a minimum billable amount when you can. For new clients I also recommend asking for part of the first invoice upfront. A client who won't pay a deposit isn't automatically a bad client, but it's worth finding out why.
+Second, protect yourself legally and financially. Get the agreement in writing, and push for a kill fee or a minimum billable amount when you can. For new clients I also recommend asking for part of the first invoice upfront. A client who won't pay a deposit isn't automatically a bad client, but do find out why they won't.
 
-The minimum billable amount matters even more on retainer-style work, where you're not booked for forty hours a week but you are expected to be available when something breaks. Being available means you can't take on a full project somewhere else, so a week with zero hours logged is still a week the client has to pay for. The fee buys exclusivity: they're the only ones who get to claim that time.
+The minimum billable amount is even more important for retainer-style work. You're not booked for forty hours a week, but you're expected to be available when something breaks, and that means you can't take on another full project in the meantime. The client pays for the exclusive claim on your time, even in a week where nothing breaks and zero hours get logged.
 
-Third, ask to see the code before you sign. Read access to the repository is ideal, but even a screenshare where someone walks you through the project tells you a lot. Check whether any tests exist. Look at the commit history to see how many developers have come and gone, and ask why the last one left. If an NDA is the blocker, sign the NDA. If they still won't show you anything, that is your answer.
+Third, ask to see the code before you sign anything. Read access to the repository is ideal but a screenshare works too. Check if there are tests. Check how many developers came and went, and ask why the last one left. Sign an NDA if that's what it takes to see the code. If they refuse even then, walk away.
 
-Fourth, work on your visibility before you need it. Don't wait until you're unemployed to start a blog or contribute to open source. Go to conferences and meetups, talk to people, and be helpful without expecting an immediate return. My writing and open source work rarely brought me a project directly, but they are the reason interviews turned into a formality instead of an evaluation.
+Fourth, work on your visibility long before you need it. Don't wait until you're unemployed before starting a blog or publishing open source code. Go to conferences and meetups even when there's no immediate payoff. My own writing and open source work rarely resulted in a project directly, but it is why my interviews were usually just a formality.
 
-Finally, start with the people you already know. Talk to your colleagues today. Let them know you're thinking about going solo. Those conversations are what turn into work a year from now. In my case, nearly every project came from someone I'd worked with, or someone who used my code.
+Finally, start with the people you already know. Tell your colleagues that you're thinking about going solo. A conversation like that can easily turn into a project a year later. Nearly all of my projects came from someone I'd worked with before, or from someone who used my code.
 
-One warning though: I personally find new projects are getting harder and harder to come by. Part of that is the economy, and part of it is AI: work that used to be a small paid project is something clients now try to do themselves first. Remote work has fallen out of fashion again too, which matters when you don't live in a tech hub.
+One warning though: I personally find new projects are getting harder and harder to come by. Some of that is the economy, and some of it is AI: work that used to be a small paid project is now something clients first try to do themselves. Remote work has fallen out of fashion again too, which matters when you don't live in a tech hub.
 
 You should think long and hard before taking the plunge. Is it worth it? Ten years in, it's still the best working arrangement I've had, but honestly I'm not sure I'd tell you to start freelancing today. At the very least, go in knowing exactly what it takes.
 
