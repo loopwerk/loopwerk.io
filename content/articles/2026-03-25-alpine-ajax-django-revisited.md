@@ -106,9 +106,9 @@ The `AlpineTemplateResponse` from [the original article](/articles/2025/alpine-a
 
 I thought I was being smart to prevent template duplication this way, but there are two problems:
 
-1. **The view does too much work.** Every POST action calls `get_context`, which fetches everything: the article, the parsed Markdown body, the comments, the like state, the comment form. When the user clicks "Like", we do all this work that we'll never use in the partial template. The template partial means the *response* is small, but the *server-side work* is exactly the same as rendering the full page.
+1. The view does too much work. Every POST action calls `get_context`, which fetches everything: the article, the parsed Markdown body, the comments, the like state, the comment form. When the user clicks "Like", we do all this work that we'll never use in the partial template. The template partial means the *response* is small, but the *server-side work* is exactly the same as rendering the full page.
 
-2. **The template is a mess.** Those `{% partialdef %}` blocks scattered throughout the template make it noisy and hard to read. In a small example it's fine, but in a real template with 200+ lines, it gets ugly fast.
+2. The template is a mess. Those `{% partialdef %}` blocks scattered throughout the template make it noisy and hard to read. In a small example it's fine, but in a real template with 200+ lines, it gets ugly fast.
 
 ## When doubt set in: switching to Jinja2
 
@@ -131,9 +131,9 @@ Template partials gave me #2 and #3, but not #1 or #4. Switching to Jinja2 and r
 
 ## Where I ended up: separate views with template includes
 
-The answer turned out to be straightforward, and the one I initially discarded as "too much boilerplate": instead of one monolithic view handling all POST actions, split each action into its own view with its own URL. And instead of `{% partialdef %}`, use plain `{% include %}` tags to extract reusable template fragments.
+The solution turned out to be straightforward, and the one I initially discarded as "too much boilerplate": instead of one monolithic view handling all POST actions, split each action into its own view with its own URL. And instead of `{% partialdef %}`, use plain `{% include %}` tags to extract reusable template fragments.
 
-Let me show you. Here's the simplified article template:
+Here's the simplified article template:
 
 ```django title="article.html"
 {% extends "base.html" %}
@@ -149,7 +149,7 @@ Let me show you. Here's the simplified article template:
 {% endblock %}
 ```
 
-Clean and readable. Each include is a self-contained fragment. And here's the like form:
+Clean and readable: each include is a self-contained fragment. For example, here's the like form:
 
 ```django title="_like_form.html"
 <form method="post"
@@ -165,7 +165,7 @@ Clean and readable. Each include is a self-contained fragment. And here's the li
 </form>
 ```
 
-And finally, the view:
+And finally, its view:
 
 ```python title="views.py"
 class ToggleLikeView(LoginRequiredMixin, View):
@@ -194,36 +194,34 @@ class ToggleLikeView(LoginRequiredMixin, View):
         return redirect(article)
 ```
 
-No comment queries. No form building. No Markdown parsing. Just the like state.
+The `is_alpine` check provides a redirect fallback for non-JavaScript POST requests, keeping things progressive. And the `ArticleView` itself becomes GET-only. No more branching on POST keys. No `get_context` method that fetches everything for every action. We have more views, but they all do one simple thing, so they end up being easier to understand and maintain.
 
-The `is_alpine` check provides a redirect fallback for non-JavaScript POST requests, keeping things progressive. And the `ArticleView` itself becomes GET-only. No more branching on POST keys. No `get_context` method that fetches everything for every action. Each view does one thing.
-
-## The trade-offs
+## Pros and cons
 
 There are a few downsides to this approach that are worth mentioning.
 
-**More templates:** for the article page, I went from one template to several: the include fragments (`_like_form.html`, `_comments.html`) that are shared between the full page and the AJAX responses. When an action needs to update multiple elements on the page, you also end up with small response templates that combine the right includes. For example, if submitting a comment should update both the comment list and a comment count elsewhere on the page:
+More templates: for the article page, I went from one template to several: the include fragments (`_like_form.html`, `_comments.html`) that are shared between the full page and the AJAX responses. When an action needs to update multiple elements on the page, you also end up with small response templates that combine the right includes. For example, if submitting a comment should update both the comment list and a comment count elsewhere on the page, you need to create a specialized response template for that:
 
 ```jinja title="_add_comment_response.html"
 {% include "articles/_comments.html" %}
 {% include "articles/_engagement_counts.html" %}
 ```
 
-Trivial, but still a file you have to create and name.
+It's not rocket science, but it's still a file you have to create and name.
 
 It's also harder to make sure that the template fragment has access to the context it needs when included into the big template via `{% include %}`, compared to `{% partialdef %}` and one single view always rendering it.
 
-**More views and URL routes:** each action gets its own view class and its own `path()` entry. For a page with likes, comments, and subscriptions, that's three or four extra views.
+More views and URL routes: each action gets its own view class and its own `path()` entry. For a page with likes and comments, that's two or three extra views.
 
 But here's what I got in return:
 
-**Actual performance improvement:** not just smaller responses, but less work on the server. Each view only queries what it needs.
+Actual performance improvement: not just smaller responses  sent to the browser, but less work executed on the server. Each view only queries what it needs.
 
-**Jinja2:** I'm using Jinja2 instead of the Django Template Language. I can call functions, I have proper expressions, and I don't need custom template tags for basic things. This alone was worth the switch.
+Jinja2: I'm using Jinja2 instead of the Django Template Language. I can call functions, I have proper expressions, and I don't need custom template tags for basic things. This alone was worth the switch.
 
-**Readable templates:** the main `article.html` is short and shows the page structure at a glance. Each fragment is self-contained. No `{% partialdef %}` blocks scattered everywhere.
+Readable templates: the main `article.html` is short and shows the page structure at a glance. Each fragment is self-contained. No `{% partialdef %}` blocks scattered everywhere.
 
-**Simple views:** each view does exactly one thing. Easy to understand, easy to test, easy to optimize.
+Simple views: each view does exactly one thing. Easy to understand, easy to test, easy to optimize.
 
 ## Conclusion
 
@@ -235,9 +233,9 @@ My overall feelings on Django + Alpine AJAX have also changed. I still believe t
 
 But the dream was to build a plain old Django application using simple views and simple templates, using old-fashioned MPA server-rendered pages. Sprinkle in a few Alpine AJAX attributes and magically your site gets SPA-like usability. And it simply hasn't played out that way for me. Yes, you *could* do that, if you're fine with the wastefulness of returning full pages as a response to AJAX requests. But when you want to do it better than that, you end up with more boilerplate to make it possible to return small bits of HTML.
 
-And this isn't really about Alpine AJAX specifically; htmx would lead to the exact same place. The fundamental tension is in the HTML-over-the-wire approach itself: the server has to know which fragments of HTML to return, and that means structuring your views and templates around it. You trade the complexity of a JavaScript frontend for a different kind of complexity on the server.
+I should note that this isn't really about Alpine AJAX specifically; htmx would lead to the exact same place. The cause is the HTML-over-the-wire approach itself: the server has to know which fragments of HTML to return, and that means structuring your views and templates around it. You trade the complexity of a JavaScript frontend for a different kind of complexity on the backend.
 
-Progressive enhancement adds to that complexity. Every form handling view needs an `is_alpine` check with a redirect fallback, every form needs to work both as a regular POST and as an AJAX submit. If I dropped progressive enhancement and just required JavaScript, those redirect fallbacks and the branching that comes with them would disappear. The views would be simpler. But I think progressive enhancement is important enough to keep in place.
+Progressive enhancement adds to that complexity. Every form handling view needs an `is_alpine` check with a redirect fallback, because every form needs to work both as a regular POST and as an AJAX submit. If I dropped progressive enhancement and just required JavaScript, those redirect fallbacks and the branching that comes with them would disappear. The views would be simpler. But I think progressive enhancement is important enough to keep in place.
 
 Would I use Alpine AJAX (or htmx) again? Honestly: probably not. I have a lot more fun when building frontends with SvelteKit, and for me Django shines when I limit its role to an API, ORM, and admin interface - not so much HTML templates and form handling. 
 
