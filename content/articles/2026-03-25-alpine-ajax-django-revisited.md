@@ -13,7 +13,7 @@ I've now been using this new stack for a while, and my approach -as well as my o
 
 [Alpine AJAX](https://alpine-ajax.js.org/) is a lightweight alternative to [htmx](https://htmx.org), which you can use to enhance server-side rendered HTML with a few attributes, turning `<a>` and `<form>` tags into AJAX-powered versions. No more full page refreshes when you submit a form.
 
-The key mechanic: when a form has `x-target="comments"`, Alpine AJAX submits the form via AJAX, finds the element with that ID in the response, and swaps it into the page. The server returns HTML, not JSON.
+It works like this: when a form has an attribute such as `x-target="comments"`, Alpine AJAX submits the form via AJAX, finds the element with ID `comments` in the response, and swaps it into the page. Notably this means that the server returns HTML instead of JSON, like we're kind of used to with our APIs.
 
 In the original article I used [django-template-partials](https://github.com/carltongibson/django-template-partials) (since merged into Django itself) to mark sections of a template as named partials using `{% partialdef %}`. Combined with a custom `AlpineTemplateResponse` the view could automatically return just the targeted partial when the request came from Alpine AJAX.
 
@@ -127,7 +127,7 @@ It was at this moment that I seriously thought about throwing the entire fronten
 3. No template duplication between the full page and the AJAX response.
 4. Simple views that only do the work they need to do.
 
-Template partials gave me #2 and #3, but not #1 or #4. Switching to Jinja2 and returning the full template for AJAX requests gave me #1 and #3, but not #2 or #4. I needed a different approach.
+Template partials gave me #2 and #3. Switching to Jinja2 and returning the full template for AJAX requests gave me #1 and #3. But I wanted all four things.
 
 ## Where I ended up: separate views with template includes
 
