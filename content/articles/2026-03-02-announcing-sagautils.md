@@ -5,15 +5,15 @@ summary: A collection of reusable utilities for Saga, extracted from this very w
 
 # Announcing SagaUtils
 
-Over the years, I've built up a collection of HTML post-processing utilities for this website. Things like generating a table of contents from headings, converting blockquotes with `[!TYPE]` syntax into styled asides, adding `target="_blank"` to external links, and various String helpers for stripping HTML tags or truncating text.
+Over the years, I've built up a collection of HTML post-processing utilities for this website. Things like generating a table of contents from headings, converting blockquotes with `[!TYPE]` syntax into styled asides, adding `target="_blank"` to external links, and various helpers for stripping HTML tags or truncating text.
 
-All of this lived in a single `String+Extensions.swift` file inside the loopwerk.io codebase. It was one big `improveHTML()` method that did everything at once: parse the HTML with [SwiftSoup](https://github.com/scinfu/SwiftSoup), loop through headings, process links, convert blockquotes, and return the result. It worked, but it wasn't reusable, and adding or removing a transformation meant editing a monolithic function.
+All of this lived in a single `String+Extensions.swift` file inside the loopwerk.io codebase. It was one big `improveHTML()` method that did everything at once: parse the HTML with [SwiftSoup](https://github.com/scinfu/SwiftSoup), loop through headings, process links, convert blockquotes, and return the result. It worked for me, but I wanted to make it composable and reusable for others.
 
-I've now extracted and restructured these utilities into their own package: [SagaUtils](https://github.com/loopwerk/SagaUtils).
+That's why I've extracted and restructured these utilities into their own package: [SagaUtils](https://github.com/loopwerk/SagaUtils).
 
 ## Composable HTML transformations
 
-The key improvement is that transformations are now composable. Each one is a standalone function with the signature `(Document) throws -> Void`, and you combine them using `swiftSoupProcessor`:
+The key improvement is that transformations are now composable. Each one is a standalone function, and you combine them using `swiftSoupProcessor`:
 
 ```swift
 import SagaUtils
@@ -29,12 +29,12 @@ try await Saga(input: "content", output: "deploy")
   .run()
 ```
 
-The built-in transformations are:
+SagaUtils ships with the following transformations:
 
-- **`generateTOC`**: Replaces a `%TOC%` placeholder with a `<nav class="toc">` generated from headings. Also adds anchor links to each heading.
-- **`convertAsides`**: Converts blockquotes with `[!TYPE]` syntax (like `[!WARNING]`) into `<aside class="warning">` elements.
-- **`processExternalLinks`**: Adds `target="_blank"` and `rel="nofollow"` to external links.
-- **`addHeadingAnchors`**: Adds named anchors to h1, h2, and h3 elements. (Included in `generateTOC` already, so you only need this if you want anchors without a table of contents.)
+- `generateTOC`: Replaces a `%TOC%` placeholder with a table of contents generated from headings in your article, while also adding anchor links to each heading.
+- `convertAsides`: Converts blockquotes with `[!TYPE]` syntax (like `[!WARNING]`) into `<aside class="warning">` elements.
+- `processExternalLinks`: Adds `target="_blank"` and `rel="nofollow"` to external links.
+- `addHeadingAnchors`: Adds named anchors to all headings (used by `generateTOC`).
 
 Writing your own transformation is straightforward since it's just a function that takes a SwiftSoup `Document`:
 
