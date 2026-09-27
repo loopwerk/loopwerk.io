@@ -1,6 +1,7 @@
 ---
 tags: django, insights
 summary: Django's generic class-based views often clash with the Zen of Python. Here's why the base View class feels more Pythonic.
+archive: true
 ---
 
 # Django views versus the Zen of Python

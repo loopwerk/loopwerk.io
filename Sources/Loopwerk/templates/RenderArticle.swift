@@ -17,11 +17,11 @@ func tagPrefix(index: Int, totalTags: Int) -> Node {
 func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
   div(class: "text-secondarytext secondarytext-links text-xs font-mono") {
     if let summary = article.metadata.summary {
-      div(class: "mb-3") {
+      p {
         summary
       }
     }
-    div {
+    p {
       "Posted on"
       article.date.formatted("MMMM dd, yyyy")
       "in "
@@ -32,6 +32,9 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
           %a(href: "/articles/tag/\(tag.slugified)/") { "#\(tag)" },
         ])
       }
+    }
+    if article.archive {
+      p(class: "text-secondarytext text-xs font-mono font-bold") { "This is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
     }
   }
 }
@@ -81,10 +84,6 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
       h1 { context.item.title }
       div(class: "-mt-6") {
         renderArticleInfo(context.item)
-      }
-
-      if context.item.archive {
-        p(class: "text-secondarytext text-lg font-bold") { "Attention: this is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
       }
 
       if let heroImage = context.item.metadata.heroImage {
