@@ -1,12 +1,11 @@
 ---
 tags: iOS, howto
 summary: The client wants an Airplay button in the navigation bar, with a custom background. The solution feels a bit hacky, but works perfectly.
+archive: true
 ---
 
 # MPVolumeView (Airplay button) on an UIBarButtonItem
 In an app I'm currently building, the client wants an Airplay button in the navigation bar, with a nice background like so:
-
-![toolbar screenshot][1]
 
 After trying some things, the solution seems to be to loop over the subviews. It feels a bit hacky, but works perfectly:
 
@@ -32,6 +31,3 @@ self.navigationItem.rightBarButtonItems = @[
     [[UIBarButtonItem alloc] initWithCustomView:informationButton]
 ];
 ```
-
-
-  [1]: https://dl.dropbox.com/u/2310965/toolbar_example.png

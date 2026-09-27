@@ -3,7 +3,7 @@ tags: sveltekit
 summary: Last August I wrote about trying to come up with the architecture for a SvelteKit app I was working on, and failing.  I'm happy to say that I have found a solution for all my problems!
 ---
 
-# SvelteKit Architecture - the solution
+# SvelteKit architecture - the solution
 
 In August last year [I wrote](/articles/2021/architecting-sveltekit/) about trying to come up with the architecture for a SvelteKit app I was working on, namely my side-project [Critical Notes](https://www.critical-notes.com/). I wanted to make sure that I was doing as few REST requests as possible, allowing for centralized WebSocket updates, and minimizing boilerplate. At that time I failed to come up with a good solution, and the article ended on a sad note.
 

@@ -1,6 +1,7 @@
 ---
 tags: insights
 summary: Here's to the curious ones. The bug finders. The rebels of the happy path. The round pegs who try every square hole just to see what breaks.
+archive: true
 ---
 
 # An ode to the tester
