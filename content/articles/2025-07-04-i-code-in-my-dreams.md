@@ -1,11 +1,12 @@
 ---
 tags: personal
+archive: true
 summary: I often get my best coding inspiration late at night, and when I go to bed with an unsolved problem, I literally write lines of code in my dreams.
 ---
 
 # I code in my dreams
 
-It's almost midnight again, and I'm still hunched over my keyboard, furiously typing away, working on a side project. The best ideas, the most interesting problems, they always seem to come to me late in the evening. Maybe it's the quiet, maybe it's because my brain finally has space to think without the constant ping of notifications, or maybe it's simply because I'm a natural night owl.
+It's almost midnight again, and I'm still hunched over my keyboard, furiously typing away, working on a side project. The best ideas always seem to come to me late in the evening. Maybe it's the quiet, maybe it's because my brain finally has space to think without the constant ping of notifications, or maybe it's simply because I'm a natural night owl.
 
 Sometimes I'll be working on a new feature deep into the night, completely forgetting about the time. Other times I'm wrestling with one of those bugs that'll drive you absolutely nuts. The code works perfectly fine in development, passes all the tests, but somehow fails intermittently in production. Classic, right? I've been staring at this thing for hours, adding logging, reading through stack traces, trying different approaches. It's one of those problems where you know the solution is probably something really simple and obvious, but you just can't see it.
 
