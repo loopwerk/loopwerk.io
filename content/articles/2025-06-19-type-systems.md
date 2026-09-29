@@ -1,48 +1,38 @@
 ---
 tags: python, javascript, saga, insights
-summary: I recently ported Saga from Swift to both Python and TypeScript. It was a fascinating exercise in cognitive dissonance, especially when it came to their type systems.
+summary: I recently ported Saga from Swift to both Python and TypeScript, giving me a direct comparison of three type systems.
 ---
 
 # Comparing three type systems: Python, TypeScript, and Swift
 
-For the longest time I've been juggling three languages: Python for backends and scripting, TypeScript for web frontends, and Swift for native app development and of course my [static site generator, Saga](https://getsaga.dev). Hopping between them is always an exercise in cognitive dissonance, but this was put into sharp relief recently when I decided to try and [port Saga from Swift to both Python and TypeScript](/articles/2025/saga-in-python-or-typescript/).
+As a software developer I mainly work with three programming languages: Python, TypeScript, and Swift. When I am switching from one to the other it always takes a bit of time to get used to it again, same as when I am switching between Dutch and English.
 
-What started as an experiment quickly became a case study. It forced me to implement the same complex, generic-heavy logic in three different ecosystems. I learned very viscerally that while they all claim to offer "types", what that means for my day-to-day productivity, confidence, and frustration couldn't be more different.
+I like all three of these languages, they all have their own pros and cons. But until recently I've never had the exact same project done in all three. That changed when I [ported Saga from Swift to Python and TypeScript](/articles/2025/saga-in-python-or-typescript/), finally giving me a direct comparison.
 
-## Python's type hints: the headache
+## Python
 
-Python's type system feels like a well-intentioned friend who offers advice but won't stop you from making a mistake. It's "gradual typing," a layer added on top of a fundamentally dynamic language. The key thing to understand is that type hints do nothing at runtime. Python's interpreter completely ignores them; they are metadata, pure and simple.
+Python is fundamentally a dynamic language, with types kind of bolted on top of it. It took until Python 3.6 for them to become usable, and I never used them until Python 3.9, in 2021. I think types make Python a much better language for big projects, but it's still a rather weak type system, because Python itself completely ignores it. You need to install an external tool such as mypy, and use that to lint your code. There's no compiler telling you about errors, and if you don't run mypy, nothing will tell you about type errors until you run into them in production.
 
-The safety net is an external tool like `mypy` or `Pylance`, and this is where the DX cracks start to show. The feedback loop feels less like a conversation with a compiler and more like getting notes from two different editors.
+And then there's the syntax. Oh boy.
 
-### And then there's the syntax…
-
-This "bolted-on" nature shows most clearly in its syntax. When porting Saga, which is full of generic types, this quickly became a headache. Take a real example from Saga's architecture: a generic `Writer` that writes a list of items to a file.
-
-Here's how you do it in Python:
+When I was porting Saga, Python's syntax quickly became a headache. Let's look at this real code, coming from Saga: a generic `Writer` that writes a list of items to one file.
 
 ```python
-from typing import Generic, TypeVar, Callable, List
+from typing import Callable
 
-M = TypeVar("M")
-
-class Writer(Generic[M]):
-    run: Callable[[List[Item[M]], str], None]
+class Writer[M]:
+    run: Callable[[list[Item[M]], str], None]
 ```
 
-Let's be honest: this is a mess.
+I'll be honest: I find this an absolute mess of square-braces soup that doesn't tell me much. What is that `str` that it accepts? The output path? An HTML body? I have no idea without digging into the implementation, because the type definition itself isn't self-documenting. And why do I have to import `Callable`?
 
-1.  **Inheriting from `Generic[M]`:** To make a class generic, you have to _inherit_ from a special `Generic` type. It feels like an implementation detail leaking into my class definition.
-2.  **`Callable` is a mouthful:** To define a function signature, you import `Callable` and use a syntax that is both verbose and uninformative.
-3.  **Where are the parameter names?** This is the biggest failure. Look at `Callable[[List[Item[M]], str], None]`. What is that `str`? The output path? A header? I have no idea without finding the implementation. The type definition fails to document itself.
+Honestly, porting Saga to Python was painful. Its syntax made the code hard to read and reason about.
 
-Working with this on the Python port of Saga was painful. The complexity of the generics, combined with this clumsy syntax, made the code hard to read and reason about.
+## TypeScript
 
-## TypeScript: the enjoyable dealbreaker
+Working on the TypeScript port was so much more enjoyable. I liked its type system and syntax much more, and the editor experience was fantastic.
 
-The TypeScript version, on the other hand, was the most enjoyable to work on. Its type system is rich, and the developer experience is fantastic.
-
-Here's the same `Writer` type in TypeScript:
+Here's that same `Writer` from before, now in TypeScript:
 
 ```typescript
 type Writer<M> = {
@@ -50,21 +40,17 @@ type Writer<M> = {
 };
 ```
 
-The difference is night and day. The generic declaration `<M>` is concise. The killer feature is the function signature: `(items: Item<M>[], outputPath: string)`. The parameter name, `outputPath`, is part of the type. It's self-documenting in a way the Python version fundamentally isn't.
+Much better, right? No imports needed. And that unknown string from before? It's now very clear what that string is for. It's self-documenting in a way that Python simply isn't.
 
-The entire porting process felt smooth and fast. The editor integration is a dream, and crafting the types was a pleasure. But TypeScript performs a magic trick, and it's one that turned out to be a dealbreaker for me. When it compiles down to JavaScript, all the types disappear.
+Porting Saga to TypeScript was smooth and easy, and writing the type definitions felt natural to me in a way that Python simply didn't. I never had to look up the syntax for example. On top of that you have the compiler that immediately tells you when you're making a mistake, no need to reach for external tools.
 
-### Runtime? What types?
+However, types completely disappear at runtime, which turned out to be a dealbreaker for me. Saga parses Markdown documents which contain frontmatter. It needs to validate that this data conforms to a specific `Metadata` type. Sadly, that's not possible with TypeScript's types alone. Instead, you're forced to use a library like Zod, where you define a schema which is used by a validator. To me, this feels wrong. When I've already provided the strongly typed `Metadata`, I don't want to also have to provide a separate validation schema. I can't ask that of Saga users.
 
-This is TypeScript's biggest limitation: you can't use its types at runtime. For Saga, I need to parse frontmatter from Markdown files: unstructured data from the outside world. I need to _validate_ that this data conforms to a specific `Metadata` type. You can't do that with TypeScript's types alone.
+## Swift
 
-The community solves this with libraries like Zod, where you define a schema that can both generate a static type and act as a runtime validator. But it's a workaround. The delightful development experience didn't matter when the final product lacked the runtime safety I needed.
+Back to where I started, with Swift. The type checker and the compiler are the same thing, and types are usable at runtime.
 
-## Swift: the complex powerhouse
-
-This brings me back to where it all started: Swift. If Python's types are a suggestion and TypeScript's are a compile-time illusion, Swift's are a runtime-enforced reality. The type checker and compiler are one and the same.
-
-The same `Writer` in Swift:
+The same `Writer`, in its original Swift form:
 
 ```swift
 struct Writer<M> {
@@ -72,22 +58,20 @@ struct Writer<M> {
 }
 ```
 
-This is as clean as TypeScript, but it tells you more. The `throws` keyword is part of the function's type, so you know this operation can fail. Python's `Callable` hides that too.
+It's very similar to the TypeScript version, with the same benefits, but even more expressive: it even tells you the function can throw an error.
 
-And because Swift's types are real at runtime, you can inspect and cast them. With Swift's `Codable`, JSON or YAML decoding is type-safe out of the box; invalid data throws an error you can handle. This is the runtime safety I was so desperately missing from TypeScript.
+And because Swift's types are usable at runtime, you can use them to validate data against them. With Swift's `Codable`, decoding JSON is type-safe out of the box, without any other tools necessary. Trying to parse invalid data throws an error you can handle, which I heavily rely on in Saga.
 
-Saga's Swift code is also complex, but it's a manageable complexity. The compiler guides you through refactoring and guarantees that if it compiles, it's type-safe. The Python version was a headache of ambiguity; the Swift version, while challenging, is a puzzle with a guaranteed solution.
+Swift is quite a complex language though, and it seems to be getting more and more complex as time goes on, but the compiler helps a lot.
 
-## Final thoughts from the trenches
+## Final thoughts
 
-The experience of porting Saga crystallized everything for me.
+Porting Saga from Swift to Python and then to TypeScript made it very easy to compare these three type systems, and allowed me to come to some conclusions that were only hunches until then.
 
-- Python's gradual typing is great for scripts, but for a complex, generic-heavy project, its clumsy syntax and lack of context created a development headache I couldn't ignore.
+Python's types are a huge improvement over no types at all. But for a complex, generics-heavy project such as Saga, I hated its syntax. I really wouldn't want to maintain a Python port of Saga, because I simply wouldn't enjoy my time with it.
 
-- TypeScript offered the best development experience of the three, but its compile-time/runtime divide was a dealbreaker. The beautiful types are an illusion that can't protect you from the messy reality of external data.
+TypeScript was a joy to work with. Its type system just feels natural to me. Sadly the lack of type info at runtime was a dealbreaker, because I wouldn't want Saga to not be fully type-safe from top to bottom, which includes the frontmatter in Markdown files. Yes, there's Zod, but when everything is already strongly typed, I really don't want to force Saga users to use such a library.
 
-- Swift gives you safety that holds at runtime. It's complex, for sure, and has its own issues that have led me to [leave native app development behind](/articles/2025/thoughts-on-apple/). But for a project like Saga, that complexity is made manageable by a compiler that works _with_ you. It's harder, but you're building on solid ground.
+Joy-wise, Swift sits in the middle for me. I do think it's too complex, and it has its own issues which contributed to me [leaving native app development behind](/articles/2025/thoughts-on-apple/), but for a big project like Saga it's the right choice. It might not be as enjoyable as TypeScript, but it handles the complexity and types well.
 
-In the end, I came full circle. The experiment confirmed that, for this specific project, the original choice was the right one. Swift prioritizes runtime safety and compiler guarantees over simplicity, and those were the trade-offs that mattered most.
-
-If TypeScript's types were usable at runtime though... I'd switch in a heartbeat.
+So, in the end I came full circle, but more convinced than ever that Swift is the right choice for Saga. If TypeScript's types were usable at runtime though... I'd switch in a heartbeat.
