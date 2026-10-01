@@ -204,6 +204,6 @@ Django's test framework doesn't have this problem because it doesn't have this f
 
 Let me be clear that I'm not anti-pytest. If I join a project that uses pytest? I use pytest. This is simply my personal preference for new projects.
 
-For new project, here's my rule of thumb: start with Django's test runner. It's predictable, it's explicit, and it works just fine. Add parameterized when you need parametrized tests. For me this is good enough.
+For new projects, here's my rule of thumb: start with Django's test runner. It's predictable, it's explicit, and it works just fine. Add parameterized when you need parametrized tests. For me this is good enough.
 
 Switch to pytest only when you can name the specific problem Django's framework can't solve. When you hit that wall, you'll know the time is right to switch.

@@ -59,6 +59,6 @@ HomeKit can't do any of this, and Home Assistant does it all locally, on my own 
 
 If you buy a Home Assistant Green today, along with the newer ZBT-2 antenna for Zigbee and Thread, the total cost is about €154. I was able to cancel my Tado subscription, which means that after roughly three years the hardware will have paid for itself.
 
-But the real value is having everything in one system, with all my automations in that same system, without forced subscriptions, and with everything working through Siri and Apple Home. I no longer need the Hue app, the Tado app, the air conditioner app, the solar app, or the smart plug app.
+But the real value is having everything in one system, with all my automations in that same system, without forced subscriptions, and with everything working through Siri and Apple Home. I no longer need the Hue app, the Tado app, the air conditioner app, or the solar app.
 
 Easily the best tech purchase I made this year.
