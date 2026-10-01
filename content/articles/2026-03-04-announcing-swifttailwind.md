@@ -9,7 +9,7 @@ When I [announced Bonsai](/articles/2026/announcing-bonsai/) two days ago, the g
 
 ## What it does
 
-SwiftTailwind wraps the [official Tailwind CSS standalone CLI](https://tailwindcss.com/blog/standalone-cli), which is a self-contained binary that doesn't need Node.js. The package downloads the correct binary for your platform (macOS or Linux, ARM or x64), validates its SHA-256 checksum against the official release, caches it at `~/.swifttailwind/`, and runs it via `Foundation.Process`. No Node, no npm, no `node_modules`.
+SwiftTailwind wraps the [official Tailwind CSS standalone CLI](https://tailwindcss.com/blog/standalone-cli), which is a self-contained binary that doesn't need Node.js or NPM. The package downloads the correct binary for your platform (macOS or Linux, ARM or x64), caches it, and runs it via `Foundation.Process`.
 
 It supports both Tailwind v3 and v4.
 
@@ -42,18 +42,6 @@ try await tailwind.run(
 )
 ```
 
-That's it. Paths can be relative to your project root (detected automatically from `Package.swift`) or absolute.
-
-In this website I run SwiftTailwind right before building the rest of the website. But instead of Tailwind living in pnpm scripts and a justfile, it's now all part of the same Swift pipeline.
-
-## Why not just use the standalone CLI directly?
-
-You could download the Tailwind standalone binary yourself and call it from a shell script. SwiftTailwind saves you from dealing with platform detection, downloading the right binary, verifying checksums, caching across versions, and wiring up `Foundation.Process`. It's a single `import` and two lines of code.
-
-## Inspiration
-
-SwiftTailwind is inspired by [SwiftyTailwind](https://github.com/nicklama/SwiftyTailwind), which is now archived and no longer maintained. SwiftTailwind is a fresh implementation with checksum verification, cleaner error handling, and full `Sendable` conformance for Swift concurrency.
-
 ## Try it out
 
-SwiftTailwind is available on GitHub: [loopwerk/SwiftTailwind](https://github.com/loopwerk/SwiftTailwind). It works with any Swift project that needs Tailwind CSS, not just Saga.
+SwiftTailwind is available on GitHub: [loopwerk/SwiftTailwind](https://github.com/loopwerk/SwiftTailwind). It works with any Swift project, not just Saga.
