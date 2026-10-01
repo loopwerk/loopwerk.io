@@ -1,9 +1,9 @@
 ---
 tags: review, analytics
-summary: After leaving Plausible I moved to Umami. Here's what's better, how I set up proxying to bypass adblockers, and the one problem neither tool can solve.
+summary: I switched from Plausible to Umami. Here's what's better, how I set up proxying to bypass adblockers, and the big problem with bots.
 ---
 
-# Umami vs Plausible: why I switched
+# Umami vs Plausible
 
 In my [previous article](/articles/2026/plausible/) I wrote about my frustrations with Plausible: the price hike, analytics getting overrun by bot traffic, and the features they lock away from the open source version. I've now moved all my sites to [Umami](https://umami.is), and I'm happy with the switch.
 
@@ -13,11 +13,11 @@ The biggest difference is that Umami's self-hosted version is the full product. 
 
 Umami also offers some unique features:
 
-- **Specific screen sizes:** Umami shows you actual resolutions like 1920x1080 or 390x844. Plausible only shows device categories (desktop, mobile, tablet), which is far less useful when you're trying to make design decisions.
-- **[Individual session details](https://umami.is/docs/sessions):** you can view exactly which pages a visitor viewed and which events they triggered, in order. Plausible shows aggregate stats but gives you no way to inspect individual visits.
-- **Visitor journeys:** Umami visualizes the paths visitors take through your site, showing how people actually navigate from page to page.
-- **Retention reports:** track how many visitors come back over time, segmented by device, country, or traffic source. Plausible has no equivalent.
-- **[Cohorts](https://umami.is/docs/cohorts):** group users based on specific actions (like visiting a URL or triggering an event) within a date range, then track that group's behavior over time. Plausible has [audience segmentation](https://plausible.io/audience-segmentation) through filters, but no way to define and follow a fixed cohort.
+- Specific screen sizes: Umami shows you actual resolutions like 1920x1080 or 390x844. Plausible only shows device categories (desktop, mobile, tablet), which is far less useful when you're trying to make design decisions.
+- [Individual session details](https://umami.is/docs/sessions): you can view exactly which pages a visitor viewed and which events they triggered, in order. Plausible shows aggregate stats but gives you no way to inspect individual visits.
+- Visitor journeys: Umami visualizes the paths visitors take through your site, showing how people actually navigate from page to page.
+- Retention reports: track how many visitors come back over time, segmented by device, country, or traffic source. Plausible has no equivalent.
+- [Cohorts](https://umami.is/docs/cohorts): group users based on specific actions (like visiting a URL or triggering an event) within a date range, then track that group's behavior over time. Plausible has [audience segmentation](https://plausible.io/audience-segmentation) through filters, but no way to define and follow a fixed cohort.
 
 On the infrastructure side, Umami uses PostgreSQL. This makes backups straightforward and works perfectly with [Coolify](https://coolify.io)'s built-in backup features for offsite storage. Plausible uses ClickHouse, which is significantly harder to manage and back up; it's definitely not possible from within Coolify's interface.
 
@@ -56,7 +56,7 @@ Even after I switched all my sites over to Umami I kept wondering if it was the 
 
 ## Setting up Umami
 
-I'm running Umami as an application in Coolify. This is extremely simple: just add a new resource to a project, and choose Umami from the list. Start the container, and you can login using `admin` / `umami` (change this immediately!)
+I'm running Umami as an application in Coolify. This is extremely simple: just add a new resource to a project, and choose Umami from the list. Start the container, and you can log in using `admin` / `umami` (change this immediately!)
 
 ### Proxying to bypass adblockers
 
@@ -84,9 +84,9 @@ location /api/send {
 }
 ```
 
-The `/api/send` location needs the extra headers because both my sites and Umami sit behind Cloudflare and then Traefik on Coolify. Without forwarding the real client IP, every visitor would show up as coming from the same Cloudflare address, and geolocation would be completely wrong.
+The `/api/send` location needs the extra headers because both my sites and Umami sit behind Cloudflare and then Traefik on Coolify. Without forwarding the real client IP through these layers, every visitor would show up as coming from the same Cloudflare address and location.
 
-On the Umami side, two environment variables make this work:
+On the Umami side, two environment variables are needed to make this work:
 
 ```
 CLIENT_IP_HEADER=x-client-real-ip
@@ -97,9 +97,9 @@ SKIP_LOCATION_HEADERS=1
 
 ### The bot problem
 
-Here's the one thing that didn't improve. After switching [critical-notes.com](https://www.critical-notes.com) to Umami, I saw similarly inflated visitor numbers as I did with self-hosted Plausible. Umami uses the [isbot](https://github.com/omrilotan/isbot) library for bot detection, which filters based on user-agent strings. It catches the obvious crawlers, but anything pretending to be a regular browser sails right through.
+Here's the one thing that didn't improve. After switching [critical-notes.com](https://www.critical-notes.com) to Umami, I saw similarly inflated visitor numbers as I did with self-hosted Plausible. Umami uses the [isbot](https://github.com/omrilotan/isbot) library for bot detection, which filters based on user-agent strings. It catches the most obvious crawlers, but not much else. Anything simply pretending to be a regular browser goes right through.
 
-This isn't really Umami's fault. No client-side analytics tool handles bots well without server-side infrastructure like data center IP blocking and behavioral analysis.
+To be fair, this isn't really Umami's fault; without server-side infrastructure like data center IP blocking and behavioral analysis, you simply won't be able to deal with the bots.
 
 One thing I'm experimenting with is a Cloudflare WAF rule that blocks known bots, empty user-agents, and known datacenter IP addresses from hitting the analytics endpoints:
 
@@ -128,7 +128,7 @@ and
 > 
 > Cloudflare's `cf.bot_management.score` rule would allow for more granular bot detection, but it requires an extremely expensive Cloudflare Enterprise plan.
 
-This adds a layer of bot filtering before the traffic even reaches Umami. It's too early to say how much of a difference it makes, but the idea is simple: if Cloudflare already knows it's a bot or coming from a data center, don't let it pollute the analytics.
+This should filter out the bots before they even reach Umami. It's too early to tell how much of a difference it makes, but it seems to make sense.
 
 > [!UPDATE]
 > **February 19, 2026**: Cloudflare's security rule works brilliantly! I've written a follow up article describing the set up in more detail: [Protect your analytics with Cloudflare](/articles/2026/protect-analytics/)
