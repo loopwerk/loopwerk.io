@@ -1,76 +1,44 @@
 ---
 tags: insights, ai
-summary: Luckily for us, good developers are still necessary in the age of LLMs. You can't just say "make an app", you still need to know how to build a good app.
+summary: You can't just say "make an app", you still need to know how to build a good app. AI might help with the code, but we're still the ones with the technical expertise and taste.
 ---
 
-# Garbage in, garbage out: why good developers are still necessary in the age of LLMs
+# Garbage in, garbage out (why good developers are still necessary in the age of LLMs)
 
-I've been a developer for a long time, and I've seen a lot of technologies come and go. I've seen hype cycles, I've seen technologies that were supposed to change everything, and I've seen technologies that actually did. I think it's safe to say that Large Language Models fall into the latter category. They are a genuinely transformative technology that is changing the way we work.
+I've been a developer for almost 25 years, and I've seen plenty of hype cycles in my time. Most of them came and went without leaving a real impact. The latest hype, AI (and LLMs in particular), seems different though: it's actually changing the way we work, in a big way.
 
-But I've also seen a lot of people who think that LLMs are going to make developers obsolete. They think that you can just tell an LLM to "make an app" and it will spit out a perfect, finished product. This is, to put it mildly, not the case. The old saying "garbage in, garbage out" is still true, maybe now more than ever.
+I've seen a lot of people who think that AI is going to make all developers obsolete. They think that you can ask it to "make an app", and it will spit out a perfect, finished project. I'm sorry to burst your bubble, but that's not the case. The old saying "garbage in, garbage out" is still true, maybe now more than ever.
 
-You still need to know how to build a good app. You might not be the one typing all the code, but you're the one steering the code generation, the features, the UX, and spotting the problems. You're the architect and the project manager and the QA department, all rolled into one. The LLM is just a tool, and it's only as good as the person using it.
+You still need to know how to build a good app. You might not be the one writing most of the code, but you are the one steering the code generation. You're in control of the features and the UX. You still need to spot the problems.
 
-## My experience with Claude Code and Saga
+## My first experience with Claude Code
 
-I recently had a chance to put this to the test with my own project, [Saga](https://getsaga.dev), a static site generator written in Swift. I wanted to make it faster by [parallelizing its processing](https://github.com/loopwerk/Saga/pull/34). I had a good idea of how to do it, because I had in fact already done it myself in a [previous PR](https://github.com/loopwerk/Saga/pull/33), but I wasn't happy with the modest speed increase. So I decided to try using Claude Code to help me make a better version.
+I've been using ChatGPT for about a year now, including for work. But it's always been a matter of me asking a very specific question, getting the answer, and then applying that answer to my code. Basically, a glorified Stack Overflow, and most of the time it was really good. But I didn't give any LLM direct access to my code, until recently.
 
-It went better than I expected: with Claude's help I was able to make Saga 60% faster. My own site, which is built with Saga, used to take 2.5 seconds to generate. Now it only takes 1 second. That's a huge improvement, and I couldn't have done it without Claude's help.
+I was working on [Saga](https://getsaga.dev), my static site generator written in Swift. I wanted to make it faster by introducing parallelization to its processing pipeline. I had a pretty good idea of how to do it, but my own experiments only resulted in modest speed increases. I hit the ceiling of my Swift expertise and needed help. I could've asked ChatGPT (or Stack Overflow), but I wouldn't have gotten a solution to my very specific problem. So, I decided to try out Claude Code.
 
-But here's the thing: I couldn't have done it _without my own expertise either_. When I decided to make Saga faster, I didn't just throw the problem at Claude and hope for the best. I had specific ideas about what could be parallelized:
+It went way better than I expected. I gave it access to the Saga project, told it to make it faster by adding parallelization, and it went to work. It took a while, but it made Saga quite a bit faster. My own site, which used to take 2.5 seconds to generate, now only takes 1 second.
 
-- File reading operations
-- Writer execution
-- Static file copying
+I don't think I could've done it without Claude Code. But here's the thing: I don't think Claude Code could've done it without me either. For example it wanted to parallelize *everything*, including the registered pipeline steps. But those steps always need to run sequentially, because the order of the steps is important. My domain knowledge was exactly the kind of thing that AI didn't have. It would've made Saga faster at generating subtly broken websites.
 
-Claude initially suggested parallelizing _everything_, including the processing steps. Sounds great, right? More parallelization = more speed? Not quite. I knew that the processing steps needed to remain sequential, because every step depends on knowing which files were handled by previous steps.
+Claude also had no idea how to fix broken unit tests now that Saga was running a bunch of processing in parallel. It went on a wild goose chase, making weirder and weirder changes all over the code. I had to step in and stop it, and explain what had to be mocked, among other things.
 
-Claude also had no idea how to fix broken unit tests now that Saga was running all these things in parellel, and it went on a wild goose chase making weirder and weirder changes all over the codebase. I had to step in, stop Claude, and tell it how to properly mock things that needed to be mocked, that it should make array access safe in concurrent code, things like that.
+## Our role is changing
 
-This is exactly the kind of domain knowledge that separates "someone who uses AI" from "a developer who uses AI." Without understanding the architecture of Saga and the importance of deterministic output, you'd end up with a faster but broken static site generator.
+I did enjoy my time with Claude Code, and I have started using it in more projects since then. And I have noticed that my role has changed, from pure developer to more of a manager.
 
-## The developer as helmsman
+AI coding assistants are incredibly skilled, but definitely junior developers. They have perfect syntax knowledge and are pretty good at debugging problems, but they don't know good UX. They can implement any design pattern you describe, but they can't tell which patterns make sense for your project. They can refactor your messes, but they won't know which messes are worth cleaning up.
 
-This is what I mean when I say that developers are still necessary in the age of LLMs. The LLM is the engine providing the power, but someone still needs to steer the ship, and without a helmsman it'll just go in circles, or worse, crash into the rocks.
+So when I was working with Claude Code, I was constantly making decisions and steering it. Which parts of the codebase to touch (and more importantly, which to leave alone). Telling it to stop when it was good enough (making the code massively more complex for a 2% speed increase isn't worth it).
 
-Think of AI coding assistants as incredibly skilled junior developers with perfect syntax knowledge but zero context about your project. They can implement any pattern you describe and refactor any mess you point out, but they can't tell you which patterns make sense for your project, or which messes are actually worth cleaning up.
+I actually had to stop it quite often because it was trying to be *too* helpful. Ask Claude to add a simple feature and it might throw in logging, 15 tests with a bunch of mocks, config options, and abstraction layers (it absolutely loves to overcomplicate things with more layers). And now you've ended up with 500 lines when 50 would've been worked.
 
-When working on that Saga PR, I was constantly making decisions:
+On the other hand, it also often doesn't do enough. When working on a Django site, it happily writes the bare minimum ORM query without dealing with N+1 queries, unless you tell it to. It doesn't think about race conditions, unless you make it. This is the kind of experience that's still important to have.
 
-- Which parts of the codebase to touch (and more importantly, which to leave alone)
-- How to maintain backward compatibility
-- Where to add concurrency primitives without introducing race conditions
-- When to stop optimizing (making the code massively more complex for a 2% speed increase isn't worth it)
+I was spending less time coding, but way more time reviewing. I want to maintain ownership of my projects, and know every line that goes into them. And of course I want to maintain my high standard of quality: just because AI has written some code doesn't mean I am not responsible for it. If I wouldn't have written it like this, I tell it to change it.
 
-Claude couldn't make any of these decisions for me. It could suggest options, sure, but evaluating those options required understanding the broader context of the project and its users.
+## Are we doomed?
 
-## The UX still matters
+I don't think so. A junior developer using Claude Code will get a worse result than a senior developer using Claude Code, because we know what to look out for. We know which architecture patterns we like, and won't let it turn our projects into spaghetti. When debugging problems, we already have at least a rough idea of where to look, and whether the suggested solution actually makes sense. We know when to stop Claude, when to steer it in a different direction, and when to point out things it missed.
 
-Here's another thing AI can't do: design good user experiences. Sure, it can implement any interface you describe, but knowing what interface to build? That's on you.
-
-For instance, imagine you're building an admin interface for a content management system. An AI might generate a perfectly functional system with all the CRUD operations working correctly. But it wouldn't know that your editors need to see a preview of how the article will look on the site before publishing. It wouldn't think to add custom actions for common workflows like "duplicate this article as a draft" or "schedule for next Monday at 9 AM".
-
-These aren't groundbreaking features, but they're the difference between software that technically works and software that people actually enjoy using.
-
-## Feature creep is real
-
-One danger I've noticed when using AI assistants: they're _too_ helpful. Ask Claude to add a simple feature, and it might throw in logging, error handling, configuration options, and three different ways to extend it. Sounds great until you realize you've just added 500 lines of code for a feature that needed 50.
-
-Good developers know when to say "no" - to features, to complexity, to clever solutions that solve problems you don't have. AI assistants don't have this restraint. They'll happily implement whatever you ask for, even if what you're asking for is a bad idea.
-
-## You need to spot the problems
-
-And maybe most importantly: you need to be able to spot when things go wrong. AI-generated code often _looks_ right but contains subtle bugs:
-
-- Race conditions in concurrent code
-- Memory leaks from retain cycles
-- Security vulnerabilities from improper input validation
-- Performance issues from accidentally doing N+1 queries
-
-During the Saga parallelization, I caught several of these. Claude's concurrent code was mostly correct, but it introduced bugs that would've resulted in sites being broken, and with flaky unit tests that didn't always spot the problem. Spotting these requires not just knowing the language, but understanding the runtime environment, the platform differences, and the kinds of things that can go wrong.
-
-## So where does this leave us?
-
-AI coding assistants have completely changed how I work: I'm writing more code faster than ever before. But the need for good developers hasn't gone away, it has shifted. Instead of typing out every line, we're now architecting systems, designing APIs, spotting problems before they hit production, making judgment calls about trade-offs, and deciding when to stop adding features. In other words: we're doing what we've always done, thinking about problems and designing solutions. We're just spending less time on the typing part.
-
-So the next time you hear someone say that LLMs are going to make developers obsolete, you can tell them they're missing the point. The role of the developer is changing, not going away. Someone still needs to know what to build and how to build it well; someone needs to turn "garbage in" into "gold out".
+The need for good developers won't go away, but I do think we'll be typing less code ourselves.
