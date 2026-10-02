@@ -5,90 +5,74 @@ summary: As I prepare Saga 3, I keep running into fundamental limitations in Swi
 
 # The shortcomings of Swift Package Manager
 
-As I'm preparing [Saga](https://github.com/loopwerk/Saga) 3, the next major version of my static site generator, I keep running into fundamental limitations in Swift Package Manager. SPM has come a long way since its introduction, but for anyone maintaining a package with a plugin ecosystem, there are some serious pain points that still don't have good solutions.
+As I am working on [Saga](https://github.com/loopwerk/Saga) 3, the next major version of my static site generator, I keep running into limitations of Swift Package Manager. SPM has come a long way since its introduction in 2016, but if you maintain a package with a plugin ecosystem, there are some serious pain points left for Apple to fix.
 
 ## 1. No peer dependencies
 
-This is the big one. In the npm ecosystem, a plugin can declare "I work with version 2 or 3 of the host package, but the consumer provides it." SPM has no equivalent concept.
+Let's start with the big one. In npm a plugin can declare "I work with version 2 or 3 of the host package, and the consumer provides it". Sadly SPM has no such concept.
 
-Saga has a plugin architecture: readers like [SagaParsleyMarkdownReader](https://github.com/loopwerk/SagaParsleyMarkdownReader), renderers like [SagaSwimRenderer](https://github.com/loopwerk/SagaSwimRenderer), and utilities like [SagaUtils](https://github.com/loopwerk/SagaUtils). Each of these depends on Saga because they use its types (`Reader`, `Item`, etc.). But SPM forces each plugin to declare *exactly* where Saga comes from - a specific git URL with a specific version range. There's no way to say "I need Saga, but let the consumer decide which version and where it comes from."
+Saga has a plugin architecture: readers like SagaParsleyMarkdownReader, renderers like SagaSwimRenderer, and utilities like SagaUtils. Each of these plugins depends on Saga, because they use its types.
 
-This leads directly to the next two problems.
+Because SPM doesn't support peer dependencies, each plugin needs to add a dependency to Saga. There's no way to say "I need Saga, but let the consumer provide it". This leads directly to the next two problems.
 
 ## 2. Version ceiling by default
 
-When you declare a dependency like this:
+When you add a dependency to your Swift project like this:
 
 ```swift
 .package(url: "https://github.com/loopwerk/Saga", from: "2.0.0")
 ```
 
-SPM interprets this as `>= 2.0.0, < 3.0.0`. There's an implicit major version ceiling. This is semver-correct in theory - a major version bump *might* break your code - but in practice it creates a cascade problem.
+That really means `>= 2.0.0, < 3.0.0`. In other words, there's a major version ceiling. That sounds good in theory, respecting SemVer and all, but for published libraries (such as the Saga plugins) this is actually causing a pretty big problem.
 
-Saga 3 changes the *user-facing* API, but the *plugin-facing* API hasn't changed at all. Readers and renderers work identically. Yet because every plugin declares `from: "2.0.0"`, none of them will resolve with Saga 3 without updating their Package.swift.
+Saga is currently at version 2, and so all the plugins depend on Saga using the `from: "2.0.0"` flag. Everything works, the ecosystem is in sync. But Saga 3 will be released soon, and while it has user-facing breaking changes, the plugin-facing API has no changes at all. All the readers, renderers and other utilities work exactly the same as before. But because every plugin depends on Saga 2, none of them are usable with Saga 3.
 
-And it gets worse: you can't release a minor version of a plugin that depends on a new major version of its host package. That's a breaking change for the plugin's consumers. So every plugin also needs a new major version. For Saga, that's 10 packages that all need coordinated major releases, even though zero lines of plugin code changed.
+This means that I have to update 10 plugins, and change `from: "2.0.0"` to `from: "3.0.0"`. All 10 plugins need their own major version bump because of this, since this is a breaking change for them.
 
-You *can* work around this with an explicit range:
+You can sort-of work around this with an explicit range:
 
 ```swift
 .package(url: "https://github.com/loopwerk/Saga", "2.0.0"..<"4.0.0")
 ```
 
-But this feels like a hack, and you're making a forward-looking promise that your code will work with a version that doesn't exist yet. With peer dependencies, this problem simply wouldn't exist.
+It solves the fact that every plugin needs a major version bump, but I'd still need to update all 10 of them. With peer dependencies this simply wouldn't be an issue.
 
 ## 3. Package identity conflicts
 
-SPM identifies packages by their URL or path. When the same package is referenced by both a git URL and a local path, SPM considers them conflicting identities - even though they're obviously the same package.
+SPM is a pain when working with local versions of dependencies. Let me explain.
 
-This comes up constantly during development. Saga's Example app uses a local path dependency to reference Saga itself:
+Saga's example app uses a local path dependency to reference Saga itself:
 
 ```swift
 .package(path: "../")
 ```
 
-But SagaSwimRenderer (which the Example also depends on) pulls in Saga via its git URL. SPM then complains:
+This works fine. But SagaSwimRenderer, which the example app also depends on, also depends on Saga via the real git URL. SPM then complains:
 
 > Conflicting identity for saga: dependency 'github.com/loopwerk/saga' and dependency '/users/kevin/workspace/loopwerk/saga/saga' both point to the same package identity 'saga'.
 
-And the warning ominously adds: "This will be escalated to an error in future versions of SwiftPM."
+It's just a warning that I can ignore, but it also says "This will be escalated to an error in future versions of SwiftPM." That sounds ominous.
 
-How are you supposed to fix this? The suggestion is to "coordinate with the maintainer of the package that introduces the conflicting dependency" - but *I am* the maintainer of both packages. There is no fix. SPM simply doesn't support this workflow.
+How am I even supposed to fix this? The suggestion is to "coordinate with the maintainer of the package that introduces the conflicting dependency" - but I am the maintainer of both packages. There is no fix! SPM simply doesn't support this workflow.
 
-With peer dependencies, the plugin wouldn't declare where Saga comes from at all. The consumer would provide it, whether that's a git URL or a local path. No conflict.
+With peer dependencies the plugins wouldn't declare where Saga comes from, only that it needs to be available. There would be no conflict.
 
 ## 4. Monorepos aren't a real solution
 
-The obvious response to all of the above is: "just put everything in one repo." And yes, that would eliminate the version cascade, the identity conflicts, and the peer dependency problem in one stroke.
+If you're thinking that the obvious answer to all of these problems is a monorepo: great minds think alike.
 
-But SPM monorepos have their own cost: anyone who depends on *one* package in the repo downloads *all* dependencies for *every* package. Even if those targets never get compiled, SPM still fetches and resolves every dependency in the Package.swift. For a project like Saga with readers that depend on different Markdown parsers, renderers that depend on different template engines, and utilities that depend on SwiftSoup - that's a lot of unnecessary downloading for someone who just wants one reader.
+However, SPM monorepos have their own problem: anyone who depends on one package in the repo has to download all dependencies for all packages. Even if those packages are unused, and their targets never compiled, SPM still fetches and resolves this entire dependency tree. For a project like Saga with a bunch of plugins that in turn have their own sizable dependencies such as SwiftSoup, that's a lot of unnecessary downloading.
 
-A second problem is that all targets in a monorepo share a single version number. When you tag a release because of a small update in Saga, every plugin appears to have been updated too, even if nothing changed.
-
-I [explored this problem](https://github.com/loopwerk/Saga/issues/24) and tried various workarounds without success. Apollo GraphQL ran into [the exact same problem](https://www.apollographql.com/blog/how-apollo-manages-swift-packages-in-a-monorepo-with-git-subtrees) with their iOS SDK. They wanted a monorepo for development (unified PRs, holistic code review) but separate repos for distribution (so users don't download everything). Their solution? Git subtrees with custom GitHub Actions that automatically split and push changes to individual repos when PRs merge. It works, but it's a significant amount of infrastructure to work around what is fundamentally a missing feature in SPM.
+I [explored this problem](https://github.com/loopwerk/Saga/issues/24) and tried to make it work, but without success. Apollo GraphQL hit [the exact same problem](https://www.apollographql.com/blog/how-apollo-manages-swift-packages-in-a-monorepo-with-git-subtrees) with their iOS SDK: they wanted a monorepo for development, but separate repos for distribution, so that users don't have to download the whole tree. Their solution was to use Git subtrees with GitHub Actions that automatically split and push changes to the separate repos when PRs are merged. It works for them, but this is a very complex setup for something that should simply be supported by SPM.
 
 ## 5. No dev dependencies
 
-SPM has no concept of development-only dependencies. If your package uses `swift-docc-plugin` to generate documentation, or a testing library like `swift-snapshot-testing`, that dependency is declared at the package level - and every consumer of your library downloads it too, even though they'll never use it.
+Virtually every package manager understands the concept of development-only dependencies, except for SPM. So if your package depends on `swift-docc-plugin` for rendering docs, or a test library like `swift-snapshot-testing`, every user of that package has to download these dependencies.
 
-The `swift-docc-plugin` case is particularly absurd: even though it's added as a dependency of the *project* and not of any *target*, SPM still fetches it for everyone. The only workaround is to [comment out the dependency in Package.swift before tagging a release](https://www.loopwerk.io/articles/2025/docc-spm-need-love/), and uncomment it when you want to generate docs locally. That's not a workflow, that's a hack.
-
-This also makes the monorepo problem worse. It's not just that consumers download dependencies for targets they don't use - they also download your documentation tooling, your test helpers, and anything else that should be scoped to development.
-
-## 6. Missing basic CLI tooling
-
-Most package managers ship with commands for common dependency management tasks: adding, removing, listing outdated packages, updating a single dependency. SPM has... `swift package add-dependency`. And that's about it.
-
-There's no `swift package outdated` to see which dependencies have newer versions available. There's no `swift package update SomePackage` to update a single dependency (it's all or nothing). There's no `swift package remove-dependency`. These are table-stakes features for a package manager in 2026.
+It's just absurd to me that something as basic as dev dependencies is not supported. It also makes the monorepo problem even worse, since consumers end up downloading all the development tools for all the packages. It's nuts.
 
 ## What I'd like to see
 
-SPM doesn't need to copy npm. But a few targeted additions would make a huge difference for anyone maintaining packages with plugins or extensions:
+SPM should really implement fixes for these problems, which seem table-stakes to me. Peer dependencies and dev dependencies are well known to other package managers, and for good reason. It should make monorepos viable, for example by lazily fetching dependencies. Only download the dependencies for targets that are actually getting compiled - solving dev dependencies as well.
 
-1. **Peer dependencies**: let a package declare that it needs a dependency without specifying the source. Let the consumer provide it.
-2. **Dev dependencies**: dependencies that are only fetched during development, not by consumers of your package.
-3. **Lazy dependency fetching**: only download dependencies that are actually needed for the targets being compiled. This would make monorepos viable and dev dependencies less urgent in one go.
-4. **Identity resolution**: if two sources resolve to the same package (same name, same targets), treat them as the same package instead of raising an unsolvable conflict.
-5. **Basic CLI commands**: `outdated`, `remove-dependency`, `update --package`. These should have existed years ago.
-
-Until then, maintaining a plugin ecosystem in Swift remains more painful than it needs to be.
+Oh, and a better CLI please. You can't even uninstall a dependency via the command line.
