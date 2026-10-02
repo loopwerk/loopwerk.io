@@ -1,31 +1,41 @@
 ---
 tags: apple, insights
-summary: After more than a decade of iOS development, the company's anti-developer stance, Swift's growing complexity, and the eroding software quality led me back to the open web.
+summary: WWDC is around the corner, and for the first time in over a decade I couldn't care less. Two and a half years after switching back to web development, I'm not sure if I'll return to iOS.
 ---
 
-# Thoughts on Apple, and why I left iOS development behind
+# Thoughts on Apple
 
-With hashtag WWDC right around the corner, I can't help but notice a feeling that would've been completely alien to me just a few years ago: a total lack of excitement. For over a decade, WWDC week used to swallow me up. I'd be glued to the keynote, and for weeks afterward, I'd be watching session videos. I started building iOS apps in 2010, and it felt like a new frontier. But now... I just don't care.
+In 2023 I took on a web development project at a new client, working on a webshop using SvelteKit and Django. This was my first big paid web development project in a decade; I switched to full-time iOS development in 2012. I worked on a few sites and backends in that time, but that wasn't my focus during those years.
 
-It's hard to pinpoint when the magic died; there wasn't a single event, just a slow, creeping realization. The company I once admired has changed, or maybe I have. In January of 2023 I left iOS development behind and returned to the open web. I left behind the walled garden for a world without an inconsistent review process and without a 30% tax on my work. Without an overlord telling you what kind of links and buttons are allowed in your app.
+We're now two and a half years further, and I have to say: I am not missing iOS development at all. Hashtag WWDC is right around the corner, and I feel a complete lack of excitement, which is a bit strange because for over a decade WWDC week used to swallow me up. I'd be glued to the keynote, and for weeks afterwards I'd be watching all the session videos. Even while I was working on a web project I'd be super excited about all the new features I'd be implementing soon enough. But this year, I feel none of this. I think I can declare that part of my life over.
 
-## Apple's petty and malicious behavior
+When I took on the webshop project, I don't think I consciously said goodbye to Apple and iOS. But now that I think about it, I doubt I'll go back any time soon, for a few reasons.
 
-On the big stage, Apple will loudly praise developers as the heart of their ecosystem. But in practice, it feels like they're squeezing those same developers wherever they can. They need to be forced by courts to do the right thing, and when they are, their compliance is so petty and malicious it's almost insulting.
 
-Just look at their response to the EU's Digital Markets Act. Specifically alternative app stores, alternative browser engines, and allowing developers to link to external payment methods. Instead of opening up, they implemented a structure so convoluted and punitive that it was clearly designed to scare developers away from using the freedoms the law was meant to provide. They then geoblock these "improvements" to ensure as few people as possible benefit. For those of us in Europe, this isn't new. We've grown accustomed to seeing features like Apple News, the Apple Card, Apple Cash (and the related Tap To Cash), and iPhone Mirroring being announced, only for them to never become available here. We are an afterthought.
+## Apple vs. developers
 
-For developers there's also the constant fear of being "Sherlocked"; the phenomenon where you build a beloved and successful app, and then Apple copies its core functions into the next OS update, killing your business. It turns the App Store into a minefield: the more successful your app, the bigger the chance that Apple comes for it.
+On stage Apple will loudly praise developers as the beating heart of their ecosystem. But at the same time they're squeezing those same developers every way they can. It's absolutely clear that they don't care about us at all, when they need to be literally forced by the courts to do the right thing. And even then their compliance is so petty and malicious that it's insulting.
+
+Just look at how they dealt with the EU's Digital Markets Act. Apple was required to allow alternative app stores, alternative browser engines, and to allow developers to link to external payment methods. All of that sounds very reasonable to me, things they should've done from the beginning (maybe not alternative app stores but certainly the rest). But instead of opening up and following the law, they implemented their solutions in such convoluted ways that it was clearly designed to scare developers away. And of course they geoblock these "improvements" to ensure that as few people as possible benefit.
+
+Look for example at the alternative browser engines. For over a decade every browser on iOS was forced to use Apple's engine, WebKit. Users got the illusion of choice, while Apple kept absolute control over web standards, and held back what developers could build. Competition was simply not possible. Finally, under legal pressure from the EU, Apple is now reluctantly "allowing" true browser competitors. Except that they made this so incredibly painful that not even Google has been able to release a version of Chrome on iOS with their own engine.
+
+The reason is simple: greed.
+
+> Safari is the highest margin product Apple has ever made, accounts for 14-16% of Apple's annual operating profit and brings in $20 billion per year in search engine revenue from Google. For each 1% browser market share that Apple loses for Safari, Apple is set to lose $200 million in revenue per year.
+> Source: [Open Web Advocacy](https://open-web-advocacy.org/blog/apples-browser-engine-ban-persists-even-under-the-dma/)
+
+Then there's the fear of being "sherlocked". This is when Apple takes a popular and successful app, and copies its functionality into iOS itself, killing the app and their business. Look at [Continuity Camera](https://techcrunch.com/2022/06/13/all-the-things-apple-sherlocked-at-wwdc-2022/), which they stole from Camo. Or the recently added Freeform and Journal apps; does iOS *really* need this to be built-in? Where's the line?
 
 ## Swift no longer sparks joy
 
-This developer-hostile attitude _might_ have been tolerable if the tools remained a joy to use. And for a long time, they were. I used to absolutely love Swift. I jumped in around Swift 3, and it felt like a revelation: such a leap forward from Objective-C. No more verbose brackets and header files; instead we got optionals, enums, and value types, and reasoning about code became so much easier. The language was opinionated in a way that guided you toward better, safer patterns. It sparked joy.
+I used to absolutely love Swift. I jumped in around Swift 3, and it was a huge leap forward from Objective-C. We got an easier syntax, and optionals and enums. The language was small, easy to pick up.
 
-But over the years, that initial simplicity and focus have been buried under more and more complexity. The language turned from a practical tool for building apps into a highly academic exercise in language theory.
+But over the years the language grew and that initial simplicity was gone. It seemed like Apple wanted Swift to do everything for everyone, and lost focus.
 
-The turning point for me began around Swift 5.5. The introduction of `async`/`await` was a welcome and long-overdue addition, simplifying asynchronous code. But it also brought the actor model and Structured Concurrency, and a whole new set of rules to memorize. Suddenly even simple background tasks meant wrestling with a complex system.
+For me the turning point came around Swift 5.5, in 2021. It introduced `async`/`await`, which was absolutely welcome and wonderful. It made async code so much easier! But it also brought actors, structured concurrency, `Sendable`, and a whole new set of rules. The language became quite a bit more complicated, the compiler errors harder to understand, and to me it felt like a different language.
 
-The real friction came with `@Sendable` and the strict data-race protections. The goal is noble, but in practice it's a demoralizing battle with the compiler. You spend less time building features and more time trying to appease the type checker, deciphering alien error messages about a type not conforming to Sendable.
+Swift 6 said "hold my beer" and added data-race safety. It's a noble goal to prevent race conditions, proven by the compiler, but the language got exponentially more complex.
 
 ```swift
 // What you want:
@@ -45,36 +55,32 @@ func doThing() async throws -> sending some Sendable {
 }
 ```
 
-This trend continued. Features like property wrappers and result builders added layers of "magic" that obscure what's actually happening. And the recent introduction of macros feels like the final departure from Swift's original promise of clarity. The code you see is a template for generating other code that you don't see, and debugging that is a whole new level of mental gymnastics.
+I now feel like I am in a constant battle to keep the compiler happy, applying its suggested fixes, because I don't understand what the hell it wants.
 
-Each new feature added power, but at the cost of immense cognitive overhead. Swift used to be a great language for a solo developer like me; now it feels tailored to large teams who can afford to have experts in its arcane corners. The joy was gone.
+All of these features have good intentions, but they all add complexity. Property wrappers and result builders added layers of magic that hide what's actually happening. And now we have macros? The code you see is not the code that's running. Great.
 
-I still haven't updated [Saga](https://getsaga.dev), my static site generator written in Swift, to use Swift 6. I just can't be bothered, to be honest.
+I still haven't updated [Saga](https://getsaga.dev), my static site generator, to Swift 6. I just can't be bothered, to be honest.
 
-## It just... doesn't work as well
+## It just... doesn't work as well anymore
 
-At the same time, the fundamental promise of the Apple ecosystem - that "it just works" - has been steadily eroding. The software quality isn't what it used to be. Filing bug reports into the black hole that is the Feedback Assistant still feels like a demoralizing and useless ritual. Tickets are left open without any form of reaction, or closed as duplicate, with absolutely no way of seeing the status of that other ticket. Or even worse: you're asked to double check if the bug is still a bug with every new OS version. Like, do your own work!
+Remember when the promise that "it just works" largely was true? Apple's operating systems were not bug-free, but they were coherent and consistent. Their designs were nice, with the Human Interface Guidelines that every app developer followed, because it all just made sense.
 
-Their newer products don't excite me either. The AI efforts feel misguided and years behind the competition. And the only major new product category in a decade, the Vision Pro, is impressive engineering that's dead on arrival for most people because of its insane price tag.
+That's definitely not the case any more. The software quality is going downhill fast, probably due to the relentless cycle of yearly updates. I run into so many bugs all the time, it's kind of insane. I used to report these bugs into the Feedback Assistant, but I stopped doing that long ago. It's a black hole where tickets are left open for years without any feedback. Or, if there is feedback, it's usually a request to please re-check the bug on every new OS version. Do your own work!
+
+Their newer products don't excite me either. They're years behind the competition when it comes to AI, and the only major new product category in a decade, the Vision Pro, is a flop because of its insane price tag.
+
+Cool features that do excite me, like iPhone Mirroring, Apple Card, Apple Cash and Tap to Cash, and Apple News, are not available in Europe. We're either forgotten about, or a casualty in Apple's war with Europe over the DMA. I'm not a fan of being an expendable pawn that Apple obviously doesn't care about.
 
 ## The golden cage
 
 Just last week I sold my Apple Watch, because I got so incredibly bored with being stuck with the same few watch faces. It's truly insane to me how developers are still not able to create third party watch faces, and I don't understand how it's in Apple's best interest. I bought an old-fashioned mechanical watch instead. I would've liked to buy another smart watch, but of course Apple makes it impossible for non-Apple watches to compete on features. They lock everything down, for example only with the Apple Watch can you reply to messages or act on other notifications.
 
-They even gatekeep the web itself. For over a decade, every browser on iOS (Chrome, Firefox, Edge) was forced to be a different user interface on top of Apple's own Safari engine, WebKit. Users got the illusion of choice, while Apple kept absolute control over web standards on its platform and held back what developers could build. Now, under legal pressure from the EU, they're reluctantly "allowing" true browser competition. Except that [they made this so incredibly painful](https://open-web-advocacy.org/blog/apples-browser-engine-ban-persists-even-under-the-dma/) that not even Google has been able to release a new version of Chrome with their own engine.
+Of course there's also the famous iMessage lock-in. By stigmatizing non-iPhones with green bubbles, Apple knowingly degrades the experience of talking with friends and family who don't have an iPhone. Tim Cook's answer to that is literally that your friends should buy an iPhone. At least he's honest about his motives, I guess. Apple was finally pressured to add support for (some of) the universal RCS standard, so things are looking up; at least we'll be able to send pictures to Android users without having to install WhatsApp.
 
-The reason for this is clear: greed. From OWA:
+And the lock-in doesn't stop at software either. Apple really doesn't like the right-to-repair movement, and has lobbied heavily against this for years. When forced to make repairs easier, they did so in the most Apple-like petty way you could imagine. Apple's "Self Service Repair" program now lets you repair your iPhone, by renting you a 36-kilogram suitcase with specialized tools. Tools so costly that Apple requires a $1200 deposit. And because Apple uses serialized parts that only they can authenticate, they make it borderline impossible to use third-party replacement parts. Worse, even combining genuine Apple parts from different iPhones won't always properly work. It's *supposed* to work, but you can still end up with scary warnings in iOS about using non-Apple hardware.
 
-> Safari is the highest margin product Apple has ever made, accounts for 14-16% of Apple's annual operating profit and brings in $20 billion per year in search engine revenue from Google. For each 1% browser market share that Apple loses for Safari, Apple is set to lose $200 million in revenue per year.
+## Conclusion
 
-Or what about the iMessage lock-in? By refusing to adopt modern, open messaging standards and instead stigmatizing non-iPhones with "green bubbles", Apple actively degrades the experience of communicating with friends and family who don't have an iPhone. It's a calculated strategy to use social pressure for profit.
+The Apple I fell in love with put the user and the developer experience first. Today's Apple feels out of touch, greedy, petty, and honestly: evil.
 
-And the control doesn't stop at software. With their war on repair, using serialized parts that only they can authenticate, Apple has tried to redefine what it means to own a device. The device you paid a premium for is never truly yours to fix or modify; Apple would rather push you towards the next upgrade cycle than allow a simple repair.
-
-## So, I left.
-
-The Apple I fell in love with put the user and the developer experience first. The Apple of today feels out of touch, greedy, petty, and honestly sometimes downright evil.
-
-So, I went back to Python and Django, back to the open web. I picked up TypeScript and SvelteKit. Here the tools are open, the community is collaborative, and nobody takes a cut of my revenue. I can ship an update without asking the overlords for permission and waiting a week. And most important of all: I'm having fun again! Things are simpler to build, and they can be accessed by anyone in the world, on any device.
-
-I don't know what will be announced at this year's WWDC, but I know it'll be presented with the usual polish and fanfare. For me, though, the trust is gone. Apple is a company that desperately needs a revolution from within. Until then, I'll be happily building on the outside.
+I'm quite happy to be back working in the open web, using Python and Django, TypeScript and SvelteKit. Open source tools that nobody controls, a collaborative community, and nobody that takes 30% of my revenue. I can deploy updates without asking the overlords for permission and waiting for a review. And most importantly: I am having fun again! Things are simpler to build, and they can be accessed by anyone in the world, on any device. I think there's much more value in that than building another iPhone app.
