@@ -75,9 +75,9 @@ There [is](https://docs.djangoproject.com/en/5.2/topics/class-based-views/generi
 
 It's a great guide that shows how common CBV patterns can be implemented more explicitly and often more concisely with functions. I highly recommend reading it.
 
-However, I take a slightly different approach in my own projects: I only use the base `View` class. I avoid both function-based views _and_ the complex generic class-based views. This gives me what I consider the perfect middle ground. It provides a clean way to organize code by request method (get, post, put, etc.) and automatically handles `405 Method Not Allowed` responses for you.
+That said, I do things slightly different myself; instead of using function-based views, I use Django's base `View` class. It gives me a clean way to organize the code per request method (get, post, etc), and it also automatically handles `405 Method Not Allowed` for you.
 
-So, instead of a function-based view with a big `if` block:
+So, instead of a function-based view with a big `if` block, as suggested by Luke:
 
 ```python
 from django.shortcuts import get_object_or_404, redirect
@@ -99,7 +99,7 @@ def comment_form_view(request, post_id):
     return TemplateResponse(request, "form.html", {"form": form, "post": post})
 ```
 
-I write this:
+I use the `View` class:
 
 ```python
 from django.views import View
@@ -124,44 +124,26 @@ class CommentFormView(View):
         return TemplateResponse(request, "form.html", {"form": form, "post": post})
 ```
 
-While this class-based version is a few lines longer, I find the separation of `get` and `post` logic far cleaner than nesting the core POST handling inside an `if request.method == "POST"` block.
-
-You might notice a small duplication here: `get_object_or_404` is called in both `get` and `post`. The "textbook" way to solve this using the base `View` class is to use the `dispatch` method. It runs before `get` or `post` are called, making it a natural place for setup logic:
+My version might be a few lines longer, but those separate `get` and `post` methods are so much cleaner to me than that `if request.method == "POST"` block. There's also a bit of duplication going on, with both methods fetching the `post` using `get_object_or_404`. The "textbook" fix is to use the `dispatch` method:
 
 ```python
-from django.views import View
-from django.shortcuts import get_object_or_404, redirect
-from django.template.response import TemplateResponse
-
 class CommentFormView(View):
     def dispatch(self, request, post_id, *args, **kwargs):
         self.post_obj = get_object_or_404(Post, pk=post_id)
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        form = CommentForm()
-        return TemplateResponse(request, "form.html", {"form": form, "post": self.post_obj})
+        # use `self.post_obj`
 
     def post(self, request, *args, **kwargs):
-        form = CommentForm(data=request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = self.post_obj
-            comment.save()
-            return redirect(self.post_obj)
-
-        return TemplateResponse(request, "form.html", {"form": form, "post": self.post_obj})
+        # use `self.post_obj`
 ```
 
 However, I don't really use this pattern in my own code, as it feels a bit too magical. Instead of a method that we explicitly call ourselves, it's one more thing to have to know about Django's `View` implementation.
 
-For a simple case like this, I often find the small duplication is actually the clearest option. It's explicit and requires zero cognitive overhead to understand what's happening in `get` and `post`. If the setup logic becomes more complex, or when there is a bigger shared context with more variables in play, then instead of using `dispatch` I'll extract it into a simple helper method that I can call from both places. This keeps the control flow explicit:
+I think the duplication is perfectly fine, when it's just a few lines. It's explicit, no question what's going on. And when the duplication grows, I find it better to move the shared logic into its own method that I call from both places, keeping everything just as explicit:
 
 ```python
-from django.views import View
-from django.shortcuts import get_object_or_404, redirect
-from django.template.response import TemplateResponse
-
 class CommentFormView(View):
     def get_shared_context(self, request, post_id):
         # Imagine that this would return more than just the one post variable 😅
@@ -187,9 +169,9 @@ class CommentFormView(View):
         return TemplateResponse(request, "form.html", context)
 ```
 
-This, for me, is the sweet spot. We've eliminated the code duplication, but in a way that remains completely explicit. The `get` and `post` methods are in full control. There's no "magic" state being set behind the scenes. We get the simplicity and explicitness of a function, but with better organization, automatic HTTP method handling, and the ability to share logic on our own terms.
+For me, the base `View` class is the perfect middle ground. The flow stays explicit, but without having all the logic in one big method and `if` statements. We have automatic HTTP method handling without the magic the generic CBVs normally bring.
 
-And yes, Django's `FormView` is smaller in its most basic form:
+And yes, I'll admit that Django's `FormView` is smaller in its most basic form:
 
 ```python
 from django.views.generic.edit import FormView
@@ -207,4 +189,4 @@ class CommentFormView(FormView):
         return redirect(post)
 ```
 
-But as soon as you want to add custom logic to the GET request (like adding extra context), handle different POST outcomes, or customize error handling, you quickly end up overriding multiple methods. At that point, you're back to deciphering the framework's internals, and the initial benefit of brevity is lost to complexity. My approach keeps all the logic right in front of you, every time.
+But as soon as you want to add custom logic to the GET request, handle different POST outcomes, or customize error handling, you quickly end up overriding multiple methods. I prefer the simple `View` where I am in full control all the time.
