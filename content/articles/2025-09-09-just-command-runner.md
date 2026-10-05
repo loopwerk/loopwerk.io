@@ -5,13 +5,13 @@ summary: How I use the just command runner to create a simple, unified interface
 
 # One command to run them all
 
-I jump between projects in Python, JavaScript, and Swift, and there's this constant low-level annoyance: remembering the right command to get things done. For example to run the development server it might be `uv run ./manage.py runserver`, `pnpm dev`, or `swift run watch`, depending on the project.
+I jump between projects in Python, TypeScript, and Swift, and there's this constant minor annoyance: remembering the right command to get things done. For example to run the development server it might be `uv run ./manage.py runserver`, `pnpm dev`, or `swift run watch`, depending on the project.
 
-For a long time, I just dealt with it. I'd seen people praise the [just](https://github.com/casey/just) command runner, but I never really got the point. It seemed like a solution in search of a problem.
+For a long time, I just dealt with it. I'd seen people on social media praise the [just](https://github.com/casey/just) command runner, but I never really understood the point.
 
-That changed when I started two Django projects that use [django-tailwind-cli](https://github.com/django-commons/django-tailwind-cli). To run the dev server _and_ the Tailwind watcher, I had to use a specific, combined command: `uv run ./manage.py tailwind runserver`. The number of times I defaulted to the standard `runserver` command out of muscle memory, then spent ten minutes pulling my hair out when my style changes didn't appear, was embarrassing. That was my tipping point.
+That changed when I started a Django project that uses [django-tailwind-cli](https://github.com/django-commons/django-tailwind-cli). To run the dev server _and_ the Tailwind watcher, I have to use a specific, combined command: `uv run ./manage.py tailwind runserver`. You won't believe the number of times I instead ran the normal `runserver` command out of muscle memory, to then wonder out loud why my style changes didn't appear. It was embarrassing.
 
-I finally understood the value of `just`. It's not just (heh) about running complex commands; it's about creating a simple, unified interface for all your projects. Now, every project of mine has a `justfile` that defines a core set of recipes.
+This made me understand the true value of `just`. It's not just (heh) about running complex commands, although it certainly can do that. For me it's all about creating a simple, unified interface for all my projects.
 
 For example, for a Django project:
 
@@ -47,13 +47,6 @@ check:
     pnpm svelte-kit sync && pnpm svelte-check --tsconfig ./tsconfig.json
 ```
 
-The magic is that the _invocation_ is always the same. I no longer need to remember the specifics. I just `cd` into a directory and run:
+The magic is that the _invocation_ is always the same: I just `cd` into a directory and run one of `just run`, `just test`, `just format` or `just check` to get things done. I never have to think about it anymore.
 
-- `just run` to start the development server.
-- `just test` to run the test suite.
-- `just format` to auto-format the code.
-- `just check` to run linters and type-checkers.
-
-Each project implements these recipes differently, but the interface for me, the developer, is stable. The cognitive load is gone.
-
-Look, I know I'm late to the party on this one, but if you've been on the fence about command runners, I highly recommend giving `just` a try. It's a wonderfully simple tool that solves a real, everyday annoyance. Better late than never.
+Look, I know I'm late to the party on this one, but if you've been on the fence about command runners, I highly recommend giving `just` a try. Better late than never.
