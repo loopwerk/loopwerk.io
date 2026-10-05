@@ -1,67 +1,53 @@
 ---
 tags: insights
-summary: 25 years of web development, from simplicity to complexity and back.
+summary: 25 years of building for the web, and why I keep choosing simplicity.
 ---
 
 # A quarter century of chasing simplicity
 
-Twenty-five years ago, in 2000, I built my first website. It was for me and the 14 other people on the student floor I lived on, it was made in Flash, and it was full of silly animations. It was fun, utterly unmaintainable, and I was hooked. Twenty-five years later I'm still building for the web, though a lot has changed along the way.
+When I was seventeen I moved to a student flat in Groningen, where I shared a floor with 14 other people. One year later, in 2000, I created my first website, for our floor, with information about each student living there. It was built in Flash, with all kinds of silly animations. It was so much fun, and I was hooked.
+
+Twenty-five years later I am still building for the web, though a lot has changed in that time.
 
 ## The age of innocence
 
-I got my first real job in 2001, as a sysadmin at the University of Groningen. While I was wrangling Windows workstations and a few Debian servers, the real magic was happening next to me: my colleagues were building dynamic websites in PHP.
+I got my first real job in 2001, as a sysadmin at the University of Groningen. While I was managing Windows workstations and a few Debian servers, the real magic was happening next to me: my colleagues were building dynamic websites in PHP.
 
-By this time my Flash website was now a collection of 15 static HTML pages. And every time I wanted to change the navigation menu, I had to edit all 15 files by hand. It was a nightmare! A colleague heard me complain and showed me a single line of PHP:
+By this time my Flash website was now a collection of 15 static HTML pages, and every time I wanted to change the navigation menu, I had to edit all 15 files by hand. A colleague heard me complain about this and showed me a single line of PHP:
 
 ```php
 <?php include 'header.html'; ?>
 ```
 
-It was like magic to me. With this one function, my tangled mess of duplication vanished. There was no turning back. I spent every free moment digging through the PHP docs, and by the time I left my sysadmin job in 2003, I had become a junior developer, thanks to that one small discovery and colleagues who were patient enough to mentor me.
+This one line was literally the beginning of my career as a developer. I spent every free moment digging through the PHP docs, and started using more and more PHP in my silly site. Eventually I created my own framework and CMS (didn't we all in those years), which turned into a huge Insane Clown Posse fansite, which I ran for five years.
 
-Back then, building websites was pure joy. The stack: PHP + HTML, with a sprinkle of MooTools, Prototype.js, and later on: jQuery. The deployment: drag files into an SFTP window, or later, a quick `cvs update` on the server. You could go from idea to online in minutes. The barrier between writing code and sharing it with the world was almost non-existent.
+Back then, building websites was pure joy. And it was so simple! PHP and HTML, a bit of MooTools, Prototype.js, and eventually jQuery. Deploying was as simple as dragging the files onto the server using SFTP, later replaced by `cvs update`.
 
-## Welcome to the build step
+I'm really lucky I got started in the early 2000s. PHP was quite simple but plenty powerful to build serious things, HTML, CSS and JavaScript could be learned by simply inspecting a site's source code, and deploying was very simple. I think the barrier to entry to becoming a paid web developer was a lot lower back then.
 
-But things didn't stay simple.
+## Things got complicated
 
-JavaScript libraries started multiplying, and I started using Angular. Suddenly I was building Single Page Apps and the backend (Python instead of PHP by 2009) was reduced to a JSON API. And for the first time, I needed a build step. My simple workflow of "edit file → reload browser" was gone.
+Sadly, things didn't stay this simple. In 2009 I moved from PHP to Python, where deploying wasn't as simple as just updating some files. But the real big change was on the frontend side: ES6, CommonJS, Babel, Webpack, npm... It felt like it came all at once.
 
-Then the real tidal wave hit: ES6, CommonJS, Babel, Webpack, npm. JavaScript as a language was improving, but the tooling exploded. My `webpack.config.js` became its own mini-project. The `node_modules` folder turned into a black hole of dependencies. Even the simplest "hello world" app pulled in hundreds of megabytes. And it was fragile too; half the time a fresh install broke the build because of some upstream change.
+Yes, JavaScript as a language was improving, but the tooling and its complexity exploded. I swear that the `webpack.config.js` file in my Angular project became sentient at some point. Even the simplest Hello World app in the framework of the week pulled in hundreds of megabytes of dependencies. And it got so fragile too; dependency updates broke the site half the time.
 
-Deployment became a mysterious black box handled by CI/CD pipelines built by a separate DevOps team. The directness was gone, and progress didn't always feel like progress.
+Deployment became a mysterious black box handled by CI/CD pipelines built by a separate DevOps team. I no longer understood and owned the whole development and deployment process like I used to. It felt like a step backwards.
 
-## Back to sanity
+Luckily it seems like things are moving in the right direction. I haven't needed Babel or Webpack since forever. We now have TypeScript, and frameworks like Svelte and SvelteKit, which brought back joy to making websites, which I had lost during the Angular / Babel years.
 
-Eventually, the pendulum swung back.
+Then came htmx, allowing us to build multi-page server-rendered apps again without a build step, just like in those early days, but without the full page reloads and jQuery spaghetti. More and more developers recognize the need to bring back simplicity, and with it the joy.
 
-TypeScript brought sanity to JavaScript. Svelte and SvelteKit gave me the power of modern frameworks without the endless configuration. Writing code felt fun again.
+And the deployment story got so much better as well. There are plenty of affordable hosting providers which build your code when you push changes, and of course there are the self-hosted options like Coolify, my weapon of choice.
 
-Then came htmx and [Alpine AJAX](/articles/2025/alpine-ajax-django/). Suddenly I was back to building multi-page apps without a build step, just like in the early days, but now with smooth interactivity. It felt almost old-school, but in the best way.
+## Keeping it simple
 
-When it comes to deployment, I've seen it all over the years:
+Time is a circle, and that holds true for technology as well. We go from simple to complex, and eventually back to simple again. But the return to simplicity isn't permanent, you have to work hard to keep it because if you don't, complexity always creeps back in.
 
-1. SFTP (the beginning)
-2. A complex deploy process built by specialized DevOps people (a black box to everyone else)
-3. Heroku (easy, but expensive and a lack of control)
-4. `git pull` on a bare-metal server (full control but so complex to get everything running correctly)
-5. GitHub webhooks running a deploy script on that bare metal server ([automation](/articles/2024/auto-deploying/)!)
-6. Coolify (the sweet spot: self-hosted, automated, free, and simple)
+I follow a few simple rules to aid me in this fight.
 
-Push to GitHub, and it's live. I think the deployment story is still too complex when it comes to Python apps, but [with Coolify it got so much better](/articles/2025/coolify-django/) than anything I've had before.
+1.  Keep it simple. As the chef Marco Pierre White says, "Perfection is lots of little things done well", and "Consistency is born out of simplicity". That clever Python one-liner will be unreadable to my future self tomorrow. Don't over-engineer. The chances we'll need to scale to millions of users are almost zero, so think twice before introducing layers of abstraction and micro-services.
+2.  Increase locality of behavior. Code is easier to understand and keep in my head when related logic, markup, and styles live close together. That's why Svelte files feel right, and why TailwindCSS makes sense to me.
+3.  Less is more, especially when it comes to dependencies. Every dependency is a moving part I don't control, a ticking time bomb of breaking changes.
+4.  Tend the code like a garden. Technical debt and code rot are absolutely real, so prune those old functions, cut dead styles, and rebuild messy parts before the project becomes unmaintainable.
 
-## The lessons learned
-
-A quarter of a century later, I see the pattern clearly: technology cycles from simple to complex and back to simple again. But the return to simplicity isn't automatic; complexity will always creep in, and you have to actively defend against it. The best tools are the ones that get out of your way.
-
-If I could share the lessons from all those years with a new developer, they would be these:
-
-1.  **Keep it simple.** This applies everywhere. As the chef Marco Pierre White says, "Perfection is lots of little things done well", and "Consistency is born out of simplicity". A clever one-liner might feel smart today, but it will be unreadable to your future self or a teammate tomorrow. Don't over-engineer. The chances you'll need to scale to millions of users are slim; build for the problem you have now, not the one you might have in five years.
-2.  **Just start building.** Don't worry about the perfect architecture. It's so much more important to get your hands dirty and get the code flowing. You will naturally discover what works and what doesn't, and you will find the patterns to organize your code. Action creates clarity.
-3.  **Practice the craft.** Programming is a craft learned through practice, mistakes, and repetition. Struggling with a problem, debugging for hours, rewriting code until it finally clicks - that's how you actually learn. AI coding assistants [can be great](/articles/2025/garbage-in-garbage-out/), but if they do the bulk of the work for you, you're not actually learning. As the quote from _Bojack Horseman_ says, "It gets easier. Every day it gets a little easier. But you gotta do it every day - that's the hard part. But it does get easier."
-4.  **Increase locality of behavior.** Code is easier to understand when related logic, markup, and styles live close together. The more you have to jump between files to see how something works, the harder it is to grasp the whole picture. That's why Svelte files feel right, why TailwindCSS makes sense, and why htmx feels so natural. Keeping things local makes the system obvious.
-5.  **Less is more**, especially with dependencies. Every dependency is a moving part you don't control. Fewer parts mean fewer surprises, easier upgrades, and a codebase that remains understandable years later.
-6.  **Tend your code like a garden.** Code is not a static artifact; it's a living system that needs regular maintenance. Technical debt is real. Prune old functions, remove dead styles, and refactor messy parts before the project becomes unmaintainable.
-7.  **Automate the arguments away.** Debates over the placement of curly braces or variable naming are a waste of time and energy. Pick a code style, use a formatter like Prettier or Ruff, and set it to run automatically on commit. This eliminates an entire class of pointless pull request comments and lets everyone focus on what actually matters: the logic.
-
-After all this time, I still find the most joy in the moments when things are simple, direct, and fun. Just like when I first discovered the magic of `include`.
+If you have a project that could use a reintroduction of simplicity and better maintainability, please reach out and I'll be happy to help.
