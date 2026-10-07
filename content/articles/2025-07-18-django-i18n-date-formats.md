@@ -1,9 +1,9 @@
 ---
 tags: django, howto
-summary: A dive into why Django's DATETIME_FORMAT setting seems to do nothing, and how to actually force the 24-hour clock in the admin, even when your locale says otherwise.
+summary: It's way too difficult to make Django use a 24-hour clock while using American English. Luckily it's not impossible.
 ---
 
-# Why Django's DATETIME_FORMAT ignores you (and how to fix it)
+# Django's internationalization settings are weird
 
 When you start a new Django project, you get a handful of default settings for localization and timezones:
 
@@ -14,15 +14,11 @@ USE_TZ = True
 TIME_ZONE = "UTC"
 ```
 
-I've written before about the default timezone being a silly choice for sites with a global user base, both on [the backend](/articles/2025/django-admin-datetime/) and [the frontend](/articles/2025/django-local-times/).
+I've written before about the default timezone being a silly choice for sites with a global user base, both on [the backend](/articles/2025/django-admin-datetime/) and [the frontend](/articles/2025/django-local-times/). But the other localization settings are just as strange.
 
-But today, I want to talk about internationalization (`I18N`) and language settings. For my sites, `LANGUAGE_CODE = "en-us"` is perfectly fine; all my admin users speak English, and we prefer American spelling over the British variant. But there are some weird things going on in Django that I want to address.
+## Weird defaults
 
-## The `USE_I18N` puzzle
-
-Here's the first weird thing. The default settings have `USE_I18N = True`, which enables Django's internationalization features. The default `LANGUAGES` setting also includes a massive list of every language under the sun.
-
-You'd think this means the Django Admin would automatically switch languages. If I set my browser's preferred language to Dutch, shouldn't the Admin follow suit? Nope. It remains stubbornly English.
+The default settings have `USE_I18N = True`, which turns on Django's internationalization features. The default `LANGUAGES` setting also includes a massive list of every language under the sun. You'd think this means that the Django Admin would automatically use the browser's preferred language, right? But nope, no matter what I change my preference to, the Admin stays English.
 
 It turns out you need to add this to your middleware for the translation to actually happen:
 
@@ -33,11 +29,11 @@ MIDDLEWARE = [
 ]
 ```
 
-Only after adding `LocaleMiddleware` will the Admin honor your browser's language preference. This feels weird to me. Why enable `USE_I18N` by default, which has a small performance cost, if it doesn't do anything without manual intervention?
+I find this strange. Why enable `USE_I18N` by default (which has a small performance cost), but not this middleware? This combination of settings seems nonsensical to me, and yet it's what ships with Django as the default.
 
-It's also very strange to me that there isn't a language drop-down in the Admin, where users can choose from the available languages (as defined by the `LANGUAGES` setting). That seems like such an obvious improvement to the Admin, in the same way that there really should be a timezone dropdown as well, to render dates and times in your local timezone.
+On a related note, here's a feature request for the Admin. Please add a language dropdown, so that I can choose my preferred language. It seems like a really simple and obvious UX improvement, just like a timezone dropdown.
 
-But since I never add translations for my own code (models and templates), I only ever want my Admin in English anyway, so I just turn the whole translation system off. My settings become:
+Anyway, since I never add translations for my models, and all our admins speak English, I usually just turn the whole translation system off:
 
 ```python title="settings.py"
 USE_I18N = False
@@ -47,54 +43,34 @@ USE_TZ = True
 TIME_ZONE = "UTC"
 ```
 
-## Formatting settings are ignored
+## Date formatting is way too difficult
 
-With `LANGUAGE_CODE = "en-us"`, Django formats all dates and times according to US conventions. This means using the 12-hour clock with "a.m." and "p.m.". As a European, this format is just hard to read, especially when you have to mentally parse "12 a.m." and "12 p.m." We want a simple 24-hour clock.
+While I, and the other admins on my projects, prefer the Admin to be in American English, we absolutely do not like the 12-hour clock with the "a.m." and "p.m." madness. Sadly, using `LANGUAGE_CODE = "en-us"` means you get both.
 
-Let's test this with a basic model:
-
-```python title="models.py"
-from django.db import models
-
-class Appointment(models.Model):
-    scheduled_at = models.DateTimeField()
-```
-
-And a simple admin:
-
-```python title="admin.py"
-from django.contrib import admin
-from .models import Appointment
-
-@admin.register(Appointment)
-class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ["scheduled_at"]
-```
-
-As expected, the admin form widget and the list display both render the time in the 12-hour format. No problem, I thought. Django has settings for this! I'll just force the 24-hour format everywhere.
+No problem, I thought, because Django has dedicated settings for this:
 
 ```python title="settings.py"
 DATETIME_FORMAT = "N j, Y, H:i"
 TIME_FORMAT = "H:i"
 ```
 
-And now for the second weird thing: this does absolutely nothing. The times in the admin are still shown with a.m./p.m. A quick trip to the documentation reveals the culprit:
+To my surprise, this does absolutely nothing. All the date/time fields in the Admin are still rendering with the annoying 12-hour clock. But why?
+
+The answer lies in the documentation:
 
 > The default formatting to use for displaying datetime fields in any part of the system. **Note that the locale-dictated format has higher precedence and will be applied instead.**
 
-Wait.. what? So even though I set `USE_I18N = False`, Django still uses the `LANGUAGE_CODE` to determine formatting rules, and **overrides my custom settings**. Setting `USE_I18N = False` only stops the translation framework; it doesn't stop the localization formatting. The `en-us` locale's formatting rules are hardcoded to use the 12-hour clock, and they will always win against the `DATETIME_FORMAT` setting.
+Wait... what? So even though I set `USE_I18N = False`, Django still uses `LANGUAGE_CODE` to determine the formatting rules, and even *overrides my custom settings*. What is the point of `DATETIME_FORMAT` and `TIME_FORMAT` then? It seems quite obvious that my custom setting should always override a default locale-based one. This is madness!
 
-So, what is the point of `DATETIME_FORMAT` and `TIME_FORMAT`? They seem only to work if you use a locale that doesn't have its own predefined formats? It feels completely backward; a specific custom setting should always override a general locale-based one.
+## The fix
 
-## The fix: overriding locale formats
+I still want my 24-hour clock, Django's logic be damned. And if the locale format is the problem, we need to change the locale format itself.
 
-So how do we get our 24-hour clock? If the locale format is the problem, we need to change the locale format.
-
-Django provides a clean, if somewhat hidden, way to do this with the `FORMAT_MODULE_PATH` setting. This tells Django to look in a specific Python module for custom format definitions.
+Let's get started.
 
 ### 1. Create a `formats` package
 
-In your project directory (the one with `manage.py`), create a new package for our custom formats. I'll call mine `formats`.
+In your project directory (the one with `manage.py`), create a new package for your custom formats. I'll call mine `formats`.
 
 ```text
 myproject/
@@ -108,7 +84,7 @@ myproject/
 
 ### 2. Create a custom `formats.py`
 
-Inside `formats.py` we can define our own formats for the `en` language code. We'll specify the 24-hour clock using `H` for the hour.
+Inside `formats.py` you can define your own formats for the `en` language code. Use `H` for the hour, which uses the 24-hour clock.
 
 ```python title="myproject/formats/en/formats.py"
 DATETIME_FORMAT = "N j, Y, H:i"
@@ -116,47 +92,39 @@ TIME_FORMAT = "H:i"
 SHORT_DATETIME_FORMAT = "m/d/Y H:i"
 ```
 
-You can add a few other locate-related formats you want to override here, see [the documentation for `FORMAT_MODULE_PATH`](https://docs.djangoproject.com/en/5.2/ref/settings/#format-module-path) for the available settings.
+You can override other locale-related settings if you want to, see [the documentation for `FORMAT_MODULE_PATH`](https://docs.djangoproject.com/en/5.2/ref/settings/#format-module-path) for the available ones.
 
 ### 3. Point Django to your custom formats
 
-Finally, in your `settings.py`, tell Django where to find this new module, by adding one line:
+Finally, tell Django where to find this new module:
 
 ```python title="settings.py"
 FORMAT_MODULE_PATH = "formats"
 ```
 
-And voilà! The Django admin now displays all times in the glorious, unambiguous 24-hour format, even while `LANGUAGE_CODE` is still `en-us`.
+And voilà! The Django Admin now displays all times in the glorious 24-hour format, even while `LANGUAGE_CODE` is still `en-us`.
 
 It's definitely more work than you'd expect for such a simple change. I really do think they should change the precedence order, but now you know how to change formatting settings for an existing locale.
 
-## Override the time picker options
+## Override the time picker shortcuts
 
-Our `FORMAT_MODULE_PATH` solution fixed the main display, but there's one last holdout for the 12-hour clock: the time picker widget in the admin. It still shows helpful-but-annoying shortcuts like "6 a.m." and "6 p.m.".
-
-To change these, we need to override the text itself, which means we have to dive into Django's translation system. The good news is that we can do this without re-enabling the full internationalization system (`USE_I18N`). The shortcuts are rendered on the server, and Django's core translation loader will pick up our overrides as long as we point it to them.
+Our `FORMAT_MODULE_PATH` solution fixed most of the clocks in the Admin, but not the time picker widget in the Admin. It still shows shortcuts like "6 a.m." and "6 p.m.". To change these, you have to dive into Django's translation system.
 
 ### 1. Update your settings
 
-We need to make three changes, the rest can stay as-is:
+You need to make three changes, the rest can stay as-is:
 
 ```python title="settings.py"
-USE_I18N = False
-<mark>LANGUAGE_CODE = "en"</mark>
-<mark>LANGUAGES = [("en", "English")]</mark>
-USE_TZ = True
-TIME_ZONE = "UTC"
-FORMAT_MODULE_PATH = "formats"
-<mark>LOCALE_PATHS = [BASE_DIR / "locale"]</mark>
+LANGUAGE_CODE = "en"
+LANGUAGES = [("en", "English")]
+LOCALE_PATHS = [BASE_DIR / "locale"]
 ```
 
-You'll notice we switched `LANGUAGE_CODE` from `en-us` to `en`. This is very important! Django treats `en-us` as its special, hardcoded default and doesn't look for a translation file for it. By switching to the more generic `en`, we're telling Django, "Hey, this is a custom language setup, please look for a translation file."
-
-The beauty is that any strings we don't override in our `en` file will automatically fall back to the built-in `en-us` defaults, so we get the best of both worlds.
+Django treats language `en-us` as its special, hardcoded default and doesn't look for a translation file for it, so you need to switch `LANGUAGE_CODE` to the more generic `en`. Any strings you don't override in your translation file will automatically fall back to the built-in `en-us` defaults.
 
 ### 2. Create the override file
 
-Next, create the following file in the root (same level as `manage.py`):
+Next, create the following file:
 
 ```po title="locale/en/LC_MESSAGES/djangojs.po"
 msgid ""
@@ -182,10 +150,10 @@ msgstr "18:00"
 
 ### 3. Compile the messages
 
-Finally, run a management command to compile this text file into a format Django can use efficiently:
+Finally, run the following management command to compile the translations:
 
 ```shell-session
 $ ./manage.py compilemessages
 ```
 
-Restart your development server, and the time picker dropdown will now show your clean, 24-hour options. With that, the Django Admin is fully converted to a sensible clock, from the list display right down to the picker shortcuts.
+Restart your development server, and the time picker will now show the newly translated shortcuts. Finally, the entire Django Admin is using a sensible clock!
