@@ -1,9 +1,9 @@
 ---
 tags: django, insights
-summary: Async Django is a huge technical achievement, but it has been quietly rejected by the community it was built for. Most developers stick to simpler, proven solutions.
+summary: Async Django is a huge technical achievement, but it solves a problem most sites simply don't have, while adding a lot of complexity.
 ---
 
-# Async Django: a solution in search of a problem?
+# Was async Django worth it?
 
 A client recently asked me a seemingly simple question:
 
