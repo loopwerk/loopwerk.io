@@ -9,24 +9,6 @@ I've recently been rethinking how I build web applications. For the past few yea
 
 And then I came across [htmx](https://htmx.org), which promises to enhance HTML to the point where your old-fashioned Multi-Page Application (MPA) feels modern, without having to write a single line of JavaScript. We can have the smooth, modern UX of a SPA but with the simplicity and robustness of traditional, server-rendered Django applications.
 
-This article is about why I believe this "Hypermedia-Driven Application" approach is a better fit for many Django projects than a full-blown SPA, and why I ultimately chose Alpine AJAX over the more popular htmx.
-
-## Returning to true REST and hypermedia
-
-To understand why this "new" approach feels so simple, we need to look back at the original principles of the web. The term everyone knows is REST, but most of us associate "REST API" with "JSON API."
-
-When Roy Fielding defined REST in his 2000 dissertation, JSON didn't even exist. REST was a description of the web itself, where hypermedia (i.e., HTML with links and forms) is the Engine of Application State (HATEOAS).
-
-In a true RESTful system, a client (like a browser) doesn't need to know any specific API endpoints besides a single entry point. It discovers what it can do next simply by parsing the HTML it receives. The links and forms _are the API_, and they fully describe the available actions. This is why Fielding gets frustrated with what we call REST APIs today:
-
-> I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today's example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating.
->
-> — Roy Fielding
-
-If you've ever built a standard server-rendered Django app, congratulations: you've built something more RESTful than 99.9% of JSON APIs. The only problem is that the full-page reloads of these Multi-Page Applications feel clunky. This is the exact problem that libraries like htmx and Alpine AJAX solve: they let us keep the robust, simple, and truly RESTful architecture of an MPA, while adding the smooth user experience of an SPA.
-
-_(For a much deeper dive into the philosophy of hypermedia as the engine of state, I highly recommend the essays on the [htmx.org website](https://htmx.org/essays/), as well as the book [Hypermedia Systems](https://hypermedia.systems) by the creator of htmx.)_
-
 ## The promise of htmx
 
 htmx is a brilliant library that "completes" HTML as a hypertext. It lets you trigger AJAX requests from any element, not just links and forms, and swap the response HTML into any part of the page.
@@ -75,25 +57,21 @@ htmx then swaps this form into the DOM, replacing the original `div`. No JSON, n
 
 ![DB to JSON to JS to HTML vs DB to HTML meme](/articles/images/dbtohtml.png)
 
-You can build incredible features like [infinite scroll](https://htmx.org/examples/infinite-scroll/), [active search](https://htmx.org/examples/active-search/), and more with just a few HTML attributes.
-
-## The downside: a crack in the foundation
-
-htmx really is a fantastic library, but there is one big downside: it encourages you to add behavior to elements that have no native function. Look at that "Click To Edit" button again:
+You can build features like [infinite scroll](https://htmx.org/examples/infinite-scroll/) and [active search](https://htmx.org/examples/active-search/) with just a few HTML attributes, but there is one big downside: it encourages you to add behavior to elements that have no native function.
 
 ```html
-<button hx-get="/contact/1/edit" class="btn primary">Click To Edit</button>
+<button hx-get="/contact/1/edit" class="btn primary">
+  Click To Edit
+</button>
 ```
 
-If JavaScript is disabled<sup>1</sup> or fails to load, this button does... nothing. It's not wrapped in a form, so it has no default action. The same is true for the "Cancel" button in the edit form. The application is broken. This violates the principle of **Progressive Enhancement**, where a site should be functional at a baseline level (plain HTML) and enhanced with JavaScript.
+If JavaScript is disabled or fails to load, this button does nothing, and the application is broken. This violates the principle of progressive enhancement, where a site should be functional at a baseline level (plain HTML) and enhanced with JavaScript.
 
-You _can_ write progressively enhanced code with htmx, but it often requires attribute repetition and constant vigilance from you, the developer.
-
-> <sup>1</sup> JavaScript fails more often than people think. Not just because some users disable it (which is admittedly very rare), but because of things like flaky networks, aggressive content blockers, misconfigured scripts, browser extensions, corporate firewalls, or even just unhandled JS errors. When your site depends entirely on JavaScript to function, any one of those issues can leave users with a broken or unusable experience. Having a site work without JS is also good for SEO and for accessibility technology such as screenreaders.
+To be fair, you _can_ write progressively enhanced code with htmx, but it often requires attribute repetition and constant vigilance from you, the developer.
 
 ## My preferred alternative: Alpine.js + Alpine AJAX
 
-[Alpine.js](https://alpinejs.dev) is a rugged, minimal JavaScript framework for composing behavior directly in your HTML. If you've used Vue, it will feel very familiar. It's very often used alongside htmx to handle things htmx doesn't, like toggling modals or managing simple client-side state.
+[Alpine.js](https://alpinejs.dev) is a minimal JavaScript framework for composing behavior directly in your HTML. If you've used Vue, it will feel very familiar. It's very often used alongside htmx to handle things htmx doesn't, like toggling modals or managing simple client-side state.
 
 ```html
 <!-- Simple Alpine.js counter -->
@@ -111,10 +89,10 @@ You _can_ write progressively enhanced code with htmx, but it often requires att
 
 I was already including Alpine for this kind of light interactivity, and then I discovered its [Alpine AJAX](https://alpine-ajax.js.org) plugin. It does most of what htmx does, but with two key differences:
 
-1.  It's smaller (3kB vs 14kB for htmx). A nice bonus, but not the deciding factor.
+1.  It's smaller (3kB vs 14kB for htmx).
 2.  It only enhances `<a>` and `<form>` tags.
 
-This second point is the game-changer. By design, Alpine AJAX prevents you from making the progressive enhancement mistake. Your application _must_ work with plain HTML first. Any AJAX functionality is purely an enhancement. For me, that's a win-win: a more resilient site with less JavaScript, built with a tool I'm already using.
+That second point might seem like a downside at first, but it prevents you from making the progressive enhancement mistake. Your application _must_ work with plain HTML first, and any AJAX functionality is purely an enhancement. It forces you to do things the right way, unlike htmx.
 
 ## Let's rebuild it with Alpine AJAX
 
@@ -291,7 +269,7 @@ Here's how a "search-as-you-type" feature looks with our Alpine stack. Alpine ha
 </table>
 ```
 
-This degrades perfectly. Without JS, it's a standard search form with a submit button. With JS, the submit button is hidden, `@input.debounce` triggers a form submission via AJAX after the user stops typing, and the results are injected into the `<tbody>`.
+This degrades perfectly: without JS, it's a standard search form with a submit button. 
 
 Compare this with the htmx version:
 
@@ -389,15 +367,13 @@ The result is that you can use Django's messages framework and those messages ar
 
 ## Closing thoughts
 
-I've been building with this stack for a few weeks, and it feels like a revelation. I get to stay in Django, writing Python and standard HTML templates. All my validation and business logic live on the server where they belong. There's no API layer to maintain, no over-fetching, no build steps.
+I've been building with this stack for a few weeks, and it feels pretty good. I get to stay in Django, writing Python and standard HTML templates. All my validation and business logic live on the server where they belong. There's no API layer to maintain, no over-fetching, no build steps, no JS frameworks.
 
-This approach also champions **Locality of Behavior**. When you look at a template, the behavior is right there in the HTML attributes (`x-target`, `@input`), not hidden away in a separate JavaScript file. It's the same reason I love Tailwind CSS. It might seem to violate "Separation of Concerns," but I've found it dramatically reduces the mental overhead of switching contexts.
+This approach also champions locality of behavior. When you look at a template, the behavior is right there in the HTML attributes (`x-target`, `@input`), not hidden away in a separate JavaScript file. It's the same reason I love Tailwind CSS.
 
-This isn't to say SPAs are dead. For highly interactive, application-like experiences (think Figma or a complex dashboard), a framework like SvelteKit or Vue is still the right tool.
+I think that for highly interactive, application-like experiences (think Figma), a framework like SvelteKit or Vue is still the right tool. But for the vast majority of simple content-driven websites this hypermedia approach feels like a return to sanity. It's a return to the stability and simplicity of Web 1.0 without the full page reloads.
 
-But for the vast majority of websites —the content sites, the e-commerce stores, the blogs— that are mostly pages of content with forms and a sprinkle of interactivity, this hypermedia approach feels like a return to sanity. It combines the stability and simplicity of Web 1.0 with the slick user experience of Web 2.0.
-
-If you're a Django developer feeling the fatigue of the modern frontend, I highly recommend you give Alpine.js and Alpine AJAX a try. You might be surprised how productive and fun it is to build for the web again.
+If you're a Django developer feeling the fatigue of the modern frontend, maybe give Alpine AJAX (or htmx) a try. You might be surprised how productive and fun it is.
 
 > [!UPDATE]
 > **March 25, 2026**: after multiple months of working with Django and Alpine AJAX I've revisited this topic in a [new article](/articles/2026/alpine-ajax-django-revisited/).

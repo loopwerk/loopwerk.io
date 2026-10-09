@@ -5,11 +5,11 @@ summary: I'm a big fan of the django-tailwind-cli package, but I ran into proble
 
 # Production-ready cache-busting for Django and Tailwind CSS
 
-I'm a big fan of the [django-tailwind-cli](https://github.com/django-commons/django-tailwind-cli) package. It makes integrating Tailwind CSS into a Django project incredibly simple. By managing the Tailwind watcher process for you, it streamlines development, especially when paired with [django-browser-reload](https://github.com/adamchainz/django-browser-reload) for live updates. It's a fantastic developer experience.
+I'm a big fan of the [django-tailwind-cli](https://github.com/django-commons/django-tailwind-cli) package, because it makes using Tailwind CSS with a Django project very simple. It manages the Tailwind watcher process for you, and becomes even better when paired with [django-browser-reload](https://github.com/adamchainz/django-browser-reload) for live updates.
 
-However, when I first deployed a project using this setup, I ran into a classic problem: caching. You see, `django-tailwind-cli` creates a single `tailwind.css` file that you load in your base template. In production, browsers and CDNs will aggressively cache this file to improve performance. This is normally a good thing! But when you deploy an update, like adding a new Tailwind class to a template, your users might not see the changes. Their browser will continue to serve the old, cached `tailwind.css` file, leading to broken or outdated styling.
+This package outputs a `tailwind.css` file that you load in your base template. And because my projects use aggressive caching rules for static files, it meant that changes to this file weren't always visible to users, which would lead to broken styling on the site.
 
-Luckily, Django has a built-in cache-busting mechanism in the form of `ManifestStaticFilesStorage`. But, there's one important caveat: you need to make sure that `css/source.css` is not processed by `ManifestStaticFilesStorage` or things will break.
+I didn't want to stop caching my static files, so instead I looked into generating cache-busting filenames, such as `tailwind.4e3e58f1a4a4.css`. Luckily, Django has a built-in feature that does exactly this: `ManifestStaticFilesStorage`. But you need to make sure that `css/source.css` is not processed by `ManifestStaticFilesStorage` or things will break.
 
 ## Step 1: configure the storage
 
@@ -30,18 +30,15 @@ STORAGES = {
 }
 ```
 
+This will use `StaticFilesStorage` in development mode, `ManifestStaticFilesStorage` otherwise.
+
 ## Step 2: update your deploy process
 
-With the settings configured, your deployment process for static files will now be a two-step command:
+With the settings configured, your deployment process for static files will now be two commands:
 
 ```shell-session
 $ ./manage.py tailwind build
 $ ./manage.py collectstatic --noinput --ignore css/source.css
 ```
 
-First, `tailwind build` creates the final `tailwind.css` file. Then, `collectstatic` picks it up, hashes it with a unique name like `tailwind.4e3e58f1a4a4.css`, and places it in your `STATIC_ROOT` directory, ready to be served.
-
-That's it! Your Tailwind styles are now production-ready and properly cache-busted.
-
-> [!UPDATE]
-> **August 2, 2025**: the initial version of this article used a custom subclass of `ManifestStaticFilesStorage` to ignore `css/source.css`, but then James was kind enough to tell me about `collectstatic`'s `--ignore` option. Thanks!
+First, `tailwind build` creates the final `tailwind.css` file. Then, `collectstatic` picks it up, hashes it with a unique name like `tailwind.4e3e58f1a4a4.css`, and places it in your `STATIC_ROOT` directory. Problem solved!
