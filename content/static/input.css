@@ -24,9 +24,9 @@
   --color-searchbg: #e5e8ea;
   --color-searchfg: #252f3f;
   --color-shadowbg: #e5e8ea;
-  --color-asidebg: transparent;
   --color-asidefg: #5f6f84;
   --color-searchplaceholder: #93a3b8;
+  --color-blockquotebg: #eaecef;
 
   --font-main:
     "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
@@ -55,9 +55,9 @@
   --color-searchbg: #252f3f;
   --color-searchfg: #f1f5f9;
   --color-shadowbg: #0e1112;
-  --color-asidebg: transparent;
   --color-asidefg: #93a3b8;
   --color-searchplaceholder: #93a3b8;
+  --color-blockquotebg: #252f3f;
 }
 
 @utility container {
@@ -98,7 +98,8 @@
     font-weight: 400;
   }
 
-  .prose a:hover {
+  .prose a:hover,
+  .prose a[aria-current="page"] {
     text-decoration: underline;
   }
 
@@ -294,7 +295,7 @@
   }
 
   .prose aside {
-    @apply px-4 border border-orange my-5 rounded-md bg-asidebg text-asidefg;
+    @apply px-4 border border-orange my-5 rounded-md text-asidefg;
     font-size: 90%;
   }
 
@@ -303,7 +304,7 @@
   }
 
   .prose blockquote {
-    @apply ml-[3px] text-xl py-3 font-title font-thin leading-8;
+    @apply ml-[2px] text-xl py-3 pr-5 font-title font-thin leading-8 bg-blockquotebg;
   }
 
   .prose blockquote p:first-child {
@@ -312,6 +313,11 @@
 
   .prose blockquote p:last-child {
     @apply mb-0;
+  }
+  
+  .prose .series {
+    @apply p-4 border border-orange my-5 rounded-md;
+    font-size: 90%;
   }
 
   /* SCREENSHOTS */

@@ -1,13 +1,16 @@
 ---
 tags: swift, saga
 summary: In the third and final part of this series about Saga I'm looking at the pros and cons of the current system and what I might want to change.
+series: building-saga, Part 3
 ---
 
 # Building my own static site generator, part 3: thoughts so far
 
 _I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here._
 
-_If you missed part 1, where I discuss the inspiration and goals of Saga, you can find it [here](/articles/2021/saga-1-inspiration/). And part 2, where I talk about the API design can be found [here](/articles/2021/saga-2-api-design/)._
+All parts in this series:
+%SERIES%
+{.series}
 
 ## Pros and cons of the current setup
 

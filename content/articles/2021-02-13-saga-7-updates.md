@@ -1,9 +1,16 @@
 ---
 tags: saga
 summary: In the past few days I've made some pretty substantial improvements to Saga, to make it work for me and my website, which is now built using Saga.
+series: building-saga, Part 7
 ---
 
 # Building my own static site generator, part 7: updates & the road to 1.0.0
+
+_I've been designing and building my own static site generator, written in Swift, and an early version has been [released on Github](https://github.com/loopwerk/Saga). In this series of articles I want to go over the inspiration, the constraints and goals, how I got to my current API, and the pros and cons of said API. Finally, I also want to brainstorm about where to go from here._
+
+All parts in this series:
+%SERIES%
+{.series}
 
 A while ago I [wrote](/articles/2021/saga-3-thoughts-so-far/) the following:
 

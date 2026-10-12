@@ -19,6 +19,7 @@ struct ArticleMetadata: Metadata {
   var heroImage: HeroImage?
   var archive: Bool?
   var expandedTags: [String]?
+  let series: [String]?
 }
 
 struct WorkProjectMetadata: Metadata {
@@ -48,6 +49,15 @@ extension Item where M == ArticleMetadata {
 
   var year: Int {
     return Calendar.current.component(.year, from: date)
+  }
+
+  /// Frontmatter like `series: year-in-review, 2025` puts the article in a series
+  var seriesKey: String? {
+    return metadata.series?[safeIndex: 0]
+  }
+
+  var seriesTitle: String? {
+    return metadata.series?[safeIndex: 1]
   }
 
   var creationDate: Date {
@@ -130,7 +140,7 @@ try await Saga(input: "content", output: "deploy")
   .register(
     folder: "articles",
     metadata: ArticleMetadata.self,
-    readers: [.parsleyMarkdownReader],
+    readers: [.parsleyMarkdownWithAttributesReader],
     itemProcessor: articleProcessor,
     filter: { $0.archive == false && ($0.date < Date() || Saga.isDev) },
     claimExcludedItems: false,
@@ -233,6 +243,9 @@ try await Saga(input: "content", output: "deploy")
 
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))
+
+  // Expand %SERIES% placeholders in article bodies. This needs all articles, so it can't be an item processor.
+  .afterRead(expandSeriesPlaceholders)
 
   // Minify all HTML output (prod only)
   .postProcess { html, _ in
