@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "b44f4d89688eb4c2266d149b897e547598df0f97",
-        "version" : "1.3.0"
+        "revision" : "c9985a7973e9835f9c624b7cdeca4d28f70a4834",
+        "version" : "1.4.0"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "7a185638b31911a9980655b70a26af1279d4917b",
-        "version" : "2.14.2"
+        "revision" : "e7f85f4d3dd91ca9a1e94d3328aa1ed5120a8c0f",
+        "version" : "2.14.3"
       }
     },
     {
