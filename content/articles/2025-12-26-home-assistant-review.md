@@ -1,6 +1,7 @@
 ---
 tags: review
 summary: Nearly a year ago I replaced a pile of smart-home apps, hubs, and subscriptions with Home Assistant Green. This is my long-term review.
+moved: true
 ---
 
 # Home Assistant review after one year of use

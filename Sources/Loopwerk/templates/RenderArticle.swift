@@ -33,8 +33,14 @@ func renderArticleInfo(_ article: Item<ArticleMetadata>) -> Node {
         ])
       }
     }
-    if article.archive {
-      p(class: "text-secondarytext text-xs font-mono font-bold") { "This is an archived article, and should not be used as a source of information. It's here to preserve the history of this site and to stop link rot." }
+    if article.moved {
+      p(class: "text-secondarytext text-xs font-mono font-bold") {
+        "This article has moved to my personal site, and is available at"
+        a(href: article.canonicalURL, target: "_blank") { article.canonicalURL }
+        %". Please update your bookmarks."
+      }
+    } else if article.archive {
+      p(class: "text-secondarytext text-xs font-mono font-bold") { "This is an archived article, and should not be linked to." }
     }
   }
 }
@@ -48,15 +54,19 @@ func getArticleHeader(_ article: Item<ArticleMetadata>) -> NodeConvertible {
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, name: "twitter:image")
   meta(content: article.title, name: "twitter:image:alt")
   meta(content: "article", name: "og:type")
-  meta(content: SiteMetadata.url.appendingPathComponent(article.url).absoluteString, name: "og:url")
+  meta(content: article.canonicalURL, name: "og:url")
   meta(content: article.title, name: "og:title")
   meta(content: article.metadata.summary, name: "og:description")
   meta(content: SiteMetadata.url.appendingPathComponent("/static/images/\(article.filenameWithoutExtension).png").absoluteString, customAttributes: ["property": "og:image"])
+
+  if article.archive && !article.moved {
+    meta(content: "noindex", name: "robots")
+  }
 }
 
 func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let extraHeader = getArticleHeader(context.item)
-  let articles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }.filter { $0.archive == false }
+  let articles = context.allItems.compactMap { $0 as? Item<ArticleMetadata> }.filter { $0.archive == false && $0.moved == false }
   let otherArticles = articles.filter { $0.archive == false && $0.url != context.item.url }
   let latestArticles = otherArticles.prefix(2)
   let tags = Set(context.item.metadata.tags)
@@ -79,7 +89,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let seeMoreArticles = relatedArticles.count >= 2 ? relatedArticles : latestArticles
   let seeMoreArticlesTitle = relatedArticles.count >= 2 ? "Related articles" : "Recent articles"
 
-  return baseLayout(canocicalURL: context.item.url, section: .articles, title: context.item.title, extraHeader: extraHeader) {
+  return baseLayout(canocicalURL: context.item.canonicalURL, section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article(class: "prose", customAttributes: ["data-pagefind-body": "data-pagefind-body"]) {
       h1 { context.item.title }
       div(class: "-mt-6") {

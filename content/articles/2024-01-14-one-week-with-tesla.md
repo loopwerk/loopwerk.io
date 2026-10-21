@@ -1,6 +1,8 @@
 ---
 tags: review, personal
 summary: I rented a Tesla model 3 in Iceland, and let's just say I have some opinions.
+archive: true
+moved: true
 ---
 
 # My one week with a Tesla

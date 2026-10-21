@@ -1,6 +1,7 @@
 ---
 tags: howto, workflow
 summary: A deeper look at my Home Assistant setup. How do I sync everything to Apple's Home app, and how do I automate my lights and heating?
+moved: true
 ---
 
 # My Home Assistant setup

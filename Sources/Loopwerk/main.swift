@@ -18,6 +18,7 @@ struct ArticleMetadata: Metadata {
   let summary: String?
   var heroImage: HeroImage?
   var archive: Bool?
+  var moved: Bool?
   var expandedTags: [String]?
   let series: [String]?
 }
@@ -43,8 +44,20 @@ extension Item where M == ArticleMetadata {
     return metadata.archive ?? false
   }
 
+  var moved: Bool {
+    return metadata.moved ?? false
+  }
+
   var expandedTags: [String] {
     return metadata.expandedTags ?? metadata.tags
+  }
+
+  /// Moved articles now live on bolhoed.net, under the same slug
+  var canonicalURL: String {
+    if moved {
+      return "https://www.bolhoed.net/blog/\(relativeDestination.parent().lastComponent)/"
+    }
+    return SiteMetadata.url.appendingPathComponent(url).absoluteString
   }
 
   var year: Int {
@@ -236,7 +249,7 @@ try await Saga(input: "content", output: "deploy")
       return false
     }
     if let article = item as? Item<ArticleMetadata> {
-      return !article.archive
+      return !article.archive && !article.moved
     }
     return true
   }))

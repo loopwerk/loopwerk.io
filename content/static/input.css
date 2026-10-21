@@ -35,7 +35,6 @@
     "Title Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
   --breakpoint-*: initial;
-  --breakpoint-sm: 315px;
   --breakpoint-lg: 740px;
 }
 
