@@ -8,7 +8,7 @@ Hi there! My name is **Kevin Renskers**, and I'm a product-minded senior softwar
 
 I created my first website in 2000, and got my first job as a PHP developer in 2001. In 2009 I switched to **Python** and **Django**, and in 2010 I created my first **iOS** app. I've worked as a fully remote developer since 2016, for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever, and Emmy and Oscar winner Sound Radix. In 2023 I shifted my focus from mostly iOS work back to the open web.
 
-My hobbies and interests include playing PC games, playing Dungeons & Dragons, watching [tv shows](https://www.bolhoed.net/shows/), cooking, [photography](https://glass.photo/kevinrenskers) and architecture.
+My hobbies and interests include playing PC games, playing Dungeons & Dragons, watching [tv shows](https://www.bolhoed.net/shows/), cooking, [photography](https://www.bolhoed.net/photos/) and architecture.
 
 Some of my all-time favorites PC games include The Last of Us, Lies of P, Elden Ring, Europa Universalis IV, Baldur's Gate, and Cyberpunk 2077. A full list can be found on my [personal website](https://www.bolhoed.net/games/).
 
