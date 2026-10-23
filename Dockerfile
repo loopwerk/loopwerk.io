@@ -57,6 +57,15 @@ RUN git clone https://github.com/loopwerk/loopwerk.io.git /tmp/repo \
     && git restore-mtime --oldest-time \
     && rm -rf .git /tmp/repo
 
+# Environment variables coming from Coolify. Add an ARG + ENV pair per variable,
+# and mark the variable as available at buildtime in Coolify, otherwise it won't
+# be passed to the build. These are declared after the expensive layers above so
+# that changing a value doesn't invalidate the dependency cache.
+ARG TMDB_ACCESS_TOKEN
+ENV TMDB_ACCESS_TOKEN=${TMDB_ACCESS_TOKEN}
+ARG MAPBOX_TOKEN
+ENV MAPBOX_TOKEN=${MAPBOX_TOKEN}
+
 # Build the site: generate images, index, minify HTML, build & hash CSS
 RUN --mount=type=cache,target=/root/.swifttailwind \
     loopwerk

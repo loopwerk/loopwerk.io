@@ -3,7 +3,7 @@ tags: insights, ai
 summary: You can't just say "make an app", you still need to know how to build a good app. AI might help with the code, but we're still the ones with the technical expertise and taste.
 ---
 
-# Garbage in, garbage out (why good developers are still necessary in the age of LLMs)
+# Garbage in, garbage out
 
 I've been a developer for almost 25 years, and I've seen plenty of hype cycles in my time. Most of them came and went without leaving a real impact. The latest hype, AI (and LLMs in particular), seems different though: it's actually changing the way we work, in a big way.
 

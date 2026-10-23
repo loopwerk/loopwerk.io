@@ -1,5 +1,5 @@
 ---
-tags: personal, faq
+tags: faq
 summary: It's ten years since I quit my job and started freelancing. Here's how I got started, how I find clients, how to figure out your rate, and what I'd tell anyone thinking about doing the same.
 ---
 
@@ -63,14 +63,14 @@ Personally, I have two rates: my standard one for short-term projects, and a 25%
 ## The horror stories
 Every freelancer has a "client from hell" story. I have two that taught me a lot about running a business.
 
-### The shelf treatment
+### Forced unpaid waiting time
 For one long-term project I was building an iOS app on top of a custom backend that the client was building in-house, and their backend team was always behind schedule. Whenever I reached a point where I couldn't continue without a certain API endpoint, I'd get a message on Friday afternoon: "Hey, we're behind on the backend. Don't work next week while we catch up."
 
 Don't work next week. As if I'm a tool you can put back on the shelf whenever you don't need it, and my income is just... paused. When I asked for a minimum billable guarantee, so I could actually pay my bills during those forced gaps, they turned it into a massive fight. I should simply "find other projects" to fill the gaps, they said. Sure! The world is obviously full of clients looking to hire someone for exactly five days, starting next Monday.
 
 I liked the app and I liked the work, but I walked away. A client that doesn't respect your time doesn't respect you.
 
-### The Xcode bait-and-switch
+### The bait-and-switch
 Story number two is about a CEO with a grand vision, who promised me a revolutionary platform, built by a "world-class engineering team" on a codebase that was "clean and ready to scale". And I believed him! Then on my first day I opened the project in Xcode, and... yeah. Spaghetti code and hacks everywhere I looked. The world-class engineering team? One junior developer, building on top of the ruins left behind by five previous teams, who all left within six months. I spent a month fixing critical bugs and submitting pull requests, trying to somehow save this thing, but the amount of technical debt made it hopeless.
 
 So I handed in my notice, and the CEO went ballistic. He refused to pay my invoice, claimed that I had "duped" him, that my month of bug fixing was actually "onboarding time", and then came the threats of legal action. In the end, after a whole lot of back and forth, I got half of the invoice paid. I never saw the other half.

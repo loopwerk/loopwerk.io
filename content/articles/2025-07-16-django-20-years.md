@@ -1,5 +1,5 @@
 ---
-tags: django, personal
+tags: django
 summary: Django turned 20! A look back at my 16 years with it, my favorite packages, and what I'd love to see in the future.
 ---
 
@@ -13,7 +13,7 @@ When I started with Django in 2009 I worked for a software agency in Groningen, 
 
 In 2012 my focus shifted dramatically. I quit my job as a web developer, moved to Iceland, and started making iOS apps full-time. I was still using Django though; I used Django REST Framework to create the APIs that powered these mobile apps.
 
-Fast forward to 2023, and I've [come full circle](/articles/2025/thoughts-on-apple/), returning to full-time web development. These days, I mostly use SvelteKit on the frontend with Django REST Framework still on the backend. My latest project is pure Django again, [using Alpine AJAX](/articles/2025/alpine-ajax-django/) for interactivity. It feels like returning to the good ol' days of server-rendered apps, except without the full page refreshes and jQuery spaghetti.
+Fast forward to 2023, and I've [come full circle](/journal/thoughts-on-apple/), returning to full-time web development. These days, I mostly use SvelteKit on the frontend with Django REST Framework still on the backend. My latest project is pure Django again, [using Alpine AJAX](/articles/2025/alpine-ajax-django/) for interactivity. It feels like returning to the good ol' days of server-rendered apps, except without the full page refreshes and jQuery spaghetti.
 
 The way I deploy my Django apps has also changed a lot over the years. I started with Heroku, which felt pretty magical at the time. That got quite expensive though, so that led me to [self-hosting on a bare metal server](/articles/2023/setting-up-debian-11/). It saved a lot of money, but I also discovered that I don't really enjoy the ops side of things. Too many things that can break in completely unexpected and hard-to-debug ways, bringing down the website.
 

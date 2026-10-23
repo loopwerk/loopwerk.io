@@ -1,8 +1,8 @@
 import Foundation
 import Moon
 import Saga
+import SagaImageReader
 import SagaPathKit
-import SwiftGD
 import SwiftSoup
 
 private let syntaxHighlighter: Moon = {
@@ -43,25 +43,6 @@ func permalink(item: Item<ArticleMetadata>) {
   item.relativeDestination = Path(components: components)
 }
 
-func heroImage(item: Item<ArticleMetadata>) {
-  // Check if a hero image exists for this article. If so, get its dimensions.
-  let imageFilename = item.filenameWithoutExtension + "-1480w.webp"
-  let heroesPath = Path(SiteMetadata.projectRoot) + "content/articles/heroes"
-  let imagePath = heroesPath + imageFilename
-
-  if imagePath.exists {
-    if let data = try? Data(contentsOf: URL(fileURLWithPath: imagePath.string)),
-       let image = try? Image(data: data, as: .webp)
-    {
-      item.metadata.heroImage = HeroImage(
-        path: "/articles/heroes/" + imageFilename,
-        width: image.size.width,
-        height: image.size.height
-      )
-    }
-  }
-}
-
 func unescapeMarkVar<M>(item: Item<M>) {
   var html = item.body
     .replacingOccurrences(of: "&lt;mark&gt;", with: "<mark>")
@@ -88,4 +69,24 @@ public func addCodeBlockTitles<M>(_ doc: Document, item: Item<M>) throws {
     let title = try pre.attr("data-title")
     try pre.prepend("<span class=\"code-title\">\(title)</span>")
   }
+}
+
+/// An album's title from its folder name: "street-art" becomes "Street art"
+func albumTitle(folder: String) -> String {
+  let words = folder.replacingOccurrences(of: "-", with: " ")
+  return words.prefix(1).uppercased() + words.dropFirst()
+}
+
+/// A photo's title doubles as its alt text: "Architecture photo taken on March 4, 2025".
+/// Photos are processed before they're linked to their album, so the album title comes from the folder.
+func photoTitle(photo: Item<ImageMetadata>) {
+  let album = albumTitle(folder: photo.relativeSource.parent().lastComponent)
+  photo.title = "\(album) photo taken on \(photo.date.formatted("MMMM d, yyyy"))"
+}
+
+/// Photos have no body of their own; the photo feed uses this as the entry content.
+/// Feed readers resolve relative URLs inconsistently, so the src is absolute.
+func photoFeedBody(photo: Item<ImageMetadata>) {
+  let src = SiteMetadata.url.appendingPathComponent(photo.relativeSource.string).absoluteString
+  photo.body = #"<img src="\#(src)" width="\#(photo.metadata.imageWidth)" height="\#(photo.metadata.imageHeight)" alt="\#(photo.title)">"#
 }
