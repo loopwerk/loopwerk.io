@@ -46,9 +46,9 @@ private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Sec
     div(class: "article-grid") {
       aside(class: "max-lg:hidden") {
         // The articles have too many tags to fit on a short screen, so there the sidebar scrolls away with the page
-        nav(class: "\(section == .articles ? "tall:sticky" : "sticky") top-24 text-xs", customAttributes: ["aria-label": "Tags"]) {
-          p(class: "mb-4 sidebar-header") { "Tags" }
-          ul(class: "flex flex-col gap-2") {
+        nav(class: "\(section == .articles ? "tall:sticky" : "sticky") top-24", customAttributes: ["aria-label": "Tags"]) {
+          p(class: "sidebar-header") { "Tags" }
+          ul {
             li { tagLink("All \(section == .journal ? "posts" : "articles") (\(allArticles.count))", href: section.path, isCurrent: currentTag == nil) }
             tags.map { tag, count in
               li { tagLink("\(tag) (\(count))", href: tagURL(tag, section: section), isCurrent: tag == currentTag) }
@@ -159,7 +159,7 @@ private func tagSeparator(index: Int, totalTags: Int) -> Node {
 }
 
 private func tagLink(_ title: String, href: String, isCurrent: Bool) -> Node {
-  a(class: isCurrent ? "text-accent" : "text-textfg/80 hover:text-accent", href: href) { title }
+  a(class: isCurrent ? "text-accent" : "", href: href) { title }
 }
 
 func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
@@ -199,44 +199,46 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   ]) {
     div(class: "article-grid") {
       aside(class: "max-lg:hidden") {
-        div(class: "sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col gap-8 overflow-y-auto text-xs") {
+        div(class: "sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col gap-8 overflow-y-auto") {
           if let toc {
             nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
-              p(class: "mb-4 sidebar-header") { "Contents" }
+              p(class: "sidebar-header") { "Contents" }
               Node.raw(toc)
             }
           }
 
           if !tags.isEmpty {
             nav(customAttributes: ["aria-label": "Tags"]) {
-              p(class: "mb-4 sidebar-header") { "Tags" }
-              ul(class: "flex flex-col gap-2") {
+              p(class: "sidebar-header") { "Tags" }
+              ul {
                 tags.map { tag in
                   li { tagLink(tag, href: tagURL(tag, section: section), isCurrent: false) }
                 }
               }
             }
           }
+          
+          div {
+            p(class: "mb-2") { date }
+          }
         }
       }
 
       div {
         article(customAttributes: section == .articles ? ["data-pagefind-body": "data-pagefind-body"] : [:]) {
-          header(class: "page-header") {
-            h1 { item.title }
-            
-            if let summary = item.metadata.summary {
-              p(class: "text-xs font-mono") {
-                summary
-              }
+          header(class: "mb-8 text-textfg/60") {
+            h1(class: "heading-1") { item.title }
+
+            if item.archive {
+              span(class: "inline-block mt-4 p-1 rounded-md bg-textfg text-bodybg") { "archived" }
             }
             
-            p(class: "text-xs font-mono links") {
+            p(class: "mt-4 links lg:hidden") {
               "Posted on"
               date
               // On desktop the tags are in the sidebar
               if !tags.isEmpty {
-                span(class: "lg:hidden") {
+                span {
                   "in "
                   tags.enumerated().map { index, tag in
                     Node.fragment([
@@ -247,12 +249,10 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
                 }
               }
             }
-            if item.archive {
-              p(class: "font-semibold") { "This is an archived article, and should not be linked to." }
-            }
+
             if let toc {
-              details(class: "article-toc group mt-12 lg:hidden") {
-                summary(class: "flex cursor-pointer list-none items-center gap-1.5 text-textfg/80 [&::-webkit-details-marker]:hidden") {
+              details(class: "article-toc group mt-6 lg:hidden") {
+                summary(class: "flex cursor-pointer list-none items-center gap-1.5 [&::-webkit-details-marker]:hidden") {
                   Node.raw(#"<svg class="h-3.5 w-3.5 group-open:rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>"#)
                   "Contents"
                 }

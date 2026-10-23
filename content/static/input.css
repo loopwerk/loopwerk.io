@@ -20,7 +20,9 @@
   --color-navbg: #fdfbf5;
 
   --font-main: "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-title: "Title Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-title: "Main Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-title--font-variation-settings: "opsz" 100;
+  --font-mono: "Code Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --breakpoint-*: initial;
   --breakpoint-md: 740px;
@@ -271,17 +273,22 @@
     @apply rounded-[10%/4.7%];
   }
 
-  a.orange {
-    @apply text-accent hover:underline;
-  }
-
-  a[href^="https://github.com"].app {
-    @apply bg-[url(images/github.svg)] bg-no-repeat bg-size-[1em_1em] bg-left pl-5;
-  }
-
+  /* A mask instead of a background image, so the icon takes the text color */
+  a[href^="https://github.com"].app,
   a[href^="https://itunes.apple.com"].app,
   a[href^="https://apps.apple.com"].app {
-    @apply bg-[url(images/apple.svg)] bg-no-repeat bg-size-[1em_1em] bg-left pl-5;
+    @apply relative pl-5;
+
+    &::before {
+      content: "";
+      @apply absolute left-0 top-1/2 size-[1em] -translate-y-1/2 bg-current;
+      mask: url(images/github.svg) center / contain no-repeat;
+    }
+  }
+
+  a[href^="https://itunes.apple.com"].app::before,
+  a[href^="https://apps.apple.com"].app::before {
+    mask-image: url(images/apple.svg);
   }
 
   /* Pagefind search results */
@@ -330,6 +337,22 @@
 
 @utility article-grid {
   @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap);
+  
+  & aside {
+    @apply text-xs text-textfg/60;
+  }
+  
+  & aside ul {
+    @apply flex flex-col gap-2;
+  }
+  
+  & a {
+    @apply hover:text-accent;
+  }
+}
+
+@utility sidebar-header {
+  @apply uppercase tracking-wide text-textfg/80 mb-2;
 }
 
 /* The nested <ul class="toc"> that SagaUtils' buildTOCList generates */
@@ -343,7 +366,7 @@
   }
 
   & a {
-    @apply leading-snug text-textfg/80 hover:text-accent;
+    @apply leading-snug;
   }
 }
 
@@ -365,12 +388,8 @@
   }
 
   & p {
-    @apply mt-4 text-textfg/80;
+    @apply mt-4 text-textfg/60;
   }
-}
-
-@utility sidebar-header {
-  @apply uppercase tracking-wide text-textfg/60;
 }
 
 /* Favorites: games, movies, shows and albums */

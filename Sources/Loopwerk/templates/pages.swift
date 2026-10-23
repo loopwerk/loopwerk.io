@@ -120,16 +120,9 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
       }
 
       aside(class: "mt-12 lg:col-start-1 lg:row-start-1 lg:mt-0") {
-        div(class: "sticky top-24 text-xs") {
-          p(class: "mb-4 sidebar-header") { "Contact" }
-          div(class: "flex gap-4 [&_a]:block [&_a]:h-6 [&_a]:w-6 [&_a]:text-textfg [&_a]:transition [&_a:hover]:text-accent md:[&_a]:h-7 md:[&_a]:w-7") {
+        div(class: "sticky top-24") {
+          div(class: "flex gap-4 [&_a]:block [&_a]:h-6 [&_a]:w-6 [&_a]:transition [&_a]:text-textfg [&_a:hover]:text-accent md:[&_a]:h-7 md:[&_a]:w-7") {
             socialLinks()
-          }
-
-          p(class: "mt-8 mb-4 sidebar-header") { "CV" }
-          a(class: "flex items-center gap-2 text-textfg hover:text-accent", href: "/about/KevinRenskers.pdf", target: "_blank") {
-            Node.raw(#"<svg class="h-6 w-6 shrink-0 md:h-7 md:w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm4 18H6V4h7v5h5z"/></svg>"#)
-            "Download"
           }
         }
       }

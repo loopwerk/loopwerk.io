@@ -39,6 +39,7 @@ let package = Package(
       ],
       exclude: [
         "Resources/background.pxd",
+        "Resources/opengraph.pxd",
         "csv",
       ],
       resources: [

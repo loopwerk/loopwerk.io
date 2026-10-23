@@ -110,17 +110,17 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         style {
           Node.raw("""
           @font-face {
-            font-family: "Title Serif";
-            src: url(/static/fonts/title.woff2) format("woff2");
-            font-style: normal;
-            font-weight: 100 900;
-            font-display: swap;
-          }
-          @font-face {
             font-family: "Main Sans";
             src: url(/static/fonts/main.woff2) format("woff2");
             font-style: normal;
             font-weight: 400 700;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Code Mono";
+            src: url(/static/fonts/code.woff2) format("woff2");
+            font-style: normal;
+            font-weight: 400;
             font-display: swap;
           }
           """)
@@ -167,9 +167,9 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         // Same grid as the articles, with the page in the text column
         div(class: "article-grid") {
           aside(class: "max-lg:hidden") {
-            nav(class: "sticky top-24 text-xs", customAttributes: ["aria-label": sidebar.title]) {
-              p(class: "mb-4 sidebar-header") { sidebar.title }
-              ul(class: "flex flex-col gap-2") {
+            nav(class: "sticky top-24", customAttributes: ["aria-label": sidebar.title]) {
+              p(class: "sidebar-header") { sidebar.title }
+              ul {
                 sidebar.sections.map { item in
                   li { sectionLink(item, currentSection: section) }
                 }
@@ -266,5 +266,5 @@ private func navLink(_ title: String, section: Section, currentSection: Section?
 }
 
 private func sectionLink(_ section: Section, currentSection: Section) -> Node {
-  a(class: section == currentSection ? "text-accent" : "text-textfg/80 hover:text-accent", href: section.path) { section.title }
+  a(class: section == currentSection ? "text-accent" : "", href: section.path) { section.title }
 }

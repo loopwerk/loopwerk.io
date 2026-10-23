@@ -89,9 +89,9 @@ private func renderProject(project: Item<OpenSourceProjectMetadata>) -> Node {
       Node.raw(project.body)
     }
 
-    div(class: "mt-2 lg:mt-0 flex gap-1 md:gap-4 items-start md:items-center flex-col md:flex-row") {
+    div(class: "mt-2 lg:mt-0 flex gap-1 md:gap-4 items-start md:items-center flex-col md:flex-row links") {
       div {
-        a(class: "orange app", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
+        a(class: "app", href: "https://github.com/\(project.metadata.repo)", rel: "nofollow", target: "_blank") {
           project.metadata.repo
         }
       }

@@ -131,7 +131,7 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
         }
       }
 
-      aside(class: "flex flex-col justify-between gap-12 p-6 lg:h-screen lg:p-10 text-xs") {
+      aside(class: "flex flex-col justify-between gap-12 p-6 lg:h-screen lg:p-10 text-xs text-textfg/60") {
         photoDetails(photo, album: album)
 
         div(class: "flex flex-col gap-1 text-textfg/60 links") {
@@ -181,19 +181,19 @@ private func photoDetails(_ photo: Item<ImageMetadata>, album: Item<PhotoAlbumMe
     return (label, value)
   }
 
-  return dl(class: "flex flex-col gap-4") {
+  return dl(class: "flex flex-col gap-6") {
     rows.map { label, value in
       div {
         dt(class: "sidebar-header") { label }
-        dd(class: "mt-1") { value }
+        dd(class: "font-mono") { value }
       }
     }
     if !settings.isEmpty {
       div {
         dt(class: "sidebar-header") { "Settings" }
-        dd(class: "mt-1 flex flex-col gap-1") {
+        dd(class: "flex flex-col gap-1") {
           settings.map { icon, value in
-            span(class: "flex items-center gap-2") {
+            span(class: "flex items-center gap-2 font-mono") {
               Node.raw(icon)
               value
             }
@@ -205,7 +205,7 @@ private func photoDetails(_ photo: Item<ImageMetadata>, album: Item<PhotoAlbumMe
     if let mapURL = photo.mapURL, let coordinates = photo.coordinates {
       div {
         dt(class: "sidebar-header") { "Location" }
-        dd(class: "mt-1") {
+        dd {
           a(href: "https://www.google.com/maps/search/?api=1&query=\(coordinates.latitude),\(coordinates.longitude)", target: "_blank") {
             img(alt: "Map of where this photo was taken", height: "220", src: mapURL, width: "220")
           }
@@ -215,8 +215,8 @@ private func photoDetails(_ photo: Item<ImageMetadata>, album: Item<PhotoAlbumMe
 
     div {
       dt(class: "sidebar-header") { "Album" }
-      dd(class: "mt-1") {
-        a(class: "underline underline-offset-2 hover:text-accent", href: album.url) { album.title }
+      dd {
+        a(class: "underline underline-offset-2 hover:text-accent font-mono", href: album.url) { album.title }
       }
     }
   }

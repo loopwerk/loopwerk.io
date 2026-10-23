@@ -22,7 +22,7 @@ class ImageGenerator {
     background = backgroundImage
     titleFontPath = titleFontURL.path
     bodyFontPath = bodyFontURL.path
-    fontSize = 52
+    fontSize = 42
   }
 
   func generate(article: Item<ArticleMetadata>, outputPath: String) {

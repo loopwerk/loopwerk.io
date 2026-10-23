@@ -1,5 +1,5 @@
 {
-  "originHash" : "32d50eb00c414e74c5b3bda0f5cd42f94726f9905349b10fe58f521ec6f16a2e",
+  "originHash" : "41e2696b9881c30ba076e988de2145a7811f36788ddbb821a54eff6010af4451",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "0a5a9cda6a2134e8622f9ad4b94013cc6fa7f009",
-        "version" : "3.8.2"
+        "revision" : "24705b79ee2d44d62770f9eb831a02930010ed58",
+        "version" : "3.8.4"
       }
     },
     {
