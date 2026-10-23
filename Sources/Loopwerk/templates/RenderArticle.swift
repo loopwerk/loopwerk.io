@@ -89,7 +89,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let seeMoreArticles = relatedArticles.count >= 2 ? relatedArticles : latestArticles
   let seeMoreArticlesTitle = relatedArticles.count >= 2 ? "Related articles" : "Recent articles"
 
-  return baseLayout(canocicalURL: context.item.canonicalURL, section: .articles, title: context.item.title, extraHeader: extraHeader) {
+  return baseLayout(canonicalURL: context.item.canonicalURL, section: .articles, title: context.item.title, extraHeader: extraHeader) {
     article(class: "prose", customAttributes: ["data-pagefind-body": "data-pagefind-body"]) {
       h1 { context.item.title }
       div(class: "-mt-6") {

@@ -2,7 +2,7 @@ import HTML
 import Saga
 
 func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
-  baseLayout(canocicalURL: "/work/", section: .work, title: "Work") {
+  baseLayout(canonicalURL: "/work/", section: .work, title: "Work") {
     div(class: "prose") {
       h1 { "Work" }
       p {

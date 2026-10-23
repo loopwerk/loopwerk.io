@@ -14,7 +14,7 @@ enum Section: String {
   case notFound
 }
 
-func baseLayout(canocicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
+func baseLayout(canonicalURL: String, section: Section, title pageTitle: String, rssLink: String = "", extraHeader: NodeConvertible = Node.fragment([]), @NodeBuilder children: () -> NodeConvertible) -> Node {
   let extraHeaderNode = extraHeader.asNode()
 
   return [
@@ -89,7 +89,7 @@ func baseLayout(canocicalURL: String, section: Section, title pageTitle: String,
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
         link(href: "/site.webmanifest", rel: "manifest")
         link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
-        link(href: canocicalURL.hasPrefix("https://") ? canocicalURL : SiteMetadata.url.appendingPathComponent(canocicalURL).absoluteString, rel: "canonical")
+        link(href: canonicalURL.hasPrefix("https://") ? canonicalURL : SiteMetadata.url.appendingPathComponent(canonicalURL).absoluteString, rel: "canonical")
 
         meta(content: "1200", customAttributes: ["property": "og:image:width"])
         meta(content: "630", customAttributes: ["property": "og:image:height"])

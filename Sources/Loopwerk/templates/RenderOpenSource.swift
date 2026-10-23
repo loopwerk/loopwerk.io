@@ -2,7 +2,7 @@ import HTML
 import Saga
 
 func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
-  baseLayout(canocicalURL: "/open-source/", section: .openSource, title: "Open Source") {
+  baseLayout(canonicalURL: "/open-source/", section: .openSource, title: "Open Source") {
     div(class: "prose") {
       h1 { "Open Source" }
       p {

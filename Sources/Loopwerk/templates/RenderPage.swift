@@ -2,7 +2,7 @@ import HTML
 import Saga
 
 func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
-  return baseLayout(canocicalURL: context.item.url, section: .home, title: context.item.title) {
+  return baseLayout(canonicalURL: context.item.url, section: .home, title: context.item.title) {
     div {
       div(class: "prose") {
         Node.raw(context.item.body)
@@ -26,7 +26,7 @@ func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = Section(rawValue: context.item.metadata.section ?? "")!
 
-  return baseLayout(canocicalURL: context.item.url, section: section, title: context.item.title) {
+  return baseLayout(canonicalURL: context.item.url, section: section, title: context.item.title) {
     article {
       div(class: "prose") {
         h1 { context.item.title }
@@ -41,7 +41,7 @@ func render404(context: PageRenderingContext) -> Node {
     .compactMap { $0 as? Item<ArticleMetadata> }
     .prefix(10)
 
-  return baseLayout(canocicalURL: context.outputPath.url, section: .notFound, title: "404") {
+  return baseLayout(canonicalURL: context.outputPath.url, section: .notFound, title: "404") {
     article(class: "prose") {
       h1 { "404" }
       h2 { "Oops!" }

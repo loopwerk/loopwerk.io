@@ -116,7 +116,7 @@ func _renderArticlesList(_ articles: [Item<ArticleMetadata>], groupByYear: Bool)
 }
 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  return baseLayout(canocicalURL: "/articles/", section: .articles, title: "Articles") {
+  return baseLayout(canonicalURL: "/articles/", section: .articles, title: "Articles") {
     _renderArticlesHeader(title: "Articles", allItems: context.allItems)
     _renderArticlesList(context.items, groupByYear: true)
   }
@@ -125,14 +125,14 @@ func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
 func renderTag(context: PartitionedRenderingContext<String, ArticleMetadata>) -> Node {
   let extraHeader = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/atom+xml")
 
-  return baseLayout(canocicalURL: "/articles/tag/\(context.key.slugified)/", section: .articles, title: "Articles in #\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
+  return baseLayout(canonicalURL: "/articles/tag/\(context.key.slugified)/", section: .articles, title: "Articles in #\(context.key)", rssLink: "tag/\(context.key.slugified)/", extraHeader: extraHeader) {
     _renderArticlesHeader(title: "#\(context.key)", allItems: context.allItems)
     _renderArticlesList(context.items, groupByYear: true)
   }
 }
 
 func renderYear(context: PartitionedRenderingContext<Int, ArticleMetadata>) -> Node {
-  baseLayout(canocicalURL: "/articles/\(context.key)/", section: .articles, title: "Articles in \(context.key)") {
+  baseLayout(canonicalURL: "/articles/\(context.key)/", section: .articles, title: "Articles in \(context.key)") {
     _renderArticlesHeader(title: "\(context.key)", allItems: context.allItems)
     _renderArticlesList(context.items, groupByYear: false)
   }

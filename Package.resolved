@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "c50e2d071082011979bf44e71234847829c02adf",
-        "version" : "3.7.0"
+        "revision" : "0a5a9cda6a2134e8622f9ad4b94013cc6fa7f009",
+        "version" : "3.8.2"
       }
     },
     {
