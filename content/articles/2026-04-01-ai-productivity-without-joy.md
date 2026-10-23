@@ -1,11 +1,11 @@
 ---
-tags: personal, ai
+tags: ai
 summary: I just finished my most productive quarter in a long time, made possible by Claude Code, and there are two conflicting feelings that I want to talk about.
 ---
 
 # Coding with AI: productivity without pride or joy
 
-I just finished [my most productive quarter](/articles/2026/q1-2026-in-review/) in a long time. Seven new open source projects, plus about forty releases to my existing projects. Fueled by a combination of too much free time (I'm still [available for new projects](/hire-me/)!) and Claude Code. Looking back at all the code that I've released, there are two quite strong and conflicting feelings that I want to talk about.
+I just finished [my most productive quarter](/journal/q1-2026-in-review/) in a long time. Seven new open source projects, plus about forty releases to my existing projects. Fueled by a combination of too much free time (I'm still [available for new projects](/about/)!) and Claude Code. Looking back at all the code that I've released, there are two quite strong and conflicting feelings that I want to talk about.
 
 ## The productivity gain is real
 
@@ -29,6 +29,6 @@ I also feel less connected to this new code. Even though I went over all the cha
 
 Apparently, plenty of people are fine with this new way of working. "I release projects where I've not written a single line" is a new boast. But why did you become a programmer? Purely for the end result, or for the craft of making that product? For me it's always mostly been about the craft. I love the feeling of starting with a blank file, writing line by line, improving things as it grows, coming up with elegant and pragmatic solutions to hard problems, and then literally pumping my fist in the air at 2:00 a.m. when it all comes together. The thing that I built is usually less important to me. It could be an e-commerce site for a client or a static site generator for myself, it doesn't really matter that much what I work on. Every project has its unique puzzles to solve and its own interesting challenges.
 
-If I let AI solve those puzzles for me, then what's left? What's in it for me? The ability to quickly churn out more code doesn't, by itself, make *my* life better.
+If I let AI solve those puzzles for me, then what's left? What's in it for me? The ability to quickly churn out more code doesn't, by itself, make _my_ life better.
 
 So what does this mean for my own AI usage in my own open source projects? Claude Code isn't going anywhere; it's an immensely useful tool and the productivity gain is real. But I am going to be more deliberate about who's doing what. The boilerplate and the boring busywork? Claude can have those, gladly. The interesting puzzles, the hard problems where all the fun lives? Those are mine. Claude can listen to my plans, poke holes in them, brainstorm solutions with me, like a very advanced rubber duck. But the solving, I want to do that part myself.

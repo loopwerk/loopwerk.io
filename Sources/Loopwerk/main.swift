@@ -1,26 +1,23 @@
 import Bonsai
 import Foundation
 import Saga
+import SagaImageReader
 import SagaParsleyMarkdownReader
 import SagaPathKit
 import SagaSwimRenderer
 import SagaUtils
+import SwiftDotenv
 import SwiftTailwind
 
-struct HeroImage: Codable {
-  let path: String
-  let width: Int
-  let height: Int
-}
+try? Dotenv.configure()
 
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
-  var heroImage: HeroImage?
   var archive: Bool?
-  var moved: Bool?
   var expandedTags: [String]?
   let series: [String]?
+  var toc: String?
 }
 
 struct WorkProjectMetadata: Metadata {
@@ -39,25 +36,85 @@ struct OpenSourceProjectMetadata: Metadata {
   let repo: String
 }
 
+struct ImdbMetadata: Metadata {
+  let position: Int
+  let id: String
+  let title: String
+  let rating: Int
+  let genres: [String]
+
+  var posterURL: String {
+    "/static/posters/imdb/\(id).jpg"
+  }
+}
+
+struct AlbumMetadata: Metadata {
+  let position: Int
+  let id: String
+  let artist: String
+  let title: String
+  let year: Int
+  let url: String?
+
+  var posterURL: String {
+    "/static/posters/albums/\(id).jpg"
+  }
+
+  /// Albums that aren't on Apple Music get a hand-picked slug instead of a collection id
+  var appleMusicURL: String? {
+    Int(id) != nil ? "https://music.apple.com/album/\(id)" : nil
+  }
+
+  /// The URL column from the csv wins, so an album can point anywhere. Albums with neither
+  /// a URL nor a store page aren't linked at all.
+  var linkURL: String? {
+    url ?? appleMusicURL
+  }
+}
+
+struct GameMetadata: Metadata {
+  let position: Int
+  let id: String
+  let title: String
+  let url: String?
+
+  var posterURL: String {
+    "/static/posters/games/\(id).jpg"
+  }
+
+  /// Games that aren't on Steam get a hand-picked slug instead of an appid
+  var steamURL: String? {
+    Int(id) != nil ? "https://store.steampowered.com/app/\(id)/" : nil
+  }
+
+  /// The URL column from the csv wins, so a game can point anywhere. Games with neither
+  /// a URL nor a store page aren't linked at all.
+  var linkURL: String? {
+    url ?? steamURL
+  }
+}
+
+struct PhotoAlbumMetadata: Metadata {}
+
+/// A writer on the nested photos step would create a feed per album, so the feed of all
+/// photos is a createPage that hands atomFeed its own context
+struct PhotoFeedContext: AtomContext {
+  let items: [Item<ImageMetadata>]
+  let outputPath: Path
+}
+
 extension Item where M == ArticleMetadata {
   var archive: Bool {
     return metadata.archive ?? false
-  }
-
-  var moved: Bool {
-    return metadata.moved ?? false
   }
 
   var expandedTags: [String] {
     return metadata.expandedTags ?? metadata.tags
   }
 
-  /// Moved articles now live on bolhoed.net, under the same slug
-  var canonicalURL: String {
-    if moved {
-      return "https://www.bolhoed.net/blog/\(relativeDestination.parent().lastComponent)/"
-    }
-    return SiteMetadata.url.appendingPathComponent(url).absoluteString
+  /// Technical articles and journal posts share everything but their folder, which decides their section
+  var section: Section {
+    relativeSource.components.first == "journal" ? .journal : .articles
   }
 
   var year: Int {
@@ -114,15 +171,16 @@ enum SiteMetadata {
     .path
 }
 
-let articleProcessor = sequence(
+/// Journal posts live at /journal/slug/, articles get the year in their permalink
+let journalProcessor = sequence(
   unescapeMarkVar,
-  swiftSoupProcessor(addHeadingAnchors, generateTOC, convertAsides, processExternalLinks, addCodeBlockTitles),
+  swiftSoupProcessor({ doc, item in item.metadata.toc = try buildTOCList(doc) }, convertAsides, processExternalLinks, addCodeBlockTitles),
   syntaxHighlight,
   publicationDateInFilename,
-  permalink,
-  heroImage,
   expandTags
 )
+
+let articleProcessor = sequence(journalProcessor, permalink)
 
 let tailwind = SwiftTailwind(version: "4.2.4")
 
@@ -147,6 +205,10 @@ try await Saga(input: "content", output: "deploy")
   // Don't trigger a rebuild when output.css changes, otherwise we get into an endless loop
   .ignoreChanges("output.css")
 
+  // Same for the posters and maps we download during the build
+  .ignoreChanges("content/static/posters/*/*")
+  .ignoreChanges("content/static/maps/*")
+
   // Non-archived articles with a publication date in the past.
   // We make sure that the filtered-out articles (i.e. archived articles) are NOT
   // marked as handled. Otherwise the next step can't process the archived articles.
@@ -170,7 +232,6 @@ try await Saga(input: "content", output: "deploy")
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
           summary: \.metadata.summary,
-          image: \.metadata.heroImage?.path,
           dateKeyPath: \.creationDate
         ),
         output: "feed.xml"
@@ -181,7 +242,6 @@ try await Saga(input: "content", output: "deploy")
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
           summary: \.metadata.summary,
-          image: \.metadata.heroImage?.path,
           dateKeyPath: \.creationDate
         ),
         output: "tag/[key]/feed.xml", tags: \.expandedTags
@@ -198,6 +258,30 @@ try await Saga(input: "content", output: "deploy")
     filter: { $0.archive == true && ($0.date < Date() || Saga.isDev) },
     writers: [
       .itemWriter(swim(renderArticle)),
+    ]
+  )
+
+  // Journal: the personal writing, with its own list pages and feed
+  .register(
+    folder: "journal",
+    metadata: ArticleMetadata.self,
+    readers: [.parsleyMarkdownWithAttributesReader],
+    itemProcessor: journalProcessor,
+    filter: { $0.date < Date() || Saga.isDev },
+    writers: [
+      .itemWriter(swim(renderArticle)),
+      .listWriter(swim(renderJournal)),
+      .tagWriter(swim(renderJournalTag), tags: \.expandedTags),
+      .listWriter(
+        Saga.atomFeed(
+          title: "\(SiteMetadata.name) journal",
+          author: SiteMetadata.author,
+          baseURL: SiteMetadata.url,
+          summary: \.metadata.summary,
+          dateKeyPath: \.creationDate
+        ),
+        output: "feed.xml"
+      ),
     ]
   )
 
@@ -225,17 +309,66 @@ try await Saga(input: "content", output: "deploy")
     writers: [.listWriter(swim(renderOpenSource))]
   )
 
-  // Render the homepage with its own template
+  // Photo albums from markdown files, with nested photo pages per album
   .register(
-    metadata: PageMetadata.self,
-    readers: [.parsleyMarkdownReader],
-    itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
-    filter: { $0.relativeSource.string == "index.md" },
-    claimExcludedItems: false,
-    writers: [.itemWriter(swim(renderHome))]
+    folder: "photos",
+    metadata: PhotoAlbumMetadata.self,
+    itemProcessor: { album in
+      album.title = albumTitle(folder: album.title)
+    },
+    writers: [
+      .listWriter(swim(renderPhotoAlbums)),
+      .itemWriter(swim(renderPhotoAlbum)),
+    ],
+    nested: { nested in
+      nested.register(
+        metadata: ImageMetadata.self,
+        readers: [.imageReader],
+        itemProcessor: sequence(downloadMap, photoTitle, photoFeedBody),
+        writers: [
+          .itemWriter(swim(renderPhoto)),
+        ]
+      )
+    }
   )
 
-  // Other content pages (about, hire me)
+  // Load tv shows
+  .register(
+    metadata: ImdbMetadata.self,
+    fetch: { try await fetch(csvName: "shows", kind: .tv) },
+    cacheKey: nil,
+    sorting: { $0.metadata.position < $1.metadata.position },
+    writers: [.listWriter(swim(renderShows), output: "shows/index.html")]
+  )
+
+  // Load movies
+  .register(
+    metadata: ImdbMetadata.self,
+    fetch: { try await fetch(csvName: "movies", kind: .movie) },
+    cacheKey: nil,
+    sorting: { $0.metadata.position < $1.metadata.position },
+    writers: [.listWriter(swim(renderMovies), output: "movies/index.html")]
+  )
+
+  // Load games
+  .register(
+    metadata: GameMetadata.self,
+    fetch: { try await fetchGames() },
+    cacheKey: nil,
+    sorting: { $0.metadata.position < $1.metadata.position },
+    writers: [.listWriter(swim(renderGames), output: "games/index.html")]
+  )
+
+  // Load albums
+  .register(
+    metadata: AlbumMetadata.self,
+    fetch: { try await fetchAlbums() },
+    cacheKey: nil,
+    sorting: { $0.metadata.position < $1.metadata.position },
+    writers: [.listWriter(swim(renderAlbums), output: "albums/index.html")]
+  )
+
+  // Content pages (home, about, legal notice)
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownReader],
@@ -249,13 +382,38 @@ try await Saga(input: "content", output: "deploy")
       return false
     }
     if let article = item as? Item<ArticleMetadata> {
-      return !article.archive && !article.moved
+      return !article.archive
     }
     return true
   }))
 
   // Hardcoded pages, no markdown file backing them
   .createPage("404.html", using: swim(render404))
+  .createPage("feeds/index.html", using: swim(renderFeeds))
+
+  // Atom feed of all photos, newest first. lastModified is when the photo was committed (see the
+  // Dockerfile's git restore-mtime), which is when it was published, unlike the EXIF capture date.
+  .createPage("photos/feed.xml") { context in
+    let photos = context.allItems
+      .compactMap { $0 as? Item<ImageMetadata> }
+      // Photos committed together share a lastModified, so those are sorted by capture date instead.
+      // Compared at whole seconds like the feed's <updated>, since local copies differ by fractions of one.
+      .sorted {
+        let lhs = Int($0.lastModified.timeIntervalSince1970), rhs = Int($1.lastModified.timeIntervalSince1970)
+        return lhs == rhs ? $0.date > $1.date : lhs > rhs
+      }
+
+    let feed: @Sendable (PhotoFeedContext) -> String = Saga.atomFeed(
+      title: "\(SiteMetadata.name) photos",
+      author: SiteMetadata.author,
+      baseURL: SiteMetadata.url,
+      itemTitle: { photo in
+        "\(photo.parent(as: PhotoAlbumMetadata.self).title), \(photo.date.formatted("MMMM d, yyyy"))"
+      }
+    )
+
+    return feed(PhotoFeedContext(items: photos, outputPath: context.outputPath))
+  }
 
   // Expand %SERIES% placeholders in article bodies. This needs all articles, so it can't be an item processor.
   .afterRead(expandSeriesPlaceholders)

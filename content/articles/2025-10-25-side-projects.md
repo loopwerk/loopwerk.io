@@ -1,5 +1,5 @@
 ---
-tags: personal, insights
+tags: insights
 summary: Don't use the same tech stack as your day job, or you'll turn your side project into a second shift.
 ---
 
@@ -25,7 +25,7 @@ I didn't start another user-facing side project for almost fifteen years.
 
 Fast forward to 2020. The itch returned, and I started something new: [critical-notes.com](https://www.critical-notes.com). I started with Svelte and Firebase, eventually moving the stack to SvelteKit and Django by late 2021. My day job was pure iOS development, so this side project was a completely different kind of experience. I loved working on this site.
 
-Then in 2023 I decided to [pivot professionally](/articles/2025/thoughts-on-apple/) and return to the open web. My new client's project involved a SvelteKit frontend and a Django backend. Yup, the exact same technologies powering Critical Notes. "Brilliant!" I thought. "I can use my side project knowledge at work, and vice versa."
+Then in 2023 I decided to [pivot professionally](/journal/thoughts-on-apple/) and return to the open web. My new client's project involved a SvelteKit frontend and a Django backend. Yup, the exact same technologies powering Critical Notes. "Brilliant!" I thought. "I can use my side project knowledge at work, and vice versa."
 
 I should've known better...
 

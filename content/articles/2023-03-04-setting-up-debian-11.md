@@ -27,10 +27,6 @@ In this article many commands have placeholders like `<var>$SERVER_IP_ADDRESS</v
 - `<var>$FRONTEND_DOMAIN</var>`: domain that's used for your frontend, like `www.example.com` (again without `http://` or `https://`)
 - `<var>$NAKED_DOMAIN</var>`: the "naked" domain that's used for your frontend, without the `www` like `example.com` (you guessed it, without `http://` or `https://`)
 
-# Table of contents
-
-%TOC%
-
 # Chapter 1 - Setting up the basics
 
 ## 1.1 - Setting up the accounts

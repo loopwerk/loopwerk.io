@@ -2,15 +2,8 @@
 section: home
 ---
 
-# Home
+# Hey there, I'm&nbsp;Kevin&nbsp;👋
 
-# Hi! I'm Kevin Renskers, a product-minded senior software engineer.
+I'm a Dutch freelance product & engineering lead. I've built software for Last.fm, Sentry, WeTransfer and Unilever, made [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https://rssfilter.com), and maintain [open source projects](/open-source/) like [Saga](https://github.com/loopwerk/Saga). I write about Swift, Python and Django in my [articles](/articles/), and you're lucky I'm [available for hire](/about/).
 
-I build web applications and APIs that solve complex problems and still make sense a year later. Twenty-five years in, what I care about isn't the framework of the week, it's the logic that makes software tick: APIs and data models on the backend, authentication, data loading, and form validation on the frontend. Beyond the code itself, I guide the architecture, mentor the team, and help decide what's worth building.
-
-I've fixed, finished, and shipped software for international clients such as Last.fm, Sentry, WeTransfer, and Unilever. I've also built [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https://rssfilter.com), from first idea to running product.
-
-On this site you'll find my technical writing, open-source work, and more about working with me.
-
-[› Check my work](/work/)
-[› Hire me](/hire-me/)
+Outside of work I play [PC games](/games/) and Dungeons & Dragons, watch way too many [shows](/shows/) and [movies](/movies/), cook, and take [photos](/photos/). I choose cats over dogs, tea over coffee, and winter over summer.

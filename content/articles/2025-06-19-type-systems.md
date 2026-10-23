@@ -72,6 +72,6 @@ Python's types are a huge improvement over no types at all. But for a complex, g
 
 TypeScript was a joy to work with. Its type system just feels natural to me. Sadly the lack of type info at runtime was a dealbreaker, because I wouldn't want Saga to not be fully type-safe from top to bottom, which includes the frontmatter in Markdown files. Yes, there's Zod, but when everything is already strongly typed, I really don't want to force Saga users to use such a library.
 
-Joy-wise, Swift sits in the middle for me. I do think it's too complex, and it has its own issues which contributed to me [leaving native app development behind](/articles/2025/thoughts-on-apple/), but for a big project like Saga it's the right choice. It might not be as enjoyable as TypeScript, but it handles the complexity and types well.
+Joy-wise, Swift sits in the middle for me. I do think it's too complex, and it has its own issues which contributed to me [leaving native app development behind](/journal/thoughts-on-apple/), but for a big project like Saga it's the right choice. It might not be as enjoyable as TypeScript, but it handles the complexity and types well.
 
 So, in the end I came full circle, but more convinced than ever that Swift is the right choice for Saga. If TypeScript's types were usable at runtime though... I'd switch in a heartbeat.
