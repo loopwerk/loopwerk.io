@@ -7,6 +7,7 @@ class ImageGenerator {
   private let fontSize: Double
   private let titleFontPath: String
   private let bodyFontPath: String
+  private let textColor = Color(hex: 0x2B2B_2BFF)
 
   init?() {
     guard
@@ -32,7 +33,7 @@ class ImageGenerator {
     // Draw the title on the image
     var offsetY = 160
     for line in wrappedText {
-      image.renderText(line, from: Point(x: 90, y: offsetY), fontList: [titleFontPath], color: Color.white, size: fontSize)
+      image.renderText(line, from: Point(x: 90, y: offsetY), fontList: [titleFontPath], color: textColor, size: fontSize)
       offsetY += Int(fontSize) + 26
     }
 
@@ -40,11 +41,11 @@ class ImageGenerator {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MMMM dd, yyyy"
     let date = dateFormatter.string(from: article.date)
-    image.renderText(date, from: Point(x: 90, y: 540), fontList: [bodyFontPath], color: Color.white, size: 20)
+    image.renderText(date, from: Point(x: 90, y: 540), fontList: [bodyFontPath], color: textColor, size: 20)
 
     // Draw the tags on the image
     let tags = article.expandedTags.sorted().map { "#\($0)" }.joined(separator: ", ")
-    image.renderText(tags, from: Point(x: 90, y: 580), fontList: [bodyFontPath], color: Color.white, size: 20)
+    image.renderText(tags, from: Point(x: 90, y: 580), fontList: [bodyFontPath], color: textColor, size: 20)
 
     // Save the image as a PNG
     image.write(to: URL(fileURLWithPath: outputPath))

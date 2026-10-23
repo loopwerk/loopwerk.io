@@ -95,8 +95,7 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         script {
           Node.raw("""
           (function(){
-            var m = matchMedia('(prefers-color-scheme:dark)'), t = localStorage.getItem('theme');
-            if (t === 'dark' || !t&&m.matches) {
+            if (localStorage.getItem('theme') === 'dark') {
               document.documentElement.classList.add('dark');
             }
             function syncThemeColor(){
@@ -105,12 +104,6 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
             }
             window.syncThemeColor = syncThemeColor;
             syncThemeColor();
-            m.addEventListener('change',function(e){
-              if(!localStorage.getItem('theme')) {
-                document.documentElement.classList.toggle('dark',e.matches);
-                syncThemeColor();
-              }
-            })
           })()
           """)
         }
@@ -141,7 +134,6 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         link(href: "/favicon.svg", rel: "icon", type: "image/svg+xml")
         link(href: "/favicon.ico", rel: "shortcut icon")
         link(href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180")
-        link(color: "#f1a948", href: "/mask.svg", rel: "mask-icon")
         meta(content: SiteMetadata.name, name: "apple-mobile-web-app-title")
         link(href: "/site.webmanifest", rel: "manifest")
 
@@ -221,7 +213,7 @@ private func siteNav(section: Section?) -> Node {
     // On desktop the nav uses the same columns as article-grid, so the menu lines up with the content column
     div(class: "relative container flex items-center pt-4 md:pt-16 pb-4 text-sm lg:grid lg:grid-cols-[var(--sidebar-width)_1fr] lg:gap-(--sidebar-gap)") {
       a(class: "text-textfg hover:text-accent lg:justify-self-start", href: Section.home.path, title: Section.home.title) {
-        Node.raw(#"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 315 315"><path d="m529 315h-315v-315h143v26h-114v263h258v-79h-173v-131h-28v157h172v26h-201v-209h86v130h172z" transform="translate(-214)"/></svg>"#)
+        Node.raw(#"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12"><path d="M12 12H0V0H5V1H1V11H11V8H4V3H3V9H10V10H2V2H5V7H12Z"/></svg>"#)
       }
 
       input(class: "peer sr-only", id: "nav-toggle", type: "checkbox")
