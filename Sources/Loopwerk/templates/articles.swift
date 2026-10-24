@@ -217,7 +217,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
               }
             }
           }
-          
+
           div {
             p(class: "mb-2") { date }
           }
@@ -232,7 +232,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             if item.archive {
               span(class: "inline-block mt-4 p-1 rounded-md bg-textfg text-bodybg") { "archived" }
             }
-            
+
             p(class: "mt-4 links lg:hidden") {
               "Posted on"
               date
@@ -267,9 +267,27 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         }
 
         if section == .articles {
+          writtenBy()
           moreArticles(item, allItems: context.allItems)
         }
       }
+    }
+  }
+}
+
+/// Who wrote the article, for readers who landed on it without knowing the site
+private func writtenBy() -> Node {
+  div(class: "mt-16 prose text-textfg/60") {
+    p {
+      "Written by Kevin Renskers, a freelance software engineer with over 25 years of experience. Subscribe to one of the"
+      a(href: "/feeds/") { "RSS feeds" }
+      %", or "
+      a(href: "mailto:kevin@loopwerk.io") { "get in touch" }
+      %" if you have questions or feedback about this article."
+    }
+
+    div(class: "text-xs") {
+      socialLinks()
     }
   }
 }
