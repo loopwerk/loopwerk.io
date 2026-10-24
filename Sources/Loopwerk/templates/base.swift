@@ -150,7 +150,7 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
           script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875", "data-performance": "true"])
         }
       }
-      body(class: "bg-bodybg flex min-h-screen flex-col text-textfg antialiased \(section?.rawValue ?? "")") {
+      body(class: "bg-bodybg flex min-h-svh flex-col text-textfg antialiased \(section?.rawValue ?? "")") {
         children().asNode()
       }
     },

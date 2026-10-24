@@ -9,8 +9,7 @@ func render404(context: PageRenderingContext) -> Node {
 
   return baseHtml(title: "404", canonicalPath: context.outputPath.url, section: nil) {
     article(class: "prose") {
-      h1 { "404" }
-      h2 { "Oops!" }
+      h1 { "Oops!" }
       p { "Your page was not found." }
       p { "Looking for one of the articles?" }
 
