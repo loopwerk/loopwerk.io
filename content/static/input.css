@@ -380,6 +380,14 @@
   }
 }
 
+@utility site-nav {
+  @apply text-textfg;
+
+  & :is(a, button, label) {
+    @apply hover:text-accent;
+  }
+}
+
 @utility page-header {
   @apply mb-12;
 

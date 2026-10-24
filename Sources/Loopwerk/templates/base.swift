@@ -209,17 +209,17 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 }
 
 private func siteNav(section: Section?) -> Node {
-  nav(class: "sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border") {
+  nav(class: "site-nav sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border") {
     // On desktop the nav uses the same columns as article-grid, so the menu lines up with the content column
     div(class: "relative container flex items-center pt-4 md:pt-16 pb-4 text-sm lg:grid lg:grid-cols-[var(--sidebar-width)_1fr] lg:gap-(--sidebar-gap)") {
-      a(class: "text-textfg hover:text-accent lg:justify-self-start", href: Section.home.path, title: Section.home.title) {
+      a(class: "lg:justify-self-start", href: Section.home.path, title: Section.home.title) {
         Node.raw(#"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12"><path d="M12 12H0V0H5V1H1V11H11V8H4V3H3V9H10V10H2V2H5V7H12Z"/></svg>"#)
       }
 
       input(class: "peer sr-only", id: "nav-toggle", type: "checkbox")
 
       label(
-        class: "-m-2 ml-auto cursor-pointer p-2 text-textfg peer-focus-visible:text-accent hover:text-accent md:hidden peer-checked:hidden",
+        class: "-m-2 ml-auto cursor-pointer p-2 peer-focus-visible:text-accent md:hidden peer-checked:hidden",
         for: "nav-toggle",
         customAttributes: ["aria-label": "Open menu"]
       ) {
@@ -227,7 +227,7 @@ private func siteNav(section: Section?) -> Node {
       }
 
       label(
-        class: "-m-2 ml-auto hidden cursor-pointer p-2 text-textfg peer-focus-visible:text-accent hover:text-accent peer-checked:max-md:block",
+        class: "-m-2 ml-auto hidden cursor-pointer p-2 peer-focus-visible:text-accent peer-checked:max-md:block",
         for: "nav-toggle",
         customAttributes: ["aria-label": "Close menu"]
       ) {
@@ -239,15 +239,17 @@ private func siteNav(section: Section?) -> Node {
       ) {
         navItems.map { navLink($0.title, section: $0.section, currentSection: section) }
 
-        a(class: "text-textfg hover:text-accent lg:ml-auto", href: "/feeds/", title: "RSS feeds") {
-          Node.raw(#"<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17a4 4 0 0 1 4 4H3zm0-7c6.075 0 11 4.925 11 11h-2a9 9 0 0 0-9-9zm0-7c9.941 0 18 8.059 18 18h-2c0-8.837-7.163-16-16-16z"/></svg>"#)
-        }
+        div(class: "lg:ml-auto flex gap-2") {
+          a(href: "/feeds/", title: "RSS feeds") {
+            Node.raw(#"<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17a4 4 0 0 1 4 4H3zm0-7c6.075 0 11 4.925 11 11h-2a9 9 0 0 0-9-9zm0-7c9.941 0 18 8.059 18 18h-2c0-8.837-7.163-16-16-16z"/></svg>"#)
+          }
 
-        // Theme toggle
-        button(class: "text-textfg hover:text-accent cursor-pointer md:-ml-2 lg:-ml-5", type: "button", customAttributes: ["onclick": "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light');window.syncThemeColor&&window.syncThemeColor()", "aria-label": "Toggle theme"]) {
-          Node.raw("""
-          <svg class="dark:hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          """)
+          // Theme toggle
+          button(class: "cursor-pointer", type: "button", customAttributes: ["onclick": "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light');window.syncThemeColor&&window.syncThemeColor()", "aria-label": "Toggle theme"]) {
+            Node.raw("""
+            <svg class="dark:hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            """)
+          }
         }
       }
     }
@@ -258,7 +260,7 @@ private func navLink(_ title: String, section: Section, currentSection: Section?
   a(
     class: section == currentSection?.navSection
       ? "font-medium text-accent"
-      : "text-textfg hover:text-accent",
+      : "",
     href: section.path
   ) {
     title
