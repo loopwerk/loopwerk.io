@@ -335,11 +335,30 @@
   }
 }
 
+@utility fade-on-scroll {
+  @supports (animation-timeline: scroll()) {
+    animation: fade-on-scroll linear both;
+    animation-timeline: scroll();
+    animation-range: 0 48px;
+  }
+}
+
+@keyframes fade-on-scroll {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 @utility article-grid {
   @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap);
   
   & aside {
-    @apply text-xs text-textfg/60;
+    @apply max-lg:hidden text-xs text-textfg/60;
+  }
+  
+  & aside > :first-child {
+    @apply tall:sticky top-24;
   }
   
   & aside ul {

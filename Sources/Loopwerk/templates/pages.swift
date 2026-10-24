@@ -111,13 +111,25 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 
 private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
   baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about) {
-    // The sidebar comes after the text so it ends up below it on mobile, and is moved into the left column on desktop
     div(class: "article-grid") {
-      aside(class: "hidden lg:block mt-12 lg:col-start-1 lg:row-start-1 lg:mt-0") {
-        div(class: "sticky top-24 text-sm") {
+      aside {
+        div(class: "text-sm") {
           img(class: "rounded-full mb-8", src: "/static/images/kevin.png")
           div(class: "flex justify-center") {
             socialLinks()
+          }
+
+          if SiteMetadata.available {
+            div(class: "flex justify-center text-[12px] mt-4") {
+              span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
+                "I'm currently available for hire! Reach out to discuss your project."
+                span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
+              }
+            }
+          } else {
+            div(class: "flex justify-center text-[12px] mt-8") {
+              p { "I am currently not available for new projects, but feel free to contact me to set something up for the future." }
+            }
           }
         }
       }
@@ -129,6 +141,15 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
             socialLinks()
           }
         }
+        
+        if SiteMetadata.available {
+          div(class: "text-[12px] lg:hidden -mt-2") {
+            p(class: "bg-codebg text-codefg p-2 rounded-lg") {
+              "I'm currently available for hire! Reach out to discuss your project."
+            }
+          }
+        }
+
         Node.raw(context.item.body)
       }
     }
@@ -136,7 +157,7 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
 }
 
 func socialLinks() -> Node {
-  div(class: "flex gap-[1em] [&_a]:block [&_a]:h-[1.5em] [&_a]:w-[1.5em] [&_a]:text-textfg [&_a]:transition [&_a:hover]:text-accent md:[&_a]:h-[1.75em] md:[&_a]:w-[1.75em]") {
+  div(class: "flex gap-[0.8em] md:gap-[1em] [&_a]:block [&_a]:h-[1.5em] [&_a]:w-[1.5em] [&_a]:text-textfg [&_a]:transition [&_a:hover]:text-accent md:[&_a]:h-[1.75em] md:[&_a]:w-[1.75em]") {
     a(href: "mailto:kevin@loopwerk.io", title: "Email") {
       Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208h32v48H256C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256v96 24H488 440c-36.9 0-69.6-17.8-90-45.4c-22 27.6-55.9 45.4-94 45.4c-66.3 0-120-53.7-120-120s53.7-120 120-120c27 0 51.9 8.9 72 24v-8h48v24 80 8c0 35.3 28.7 64 64 64h24V256c0-114.9-93.1-208-208-208zm72 208a72 72 0 1 0 -144 0 72 72 0 1 0 144 0z"/></svg>"#)
     }

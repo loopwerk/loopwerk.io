@@ -44,9 +44,8 @@ private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Sec
   return baseHtml(title: section == .articles && title != "Articles" ? "Articles in \(title)" : title, canonicalPath: canonicalPath, section: section, extraHeader: extraHeader) {
     // Same grid as the article page, with the list in the text column so nothing shifts when you open an article
     div(class: "article-grid") {
-      aside(class: "max-lg:hidden") {
-        // The articles have too many tags to fit on a short screen, so there the sidebar scrolls away with the page
-        nav(class: "\(section == .articles ? "tall:sticky" : "sticky") top-24", customAttributes: ["aria-label": "Tags"]) {
+      aside {
+        nav(customAttributes: ["aria-label": "Tags"]) {
           p(class: "sidebar-header") { "Tags" }
           ul {
             li { tagLink("All \(section == .journal ? "posts" : "articles") (\(allArticles.count))", href: section.path, isCurrent: currentTag == nil) }
@@ -198,8 +197,8 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     item.archive ? meta(content: "noindex", name: "robots") : [],
   ]) {
     div(class: "article-grid") {
-      aside(class: "max-lg:hidden") {
-        div(class: "sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col gap-8 overflow-y-auto") {
+      aside {
+        div(class: "flex flex-col gap-8") {
           if let toc {
             nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
               p(class: "sidebar-header") { "Contents" }
@@ -284,6 +283,12 @@ private func writtenBy() -> Node {
       %", or "
       a(href: "mailto:kevin@loopwerk.io") { "get in touch" }
       %" if you have questions or feedback about this article."
+      
+      if SiteMetadata.available {
+        "Liked what you read? Kevin is currently"
+        a(href: "/about/") { "available for hire" }
+        %"!"
+      }
     }
 
     div(class: "text-xs") {

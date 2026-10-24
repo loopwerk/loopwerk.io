@@ -160,14 +160,18 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 /// The site layout: nav, centered content, and footer
 func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), extraHeader: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
   rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader) {
+    if SiteMetadata.available, section != .about {
+      availableForHire()
+    }
+
     siteNav(section: section)
 
     main(class: "container flex flex-1 flex-col py-6 md:py-12 lg:py-16 \(section == .home ? "lg:short:py-8" : "")") {
       if let section, let sidebar = section.sidebar {
         // Same grid as the articles, with the page in the text column
         div(class: "article-grid") {
-          aside(class: "max-lg:hidden") {
-            nav(class: "sticky top-24", customAttributes: ["aria-label": sidebar.title]) {
+          aside {
+            nav(customAttributes: ["aria-label": sidebar.title]) {
               p(class: "sidebar-header") { sidebar.title }
               ul {
                 sidebar.sections.map { item in
@@ -208,6 +212,23 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
   }
 }
 
+/// Mobile only: centered in the nav's logo row, but positioned against the page rather than inside the sticky nav,
+/// so it scrolls away while the nav stays put
+private func availableForHire() -> Node {
+  div(class: "pointer-events-none absolute inset-x-0 top-4 z-60 flex h-7 items-center justify-center text-[12px] md:hidden") {
+    a(class: "pointer-events-auto bg-codebg py-1 px-4 rounded-full hover:underline", href: "/about/") { "I'm available for hire" }
+  }
+}
+
+/// Desktop only: floats above the About link with an arrow pointing down at it. Browsers with scroll-driven
+/// animations fade it out as the nav sticks, so it can sit closer; others keep it inside the part that scrolls away.
+private func availableForHireAboveLink() -> Node {
+  a(class: "fade-on-scroll absolute bottom-full left-1/2 mb-7 supports-[animation-timeline:scroll()]:mb-4 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-codebg py-1 px-4 text-[12px] font-normal text-codefg hover:text-inherit! hover:underline md:block", href: "/about/") {
+    "I'm currently available for hire!"
+    span(class: "absolute top-full left-1/2 -translate-x-1/2 border-x-[8px] border-t-[8px] border-x-transparent border-t-codebg")
+  }
+}
+
 private func siteNav(section: Section?) -> Node {
   nav(class: "site-nav sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border") {
     // On desktop the nav uses the same columns as article-grid, so the menu lines up with the content column
@@ -237,7 +258,16 @@ private func siteNav(section: Section?) -> Node {
       div(
         class: "hidden md:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-5 lg:gap-8 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex"
       ) {
-        navItems.map { navLink($0.title, section: $0.section, currentSection: section) }
+        navItems.map { item in
+          if item.section == .about, SiteMetadata.available, section != .about {
+            span(class: "relative") {
+              navLink(item.title, section: item.section, currentSection: section)
+              availableForHireAboveLink()
+            }
+          } else {
+            navLink(item.title, section: item.section, currentSection: section)
+          }
+        }
 
         div(class: "lg:ml-auto flex gap-2") {
           a(href: "/feeds/", title: "RSS feeds") {
