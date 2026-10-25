@@ -1,29 +1,66 @@
+import Foundation
 import HTML
 import Saga
+import SagaImageReader
 
 func render404(context: PageRenderingContext) -> Node {
-  let articles = context.allItems
-    .compactMap { $0 as? Item<ArticleMetadata> }
-    .filter { $0.section == .articles && !$0.archive }
-    .prefix(10)
+  let photos = context.allItems
+    .compactMap { $0 as? Item<ImageMetadata> }
+    .map { ["src": "/\($0.relativeSource)", "url": $0.url, "album": $0.parent(as: PhotoAlbumMetadata.self).title] }
+
+  let photosJSON = (try? JSONEncoder().encode(photos)).map { String(decoding: $0, as: UTF8.self) } ?? "[]"
 
   return baseHtml(title: "404", canonicalPath: context.outputPath.url, section: nil) {
-    article(class: "prose") {
-      h1 { "Oops!" }
-      p { "Your page was not found." }
-      p { "Looking for one of the articles?" }
+    h1(class: "photo-404", id: "photo-404") {
+      span(class: "sr-only") { "404" }
+    }
 
-      ul {
-        articles.map { article in
-          li {
-            a(href: article.url) { article.title }
-          }
-        }
-      }
+    p(class: "sr-only") { "Your page was not found." }
+    div(class: "hidden text-center mt-12 links -mb-6 lg:-mb-12", id: "photo-caption") {
+      "Your page was not found. Here's a"
+      a(href: "/photos/") { "photo" }
+      "from the "
+      span(id: "photo-album")
+      "album instead."
+    }
 
-      div {
-        a(href: "/articles/") { "› See all articles" }
-      }
+    script {
+      Node.raw(
+        """
+        (() => {
+          const photos = \(photosJSON);
+          const heading = document.getElementById("photo-404");
+          const caption = document.getElementById("photo-caption");
+          const link = caption.querySelector("a");
+          const album = document.getElementById("photo-album");
+          let current = null;
+
+          const show = () => {
+            if (!photos.length) return;
+            let photo;
+            do {
+              photo = photos[Math.floor(Math.random() * photos.length)];
+            } while (photos.length > 1 && photo === current);
+            current = photo;
+
+            // Only swap once the photo has loaded, so the 404 is never transparent with nothing behind it
+            const image = new Image();
+            image.onload = () => {
+              if (current !== photo) return;
+              heading.style.backgroundImage = `url("${image.src}")`;
+              heading.classList.add("has-photo", "cursor-pointer");
+              link.href = photo.url;
+              album.textContent = photo.album;
+              caption.classList.remove("hidden");
+            };
+            image.src = encodeURI(photo.src);
+          };
+
+          heading.addEventListener("click", show);
+          show();
+        })();
+        """
+      )
     }
   }
 }
@@ -141,7 +178,7 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
             socialLinks()
           }
         }
-        
+
         if SiteMetadata.available {
           div(class: "text-[12px] lg:hidden -mt-2") {
             p(class: "bg-codebg text-codefg p-2 rounded-lg") {
