@@ -241,7 +241,7 @@ try await Saga(input: "content", output: ".deploy")
       // Atom feed for all articles, and a feed per tag
       .listWriter(
         Saga.atomFeed(
-          title: SiteMetadata.name,
+          title: "\(SiteMetadata.name) articles",
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
           limit: 20,
@@ -251,14 +251,16 @@ try await Saga(input: "content", output: ".deploy")
         output: "feed.xml"
       ),
       .tagWriter(
-        Saga.atomFeed(
-          title: SiteMetadata.name,
-          author: SiteMetadata.author,
-          baseURL: SiteMetadata.url,
-          limit: 20,
-          summary: \.metadata.summary,
-          date: \.creationDate
-        ),
+        { context in
+          Saga.atomFeed(
+            title: "\(SiteMetadata.name) articles tagged \(context.key)",
+            author: SiteMetadata.author,
+            baseURL: SiteMetadata.url,
+            limit: 20,
+            summary: \.metadata.summary,
+            date: \.creationDate
+          )(context)
+        },
         output: "tag/[key]/feed.xml", tags: \.expandedTags
       ),
     ]

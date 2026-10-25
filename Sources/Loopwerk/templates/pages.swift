@@ -77,7 +77,7 @@ func renderFeeds(context: PageRenderingContext) -> Node {
   return baseHtml(title: "RSS feeds", canonicalPath: context.outputPath.url, section: nil) {
     article(class: "prose") {
       h1 { "RSS feeds" }
-      p { "The following RSS feeds are available to subscribe to:" }
+      p { "The following feeds are available to subscribe to:" }
 
       h2 { "Everything" }
       ul {
@@ -86,18 +86,21 @@ func renderFeeds(context: PageRenderingContext) -> Node {
         }
       }
 
-      h2 { "All the articles" }
+      h2 { "Articles" }
       ul {
         li {
           a(href: "/articles/feed.xml", target: "_blank") { "\(SiteMetadata.url)/articles/feed.xml" }
         }
       }
 
-      h2 { "Articles per tag" }
+      h3 { "Articles per tag" }
       ul {
-        tags.map { tag in
+        li {
+          "\(SiteMetadata.url)/articles/tag/[tag]/feed.xml, for example:"
+        }
+        ["django", "python", "javascript", "swift", "saga", "sveltekit"].map { tag in
           li {
-            a(href: "/articles/tag/\(tag.slugified)/feed.xml", target: "_blank") { "\(SiteMetadata.url)/articles/tag/\(tag.slugified)/feed.xml" }
+            a(href: "/articles/tag/\(tag)/feed.xml", target: "_blank") { "\(SiteMetadata.url)/articles/tag/\(tag)/feed.xml" }
           }
         }
       }
