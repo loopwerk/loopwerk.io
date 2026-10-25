@@ -126,6 +126,7 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
           """)
         }
 
+        link(href: "/feed.xml", rel: "alternate", title: "\(SiteMetadata.name) feed of everything", type: "application/atom+xml")
         link(href: "/articles/feed.xml", rel: "alternate", title: "\(SiteMetadata.name) articles", type: "application/atom+xml")
         link(href: "/journal/feed.xml", rel: "alternate", title: "\(SiteMetadata.name) journal", type: "application/atom+xml")
         link(href: "/photos/feed.xml", rel: "alternate", title: "\(SiteMetadata.name) photos", type: "application/atom+xml")

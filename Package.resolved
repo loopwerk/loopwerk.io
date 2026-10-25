@@ -1,5 +1,5 @@
 {
-  "originHash" : "41e2696b9881c30ba076e988de2145a7811f36788ddbb821a54eff6010af4451",
+  "originHash" : "0b08bcc6b63c0203e3e7b027df4ebae11d225b8b5cf776d5caabf4c4e514bf1b",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Moon",
       "state" : {
-        "revision" : "439d48259e278863203f5a6f67bb45c84ffbd360",
-        "version" : "1.3.0"
+        "revision" : "5c9be5a538dba8c5e70f7163eb340f269043fe54",
+        "version" : "1.3.1"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "24705b79ee2d44d62770f9eb831a02930010ed58",
-        "version" : "3.8.4"
+        "revision" : "0ae9e080b66eb4d7822c9b90b1bbca97b8f43b75",
+        "version" : "3.10.0"
       }
     },
     {

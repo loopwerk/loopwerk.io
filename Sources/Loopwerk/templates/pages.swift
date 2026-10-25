@@ -78,6 +78,14 @@ func renderFeeds(context: PageRenderingContext) -> Node {
     article(class: "prose") {
       h1 { "RSS feeds" }
       p { "The following RSS feeds are available to subscribe to:" }
+
+      h2 { "Everything" }
+      ul {
+        li {
+          a(href: "/feed.xml", target: "_blank") { "\(SiteMetadata.url)/feed.xml" }
+        }
+      }
+
       h2 { "All the articles" }
       ul {
         li {

@@ -96,11 +96,23 @@ struct GameMetadata: Metadata {
 
 struct PhotoAlbumMetadata: Metadata {}
 
-/// A writer on the nested photos step would create a feed per album, so the feed of all
-/// photos is a createPage that hands atomFeed its own context
-struct PhotoFeedContext: AtomContext {
-  let items: [Item<ImageMetadata>]
-  let outputPath: Path
+/// The date a feed entry was published. For photos that's lastModified, the time their commit gave them
+/// (see the Dockerfile's git restore-mtime), unlike the EXIF capture date in `date`.
+func feedDate(_ item: AnyItem) -> Date {
+  (item as? Item<ArticleMetadata>)?.creationDate ?? item.lastModified
+}
+
+/// Newest first by feedDate. Photos committed together share that date, so those are sorted by capture date instead.
+/// Compared at whole seconds like the feed's <updated>, since local copies differ by fractions of one.
+func feedOrder(_ lhs: AnyItem, _ rhs: AnyItem) -> Bool {
+  let lhsDate = Int(feedDate(lhs).timeIntervalSince1970), rhsDate = Int(feedDate(rhs).timeIntervalSince1970)
+  return lhsDate == rhsDate ? lhs.date > rhs.date : lhsDate > rhsDate
+}
+
+/// Photos have no title of their own, so their feed entries are named after their album and capture date
+func feedTitle(_ item: AnyItem) -> String {
+  guard let photo = item as? Item<ImageMetadata> else { return item.title }
+  return "\(photo.parent(as: PhotoAlbumMetadata.self).title), \(photo.date.formatted("MMMM d, yyyy"))"
 }
 
 extension Item where M == ArticleMetadata {
@@ -232,8 +244,9 @@ try await Saga(input: "content", output: ".deploy")
           title: SiteMetadata.name,
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
+          limit: 20,
           summary: \.metadata.summary,
-          dateKeyPath: \.creationDate
+          date: \.creationDate
         ),
         output: "feed.xml"
       ),
@@ -242,8 +255,9 @@ try await Saga(input: "content", output: ".deploy")
           title: SiteMetadata.name,
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
+          limit: 20,
           summary: \.metadata.summary,
-          dateKeyPath: \.creationDate
+          date: \.creationDate
         ),
         output: "tag/[key]/feed.xml", tags: \.expandedTags
       ),
@@ -278,8 +292,9 @@ try await Saga(input: "content", output: ".deploy")
           title: "\(SiteMetadata.name) journal",
           author: SiteMetadata.author,
           baseURL: SiteMetadata.url,
+          limit: 20,
           summary: \.metadata.summary,
-          dateKeyPath: \.creationDate
+          date: \.creationDate
         ),
         output: "feed.xml"
       ),
@@ -392,29 +407,35 @@ try await Saga(input: "content", output: ".deploy")
   .createPage("404.html", using: swim(render404))
   .createPage("feeds/index.html", using: swim(renderFeeds))
 
-  // Atom feed of all photos, newest first. lastModified is when the photo was committed (see the
-  // Dockerfile's git restore-mtime), which is when it was published, unlike the EXIF capture date.
-  .createPage("photos/feed.xml") { context in
-    let photos = context.allItems
-      .compactMap { $0 as? Item<ImageMetadata> }
-      // Photos committed together share a lastModified, so those are sorted by capture date instead.
-      // Compared at whole seconds like the feed's <updated>, since local copies differ by fractions of one.
-      .sorted {
-        let lhs = Int($0.lastModified.timeIntervalSince1970), rhs = Int($1.lastModified.timeIntervalSince1970)
-        return lhs == rhs ? $0.date > $1.date : lhs > rhs
-      }
+  // Atom feed of all photos. A writer on the nested photos step would create a feed per album instead.
+  .createPage("photos/feed.xml", using: Saga.atomFeed(
+    title: "\(SiteMetadata.name) photos",
+    author: SiteMetadata.author,
+    baseURL: SiteMetadata.url,
+    filter: { $0 is Item<ImageMetadata> },
+    sorting: feedOrder,
+    limit: 20,
+    itemTitle: feedTitle,
+    date: feedDate
+  ))
 
-    let feed: @Sendable (PhotoFeedContext) -> String = Saga.atomFeed(
-      title: "\(SiteMetadata.name) photos",
-      author: SiteMetadata.author,
-      baseURL: SiteMetadata.url,
-      itemTitle: { photo in
-        "\(photo.parent(as: PhotoAlbumMetadata.self).title), \(photo.date.formatted("MMMM d, yyyy"))"
+  // Atom feed of everything: articles, journal posts and photos
+  .createPage("feed.xml", using: Saga.atomFeed(
+    title: "\(SiteMetadata.name) feed of everything",
+    author: SiteMetadata.author,
+    baseURL: SiteMetadata.url,
+    filter: { item in
+      if let article = item as? Item<ArticleMetadata> {
+        return !article.archive
       }
-    )
-
-    return feed(PhotoFeedContext(items: photos, outputPath: context.outputPath))
-  }
+      return item is Item<ImageMetadata>
+    },
+    sorting: feedOrder,
+    limit: 20,
+    itemTitle: feedTitle,
+    summary: { ($0 as? Item<ArticleMetadata>)?.metadata.summary },
+    date: feedDate
+  ))
 
   // Expand %SERIES% placeholders in article bodies. This needs all articles, so it can't be an item processor.
   .afterRead(expandSeriesPlaceholders)
