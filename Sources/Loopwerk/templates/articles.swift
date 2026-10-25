@@ -271,6 +271,57 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
         }
       }
     }
+
+    if toc != nil {
+      tocHighlighter()
+    }
+  }
+}
+
+/// Marks the TOC link of the section being read: the last heading that has scrolled past the top of the screen.
+/// Before the first heading, nothing is marked.
+private func tocHighlighter() -> Node {
+  script {
+    Node.raw(
+      """
+      (() => {
+        const entries = [...document.querySelectorAll(".article-toc a[href^='#']")]
+          .map(link => ({ link, heading: document.getElementsByName(decodeURIComponent(link.hash.slice(1)))[0]?.parentElement }))
+          .filter(entry => entry.heading);
+        const headings = [...new Set(entries.map(entry => entry.heading))];
+        let active = null;
+        let scheduled = false;
+
+        const update = () => {
+          scheduled = false;
+          let current = null;
+          for (const heading of headings) {
+            if (heading.getBoundingClientRect().top > 160) break;
+            current = heading;
+          }
+          if (current === active) return;
+          active = current;
+          for (const { link, heading } of entries) {
+            if (heading === active) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          }
+        };
+
+        const schedule = () => {
+          if (scheduled) return;
+          scheduled = true;
+          requestAnimationFrame(update);
+        };
+
+        addEventListener("scroll", schedule, { passive: true });
+        addEventListener("resize", schedule, { passive: true });
+        update();
+      })();
+      """
+    )
   }
 }
 
@@ -283,7 +334,7 @@ private func writtenBy() -> Node {
       %", or "
       a(href: "mailto:kevin@loopwerk.io") { "get in touch" }
       %" if you have questions or feedback about this article."
-      
+
       if SiteMetadata.available {
         "Liked what you read? Kevin is currently"
         a(href: "/about/") { "available for hire" }

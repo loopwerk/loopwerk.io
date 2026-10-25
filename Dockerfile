@@ -77,4 +77,4 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built static files from builder
-COPY --from=builder /app/deploy /usr/share/nginx/html
+COPY --from=builder /app/.deploy /usr/share/nginx/html

@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaUtils",
       "state" : {
-        "revision" : "ec8eaf1f04c3112b5898d7196ac4272ab653a388",
-        "version" : "1.5.1"
+        "revision" : "af7817e3b55b3790e2f13ba60371709af5b69147",
+        "version" : "1.5.2"
       }
     },
     {

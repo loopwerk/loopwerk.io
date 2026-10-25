@@ -384,8 +384,8 @@
     @apply mt-2 pl-4;
   }
 
-  & a {
-    @apply leading-snug;
+  & a[aria-current="location"] {
+    @apply text-accent;
   }
 }
 
@@ -438,9 +438,9 @@
 }
 
 @utility fav-title {
-  @apply mt-3 text-sm font-semibold leading-snug;
+  @apply mt-3 text-center text-sm;
 }
 
 @utility fav-subtitle {
-  @apply mt-0.5 text-xs text-textfg/80;
+  @apply mt-0.5 text-center text-xs text-textfg/60;
 }

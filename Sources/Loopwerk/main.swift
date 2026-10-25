@@ -185,7 +185,7 @@ let articleProcessor = sequence(journalProcessor, permalink)
 
 let tailwind = SwiftTailwind(version: "4.2.4")
 
-try await Saga(input: "content", output: "deploy")
+try await Saga(input: "content", output: ".deploy")
   // Compile tailwind to output.css
   .beforeRead { saga in
     if let path = saga.buildReason.changedFile(),
@@ -373,7 +373,7 @@ try await Saga(input: "content", output: "deploy")
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownReader],
-    itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
+    itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors),
     writers: [.itemWriter(swim(renderPage))]
   )
 
@@ -448,7 +448,7 @@ try await Saga(input: "content", output: "deploy")
 
     let pagefind = Process()
     pagefind.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-    pagefind.arguments = ["pnpm", "pagefind", "--site", "deploy"]
+    pagefind.arguments = ["pnpm", "pagefind", "--site", ".deploy"]
     pagefind.currentDirectoryURL = URL(fileURLWithPath: SiteMetadata.projectRoot)
     try pagefind.run()
     pagefind.waitUntilExit()

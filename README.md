@@ -24,7 +24,7 @@ Or if you use `just`:
 $ just run
 ```
 
-This builds the website and creates a static server showing the contents of the `deploy` folder. It then watches for changes in the `content` and `Sources` folders, recreates the website, and refreshes the browser.
+This builds and serves the website. It then watches for changes in the `content` and `Sources` folders, recreates the website, and refreshes the browser.
 
 ## License
 This repository is **not open source**.

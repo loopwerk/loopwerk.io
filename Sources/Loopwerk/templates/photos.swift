@@ -54,7 +54,7 @@ private func albumCard(_ album: Item<PhotoAlbumMetadata>) -> Node {
         }
       }
     }
-    h2(class: "mt-3 font-semibold leading-snug group-hover:text-accent") { album.title }
+    h2(class: "mt-3 font-semibold group-hover:text-accent") { album.title }
     p(class: "mt-1 text-sm text-textfg/60") { photoCount(photos.count) }
   }
 }

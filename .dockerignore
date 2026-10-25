@@ -1,5 +1,5 @@
 .build
-deploy
+.deploy
 node_modules
 .git
 .DS_Store

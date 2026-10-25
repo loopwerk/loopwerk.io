@@ -5,7 +5,7 @@
 xcuserdata/
 *.py[cod]
 env
-deploy
+.deploy
 node_modules
 .claude
 .playwright-mcp
