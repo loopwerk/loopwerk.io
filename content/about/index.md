@@ -8,11 +8,9 @@ Hi there! My name is **Kevin Renskers**, and I'm a product-minded senior softwar
 
 I created my first website in 2000, and got my first job as a PHP developer in 2001. In 2009 I switched to Python and Django, and in 2010 I created my first iOS app. In 2023 I shifted my focus from mostly iOS work back to the open web.
 
-
 I built [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https://rssfilter.com), I maintain a bunch of [open source projects](/open-source/), and I'm a member of the [Django Software Foundation](https://www.djangoproject.com/foundation/).
 
 My hobbies and interests include playing [PC games](/games/), playing Dungeons & Dragons, watching [tv shows](/shows/), cooking, [photography](/photos/) and architecture. I choose cats over dogs, tea over coffee, and winter over summer. I've lived in Iceland for almost four years, and my favorite foods are ramen, hamburgers, tacos, and Thai.
-
 
 ## Hire me
 

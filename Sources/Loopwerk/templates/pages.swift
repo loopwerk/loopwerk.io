@@ -117,6 +117,10 @@ func renderFeeds(context: PageRenderingContext) -> Node {
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = context.item.metadata.section.flatMap { Section(rawValue: $0) }
 
+  if context.item.url == "/about/cv/" {
+    return renderCV(context: context)
+  }
+
   switch section {
     case .home:
       return renderHome(context: context)

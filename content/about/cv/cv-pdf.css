@@ -1,0 +1,113 @@
+/* Styles for the PDF version of the CV, rendered by WeasyPrint (see main.swift) */
+
+@font-face {
+  font-family: "Main Sans";
+  src: url(../../static/fonts/main.woff2) format("woff2");
+}
+
+@page {
+  size: A4;
+  margin: 15mm 22mm;
+}
+
+:root {
+  --accent: #f1a948;
+  --text: #2b2b2b;
+  --muted: #6b6b6b;
+}
+
+body {
+  font-family: "Main Sans", sans-serif;
+  font-size: 10pt;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  margin: 0 0 0.8em;
+}
+
+/* Header: photo on the left, name and contact details next to it */
+
+header {
+  display: flex;
+  gap: 7mm;
+}
+
+header img {
+  flex: none;
+  height: 52mm;
+}
+
+h1 {
+  font-size: 26pt;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--accent);
+  margin: 0 0 1mm;
+}
+
+/* Sections */
+
+h2 {
+  font-size: 13pt;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 7mm 0 2.5mm;
+  break-after: avoid;
+}
+
+h3 {
+  font-size: 11pt;
+  font-weight: 700;
+  margin: 6mm 0 0;
+  break-after: avoid;
+}
+
+/* The date line under each job */
+h3 + p {
+  font-size: 8.5pt;
+  color: var(--muted);
+  margin-bottom: 2.5mm;
+  break-after: avoid;
+}
+
+h4 {
+  font-size: 9.5pt;
+  font-weight: 700;
+  margin: 4mm 0 0.5mm;
+  break-after: avoid;
+}
+
+ul {
+  margin: 0 0 0.8em;
+  padding-left: 5mm;
+  break-inside: avoid;
+}
+
+li {
+  padding-left: 1.5mm;
+}
+
+li::marker {
+  color: var(--accent);
+}
+
+.page-break {
+  break-before: page;
+}
+
+.page-break + * {
+  margin-top: 0;
+}
+
+p,
+li {
+  orphans: 3;
+  widows: 3;
+}

@@ -485,6 +485,27 @@ try await Saga(input: "content", output: ".deploy")
   // Markdown twins, for content negotiation (see nginx.conf)
   .afterWrite(writeMarkdownFiles)
 
+  // Generate the CV PDF from the CV page's markdown
+  .afterWrite { saga in
+    guard !Saga.isDev else { return }
+
+    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/about/cv/" }) else { return }
+
+    let cvFolder = saga.outputPath + "about" + "cv"
+    let document = cvFolder + "pdf.html"
+    try document.write(renderCVDocument(item: cv).toString())
+    defer { try? document.delete() }
+
+    let weasyprint = Process()
+    weasyprint.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    weasyprint.arguments = ["weasyprint", document.string, (saga.outputPath + "about" + "KevinRenskers.pdf").string]
+    try weasyprint.run()
+    weasyprint.waitUntilExit()
+    if weasyprint.terminationStatus != 0 {
+      print("weasyprint failed with exit code \(weasyprint.terminationStatus)")
+    }
+  }
+
   // Create article images (prod only)
   .afterWrite { saga in
     guard !Saga.isDev else { return }

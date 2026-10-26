@@ -10,9 +10,9 @@ private let markdownDateFormatter: DateFormatter = {
 }()
 
 /// Write a markdown twin next to each article's and page's index.html, served by nginx to
-/// clients sending "Accept: text/markdown". The source file is emitted verbatim, except that
-/// for articles the publication date (which only exists in the source filename) is injected
-/// into the frontmatter so agents can see when an article was written.
+/// clients sending "Accept: text/markdown". Pages are emitted without their frontmatter. Articles
+/// keep theirs, with the publication date (which only exists in the source filename) injected
+/// so agents can see when an article was written.
 func writeMarkdownFiles(saga: Saga) async throws {
   let articles = saga.allItems.compactMap { $0 as? Item<ArticleMetadata> }
   let pages = saga.allItems.compactMap { $0 as? Item<PageMetadata> }
@@ -20,7 +20,7 @@ func writeMarkdownFiles(saga: Saga) async throws {
   for page in pages {
     let destination = saga.outputPath + page.relativeDestination.parent() + "index.md"
     try destination.parent().mkpath()
-    try destination.write(page.absoluteSource.read() as String)
+    try destination.write(withoutFrontmatter(page.absoluteSource.read()))
   }
 
   for article in articles {
@@ -57,13 +57,15 @@ func renderJournalMarkdown(context: ItemsRenderingContext<ArticleMetadata>) -> S
   return "# Journal\n\n" + context.items.map(articleLine).joined()
 }
 
+private func withoutFrontmatter(_ markdown: String) -> String {
+  let lines = markdown.components(separatedBy: "\n")
+  guard lines.first == "---", let end = lines.dropFirst().firstIndex(of: "---") else { return markdown }
+  return lines[(end + 1)...].joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) + "\n"
+}
+
 /// The source markdown of an item, without its frontmatter and leading `# Title` heading
 private func markdownBody(_ item: AnyItem) throws -> String {
-  var lines = try (item.absoluteSource.read() as String).components(separatedBy: "\n")[...]
-
-  if lines.first == "---", let end = lines.dropFirst().firstIndex(of: "---") {
-    lines = lines[(end + 1)...]
-  }
+  var lines = try withoutFrontmatter(item.absoluteSource.read()).components(separatedBy: "\n")[...]
 
   lines = lines.drop(while: { $0.trimmingCharacters(in: .whitespaces).isEmpty })
   if lines.first?.hasPrefix("# ") == true {

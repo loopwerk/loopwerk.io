@@ -13,6 +13,8 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     git-restore-mtime \
     curl \
     nodejs npm \
+    weasyprint \
+    python3-brotli \
     && apt-get install -y libjavascriptcoregtk-4.1-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pkg-config --libs javascriptcoregtk-4.1
