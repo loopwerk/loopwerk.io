@@ -336,7 +336,7 @@ private func writtenBy() -> Node {
 
       if SiteMetadata.available {
         "Liked what you read? Kevin is currently"
-        a(href: "/about/") { "available for hire" }
+        a(href: Section.hireMe.path) { "available for hire" }
         %"!"
       }
     }

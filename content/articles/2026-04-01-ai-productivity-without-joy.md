@@ -5,7 +5,7 @@ summary: I just finished my most productive quarter in a long time, made possibl
 
 # Coding with AI: productivity without pride or joy
 
-I just finished [my most productive quarter](/journal/q1-2026-in-review/) in a long time. Seven new open source projects, plus about forty releases to my existing projects. Fueled by a combination of too much free time (I'm still [available for new projects](/about/)!) and Claude Code. Looking back at all the code that I've released, there are two quite strong and conflicting feelings that I want to talk about.
+I just finished [my most productive quarter](/journal/q1-2026-in-review/) in a long time. Seven new open source projects, plus about forty releases to my existing projects. Fueled by a combination of too much free time (I'm still [available for new projects](/hire-me/)!) and Claude Code. Looking back at all the code that I've released, there are two quite strong and conflicting feelings that I want to talk about.
 
 ## The productivity gain is real
 

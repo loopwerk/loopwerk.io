@@ -15,6 +15,9 @@ enum Section: String, CaseIterable, Codable {
   case shows
   case albums
   case about
+  case hireMe
+  case cv
+  case uses
 
   var title: String {
     switch self {
@@ -29,6 +32,9 @@ enum Section: String, CaseIterable, Codable {
       case .shows: "TV shows"
       case .albums: "Albums"
       case .about: "About"
+      case .hireMe: "Hire me"
+      case .cv: "CV"
+      case .uses: "Uses"
     }
   }
 
@@ -45,6 +51,9 @@ enum Section: String, CaseIterable, Codable {
       case .shows: "/shows/"
       case .albums: "/albums/"
       case .about: "/about/"
+      case .hireMe: "/hire-me/"
+      case .cv: "/about/cv/"
+      case .uses: "/about/uses/"
     }
   }
 
@@ -55,6 +64,9 @@ enum Section: String, CaseIterable, Codable {
     }
     if [.games, .movies, .shows, .albums].contains(self) {
       return ("Favorites", [.games, .movies, .shows, .albums])
+    }
+    if [.about, .hireMe, .cv, .uses].contains(self) {
+      return ("About", [.about, .hireMe, .cv, .uses])
     }
     return nil
   }
@@ -164,10 +176,10 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
   ]
 }
 
-/// The site layout: nav, centered content, and footer
-func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), hasMarkdownTwin: Bool = false, extraHeader: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
+/// The site layout: nav, centered content, and footer. On pages with a sidebar, `asideContent` goes above its links.
+func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), hasMarkdownTwin: Bool = false, extraHeader: Node = [], asideContent: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
   rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader, hasMarkdownTwin: hasMarkdownTwin) {
-    if SiteMetadata.available, section != .about {
+    if SiteMetadata.available, section?.navSection != .about {
       availableForHire()
     }
 
@@ -178,13 +190,17 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         // Same grid as the articles, with the page in the text column
         div(class: "article-grid") {
           aside {
-            nav(customAttributes: ["aria-label": sidebar.title]) {
-              p(class: "sidebar-header") { sidebar.title }
-              ul {
-                sidebar.sections.map { item in
-                  li { sectionLink(item, currentSection: section) }
+            div {
+              nav(customAttributes: ["aria-label": sidebar.title]) {
+                p(class: "sidebar-header") { sidebar.title }
+                ul {
+                  sidebar.sections.map { item in
+                    li { sectionLink(item, currentSection: section) }
+                  }
                 }
               }
+
+              asideContent
             }
           }
 
@@ -223,14 +239,14 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 /// so it scrolls away while the nav stays put
 private func availableForHire() -> Node {
   div(class: "pointer-events-none absolute inset-x-0 top-4 z-60 flex h-7 items-center justify-center text-[12px] md:hidden print:hidden") {
-    a(class: "pointer-events-auto bg-codebg py-1 px-4 rounded-full hover:underline", href: "/about/") { "I'm available for hire" }
+    a(class: "pointer-events-auto bg-codebg py-1 px-4 rounded-full hover:underline", href: Section.hireMe.path) { "I'm available for hire" }
   }
 }
 
 /// Desktop only: floats above the About link with an arrow pointing down at it. Browsers with scroll-driven
 /// animations fade it out as the nav sticks, so it can sit closer; others keep it inside the part that scrolls away.
 private func availableForHireAboveLink() -> Node {
-  a(class: "fade-on-scroll absolute bottom-full left-1/2 mb-7 supports-[animation-timeline:scroll()]:mb-4 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-codebg py-1 px-4 text-[12px] font-normal text-codefg hover:text-inherit! hover:underline md:block", href: "/about/") {
+  a(class: "fade-on-scroll absolute bottom-full left-1/2 mb-7 supports-[animation-timeline:scroll()]:mb-4 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-codebg py-1 px-4 text-[12px] font-normal text-codefg hover:text-inherit! hover:underline md:block", href: Section.hireMe.path) {
     "I'm currently available for hire!"
     span(class: "absolute top-full left-1/2 -translate-x-1/2 border-x-[8px] border-t-[8px] border-x-transparent border-t-codebg")
   }
@@ -266,7 +282,7 @@ private func siteNav(section: Section?) -> Node {
         class: "hidden md:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-5 lg:gap-8 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex print:hidden"
       ) {
         navItems.map { item in
-          if item.section == .about, SiteMetadata.available, section != .about {
+          if item.section == .about, SiteMetadata.available, section?.navSection != .about {
             span(class: "relative") {
               navLink(item.title, section: item.section, currentSection: section)
               availableForHireAboveLink()

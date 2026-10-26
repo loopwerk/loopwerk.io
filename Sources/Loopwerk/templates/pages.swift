@@ -117,15 +117,13 @@ func renderFeeds(context: PageRenderingContext) -> Node {
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   let section = context.item.metadata.section.flatMap { Section(rawValue: $0) }
 
-  if context.item.url == "/about/cv/" {
-    return renderCV(context: context)
-  }
-
   switch section {
     case .home:
       return renderHome(context: context)
-    case .about:
-      return renderAbout(context: context)
+    case .about, .hireMe, .uses:
+      return renderAbout(context: context, section: section!)
+    case .cv:
+      return renderCV(context: context)
     default:
       break
   }
@@ -153,55 +151,54 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
-  baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true) {
-    div(class: "article-grid") {
-      aside {
-        div(class: "text-sm") {
-          img(class: "rounded-full mb-8", src: "/static/images/kevin.png")
-          div(class: "flex justify-center text-textfg") {
-            socialLinks(includeCV: true)
-          }
-
-          if SiteMetadata.available {
-            div(class: "flex justify-center text-[12px] mt-4") {
-              span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
-                "I'm currently available for hire! Reach out to discuss your project."
-                span(class: "absolute bottom-full left-[10px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
-              }
-            }
-          } else {
-            div(class: "flex justify-center text-[12px] mt-8") {
-              p { "I am currently not available for new projects, but feel free to contact me to set something up for the future." }
-            }
-          }
+func aboutAsideContent() -> Node {
+  div(class: "text-sm mt-8") {
+    img(class: "rounded-full mb-8", src: "/static/images/kevin.png")
+    div(class: "flex justify-center text-textfg") {
+      socialLinks()
+    }
+    
+    if SiteMetadata.available {
+      div(class: "flex justify-center text-[12px] mt-4") {
+        span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
+          "I'm currently available for hire! Reach out to discuss your project."
+          span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
         }
       }
-
-      article(class: "prose lg:col-start-2 lg:row-start-1") {
-        div(class: "mb-8 flex items-baseline justify-between") {
-          h1(class: "mb-0!") { context.item.title }
-          div(class: "lg:hidden") {
-            socialLinks(includeCV: true)
-          }
-        }
-
-        if SiteMetadata.available {
-          div(class: "text-[12px] lg:hidden -mt-2") {
-            p(class: "bg-codebg text-codefg p-2 rounded-lg") {
-              "I'm currently available for hire! Reach out to discuss your project."
-            }
-          }
-        }
-
-        Node.raw(context.item.body)
+    } else {
+      div(class: "flex justify-center text-[12px] mt-8") {
+        p { "I am currently not available for new projects, but feel free to contact me to set something up for the future." }
       }
     }
   }
 }
 
-func socialLinks(includeCV: Bool = false) -> Node {
-  div(class: "flex \(includeCV ? "gap-[0.6em]" : "gap-[0.8em] md:gap-[1em]") [&_a]:block [&_a]:h-[1.5em] md:[&_a]:h-[1.75em] [&_a]:w-[1.5em] md:[&_a]:w-[1.75em]") {
+/// About and hire me share the photo, social links and availability note in the sidebar
+private func renderAbout(context: ItemRenderingContext<PageMetadata>, section: Section) -> Node {
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, asideContent: aboutAsideContent()) {
+    article(class: "prose") {
+      div(class: "mb-8 flex items-baseline justify-between") {
+        h1(class: "mb-0!") { context.item.title }
+        div(class: "lg:hidden") {
+          socialLinks()
+        }
+      }
+
+      if SiteMetadata.available {
+        div(class: "text-[12px] lg:hidden -mt-2") {
+          p(class: "bg-codebg text-codefg p-2 rounded-lg") {
+            "I'm currently available for hire! Reach out to discuss your project."
+          }
+        }
+      }
+
+      Node.raw(context.item.body)
+    }
+  }
+}
+
+func socialLinks() -> Node {
+  div(class: "flex gap-[0.8em] md:gap-[1em] [&_a]:block [&_a]:h-[1.5em] md:[&_a]:h-[1.75em] [&_a]:w-[1.5em] md:[&_a]:w-[1.75em]") {
     a(href: "mailto:kevin@loopwerk.io", title: "Email") {
       Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208h32v48H256C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256v96 24H488 440c-36.9 0-69.6-17.8-90-45.4c-22 27.6-55.9 45.4-94 45.4c-66.3 0-120-53.7-120-120s53.7-120 120-120c27 0 51.9 8.9 72 24v-8h48v24 80 8c0 35.3 28.7 64 64 64h24V256c0-114.9-93.1-208-208-208zm72 208a72 72 0 1 0 -144 0 72 72 0 1 0 144 0z"/></svg>"#)
     }
@@ -216,12 +213,6 @@ func socialLinks(includeCV: Bool = false) -> Node {
 
     a(href: "https://www.linkedin.com/in/kevinrenskers/", target: "_blank", title: "LinkedIn") {
       Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>"#)
-    }
-
-    if includeCV {
-      a(href: "/about/cv/", title: "CV") {
-        Node.raw(#"<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 -3.137 43.916 50.19"><g><path d="M34.395,0H9.522c-2.762,0-5,2.239-5,5v33.916c0,2.761,2.238,5,5,5h24.871c2.762,0,5-2.239,5-5V5 C39.395,2.239,37.154,0,34.395,0z M9.208,16.855c0-1.172,0.951-2.121,2.121-2.121h0.742c-0.791-0.874-1.277-2.03-1.277-3.304 c0-2.723,2.209-4.931,4.932-4.931c2.725,0,4.932,2.207,4.932,4.932c0,1.272-0.486,2.429-1.279,3.303h0.709 c1.172,0,2.121,0.949,2.121,2.121v3.578c0,1.122-0.875,2.03-1.975,2.106h-9.051c-1.1-0.076-1.975-0.984-1.975-2.106V16.855 L9.208,16.855z M32.708,37.416h-21.5c-1.104,0-2-0.896-2-2s0.896-2,2-2h21.5c1.104,0,2,0.896,2,2S33.812,37.416,32.708,37.416z M32.708,29.916h-21.5c-1.104,0-2-0.896-2-2s0.896-2,2-2h21.5c1.104,0,2,0.896,2,2S33.812,29.916,32.708,29.916z M32.708,22.416 h-6.5c-1.104,0-2-0.896-2-2c0-1.104,0.896-2,2-2h6.5c1.104,0,2,0.896,2,2C34.708,21.52,33.812,22.416,32.708,22.416z"/></g></svg>"#)
-      }
     }
   }
 }

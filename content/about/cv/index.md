@@ -1,5 +1,5 @@
 ---
-section: about
+section: cv
 ---
 
 # Kevin Renskers

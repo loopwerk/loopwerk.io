@@ -1,11 +1,10 @@
 ---
-tags: review
-summary: This is the stuff I use daily for development, photography, and gaming.
+section: uses
 ---
 
 # The software and hardware I use
 
-Inspired by [uses.tech](https://uses.tech).
+*Inspired by [uses.tech](https://uses.tech). Last updated October, 2026.*
 
 This is the stuff I use daily for development, photography, and gaming. I don't upgrade often, but when I do it's usually because something genuinely annoys me, not because there's a new version.
 
