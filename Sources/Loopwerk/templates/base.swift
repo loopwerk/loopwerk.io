@@ -65,6 +65,8 @@ enum Section: String, CaseIterable, Codable {
   }
 }
 
+let logoSVG = #"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12"><path d="M12 12H0V0H5V1H1V11H11V8H4V3H3V9H10V10H2V2H5V7H12Z"/></svg>"#
+
 private let navItems: [(title: String, section: Section)] = [
   ("Articles", .articles),
   ("Journal", .journal),
@@ -82,7 +84,7 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
   return [
     .documentType("html"),
     // From lg the root font size is 18px, so everything sized in rem (text, spacing, widths) grows with it
-    html(class: "font-main scroll-pt-20 lg:text-lg", lang: "en-US") {
+    html(class: "font-main scroll-pt-20 lg:text-lg print:text-base", lang: "en-US") {
       head {
         meta(charset: "utf-8")
         meta(content: "width=device-width, initial-scale=1", name: "viewport")
@@ -155,7 +157,7 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
           script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "81dabfb5-ff5a-4ae4-bc0f-7e5d91c71875", "data-performance": "true"])
         }
       }
-      body(class: "bg-bodybg flex min-h-svh flex-col text-textfg antialiased \(section?.rawValue ?? "")") {
+      body(class: "bg-bodybg flex min-h-svh print:min-h-0 flex-col text-textfg antialiased \(section?.rawValue ?? "")") {
         children().asNode()
       }
     },
@@ -171,7 +173,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 
     siteNav(section: section)
 
-    main(class: "container flex flex-1 flex-col py-6 md:py-12 lg:py-16 \(section == .home ? "lg:short:py-8" : "")") {
+    main(class: "container flex flex-1 flex-col py-6 md:py-12 lg:py-16 print:max-w-none print:p-0 \(section == .home ? "lg:short:py-8" : "")") {
       if let section, let sidebar = section.sidebar {
         // Same grid as the articles, with the page in the text column
         div(class: "article-grid") {
@@ -187,7 +189,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
           }
 
           div {
-            nav(class: "mb-8 flex flex-wrap gap-x-4 gap-y-2 text-sm lg:hidden", customAttributes: ["aria-label": sidebar.title]) {
+            nav(class: "mb-8 flex flex-wrap gap-x-4 gap-y-2 text-sm lg:hidden print:hidden", customAttributes: ["aria-label": sidebar.title]) {
               sidebar.sections.map { sectionLink($0, currentSection: section) }
             }
 
@@ -200,7 +202,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
     }
 
     if section != .home {
-      footer(class: "container flex flex-col items-center gap-1 py-8 text-sm text-textfg/60 links") {
+      footer(class: "container flex flex-col items-center gap-1 py-8 text-sm text-textfg/60 links print:hidden") {
         p {
           "Built in Swift using"
           a(href: "https://getsaga.dev", rel: "nofollow", target: "_blank") { "Saga" }
@@ -220,7 +222,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 /// Mobile only: centered in the nav's logo row, but positioned against the page rather than inside the sticky nav,
 /// so it scrolls away while the nav stays put
 private func availableForHire() -> Node {
-  div(class: "pointer-events-none absolute inset-x-0 top-4 z-60 flex h-7 items-center justify-center text-[12px] md:hidden") {
+  div(class: "pointer-events-none absolute inset-x-0 top-4 z-60 flex h-7 items-center justify-center text-[12px] md:hidden print:hidden") {
     a(class: "pointer-events-auto bg-codebg py-1 px-4 rounded-full hover:underline", href: "/about/") { "I'm available for hire" }
   }
 }
@@ -235,17 +237,17 @@ private func availableForHireAboveLink() -> Node {
 }
 
 private func siteNav(section: Section?) -> Node {
-  nav(class: "site-nav sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border") {
+  nav(class: "site-nav sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border print:static print:border-0") {
     // On desktop the nav uses the same columns as article-grid, so the menu lines up with the content column
-    div(class: "relative container flex items-center pt-4 md:pt-16 pb-4 text-sm lg:grid lg:grid-cols-[var(--sidebar-width)_1fr] lg:gap-(--sidebar-gap)") {
+    div(class: "relative container flex items-center pt-4 md:pt-16 pb-4 text-sm lg:grid lg:grid-cols-[var(--sidebar-width)_1fr] lg:gap-(--sidebar-gap) print:block print:max-w-none print:p-0 print:pb-8") {
       a(class: "lg:justify-self-start", href: Section.home.path, title: Section.home.title) {
-        Node.raw(#"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12"><path d="M12 12H0V0H5V1H1V11H11V8H4V3H3V9H10V10H2V2H5V7H12Z"/></svg>"#)
+        Node.raw(logoSVG)
       }
 
       input(class: "peer sr-only", id: "nav-toggle", type: "checkbox")
 
       label(
-        class: "-m-2 ml-auto cursor-pointer p-2 peer-focus-visible:text-accent md:hidden peer-checked:hidden",
+        class: "-m-2 ml-auto cursor-pointer p-2 peer-focus-visible:text-accent md:hidden peer-checked:hidden print:hidden",
         for: "nav-toggle",
         customAttributes: ["aria-label": "Open menu"]
       ) {
@@ -253,7 +255,7 @@ private func siteNav(section: Section?) -> Node {
       }
 
       label(
-        class: "-m-2 ml-auto hidden cursor-pointer p-2 peer-focus-visible:text-accent peer-checked:max-md:block",
+        class: "-m-2 ml-auto hidden cursor-pointer p-2 peer-focus-visible:text-accent peer-checked:max-md:block print:hidden",
         for: "nav-toggle",
         customAttributes: ["aria-label": "Close menu"]
       ) {
@@ -261,7 +263,7 @@ private func siteNav(section: Section?) -> Node {
       }
 
       div(
-        class: "hidden md:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-5 lg:gap-8 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex"
+        class: "hidden md:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-5 lg:gap-8 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex print:hidden"
       ) {
         navItems.map { item in
           if item.section == .about, SiteMetadata.available, section != .about {

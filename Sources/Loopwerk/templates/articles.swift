@@ -59,7 +59,7 @@ private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Sec
       div {
         header(class: "page-header") {
           h1 { title }
-          details(class: "group mt-4 lg:hidden") {
+          details(class: "group mt-4 lg:hidden print:hidden") {
             summary(class: "flex cursor-pointer list-none items-center gap-1.5 text-textfg/80 [&::-webkit-details-marker]:hidden") {
               Node.raw(#"<svg class="h-3.5 w-3.5 group-open:rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>"#)
               "Tags"
@@ -100,7 +100,7 @@ private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Sec
 /// hides the articles that don't match and swaps in the excerpts of those that do.
 @NodeBuilder
 private func searchForm() -> Node {
-  form(class: "relative mt-6", id: "search-form") {
+  form(class: "relative mt-6 print:hidden", id: "search-form") {
     input(class: "w-full rounded-md border border-textfg/20 bg-transparent pl-11 py-2 pr-10 text-base focus:border-accent focus:outline-none", id: "search", name: "q", placeholder: "Search articles", type: "text")
     a(class: "absolute right-3 top-1/2 hidden -translate-y-1/2 text-lg text-textfg/60 hover:text-accent", href: "./", id: "search-clear", customAttributes: ["aria-label": "Clear search"]) { "\u{00D7}" }
   }
@@ -231,7 +231,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
               span(class: "inline-block mt-4 p-1 rounded-md bg-textfg text-bodybg") { "archived" }
             }
 
-            p(class: "mt-4 links lg:hidden") {
+            p(class: "mt-4 links lg:hidden print:block") {
               "Posted on"
               date
               // On desktop the tags are in the sidebar
@@ -249,7 +249,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
             }
 
             if let toc {
-              details(class: "article-toc group mt-6 lg:hidden") {
+              details(class: "article-toc group mt-6 lg:hidden print:hidden") {
                 summary(class: "flex cursor-pointer list-none items-center gap-1.5 [&::-webkit-details-marker]:hidden") {
                   Node.raw(#"<svg class="h-3.5 w-3.5 group-open:rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>"#)
                   "Contents"
@@ -326,7 +326,7 @@ private func tocHighlighter() -> Node {
 
 /// Who wrote the article, for readers who landed on it without knowing the site
 private func writtenBy() -> Node {
-  div(class: "mt-16 prose text-textfg/60") {
+  div(class: "mt-16 prose text-textfg/60 print:hidden") {
     p {
       "Written by Kevin Renskers, a freelance software engineer with over 25 years of experience. Subscribe to one of the"
       a(href: "/feeds/") { "RSS feeds" }
@@ -370,7 +370,7 @@ private func moreArticles(_ article: Item<ArticleMetadata>, allItems: [AnyItem])
   let seeMoreArticles = relatedArticles.count >= 2 ? relatedArticles : latestArticles
   let seeMoreArticlesTitle = relatedArticles.count >= 2 ? "Related articles" : "Recent articles"
 
-  return div(class: "mt-16 md:mt-24") {
+  return div(class: "mt-16 md:mt-24 print:hidden") {
     h2(class: "heading-1 mb-8") { seeMoreArticlesTitle }
 
     div(class: "flex flex-col gap-8 pb-6") {

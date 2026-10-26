@@ -103,17 +103,21 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
     section: .photos,
     ogImage: ("/\(photo.relativeSource)", photo.metadata.imageWidth, photo.metadata.imageHeight)
   ) {
-    a(class: "fixed right-4 top-4 z-10 p-2 text-textfg hover:text-accent", href: album.url, title: "Close", customAttributes: ["aria-label": "Close"]) {
+    a(class: "fixed right-4 top-4 z-10 p-2 text-textfg hover:text-accent print:hidden", href: album.url, title: "Close", customAttributes: ["aria-label": "Close"]) {
       Node.raw(#"<svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>"#)
     }
 
-    main(class: "lg:grid lg:grid-cols-[20rem_minmax(0,1fr)]") {
+    div(class: "hidden pb-8 print:block") {
+      Node.raw(logoSVG)
+    }
+
+    main(class: "lg:grid lg:grid-cols-[20rem_minmax(0,1fr)] print:block") {
       // On desktop the photo column is exactly as tall as the screen, so the previous/next links stay put whatever the photo's orientation
-      div(class: "flex flex-col px-6 pt-16 pb-6 lg:order-last lg:h-screen lg:p-10 lg:pt-16") {
-        div(class: "flex min-h-0 flex-1 items-center justify-center") {
+      div(class: "flex flex-col px-6 pt-16 pb-6 lg:order-last lg:h-screen lg:p-10 lg:pt-16 print:h-auto print:p-0") {
+        div(class: "flex min-h-0 flex-1 items-center justify-center print:justify-start") {
           img(
             alt: photo.title,
-            class: "h-auto max-h-[80vh] w-auto max-w-full border-white border-[16px] md:border-[24px] lg:max-h-full",
+            class: "h-auto max-h-[80vh] w-auto max-w-full border-white border-[16px] md:border-[24px] lg:max-h-full print:max-h-[22cm] print:border-0",
             decoding: "async",
             height: "\(photo.metadata.imageHeight)",
             src: "/\(photo.relativeSource)",
@@ -121,7 +125,7 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
           )
         }
 
-        nav(class: "mt-6 flex justify-center gap-8 text-sm", customAttributes: ["aria-label": "Photos"]) {
+        nav(class: "mt-6 flex justify-center gap-8 text-sm print:hidden", customAttributes: ["aria-label": "Photos"]) {
           if let previous = context.previous {
             a(class: "hover:text-accent", href: previous.url) { "← Previous" }
           }
@@ -131,7 +135,7 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
         }
       }
 
-      aside(class: "flex flex-col justify-between gap-12 p-6 lg:h-screen lg:p-10 text-xs text-textfg/60") {
+      aside(class: "flex flex-col justify-between gap-12 p-6 lg:h-screen lg:p-10 text-xs text-textfg/60 print:hidden") {
         photoDetails(photo, album: album)
 
         div(class: "flex flex-col gap-1 text-textfg/60 links") {

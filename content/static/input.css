@@ -51,28 +51,21 @@
   --color-navbg: #141820;
 }
 
+@media print {
+  :root {
+    --color-bodybg: #ffffff;
+    --color-codebg: #eeeeee;
+    --color-codefg: #000000;
+    --color-textfg: #000000;
+    --color-divider: #000000;
+    --color-navbg: #eeeeee;
+  }
+}
+
 @layer base {
   body.home {
     --ape-offset: clamp(-18vh, 50vw + min(100vw, var(--container-lg)) / 2 - 27.5rem - 49.3vh, 0px);
     @apply md:bg-[url(/static/ape.svg)] bg-size-[auto_75vh] bg-position-[left_var(--ape-offset)_bottom] bg-fixed bg-no-repeat;
-  }
-
-  table.countries {
-    @apply block max-h-[415px] overflow-y-auto;
-  }
-
-  table.countries thead,
-  table.countries tbody {
-    @apply table w-full table-fixed;
-  }
-
-  table.countries thead {
-    @apply sticky top-0;
-  }
-
-  table.countries th:first-child,
-  table.countries td:first-child {
-    @apply w-5/6;
   }
 }
 
@@ -111,16 +104,32 @@
     @apply font-title text-3xl mb-4;
   }
 
+  .prose :is(h2, h3, h4) {
+    @apply print:break-after-avoid;
+  }
+
+  .prose :is(pre, img, figure, table, aside) {
+    @apply print:break-inside-avoid;
+  }
+
+  .prose table {
+    @apply rounded-md overflow-hidden border-separate border-spacing-0 print:border print:border-divider;
+  }
+
   .prose thead {
-    @apply border-0 bg-textfg;
+    @apply border-0 bg-textfg print:bg-bodybg;
   }
 
   .prose thead th {
-    @apply text-bodybg;
+    @apply text-bodybg print:text-textfg print:font-bold print:border-b-2 print:border-divider;
   }
 
   .prose tbody tr {
-    @apply border-0 even:bg-textfg/5;
+    @apply border-0 even:bg-textfg/5 print:bg-bodybg;
+  }
+
+  .prose tbody tr:not(:last-child) td {
+    @apply print:border-b print:border-divider;
   }
 
   .prose th,
@@ -133,11 +142,11 @@
   }
 
   .prose pre {
-    @apply py-4 rounded-md text-codefg bg-codebg overflow-x-auto overflow-y-hidden;
+    @apply py-4 rounded-md text-codefg bg-codebg overflow-x-auto overflow-y-hidden print:border print:border-divider;
   }
 
   .prose pre code {
-    @apply text-sm md:text-base;
+    @apply text-sm md:text-base print:whitespace-pre-wrap print:wrap-break-word;
   }
 
   /* Markdown blocks wrap instead of scrolling horizontally */
@@ -157,7 +166,7 @@
   }
 
   .prose pre[data-title] .code-title {
-    @apply block text-sm text-textfg/80 py-2 pl-10 mb-4 -mx-4 border-b border-textfg/20 bg-no-repeat bg-position-[1rem_center] bg-size-[16px_16px] bg-[url(icons/document.svg)];
+    @apply block text-sm text-textfg/80 py-2 pl-10 mb-4 -mx-4 border-b border-textfg/20 bg-no-repeat bg-position-[1rem_center] bg-size-[16px_16px] bg-[url(icons/document.svg)] print:border-b-2 print:border-divider print:text-textfg print:font-bold print:pl-4 print:bg-none!;
   }
 
   .prose pre[data-title]:has(code.language-python) .code-title {
@@ -229,11 +238,11 @@
 
   /* Blockquotes with [!TYPE], see convertAsides */
   .prose aside {
-    @apply px-4 border border-accent my-5 rounded-md text-textfg/80 text-[90%];
+    @apply px-4 border border-accent my-5 rounded-md text-textfg/80 text-[90%] print:border-divider;
   }
 
   .prose aside .title {
-    @apply text-accent block -mb-2;
+    @apply text-accent print:text-textfg block -mb-2;
   }
 
   .prose .series {
@@ -273,22 +282,24 @@
     @apply rounded-[10%/4.7%];
   }
 
-  /* A mask instead of a background image, so the icon takes the text color */
-  a[href^="https://github.com"].app,
-  a[href^="https://itunes.apple.com"].app,
-  a[href^="https://apps.apple.com"].app {
-    @apply relative pl-5;
-
-    &::before {
-      content: "";
-      @apply absolute left-0 top-1/2 size-[1em] -translate-y-1/2 bg-current;
-      mask: url(images/github.svg) center / contain no-repeat;
+  @media screen {
+    /* A mask instead of a background image, so the icon takes the text color */
+    a[href^="https://github.com"].app,
+    a[href^="https://itunes.apple.com"].app,
+    a[href^="https://apps.apple.com"].app {
+      @apply relative pl-5;
+      
+      &::before {
+        content: "";
+        @apply absolute left-0 top-1/2 size-[1em] -translate-y-1/2 bg-current;
+        mask: url(images/github.svg) center / contain no-repeat;
+      }
     }
-  }
-
-  a[href^="https://itunes.apple.com"].app::before,
-  a[href^="https://apps.apple.com"].app::before {
-    mask-image: url(images/apple.svg);
+    
+    a[href^="https://itunes.apple.com"].app::before,
+    a[href^="https://apps.apple.com"].app::before {
+      mask-image: url(images/apple.svg);
+    }
   }
 
   /* Pagefind search results */
@@ -312,6 +323,24 @@
     mask-size: 100%;
     z-index: 9;
     pointer-events: none;
+  }
+
+  table.countries {
+    @apply block max-h-[415px] overflow-y-auto print:max-h-none;
+  }
+
+  table.countries thead,
+  table.countries tbody {
+    @apply table w-full table-fixed;
+  }
+
+  table.countries thead {
+    @apply sticky top-0;
+  }
+
+  table.countries th:first-child,
+  table.countries td:first-child {
+    @apply w-5/6;
   }
 }
 
@@ -351,17 +380,17 @@
 }
 
 @utility article-grid {
-  @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap);
+  @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap) print:block;
   
-  & aside {
-    @apply max-lg:hidden text-xs text-textfg/60;
+  & > aside {
+    @apply max-lg:hidden print:hidden text-xs text-textfg/60;
   }
   
-  & aside > :first-child {
+  & > aside > :first-child {
     @apply tall:sticky top-24;
   }
   
-  & aside ul {
+  & > aside ul {
     @apply flex flex-col gap-2;
   }
   
@@ -390,12 +419,18 @@
 }
 
 @utility heading-1 {
-  @apply font-title font-bold text-4xl text-textfg;
+  @apply font-title font-bold text-4xl text-textfg max-w-(--content-width);
 }
 
 @utility links {
   & a {
-    @apply text-inherit underline underline-offset-2 hover:text-accent font-normal;
+    @apply text-inherit underline underline-offset-2 hover:text-accent font-normal print:no-underline;
+  }
+  
+  @media print {
+    & a[href^="http"]::after {
+      content: " (" attr(href) ")";
+    }
   }
 }
 
