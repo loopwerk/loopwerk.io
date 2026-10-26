@@ -1,10 +1,10 @@
 import Foundation
-#if canImport(FoundationNetworking)
-  import FoundationNetworking
-#endif
 import Saga
 import SagaPathKit
 import SwiftCSV
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 
 private let postersFolder: Path = "content/static/posters/games"
 private let assetBaseURL = "https://shared.cloudflare.steamstatic.com/store_item_assets/"

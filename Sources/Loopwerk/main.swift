@@ -31,8 +31,24 @@ struct PageMetadata: Metadata {
   let section: String?
 }
 
+/// Open source projects are listed per category, in this order
+enum ProjectCategory: String, Codable, CaseIterable {
+  case python = "Python"
+  case swift = "Swift"
+  case javascript = "JavaScript"
+  case objectiveC = "Objective-C"
+  case other = "Other"
+
+  var title: String {
+    switch self {
+      case .javascript: "TypeScript / JavaScript"
+      default: rawValue
+    }
+  }
+}
+
 struct OpenSourceProjectMetadata: Metadata {
-  let category: String
+  let category: ProjectCategory
   let repo: String
 }
 
@@ -67,8 +83,8 @@ struct AlbumMetadata: Metadata {
 
   /// The URL column from the csv wins, so an album can point anywhere. Albums with neither
   /// a URL nor a store page aren't linked at all.
-  var linkURL: String? {
-    url ?? appleMusicURL
+  var linkURL: String {
+    url ?? appleMusicURL ?? "http://www.example.com/"
   }
 }
 
@@ -82,15 +98,13 @@ struct GameMetadata: Metadata {
     "/static/posters/games/\(id).jpg"
   }
 
-  /// Games that aren't on Steam get a hand-picked slug instead of an appid
   var steamURL: String? {
     Int(id) != nil ? "https://store.steampowered.com/app/\(id)/" : nil
   }
 
-  /// The URL column from the csv wins, so a game can point anywhere. Games with neither
-  /// a URL nor a store page aren't linked at all.
-  var linkURL: String? {
-    url ?? steamURL
+  /// The URL column from the csv wins, so a game can point anywhere
+  var linkURL: String {
+    url ?? steamURL ?? "http://www.example.com/"
   }
 }
 
@@ -235,6 +249,7 @@ try await Saga(input: "content", output: ".deploy")
     writers: [
       .itemWriter(swim(renderArticle)),
       .listWriter(swim(renderArticles)),
+      .listWriter(renderArticlesMarkdown, output: "index.md"),
       .tagWriter(swim(renderTag), tags: \.expandedTags),
       .yearWriter(swim(renderYear)),
 
@@ -288,6 +303,7 @@ try await Saga(input: "content", output: ".deploy")
     writers: [
       .itemWriter(swim(renderArticle)),
       .listWriter(swim(renderJournal)),
+      .listWriter(renderJournalMarkdown, output: "index.md"),
       .tagWriter(swim(renderJournalTag), tags: \.expandedTags),
       .listWriter(
         Saga.atomFeed(
@@ -309,7 +325,10 @@ try await Saga(input: "content", output: ".deploy")
     metadata: WorkProjectMetadata.self,
     readers: [.parsleyMarkdownReader],
     itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
-    writers: [.listWriter(swim(renderWork))]
+    writers: [
+      .listWriter(swim(renderWork)),
+      .listWriter(renderWorkMarkdown, output: "index.md"),
+    ]
   )
   .register(
     folder: "open-source/support",
@@ -324,7 +343,10 @@ try await Saga(input: "content", output: ".deploy")
     readers: [.parsleyMarkdownReader],
     itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
     sorting: { $0.title < $1.title },
-    writers: [.listWriter(swim(renderOpenSource))]
+    writers: [
+      .listWriter(swim(renderOpenSource)),
+      .listWriter(renderOpenSourceMarkdown, output: "index.md"),
+    ]
   )
 
   // Photo albums from markdown files, with nested photo pages per album
@@ -356,7 +378,10 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "shows", kind: .tv) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderShows), output: "shows/index.html")]
+    writers: [
+      .listWriter(swim(renderShows), output: "shows/index.html"),
+      .listWriter(renderShowsMarkdown, output: "shows/index.md"),
+    ]
   )
 
   // Load movies
@@ -365,7 +390,10 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "movies", kind: .movie) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderMovies), output: "movies/index.html")]
+    writers: [
+      .listWriter(swim(renderMovies), output: "movies/index.html"),
+      .listWriter(renderMoviesMarkdown, output: "movies/index.md"),
+    ]
   )
 
   // Load games
@@ -374,7 +402,10 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchGames() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderGames), output: "games/index.html")]
+    writers: [
+      .listWriter(swim(renderGames), output: "games/index.html"),
+      .listWriter(renderGamesMarkdown, output: "games/index.md"),
+    ]
   )
 
   // Load albums
@@ -383,7 +414,10 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchAlbums() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderAlbums), output: "albums/index.html")]
+    writers: [
+      .listWriter(swim(renderAlbums), output: "albums/index.html"),
+      .listWriter(renderAlbumsMarkdown, output: "albums/index.md"),
+    ]
   )
 
   // Content pages (home, about, legal notice)
@@ -396,7 +430,7 @@ try await Saga(input: "content", output: ".deploy")
 
   // Sitemap
   .createPage("sitemap.xml", using: Saga.sitemap(baseURL: SiteMetadata.url, filter: { path, item in
-    if path.string.hasSuffix("feed.xml") {
+    if path.string.hasSuffix("feed.xml") || path.extension == "md" {
       return false
     }
     if let article = item as? Item<ArticleMetadata> {
@@ -443,12 +477,12 @@ try await Saga(input: "content", output: ".deploy")
   .afterRead(expandSeriesPlaceholders)
 
   // Minify all HTML output (prod only)
-  .postProcess { html, _ in
-    guard !Saga.isDev else { return html }
+  .postProcess { html, path in
+    guard !Saga.isDev, path.extension != "md" else { return html }
     return Bonsai.minifyHTML(html)
   }
 
-  // Markdown twins of articles, for content negotiation (see nginx.conf)
+  // Markdown twins, for content negotiation (see nginx.conf)
   .afterWrite(writeMarkdownFiles)
 
   // Create article images (prod only)

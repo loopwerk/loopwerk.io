@@ -66,14 +66,6 @@ func render404(context: PageRenderingContext) -> Node {
 }
 
 func renderFeeds(context: PageRenderingContext) -> Node {
-  // Only the listed articles get a tag feed, see the articles tagWriter in main.swift
-  let tags = Set(
-    context.allItems
-      .compactMap { $0 as? Item<ArticleMetadata> }
-      .filter { $0.section == .articles && !$0.archive }
-      .flatMap(\.expandedTags)
-  ).sorted()
-
   return baseHtml(title: "RSS feeds", canonicalPath: context.outputPath.url, section: nil) {
     article(class: "prose") {
       h1 { "RSS feeds" }
@@ -134,7 +126,7 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
       break
   }
 
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section) {
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true) {
     article(class: "prose") {
       h1 { context.item.title }
       Node.raw(context.item.body)
@@ -143,7 +135,7 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
 }
 
 private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
-  baseHtml(title: nil, canonicalPath: context.item.url, section: .home) {
+  baseHtml(title: nil, canonicalPath: context.item.url, section: .home, hasMarkdownTwin: true) {
     div(class: "md:mt-auto md:ml-auto md:max-w-xl md:rounded-2xl md:bg-bodybg/30 md:short:p-6 md:p-10 md:backdrop-blur-lg") {
       article(class: "prose") {
         h1(class: "mb-0!") { Node.raw(context.item.title) }
@@ -158,7 +150,7 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 }
 
 private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
-  baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about) {
+  baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true) {
     div(class: "article-grid") {
       aside {
         div(class: "text-sm") {

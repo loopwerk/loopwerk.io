@@ -1,11 +1,11 @@
 import Foundation
-#if canImport(FoundationNetworking)
-  import FoundationNetworking
-#endif
 import Saga
 import SagaImageReader
 import SagaPathKit
 import SwiftDotenv
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 
 private let mapsFolder: Path = "content/static/maps"
 

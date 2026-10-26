@@ -3,24 +3,24 @@ import HTML
 import Saga
 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "Articles", currentTag: nil, canonicalPath: context.outputPath.url)
+  renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "Articles", currentTag: nil, canonicalPath: context.outputPath.url, hasMarkdownTwin: true)
 }
 
 func renderTag(context: PartitionedRenderingContext<String, ArticleMetadata>) -> Node {
   let feed = link(href: "/articles/tag/\(context.key.slugified)/feed.xml", rel: "alternate", title: "\(SiteMetadata.name): articles with tag \(context.key)", type: "application/atom+xml")
-  return renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "#\(context.key)", currentTag: context.key, canonicalPath: context.outputPath.url, extraHeader: feed)
+  return renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "#\(context.key)", currentTag: context.key, canonicalPath: context.outputPath.url, hasMarkdownTwin: false, extraHeader: feed)
 }
 
 func renderYear(context: PartitionedRenderingContext<Int, ArticleMetadata>) -> Node {
-  renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "\(context.key)", currentTag: nil, canonicalPath: context.outputPath.url, groupByYear: false)
+  renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "\(context.key)", currentTag: nil, canonicalPath: context.outputPath.url, groupByYear: false, hasMarkdownTwin: false)
 }
 
 func renderJournal(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
-  renderArticleList(context.items, section: .journal, allItems: context.allItems, title: "Journal", currentTag: nil, canonicalPath: context.outputPath.url, groupByYear: false)
+  renderArticleList(context.items, section: .journal, allItems: context.allItems, title: "Journal", currentTag: nil, canonicalPath: context.outputPath.url, groupByYear: false, hasMarkdownTwin: true)
 }
 
 func renderJournalTag(context: PartitionedRenderingContext<String, ArticleMetadata>) -> Node {
-  renderArticleList(context.items, section: .journal, allItems: context.allItems, title: "#\(context.key)", currentTag: context.key, canonicalPath: context.outputPath.url, groupByYear: false)
+  renderArticleList(context.items, section: .journal, allItems: context.allItems, title: "#\(context.key)", currentTag: context.key, canonicalPath: context.outputPath.url, groupByYear: false, hasMarkdownTwin: false)
 }
 
 /// The listed articles of a section: archived articles have a page, but aren't part of any list
@@ -34,14 +34,14 @@ private func tagURL(_ tag: String, section: Section) -> String {
   "\(section.path)tag/\(tag.slugified)/"
 }
 
-private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Section, allItems: [AnyItem], title: String, currentTag: String?, canonicalPath: String, groupByYear: Bool = true, extraHeader: Node = []) -> Node {
+private func renderArticleList(_ articles: [Item<ArticleMetadata>], section: Section, allItems: [AnyItem], title: String, currentTag: String?, canonicalPath: String, groupByYear: Bool = true, hasMarkdownTwin: Bool, extraHeader: Node = []) -> Node {
   let allArticles = listedArticles(in: section, allItems: allItems)
   let tags = tagsWithCounts(allArticles)
   let articlesPerYear: [(year: Int?, articles: [Item<ArticleMetadata>])] = groupByYear
     ? Dictionary(grouping: articles, by: \.year).sorted { $0.key > $1.key }.map { ($0.key, $0.value) }
     : [(nil, articles)]
 
-  return baseHtml(title: section == .articles && title != "Articles" ? "Articles in \(title)" : title, canonicalPath: canonicalPath, section: section, extraHeader: extraHeader) {
+  return baseHtml(title: section == .articles && title != "Articles" ? "Articles in \(title)" : title, canonicalPath: canonicalPath, section: section, hasMarkdownTwin: hasMarkdownTwin, extraHeader: extraHeader) {
     // Same grid as the article page, with the list in the text column so nothing shifts when you open an article
     div(class: "article-grid") {
       aside {
@@ -185,9 +185,8 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
   let tags = item.expandedTags.sorted()
   let ogImage = "/static/images/\(item.filenameWithoutExtension).png"
 
-  return baseHtml(title: item.title, canonicalPath: item.url, section: section, ogImage: (ogImage, 1200, 630), extraHeader: [
+  return baseHtml(title: item.title, canonicalPath: item.url, section: section, ogImage: (ogImage, 1200, 630), hasMarkdownTwin: true, extraHeader: [
     link(href: Saga.hashed("/static/prism.css"), rel: "stylesheet", customAttributes: ["media": "print", "onload": "this.media='all'"]),
-    link(href: SiteMetadata.url.appendingPathComponent(item.url).appendingPathComponent("index.md").absoluteString, rel: "alternate", type: "text/markdown"),
     meta(content: item.metadata.summary, name: "description"),
     meta(content: "article", customAttributes: ["property": "og:type"]),
     meta(content: item.title, customAttributes: ["property": "og:title"]),

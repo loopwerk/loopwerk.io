@@ -1,18 +1,24 @@
 import HTML
+import Parsley
 import Saga
 
+// The intros are markdown, so the markdown twins of these pages can use them as is
+
+let workIntro = """
+Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots.
+
+If you are looking for a developer to work on your project, [check if I am available](/about/).
+"""
+
+let openSourceIntro = """
+These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer [commercial support and consulting](/open-source/support/).
+"""
+
 func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
-  baseHtml(title: "Work", canonicalPath: "/work/", section: .work) {
+  baseHtml(title: "Work", canonicalPath: "/work/", section: .work, hasMarkdownTwin: true) {
     div(class: "prose") {
       h1 { "Work" }
-      p {
-        "Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots."
-      }
-      p {
-        "If you are looking for a developer to work on your project,"
-        a(href: "/about/") { "check if I am available" }
-        %"."
-      }
+      Node.raw(try! Parsley.html(workIntro))
     }
 
     context.items.map { app in
@@ -44,22 +50,15 @@ func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
 }
 
 func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
-  baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource) {
+  baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource, hasMarkdownTwin: true) {
     div(class: "prose") {
       h1 { "Open Source" }
-      p {
-        "These are some of the more interesting open source projects I've created over the years."
-        "For teams using my open source projects in production, I offer"
-        a(href: "/open-source/support/") {
-          "commercial support and consulting"
-        }
-        %"."
-      }
+      Node.raw(try! Parsley.html(openSourceIntro))
     }
 
     let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
 
-    ["Python", "Swift", "JavaScript", "Objective-C", "Other"].map { category -> Node in
+    ProjectCategory.allCases.map { category -> Node in
       let projects = projectsByCategory[category] ?? []
       return renderCategory(category: category, projects: projects)
     }
@@ -67,9 +66,9 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
 }
 
 @NodeBuilder
-private func renderCategory(category: String, projects: [Item<OpenSourceProjectMetadata>]) -> Node {
+private func renderCategory(category: ProjectCategory, projects: [Item<OpenSourceProjectMetadata>]) -> Node {
   div(class: "mt-12") {
-    h1(class: "font-title text-3xl font-bold mb-6") { category == "JavaScript" ? "TypeScript / JavaScript" : category }
+    h1(class: "font-title text-3xl font-bold mb-6") { category.title }
 
     projects
       .map { project -> Node in

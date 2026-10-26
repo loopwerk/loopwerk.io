@@ -4,7 +4,7 @@ import Saga
 import SagaSwimRenderer
 
 func renderGames(context: ItemsRenderingContext<GameMetadata>) -> Node {
-  baseHtml(title: "My favorite games", canonicalPath: context.outputPath.url, section: .games) {
+  baseHtml(title: "My favorite games", canonicalPath: context.outputPath.url, section: .games, hasMarkdownTwin: true) {
     header(class: "page-header") {
       h1 {
         "My favorite games"
@@ -17,11 +17,7 @@ func renderGames(context: ItemsRenderingContext<GameMetadata>) -> Node {
     ul(class: "fav-grid") {
       context.items.map { game in
         li {
-          if let url = game.metadata.linkURL {
-            a(class: "group block", href: url, target: "_blank") {
-              gameCardContents(game)
-            }
-          } else {
+          a(class: "group block", href: game.metadata.linkURL, target: "_blank") {
             gameCardContents(game)
           }
         }

@@ -4,7 +4,7 @@ import Saga
 import SagaSwimRenderer
 
 func renderAlbums(context: ItemsRenderingContext<AlbumMetadata>) -> Node {
-  baseHtml(title: "My favorite albums", canonicalPath: context.outputPath.url, section: .albums) {
+  baseHtml(title: "My favorite albums", canonicalPath: context.outputPath.url, section: .albums, hasMarkdownTwin: true) {
     header(class: "page-header") {
       h1 {
         "My favorite albums"
@@ -17,11 +17,7 @@ func renderAlbums(context: ItemsRenderingContext<AlbumMetadata>) -> Node {
     ul(class: "fav-grid") {
       context.items.map { album in
         li {
-          if let url = album.metadata.linkURL {
-            a(class: "group block", href: url, target: "_blank") {
-              albumCardContents(album)
-            }
-          } else {
+          a(class: "group block", href: album.metadata.linkURL, target: "_blank") {
             albumCardContents(album)
           }
         }

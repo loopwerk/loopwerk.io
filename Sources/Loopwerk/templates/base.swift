@@ -74,8 +74,9 @@ private let navItems: [(title: String, section: Section)] = [
   ("About", .about),
 ]
 
-/// The document shell (head and body) without any layout, for pages like the photo page that do their own
-func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), extraHeader: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
+/// The document shell (head and body) without any layout, for pages like the photo page that do their own.
+/// Pages with a markdown twin (see MarkdownOutput.swift) set `hasMarkdownTwin` to link to it.
+func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), extraHeader: Node = [], hasMarkdownTwin: Bool = false, @NodeBuilder children: () -> NodeConvertible) -> Node {
   let canonicalURL = SiteMetadata.url.appendingPathComponent(canonicalPath).absoluteString
 
   return [
@@ -89,6 +90,9 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         meta(content: SiteMetadata.author, name: "author")
         meta(content: "@kevinrenskers@hachyderm.io", name: "fediverse:creator")
         link(href: canonicalURL, rel: "canonical")
+        if hasMarkdownTwin {
+          link(href: SiteMetadata.url.appendingPathComponent(canonicalPath).appendingPathComponent("index.md").absoluteString, rel: "alternate", type: "text/markdown")
+        }
         link(href: Saga.hashed("/static/output.css"), rel: "stylesheet")
         meta(content: "", name: "theme-color")
         // After the stylesheet, so the theme-color can be read from --color-bodybg
@@ -159,8 +163,8 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 }
 
 /// The site layout: nav, centered content, and footer
-func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), extraHeader: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
-  rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader) {
+func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), hasMarkdownTwin: Bool = false, extraHeader: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
+  rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader, hasMarkdownTwin: hasMarkdownTwin) {
     if SiteMetadata.available, section != .about {
       availableForHire()
     }
