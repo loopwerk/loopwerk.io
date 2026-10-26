@@ -1,8 +1,8 @@
 # Multi-stage build for loopwerk.io static site
 
 # Stage 1: Build environment
-# Using Ubuntu 24.04 (Noble) for libgd 2.3.2+ with AVIF support
-FROM swift:6.1-noble AS builder
+# Using Ubuntu 26.04 (Resolute) for libgd with AVIF support and WeasyPrint 67+
+FROM swift:6.4-resolute AS builder
 
 # Install system dependencies
 RUN apt-get update && apt-get --no-install-recommends install -y \

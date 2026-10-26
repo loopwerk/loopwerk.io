@@ -487,8 +487,6 @@ try await Saga(input: "content", output: ".deploy")
 
   // Generate the CV PDF from the CV page's markdown
   .afterWrite { saga in
-    guard !Saga.isDev else { return }
-
     guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/about/cv/" }) else { return }
 
     let cvFolder = saga.outputPath + "about" + "cv"
