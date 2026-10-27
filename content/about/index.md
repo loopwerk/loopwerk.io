@@ -12,4 +12,6 @@ I built [Critical Notes](https://www.critical-notes.com) and [RSS Filter](https:
 
 My hobbies and interests include playing [PC games](/games/), playing Dungeons & Dragons, watching [tv shows](/shows/), cooking, [photography](/photos/) and architecture. I choose cats over dogs, tea over coffee, and winter over summer. I've lived in Iceland for almost four years, and my favorite foods are ramen, hamburgers, tacos, and Thai.
 
+My big dream is to sell my house, buy a campervan, and travel Scandinavia (and then the rest of Europe) for a long time, working remotely. I'd also love to do a motorcycle tour through Africa at some point. 
+
 Want to work with me? Have a look at my [hire me](/hire-me/) page.

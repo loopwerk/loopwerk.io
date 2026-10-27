@@ -20,7 +20,7 @@ func writeMarkdownFiles(saga: Saga) async throws {
   for page in pages {
     let destination = saga.outputPath + page.relativeDestination.parent() + "index.md"
     try destination.parent().mkpath()
-    try destination.write(withoutFrontmatter(page.absoluteSource.read()))
+    try destination.write(replaceLastUpdatedPlaceholder(in: withoutFrontmatter(page.absoluteSource.read()), item: page))
   }
 
   for article in articles {

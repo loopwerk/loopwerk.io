@@ -90,3 +90,18 @@ func photoFeedBody(photo: Item<ImageMetadata>) {
   let src = SiteMetadata.url.appendingPathComponent(photo.relativeSource.string).absoluteString
   photo.body = #"<img src="\#(src)" width="\#(photo.metadata.imageWidth)" height="\#(photo.metadata.imageHeight)" alt="\#(photo.title)">"#
 }
+
+private let lastUpdatedDateFormatter: DateFormatter = {
+  let formatter = DateFormatter()
+  formatter.dateFormat = "MMMM dd, yyyy"
+  formatter.timeZone = TimeZone(identifier: "Europe/Amsterdam")
+  return formatter
+}()
+
+func replaceLastUpdatedPlaceholder(in text: String, item: AnyItem) -> String {
+  text.replacingOccurrences(of: "{{ last_updated }}", with: lastUpdatedDateFormatter.string(from: item.lastModified))
+}
+
+func lastUpdated(item: Item<PageMetadata>) {
+  item.body = replaceLastUpdatedPlaceholder(in: item.body, item: item)
+}

@@ -4,9 +4,9 @@ section: uses
 
 # The software and hardware I use
 
-*Inspired by [uses.tech](https://uses.tech). Last updated October, 2026.*
+*Inspired by [uses.tech](https://uses.tech). Last updated {{ last_updated }}.*
 
-This is the stuff I use daily for development, photography, and gaming. I don't upgrade often, but when I do it's usually because something genuinely annoys me, not because there's a new version.
+This is the stuff I use daily for development, photography, and gaming. I don't upgrade often, I tend to use my hardware until it's broken.
 
 ## Hardware
 
@@ -14,13 +14,14 @@ This is the stuff I use daily for development, photography, and gaming. I don't 
 
 My desk setup is built around one ultrawide screen for everything: work, gaming, and movies.
 
-- MacBook Pro (14" M1 Max, 32 GB) - still running macOS 15. After all these years it's still incredibly fast, and I see no reason to upgrade.
-- LG 38WN95CP-W 38" ultrawide - 3840 x 1600 resolution, absolutely perfect for productivity, gaming, watching movies. Love it.
-- Logitech MX Keys - great keyboard, extremely good battery life. Can connect to three devices; I use it for my MacBook and my gaming PC.
-- Apple Magic Trackpad - I much prefer a trackpad over a mouse for everyday use. Gestures!
-- Gaming PC (Ryzen 7 9800X3D, RTX 5080) - connected to the same LG ultrawide.
+- MacBook Pro (14" M1 Max, 32 GB) - running macOS 27. It's a bit thick and heavy but after all these years it's still incredibly fast, and I see no reason to upgrade.
+- LG 38WN95CP-W 38" ultrawide - 3840 x 1600 resolution, absolutely perfect for productivity, gaming, and watching movies. Love it.
+- Logitech MX Keys - great keyboard, extremely good battery life. It can connect to up to three devices; I use it for my MacBook and my gaming PC.
+- Apple Magic Trackpad - I much prefer a trackpad over a mouse for everyday use, because of gestures.
+- Gaming PC (Ryzen 7 9800X3D, RTX 5080, 32 GB) - connected to the same LG ultrawide.
 - Logitech G502X gaming mouse - connected to my game PC. I never touch a mouse on macOS.
 - Sony PS5 controller - I prefer most PC games with a controller, and Sony makes the best one.
+- Microsoft Xbox Series X/S controller - I bought this one before the PS5 controller, and rarely use it since. But some games don't work properly with the PS5 controller so I'm glad I still own this one.
 
 ### Gadgets
 
@@ -159,7 +160,7 @@ On my phone I try to keep things very minimal with only two pages of apps, but a
 - [Ivory](https://tapbots.com/ivory/) - a really good paid Mastodon client. On macOS I simply use the website.
 - GitHub - on macOS I simply use the website, but on mobile I do prefer their native app. It's good.
 - Home - I control my whole smart home from it, [bridged from Home Assistant](/journal/home-assistant-setup/).
-- [NordVPN](https://nordvpn.com) - I exclusively use it to watch YouTube on my iPad, since DuckDuckGo doesn't have an iPad browser.
+- [NordVPN](https://nordvpn.com) and [SurfShark](https://surfshark.com) - I switch between these two when my subscription ends, depending on which has the best offer. I exclusively use a VPN to watch ad-free YouTube on my iPad.
 - Apple Camera - I've tried a few other camera apps, but since I refuse to get a monthly subscription for a camera app, I just keep coming back to the default camera app. It's fine.
 - [Glass](https://glass.photo/kevinrenskers) - a photo sharing community that's not about gaining (and showing off) "likes".
 
@@ -167,7 +168,7 @@ On my phone I try to keep things very minimal with only two pages of apps, but a
 
 The services that keep everything running behind the scenes.
 
-- [Migadu](https://migadu.com) - email hosting for my custom domains. Simple, affordable, and privacy-focused. No frills, just reliable email.
+- [Migadu](https://migadu.com) - email hosting for my custom domains. Simple, affordable, and privacy-focused. No frills, just reliable email. Absolutely horrible customer service though.
 - [Harvest](https://harvestapp.com) - time tracking and invoicing. It's simple and gets the job done for freelance work.
 - Hosting stack: Debian, PostgreSQL, [Coolify](https://coolify.io) - I self-host my side projects on Hetzner VPS. Coolify makes deploying Docker containers super easy.
 - [Kagi](https://kagi.com/) - paid search engine which uses Google's index under the hood, but without Google tracking you across the web. You pay with money instead of your data.

@@ -424,7 +424,7 @@ try await Saga(input: "content", output: ".deploy")
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownReader],
-    itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors),
+    itemProcessor: sequence(lastUpdated, swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors)),
     writers: [.itemWriter(swim(renderPage))]
   )
 
