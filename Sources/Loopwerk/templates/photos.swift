@@ -9,6 +9,11 @@ extension Item where M == ImageMetadata {
     let path = "static/thumbnails/\(album)/\(relativeSource.lastComponentWithoutExtension).webp"
     return FileManager.default.fileExists(atPath: "content/\(path)") ? "/\(path)" : "/\(relativeSource)"
   }
+
+  /// Id of the photo's thumbnail on the album page, which closing the photo scrolls back into view
+  var thumbnailID: String {
+    "photo-\(relativeSource.lastComponentWithoutExtension)"
+  }
 }
 
 private func photoCount(_ count: Int) -> String {
@@ -73,7 +78,7 @@ func renderPhotoAlbum(context: ItemRenderingContext<PhotoAlbumMetadata>) -> Node
 
     div(class: "grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-16") {
       photos.map { photo in
-        a(class: "group block aspect-square overflow-hidden", href: photo.url) {
+        a(class: "group block aspect-square overflow-hidden", href: photo.url, id: photo.thumbnailID) {
           img(
             alt: photo.title,
             class: "h-full w-full object-cover transition duration-500 group-hover:scale-105",
@@ -85,6 +90,21 @@ func renderPhotoAlbum(context: ItemRenderingContext<PhotoAlbumMetadata>) -> Node
           )
         }
       }
+    }
+
+    // Closing a photo after paging to other photos comes back here with "#return=<thumbnail id>" (see
+    // photoNavigation). The hash is removed right away and that photo's thumbnail is centered on the screen.
+    script {
+      Node.raw(
+        """
+        (() => {
+          const match = location.hash.match(/^#return=(.+)$/);
+          if (!match) return;
+          history.replaceState(history.state, "", location.pathname + location.search);
+          document.getElementById(decodeURIComponent(match[1]))?.scrollIntoView({ block: "center" });
+        })();
+        """
+      )
     }
   }
 }
@@ -103,7 +123,7 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
     section: .photos,
     ogImage: ("/\(photo.relativeSource)", photo.metadata.imageWidth, photo.metadata.imageHeight)
   ) {
-    a(class: "fixed right-4 top-4 z-10 p-2 text-textfg hover:text-accent print:hidden", href: album.url, title: "Close", customAttributes: ["aria-label": "Close"]) {
+    a(class: "fixed right-4 top-4 z-10 p-2 text-textfg hover:text-accent print:hidden", href: album.url, id: "photo-close", title: "Close", customAttributes: ["aria-label": "Close", "data-thumbnail": photo.thumbnailID]) {
       Node.raw(#"<svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>"#)
     }
 
@@ -125,12 +145,17 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
           )
         }
 
-        nav(class: "mt-6 flex justify-center gap-8 text-sm print:hidden", customAttributes: ["aria-label": "Photos"]) {
+        // Two fixed columns with a dimmed stand-in for a missing link, so the links don't move between photos
+        nav(class: "mt-6 grid grid-cols-2 gap-8 text-sm print:hidden", customAttributes: ["aria-label": "Photos"]) {
           if let previous = context.previous {
-            a(class: "hover:text-accent", href: previous.url) { "← Previous" }
+            a(class: "justify-self-end hover:text-accent", href: previous.url, id: "photo-previous", customAttributes: ["data-image": "/\(previous.relativeSource)"]) { "← Previous" }
+          } else {
+            span(class: "justify-self-end text-textfg/30") { "← Previous" }
           }
           if let next = context.next {
-            a(class: "hover:text-accent", href: next.url) { "Next →" }
+            a(class: "justify-self-start hover:text-accent", href: next.url, id: "photo-next", customAttributes: ["data-image": "/\(next.relativeSource)"]) { "Next →" }
+          } else {
+            span(class: "justify-self-start text-textfg/30") { "Next →" }
           }
         }
       }
@@ -143,6 +168,45 @@ func renderPhoto(context: ItemRenderingContext<ImageMetadata>) -> Node {
           a(href: "/legal/") { "legal notice" }
         }
       }
+    }
+
+    // Escape closes the photo, the left and right arrow keys go to the previous and next photo.
+    // Closing a photo opened straight from the album goes back in history, so the album keeps its exact scroll position.
+    // After paging to other photos it opens the album with "#return=<thumbnail id>" to show the last viewed photo there.
+    // Once this photo has loaded, the previous and next photos are downloaded so paging to them is instant.
+    script {
+      Node.raw(
+        """
+        (() => {
+          const closeLink = document.getElementById("photo-close");
+
+          const close = () => {
+            if (document.referrer === closeLink.href && history.length > 1) return history.back();
+            window.location.href = `${closeLink.href}#return=${encodeURIComponent(closeLink.dataset.thumbnail)}`;
+          };
+
+          closeLink.addEventListener("click", event => {
+            if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+            event.preventDefault();
+            close();
+          });
+
+          document.addEventListener("keydown", event => {
+            if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+            if (event.key === "Escape") return close();
+            const id = { ArrowLeft: "photo-previous", ArrowRight: "photo-next" }[event.key];
+            const link = id && document.getElementById(id);
+            if (link) window.location.href = link.href;
+          });
+
+          window.addEventListener("load", () => {
+            for (const link of document.querySelectorAll("#photo-previous, #photo-next")) {
+              new Image().src = link.dataset.image;
+            }
+          });
+        })();
+        """
+      )
     }
   }
 }
