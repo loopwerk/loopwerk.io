@@ -2,7 +2,7 @@
 section: about
 ---
 
-# About
+# About me
 
 Hi there! My name is **Kevin Renskers**, and I'm a product-minded senior software engineer who loves the logic that makes software tick: APIs and data models on the backend, authentication, data loading, and form validation on the frontend. Nothing beats that "eureka" feeling of cracking a complex problem in understandable code that still makes sense a year later.
 

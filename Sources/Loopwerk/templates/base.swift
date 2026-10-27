@@ -31,7 +31,7 @@ enum Section: String, CaseIterable, Codable {
       case .movies: "Movies"
       case .shows: "TV shows"
       case .albums: "Albums"
-      case .about: "About"
+      case .about: "About me"
       case .hireMe: "Hire me"
       case .cv: "CV"
       case .uses: "Uses"
