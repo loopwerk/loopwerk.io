@@ -181,15 +181,13 @@ private func renderHireMe(context: ItemRenderingContext<PageMetadata>) -> Node {
     }
     
     if SiteMetadata.available {
-      div(class: "flex justify-center text-[12px] mt-4") {
-        span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
-          "I'm currently available for hire! Reach out to discuss your project."
-          span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
-        }
+      div(class: "text-[12px] mt-4 w-[120px] relative bg-codebg text-codefg p-2 rounded-lg font-mono") {
+        "I'm currently available for new projects! Reach out to discuss yours."
+        span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
       }
     } else {
-      div(class: "flex justify-center text-[12px] mt-8") {
-        p { "I am currently not available for new projects, but feel free to contact me to set something up for the future." }
+      div(class: "text-[12px] mt-8") {
+        "I am currently not available for new projects, but feel free to contact me to set something up for the future."
       }
     }
   }

@@ -293,7 +293,7 @@ private func availableForHire() -> Node {
 /// Desktop only: floats above the About link with an arrow pointing down at it. Browsers with scroll-driven
 /// animations fade it out as the nav sticks, so it can sit closer; others keep it inside the part that scrolls away.
 private func availableForHireAboveLink() -> Node {
-  a(class: "fade-on-scroll absolute bottom-full left-1/2 mb-7 supports-[animation-timeline:scroll()]:mb-4 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-codebg py-1 px-4 text-[12px] font-normal text-codefg hover:text-inherit! hover:underline md:block", href: Section.hireMe.path) {
+  a(class: "fade-on-scroll absolute bottom-full left-1/2 mb-7 supports-[animation-timeline:scroll()]:mb-4 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-codebg py-1 px-4 text-[12px] text-codefg hover:text-inherit! hover:underline md:block font-mono", href: Section.hireMe.path) {
     "I'm currently available!"
     span(class: "absolute top-full left-1/2 -translate-x-1/2 border-x-[8px] border-t-[8px] border-x-transparent border-t-codebg")
   }
