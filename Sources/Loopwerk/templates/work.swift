@@ -2,46 +2,63 @@ import HTML
 import Parsley
 import Saga
 
-// The intros are markdown, so the markdown twins of these pages can use them as is
-
-let workIntro = """
-Web and iOS apps I've worked on since 2010. Older projects (many websites, mostly written with PHP) are not included because they're no longer online and I didn't keep screenshots.
-
-If you are looking for a developer to work on your project, [check if I am available](/about/).
-"""
-
-let openSourceIntro = """
-These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer [commercial support and consulting](/open-source/support/).
-"""
-
 func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
-  baseHtml(title: "Work", canonicalPath: "/work/", section: .work, hasMarkdownTwin: true) {
-    div(class: "prose") {
+  baseHtml(title: "Work", canonicalPath: "/work/", section: .work) {
+    div(class: "prose mb-16") {
       h1 { "Work" }
-      Node.raw(try! Parsley.html(workIntro))
+      p { "A selection of projects, from web applications and APIs to iOS apps and SDKs." }
+      p {
+        "If you are looking for a developer to work on your project,"
+        a(href: "/hire-me/") { "check if I am available" }
+        %"."
+      }
     }
 
-    context.items.map { app in
-      div(class: "mt-12 prose") {
-        h3(class: "text-2xl font-bold !mb-0") { app.title }
+    let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
 
-        div(class: "mb-4 flex flex-wrap screenshots\(app.metadata.roundOffImages ?? true ? " rounded" : "") break_\(app.metadata.breakImages ?? (app.metadata.images.count % 2 == 0 ? 2 : app.metadata.images.count))") {
-          app.metadata.images.map { src in
-            %span(class: "block") { %img(src: "/work/images/\(src)") }
-          }
+    WorkCategory.allCases.map { category -> Node in
+      let projects = projectsByCategory[category] ?? []
+
+      return div(class: "mb-24") {
+        h2(class: "font-title text-3xl font-bold mb-12") { category.title }
+        projects.map(renderWorkProject)
+      }
+    }
+  }
+}
+
+@NodeBuilder
+private func renderWorkProject(project: Item<WorkProjectMetadata>) -> Node {
+  div(class: project.metadata.category == .earlier ? "mb-10 prose" : "mb-16 prose") {
+    h3(class: "text-xl font-bold mb-0!") { project.title }
+    p(class: "text-textfg/60") { project.metadata.tech.joined(separator: ", ") }
+
+    if let images = project.metadata.images {
+      div(class: "mb-4 flex flex-wrap screenshots\(project.metadata.roundedImages ?? true ? " rounded" : "") break_\(project.metadata.breakImages ?? (images.count % 2 == 0 ? 2 : images.count))") {
+        images.map { src in
+          %span(class: "block") { %img(src: "/work/images/\(src)") }
         }
+      }
+    }
 
-        Node.raw(app.body)
+    Node.raw(project.body)
 
-        if let url = app.metadata.url {
-          div(class: "mt-4") {
-            a(class: "app", href: url, rel: "nofollow", target: "_blank") {
-              if url.contains(".apple.com") {
-                "App Store"
-              } else {
-                "Visit website"
-              }
-            }
+    if let from = project.metadata.from, let testimonial = project.metadata.testimonial {
+      blockquote(class: "[&>p:first-child]:mb-0!") {
+        Node.raw(try! Parsley.html(testimonial, options: [.smartQuotes]))
+        p(class: "font-normal mt-2!") { "— " + from }
+      }
+    }
+
+    if let url = project.metadata.url {
+      p {
+        a(class: "app", href: url, rel: "nofollow", target: "_blank") {
+          if url.contains(".apple.com") {
+            "App Store"
+          } else if url.contains("github.com") {
+            "GitHub"
+          } else {
+            "Visit website"
           }
         }
       }
@@ -50,10 +67,14 @@ func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
 }
 
 func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
-  baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource, hasMarkdownTwin: true) {
+  baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource) {
     div(class: "prose") {
       h1 { "Open Source" }
-      Node.raw(try! Parsley.html(openSourceIntro))
+      p {
+        "These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer"
+        a(href: "/open-source/support/") { "commercial support and consulting" }
+        %"."
+      }
     }
 
     let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
@@ -72,13 +93,13 @@ private func renderCategory(category: ProjectCategory, projects: [Item<OpenSourc
 
     projects
       .map { project -> Node in
-        return renderProject(project: project)
+        return renderOpenSourceProject(project: project)
       }
   }
 }
 
 @NodeBuilder
-private func renderProject(project: Item<OpenSourceProjectMetadata>) -> Node {
+private func renderOpenSourceProject(project: Item<OpenSourceProjectMetadata>) -> Node {
   div(class: "pb-10 lg:pb-8") {
     h3(class: "text-xl font-bold") {
       project.title

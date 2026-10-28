@@ -17,10 +17,20 @@ func writeMarkdownFiles(saga: Saga) async throws {
   let articles = saga.allItems.compactMap { $0 as? Item<ArticleMetadata> }
   let pages = saga.allItems.compactMap { $0 as? Item<PageMetadata> }
 
+  let cvProjectsMarkdown = try cvProjects(saga: saga)
+    .map { project in
+      // The source markdown without its `# Title` line, which becomes the `####` heading
+      let markdown = try withoutFrontmatter(project.absoluteSource.read())
+      let body = markdown.hasPrefix("# ") ? markdown.drop(while: { $0 != "\n" }).trimmingCharacters(in: .whitespacesAndNewlines) : markdown
+      return "#### \(project.title) (\(project.metadata.tech.joined(separator: ", ")))\n\n\(body)"
+    }
+    .joined(separator: "\n\n")
+
   for page in pages {
     let destination = saga.outputPath + page.relativeDestination.parent() + "index.md"
     try destination.parent().mkpath()
-    try destination.write(replacePlaceholders(in: withoutFrontmatter(page.absoluteSource.read()), item: page, markdown: true))
+    try destination.write(replacePlaceholders(in: withoutFrontmatter(page.absoluteSource.read()), item: page, markdown: true)
+      .replacingOccurrences(of: "{{ cv_projects }}", with: cvProjectsMarkdown))
   }
 
   for article in articles {
@@ -61,80 +71,4 @@ private func withoutFrontmatter(_ markdown: String) -> String {
   let lines = markdown.components(separatedBy: "\n")
   guard lines.first == "---", let end = lines.dropFirst().firstIndex(of: "---") else { return markdown }
   return lines[(end + 1)...].joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) + "\n"
-}
-
-/// The source markdown of an item, without its frontmatter and leading `# Title` heading
-private func markdownBody(_ item: AnyItem) throws -> String {
-  var lines = try withoutFrontmatter(item.absoluteSource.read()).components(separatedBy: "\n")[...]
-
-  lines = lines.drop(while: { $0.trimmingCharacters(in: .whitespaces).isEmpty })
-  if lines.first?.hasPrefix("# ") == true {
-    lines = lines.dropFirst()
-  }
-
-  return lines.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
-}
-
-func renderWorkMarkdown(context: ItemsRenderingContext<WorkProjectMetadata>) throws -> String {
-  var markdown = "# Work\n\n\(workIntro)\n"
-
-  for app in context.items {
-    markdown += "\n## \(app.title)\n\n\(try markdownBody(app))\n"
-    if let url = app.metadata.url {
-      markdown += "\n\(url.contains(".apple.com") ? "App Store" : "Website"): \(url)\n"
-    }
-  }
-
-  return markdown
-}
-
-func renderOpenSourceMarkdown(context: ItemsRenderingContext<OpenSourceProjectMetadata>) throws -> String {
-  var markdown = "# Open Source\n\n\(openSourceIntro)\n"
-
-  let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
-
-  for category in ProjectCategory.allCases {
-    guard let projects = projectsByCategory[category] else { continue }
-    markdown += "\n## \(category.title)\n"
-
-    for project in projects {
-      markdown += "\n### \(project.title)\n\n\(try markdownBody(project))\n\nGitHub: https://github.com/\(project.metadata.repo)\n"
-    }
-  }
-
-  return markdown
-}
-
-private func favoritesMarkdown<M>(title: String, items: [Item<M>], line: (Item<M>) -> String) -> String {
-  return "# \(title)\n\n" + items.enumerated().map {
-    "\($0.offset + 1). \(line($0.element))"
-  }.joined(separator: "\n") + "\n"
-}
-
-private func link(_ text: String, _ url: String) -> String {
-  return "[\(text)](\(url))"
-}
-
-func renderShowsMarkdown(context: ItemsRenderingContext<ImdbMetadata>) -> String {
-  favoritesMarkdown(title: "My favorite TV Shows", items: context.items) {
-    link($0.title, "https://www.imdb.com/title/\($0.metadata.id)/")
-  }
-}
-
-func renderMoviesMarkdown(context: ItemsRenderingContext<ImdbMetadata>) -> String {
-  favoritesMarkdown(title: "My favorite movies", items: context.items) {
-    link($0.title, "https://www.imdb.com/title/\($0.metadata.id)/")
-  }
-}
-
-func renderGamesMarkdown(context: ItemsRenderingContext<GameMetadata>) -> String {
-  favoritesMarkdown(title: "My favorite games", items: context.items) {
-    link($0.title, $0.metadata.linkURL)
-  }
-}
-
-func renderAlbumsMarkdown(context: ItemsRenderingContext<AlbumMetadata>) -> String {
-  favoritesMarkdown(title: "My favorite albums", items: context.items) {
-    link("\($0.metadata.artist) - \($0.title)", $0.metadata.linkURL)
-  }
 }

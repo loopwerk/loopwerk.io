@@ -91,6 +91,14 @@ func photoFeedBody(photo: Item<ImageMetadata>) {
   photo.body = #"<img src="\#(src)" width="\#(photo.metadata.imageWidth)" height="\#(photo.metadata.imageHeight)" alt="\#(photo.title)">"#
 }
 
+/// Screenshots are found by filename: work/images/critical-notes-1.webp belongs to work/critical-notes.md
+func workImages(item: Item<WorkProjectMetadata>) {
+  let slug = item.relativeSource.lastComponentWithoutExtension
+  let files = (try? FileManager.default.contentsOfDirectory(atPath: "\(SiteMetadata.projectRoot)/content/work/images")) ?? []
+  let images = files.filter { $0.hasPrefix("\(slug)-") }.sorted()
+  item.metadata.images = images.isEmpty ? nil : images
+}
+
 private let lastUpdatedDateFormatter: DateFormatter = {
   let formatter = DateFormatter()
   formatter.dateFormat = "MMMM dd, yyyy"

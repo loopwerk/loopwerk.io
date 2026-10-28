@@ -2,6 +2,13 @@ import Foundation
 import HTML
 import Saga
 
+/// The work projects with `includeInCV: true`, which fill the CV's `{{ cv_projects }}` placeholder
+func cvProjects(saga: Saga) -> [Item<WorkProjectMetadata>] {
+  saga.allItems
+    .compactMap { $0 as? Item<WorkProjectMetadata> }
+    .filter { $0.metadata.includeInCV == true }
+}
+
 /// The CV page. The PDF version at /about/KevinRenskers.pdf is generated from the same markdown file.
 func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
   return baseHtml(title: "CV", canonicalPath: context.item.url, section: .cv, hasMarkdownTwin: true, asideContent: aboutAsideContent()) {

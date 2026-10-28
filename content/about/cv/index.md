@@ -56,29 +56,7 @@ I take products from idea to shipped software for international clients: designi
 
 Selected projects (full list at [www.loopwerk.io/work/](https://www.loopwerk.io/work/)):
 
-#### Sound Radix (Python, TypeScript)
-
-Took over end-to-end development of soundradix.com: a Django backend with a SvelteKit frontend. Replaced the entire Django Oscar webshop with a custom-built system, unlocking features that were previously impossible, significantly improving performance, and measurably increasing yearly revenue. Redesigned the shop administration and reporting tools, making sales insights more accessible and cutting operational overhead. Also rewrote the frontend from JavaScript to TypeScript and added comprehensive test coverage.
-
-#### Critical Notes (Python, TypeScript)
-
-Designed, built, and run my own SaaS: a note-taking tool for tabletop role-playing games, built on Django REST Framework and SvelteKit, with Stripe subscriptions. I own every decision, from architecture and infrastructure to pricing and support.
-
-#### Sentry (Objective-C)
-
-Built the very first version of Sentry's iOS SDK in 2012. Returned in 2022 to work on the second-generation SDK, contributing 100+ pull requests including out-of-memory crash reporting. I remain one of the top contributors.
-
-#### WeTransfer (Swift)
-
-Helped refactor the iOS app to a single MVVM-C architecture, replacing the mix of inconsistent architectures different teams had built over the years. This unified foundation simplified future development and let the team move faster without breaking things.
-
-#### Unilever (Swift)
-
-Worked on Tessa, an app where people scan grocery receipts to earn points on Unilever products. I was the main driver behind the app's architectural improvements, including a move to MVVM-C.
-
-#### Last.fm scrobbler (Objective-C, Swift)
-
-Built and maintained the two official Last.fm scrobbler apps for iOS and iPadOS, including a full Swift rewrite of the original. Last.fm is my oldest client; recent work brought detailed listening reports into the app.
+{{ cv_projects }}
 
 <div class="page-break"></div>
 

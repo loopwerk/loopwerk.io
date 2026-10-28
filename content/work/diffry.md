@@ -1,7 +1,9 @@
 ---
-images: diffry_1.webp, diffry_2.webp, diffry_3.webp, diffry_4.webp
+category: earlier
+tech: Swift, Combine
 url: https://apps.apple.com/nl/app/diffry/id1459623608?l=en
 date: 2020-06-01
+roundedImages: false
 ---
 
 # Diffry

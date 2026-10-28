@@ -4,7 +4,7 @@ import Saga
 import SagaSwimRenderer
 
 func renderGames(context: ItemsRenderingContext<GameMetadata>) -> Node {
-  baseHtml(title: "My favorite games", canonicalPath: context.outputPath.url, section: .games, hasMarkdownTwin: true) {
+  baseHtml(title: "My favorite games", canonicalPath: context.outputPath.url, section: .games) {
     header(class: "page-header") {
       h1 {
         "My favorite games"

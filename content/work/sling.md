@@ -1,9 +1,10 @@
 ---
-images: sling_1.webp, sling_2.webp, sling_3.webp, sling_4.webp
-url: https://itunes.apple.com/us/app/sling-stay-in-sync-your-team/id922995624?mt=8
-date: 2015-12-01
+category: earlier
+tech: JavaScript, Angular, Objective-C
+url: https://getsling.com
+date: 2014-06-01
 ---
 
 # Sling
 
-"Your business in your pocket." This is the iOS app for Sling, which I've built with a team of other developers.
+Employee scheduling and communication for hourly workers and their managers. I was the lead developer of the web version and also contributed to the native iOS app.

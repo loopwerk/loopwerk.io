@@ -1,11 +1,10 @@
 ---
-images: sjonvarp_1.webp, sjonvarp_2.webp
-roundOffImages: false
-breakImages: 1
-url: https://itunes.apple.com/app/sjonvarp-simans/id724740942?mt=8
+category: earlier
 date: 2015-06-01
+tech: Objective-C
+roundedImages: false
 ---
 
 # Sjónvarp Símans
 
-Live streaming TV and video on demand for Síminn, an Icelandic media company. The catalogue browser is entirely remote-controlled: each page consists of structure- and layout JSON files personalized for the logged in user, comparable with HTML and CSS, respectively. Síminn can change the look and feel and even the navigation structure without ever having to upload a new version to the App Store. The TV player shows the full program guide in an innovative interface that doesn't get in your way.
+Live TV and video on demand for an Icelandic media company. The catalogue was entirely remote-controlled: structure and layout came from JSON files personalized per user, so Síminn could change the look and even the navigation without an App Store release.

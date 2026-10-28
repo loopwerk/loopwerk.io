@@ -34,14 +34,34 @@ struct ArticleMetadata: Metadata {
 }
 
 struct WorkProjectMetadata: Metadata {
-  let images: [String]
-  let roundOffImages: Bool?
+  let category: WorkCategory
+  let tech: [String]
+  var images: [String]?
+  let roundedImages: Bool?
   let breakImages: Int?
   let url: String?
+  let testimonial: String?
+  let from: String?
+  let includeInCV: Bool?
 }
 
 struct PageMetadata: Metadata {
   let section: String?
+}
+
+/// Work projects are listed per category, in this order
+enum WorkCategory: String, Codable, CaseIterable {
+  case featured
+  case mine
+  case earlier
+
+  var title: String {
+    switch self {
+      case .featured: "Selected client work"
+      case .mine: "My own side projects"
+      case .earlier: "Earlier work"
+    }
+  }
 }
 
 /// Open source projects are listed per category, in this order
@@ -324,11 +344,8 @@ try await Saga(input: "content", output: ".deploy")
     folder: "work",
     metadata: WorkProjectMetadata.self,
     readers: [.parsleyMarkdownReader],
-    itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
-    writers: [
-      .listWriter(swim(renderWork)),
-      .listWriter(renderWorkMarkdown, output: "index.md"),
-    ]
+    itemProcessor: sequence(workImages, swiftSoupProcessor(convertAsides, processExternalLinks)),
+    writers: [.listWriter(swim(renderWork))]
   )
   .register(
     folder: "open-source/support",
@@ -343,10 +360,7 @@ try await Saga(input: "content", output: ".deploy")
     readers: [.parsleyMarkdownReader],
     itemProcessor: swiftSoupProcessor(convertAsides, processExternalLinks),
     sorting: { $0.title < $1.title },
-    writers: [
-      .listWriter(swim(renderOpenSource)),
-      .listWriter(renderOpenSourceMarkdown, output: "index.md"),
-    ]
+    writers: [.listWriter(swim(renderOpenSource))]
   )
 
   // Photo albums from markdown files, with nested photo pages per album
@@ -378,10 +392,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "shows", kind: .tv) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [
-      .listWriter(swim(renderShows), output: "shows/index.html"),
-      .listWriter(renderShowsMarkdown, output: "shows/index.md"),
-    ]
+    writers: [.listWriter(swim(renderShows), output: "shows/index.html")]
   )
 
   // Load movies
@@ -390,10 +401,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "movies", kind: .movie) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [
-      .listWriter(swim(renderMovies), output: "movies/index.html"),
-      .listWriter(renderMoviesMarkdown, output: "movies/index.md"),
-    ]
+    writers: [.listWriter(swim(renderMovies), output: "movies/index.html")]
   )
 
   // Load games
@@ -402,10 +410,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchGames() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [
-      .listWriter(swim(renderGames), output: "games/index.html"),
-      .listWriter(renderGamesMarkdown, output: "games/index.md"),
-    ]
+    writers: [.listWriter(swim(renderGames), output: "games/index.html")]
   )
 
   // Load albums
@@ -414,10 +419,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchAlbums() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [
-      .listWriter(swim(renderAlbums), output: "albums/index.html"),
-      .listWriter(renderAlbumsMarkdown, output: "albums/index.md"),
-    ]
+    writers: [.listWriter(swim(renderAlbums), output: "albums/index.html")]
   )
 
   // Content pages (home, about, legal notice)
@@ -475,6 +477,15 @@ try await Saga(input: "content", output: ".deploy")
 
   // Expand %SERIES% placeholders in article bodies. This needs all articles, so it can't be an item processor.
   .afterRead(expandSeriesPlaceholders)
+
+  // Fill the CV's project list from the work projects. This needs the work items, so it can't be an item processor.
+  // The CV page and its PDF both render from this body.
+  .afterRead { saga in
+    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/about/cv/" }) else { return }
+
+    let projects = cvProjects(saga: saga).map { "<h4>\($0.title) (\($0.metadata.tech.joined(separator: ", ")))</h4>\n\($0.body)" }
+    cv.body = cv.body.replacingOccurrences(of: "<p>{{ cv_projects }}</p>", with: projects.joined(separator: "\n"))
+  }
 
   // Minify all HTML output (prod only)
   .postProcess { html, path in

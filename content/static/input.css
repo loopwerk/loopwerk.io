@@ -263,7 +263,7 @@
 
   /* Work screenshots */
   .screenshots.break_1 span {
-    @apply flex-1;
+    @apply flex-[0_0_100%] md:flex-1;
   }
 
   .screenshots.break_2 span {

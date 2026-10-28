@@ -1,9 +1,10 @@
 ---
-images: getsaga_1.webp, getsaga_2.webp
-roundOffImages: false
+category: mine
+roundedImages: false
 breakImages: 1
 url: https://getsaga.dev
 date: 2026-03-04
+tech: Swift
 ---
 
 # GetSaga.dev
