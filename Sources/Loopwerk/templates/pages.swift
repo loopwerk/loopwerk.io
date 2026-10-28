@@ -120,8 +120,8 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   switch section {
     case .home:
       return renderHome(context: context)
-    case .about, .hireMe, .uses:
-      return renderAbout(context: context, section: section!)
+    case .about, .hireMe:
+      return renderPageWithSocialLinksInSidebar(context: context, section: section!)
     case .cv:
       return renderCV(context: context)
     default:
@@ -151,9 +151,8 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-func aboutAsideContent() -> Node {
-  div(class: "text-sm mt-8") {
-    img(class: "rounded-full mb-8", src: "/static/images/kevin.png")
+func socialLinksAsideContent() -> Node {
+  div(class: "text-sm mt-12") {
     div(class: "flex justify-center text-textfg") {
       socialLinks()
     }
@@ -173,9 +172,8 @@ func aboutAsideContent() -> Node {
   }
 }
 
-/// About and hire me share the photo, social links and availability note in the sidebar
-private func renderAbout(context: ItemRenderingContext<PageMetadata>, section: Section) -> Node {
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, asideContent: aboutAsideContent()) {
+private func renderPageWithSocialLinksInSidebar(context: ItemRenderingContext<PageMetadata>, section: Section) -> Node {
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, asideContent: socialLinksAsideContent()) {
     article(class: "prose") {
       div(class: "mb-8 flex items-baseline justify-between") {
         h1(class: "mb-0!") { context.item.title }

@@ -392,7 +392,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "shows", kind: .tv) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderShows), output: "shows/index.html")]
+    writers: [.listWriter(swim(renderShows), output: "about/shows/index.html")]
   )
 
   // Load movies
@@ -401,7 +401,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetch(csvName: "movies", kind: .movie) },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderMovies), output: "movies/index.html")]
+    writers: [.listWriter(swim(renderMovies), output: "about/movies/index.html")]
   )
 
   // Load games
@@ -410,7 +410,7 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchGames() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderGames), output: "games/index.html")]
+    writers: [.listWriter(swim(renderGames), output: "about/games/index.html")]
   )
 
   // Load albums
@@ -419,13 +419,13 @@ try await Saga(input: "content", output: ".deploy")
     fetch: { try await fetchAlbums() },
     cacheKey: nil,
     sorting: { $0.metadata.position < $1.metadata.position },
-    writers: [.listWriter(swim(renderAlbums), output: "albums/index.html")]
+    writers: [.listWriter(swim(renderAlbums), output: "about/albums/index.html")]
   )
 
   // Content pages (home, about, legal notice)
   .register(
     metadata: PageMetadata.self,
-    readers: [.parsleyMarkdownReader],
+    readers: [.parsleyMarkdownWithAttributesReader],
     itemProcessor: sequence(fillPlaceholders, swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors)),
     writers: [.itemWriter(swim(renderPage))]
   )

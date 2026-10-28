@@ -279,13 +279,16 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
 
 /// Marks the TOC link of the section being read: the last heading that has scrolled past the top of the screen.
 /// Before the first heading, nothing is marked.
-private func tocHighlighter() -> Node {
+func tocHighlighter() -> Node {
   script {
     Node.raw(
       """
       (() => {
         const entries = [...document.querySelectorAll(".article-toc a[href^='#']")]
-          .map(link => ({ link, heading: document.getElementsByName(decodeURIComponent(link.hash.slice(1)))[0]?.parentElement }))
+          .map(link => {
+            const slug = decodeURIComponent(link.hash.slice(1));
+            return { link, heading: document.getElementById(slug) ?? document.getElementsByName(slug)[0]?.parentElement };
+          })
           .filter(entry => entry.heading);
         const headings = [...new Set(entries.map(entry => entry.heading))];
         let active = null;
