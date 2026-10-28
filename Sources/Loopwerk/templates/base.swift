@@ -25,7 +25,7 @@ enum Section: String, CaseIterable, Codable {
       case .articles: "Articles"
       case .journal: "Journal"
       case .work: "Work"
-      case .openSource: "Open Source"
+      case .openSource: "Open source"
       case .photos: "Photos"
       case .games: "Favorite games"
       case .movies: "Favorite movies"
@@ -33,7 +33,7 @@ enum Section: String, CaseIterable, Codable {
       case .albums: "Favorite albums"
       case .about: "About"
       case .uses: "Uses"
-      case .hireMe: "Hire Me"
+      case .hireMe: "Hire me"
       case .cv: "CV"
     }
   }

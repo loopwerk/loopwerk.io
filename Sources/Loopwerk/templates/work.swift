@@ -84,7 +84,7 @@ private func renderWorkProject(project: Item<WorkProjectMetadata>) -> Node {
 func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
   let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
 
-  return baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource) {
+  return baseHtml(title: "Open source", canonicalPath: "/open-source/", section: .openSource) {
     div(class: "article-grid") {
       aside {
         nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
@@ -99,7 +99,7 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
 
       div {
         div(class: "prose") {
-          h1 { "Open Source" }
+          h1 { "Open source" }
           p {
             "These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer"
             a(href: "/open-source/support/") { "commercial support and consulting" }

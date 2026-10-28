@@ -120,8 +120,10 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   switch section {
     case .home:
       return renderHome(context: context)
-    case .about, .hireMe:
-      return renderPageWithSocialLinksInSidebar(context: context, section: section!)
+    case .about:
+      return renderAbout(context: context)
+    case .hireMe:
+      return renderHireMe(context: context)
     case .cv:
       return renderCV(context: context)
     default:
@@ -151,12 +153,33 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-func socialLinksAsideContent() -> Node {
-  div(class: "text-sm mt-12") {
+private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
+  let asideContent = div(class: "text-sm mt-12") {
     div(class: "flex justify-center text-textfg") {
       socialLinks()
     }
+  }
+  
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true, asideContent: asideContent) {
+    article(class: "prose") {
+      div(class: "mb-8 flex items-baseline justify-between") {
+        h1(class: "mb-0!") { context.item.title }
+        div(class: "lg:hidden") {
+          socialLinks()
+        }
+      }
 
+      Node.raw(context.item.body)
+    }
+  }
+}
+
+private func renderHireMe(context: ItemRenderingContext<PageMetadata>) -> Node {
+  let asideContent = div(class: "text-sm mt-12") {
+    div(class: "flex justify-center text-textfg") {
+      socialLinks()
+    }
+    
     if SiteMetadata.available {
       div(class: "flex justify-center text-[12px] mt-4") {
         span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
@@ -170,10 +193,8 @@ func socialLinksAsideContent() -> Node {
       }
     }
   }
-}
-
-private func renderPageWithSocialLinksInSidebar(context: ItemRenderingContext<PageMetadata>, section: Section) -> Node {
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, asideContent: socialLinksAsideContent()) {
+  
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .hireMe, hasMarkdownTwin: true, asideContent: asideContent) {
     article(class: "prose") {
       div(class: "mb-8 flex items-baseline justify-between") {
         h1(class: "mb-0!") { context.item.title }
@@ -181,7 +202,7 @@ private func renderPageWithSocialLinksInSidebar(context: ItemRenderingContext<Pa
           socialLinks()
         }
       }
-
+      
       if SiteMetadata.available {
         div(class: "text-[12px] lg:hidden -mt-2") {
           p(class: "bg-codebg text-codefg p-2 rounded-lg") {
@@ -189,7 +210,7 @@ private func renderPageWithSocialLinksInSidebar(context: ItemRenderingContext<Pa
           }
         }
       }
-
+      
       Node.raw(context.item.body)
     }
   }

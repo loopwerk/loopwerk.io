@@ -26,7 +26,7 @@ func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-/// The standalone document WeasyPrint turns into the PDF. Paths are relative to /about/cv/.
+/// The standalone document WeasyPrint turns into the PDF. Paths are relative to /hire-me/cv/.
 func renderCVDocument(item: Item<PageMetadata>) -> Node {
   // Everything before the first section heading (location, tagline, contact details) goes next to the photo
   let headerEnd = item.body.range(of: "<h2")?.lowerBound ?? item.body.endIndex

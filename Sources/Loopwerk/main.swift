@@ -481,7 +481,7 @@ try await Saga(input: "content", output: ".deploy")
   // Fill the CV's project list from the work projects. This needs the work items, so it can't be an item processor.
   // The CV page and its PDF both render from this body.
   .afterRead { saga in
-    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/about/cv/" }) else { return }
+    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/hire-me/cv/" }) else { return }
 
     let projects = cvProjects(saga: saga).map { "<h4>\($0.title) (\($0.metadata.tech.joined(separator: ", ")))</h4>\n\($0.body)" }
     cv.body = cv.body.replacingOccurrences(of: "<p>{{ cv_projects }}</p>", with: projects.joined(separator: "\n"))
@@ -498,9 +498,9 @@ try await Saga(input: "content", output: ".deploy")
 
   // Generate the CV PDF from the CV page's markdown
   .afterWrite { saga in
-    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/about/cv/" }) else { return }
+    guard let cv = saga.allItems.compactMap({ $0 as? Item<PageMetadata> }).first(where: { $0.url == "/hire-me/cv/" }) else { return }
 
-    let cvFolder = saga.outputPath + "about" + "cv"
+    let cvFolder = saga.outputPath + "hire-me" + "cv"
     let document = cvFolder + "pdf.html"
     try document.write(renderCVDocument(item: cv).toString())
     defer { try? document.delete() }
