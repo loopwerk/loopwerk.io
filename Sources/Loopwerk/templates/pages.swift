@@ -120,8 +120,10 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
   switch section {
     case .home:
       return renderHome(context: context)
-    case .about, .hireMe, .uses:
-      return renderAbout(context: context, section: section!)
+    case .about:
+      return renderAbout(context: context)
+    case .hireMe:
+      return renderHireMe(context: context)
     case .cv:
       return renderCV(context: context)
     default:
@@ -151,31 +153,14 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-func aboutAsideContent() -> Node {
-  div(class: "text-sm mt-8") {
-    img(class: "rounded-full mb-8", src: "/static/images/kevin.png")
+private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
+  let asideContent = div(class: "text-sm mt-12") {
     div(class: "flex justify-center text-textfg") {
       socialLinks()
     }
-
-    if SiteMetadata.available {
-      div(class: "flex justify-center text-[12px] mt-4") {
-        span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
-          "I'm currently available for hire! Reach out to discuss your project."
-          span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
-        }
-      }
-    } else {
-      div(class: "flex justify-center text-[12px] mt-8") {
-        p { "I am currently not available for new projects, but feel free to contact me to set something up for the future." }
-      }
-    }
   }
-}
-
-/// About and hire me share the photo, social links and availability note in the sidebar
-private func renderAbout(context: ItemRenderingContext<PageMetadata>, section: Section) -> Node {
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, asideContent: aboutAsideContent()) {
+  
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true, asideContent: asideContent) {
     article(class: "prose") {
       div(class: "mb-8 flex items-baseline justify-between") {
         h1(class: "mb-0!") { context.item.title }
@@ -184,6 +169,38 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>, section: S
         }
       }
 
+      Node.raw(context.item.body)
+    }
+  }
+}
+
+private func renderHireMe(context: ItemRenderingContext<PageMetadata>) -> Node {
+  let asideContent = div(class: "text-sm mt-12") {
+    div(class: "flex justify-center text-textfg") {
+      socialLinks()
+    }
+    
+    if SiteMetadata.available {
+      div(class: "text-[12px] mt-4 w-[120px] relative bg-codebg text-codefg p-2 rounded-lg font-mono") {
+        "I'm currently available for new projects! Reach out to discuss yours."
+        span(class: "absolute bottom-full left-[16px] border-x-[8px] border-b-[8px] border-x-transparent border-b-codebg")
+      }
+    } else {
+      div(class: "text-[12px] mt-8") {
+        "I am currently not available for new projects, but feel free to contact me to set something up for the future."
+      }
+    }
+  }
+  
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .hireMe, hasMarkdownTwin: true, asideContent: asideContent) {
+    article(class: "prose") {
+      div(class: "mb-8 flex items-baseline justify-between") {
+        h1(class: "mb-0!") { context.item.title }
+        div(class: "lg:hidden") {
+          socialLinks()
+        }
+      }
+      
       if SiteMetadata.available {
         div(class: "text-[12px] lg:hidden -mt-2") {
           p(class: "bg-codebg text-codefg p-2 rounded-lg") {
@@ -191,7 +208,7 @@ private func renderAbout(context: ItemRenderingContext<PageMetadata>, section: S
           }
         }
       }
-
+      
       Node.raw(context.item.body)
     }
   }

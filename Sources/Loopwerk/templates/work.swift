@@ -3,27 +3,42 @@ import Parsley
 import Saga
 
 func renderWork(context: ItemsRenderingContext<WorkProjectMetadata>) -> Node {
-  baseHtml(title: "Work", canonicalPath: "/work/", section: .work) {
-    div(class: "prose mb-16") {
-      h1 { "Work" }
-      p { "A selection of projects, from web applications and APIs to iOS apps and SDKs." }
-      p {
-        "If you are looking for a developer to work on your project,"
-        a(href: "/hire-me/") { "check if I am available" }
-        %"."
+  let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
+
+  return baseHtml(title: "Work", canonicalPath: "/work/", section: .work) {
+    div(class: "article-grid") {
+      aside {
+        nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
+          p(class: "sidebar-header") { "Contents" }
+          ul {
+            WorkCategory.allCases.map { category in
+              li { a(href: "#\(category.rawValue)") { category.title } }
+            }
+          }
+        }
+      }
+
+      div {
+        div(class: "prose mb-16") {
+          h1 { "Work" }
+          p { "A selection of projects, from web applications and APIs to iOS apps and SDKs." }
+          p {
+            "If you are looking for a developer to work on your project,"
+            a(href: "/hire-me/") { "check if I am available" }
+            %"."
+          }
+        }
+
+        WorkCategory.allCases.map { category in
+          div(class: "mb-24") {
+            h2(class: "font-title text-3xl font-bold mb-12", id: category.rawValue) { category.title }
+            (projectsByCategory[category] ?? []).map(renderWorkProject)
+          }
+        }
       }
     }
 
-    let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
-
-    WorkCategory.allCases.map { category -> Node in
-      let projects = projectsByCategory[category] ?? []
-
-      return div(class: "mb-24") {
-        h2(class: "font-title text-3xl font-bold mb-12") { category.title }
-        projects.map(renderWorkProject)
-      }
-    }
+    tocHighlighter()
   }
 }
 
@@ -67,34 +82,41 @@ private func renderWorkProject(project: Item<WorkProjectMetadata>) -> Node {
 }
 
 func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>) -> Node {
-  baseHtml(title: "Open Source", canonicalPath: "/open-source/", section: .openSource) {
-    div(class: "prose") {
-      h1 { "Open Source" }
-      p {
-        "These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer"
-        a(href: "/open-source/support/") { "commercial support and consulting" }
-        %"."
+  let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
+
+  return baseHtml(title: "Open source", canonicalPath: "/open-source/", section: .openSource) {
+    div(class: "article-grid") {
+      aside {
+        nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
+          p(class: "sidebar-header") { "Contents" }
+          ul {
+            ProjectCategory.allCases.map { category in
+              li { a(href: "#\(category.title.slugified)") { category.title } }
+            }
+          }
+        }
+      }
+
+      div {
+        div(class: "prose") {
+          h1 { "Open source" }
+          p {
+            "These are some of the more interesting open source projects I've created over the years. For teams using my open source projects in production, I offer"
+            a(href: "/open-source/support/") { "commercial support and consulting" }
+            %"."
+          }
+        }
+
+        ProjectCategory.allCases.map { category in
+          div(class: "mt-12") {
+            h1(class: "font-title text-3xl font-bold mb-6", id: category.title.slugified) { category.title }
+            (projectsByCategory[category] ?? []).map(renderOpenSourceProject)
+          }
+        }
       }
     }
 
-    let projectsByCategory = Dictionary(grouping: context.items, by: { $0.metadata.category })
-
-    ProjectCategory.allCases.map { category -> Node in
-      let projects = projectsByCategory[category] ?? []
-      return renderCategory(category: category, projects: projects)
-    }
-  }
-}
-
-@NodeBuilder
-private func renderCategory(category: ProjectCategory, projects: [Item<OpenSourceProjectMetadata>]) -> Node {
-  div(class: "mt-12") {
-    h1(class: "font-title text-3xl font-bold mb-6") { category.title }
-
-    projects
-      .map { project -> Node in
-        return renderOpenSourceProject(project: project)
-      }
+    tocHighlighter()
   }
 }
 

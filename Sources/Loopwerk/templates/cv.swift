@@ -11,7 +11,7 @@ func cvProjects(saga: Saga) -> [Item<WorkProjectMetadata>] {
 
 /// The CV page. The PDF version at /about/KevinRenskers.pdf is generated from the same markdown file.
 func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
-  return baseHtml(title: "CV", canonicalPath: context.item.url, section: .cv, hasMarkdownTwin: true, asideContent: aboutAsideContent()) {
+  return baseHtml(title: "CV", canonicalPath: context.item.url, section: .cv, hasMarkdownTwin: true) {
     article(class: "prose [&_h3+p]:-mt-4 [&_h3+p]:text-sm [&_h3+p]:text-textfg/70 [&_h4]:mb-0 [&_h4+p]:mt-1") {
       div(class: "print:hidden text-sm mb-8 links") {
         a(href: "/about/KevinRenskers.pdf", target: "_blank") { "Download as PDF" }
@@ -26,7 +26,7 @@ func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
   }
 }
 
-/// The standalone document WeasyPrint turns into the PDF. Paths are relative to /about/cv/.
+/// The standalone document WeasyPrint turns into the PDF. Paths are relative to /hire-me/cv/.
 func renderCVDocument(item: Item<PageMetadata>) -> Node {
   // Everything before the first section heading (location, tagline, contact details) goes next to the photo
   let headerEnd = item.body.range(of: "<h2")?.lowerBound ?? item.body.endIndex
