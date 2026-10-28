@@ -98,10 +98,22 @@ private let lastUpdatedDateFormatter: DateFormatter = {
   return formatter
 }()
 
-func replaceLastUpdatedPlaceholder(in text: String, item: AnyItem) -> String {
-  text.replacingOccurrences(of: "{{ last_updated }}", with: lastUpdatedDateFormatter.string(from: item.lastModified))
+/// Runs on both the rendered HTML and the markdown twin, hence the `markdown` flag for values that contain links
+func replacePlaceholders(in text: String, item: AnyItem, markdown: Bool) -> String {
+  func link(_ text: String, href: String) -> String {
+    markdown ? "[\(text)](\(href))" : #"<a href="\#(href)">\#(text)</a>"#
+  }
+
+  let placeholders = [
+    "{{ last_updated }}": lastUpdatedDateFormatter.string(from: item.lastModified),
+    "{{ available }}": SiteMetadata.available ? ", and I'm currently \(link("available for hire", href: "/hire-me/"))" : "",
+  ]
+
+  return placeholders.reduce(text) { text, placeholder in
+    text.replacingOccurrences(of: placeholder.key, with: placeholder.value)
+  }
 }
 
-func lastUpdated(item: Item<PageMetadata>) {
-  item.body = replaceLastUpdatedPlaceholder(in: item.body, item: item)
+func fillPlaceholders(item: Item<PageMetadata>) {
+  item.body = replacePlaceholders(in: item.body, item: item, markdown: false)
 }

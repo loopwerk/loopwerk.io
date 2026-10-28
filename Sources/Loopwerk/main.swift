@@ -11,6 +11,19 @@ import SwiftTailwind
 
 try? Dotenv.configure()
 
+enum SiteMetadata {
+  static let url = URL(string: "https://www.loopwerk.io")!
+  static let name = "Loopwerk"
+  static let author = "Kevin Renskers"
+  static let now = Date()
+  static let available = true
+  static let projectRoot = URL(fileURLWithPath: #filePath)
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .path
+}
+
 struct ArticleMetadata: Metadata {
   let tags: [String]
   let summary: String?
@@ -183,19 +196,6 @@ extension Item where M == ArticleMetadata {
 
     return Calendar.current.date(from: components) ?? date
   }
-}
-
-enum SiteMetadata {
-  static let url = URL(string: "https://www.loopwerk.io")!
-  static let name = "Loopwerk"
-  static let author = "Kevin Renskers"
-  static let now = Date()
-  static let available = true
-  static let projectRoot = URL(fileURLWithPath: #filePath)
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .path
 }
 
 /// Journal posts live at /journal/slug/, articles get the year in their permalink
@@ -424,7 +424,7 @@ try await Saga(input: "content", output: ".deploy")
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownReader],
-    itemProcessor: sequence(lastUpdated, swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors)),
+    itemProcessor: sequence(fillPlaceholders, swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors)),
     writers: [.itemWriter(swim(renderPage))]
   )
 

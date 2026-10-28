@@ -157,7 +157,7 @@ func aboutAsideContent() -> Node {
     div(class: "flex justify-center text-textfg") {
       socialLinks()
     }
-    
+
     if SiteMetadata.available {
       div(class: "flex justify-center text-[12px] mt-4") {
         span(class: "relative bg-codebg text-codefg p-2 rounded-lg") {
