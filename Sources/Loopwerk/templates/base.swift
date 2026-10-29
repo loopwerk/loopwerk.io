@@ -180,6 +180,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
   // Pages that don't pass a header get the default, an empty fragment
   let headerContent = pageHeader().asNode()
   let mobileTOC = toc.map(mobileTableOfContents) ?? []
+  let hasSidebar = toc != nil || sidebarContent != nil
 
   let page: Node = [
     headerContent == [] ? mobileTOC : header(class: "page-header") {
@@ -280,7 +281,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
     }
 
     main(class: "container flex flex-1 flex-col py-6 md:py-12 lg:py-16 print:max-w-none print:p-0 \(section == .home ? "lg:short:py-8" : "")") {
-      if toc != nil || sidebarContent != nil {
+      if hasSidebar {
         // Sidebar on the left, page in the text column, so nothing shifts between pages with a sidebar
         div(class: "sidebar-grid") {
           aside {
@@ -299,17 +300,23 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
 
     // Footer
     if section != .home {
-      footer(class: "container flex flex-col items-center gap-1 py-8 text-sm text-textfg/60 links print:hidden") {
-        p {
-          "Built in Swift using"
-          a(href: "https://getsaga.dev", rel: "nofollow", target: "_blank") { "Saga" }
-          "("
-          %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
-          %")."
+      // With a sidebar, the footer uses the sidebar-grid columns so it's centered under the content column
+      footer(class: "container py-8 text-sm text-textfg/60 links print:hidden \(hasSidebar ? "lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap)" : "")") {
+        if hasSidebar {
+          div(class: "max-lg:hidden")
         }
-        div(class: "flex gap-2") {
-          p { "© 2009-\(Calendar.current.component(.year, from: SiteMetadata.now)) Kevin Renskers" }
-          a(href: "/legal/") { "legal notice" }
+        div(class: "flex flex-col items-center gap-1") {
+          p {
+            "Built in Swift using"
+            a(href: "https://getsaga.dev", rel: "nofollow", target: "_blank") { "Saga" }
+            "("
+            %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
+            %")."
+          }
+          div(class: "flex gap-2") {
+            p { "© 2009-\(Calendar.current.component(.year, from: SiteMetadata.now)) Kevin Renskers" }
+            a(href: "/legal/") { "legal notice" }
+          }
         }
       }
     }
