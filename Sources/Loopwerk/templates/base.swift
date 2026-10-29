@@ -227,21 +227,26 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
           navItems.map { item in
             div(class: "relative") {
               if let sections = subpages[item] {
-                // A submenu that opens on click. `name` makes the submenus exclusive: opening one closes the other.
-                details(class: "group", customAttributes: ["name": "submenu"]) {
+                let links = sections.map { subpage in
+                  li {
+                    a(class: subpage == section ? "whitespace-nowrap text-accent" : "whitespace-nowrap", href: subpage.path) { subpage.submenuTitle }
+                  }
+                }
+
+                // Mobile: always expanded, the nav item is just a label above its indented subpages
+                div(class: "md:hidden") {
+                  item.title
+                  ul(class: "mt-2 ml-4 flex flex-col gap-2") { links }
+                }
+
+                // Desktop: a dropdown that opens on click. `name` makes the submenus exclusive: opening one closes the other.
+                details(class: "group max-md:hidden", customAttributes: ["name": "submenu"]) {
                   summary(class: "flex cursor-pointer list-none items-center gap-1 hover:text-accent [&::-webkit-details-marker]:hidden \(item == section?.navSection ? "text-accent" : "")") {
                     item.title
                     Node.raw(#"<svg class="h-3 w-3 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>"#)
                   }
 
-                  // Mobile: indented under the nav item. Desktop: a dropdown below it.
-                  ul(class: "mt-2 ml-4 flex flex-col gap-2 md:absolute md:top-full md:-left-4 md:z-10 md:mt-5 md:ml-0 md:rounded-b-lg md:border md:border-divider md:bg-bodybg md:px-4 md:py-3 md:shadow-lg") {
-                    sections.map { subpage in
-                      li {
-                        a(class: subpage == section ? "whitespace-nowrap text-accent" : "whitespace-nowrap", href: subpage.path) { subpage.submenuTitle }
-                      }
-                    }
-                  }
+                  ul(class: "absolute top-full -left-4 z-10 mt-5 flex flex-col gap-2 rounded-b-lg border border-divider bg-bodybg px-4 py-3 shadow-lg") { links }
                 }
               } else {
                 navLink(section: item, currentSection: section)
