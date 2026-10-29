@@ -145,10 +145,17 @@ struct GameMetadata: Metadata {
 
 struct PhotoAlbumMetadata: Metadata {}
 
-/// The date a feed entry was published. For photos that's lastModified, the time their commit gave them
-/// (see the Dockerfile's git restore-mtime), unlike the EXIF capture date in `date`.
+extension AnyItem {
+  /// Time of the file's first commit. The Dockerfile runs `git restore-mtime --oldest-time`, which
+  /// writes it into the modification time; the creation time can't be set on Linux.
+  var firstCommitDate: Date {
+    lastModified
+  }
+}
+
+/// The date a feed entry was published. For photos that's their first commit, unlike the EXIF capture date in `date`.
 func feedDate(_ item: AnyItem) -> Date {
-  (item as? Item<ArticleMetadata>)?.creationDate ?? item.lastModified
+  (item as? Item<ArticleMetadata>)?.publishedDate ?? item.firstCommitDate
 }
 
 /// Newest first by feedDate. Photos committed together share that date, so those are sorted by capture date instead.
@@ -191,32 +198,16 @@ extension Item where M == ArticleMetadata {
     return metadata.series?[safeIndex: 1]
   }
 
-  var creationDate: Date {
-    // Use file modification date if it matches the filename date (accounting for timezone)
-    // The git-restore-mtime script should have set proper file timestamps to the FIRST commit
-    let amsterdamTimeZone = TimeZone(identifier: "Europe/Amsterdam")!
-    var calendar = Calendar.current
-    calendar.timeZone = amsterdamTimeZone
+  /// `date` comes from the filename and has no time of day. Use the time of the first commit when it
+  /// happened on that day; when it didn't (drafted earlier, imported, or moved since), use noon.
+  var publishedDate: Date {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.timeZone = TimeZone(identifier: "Europe/Amsterdam")!
 
-    let fileCreationComponents = calendar.dateComponents([.year, .month, .day], from: lastModified)
-    let selfDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-
-    // Check if the dates match in Amsterdam timezone
-    if fileCreationComponents.year == selfDateComponents.year,
-       fileCreationComponents.month == selfDateComponents.month,
-       fileCreationComponents.day == selfDateComponents.day
-    {
-      return lastModified
+    if calendar.isDate(firstCommitDate, inSameDayAs: date) {
+      return firstCommitDate
     }
-
-    // Fallback to self.date (filename date at noon)
-    var components = Calendar.current.dateComponents([.year, .month, .day], from: date)
-    components.hour = 12
-    components.minute = 0
-    components.second = 0
-    components.timeZone = TimeZone.current
-
-    return Calendar.current.date(from: components) ?? date
+    return calendar.date(bySettingHour: 12, minute: 0, second: 0, of: date) ?? date
   }
 }
 
@@ -297,7 +288,7 @@ try await Saga(input: "content", output: ".deploy")
           baseURL: SiteMetadata.url,
           limit: 20,
           summary: \.metadata.summary,
-          date: \.creationDate
+          date: \.publishedDate
         ),
         output: "feed.xml"
       ),
@@ -309,7 +300,7 @@ try await Saga(input: "content", output: ".deploy")
             baseURL: SiteMetadata.url,
             limit: 20,
             summary: \.metadata.summary,
-            date: \.creationDate
+            date: \.publishedDate
           )(context)
         },
         output: "tag/[key]/feed.xml", tags: \.expandedTags
@@ -348,7 +339,7 @@ try await Saga(input: "content", output: ".deploy")
           baseURL: SiteMetadata.url,
           limit: 20,
           summary: \.metadata.summary,
-          date: \.creationDate
+          date: \.publishedDate
         ),
         output: "feed.xml"
       ),

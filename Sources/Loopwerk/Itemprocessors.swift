@@ -99,21 +99,13 @@ func workImages(item: Item<WorkProjectMetadata>) {
   item.metadata.images = images.isEmpty ? nil : images
 }
 
-private let lastUpdatedDateFormatter: DateFormatter = {
-  let formatter = DateFormatter()
-  formatter.dateFormat = "MMMM dd, yyyy"
-  formatter.timeZone = TimeZone(identifier: "Europe/Amsterdam")
-  return formatter
-}()
-
 /// Runs on both the rendered HTML and the markdown twin, hence the `markdown` flag for values that contain links
-func replacePlaceholders(in text: String, item: AnyItem, markdown: Bool) -> String {
+func replacePlaceholders(in text: String, markdown: Bool) -> String {
   func link(_ text: String, href: String) -> String {
     markdown ? "[\(text)](\(href))" : #"<a href="\#(href)">\#(text)</a>"#
   }
 
   let placeholders = [
-    "{{ last_updated }}": lastUpdatedDateFormatter.string(from: item.lastModified),
     "{{ available }}": SiteMetadata.available ? ", and I'm currently \(link("available for hire", href: "/hire-me/"))" : "",
   ]
 
@@ -123,5 +115,5 @@ func replacePlaceholders(in text: String, item: AnyItem, markdown: Bool) -> Stri
 }
 
 func fillPlaceholders(item: Item<PageMetadata>) {
-  item.body = replacePlaceholders(in: item.body, item: item, markdown: false)
+  item.body = replacePlaceholders(in: item.body, markdown: false)
 }

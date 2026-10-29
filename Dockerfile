@@ -10,7 +10,6 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     libavif-dev \
     python3 \
     git \
-    git-restore-mtime \
     curl \
     nodejs npm \
     weasyprint \
@@ -18,6 +17,12 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     && apt-get install -y libjavascriptcoregtk-4.1-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pkg-config --libs javascriptcoregtk-4.1
+
+# Ubuntu's git-restore-mtime (2022.12) calls `git whatchanged`, which this git
+# refuses to run, so it silently touches nothing. v2025.08 uses `git log --raw`.
+RUN curl -fsSL https://raw.githubusercontent.com/MestreLion/git-tools/v2025.08/git-restore-mtime \
+    -o /usr/local/bin/git-restore-mtime \
+    && chmod +x /usr/local/bin/git-restore-mtime
 
 # Install pnpm
 RUN npm install -g pnpm@10

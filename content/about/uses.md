@@ -4,7 +4,7 @@ section: uses
 
 # The software and hardware I use
 
-*Inspired by [uses.tech](https://uses.tech). Last updated {{ last_updated }}.*
+*Inspired by [uses.tech](https://uses.tech). Last updated October 27, 2026.*
 
 This is the stuff I use daily for development, photography, and gaming. I don't upgrade often, I tend to use my hardware until it's broken.
 

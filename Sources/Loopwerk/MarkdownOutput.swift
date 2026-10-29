@@ -29,7 +29,7 @@ func writeMarkdownFiles(saga: Saga) async throws {
   for page in pages {
     let destination = saga.outputPath + page.relativeDestination.parent() + "index.md"
     try destination.parent().mkpath()
-    try destination.write(replacePlaceholders(in: withoutFrontmatter(page.absoluteSource.read()), item: page, markdown: true)
+    try destination.write(replacePlaceholders(in: withoutFrontmatter(page.absoluteSource.read()), markdown: true)
       .replacingOccurrences(of: "{{ cv_projects }}", with: cvProjectsMarkdown))
   }
 
