@@ -33,14 +33,20 @@ func render404(context: PageRenderingContext) -> Node {
           const caption = document.getElementById("photo-caption");
           const link = caption.querySelector("a");
           const album = document.getElementById("photo-album");
+          let queue = [];
           let current = null;
 
           const show = () => {
             if (!photos.length) return;
-            let photo;
-            do {
-              photo = photos[Math.floor(Math.random() * photos.length)];
-            } while (photos.length > 1 && photo === current);
+            if (!queue.length) {
+              // Fisher-Yates shuffle, so every photo is shown once before any repeats
+              queue = [...photos];
+              for (let i = queue.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [queue[i], queue[j]] = [queue[j], queue[i]];
+              }
+            }
+            const photo = queue.pop();
             current = photo;
 
             // Only swap once the photo has loaded, so the 404 is never transparent with nothing behind it
@@ -218,7 +224,7 @@ func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
     div(class: "print:hidden text-sm mb-8 links") {
       a(href: "/about/KevinRenskers.pdf", target: "_blank") { "Download as PDF" }
     }
-    
+
     h1 { context.item.title }
   } content: {
     article(class: "prose [&_h3+p]:-mt-4 [&_h3+p]:text-sm [&_h3+p]:text-textfg/70 [&_h4]:mb-0 [&_h4+p]:mt-1") {

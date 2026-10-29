@@ -90,7 +90,7 @@ func renderOpenSource(context: ItemsRenderingContext<OpenSourceProjectMetadata>)
         %"."
       }
     }
-    
+
     ProjectCategory.allCases.map { category in
       div(class: "mt-12") {
         h2(class: "font-title text-3xl font-bold mb-6", id: category.title.slugified) { category.title }

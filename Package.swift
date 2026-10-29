@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "Loopwerk",
   platforms: [
-    .macOS(.v14),
+    .macOS(.v15),
   ],
   dependencies: [
     .package(url: "https://github.com/loopwerk/Saga", from: "3.10.0"),
