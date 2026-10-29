@@ -4,7 +4,7 @@ section: hireMe
 
 # Hire me
 
-I've worked as a fully remote developer since 2016, for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever, and Emmy and Oscar winner Sound Radix.
+I've worked as a fully remote developer since 2016, for international clients such as CBS, Last.fm, Sentry, WeTransfer, Unilever, and Emmy and Oscar winner Sound Radix. You can [see and download my CV here](/hire-me/cv/).
 
 I care deeply about clean architecture, code quality, testing, and long-term maintainability. I value pragmatic solutions that balance clarity and performance, and I'm comfortable moving between backend and frontend in the same day.
 

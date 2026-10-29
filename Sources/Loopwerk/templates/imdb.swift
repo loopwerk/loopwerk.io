@@ -5,15 +5,13 @@ import SagaSwimRenderer
 
 func renderShows(context: ItemsRenderingContext<ImdbMetadata>) -> Node {
   baseHtml(title: "My favorite TV Shows", canonicalPath: context.outputPath.url, section: .shows) {
-    header(class: "page-header") {
-      h1 {
-        "My favorite TV Shows"
-      }
-      p {
-        "\(context.items.count) shows, ranked"
-      }
+    h1 {
+      "My favorite TV Shows"
     }
-
+    p {
+      "\(context.items.count) shows, ranked"
+    }
+  } content: {
     ul(class: "fav-grid") {
       context.items.map(showCard)
     }
@@ -22,15 +20,13 @@ func renderShows(context: ItemsRenderingContext<ImdbMetadata>) -> Node {
 
 func renderMovies(context: ItemsRenderingContext<ImdbMetadata>) -> Node {
   baseHtml(title: "My favorite movies", canonicalPath: context.outputPath.url, section: .movies) {
-    header(class: "page-header") {
-      h1 {
-        "My favorite movies"
-      }
-      p {
-        "\(context.items.count) movies, ranked"
-      }
+    h1 {
+      "My favorite movies"
     }
-
+    p {
+      "\(context.items.count) movies, ranked"
+    }
+  } content: {
     ul(class: "fav-grid") {
       context.items.map(showCard)
     }

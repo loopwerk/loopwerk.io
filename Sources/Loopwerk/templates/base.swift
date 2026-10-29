@@ -27,15 +27,20 @@ enum Section: String, CaseIterable, Codable {
       case .work: "Work"
       case .openSource: "Open source"
       case .photos: "Photos"
-      case .games: "Favorite games"
-      case .movies: "Favorite movies"
-      case .shows: "Favorite TV shows"
-      case .albums: "Favorite albums"
+      case .games: "My favorite games"
+      case .movies: "My favorite movies"
+      case .shows: "My favorite TV shows"
+      case .albums: "My favorite albums"
       case .about: "About"
-      case .uses: "Uses"
+      case .uses: "What I use"
       case .hireMe: "Hire me"
       case .cv: "CV"
     }
+  }
+
+  /// The title in a submenu, where the nav item's own page needs a name of its own
+  var submenuTitle: String {
+    self == .about ? "About me" : title
   }
 
   var path: String {
@@ -59,14 +64,13 @@ enum Section: String, CaseIterable, Codable {
 
   /// The nav item that is highlighted on this section's pages
   var navSection: Section {
-    sidebars.first { $0.value.contains(self) }?.key ?? self
+    subpages.first { $0.value.contains(self) }?.key ?? self
   }
 }
 
-/// Sections that share one nav item (the key) get a sidebar linking to each of them, instead of a submenu
-let sidebars: [Section: [Section]] = [
+/// Sections that share one nav item (the key), which gets a submenu linking to the others
+let subpages: [Section: [Section]] = [
   .about: [.about, .uses, .games, .movies, .shows, .albums],
-  .hireMe: [.hireMe, .cv],
 ]
 
 let logoSVG = #"<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12"><path d="M12 12H0V0H5V1H1V11H11V8H4V3H3V9H10V10H2V2H5V7H12Z"/></svg>"#
@@ -169,15 +173,30 @@ func rootHtml(title pageTitle: String?, canonicalPath: String, section: Section?
   ]
 }
 
-/// The site layout: nav, centered content, and footer. On pages with a sidebar, `asideContent` goes above its links.
-func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), hasMarkdownTwin: Bool = false, extraHeader: Node = [], asideContent: Node = [], @NodeBuilder children: () -> NodeConvertible) -> Node {
-  rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader, hasMarkdownTwin: hasMarkdownTwin) {
+/// The site layout: nav, centered content, and footer. The page is its `header` (title and whatever goes with it)
+/// followed by its `content`. A `toc` is shown in the sidebar, and on mobile between the header and
+/// the content. Pages with a `toc` or `sidebarContent` get a sidebar.
+func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?, ogImage: (path: String, width: Int, height: Int) = ("/static/images/opengraph.png", 1200, 630), hasMarkdownTwin: Bool = false, extraHeader: Node = [], toc: Node? = nil, sidebarContent: Node? = nil, @NodeBuilder header pageHeader: () -> NodeConvertible = { Node.fragment([]) }, @NodeBuilder content: () -> NodeConvertible) -> Node {
+  // Pages that don't pass a header get the default, an empty fragment
+  let headerContent = pageHeader().asNode()
+  let mobileTOC = toc.map(mobileTableOfContents) ?? []
+
+  let page: Node = [
+    headerContent == [] ? mobileTOC : header(class: "page-header") {
+      headerContent
+      mobileTOC
+    },
+    content().asNode(),
+    toc == nil ? [] : tocHighlighter(),
+  ]
+
+  return rootHtml(title: pageTitle, canonicalPath: canonicalPath, section: section, ogImage: ogImage, extraHeader: extraHeader, hasMarkdownTwin: hasMarkdownTwin) {
     if SiteMetadata.available, section?.navSection != .hireMe {
       availableForHire()
     }
 
     nav(class: "site-nav sticky top-0 md:-top-12 z-50 border-b border-transparent bg-bodybg sticky-nav-border print:static print:border-0") {
-      // On desktop the nav uses the same columns as article-grid, so the menu lines up with the content column
+      // On desktop the nav uses the same columns as sidebar-grid, so the menu lines up with the content column
       div(class: "relative container flex items-center pt-4 md:pt-16 pb-4 text-sm lg:grid lg:grid-cols-[var(--sidebar-width)_1fr] lg:gap-(--sidebar-gap) print:block print:max-w-none print:p-0 print:pb-8") {
         a(class: "lg:justify-self-start", href: Section.home.path, title: Section.home.title) {
           Node.raw(logoSVG)
@@ -202,16 +221,34 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         }
 
         div(
-          class: "hidden lg:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-4 lg:gap-6 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex print:hidden"
+          class: "hidden lg:pl-[3px] md:ml-auto lg:ml-0 md:flex md:items-center gap-4 md:gap-4 lg:gap-5 max-md:absolute max-md:top-full max-md:right-0 max-md:left-0 max-md:flex-col max-md:border-b max-md:border-divider max-md:bg-bodybg max-md:px-6 max-md:py-4 peer-checked:max-md:flex print:hidden"
         ) {
           navItems.map { item in
-            if item == .hireMe, SiteMetadata.available, section?.navSection != .hireMe {
-              span(class: "relative") {
+            div(class: "relative") {
+              if let sections = subpages[item] {
+                // A submenu that opens on click. `name` makes the submenus exclusive: opening one closes the other.
+                details(class: "group", customAttributes: ["name": "submenu"]) {
+                  summary(class: "flex cursor-pointer list-none items-center gap-1 hover:text-accent [&::-webkit-details-marker]:hidden \(item == section?.navSection ? "text-accent" : "")") {
+                    item.title
+                    Node.raw(#"<svg class="h-3 w-3 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>"#)
+                  }
+
+                  // Mobile: indented under the nav item. Desktop: a dropdown below it.
+                  ul(class: "mt-2 ml-4 flex flex-col gap-2 md:absolute md:top-full md:-left-4 md:z-10 md:mt-5 md:ml-0 md:rounded-b-lg md:border md:border-divider md:bg-bodybg md:px-4 md:py-3 md:shadow-lg") {
+                    sections.map { subpage in
+                      li {
+                        a(class: subpage == section ? "whitespace-nowrap text-accent" : "whitespace-nowrap", href: subpage.path) { subpage.submenuTitle }
+                      }
+                    }
+                  }
+                }
+              } else {
                 navLink(section: item, currentSection: section)
+              }
+
+              if item == .hireMe, SiteMetadata.available, section?.navSection != .hireMe {
                 availableForHireAboveLink()
               }
-            } else {
-              navLink(section: item, currentSection: section)
             }
           }
 
@@ -231,35 +268,32 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
       }
     }
 
+    // An open submenu closes when you click anywhere outside it
+    script {
+      Node.raw("""
+      document.addEventListener("click", (event) => {
+        for (const submenu of document.querySelectorAll(".site-nav details[open]")) {
+          if (!submenu.contains(event.target)) submenu.open = false;
+        }
+      });
+      """)
+    }
+
     main(class: "container flex flex-1 flex-col py-6 md:py-12 lg:py-16 print:max-w-none print:p-0 \(section == .home ? "lg:short:py-8" : "")") {
-      if let section, let sidebar = sidebars[section.navSection] {
-        // Same grid as the articles, with the page in the text column
-        div(class: "article-grid") {
+      if toc != nil || sidebarContent != nil {
+        // Sidebar on the left, page in the text column, so nothing shifts between pages with a sidebar
+        div(class: "sidebar-grid") {
           aside {
-            div {
-              nav(customAttributes: ["aria-label": "Pages"]) {
-                p(class: "sidebar-header") { "Pages" }
-                ul {
-                  sidebar.map { item in
-                    li { sectionLink(item, currentSection: section) }
-                  }
-                }
-              }
-
-              asideContent
+            div(class: "flex flex-col gap-8") {
+              toc.map(tableOfContents) ?? []
+              sidebarContent ?? []
             }
           }
 
-          div {
-            nav(class: "mb-8 flex flex-wrap gap-x-4 gap-y-2 text-sm lg:hidden print:hidden", customAttributes: ["aria-label": section.navSection.title]) {
-              sidebar.map { sectionLink($0, currentSection: section) }
-            }
-
-            children().asNode()
-          }
+          div { page }
         }
       } else {
-        children().asNode()
+        page
       }
     }
 
@@ -279,6 +313,74 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         }
       }
     }
+  }
+}
+
+private func tableOfContents(_ toc: Node) -> Node {
+  nav(class: "article-toc", customAttributes: ["aria-label": "Contents"]) {
+    p(class: "sidebar-header") { "Contents" }
+    toc
+  }
+}
+
+/// On mobile the sidebar is hidden, so the TOC folds out between the page header and the content
+private func mobileTableOfContents(_ toc: Node) -> Node {
+  details(class: "article-toc group mt-6 text-textfg/60 lg:hidden print:hidden") {
+    summary(class: "flex cursor-pointer list-none items-center gap-1.5 [&::-webkit-details-marker]:hidden") {
+      Node.raw(#"<svg class="h-3.5 w-3.5 group-open:rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>"#)
+      "Contents"
+    }
+    div(class: "mt-3") { toc }
+  }
+}
+
+/// Marks the TOC link of the section being read: the last heading that has scrolled past the top of the screen.
+/// Before the first heading, nothing is marked.
+private func tocHighlighter() -> Node {
+  script {
+    Node.raw(
+      """
+      (() => {
+        const entries = [...document.querySelectorAll(".article-toc a[href^='#']")]
+          .map(link => {
+            const slug = decodeURIComponent(link.hash.slice(1));
+            return { link, heading: document.getElementById(slug) ?? document.getElementsByName(slug)[0]?.parentElement };
+          })
+          .filter(entry => entry.heading);
+        const headings = [...new Set(entries.map(entry => entry.heading))];
+        let active = null;
+        let scheduled = false;
+
+        const update = () => {
+          scheduled = false;
+          let current = null;
+          for (const heading of headings) {
+            if (heading.getBoundingClientRect().top > 160) break;
+            current = heading;
+          }
+          if (current === active) return;
+          active = current;
+          for (const { link, heading } of entries) {
+            if (heading === active) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          }
+        };
+
+        const schedule = () => {
+          if (scheduled) return;
+          scheduled = true;
+          requestAnimationFrame(update);
+        };
+
+        addEventListener("scroll", schedule, { passive: true });
+        addEventListener("resize", schedule, { passive: true });
+        update();
+      })();
+      """
+    )
   }
 }
 
@@ -302,14 +404,10 @@ private func availableForHireAboveLink() -> Node {
 private func navLink(section: Section, currentSection: Section?) -> Node {
   a(
     class: section == currentSection?.navSection
-      ? "font-medium text-accent"
+      ? "text-accent"
       : "",
     href: section.path
   ) {
     section.title
   }
-}
-
-private func sectionLink(_ section: Section, currentSection: Section) -> Node {
-  a(class: section == currentSection ? "text-accent" : "", href: section.path) { section.title }
 }

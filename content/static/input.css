@@ -379,7 +379,7 @@
   }
 }
 
-@utility article-grid {
+@utility sidebar-grid {
   @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap) print:block;
   
   & > aside {
@@ -443,14 +443,14 @@
 }
 
 @utility page-header {
-  @apply mb-12;
+  @apply mb-8;
 
   & h1 {
     @apply heading-1;
   }
 
   & p {
-    @apply mt-4 text-textfg/60;
+    @apply mt-4 mb-4 text-textfg/60;
   }
 }
 
@@ -480,7 +480,7 @@
 
 /* Favorites: games, movies, shows and albums */
 @utility fav-grid {
-  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-8;
 }
 
 /* Set the aspect ratio per page */

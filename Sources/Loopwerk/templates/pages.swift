@@ -67,8 +67,9 @@ func render404(context: PageRenderingContext) -> Node {
 
 func renderFeeds(context: PageRenderingContext) -> Node {
   return baseHtml(title: "RSS feeds", canonicalPath: context.outputPath.url, section: nil) {
+    h1 { "RSS feeds" }
+  } content: {
     article(class: "prose") {
-      h1 { "RSS feeds" }
       p { "The following feeds are available to subscribe to:" }
 
       h2 { "Everything" }
@@ -127,14 +128,13 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
     case .cv:
       return renderCV(context: context)
     default:
-      break
-  }
-
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true) {
-    article(class: "prose") {
-      h1 { context.item.title }
-      Node.raw(context.item.body)
-    }
+      return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: section, hasMarkdownTwin: true, toc: context.item.metadata.toc.map(Node.raw)) {
+        h1 { context.item.title }
+      } content: {
+        article(class: "prose") {
+          Node.raw(context.item.body)
+        }
+      }
   }
 }
 
@@ -154,32 +154,30 @@ private func renderHome(context: ItemRenderingContext<PageMetadata>) -> Node {
 }
 
 private func renderAbout(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let asideContent = div(class: "text-sm mt-12") {
-    div(class: "flex justify-center text-textfg") {
-      socialLinks()
-    }
+  let sidebarContent = div(class: "flex justify-center text-sm text-textfg") {
+    socialLinks()
   }
-  
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true, asideContent: asideContent) {
-    article(class: "prose") {
-      div(class: "mb-8 flex items-baseline justify-between") {
-        h1(class: "mb-0!") { context.item.title }
-        div(class: "lg:hidden") {
-          socialLinks()
-        }
-      }
 
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .about, hasMarkdownTwin: true, toc: context.item.metadata.toc.map(Node.raw), sidebarContent: sidebarContent) {
+    div(class: "flex items-baseline justify-between") {
+      h1 { context.item.title }
+      div(class: "lg:hidden") {
+        socialLinks()
+      }
+    }
+  } content: {
+    article(class: "prose") {
       Node.raw(context.item.body)
     }
   }
 }
 
 private func renderHireMe(context: ItemRenderingContext<PageMetadata>) -> Node {
-  let asideContent = div(class: "text-sm mt-12") {
+  let sidebarContent = div(class: "text-sm") {
     div(class: "flex justify-center text-textfg") {
       socialLinks()
     }
-    
+
     if SiteMetadata.available {
       div(class: "text-[12px] mt-4 w-[120px] relative bg-codebg text-codefg p-2 rounded-lg font-mono") {
         "I'm currently available for new projects! Reach out to discuss yours."
@@ -191,24 +189,39 @@ private func renderHireMe(context: ItemRenderingContext<PageMetadata>) -> Node {
       }
     }
   }
-  
-  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .hireMe, hasMarkdownTwin: true, asideContent: asideContent) {
+
+  return baseHtml(title: context.item.title, canonicalPath: context.item.url, section: .hireMe, hasMarkdownTwin: true, toc: context.item.metadata.toc.map(Node.raw), sidebarContent: sidebarContent) {
+    div(class: "flex items-baseline justify-between") {
+      h1 { context.item.title }
+      div(class: "lg:hidden") {
+        socialLinks()
+      }
+    }
+
+    if SiteMetadata.available {
+      div(class: "text-[12px] lg:hidden mt-6") {
+        p(class: "bg-codebg text-codefg p-2 rounded-lg") {
+          "I'm currently available for hire! Reach out to discuss your project."
+        }
+      }
+    }
+  } content: {
     article(class: "prose") {
-      div(class: "mb-8 flex items-baseline justify-between") {
-        h1(class: "mb-0!") { context.item.title }
-        div(class: "lg:hidden") {
-          socialLinks()
-        }
-      }
-      
-      if SiteMetadata.available {
-        div(class: "text-[12px] lg:hidden -mt-2") {
-          p(class: "bg-codebg text-codefg p-2 rounded-lg") {
-            "I'm currently available for hire! Reach out to discuss your project."
-          }
-        }
-      }
-      
+      Node.raw(context.item.body)
+    }
+  }
+}
+
+/// The CV page. The PDF version at /about/KevinRenskers.pdf is generated from the same markdown file.
+func renderCV(context: ItemRenderingContext<PageMetadata>) -> Node {
+  return baseHtml(title: "CV", canonicalPath: context.item.url, section: .hireMe, hasMarkdownTwin: true, toc: context.item.metadata.toc.map(Node.raw)) {
+    div(class: "print:hidden text-sm mb-8 links") {
+      a(href: "/about/KevinRenskers.pdf", target: "_blank") { "Download as PDF" }
+    }
+    
+    h1 { context.item.title }
+  } content: {
+    article(class: "prose [&_h3+p]:-mt-4 [&_h3+p]:text-sm [&_h3+p]:text-textfg/70 [&_h4]:mb-0 [&_h4+p]:mt-1") {
       Node.raw(context.item.body)
     }
   }

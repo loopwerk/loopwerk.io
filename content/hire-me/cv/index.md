@@ -1,5 +1,6 @@
 ---
 section: cv
+tocDepth: 2
 ---
 
 # Kevin Renskers

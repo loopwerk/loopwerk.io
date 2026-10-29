@@ -24,11 +24,9 @@ private func photoCount(_ count: Int) -> String {
 
 func renderPhotoAlbums(context: ItemsRenderingContext<PhotoAlbumMetadata>) -> Node {
   baseHtml(title: "Photos", canonicalPath: context.outputPath.url, section: .photos) {
-    header(class: "page-header") {
-      h1 { "Photos" }
-      p { "\(context.items.count) \(context.items.count == 1 ? "album" : "albums")" }
-    }
-
+    h1 { "Photos" }
+    p { "\(context.items.count) \(context.items.count == 1 ? "album" : "albums")" }
+  } content: {
     ul(class: "grid grid-cols-2 gap-8 lg:grid-cols-3 lg:gap-12") {
       context.items.map { album in
         li { albumCard(album) }
@@ -71,11 +69,9 @@ func renderPhotoAlbum(context: ItemRenderingContext<PhotoAlbumMetadata>) -> Node
   let photos = album.children(as: ImageMetadata.self)
 
   return baseHtml(title: "Photos | \(album.title)", canonicalPath: context.item.url, section: .photos) {
-    header(class: "page-header") {
-      h1 { album.title }
-      p { photoCount(photos.count) }
-    }
-
+    h1 { album.title }
+    p { photoCount(photos.count) }
+  } content: {
     div(class: "grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-16") {
       photos.map { photo in
         a(class: "group block aspect-square overflow-hidden", href: photo.url, id: photo.thumbnailID) {

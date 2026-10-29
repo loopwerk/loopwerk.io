@@ -47,6 +47,8 @@ struct WorkProjectMetadata: Metadata {
 
 struct PageMetadata: Metadata {
   let section: String?
+  let tocDepth: Int?
+  var toc: String?
 }
 
 /// Work projects are listed per category, in this order
@@ -221,13 +223,27 @@ extension Item where M == ArticleMetadata {
 /// Journal posts live at /journal/slug/, articles get the year in their permalink
 let journalProcessor = sequence(
   unescapeMarkVar,
-  swiftSoupProcessor({ doc, item in item.metadata.toc = try buildTOCList(doc) }, convertAsides, processExternalLinks, addCodeBlockTitles),
+  swiftSoupProcessor(
+    { doc, item in item.metadata.toc = try buildTOCList(doc) },
+    convertAsides,
+    processExternalLinks,
+    addCodeBlockTitles
+  ),
   syntaxHighlight,
   publicationDateInFilename,
   expandTags
 )
 
 let articleProcessor = sequence(journalProcessor, permalink)
+
+let pageProcessor = sequence(
+  fillPlaceholders,
+  swiftSoupProcessor(
+    { doc, item in item.metadata.toc = try buildTOCList(doc, maxLevel: item.metadata.tocDepth ?? 3) },
+    convertAsides,
+    processExternalLinks
+  )
+)
 
 let tailwind = SwiftTailwind(version: "4.2.4")
 
@@ -426,7 +442,7 @@ try await Saga(input: "content", output: ".deploy")
   .register(
     metadata: PageMetadata.self,
     readers: [.parsleyMarkdownWithAttributesReader],
-    itemProcessor: sequence(fillPlaceholders, swiftSoupProcessor(convertAsides, processExternalLinks, addHeadingAnchors)),
+    itemProcessor: pageProcessor,
     writers: [.itemWriter(swim(renderPage))]
   )
 

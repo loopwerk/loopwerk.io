@@ -5,15 +5,13 @@ import SagaSwimRenderer
 
 func renderAlbums(context: ItemsRenderingContext<AlbumMetadata>) -> Node {
   baseHtml(title: "My favorite albums", canonicalPath: context.outputPath.url, section: .albums) {
-    header(class: "page-header") {
-      h1 {
-        "My favorite albums"
-      }
-      p {
-        "\(context.items.count) albums, ranked"
-      }
+    h1 {
+      "My favorite albums"
     }
-
+    p {
+      "\(context.items.count) albums, ranked"
+    }
+  } content: {
     ul(class: "fav-grid") {
       context.items.map { album in
         li {

@@ -5,15 +5,13 @@ import SagaSwimRenderer
 
 func renderGames(context: ItemsRenderingContext<GameMetadata>) -> Node {
   baseHtml(title: "My favorite games", canonicalPath: context.outputPath.url, section: .games) {
-    header(class: "page-header") {
-      h1 {
-        "My favorite games"
-      }
-      p {
-        "\(context.items.count) games, ranked"
-      }
+    h1 {
+      "My favorite games"
     }
-
+    p {
+      "\(context.items.count) games, ranked"
+    }
+  } content: {
     ul(class: "fav-grid") {
       context.items.map { game in
         li {
