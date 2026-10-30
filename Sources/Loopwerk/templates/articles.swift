@@ -205,7 +205,7 @@ func renderArticle(context: ItemRenderingContext<ArticleMetadata>) -> Node {
     h1 { item.title }
 
     if item.archive {
-      span(class: "inline-block mt-4 p-1 rounded-md bg-textfg text-bodybg") { "archived" }
+      span(class: "inline-block mt-4 py-1 px-4 rounded-md bg-textfg text-bodybg") { "archived" }
     }
 
     p(class: "links lg:hidden print:block") {

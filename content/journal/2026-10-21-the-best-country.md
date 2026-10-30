@@ -1,9 +1,9 @@
 ---
 tags: review
-summary: I decided to find the best country in the world to immigrate to.
+summary: I decided to find the best country in the world to live in, based on happiness, quality of life, politics, crime, nature, and a few other factors.
 ---
 
-# Finding the best country in the world
+# Finding the best country to live in
 I'm no stranger to living abroad: I moved to Iceland in January 2012, and came back to the Netherlands in August 2015. And eleven years later, it's starting to itch again. I feel the need to move to a new place. But where? I decided to use a bunch of data to find the best country in the world.
 
 | Country | Score |
