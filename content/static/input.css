@@ -12,8 +12,8 @@
 
 @theme {
   --color-accent: #f1a948;
-  --color-bodybg: #FEFBF6;
-  --color-codebg: #FBE9CF;
+  --color-bodybg: #fefbf6;
+  --color-codebg: #fbe9cf;
   --color-codefg: #2b2b2b;
   --color-textfg: #2b2b2b;
   --color-divider: #b3b2ae;
@@ -261,6 +261,14 @@
     @apply m-0 h-auto flex-1 min-w-0 rounded-md;
   }
 
+  .prose video {
+    @apply shadow-2xl rounded-md;
+  }
+
+  .prose img.shadow {
+    @apply shadow-2xl rounded-md;
+  }
+
   /* Work screenshots */
   .screenshots.break_1 span {
     @apply flex-[0_0_100%] md:flex-1;
@@ -288,14 +296,14 @@
     a[href^="https://itunes.apple.com"].app,
     a[href^="https://apps.apple.com"].app {
       @apply relative pl-5;
-      
+
       &::before {
         content: "";
         @apply absolute left-0 top-1/2 size-[1em] -translate-y-1/2 bg-current;
         mask: url(images/github.svg) center / contain no-repeat;
       }
     }
-    
+
     a[href^="https://itunes.apple.com"].app::before,
     a[href^="https://apps.apple.com"].app::before {
       mask-image: url(images/apple.svg);
@@ -381,19 +389,19 @@
 
 @utility sidebar-grid {
   @apply w-full lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,var(--content-width))] lg:justify-between lg:gap-(--sidebar-gap) print:block;
-  
+
   & > aside {
     @apply max-lg:hidden print:hidden text-xs text-textfg/60;
   }
-  
+
   & > aside > :first-child {
     @apply tall:sticky top-24;
   }
-  
+
   & > aside ul {
     @apply flex flex-col gap-2;
   }
-  
+
   & a {
     @apply hover:text-accent;
   }
@@ -426,7 +434,7 @@
   & a {
     @apply text-inherit underline underline-offset-2 hover:text-accent font-normal print:no-underline;
   }
-  
+
   @media print {
     & a[href^="http"]::after {
       content: " (" attr(href) ")";

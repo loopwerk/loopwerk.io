@@ -312,7 +312,7 @@ try await Saga(input: "content", output: ".deploy")
   .register(
     folder: "articles",
     metadata: ArticleMetadata.self,
-    readers: [.parsleyMarkdownReader],
+    readers: [.parsleyMarkdownWithAttributesReader],
     itemProcessor: articleProcessor,
     filter: { $0.archive == true && ($0.date < Date() || Saga.isDev) },
     writers: [
