@@ -133,11 +133,10 @@ Short and sweet: Apple Music and VLC cover all my needs.
 
 ### Browsers
 
-Three browsers, each with its own job.
+Two browsers, each with its own job.
 
 - Safari - still my browser of choice. It syncs all my bookmarks, is integrated with Apple's Passwords app, works with work and personal profiles, and is fast.
-- [DuckDuckGo](https://duckduckgo.com/app) web browser - I exclusively use it to watch YouTube, because its video player doesn't play any ads.
-- [Firefox](https://www.firefox.com/) - just for testing websites. Every web developer needs a second browser.
+- [Helium](https://helium.computer) - for web development work, because [Safari isn't ideal for that](https://www.loopwerk.io/articles/2026/still-no-perfect-browser/).
 
 ### Productivity
 
