@@ -3,7 +3,7 @@ tags: deployment, howto
 summary: Webservers get hit by hundreds of thousands of requests to random (non-existing) PHP files. Let's block it using CloudFlare's WAF rules.
 ---
 
-# Blocking PHP requests using CloudFlare's WAF rules
+# Blocking PHP requests using CloudFlare’s WAF rules
 
 A while ago I wrote [an article about hardening your web server](/articles/2024/hardening-web-server/) against script kiddies, who have a tendency to bombard your server with many thousands of requests to (non-existing) PHP files. I used a combination of Nginx rules, a firewall, and fail2ban to not only block these requests but even completely block repeat offenders from accessing anything on the server.
 

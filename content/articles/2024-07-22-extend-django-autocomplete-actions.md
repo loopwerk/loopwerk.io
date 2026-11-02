@@ -3,7 +3,7 @@ tags: django, howto
 summary: Extending Django's autocomplete widget with a new action which copies the linked user's email address to the clipboard.
 ---
 
-# Extend Django's autocomplete widget actions
+# Extend Django’s autocomplete widget actions
 
 When you use Django's admin interface it's often a good idea to use an autocomplete form field for a `ForeignKey` model field, especially once the related table has a lot of entries. For example an `Order` model has a relationship to a `User` model:
 

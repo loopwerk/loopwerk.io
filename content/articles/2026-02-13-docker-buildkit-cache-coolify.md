@@ -3,7 +3,7 @@ tags: coolify, howto
 summary: If your Coolify deployments are sometimes fast and sometimes mysteriously slow, Docker's BuildKit garbage collection is probably silently deleting your build cache.
 ---
 
-# BuildKit's garbage collection is deleting Coolify's build cache
+# BuildKit’s garbage collection is deleting Coolify’s build cache
 
 I deploy my static site to a Coolify server using a multi-stage Dockerfile. When Docker's layer cache is warm, a deploy takes under a minute. Every once in a while though, the deploy takes over four minutes, when nothing about the Dockerfile or dependencies has changed. What's up with that? Why are the build layers no longer retrieved from the cache? I had already configured Coolify's "Docker Cleanup" settings to only run once a month instead of every night, so that can't be the reason.
 

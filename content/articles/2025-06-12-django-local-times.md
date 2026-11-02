@@ -3,7 +3,7 @@ tags: django, howto
 summary: A solution for showing dates and times in your visitor's local timezone, all while handling the tricky first-visit problem.
 ---
 
-# Make Django show dates and times in the visitor's local timezone
+# Make Django show dates and times in the visitor’s local timezone
 
 Proper timezone handling is very important for a good user experience. When your site shows me emails or comments, I want to see the dates and times in my own local timezone, not whatever your server's timezone is set to.
 

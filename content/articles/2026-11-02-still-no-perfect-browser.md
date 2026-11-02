@@ -3,7 +3,7 @@ tags: review
 summary: A review roundup of a whole bunch of browsers.
 ---
 
-# It's 2026 and there's still no perfect browser
+# It’s 2026 and there’s still no perfect browser
 
 Back in 2011 I asked myself [why there's no perfect browser](/articles/2011/why-there-no-perfect-browser/), in an admittedly pretty terribly written article.
 

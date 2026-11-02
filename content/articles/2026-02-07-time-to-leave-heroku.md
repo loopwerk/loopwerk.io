@@ -3,7 +3,7 @@ tags: django, insights, coolify
 summary: Heroku just announced it's entering "sustaining engineering mode". No more new features. After years of security breaches, outages, and price hikes, it's time to leave.
 ---
 
-# It's time to leave Heroku
+# It’s time to leave Heroku
 
 Remember when Heroku felt like magic? You pushed to `main`, and it built and deployed your site automatically. For me personally this was a huge improvement over hosting Python projects myself, and the free tier was generous enough that most side projects never ended up paying a cent. Literally every Python developer I knew recommended it.
 

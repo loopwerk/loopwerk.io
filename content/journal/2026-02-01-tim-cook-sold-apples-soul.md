@@ -3,7 +3,7 @@ tags: apple
 summary: The company I once admired has become morally bankrupt, but leaving the ecosystem feels almost impossible.
 ---
 
-# Tim Cook sold Apple's soul
+# Tim Cook sold Apple’s soul
 
 I think Apple is going downhill on almost every front that matters to me: software quality, user interface design, usability, and accessibility. Their Human Interface Guidelines used to feel close to sacred. They meant something. Instead, we now have Liquid Glass.
 

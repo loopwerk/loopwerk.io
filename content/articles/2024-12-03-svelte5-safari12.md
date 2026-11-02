@@ -3,7 +3,7 @@ tags: sveltekit
 summary: Quite recently I upgraded a Svelte 4 project to Svelte 5, and soon afterwards I found some problems inside of Safari 12 and 13 that needed a tricky workaround.
 ---
 
-# Svelte 5 sites don't work as expected in Safari 12 and 13
+# Svelte 5 sites don’t work as expected in Safari 12 and 13
 
 Quite recently I upgraded a Svelte 4 project to Svelte 5, and at first everything seemed to work perfectly fine. I tested the site in multiple browsers in multiple versions, found no bugs, and deployed to production. Pretty soon after that I started to get complaints that the site's dropdown menus no longer worked in Safari 12 or Safari 13, so I got an account at [BrowserStack.com](https://www.browserstack.com) - a pretty great way to test your site in almost any browser and OS you can think of - and was able to reproduce the issue. Sure enough: when you hovered your mouse over the main menu items, the submenu items no longer became visible.
 

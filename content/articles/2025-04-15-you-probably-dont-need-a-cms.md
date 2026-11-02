@@ -3,7 +3,7 @@ tags: django, insights
 summary: Many people quickly reach for a big CMS package for Django, when often this is overkill. Here's how to use a simple Django model with a CKEditor 5 WYSIWYG field.
 ---
 
-# You probably don't need a CMS
+# You probably don’t need a CMS
 
 When I took over development and maintenance of the [Sound Radix](https://www.soundradix.com) site and backend in January of 2023, it had a full blown CMS system ([puput](https://github.com/APSL/puput)) for the artist interviews. The administrators used the regular ol' Django Admin site to manage everything except for the interviews which were handled in a completely separate CMS environment, reached on its own URL. Similarly I see plenty of people recommending Wagtail or Django CMS or Mezzanine when somebody asks how to get started building a simple blog.
 

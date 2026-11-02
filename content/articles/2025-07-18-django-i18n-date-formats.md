@@ -3,7 +3,7 @@ tags: django, howto
 summary: It's way too difficult to make Django use a 24-hour clock while using American English. Luckily it's not impossible.
 ---
 
-# Django's internationalization settings are weird
+# Django’s internationalization settings are weird
 
 When you start a new Django project, you get a handful of default settings for localization and timezones:
 

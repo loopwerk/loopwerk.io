@@ -3,7 +3,7 @@ tags: django, insights
 summary: I never made the switch from unittest to pytest for my Django projects. And after years of building and maintaining Django applications, I still don't feel like I'm missing out.
 ---
 
-# Django's test runner is underrated
+# Django’s test runner is underrated
 
 Is it just me, or does every podcast, blog post, and conference talk agree that pytest is the bee's knees? [Real Python](https://realpython.com/tutorials/testing/) says that most developers prefer it, and Brian Okken's book [Python Testing with pytest](https://pragprog.com/titles/bopytest2/python-testing-with-pytest-second-edition/) literally calls it "undeniably the best choice". It's almost like a rite of passage: at some point you're supposed to graduate to pytest, the "real" testing framework for grown-ups.
 
