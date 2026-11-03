@@ -68,9 +68,12 @@ It's a good browser, and I definitely prefer it over Firefox, although the verti
 
 [DuckDuckGo](https://duckduckgo.com/), the privacy-focused search engine, has a WebKit-based [browser](https://duckduckgo.com/app), which out of the box blocks the most ads, cookies, and trackers of any browser I've tried. It was the first one to reliably block ads within YouTube, and just for that I've used it as my second browser for about a year. Yes, just to watch YouTube.
 
-I do love DuckDuckGo's integrated email protection, where you can generate a @duck.com address on the fly, which then forwards to your real email address. It's similar to iCloud's Hide My Email, and Firefox's Relay, but better and free.
+I do love DuckDuckGo's integrated email protection, where you can generate a `@duck.com` address on the fly, which then forwards to your real email address. It's similar to iCloud's Hide My Email, and Firefox's Relay, but better and free.
 
 It's an okay browser, but it's too limited. You can't switch search engines, which I guess makes sense for a browser made by DuckDuckGo, but I prefer (and pay for) Kagi myself. More than that though, you can't install any extensions. That means no Apple Passwords integration, which is immediately a dealbreaker for a daily browser. And that lovely email protection feature? It's available in Firefox and Chrome (and browsers based on them) using DuckDuckGo's [extension](https://duckduckgo.com/duckduckgo-help-pages/desktop/adding-duckduckgo-to-your-browser).
+
+> [!UPDATE]
+> **November 3, 2026**: I just found out that when you use the DuckDuckGo extension, it forces you to use the DuckDuckGo search engine, with no way to override this. That bummed me out, so I looked for a cross-browser solution that respects my choice. Check my [follow-up article](/articles/2026/private-email/) for a pretty interesting one.
 
 Even its world-class ad blocking is pretty easily replicated in other browsers. Safari with the [Ghostery](https://apps.apple.com/app/id6504861501) and [Wipr 2](https://apps.apple.com/app/id1662217862) extensions installed now gives me ad-free YouTube, so for me there's no reason left to use the DuckDuckGo browser.
 
