@@ -14,8 +14,8 @@ This is the stuff I use daily for development, photography, and gaming. I don't 
 
 My desk setup is built around one ultrawide screen for everything: work, gaming, and movies.
 
-- MacBook Pro (14" M1 Max, 32 GB) - running macOS 27. It's a bit thick and heavy but after all these years it's still incredibly fast, and I see no reason to upgrade.
-- LG 38WN95CP-W 38" ultrawide - 3840 x 1600 resolution, absolutely perfect for productivity, gaming, and watching movies. Love it.
+- MacBook Pro (14″ M1 Max, 32 GB) - running macOS 27. It's a bit thick and heavy but after all these years it's still incredibly fast, and I see no reason to upgrade.
+- LG 38WN95CP-W 38″ ultrawide - 3840 x 1600 resolution, absolutely perfect for productivity, gaming, and watching movies. Love it.
 - Logitech MX Keys - great keyboard, extremely good battery life. It can connect to up to three devices; I use it for my MacBook and my gaming PC.
 - Apple Magic Trackpad - I much prefer a trackpad over a mouse for everyday use, because of gestures.
 - Gaming PC (Ryzen 7 9800X3D, RTX 5080, 32 GB) - connected to the same LG ultrawide.
@@ -28,7 +28,7 @@ My desk setup is built around one ultrawide screen for everything: work, gaming,
 The usual collection of devices that follow me around.
 
 - iPhone Air with 256 GB of storage. I wasn't planning on updating from the iPhone 14 Pro I had before it, but once I held it in my hands I was in love. If it was just a bit smaller it would be my all-time favorite iPhone. As it stands, that title is still held by the iPhone X.
-- 2018 iPad Pro 12.9" - mostly used in bed for watching YouTube and the occasional web browsing. It's showing its age but still gets the job done.
+- 2018 iPad Pro 12.9″ - mostly used in bed for watching YouTube and the occasional web browsing. It's showing its age but still gets the job done.
 - Steam Deck OLED - perfect for playing PC games on the couch or in bed. Valve really nailed this one. I use tomtoc's thin [carrying case](https://www.amazon.com/Carrying-Compatible-Protective-Portable-Accessories-Shockproof/dp/B0BGPZ3817).
 - Home Assistant Green - the [brains of my smart home](/journal/home-assistant-setup/). Controls all my lights, sensors, and automations.
 - [Mondaine watch](https://mondaine.com/cdn/shop/products/MSE.43120.LB-C80-_2022.jpg) - a simple, beautiful black watch with the iconic Swiss railway clock. No smart features, no notifications, not even the date; just the time.
