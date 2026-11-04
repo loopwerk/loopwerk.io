@@ -30,7 +30,7 @@ The usual collection of devices that follow me around.
 - iPhone Air with 256 GB of storage. I wasn't planning on updating from the iPhone 14 Pro I had before it, but once I held it in my hands I was in love. If it was just a bit smaller it would be my all-time favorite iPhone. As it stands, that title is still held by the iPhone X.
 - 2018 iPad Pro 12.9″ - mostly used in bed for watching YouTube and the occasional web browsing. It's showing its age but still gets the job done.
 - Steam Deck OLED - perfect for playing PC games on the couch or in bed. Valve really nailed this one. I use tomtoc's thin [carrying case](https://www.amazon.com/Carrying-Compatible-Protective-Portable-Accessories-Shockproof/dp/B0BGPZ3817).
-- Home Assistant Green - the [brains of my smart home](/journal/home-assistant-setup/). Controls all my lights, sensors, and automations.
+- Home Assistant Green - the [brains of my smart home](/articles/2025/home-assistant-setup/). Controls all my lights, sensors, and automations.
 - [Mondaine watch](https://mondaine.com/cdn/shop/products/MSE.43120.LB-C80-_2022.jpg) - a simple, beautiful black watch with the iconic Swiss railway clock. No smart features, no notifications, not even the date; just the time.
 - [Danish Design watch](https://watch4time.eu/en/shop/danish-design-310/) - a simple white watch with even fewer features: not even a hand for the seconds.
 - [GL.iNet Opal](https://www.gl-inet.com/en-de/products/gl-sft1200) travel router. When I am at a hotel I power up the Opal, connect it to the hotel's WiFi, and just like that, all my devices connect to a known and safe access point (my Opal's wireless network has the same name as my home network). Much easier than configuring the hotel's WiFi password on all my devices, such as the Steam Deck.
@@ -158,7 +158,7 @@ On my phone I try to keep things very minimal with only two pages of apps, but a
 - [Pocket Casts](https://pocketcasts.com) - a better alternative to Apple's Podcasts app.
 - [Ivory](https://tapbots.com/ivory/) - a really good paid Mastodon client. On macOS I simply use the website.
 - GitHub - on macOS I simply use the website, but on mobile I do prefer their native app. It's good.
-- Home - I control my whole smart home from it, [bridged from Home Assistant](/journal/home-assistant-setup/).
+- Home - I control my whole smart home from it, [bridged from Home Assistant](/articles/2025/home-assistant-setup/).
 - [NordVPN](https://nordvpn.com) and [SurfShark](https://surfshark.com) - I switch between these two when my subscription ends, depending on which has the best offer. I exclusively use a VPN to watch ad-free YouTube on my iPad.
 - Apple Camera - I've tried a few other camera apps, but since I refuse to get a monthly subscription for a camera app, I just keep coming back to the default camera app. It's fine.
 - [Glass](https://glass.photo/kevinrenskers) - a photo sharing community that's not about gaining (and showing off) "likes".

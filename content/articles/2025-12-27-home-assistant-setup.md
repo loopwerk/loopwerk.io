@@ -5,7 +5,7 @@ summary: A deeper look at my Home Assistant setup. How do I sync everything to A
 
 # My Home Assistant setup
 
-Yesterday I wrote my [review of Home Assistant](/journal/home-assistant-review/) after one year of use. I mentioned that I sync everything to HomeKit and that I use Apple's Home app to detect when I am home, and sync this back to Home Assistant. I also mentioned some of my automations, but didn't explain how I actually set things up.
+Yesterday I wrote my [review of Home Assistant](/articles/2025/home-assistant-review/) after one year of use. I mentioned that I sync everything to HomeKit and that I use Apple's Home app to detect when I am home, and sync this back to Home Assistant. I also mentioned some of my automations, but didn't explain how I actually set things up.
 
 This is not a general Home Assistant tutorial, and it's not the "best" or "most advanced" way to do things. It's simply the setup that has proven reliable for me over the past year. The idea: Apple Home handles presence, voice control, and remote access; Home Assistant handles logic, integrations, and automations.
 
@@ -117,7 +117,7 @@ mode: single
 
 I create these automations using Home Assistant's builder UI. I normally don't write the YAML directly.
 
-![](/journal/images/home-assistant-setup/automation.png)
+![](/articles/images/home-assistant-setup/automation.png)
 
 ...but the YAML code is a lot easier to share on a website.
 
@@ -125,7 +125,7 @@ I create these automations using Home Assistant's builder UI. I normally don't w
 
 My heating setup is a bit more complicated, because most of the logic lives in Tado's app. I've created a Smart Schedule for every room in my house, where the heating is set to specific temperatures at specific times. Using Smart Schedules, I can also configure an Away temperature.
 
-<img src="/journal/images/home-assistant-setup/tado_1.png" width="48%" style="display:inline" /> <img src="/journal/images/home-assistant-setup/tado_2.png" width="48%" style="display:inline" />
+<img src="/articles/images/home-assistant-setup/tado_1.png" width="48%" style="display:inline" /> <img src="/articles/images/home-assistant-setup/tado_2.png" width="48%" style="display:inline" />
 
 Normally, you pay Tado €4 per month to automatically switch between the Home and Away schedules based on your location. Instead, this part is outsourced to Home Assistant with two automations.
 

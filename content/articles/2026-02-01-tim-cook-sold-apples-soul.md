@@ -67,11 +67,11 @@ The task of switching everything feels impossibly large. This is, of course, by 
 
 ## Finding my way out
 
-I've already stopped building iOS apps professionally. After years of iOS development, in 2023 [I walked away](/journal/thoughts-on-apple/), no longer willing to help Apple build the walls of their garden. Furthermore, I've decided I won't spend another cent on Apple hardware. My M1 MacBook, my iPhone 14 Pro, my 2018 iPad Pro: I'll use them until they die or become unusable.
+I've already stopped building iOS apps professionally. After years of iOS development, in 2023 [I walked away](/articles/2025/thoughts-on-apple/), no longer willing to help Apple build the walls of their garden. Furthermore, I've decided I won't spend another cent on Apple hardware. My M1 MacBook, my iPhone 14 Pro, my 2018 iPad Pro: I'll use them until they die or become unusable.
 
 This is an imperfect solution. I'm still in the ecosystem, still contributing to their services revenue, still implicitly supporting a company whose values I no longer recognize. But it's the compromise I've found between my principles and the practical reality of my digital life.
 
-In 2026 I want to set up [Nextcloud](https://nextcloud.com) or [ownCloud](https://owncloud.online) for me and my family, so that I start to move away from Apple's ecosystem, bit by bit. I'll probably add a self-hosted Bitwarden instance for password storage. Last year I already moved my smart home brains off of Apple's Home app and [onto Home Assistant](/journal/home-assistant-review/). I suspect I'll keep using Apple Music going forward: it works on Android (if I would switch to that), it has a web-based player that works on Linux, and my family all use it too (and we love to make collaborative playlists for road trips).
+In 2026 I want to set up [Nextcloud](https://nextcloud.com) or [ownCloud](https://owncloud.online) for me and my family, so that I start to move away from Apple's ecosystem, bit by bit. I'll probably add a self-hosted Bitwarden instance for password storage. Last year I already moved my smart home brains off of Apple's Home app and [onto Home Assistant](/articles/2025/home-assistant-review/). I suspect I'll keep using Apple Music going forward: it works on Android (if I would switch to that), it has a web-based player that works on Linux, and my family all use it too (and we love to make collaborative playlists for road trips).
 
 ## Final thoughts
 

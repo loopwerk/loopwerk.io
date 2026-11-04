@@ -39,7 +39,7 @@ Oh my God, this really hits the nail on the head when it comes to Liquid Glass: 
 
 > Apple has effectively infinite resources and operates on their own timeline, but everyone else does not have this kind of luxury. Springing big changes like this all at once forces so many independent developers, entire companies, and the industry as a whole to freeze their own development schedules to accommodate Apple's design system. It's asking a lot. For almost nothing in return.
 
-This is [one of the reasons](/journal/thoughts-on-apple/) why I left Apple development behind and went back to the open web.
+This is [one of the reasons](/articles/2025/thoughts-on-apple/) why I left Apple development behind and went back to the open web.
 
 > I keep looking at all the changes Liquid Glass brings, and I cannot find one instance where it has markedly improved the experience in any way. Everything that got rounder—except for the things that didn't—why? Everything that got inset that wasn't before—why? Everything that is now blurry—why? I don't think it's a secret that the content area of some apps decreased. The margins and padding increased—except where it didn't.
 

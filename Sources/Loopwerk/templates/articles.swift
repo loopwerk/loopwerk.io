@@ -1,6 +1,7 @@
 import Foundation
 import HTML
 import Saga
+import Parsley
 
 func renderArticles(context: ItemsRenderingContext<ArticleMetadata>) -> Node {
   renderArticleList(context.items, section: .articles, allItems: context.allItems, title: "Articles", currentTag: nil, canonicalPath: context.outputPath.url, hasMarkdownTwin: true)
@@ -162,8 +163,8 @@ func _renderArticleForGrid(article: Item<ArticleMetadata>) -> Node {
       }
     }
 
-    p(class: "text-textfg/80", customAttributes: ["data-summary": ""]) {
-      article.metadata.summary ?? ""
+    div(class: "text-textfg/80", customAttributes: ["data-summary": ""]) {
+      Node.raw(try! Parsley.html(article.metadata.summary ?? "", options: [.smartQuotes]))
     }
   }
 }
