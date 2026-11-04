@@ -246,7 +246,7 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
                     Node.raw(#"<svg class="h-3 w-3 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>"#)
                   }
 
-                  ul(class: "absolute top-full -left-4 z-10 mt-5 flex flex-col gap-2 rounded-b-lg border border-divider bg-bodybg px-4 py-3 shadow-lg") { links }
+                  ul(class: "absolute top-full -left-4 z-10 mt-5 flex flex-col gap-2 rounded-b-lg border border-divider bg-bodybg px-4 py-3 shadow-2xl dark:shadow-black") { links }
                 }
               } else {
                 navLink(section: item, currentSection: section)

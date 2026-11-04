@@ -262,11 +262,11 @@
   }
 
   .prose video {
-    @apply shadow-2xl rounded-md;
+    @apply shadow-2xl dark:shadow-black rounded-md;
   }
 
   .prose img.shadow {
-    @apply shadow-2xl rounded-md;
+    @apply shadow-2xl dark:shadow-black rounded-md;
   }
 
   /* Work screenshots */
