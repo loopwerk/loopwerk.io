@@ -312,14 +312,14 @@ func baseHtml(title pageTitle: String?, canonicalPath: String, section: Section?
         }
         div(class: "flex flex-col items-center gap-1") {
           p {
-            "Built in Swift using"
+            a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "Built" }
+            "in"
+            img(class: "inline h-[1.25em] align-[-0.25em] mr-[2px]", src: "/static/icons/swift.svg")
+            %"Swift using"
             a(href: "https://getsaga.dev", rel: "nofollow", target: "_blank") { "Saga" }
-            "("
-            %a(href: "https://github.com/loopwerk/loopwerk.io", rel: "nofollow", target: "_blank") { "source" }
-            %")."
           }
-          div(class: "flex gap-2") {
-            p { "© 2009-\(Calendar.current.component(.year, from: SiteMetadata.now)) Kevin Renskers" }
+          p {
+            "© 2009-\(Calendar.current.component(.year, from: SiteMetadata.now)) Kevin Renskers ·"
             a(href: "/legal/") { "legal notice" }
           }
         }
