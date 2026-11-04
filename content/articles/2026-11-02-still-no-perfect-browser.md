@@ -118,6 +118,16 @@ Based on Chromium, and it's yet another browser that promises to block a bunch o
 
 But it's also full of AI, crypto crap, and their own "first-party, privacy-protecting ads while you browse". You can get the same ad and tracker blocking in other browsers by installing [uBlock Origin Lite](https://ublockorigin.com/), without the addition of other ads.
 
+## Arc
+
+It's a very similar browser to Zen, only based on Chromium. It has the same vertical tabs, the same way to easily switch between profiles without needing multiple windows. Because it's based on Chromium you get best-in-class web standards support, and the best web inspector and responsive design mode.
+
+On paper it could've been the perfect browser, but sadly it's being shut down in favor of [Dia](https://www.diabrowser.com/), an "AI-native" browser which connects to apps and services to give you a "morning brief" and "sharable reports".
+
+No thanks, I just want a browser!
+
+While the AI features are optional, giving them your email address is not, and it'll then create an Atlassian account for you! Luckily I gave them a throw-away temporary email address which I immediately nuked. And while you can choose to not use the AI features, they are still in your face; you can't remove the prominent Chat button for example.
+
 ## Conclusion
 
 Safari is pretty close to my perfect browser. It ticks all the boxes, it has the best integration with the rest of the Apple ecosystem, and it simply feels the best, down to the two-finger swipes. If it didn't have its memory and performance problems with long-running and often-refreshing websites, I would only use Safari.
