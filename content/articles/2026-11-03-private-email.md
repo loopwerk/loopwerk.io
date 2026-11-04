@@ -1,5 +1,5 @@
 ---
-tags: workflow, howto
+tags: workflow, howto, browsers
 summary: iCloud's Hide My Email only works in Safari, DuckDuckGo's extension doesn't work in Safari and forces their search engine... are there no better solutions?
 ---
 

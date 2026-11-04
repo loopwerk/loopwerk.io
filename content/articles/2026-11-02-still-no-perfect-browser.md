@@ -1,5 +1,5 @@
 ---
-tags: review
+tags: review, browsers
 summary: A review roundup of a whole bunch of browsers.
 ---
 
@@ -130,7 +130,7 @@ While the AI features are optional, giving them your email address is not, and i
 
 ## Conclusion
 
-Safari is pretty close to my perfect browser. It ticks all the boxes, it has the best integration with the rest of the Apple ecosystem, and it simply feels the best, down to the two-finger swipes. If it didn't have its memory and performance problems with long-running and often-refreshing websites, I would only use Safari.
+Safari is pretty close to my perfect browser. It ticks all the important boxes, it has the best integration with the rest of the Apple ecosystem, and it simply feels the best, down to the two-finger swipes. If it didn't have its memory and performance problems with long-running and often-refreshing websites, I would only use Safari.
  
 But because of those problems, I now use two browsers: Safari as my daily driver, and Helium for web development.
  

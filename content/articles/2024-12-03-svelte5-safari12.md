@@ -1,5 +1,5 @@
 ---
-tags: sveltekit
+tags: sveltekit, browsers
 summary: Quite recently I upgraded a Svelte 4 project to Svelte 5, and soon afterwards I found some problems inside of Safari 12 and 13 that needed a tricky workaround.
 ---
 
