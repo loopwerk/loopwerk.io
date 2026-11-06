@@ -7,45 +7,46 @@ summary: Here's how I make the most out of Claude Code: my CLAUDE.md rules and a
 
 I use Claude Code to help me with tricky problems or boring busywork. I keep it very simple on purpose: no skills, no MCP, no subagents or multiple agents running in Git worktrees. I like to keep on top of what Claude is doing, interrupting and changing course whenever it goes off in the wrong direction (which it does all the time). It helps me to stay connected with the codebase, and it's the only way I get the highest-quality results that I would write myself.
 
-Over time I've turned the most common reasons to interrupt Claude into `CLAUDE.md` rules, and that does help to reduce the number of times I have to step in. Here's one from a Django project, which explains the Python specifics.
+Over time I've turned the most common reasons to interrupt Claude into rules, and that does help to reduce the number of times I have to step in. I use the following `CLAUDE.md` file from my [dotfiles repo](https://github.com/kevinrenskers/dotfiles), which gets imported into `~/.claude/CLAUDE.md` so that's it's automatically used in every project:
 
 ````markdown title="CLAUDE.md"
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Where to record new guidance
 
-**Where to record new guidance:** before saving anything to per-agent memory, ask "is this a rule the team should follow?" If yes, add it to this file (CLAUDE.md) — it's in git, visible to everyone, and applies to every agent and contributor. Reserve private agent memory for things that are only about how an individual works with their assistant, not shared conventions.
+Before saving anything to per-agent memory, ask "is this a rule the team should follow?" If yes, propose adding it to the project's CLAUDE.md file — it's in git, visible to everyone, and applies to every agent and contributor.
 
-## Overview
-
-[Short overview of the project.]
-
-## Commands
-
-This project uses uv to run Python and manage dependencies.
-
-- `uv run ./manage.py test`: run all tests
-- `uv run ruff check .`: lint
-- `uv run ruff format .`: format
-- `uv run mypy . --check-untyped-defs`: type check
-
-You are never allowed to start the dev server. The server will already be running, and if not, ask for it to be started.
+Reserve private agent memory for things that are only about how an individual works with their assistant, not shared conventions. Even then, ask if the individual rule should be stored in the CLAUDE.md in my dotfiles repo (imported from ~/.claude/CLAUDE.md, so check its location there), rather than memory. Memory is not easily visible to me, and is not stored in git.
 
 ## Communication style — be direct and honest
 
-When writing something intended for human consumption (a comment, commit message, reply to prompt), use as few words as possible. Pick every word meticulously to reduce the volume to a strict minimum. Be down to the point. Less is more. Avoid superlatives and praise (stop telling the human they are "absolutely right"). Be direct and honest, like a Dutch person would, rather than wrapping everything in layers of politeness.
+When writing something intended for human consumption (a comment, commit message, reply to prompt), use as few words as possible. Pick every word meticulously to reduce the volume to a strict minimum. Be down to the point. Less is more. Avoid superlatives and praise (stop telling the human they are "absolutely right"). Be direct and honest, rather than wrapping everything in layers of politeness.
 
 ## Accuracy — never guess or assume
 
 **Never present a guess, assumption, or reverse-engineered explanation as established fact.** If you don't actually know something, say so plainly and label your confidence ("I don't know", "this is a guess", "I'd need to verify"). Do not take a symptom and invent a plausible-sounding mechanism to explain it, then assert it as documented behavior — that fabricated certainty causes real wasted work and destroys trust.
 
-- **Use Google.** Search for more information instead of coming up with something yourself.
+- **Search the web.** Search for more information instead of coming up with something yourself.
 - **Get evidence before asserting.** Inspect the real environment, read the source, or test it — don't theorize.
 - **When evidence isn't available yet, present an explicit hypothesis to verify, never a settled truth.**
 
+## User-Agent
+
+My email address may appear in a User-Agent header only for an approved site (list below) whose UA policy explicitly asks for an email address. Never send it to any other site. If an unapproved site's UA policy asks for an email address, ask me whether to approve the site, and hold the request until I do. If I decline or am unavailable, do not make the request.
+
+Ad-hoc requests and requests from temporary tools use a UA prefixed with `claude-code/<ver>`, where `<ver>` is the active version for the Claude Code session.
+
+Approved sites (by domain or name):
+
+- Wikipedia (`wikipedia.org` and its language subdomains)
+
 ## Don't do more than asked for
 
-When asked for a code review, just review the code without running anything. When asked to work on a feature, don't touch unrelated code. Always do the least amount of work to fulfill the request, and note possible follow-ups.
+When asked for a code review, just review the code without running anything. When asked to work on a feature, do the least amount of work to fulfill the request: don't add new layers of abstraction, don't invent use cases not asked for, don't grow the feature by adding new features. If you think something unasked is worth adding anyway (I might have missed or forgot something), ask for approval first.
+
+## Leave the project better than it was
+
+If you see a bug, linter error, unformatted code, or another problem, don't think "this is not my problem" or "this is in code I didn't touch". Ping me about your findings and ask what to do.
 
 ## Never touch production
 
@@ -55,7 +56,7 @@ This holds no matter how safe the command looks or how urgent the bug is. Do not
 
 When you hand over code that writes, say so explicitly, keep it in its own command, and stop there — the decision to run it is the human's, and it is not yours to assume, encourage, or treat as agreed because they ran a read-only query earlier.
 
-### Handing over Django shell code
+### For Django projects: handing over Django shell code
 
 **Never hand over shell code as bare Python to paste into a REPL.** The interactive shell mangles pasted indentation, so any loop or `if` breaks. Always give it as a single runnable command with the code in a quoted heredoc:
 
@@ -72,16 +73,6 @@ The quoted delimiter (`<<'PY'`, not `<<PY`) stops the shell expanding `$`, and i
 
 Keep read-only queries and anything that writes in **separate** commands, and say plainly which is which — never bury an `update()` or `save()` at the end of a block that looks like a diagnostic.
 
-## Gating incomplete work (feature flags)
-
-Unfinished features are sometimes merged to `staging` so they can be tested before they're done. That is only acceptable if the unfinished work is **fully gated so production keeps behaving exactly as it did before**. `staging` must stay deployable to production at all times. When you gate something, follow these rules:
-
-1. **Gate the whole feature, not just one layer.** A flag on the template/UI is meaningless if the data, queries, or shared helpers that feed it still run in production. Trace every path the feature touches — template, view, context/data functions, model methods, shared utilities — and put each one behind the _same_ flag. A half-gated feature still ships to production through the shared code.
-
-2. **Flag OFF must reproduce current production behavior exactly.** A flag is _additive_: with it off, nothing changes. When you modify a shared function for a new variant, keep the existing behavior as the default branch and add the new behavior under `if flag:`. Never rewrite an existing code path in place — that changes production even when the flag is off.
-
-3. **A gate must not alter or remove behavior that already exists in production.** Don't make an existing option, route, or default behave differently than it does today. Instead, **add a new, separate variant** (e.g. an extra template option) that is only exposed outside production, and leave existing options pinned to their current behavior.
-
 ## Code comments
 
 Keep comments short and about the code _as it is now_. A comment must explain what the current code does or why, for someone reading it fresh.
@@ -96,16 +87,25 @@ Keep comments short and about the code _as it is now_. A comment must explain wh
 ## Code style
 
 - **Imports go at the top of the file.** Never put imports inside functions or fixtures to dodge ordering/lint warnings. The only acceptable inline import is to break a genuine circular import.
-- **Never put a real email address (or other real user PII) in code, comments, or tests.** Real members' data must not leak into our code. Use the reserved example domains for placeholders — `john@example.com`, `name@example.org`.
+- **Never put a real email address (or other real user PII) in code, comments, or tests.** Real users' data must not leak into our code. Use the reserved example domains for placeholders — `john@example.com`, `name@example.org`.
 
 ## Testing
 
 - **Write the failing test first, then fix.** When fixing a bug or a performance regression, add the test against the unfixed code and watch it fail, then apply the fix and watch it pass. Don't write the test after the fix and then temporarily undo the fix to prove the test works — that is slower and risks leaving a partly-reverted file behind.
-- **N+1 regression tests must vary the row count and assert the _total_ query count is constant — not a single-table count on one row.** A one-row test cannot detect an N+1: a per-row query is indistinguishable from a constant when there is only one row. Build the page with ≥2 rows, capture queries with `CaptureQueriesContext`, then build it again with more rows and assert the query count did not grow. Counting only one table hides per-row queries on _other_ relations. Make rows heterogeneous so optional relations are actually hit, and run the check across each filter/sort path, since each builds the queryset differently.
+- For Django projects: **N+1 regression tests must vary the row count and assert the _total_ query count is constant — not a single-table count on one row.** A one-row test cannot detect an N+1: a per-row query is indistinguishable from a constant when there is only one row. Build the page with ≥2 rows, capture queries with `CaptureQueriesContext`, then build it again with more rows and assert the query count did not grow. Counting only one table hides per-row queries on _other_ relations. Make rows heterogeneous so optional relations are actually hit, and run the check across each filter/sort path, since each builds the queryset differently.
+- Prefer to run the entire test suite using `just test` over running individual tests.
+- Avoid mocking, as it's usually a sign of a bad architecture. Instead dependencies should be injected, making it possible to inject test versions when running tests. Even if mocking is the only way to go, ask for permission first.
+- Avoid useless unit tests: don't test framework logic (the framework already tests that itself), avoid duplicate tests.
+
+## just commands
+
+Commonly used commands go into `justfile`. Every project _should_ have one with common commands such as `run`, `test`, `format` and `check`. If a `just` command mentioned in this file doesn't exist: stop and notify me. Don't figure out an alternative command without approval.
+
+If I ask for a script or command to run regularly, such as a way to create thumbnails of all photos in a particular folder, ask if it should be in the `justfile`.
 
 ## Lint and format before committing
 
-**Always run both `uv run ruff format .` and `uv run ruff check .`** before finishing or committing. `format` only reformats; `check` is what catches lint errors like unused imports, and CI runs it — so `format` alone is not enough.
+Always run both `just format` and `just check` before finishing or committing. `format` only reformats; `check` is what catches lint errors like unused imports, so `format` alone is not enough.
 
 ## Self-review before committing
 
@@ -122,18 +122,19 @@ Fix what you find.
 
 ## Commit messages and PR descriptions
 
-- **Wrap code references in backticks** — function/variable/class names, symbols, file paths, regex/string literals, and hex character codes (e.g. `clean_cell_value`, `ILLEGAL_FOR_EXCEL_RE`, `0x80-0x9f`, `U+0094`). Plain prose stays unformatted.
-- **Keep the "why" short — a few plain sentences stating what changed and why.** Don't pad it with legacy-system asides, hedging parentheticals ("the old Django table did X, now shadowed…"), or every edge case surfaced during investigation. Those conflate the change with everything adjacent to it and make it harder to review. Put mechanical/technical detail in the diff or a "Changes" section, and edge cases in a table or the code — not the intro.
+- **Wrap code references in backticks** — function/variable/class names, symbols, file paths, regex/string literals, and hex character codes. Plain prose stays unformatted.
+- **Keep the "why" short — a few plain sentences stating what changed and why.** Don't pad it with legacy-system asides, hedging parentheticals ("the old Django table did X, now shadowed…"), or every edge case surfaced during investigation. Those conflate the change with everything adjacent to it and make it harder to review. Put mechanical/technical detail and their edge cases in the diff or its own section — not the intro.
 - **No per-file "Changes" table.** Walking the reader file by file repeats what the diff already shows. Describe the change in plain English instead.
 ````
 
-During long coding sessions, Claude still seems to forget some of these rules. For example, I see Claude suddenly adding very long code comments that literally describe what the code is doing. This is not useful, as we can simply read the code itself. To combat this, there's one more piece to the puzzle: a self-review hook. It reads the "Self-review before committing" section straight out of `CLAUDE.md` and injects it into Claude's context before every `git commit`, so the diff gets checked against the rules before it's committed.
+During long coding sessions, Claude still seems to forget some of these rules. For example, I see Claude suddenly adding very long code comments that literally describe what the code is doing. This is not useful, as we can simply read the code itself. To combat this, there's one more piece to the puzzle: a self-review hook. It reads the "Self-review before committing" section straight out of the `CLAUDE.md` that sits next to it and injects it into Claude's context before every `git commit`, so the diff gets checked against the rules before it's committed.
 
-```bash title=".claude/hooks/claude-md-self-review.sh"
+```bash title="claude/claude-md-self-review.sh"
 #!/usr/bin/env bash
 # Fires before every Bash tool call. When the command is a git commit, injects the
-# "Self-review before committing" section of CLAUDE.md so the diff gets read before
-# it is committed. The section is read at runtime, so CLAUDE.md stays the only copy.
+# "Self-review before committing" section of the CLAUDE.md next to this script so the
+# diff gets read before it is committed. The section is read at runtime, so CLAUDE.md
+# stays the only copy.
 set -uo pipefail
 
 # Emit the checklist (or, when it cannot be found, a warning plus a fallback
@@ -157,7 +158,7 @@ case "$command" in
 *) exit 0 ;;
 esac
 
-claude_md="${CLAUDE_PROJECT_DIR:-.}/CLAUDE.md"
+claude_md="$(dirname "$0")/CLAUDE.md"
 [ -r "$claude_md" ] || emit "$FALLBACK" "Self-review hook: cannot read $claude_md, so it is falling back to a generic reminder instead of the checklist."
 
 # Print the section from its heading up to the next one.
@@ -171,15 +172,15 @@ checklist=$(awk '
 
 # Nothing but the heading means the section was renamed or removed.
 if [ "$(printf '%s\n' "$checklist" | wc -l)" -le 1 ]; then
-  emit "$FALLBACK" "Self-review hook: no '## Self-review before committing' section in CLAUDE.md — it was renamed or removed, so the hook is falling back to a generic reminder instead of the real checklist. Fix the heading or update .claude/hooks/claude-md-self-review.sh."
+  emit "$FALLBACK" "Self-review hook: no '## Self-review before committing' section in $claude_md — it was renamed or removed, so the hook is falling back to a generic reminder instead of the real checklist. Fix the heading or update $0."
 fi
 
 emit "$checklist"
 ```
 
-To enable the hook, add it to Claude's settings file:
+To enable the hook, add it to Claude's global settings file, using the absolute path to the script.
 
-```json title=".claude/settings.json"
+```json title="~/.claude/settings.json"
 {
   "hooks": {
     "PreToolUse": [
@@ -188,7 +189,7 @@ To enable the hook, add it to Claude's settings file:
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/claude-md-self-review.sh\"",
+            "command": "\"/path/to/dotfiles/claude/claude-md-self-review.sh\"",
             "statusMessage": "Checking the diff against CLAUDE.md",
             "timeout": 10
           }
@@ -199,8 +200,7 @@ To enable the hook, add it to Claude's settings file:
 }
 ```
 
-> [!NOTE]
-> Yes, this means I commit the `.claude` folder to Git. Only `.claude/settings.local.json` is gitignored.
+The `claude/setup.sh` script in my [dotfiles repo](https://github.com/kevinrenskers/dotfiles) takes care of this, as well as the `CLAUDE.md` import.
 
 In my experience this helps a lot, especially when it comes to overly verbose comments which kept creeping back in.
 
