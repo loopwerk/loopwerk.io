@@ -117,7 +117,9 @@ private func renderOpenSourceProject(project: Item<OpenSourceProjectMetadata>) -
           project.metadata.repo
         }
       }
-      img(class: "print:hidden", src: "https://img.shields.io/github/stars/\(project.metadata.repo)?color=f5b031&labelColor=566b78")
+      if let stars = project.metadata.stars {
+        span(class: "text-sm") { "★ \(stars)" }
+      }
     }
   }
 }

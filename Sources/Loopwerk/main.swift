@@ -85,6 +85,7 @@ enum ProjectCategory: String, Codable, CaseIterable {
 struct OpenSourceProjectMetadata: Metadata {
   let category: ProjectCategory
   let repo: String
+  let stars: Int?
 }
 
 struct ImdbMetadata: Metadata {

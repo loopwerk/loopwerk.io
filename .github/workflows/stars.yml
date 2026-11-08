@@ -1,0 +1,34 @@
+name: Update GitHub stars
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+      timezone: "Europe/Amsterdam"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stars:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Update star counts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for file in content/open-source/*.md; do
+            repo=$(sed -n 's/^repo: //p' "$file")
+            [ -n "$repo" ] || continue
+            stars=$(gh api "repos/$repo" --jq .stargazers_count)
+            sed -i '/^stars: /d' "$file"
+            sed -i "/^repo: /a stars: $stars" "$file"
+          done
+      - name: Commit and push changes
+        run: |
+          git diff --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update GitHub stars"
+          git push

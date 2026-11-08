@@ -1,6 +1,7 @@
 ---
 category: JavaScript
 repo: loopwerk/tag-changelog
+stars: 65
 ---
 
 A GitHub Action triggered by a new tag getting pushed. It then fetches all the commits since the previous tag and creates a changelog text using the Conventional Commits format.
