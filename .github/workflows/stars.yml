@@ -6,14 +6,14 @@ on:
       timezone: "Europe/Amsterdam"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   stars:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v7
+
       - name: Update star counts
         env:
           GH_TOKEN: ${{ github.token }}
@@ -25,6 +25,7 @@ jobs:
             sed -i '/^stars: /d' "$file"
             sed -i "/^repo: /a stars: $stars" "$file"
           done
+
       - name: Commit and push changes
         run: |
           git diff --quiet && exit 0
