@@ -4,7 +4,7 @@ section: uses
 
 # The software and hardware I use
 
-*Inspired by [uses.tech](https://uses.tech). Last updated November 2, 2026.*
+*Inspired by [uses.tech](https://uses.tech). Last updated November 10, 2026.*
 
 This is the stuff I use daily for development, photography, and gaming. I don't upgrade often, I tend to use my hardware until it's broken.
 
@@ -106,6 +106,8 @@ My daily drivers for writing code, managing databases, and testing APIs.
 - [Bruno](https://www.usebruno.com) - this has completely replaced Postman for all API / HTTP testing. It's fast, offline, and stores requests as plain files. Brilliant piece of software.
 - [SourceTree](https://www.sourcetreeapp.com) - I really do not like git's command line interface, so I use a GUI. I'd love to use [Fork](https://git-fork.com) instead of this Atlassian-owned software, but sadly it's [unusable](https://github.com/fork-dev/Tracker/issues/785) for colorblind people.
 - [Postico 2](https://eggerapps.at/postico2/) - PostgreSQL browser. Clean interface, makes it easy to browse and query databases during development.
+- [UTM](https://getutm.app) - run virtual machines on macOS; Windows, Linux, even macOS.
+- [Boop](https://boop.okat.best) - it's a place for you to paste plain text and transform it in a bunch of different ways. I only need it a few times a year (mostly to pretty print JSON), but when I do, it's a lifesaver.⁣
 
 ### AI
 
@@ -123,6 +125,9 @@ I'm not a designer, but I do enough image editing and color picking to need a fe
 - [Pixelmator Pro](https://apps.apple.com/us/app/pixelmator-pro/id1289583905?mt=12) - for less simple image editing. I like its interface less than Acorn's, but it is more powerful and handles more formats.
 - [Affinity](https://www.affinity.studio) - for vector editing. A proper Illustrator alternative, and it's free!
 - [ColorSnapper 2](https://colorsnapper.com) - system-wide color picker. Handy for grabbing colors from designs or websites.
+- [Shottr](https://shottr.cc)⁣ - I normally use macOS's built-in screenshot tools, but sometimes I need the extra power that Shottr gives, such as scrolling captures or annotations.
+- [Figma](https://www.figma.com/)⁣ - I don't design in Figma myself, but I work with plenty of designers who do.
+- [ImageOptim](https://imageoptim.com/mac)⁣ - seriously reduce image sizes.
 
 ### Media
 
@@ -147,6 +152,8 @@ Small utilities and writing tools that make daily life on macOS a little smoothe
 - [Pure Paste](https://sindresorhus.com/pure-paste) - automatically clears formatting when pasting. One of those tiny utilities that should be built into macOS.
 - [Rocket](https://matthewpalmer.net/rocket/) - emoji autocomplete on macOS. Type a colon, start typing a name, and pick your emoji. Much faster than the built-in emoji picker.
 - [Blip](https://blip.net) - peer to peer file transfers. It's like Airdrop, but you don't have to be near each other and works on many platforms.
+- [Command X](https://sindresorhus.com/command-x)⁣ - cut and paste files in Finder.
+- [PDF Squeezer⁣ 4](https://www.witt-software.com/en/pdfsqueezer/) - many tools export PDF as insanely big files. PDF Squeezer is usually able to reduce them to 10% of that size.
 
 ### iOS apps
 
@@ -168,7 +175,6 @@ On my phone I try to keep things very minimal with only two pages of apps, but a
 The services that keep everything running behind the scenes.
 
 - [Migadu](https://migadu.com) - email hosting for my custom domains. Simple, affordable, and privacy-focused. No frills, just reliable email. Absolutely horrible customer service though.
-- [Harvest](https://harvestapp.com) - time tracking and invoicing. It's simple and gets the job done for freelance work.
 - Hosting stack: Debian, PostgreSQL, [Coolify](https://coolify.io) - I self-host my side projects on Hetzner VPS. Coolify makes deploying Docker containers super easy.
 - [Kagi](https://kagi.com/) - paid search engine which uses Google's index under the hood, but without Google tracking you across the web. You pay with money instead of your data.
 - [Umami](https://umami.is) - an open source and self-hosted, privacy-friendly alternative to Google Analytics. Lightweight, no cookies, and I own all the data.
