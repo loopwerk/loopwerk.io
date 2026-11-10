@@ -2,8 +2,7 @@ name: Update GitHub stars
 
 on:
   schedule:
-    - cron: "17 6 * * *"
-      timezone: "Europe/Amsterdam"
+    - cron: "17 5 * * *"
   workflow_dispatch:
 
 jobs:
