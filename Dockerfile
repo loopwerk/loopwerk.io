@@ -79,12 +79,8 @@ RUN --mount=type=cache,target=/root/.swifttailwind \
 # Stage 2: Nginx runtime
 FROM nginx:alpine
 
-# The image ships the njs module but doesn't load it
-RUN sed -i '1i load_module modules/ngx_http_js_module.so;' /etc/nginx/nginx.conf
-
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY umami.js /etc/nginx/njs/umami.js
 
 # Copy built static files from builder
 COPY --from=builder /app/.deploy /usr/share/nginx/html
