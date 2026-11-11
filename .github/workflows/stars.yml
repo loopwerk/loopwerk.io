@@ -2,7 +2,7 @@ name: Update GitHub stars
 
 on:
   schedule:
-    - cron: "17 5 * * *"
+    - cron: "17 5,17 * * *"
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
           for file in content/open-source/*.md; do
             repo=$(sed -n 's/^repo: //p' "$file")
             [ -n "$repo" ] || continue
-            stars=$(gh api "repos/$repo" --jq .stargazers_count)
+            stars=$(gh api "repos/$repo" --jq .stargazers_count) || continue
             sed -i '/^stars: /d' "$file"
             sed -i "/^repo: /a stars: $stars" "$file"
           done
