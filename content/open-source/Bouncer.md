@@ -1,7 +1,7 @@
 ---
 category: JavaScript
 repo: loopwerk/Bouncer
-stars: 2
+stars: 3
 ---
 
 Bouncer keeps bots out of your self-hosted Umami analytics.
