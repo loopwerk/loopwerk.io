@@ -1,5 +1,5 @@
 {
-  "originHash" : "0ef19ed0242ca96894653a160c113e19c2358e1b34cb672fb89936a3eb1f45fd",
+  "originHash" : "8241e86d8bbb06d76074e94decc56c03a659f229aba8267d1e33a2ad07df15a4",
   "pins" : [
     {
       "identity" : "bonsai",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "282f8390b083a31c4bc41b9cd9759bd2956913bb",
-        "version" : "3.10.1"
+        "revision" : "0dad828900211dee7c271335dc620dc75cd9c451",
+        "version" : "4.0.0"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaImageReader",
       "state" : {
-        "revision" : "208e45c82d3b3e3553d5d1f6cf699941cac19a37",
-        "version" : "1.4.0"
+        "revision" : "bc7bea774b2921cf6da24058048334b0aa840a16",
+        "version" : "1.5.0"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "c9985a7973e9835f9c624b7cdeca4d28f70a4834",
-        "version" : "1.4.0"
+        "revision" : "3dd5e4b2aedde683c2433c77f2032b22aba0e75d",
+        "version" : "1.5.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaSwimRenderer",
       "state" : {
-        "revision" : "05e68daf645d68cbb00658890a31083e9b1edb90",
-        "version" : "1.4.1"
+        "revision" : "79682767b62c17fd65673a6e026b1a4a103609f9",
+        "version" : "1.5.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaUtils",
       "state" : {
-        "revision" : "1e43641b17aa742a8492983403d379e5364d6e32",
-        "version" : "1.6.0"
+        "revision" : "a640c0261be83e2ab29e37f9d272e5f954993602",
+        "version" : "1.7.0"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "3b6410f7dee09eb33cdd26260c5fd47fda19b0e2",
-        "version" : "1.7.3"
+        "revision" : "917b472dbe53ba699cbb0495f9a95a084bc6364d",
+        "version" : "1.7.4"
       }
     },
     {
@@ -159,8 +159,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "e7f85f4d3dd91ca9a1e94d3328aa1ed5120a8c0f",
-        "version" : "2.14.3"
+        "revision" : "8397a860c6955924b584c50c5265c6aac0970015",
+        "version" : "2.14.4"
       }
     },
     {
