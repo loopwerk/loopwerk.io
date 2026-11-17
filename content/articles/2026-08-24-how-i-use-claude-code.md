@@ -1,6 +1,7 @@
 ---
 tags: workflow, ai
 summary: Here's how I make the most out of Claude Code: my CLAUDE.md rules and a pre-commit hook for Claude to check its own work.
+archive: true
 ---
 
 # How I use Claude Code
