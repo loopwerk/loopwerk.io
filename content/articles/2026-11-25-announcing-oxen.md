@@ -36,3 +36,5 @@ On the roadmap: reports, an API, custom invoice templates, e-invoices, data expo
 Oxen is fully open source and self-hosted. There's no hosted cloud version, and no plans to create one. There's no monetization plan. I've built this because I needed it for myself, and I am making it available for others to use.
 
 There is first-class support for Coolify, as well as regular ol' Docker Compose. The readme should get you up and running.
+
+I hope that Oxen is useful to more people. Please let me know if you're using it, and a star on GitHub would be very much appreciated.
