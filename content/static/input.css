@@ -19,10 +19,14 @@
   --color-divider: #b3b2ae;
   --color-navbg: #fdfbf5;
 
-  --font-main: "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-main:
+    "Main Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-title: "Main Sans", ui-sans-serif, system-ui, sans-serif;
   --font-title--font-variation-settings: "opsz" 100;
-  --font-mono: "Code Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    "Code Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   --breakpoint-*: initial;
   --breakpoint-md: 740px;
@@ -38,7 +42,10 @@
   --content-width: 37.5rem;
   --page-gutter: 1.5rem;
   --container-md: calc(var(--content-width) + 2 * var(--page-gutter));
-  --container-lg: calc(var(--sidebar-width) + var(--sidebar-gap) + var(--content-width) + 2 * var(--page-gutter));
+  --container-lg: calc(
+    var(--sidebar-width) + var(--sidebar-gap) + var(--content-width) + 2 *
+      var(--page-gutter)
+  );
 }
 
 .dark {
@@ -64,7 +71,11 @@
 
 @layer base {
   body.home {
-    --ape-offset: clamp(-18vh, 50vw + min(100vw, var(--container-lg)) / 2 - 27.5rem - 49.3vh, 0px);
+    --ape-offset: clamp(
+      -18vh,
+      50vw + min(100vw, var(--container-lg)) / 2 - 27.5rem - 49.3vh,
+      0px
+    );
     @apply md:bg-[url(/static/ape.svg)] bg-size-[auto_75vh] bg-position-[left_var(--ape-offset)_bottom] bg-fixed bg-no-repeat;
   }
 }
@@ -254,11 +265,11 @@
   }
 
   .prose .images {
-    @apply flex flex-col md:flex-row gap-4 my-8;
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-8;
   }
 
   .prose .images img {
-    @apply m-0 h-auto flex-1 min-w-0 rounded-md;
+    @apply m-0 shadow-2xl dark:shadow-black;
   }
 
   .prose video {
