@@ -22,19 +22,25 @@ I moved all my Django sites, and here's how you can do the same.
 
 ## Step 1: prepare a fresh server
 
-Before installing Coolify, it's a good idea to do some basic server hardening. Spin up a new VPS (for example on Hetzner) and log in as root to get it ready.
+Before installing Coolify, it's a good idea to do some basic server hardening. Spin up a new Debian VPS (for example on Hetzner) and log in as root to get it ready.
 
-Personally, I always disable password-based SSH login in favor of public key authentication. In `/etc/ssh/sshd_config`, I made these changes:
+Personally, I always disable password-based SSH login in favor of public key authentication. I supplied my SSH public key to Hetzner during the server creation process, so it was already stored on the server for me. If you didn't do that, you'll need to copy your public key to the server yourself. The easiest way is with the `ssh-copy-id` command from your local machine:
+
+```shell-session
+$ ssh-copy-id root@YOUR_SERVER_IP
+```
+
+Then to disable password-based logins, make these changes to `/etc/ssh/sshd_config`:
 
 ```ini
 PasswordAuthentication no
 PubkeyAuthentication yes
 ```
 
-I supplied my SSH public key to Hetzner during the server creation process, so it was already stored on the server for me. If you didn't do that, you'll need to copy your public key to the server yourself. The easiest way is with the `ssh-copy-id` command from your local machine:
+Restart the SSH service to apply the changes:
 
 ```shell-session
-$ ssh-copy-id root@YOUR_SERVER_IP
+$ systemctl restart ssh
 ```
 
 Next, set up UFW (Uncomplicated Firewall) to control network traffic:
@@ -54,26 +60,27 @@ To protect against brute-force attacks, install [Fail2ban](https://github.com/fa
 ```shell-session
 $ apt install fail2ban python3-systemd
 $ cd /etc/fail2ban
-$ cp jail.conf jail.local
 $ nano jail.local
 ```
 
 Then enable the SSH jail in `jail.local` and configure it to be quite strict, banning an IP after a single failed attempt. After all, we're using SSH keys, not passwords.
 
 ```ini title="/etc/fail2ban/jail.local"
+[DEFAULT]
+banaction = ufw
+
 [sshd]
 enabled = true
 port = ssh
-logpath = %(sshd_log)s
 backend = systemd
 maxretry = 1
 ```
 
-You'll also need to change the value of `banaction` to `ufw`. After saving, enable and start the service:
+After saving, enable and start the service:
 
 ```shell-session
 $ systemctl enable fail2ban
-$ service fail2ban start
+$ systemctl restart fail2ban
 ```
 
 Finally, enable automatic security updates to keep the system patched without manual intervention.
@@ -82,6 +89,58 @@ Finally, enable automatic security updates to keep the system patched without ma
 $ apt install unattended-upgrades
 $ dpkg-reconfigure --priority=low unattended-upgrades
 ```
+
+### Cloud config
+
+Instead of doing the above manual steps and config changes, you can also paste this into the "Cloud config" field when creating your server.
+
+> [!IMPORTANT]
+> Make sure to also select your SSH key, as password logins will be disabled from the first boot!
+
+```yml
+#cloud-config
+ssh_pwauth: false
+
+package_update: true
+package_upgrade: true
+packages:
+  - ufw
+  - fail2ban
+  - python3-systemd
+  - unattended-upgrades
+
+write_files:
+  - path: /etc/fail2ban/jail.local
+    defer: true
+    content: |
+      [DEFAULT]
+      banaction = ufw
+
+      [sshd]
+      enabled = true
+      port = ssh
+      backend = systemd
+      maxretry = 1
+
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    defer: true
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+
+runcmd:
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow ssh
+  - ufw allow http
+  - ufw allow https
+  - ufw --force enable
+  - systemctl enable fail2ban
+  - systemctl restart fail2ban
+  - systemctl restart ssh
+```
+
+It does all the same steps, but completely automated.
 
 ## Step 2: install Coolify
 
